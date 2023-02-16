@@ -1,0 +1,6 @@
+# Estructura simétrica y asimétrica del SAM 
+
+## Datos y métodos
+
+
+Acá iría gran parte [del paper del SAM](https://github.com/eliocamp/asymsam). Adentrar un poco más en la relación con el  cEOF2

@@ -1,0 +1,10 @@
+book_filename: "thesis"
+chapter_name: "Capítulo "
+download: [
+    ["thesis.pdf", "PDF"],
+    ["thesis.epub", "EPUB"],
+    ["thesis.docx", "Word"]
+  ]
+delete_merged_file: true
+output_dir: "../docs"
+edit: "https://github.com/eliocamp/phd-thesis/blob/main/%s"

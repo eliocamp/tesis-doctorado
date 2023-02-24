@@ -308,7 +308,7 @@ Acá iría básicamente \href{https://github.com/eliocamp/shceof}{el paper de cE
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/eof-naive-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/eof-naive-1.pdf}
 \caption{\label{fig:eof-naive}Spatial patterns of the four leading EOFs of SON geopotential height zonal anomalies at 50 hPa south of 20º S for the 1979 -- 2019 period (arbitrary units).}
 \end{figure}
 En el análisis EOF estándar, las ondas zonales pueden aparecer como pares de EOFs (posiblemente degenerados) que representan patrones similares pero desplazados en fase (\textbf{horel1984?}).
@@ -357,9 +357,9 @@ Las dos fases del cEOF líder son muy similares a los dos EOF líderes mostrados
 \cmidrule(l{3pt}r{3pt}){2-4}
 200 hPa & cEOF1 & cEOF2 & cEOF3\\
 \midrule
-cEOF1 & \textbf{0.29} & 0.01 & 0.03\\
-cEOF2 & 0.00 & \textbf{0.59} & 0.02\\
-cEOF3 & 0.00 & 0.00 & 0.01\\
+cEOF1 & \textbf{0.32} & 0.04 & 0.02\\
+cEOF2 & 0.01 & \textbf{0.62} & 0.03\\
+cEOF3 & 0.00 & 0.01 & 0.00\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -409,12 +409,12 @@ Evaluamos la significancia estadística mediante una prueba t de dos caras y, en
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/ceofs-1-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/ceofs-1-1.pdf}
 \caption{\label{fig:ceofs-1}Spatial patterns for the two leading cEOFs of SON geopotential height zonal anomalies at 50 hPa and 200 hPa for the 1979 -- 2019 period. The shading (contours) corresponds to 0º (90º) phase. Arbitrary units. The proportion of variance explained for each mode with respect to the zonal mean is indicated in parenthesis.}
 \end{figure}
 
 \begin{figure*}
-\includegraphics{thesis_files/figure-latex/extended-series-1} \caption{Time series of the two leading cEOFs of SON geopotential height zonal anomalies at 50 hPa and 200 hPa. cEOF1 (row a) and cEOF2 (row b) separated in their 0º (column 1) and 90º (column 2) phase. Dark straight line is the linear trend. Black horizontal and vertical line mark the mean value and range of each time series, respectively.}\label{fig:extended-series}
+\includegraphics{20-ceofs_files/figure-latex/extended-series-1} \caption{Time series of the two leading cEOFs of SON geopotential height zonal anomalies at 50 hPa and 200 hPa. cEOF1 (row a) and cEOF2 (row b) separated in their 0º (column 1) and 90º (column 2) phase. Dark straight line is the linear trend. Black horizontal and vertical line mark the mean value and range of each time series, respectively.}\label{fig:extended-series}
 \end{figure*}
 Para describir la variabilidad de las anomalías zonales de la circulación, en las Figuras \ref{fig:ceofs-1} y \ref{fig:extended-series} se muestran las partes espacial y temporal de los dos primeros modos cEOF de las anomalías zonales de la altura geopotencial a 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
 El primer modo (cEOF1) explica el 82\% de la varianza de los campos anómalos zonalmente, mientras que el segundo modo (cEOF2) explica una fracción menor (7\%).
@@ -425,8 +425,8 @@ El cEOF1 (Fig. \ref{fig:ceofs-1} columna 1) es un patrón de onda hemisférica 1
 A 50 hPa el cEOF1 de 0º tiene el máximo de la onda 1 a 150ºE y a 200 hPa, el máximo se sitúa en torno a 175ºE indicando un desplazamiento hacia el oeste con la altura.
 La cEOF2 (Fig. \ref(fig:eof-naive) columna 2) muestra también una estructura de onda zonal con amplitud máxima en latitudes altas, pero con escalas espaciales más cortas.
 En particular, la estructura dominante a ambos niveles es una onda 3 pero con mayor amplitud en el sector pacífico.
-No hay cambio de fase aparente con la altura, pero la amplitud del patrón se reduce considerablemente en la estratosfera, lo que es coherente con el hecho de que el cEOF2 calculado por separado para 200 hPa explica un poco más de varianza que el cEOF2 calculado por separado para 50 hPa (11\% vs.~11\%.
-3\%, respectivamente).
+No hay cambio de fase aparente con la altura, pero la amplitud del patrón se reduce considerablemente en la estratosfera, lo que es coherente con el hecho de que el cEOF2 calculado por separado para 200 hPa explica un poco más de varianza que el cEOF2 calculado por separado para 50 hPa (10\% vs.~10\%.
+6\%, respectivamente).
 Esto sugiere que este modo barotrópico representa principalmente la variabilidad troposférica.
 
 No existe una correlación simultánea significativa entre las series temporales de los cEOFs.
@@ -435,7 +435,7 @@ Debido a que los campos geopotenciales que entran en el algoritmo cEOFs son anom
 Sin embargo, la media temporal de cEOF2 es casi cero, lo que indica que sólo cEOF1 incluye variabilidad que se proyecta significativamente sobre el campo anómalo zonal medio.
 Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 (\(r^2\) = 98\%) y no similar al cEOF2 (\(r^2\) = 0\%).
 
-Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \ref(fig:extended-series)a.1, valor p = 0.0038), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
+Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \ref(fig:extended-series)a.1, valor p = 0.07), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
 La tendencia positiva en el cEOF1 de 0º se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
 Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de alta latitud.
 
@@ -451,7 +451,7 @@ En esta sección calculamos campos de regresión utilizando los campos completos
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/eof1-regr-gh-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/eof1-regr-gh-1.pdf}
 \caption{\label{fig:eof1-regr-gh}Regression of SON geopotential height anomalies (\(m^2s^{-1}\)) with the (column 1) 0º and (column 2) 90º phases of the first cEOF for the 1979 -- 2019 period at (row a) 50 hPa and (row b) 200 hPa. These coefficients come from multiple linear regression involving the 0º and 90º phases. Areas marked with dots have p-values smaller than 0.01 adjusted for False Detection Rate.}
 \end{figure}
 La figura \ref{fig:eof1-regr-gh} muestra mapas de regresión de anomalías de altura geopotencial SON sobre cEOF1.
@@ -464,7 +464,7 @@ Por lo tanto, la magnitud y la fase del cEOF1 están asociadas a la magnitud y l
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/eof2-regr-gh-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/eof2-regr-gh-1.pdf}
 \caption{\label{fig:eof2-regr-gh}Same as Figure~\ref{fig:eof1-regr-gh} but for cEOF2.}
 \end{figure}
 La figura \ref{fig:eof2-regr-gh} muestra los mapas de regresión de las anomalías de altura geopotencial sobre el cEOF2.
@@ -485,13 +485,13 @@ Sin embargo, dado que estas anomalías no son estadísticamente significativas, 
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/eof1-regr-t-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/eof1-regr-t-1.pdf}
 \caption{\label{fig:eof1-regr-t}Same as Figure~\ref{fig:eof1-regr-gh} but for air temperature (K).}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/t-vertical-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/t-vertical-1.pdf}
 \caption{\label{fig:t-vertical}Regression of SON zonal anomalies averaged between 75°S and 45°S of mean air temperature (shaded, Kelvin) and ozone mixing ratio (contours, negative contours with dashed lines, labels in parts per billion by mass) with the (a) 0º and (b) 90º phase of the cEOF1 for the 1979 -- 2019 period.}
 \end{figure}
 También se evaluó la firma de la variabilidad de los cEOFs en la temperatura del aire.
@@ -513,7 +513,7 @@ Por otro lado, en la estratosfera baja dominada por la advección, las anomalía
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/o3-regr-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/o3-regr-1.pdf}
 \caption{\label{fig:o3-regr}Regression of SON mean Total Column Ozone anomalies (shaded, Dobson Units) with the (a) 0º and (b) 90º phases of the cEOF1 for the 1979 -- 2019 period. On contours, the mean zonal anomaly of Total Column Ozone (negative contours in dashed lines, Dobson Units). Areas marked with dots have p-values smaller than 0.01 adjusted for False Detection Rate.}
 \end{figure}
 
@@ -521,13 +521,13 @@ Por otro lado, en la estratosfera baja dominada por la advección, las anomalía
 Los mapas de regresión de las anomalías del COT sobre el cEOF1 (Fig.\ref(fig:o3-regr)) muestran patrones de onda zonal 1 asociados a ambos componentes del cEOF1.
 La posición climatológica del mínimo primaveral de ozono (agujero de ozono) se encuentra fuera del Polo Sur y hacia el mar de Weddell (por ejemplo, \textbf{grytsai2011?}).
 Así, el campo de regresión 0º cEOF1 (Figura~\ref{fig:o3-regr}a) coincide con la posición climatológica del agujero de ozono, mientras que está desfasado 90º para el 90º cEOF1.
-La correlación temporal entre las amplitudes de la onda planetaria 1 del COT y la amplitud del cEOF1 es 0.79 (CI: 0.63 -- 0.88), mientras que la correlación entre sus fases es -0.85 (CI: -0.92 -- -0.74).
+La correlación temporal entre las amplitudes de la onda planetaria 1 del COT y la amplitud del cEOF1 es 0.79 (CI: 0.65 -- 0.88), mientras que la correlación entre sus fases es -0.84 (CI: -0.91 -- -0.73).
 En consecuencia, cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
 
 \hypertarget{fuentes-de-variabilidad-tropicales}{%
 \subsection{Fuentes de variabilidad tropicales}\label{fuentes-de-variabilidad-tropicales}}
 \begin{figure*}
-\includegraphics{thesis_files/figure-latex/sst-psi-2-1} \caption{Regression of SST (K, left column) and streamfunction zonal anomalies (\(m^2/s\times10^-7\), shaded) with their corresponding activity wave flux (vectors) (right column) upon cEOF2 different phases (illustrated in the lower-left arrow) for the 1979 -- 2019 period. Areas marked with dots have p-values smaller than 0.01 adjusted for FDR.}\label{fig:sst-psi-2}
+\includegraphics{20-ceofs_files/figure-latex/sst-psi-2-1} \caption{Regression of SST (K, left column) and streamfunction zonal anomalies (\(m^2/s\times10^-7\), shaded) with their corresponding activity wave flux (vectors) (right column) upon cEOF2 different phases (illustrated in the lower-left arrow) for the 1979 -- 2019 period. Areas marked with dots have p-values smaller than 0.01 adjusted for FDR.}\label{fig:sst-psi-2}
 \end{figure*}
 
 
@@ -537,15 +537,15 @@ Además de los mapas de regresión para las fases de 0º y 90º, incluimos las r
 
 La cEOF2 de 90º (segunda fila) está asociada a fuertes anomalías positivas de la TSM en el Pacífico central y oriental y a anomalías negativas en una zona que atraviesa el norte de Australia, Nueva Zelanda y la Zona de Convergencia del Pacífico Sur (SPCZ) (Figura \ref@(fig:sst-psi-2).b1).
 El campo de regresión de las anomalías de la TSM guarda un gran parecido con el ENOS canónicamente positivo (\textbf{bamston1997?}).
-De hecho, existe una correlación significativa y muy alta (0.76 (CI: 0.6 -- 0.87)) entre el ONI y la serie temporal 90º cEOF2.
+De hecho, existe una correlación significativa y muy alta (0.76 (CI: 0.6 -- 0.86)) entre el ONI y la serie temporal 90º cEOF2.
 Además del patrón similar al ENOS del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un DIO positivo (\textbf{saji1999?}).
-De forma coherente, la correlación entre el 90º cEOF2 y el DMI es 0.62 (CI: 0.38 -- 0.78).
+De forma coherente, la correlación entre el 90º cEOF2 y el DMI es 0.58 (CI: 0.34 -- 0.75).
 
 El 90º cEOF2 está asociado a fuertes anomalías de la función de onda que emanan de los trópicos (Figura \ref{fig:sst-psi-2}.b2), tanto del sector del Pacífico Central como del Océano Índico.
 La respuesta atmosférica asociada a 90º cEOF2 es entonces consistente con el efecto combinado del ENOS y el DIO sobre los extratropicos: con anomalías de la TSM que inducen convección tropical anómala que a su vez excita ondas de Rossby que se propagan meridionalmente hacia latitudes más altas (\textbf{mo2000?}; \textbf{cai2011?}; \textbf{nuncio2015?}).
 
 Sin embargo, el cEOF2 no está asociado a los mismos patrones de anomalía de la TSM tropical en todas sus fases Las figuras \ref{fig:sst-psi-2}.d1 y d2 muestran que la cEOF2 de 0º no está asociada a ninguna anomalía significativa de la TSM ni de la función de la corriente en los trópicos.
-Como resultado, la correlación entre el 0º cEOF2 y ENSO no es significativa (0 (CI: -0.3 -- 0.31)).
+Como resultado, la correlación entre el 0º cEOF2 y ENSO no es significativa (0 (CI: -0.3 -- 0.3)).
 Mientras tanto, las filas a y c de la Fig.\ref{fig:sst-psi-2} muestran que las fases intermedias siguen asociadas con anomalías regresivas significativas de la TSM sobre el Océano Pacífico, pero en lugares ligeramente diferentes.
 La fase de 135º está asociada a anomalías de la TSM en el Pacífico central (Fig.\ref{fig:sst-psi-2}a.1), mientras que la fase de 45º está asociada a anomalías de la TSM que corresponden aproximadamente a los ``sabores'' de ENSO del Pacífico central y del Pacífico oriental, respectivamente (Fig.\ref{fig:sst-psi-2}c.1) (\textbf{kao2009?}).
 Ambas fases también están asociadas a trenes de ondas que se generan en la región que rodea Australia y se propagan hacia los extratropicales, aunque menos intensos que los asociados a la fase de 90º.
@@ -553,19 +553,19 @@ Ambas fases también están asociadas a trenes de ondas que se generan en la reg
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/enso-phase-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/enso-phase-1.pdf}
 \caption{\label{fig:enso-phase}SON ONI values plotted against cEOF2 phase for the 1979 -- 2019 period. Years with magnitude of cEOF2 greater (smaller) than the 50th percentile are shown as orange diamonds (green circles). Black line is the fit ONI \textasciitilde{} sin(phase) computed by weighted OLS using the magnitude of the cEOF2 as weights.}
 \end{figure}
 Para explorar más a fondo la relación entre el forzamiento tropical y las fases del cEOF2, la Figura \ref{fig:enso-phase} muestra el ONI trazado contra la fase del cEOF2 para cada trimestre SON entre 1979 y 2019, destacando los años en los que la magnitud del cEOF2 está por encima de la mediana.
 En los años con ONI positivo (negativo), la fase cEOF2 se sitúa mayoritariamente en torno a 90º (-90º).
 En las estaciones ENOS neutras, la fase cEOF2 es mucho más variable.
 La línea negra de la figura \ref{fig:enso-phase} es un ajuste sinusoidal de la relación entre el ONI y la fase cEOF2.
-El \(r^2\) correspondiente al ajuste es 0.57, estadísticamente significativo con valor p \textless{} 0.001, lo que indica una relación casi sinusoidal entre estas dos variables.
+El \(r^2\) correspondiente al ajuste es 0.59, estadísticamente significativo con valor p \textless{} 0.001, lo que indica una relación casi sinusoidal entre estas dos variables.
 
-La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es 0.45 (CI: 0.17 -- 0.66).
+La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es 0.44 (CI: 0.17 -- 0.65).
 Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (2015, 1997, and 1982), que coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
-Si se eliminan esos años, la correlación deja de ser significativa (0.04 (CI: -0.28 -- 0.35)).
-Además, incluso cuando se utilizan todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (0.2, valor p = 0.21).
+Si se eliminan esos años, la correlación deja de ser significativa (0.09 (CI: -0.22 -- 0.39)).
+Además, incluso cuando se utilizan todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (0.24, valor p = 0.12).
 Por lo tanto, aunque la localización de las anomalías tropicales de la TSM parece tener un efecto en la definición de la fase del cEOF2, la relación entre la magnitud del cEOF2 y el ONI sigue siendo incierta y podría ser sólo evidente en eventos ENSO muy fuertes, que son escasos en el registro observacional histórico.
 
 Concluimos que el tren de ondas representado por cEOF2 puede ser tanto parte de la variabilidad interna de la atmósfera extratropical como forzado por las TSM tropicales.
@@ -582,7 +582,7 @@ Esto sugiere que la variabilidad de cEOF1 está impulsada principalmente por la 
 \subsection{Impactos en superficie}\label{impactos-en-superficie}}
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/pp-t2m-r2-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/pp-t2m-r2-1.pdf}
 \caption{\label{fig:pp-t2m-r2}Explained variance (\(r^2\) as percentage) of 2-metre temperature (row a) and precipitation (row b) anomalies by the regression upon cEOF1 (column 1) and cEOF2 (column 2).}
 \end{figure}
 
@@ -609,7 +609,7 @@ En la \href{mailto:figura@ref}{\nolinkurl{figura@ref}}(fig:pp-temp-2) se muestra
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/pp-temp-2-1.pdf}
+\includegraphics{20-ceofs_files/figure-latex/pp-temp-2-1.pdf}
 \caption{\label{fig:pp-temp-2}Regresión de la temperatura media de 2 metros SON (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el periodo 1979 -- 2019. Las áreas marcadas con puntos tienen valores p inferiores a 0,01 ajustados para la tasa de detección de falsos.}
 \end{figure}
 Las anomalías de temperatura asociadas a los 90º cEOF (Fig.~\ref{fig:pp-temp-2}.b1) muestran valores positivos en el Pacífico tropical, coherentes con las anomalías de TSM asociadas a la misma fase (Fig.~\ref{fig:sst-psi-2}.b1).
@@ -651,8 +651,365 @@ Sería un análisis más modesto.
 \hypertarget{estructura-simuxe9trica-y-asimuxe9trica-del-sam}{%
 \chapter{Estructura simétrica y asimétrica del SAM}\label{estructura-simuxe9trica-y-asimuxe9trica-del-sam}}
 
+\hypertarget{introducciuxf3n-1}{%
+\section{Introducción}\label{introducciuxf3n-1}}
+
+El Modo Anular Austral (SAM) es el principal modo de variabilidad de la circulación extratropical del hemisferio sur (\textbf{rogers1982?}) en escalas temporales diarias, mensuales y decenales (\textbf{baldwin2001a?}; \textbf{fogt2006?}) y ejerce una importante influencia en las anomalías de temperatura y precipitación, así como en la concentración de hielo marino (p.~ej. \textbf{fogt2020?}).
+Su fase positiva suele describirse como presiones anómalamente bajas sobre la Antártida rodeadas de un anillo de altas presiones anómalas en latitudes medias y altas.
+
+La mayoría de los autores describen el SAM como un patrón zonalmente simétrico, hecho que se refleja no sólo en su nombre, sino también en los diversos métodos utilizados para caracterizarlo.
+De los distintos índices presentados en la literatura, muchos de ellos se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial (\textbf{ho2012?}).
+(\textbf{gong1999?}) definió el índice SAM como la diferencia de presión media zonal a nivel del mar entre 40\degree S y 65\degree S, que es también la definición utilizada por el índice basado en estaciones de (\textbf{marshall2003?}).
+(\textbf{baldwin2009?}) propuso definir los modos anular septentrional y meridional como la EOF principal de la altura geopotencial promediada zonalmente en cada nivel.
+
+Aunque estos índices se basan en promedios zonales, sus anomalías espaciales de altura geopotencial asociadas contienen notables desviaciones de la simetría zonal, particularmente en la región del Océano Pacífico.
+Las asimetrías zonales no han sido ampliamente estudiadas, pero trabajos previos sugieren que modulan fuertemente los impactos regionales de la SAM (Silvestri and Vera, 2009; \textbf{fan2007?}; \textbf{fogt2012?}; \textbf{rosso2018?}).
+El hecho de que la SAM no sea totalmente simétrica zonalmente dificulta nuestra capacidad para reconstruir su variabilidad histórica antes de la disponibilidad de observaciones densas en el hemisferio sur (\textbf{jones2009?}).
+
+Parte de la variabilidad asociada a las asimetrías zonales de la SAM parece estar forzada por los trópicos.
+La variabilidad de tipo ENOS afecta a los extratópicos del Hemisferio Sur a través de los trenes de ondas de Rossby (\textbf{mo1987?}; \textbf{kidson1988?}; \textbf{karoly1989?}) que se proyectan fuertemente sobre las anomalías zonales asociadas a la SAM en el sector del Pacífico.
+Además, se han observado influencias tropicales en la SAM (\textbf{fan2007?}; \textbf{fogt2011?}; \textbf{clem2013?}).
+(\textbf{fan2007?}) calculó los índices de SAM de los hemisferios occidental y oriental por separado y descubrió que estaban mucho más correlacionados entre sí si se eliminaba la señal (lineal) del ENSO.
+
+Varios investigadores han documentado tendencias positivas en la SAM utilizando diferentes índices, sobre todo en verano y otoño austral (por ejemplo, \textbf{fogt2020?} y sus referencias).
+Se cree que estas tendencias están impulsadas principalmente por el agotamiento del ozono estratosférico y el aumento de los gases de efecto invernadero, y se entienden en el contexto de las variables medias zonales (\textbf{marshall2004?}; \textbf{gillett2005?}; \textbf{arblaster2006?}; \textbf{gillett2013?}).
+Sin embargo, aún no está claro cómo o si el componente SAM asimétrico responde a estos forzamientos, o cómo su variabilidad altera las tendencias observadas.
+
+El impacto de la componente zonalmente asimétrica de la SAM a escala regional aún no se ha estudiado en detalle.
+La fase positiva de la SAM se asocia con temperaturas más frías de lo normal sobre la Antártida y más cálidas de lo normal en latitudes más bajas (\textbf{jones2019?}) (y viceversa para la SAM negativa).
+Pero hay desviaciones significativas de esta respuesta media zonal, especialmente en la Península Antártica y el Atlántico sur (\textbf{fogt2012?}).
+La señal relacionada con SAM en las anomalías de precipitación se comporta de forma similar, aunque con una desviación aún mayor de la simetría zonal (\textbf{lim2016?}).
+La relación SAM-precipitación en el sudeste de Sudamérica puede explicarse por la circulación zonalmente asimétrica similar a la del Pacífico-Sudamérica (PSA) asociada a la SAM (Silvestri and Vera, 2009; \textbf{rosso2018?}).
+(\textbf{fan2007?}) también descubrió que las precipitaciones en Asia oriental se veían afectadas por la variabilidad de la parte occidental de la SAM.
+
+El estudio de la variabilidad temporal del componente asimétrico de la SAM no ha recibido mucha atención, excepto por (\textbf{fogt2012?}).
+Este estudio aporta evidencias sobre la relevancia del componente asimétrico de la SAM.
+Sin embargo, sus conclusiones se basan en composiciones de eventos SAM positivos y negativos que incluyen un pequeño número de casos desigualmente distribuidos entre años con y sin información satelital.
+Esto último es especialmente importante debido a las inhomogeneidades en los productos de reanálisis anteriores a la era de los satélites y al posible cambio en la estructura asimétrica de la SAM (Silvestri and Vera, 2009).
+Además, (\textbf{fogt2012?}) estudió la componente asimétrica zonal de la SAM sólo en la presión a nivel del mar.
+Las asimetrías zonales en el patrón espacial de la SAM son bastante barotrópicas en toda la troposfera, pero cambian drásticamente en la estratosfera (\textbf{baldwin2009?}).
+
+En resumen, las investigaciones previas sugieren fuertemente que el componente zonalmente asimétrico de la SAM puede ser potencialmente muy diferente del componente zonalmente simétrico.
+Podría tener diferentes fuentes de variabilidad, impactos y respuesta a largo plazo al forzamiento radiativo.
+Un único índice SAM que mezcle la variabilidad zonalmente simétrica y zonalmente asimétrica sólo es capaz de captar el efecto combinado de estos dos modos potencialmente distintos.
+
+Nuestro objetivo es, por tanto, describir los componentes zonalmente asimétricos y simétricos de la variabilidad de la SAM.
+En primer lugar, proponemos una metodología que proporciona, para cada nivel, dos índices que pretenden captar de forma independiente la variabilidad del componente SAM simétrico y asimétrico, respectivamente.
+En consecuencia, se evalúan su estructura vertical y su coherencia, así como su variabilidad temporal y sus tendencias.
+A continuación se estudian los patrones espaciales descritos por la variabilidad exclusiva de cada índice centrándose en 50 hPa como representación de la estratosfera y 700 hPa como representación de la troposfera.
+Por último, se investigan las relaciones de la SAM a 700 hPa con las anomalías de temperatura y precipitación.
+
 \hypertarget{datos-y-muxe9todos-1}{%
 \section{Datos y métodos}\label{datos-y-muxe9todos-1}}
+
+\hypertarget{definiciuxf3n-de-los-uxedndices}{%
+\subsection{Definición de los índices}\label{definiciuxf3n-de-los-uxedndices}}
+
+Tradicionalmente, la SAM se define como el modo ortogonal empírico (EOF) principal de las anomalías de la presión al nivel del mar o de la altura geopotencial en niveles bajos (\textbf{ho2012?}).
+Siguiendo a (\textbf{baldwin2001?}), ampliamos esa definición verticalmente y utilizamos el término SAM para referirnos al EOF principal de las anomalías mensuales de la altura geopotencial al sur de 20 grados S en cada nivel.
+Realizamos EOFs calculando la Descomposición de Valor Singular de la matriz de datos consistente en 525 filas y 4176 columnas (144 puntos de longitud y 29 puntos de latitud).
+Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener en cuenta el área no igual de cada punto de cuadrícula (\textbf{chung1999?}).
+En el análisis EOF consideramos todos los meses juntos sin dividir por estaciones.
+
+Para separar los componentes zonalmente simétricos y asimétricos de la SAM, calculamos la media zonal y las anomalías del patrón espacial completo de la SAM, como se muestra en la Figura \ref{fig:method} a 700 hPa.
+La señal espacial completa (\(\mathrm{EOF_1}(\lambda, \phi)\)) es la suma de los componentes zonalmente asimétricos (\(\mathrm{EOF_1^*}(\lambda, \phi)\)) y simétricos (\([\mathrm{EOF_1}](\lambda, \phi)\)).
+A continuación, calculamos el índice SAM, el índice SAM asimétrico (A\nobreakdash-SAM) y los índices SAM simétrico (S\nobreakdash-SAM) como los coeficientes de la regresión de cada campo de altura geopotencial mensual sobre los respectivos patrones (ponderando por el coseno de la latitud).
+A continuación, los tres índices se normalizan dividiéndolos por la desviación típica del índice SAM en cada nivel.
+Como resultado, las magnitudes entre los índices son comparables.
+Sin embargo, sólo el índice SAM tiene desviación típica unitaria por definición.
+La varianza explicada de cada patrón se utiliza como indicador del grado de simetría o asimetría zonal de cada campo mensual.
+Para cuantificar la coherencia entre las series temporales correspondientes a distintos índices o al mismo índice en distintos niveles, calculamos la correlación temporal entre ellas.
+
+
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/method-1} \caption{Spatial patterns of the first EOF of 700~hPa geopotential height for 1979 -- 2018 period1. (a) Full field, (b) zonally asymmetric component and (c) zonally symmetric component. Arbitrary units; positive values in blue and negative values in red.}\label{fig:method}
+\end{figure*}
+El método supone la linealidad de la componente asimétrica de la SAM.
+Esto significa que las asimetrías zonales asociadas a la fase positiva de SAM (SAM+) son de signo casi opuesto y de la misma magnitud que las asociadas a la fase negativa de SAM (SAM-).
+Las composiciones de (\textbf{fogt2012?}) (su Figura 4) sugieren que esto podría no ser del todo válido, aunque gran parte de esa aparente no linealidad podría deberse a la naturaleza heterogénea de los años seleccionados para construir las composiciones.
+Para probar esta suposición, calculamos compuestos estacionales de anomalías zonales de altura geopotencial para SAM+ y SAM- (definidos como meses en los que el índice SAM es mayor que 1 desviación estándar y menor que menos 1 desviación estándar, respectivamente) para el periodo de 1979 a 2018 en los niveles de 700 hPa y 50 hPa (Figuras \ref{fig:A3} y \ref{fig:A4}).
+En todas las estaciones y en ambos niveles, los compuestos SAM+ son similares a los SAM- en estructura pero con signo opuesto.
+Las correlaciones espaciales entre los compuestos de cada estación son elevadas.
+El método considerado en este estudio parece entonces una aproximación razonable del fenómeno.
+
+Al realizar el análisis EOF utilizando los datos de todos los meses estamos asumiendo que la estructura zonalmente asimétrica de la SAM es la misma en todas las estaciones.
+Esto último se evaluó calculando las anomalías zonales de la altura geopotencial mediante la proyección de la primera EOF de cada estación de forma independiente.
+Se consideraron las siguientes estaciones: diciembre a febrero (DJF), marzo a mayo (MAM), junio a agosto (JJA) y septiembre a noviembre (SON).
+Los resultados son muy similares entre sí en la troposfera (Figura \ref(fig:A5), fila 2) y muestran correlaciones espaciales entre 0,65 (DJF con JJA) y 0,9 (MAM con SON).
+En la estratosfera (Figura \ref{fig:A5}, fila 1), los patrones son similares para todas las estaciones excepto DJF, cuando las anomalías zonales de la onda-1 se giran 90\degree en comparación con el resto del año.
+Las correlaciones espaciales en la estratosfera se sitúan entre -0,24 (DJF con SON) y 0,95 (MAM con JJA).
+Por tanto, los resultados confirman que la estructura asimétrica zonal de la SAM es muy similar durante la mayor parte del año.
+El trimestre DJF muestra correlaciones mucho más bajas con las otras estaciones en ambos niveles y las anomalías zonales más débiles (Figura \ref(fig:A3)), lo que concuerda con (\textbf{fogt2020?}).
+Por tanto, cabría esperar que, aunque el análisis se realice incluyendo todos los meses, represente con mayor precisión el resto de las estaciones.
+
+El método también asume que el patrón zonalmente asimétrico de la SAM permanece estacionario a lo largo del periodo considerado.
+Silvestri and Vera (2009) sugieren que este podría no ser el caso entre 1958 y 2004.
+Los patrones asimétricos zonales de SAM se calcularon para las dos mitades del periodo (1979 a 1998 y 1999 a 2018) respectivamente.
+Las diferencias entre los dos periodos parecen ser relativamente pequeñas tanto en la troposfera como en la estratosfera (Figura \ref(fig:A6)).
+
+\hypertarget{regresiones}{%
+\subsection{Regresiones}\label{regresiones}}
+
+Realizamos regresiones lineales para cuantificar la asociación entre los índices SAM y otras variables.
+Además, aplicamos un análisis de regresión lineal múltiple para describir la influencia combinada de A\nobreakdash-SAM y S\nobreakdash-SAM.
+Para obtener los coeficientes lineales de una variable \(X\) (geopotencial, temperatura, precipitación, etc\ldots) con A\nobreakdash-SAM y S\nobreakdash-SAM ajustamos la ecuación
+
+\[
+X(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{A-SAM} + \beta(\lambda, \phi) \operatorname{S-SAM} + X_0(\lambda, \phi) + \epsilon(\lambda, \phi, t)
+\]
+
+donde \(\lambda\) y \(\phi\) son la longitud y la latitud, \(t\) es el tiempo, \(\alpha\) y \(\beta\) son los coeficientes de regresión lineal, \(X_0\) y \(\epsilon\) son la constante y los términos de error.
+A partir de esta ecuación, \(\alpha\) representa la asociación (lineal) de \(X\) con la variabilidad de A\nobreakdash-SAM que no se explica por la variabilidad de S\nobreakdash-SAM; es decir, es proporcional a la correlación parcial de \(X\) y A\nobreakdash-SAM, controlando el efecto de S\nobreakdash-SAM, y viceversa para \(\beta\).
+Al realizar una regresión separada para cada trimestre (DJF, MAM, JJA, SON), promediamos estacionalmente las variables relevantes para cada año y trimestre antes de calcular la regresión.
+
+La significación estadística de los campos de regresión se evaluó ajustando los valores p mediante el control de la Tasa de Falsos Descubrimientos (\textbf{benjamini1995?}; \textbf{wilks2016?}) para evitar resultados engañosos derivados del elevado número de regresiones (\textbf{walker1914?}; \textbf{katz1991?}).
+
+Las tendencias lineales se calcularon mediante mínimos cuadrados ordinarios y el intervalo de confianza del 95\% se calculó asumiendo una distribución t con los grados de libertad residuales apropiados.
+La amplitud de las ondas zonales se define calculando la transformada de Fourier del campo espacial en cada círculo de latitud.
+
+Calculamos las estimaciones de probabilidad de densidad utilizando un kernel gaussiano de anchura óptima según (\textbf{sheather1991?}).
+
+\hypertarget{resultados}{%
+\section{Resultados}\label{resultados}}
+
+\hypertarget{temporal}{%
+\section{Temporal evolution}\label{temporal}}
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/asymsam-timeseries-1} \caption{Time series for A-SAM and S-SAM at (a) 50~hPa and (b) 700~hPa. To the right, probability density estimate of each index. Series are standardised by the standard deviation of the SAM at each level.}\label{fig:asymsam-timeseries}
+\end{figure*}
+En primer lugar, evaluamos la evolución temporal de A\nobreakdash-SAM y S\nobreakdash-SAM.
+La figura \ref{fig:asymsam-timeseries} muestra las series temporales correspondientes para 700 hPa y 50 hPa y sus correspondientes estimaciones de densidad.
+Seleccionamos estos dos niveles como representativos de la variabilidad troposférica y estratosférica respectivamente.
+Como se muestra a continuación, las variabilidades de ambos índices son muy coherentes dentro de cada capa atmosférica, por lo que es razonable tomar un nivel como representativo de cada capa.
+
+La variabilidad mes a mes es evidente para ambos índices, con variaciones ruidosas en las frecuencias bajas.
+A primera vista, las series pueden distinguirse por sus distribuciones.
+En comparación con los índices troposféricos, los estratosféricos son mucho más de cola larga; es decir, abundan los valores extremos (tanto negativos como positivos).
+Las series A\nobreakdash-SAM tienen a la vez más variabilidad en las frecuencias más altas que las series S\nobreakdash-SAM.
+
+El S\nobreakdash-SAM estratosférico varía fuertemente con un periodo entre 15 y 30 meses (el espectro máximo se sitúa en 12 meses), lo que puede apreciarse mediante el análisis espectral (Figura \ref{fig:A2}). En el periodograma del S\nobreakdash-SAM troposférico se aprecia un pico local en un rango de frecuencias similar, aunque no es estadísticamente significativo. Esta banda de periodicidad está alrededor del rango de periodicidad de la Oscilación Cuasi-Bienal (\textbf{baldwin2001b?}) y es consistente con (\textbf{vasconcellos2020?}), quien encontró que la SAM y la QBO comparten una alta potencia común significativa alrededor de la banda de 2 años.
+El hecho de que esta periodicidad no sea evidente en el índice A\nobreakdash-SAM, también es consistente con sus composiciones de anomalías de altura geopotencial durante la QBO oriental y occidental, que muestran un monopolo bastante simétrico sobre la Antártida.
+En la troposfera, el pico de variabilidad más significativo se encuentra en A\nobreakdash-SAM en torno a 36 meses.
+
+En una inspección visual, las series temporales A\nobreakdash-SAM y S\nobreakdash-SAM parecen estar correlacionadas.
+Además, observando los extremos en la estratosfera, la serie S\nobreakdash-SAM parece ir por detrás de la serie A\nobreakdash-SAM (véanse, por ejemplo, los eventos positivos de finales de 1987).
+La figura \ref{fig:cor-lev} muestra estas correlaciones a lo largo de todos los niveles considerados, para los retardos cero y -1.
+Los valores de las correlaciones de retardo cero entre A\nobreakdash-SAM y S\nobreakdash-SAM son relativamente constantes en toda la troposfera, fluctuando entre 0.32 y 0.4.
+Las correlaciones con desfase de un mes son igualmente constantes, pero se reducen significativamente a alrededor de 0.13.
+En la estratosfera, las correlaciones de desfase cero caen a un mínimo de 0.14 en 20 hPa y luego aumentan de nuevo monotónicamente con la altura hasta el nivel más alto del reanálisis (aunque los resultados cerca de la parte superior de los modelos deben interpretarse con cuidado).
+Al mismo tiempo, las correlaciones de un mes de retraso aumentan con la altura.
+Por lo tanto, el índice A\nobreakdash-SAM estratosférico tiende a preceder al índice S\nobreakdash-SAM.
+(Las correlaciones en los desfases de -5 a 5 se muestran en la Figura \ref{fig:A1}).
+
+\includegraphics{30-sam_files/figure-latex/cor-lev-1.pdf}
+aaa
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/cross-correlation-1} \caption{Cross correlation between levels for the (a) SAM, (b) A-SAM, and (c) S-SAM for the 1979 -- 2018 period3.}\label{fig:cross-correlation}
+\end{figure*}
+La figura \ref{fig:cross-correlation} muestra la correlación cruzada (lag cero) entre niveles para los índices SAM, A\nobreakdash-SAM y S\nobreakdash-SAM.
+Para el SAM (Figura \ref(fig:cross-correlation)a), los valores altos por debajo de 100 hPa reflejan la coherencia vertical (lag cero) en toda la troposfera.
+Por encima de 100 hPa, la correlación entre niveles disminuye más rápidamente, lo que indica una variabilidad menos coherente (desfase cero).
+Sin embargo, las correlaciones entre los niveles troposféricos y los niveles estratosféricos bajos y medios siguen siendo relativamente altas (por ejemplo, más de 0,4 entre los niveles troposféricos y los niveles por debajo de 30 hPa).
+A\nobreakdash-SAM y S\nobreakdash-SAM (Figura \ref{fig:cross-correlation}b y c, respectivamente) comparten un alto nivel de coherencia similar en la troposfera, pero difieren en su comportamiento estratosférico.
+La coherencia estratosférica es mayor para el A\nobreakdash-SAM que para el S\nobreakdash-SAM.
+La S\nobreakdash-SAM estratosférica parece conectarse con más fuerza a la troposfera que la A\nobreakdash-SAM estratosférica.
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/trends-1} \caption{Linear trends (in standard deviations per decade) at each level for annual (row 1) and seasonal values (rows 2 to 5) for the period 1979 -- 2018 and for the (column a) SAM index, (column b) A-SAM index, and (column c) S-SAM index. Shading indicates the 95 confidence interval from a t-distribution.}\label{fig:trends}
+\end{figure*}
+Las tendencias lineales para cada uno de los índices (SAM, S\nobreakdash-SAM y A\nobreakdash-SAM) se evaluaron para el periodo completo 1979 -- 2018 en cada nivel para el año completo y separado por trimestres (Figura \ref{fig:trends}).
+El índice SAM presenta una tendencia significativa estadísticamente positiva (Figura \ref{fig:trends}b.1) que se extiende por toda la troposfera hasta aproximadamente 50 hPa y alcanza su valor máximo a 100 hPa.
+Las tendencias estacionales (resto de la Figura \ref{fig:trends} columna a) indican que las tendencias positivas están presentes en otoño y sobre todo en verano, donde el máximo de 100 hPa está mucho más definido.
+En invierno y primavera, no detectamos ninguna tendencia estadísticamente significativa.
+Esto es coherente con los resultados de estudios anteriores, que encuentran grandes tendencias positivas en verano, menores en otoño y ninguna tendencia en las demás estaciones (por ejemplo, (\textbf{fogt2020?}) y referencias en él) utilizando índices de la SAM basados en la circulación en superficie o cerca de la superficie.
+
+Al separar la señal SAM en sus partes asimétrica y simétrica, no sólo podemos ver que estas tendencias se deben casi por completo al componente simétrico (columna b frente a columna c en la Figura \ref{fig:trends}), sino que en algunos casos las tendencias se vuelven más claras.
+En verano, A\nobreakdash-SAM tiene una tendencia negativa estadísticamente no significativa en la troposfera media que oculta la tendencia en el índice SAM; como resultado, las tendencias calculadas utilizando sólo el componente simétrico son más fuertes (comparar la región sombreada en la Figura \ref{fig:trends}b.2 y c.2).
+En otoño, el índice S\nobreakdash-SAM revela una tendencia positiva estadísticamente significativa en la estratosfera que no es significativa utilizando el índice SAM.
+
+Una tendencia positiva en el índice S\nobreakdash-SAM y ninguna tendencia en el índice A\nobreakdash-SAM podría sugerir en un primer momento una tendencia hacia una SAM más simétrica.
+Sin embargo, un S\nobreakdash-SAM muy negativo con tendencia a un S\nobreakdash-SAM menos negativo se traduciría en una tendencia positiva del S\nobreakdash-SAM pero en una SAM más asimétrica.
+\begin{figure}
+\centering
+\includegraphics{30-sam_files/figure-latex/r-squared-trend-1.pdf}
+\caption{\label{fig:r-squared-trend}Linear trends (in percent per decade) of the variance explained by A-SAM and S-SAM at each level and for each trimester for the period 1979 -- 2018. Shading indicates the 95 confidence interval.}
+\end{figure}
+aaa
+Para estudiar la cuestión de si la SAM se está volviendo más o menos asimétrica, mostramos las tendencias de la varianza explicada de cada índice para cada trimestre en la Figura \ref{fig:r-squared-trend}.
+En la troposfera, la única tendencia significativa es la de DJF, en la que el A\nobreakdash-SAM tiene una tendencia positiva de alrededor del 2\% por década, lo que sugiere que el DJF SAM se ha vuelto más asimétrico en el período de 1979 a 2018.
+(\textbf{fogt2012?}) observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (1979 -- 2018) nos impide detectar ese cambio.
+Sin embargo, debido a la naturaleza atípica del componente asimétrico de la SAM durante la DJF (Sección \ref{definition-of-indices}), esto debe tomarse sólo como una evidencia preliminar.
+La otra tendencia significativa se da en la estratosfera durante SON, donde hay una tendencia positiva en la varianza explicada por la S\nobreakdash-SAM de aproximadamente un 4\% por década.
+Este cambio podría ser el resultado del forzamiento provocado por el agotamiento del ozono.
+
+\hypertarget{spatial}{%
+\section{Spatial patterns}\label{spatial}}
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/2d-regr-1} \caption{Regression of geopotential height (meters) at (row 1) 50~hPa and (row 2) 700~hPa with (column a) SAM, (column b) A-SAM, and (column c) S-SAM for the 1979 -- 2018 period4. The regression patterns for A-SAM and S-SAM are the result of one multiple regression using both indices. Points marked on panel b.2 are the location of the reference points used by \cite{raphael2004} for their Zonal Wave 3 index. }\label{fig:2d-regr}
+\end{figure*}
+A continuación calculamos la regresión espacial de las anomalías de altura geopotencial sobre los índices A\nobreakdash-SAM y S\nobreakdash-SAM en los niveles de 700 hPa y 50 hPa (Figura \ref{fig:2d-regr}).
+Mientras que los coeficientes de regresión de la columna a de la Figura \ref{fig:2d-regr} se calculan utilizando SAM, los coeficientes de regresión de las columnas b y c de la Figura \ref{fig:2d-regr} se calculan mediante regresión múltiple utilizando los índices A\nobreakdash-SAM y S\nobreakdash-SAM al mismo tiempo.
+Así, deben interpretarse como los patrones asociados a cada índice, eliminando la variabilidad (linealmente) explicada por el otro.
+
+En la estratosfera, el patrón espacial asociado al SAM está claramente dominado por una estructura zonalmente simétrica y monopolar (Figura \ref(fig:2d-regr)a.1) que no está centrada en el Polo Sur.
+Por otro lado, el monopolo asociado a S\nobreakdash-SAM (Figura \ref{fig:2d-regr}c.1) es más simétrico, aunque sigue sin estar perfectamente centrado en el Polo Sur.
+Además, el patrón de regresión de A\nobreakdash-SAM se caracteriza por una estructura de onda-1 con centros sobre el Pasaje de Drake en el Hemisferio Occidental y el Mar de Davis en el Hemisferio Oriental.
+
+En la troposfera, el patrón de regresión asociado al SAM muestra la conocida combinación de modo anular zonalmente simétrico con asimetrías zonales en forma de onda-3 (Figura \ref(fig:2d-regr)a.2, (\textbf{fogt2012?})).
+Los patrones de regresión asociados a los índices A\nobreakdash-SAM y S\nobreakdash-SAM desentrañan con éxito ambas estructuras.
+Obsérvese que, a la luz del debate anterior sobre la naturaleza atípica de la DJF, es probable que este efecto medio anual no represente perfectamente la DJF.
+Mientras que el índice A\nobreakdash-SAM da lugar a una onda zonal más limpia (Figura \ref{fig:2d-regr}b.2), el índice S\nobreakdash-SAM se asocia a una estructura anular, con sólo asimetrías zonales vestigiales (Figura \ref{fig:2d-regr}c.2) en forma de una onda-3 que es la inversa de la onda-3 A\nobreakdash-SAM.
+El patrón de onda-3 observado en la figura \ref(fig:2d-regr)b.2 está girado media longitud de onda respecto a la posición media del patrón de onda-3 medio descrito por (\textbf{raphael2004?}), cuyas posiciones de referencia están marcadas con puntos en la figura.
+De hecho, no existe correlación entre el índice de (\textbf{raphael2004?}) y A\nobreakdash-SAM (cor = -0.14, p-value \textless{} 0.001).
+Así, el índice A\nobreakdash-SAM troposférico representa un desplazamiento zonal en la posición del patrón climatológico de la onda-3.
+
+
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/wave-amplitude-1} \caption{Amplitud (metros) de las ondas zonales de los patrones de regresión de altura geopotencial de la Figura \ref(fig:2d-regr) para ondas zonales con número de onda 0, 1, 2 y 3, donde el número de onda 0 representa la amplitud de la media zonal.}\label{fig:wave-amplitude}
+\end{figure*}
+La amplitud de los primeros números de onda zonales en cada latitud a 50 hPa y 700 hPa se muestran en la Figura \ref{fig:wave-amplitude}, donde el número de onda cero representa la amplitud de la media zonal.
+Las amplitudes de las ondas zonales del patrón espacial descrito por el índice SAM (Figura \ref(fig:wave-amplitude) columna a) están dominadas por la media zonal (número de onda 0) en ambos niveles.
+Sin embargo, las ondas zonales son importantes, sobre todo al sur de 50 grados S, con un número de onda 1 claramente dominante a 50 hPa (Figura \ref{fig:wave-amplitude}a.1) y una mezcla de ondas de amplitud similar a 700 hPa (Figura \ref{fig:wave-amplitude}a.2).
+La figura \ref{fig:wave-amplitude} columna b muestra que el A\nobreakdash-SAM está abrumadoramente dominado por la onda 1 en la estratosfera (Figura @ref(fig: onda-amplitud)b.1), mientras que en la troposfera se explica por una combinación de ondas zonales 3 a 1 en nivel decreciente de importancia (Figura \ref{fig:onda-amplitud}b.2) con una amplitud despreciable de la media zonal.
+Por otra parte, el S\nobreakdash-SAM se explica casi en su totalidad por la media zonal en ambos niveles (Figura \ref{fig:wave-amplitude} columna c), con poca o ninguna contribución de las ondas zonales con números de onda de 1 a 3.
+\begin{figure}
+\centering
+\includegraphics{30-sam_files/figure-latex/vertical-regression-1.pdf}
+\caption{\label{fig:vertical-regression}Regression between monthly geopotential height anomalies (meters) averaged betweeen 65 and 40 S and the A-SAM index (extracted from a multiple regression which included the S-SAM index). (a) With the A-SAM in 50\textasciitilde hPa and (b) in 700\textasciitilde hPa for the 1979 -- 2018 period5.}
+\end{figure}
+Para analizar la estructura vertical de las anomalías de altura geopotencial asociadas al índice A\nobreakdash-SAM, mostramos una sección transversal vertical de regresiones de altura geopotencial media entre 65\degree S y 40\degree S para el índice A\nobreakdash-SAM de 50 hPa (Figura \ref{fig:vertical-regression}a) y para el índice A\nobreakdash-SAM de 700 hPa (Figura \ref{fig:vertical-regression}b).
+Las anomalías de altura geopotencial asociadas a la A\nobreakdash-SAM estratosférica (Figura \ref{fig:vertical-regression}a) están claramente limitadas a la estratosfera, lo que subraya el desacoplamiento entre la A\nobreakdash-SAM estratosférica y la troposférica.
+La estructura vertical de esta señal se inclina unos 60 grados hacia el oeste entre 100 hPa y 1 hPa, lo que sugiere procesos baroclínicos.
+La señal en la estratosfera se maximiza cerca de 10 hPa a pesar de utilizar el índice de 50 hPa para la regresión.
+
+El A\nobreakdash-SAM troposférico (Figura \ref{fig:vertical-regression}b) presenta señales significativas que se extienden hacia arriba hasta los niveles superiores considerados.
+En la troposfera, la estructura de la onda 3 es barotrópica equivalente, con una amplitud máxima en torno a los 250 hPa.
+Las anomalías son mayores en el hemisferio occidental, donde se extienden hasta la estratosfera.
+En el hemisferio oriental, la señal de la onda 3 es menor y se limita a la troposfera, mientras que las anomalías negativas dominan en la estratosfera.
+Así, mientras que el índice A\nobreakdash-SAM troposférico está asociado a anomalías geopotenciales estratosféricas, éstas no se proyectan fuertemente sobre el A\nobreakdash-SAM estratosférico.
+Las estructuras mostradas en la Figura \ref{fig:vertical-regression} son robustas a la elección del nivel del índice.
+Para cualquier índice estratosférico (por encima de 100 hPa), las anomalías resultantes son muy similares a la estructura de onda-1 con máximo cerca de 10 hPa en la Figura \ref{fig:vertical-regression}a.
+Por el contrario, para cualquier índice troposférico (por debajo de 100 hPa), el resultado es muy similar al de la Figura \ref{fig:vertical-regression}b.
+Los patrones cambian principalmente en amplitud (no se muestra).
+\begin{table}
+
+\caption{\label{tab:enso-cor-table}Correlation between SAM indices and the Oceanic Niño Index. p-values corrected for False Detection Rate in parenthesis. In bold, correlations with p-value smaller than 0.05.}
+\centering
+\begin{tabular}[t]{c>{}c>{}c>{}c}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{Correlation} & \multicolumn{2}{c}{Partial correlation} \\
+\cmidrule(l{3pt}r{3pt}){2-2} \cmidrule(l{3pt}r{3pt}){3-4}
+ & SAM & A-SAM & S-SAM\\
+\midrule
+ & \textbf{-0.15} & \textbf{0.24} & 0.02\\
+\cmidrule{2-4}
+\multirow[t]{-2}{*}{\centering\arraybackslash Year} & \textbf{(<0.001)} & \textbf{(<0.001)} & (0.596)\\
+\cmidrule{1-4}
+ & \textbf{-0.25} & \textbf{0.23} & 0.15\\
+\cmidrule{2-4}
+\multirow[t]{-2}{*}{\centering\arraybackslash DJF} & \textbf{(0.002)} & \textbf{(0.004)} & (0.069)\\
+\cmidrule{1-4}
+ & -0.10 & \textbf{0.23} & -0.05\\
+\cmidrule{2-4}
+\multirow[t]{-2}{*}{\centering\arraybackslash MAM} & (0.264) & \textbf{(0.003)} & (0.596)\\
+\cmidrule{1-4}
+ & -0.03 & \textbf{0.18} & -0.06\\
+\cmidrule{2-4}
+\multirow[t]{-2}{*}{\centering\arraybackslash JJA} & (0.658) & \textbf{(0.027)} & (0.573)\\
+\cmidrule{1-4}
+ & \textbf{-0.18} & \textbf{0.36} & -0.03\\
+\cmidrule{2-4}
+\multirow[t]{-2}{*}{\centering\arraybackslash SON} & \textbf{(0.027)} & \textbf{(<0.001)} & (0.658)\\
+\bottomrule
+\end{tabular}
+\end{table}
+El patrón de la onda 3 de la Figura \ref(fig:2d-regr)b.2 es muy similar al patrón SAM (\textbf{mo1987?}; \textbf{kidson1988?}), que es un patrón de teleconexión asociado al ENSO (\textbf{karoly1989?}).
+De hecho, (\textbf{fogt2011?}) demostró que existe una relación significativa entre el SAM y el ENSO.
+La correlación entre la SAM y el ENSO medida por el Índice del Niño Oceánico (ONI, \textbf{bamston1997?}) se muestra en la Tabla \ref(tab:enso-cor-table) para cada índice SAM y para cada trimestre.
+Existe una correlación significativa entre SAM y ENSO. Cuando se divide en trimestres, esta correlación sólo es importante en DJF y SON.
+Esta relación es captada principalmente por el A\nobreakdash-SAM, ya que este índice presenta correlaciones parciales significativas con el ENSO, mientras que las correlaciones con el S\nobreakdash-SAM son todas menores y no significativas.
+En MAM, ENSO no está significativamente correlacionado con SAM, pero sí lo está con A\nobreakdash-SAM en un nivel comparable a la correlación ENSO-SAM en SON. El mismo análisis se realizó utilizando el Índice ENSO Multivariante (\textbf{wolter2011?}) y el Índice de Oscilación del Sur (\textbf{ropelewski1987?}), obteniendo resultados similares.
+Esto último nos permite concluir que estos resultados no dependen del índice ENSO utilizado.
+
+\hypertarget{impacts}{%
+\section{Impactos}\label{impacts}}
+
+
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/regr-air-season-1} \caption{Regression of seasonal mean 2-metre temperature anomalies (Kelvin) from ERA5 with SAM, A\nobreakdash-SAM and S\nobreakdash-SAM for the 1979 -- 2018 period. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate. Note that the colour scale cuts-off at \(\pm0.6 \mathrm{K}\) to highlight mid-latitudes and tropics features at the expense of the higher values in polar regions.}\label{fig:regr-air-season}
+\end{figure*}
+Para evaluar las diferencias en los impactos asociados a los índices SAM, A\nobreakdash-SAM y S\nobreakdash-SAM, realizamos una regresión de la temperatura del aire y la precipitación a 2 metros sobre cada uno de los tres índices SAM a 700 hPa.
+Como se ha mostrado en secciones anteriores, los tres índices son muy coherentes en la troposfera, por lo que seleccionamos este nivel para representar la circulación troposférica por coherencia con estudios anteriores.
+Las regresiones se realizaron sin desdiferenciar ni las variables ni los índices, pero calcular las regresiones con valores desdiferenciados no cambia los resultados considerablemente (no se muestra).
+
+La figura \ref{fig:regr-aire-season} muestra los coeficientes de regresión de cada índice a 700 hPa con la temperatura del aire terrestre superficial y del mar para cada trimestre.
+En verano, los valores positivos del índice SAM (Figura \ref{fig:regr-aire-season}a.1) se asocian con anomalías negativas de temperatura cerca de la Antártida que están rodeadas por un anillo de anomalías positivas en las latitudes medias.
+El anillo no es zonalmente simétrico, ya que hay cuatro máximos locales distintivos en torno a los 30º W, 120º W, 150º E y 90º E respectivamente.
+En los trópicos, las anomalías son negativas en el Pacífico ecuatorial, lo que concuerda con la correlación negativa entre SAM y ENOS.
+La figura \ref{fig:regr-air-season}b.1 and c.1 muestra anomalías de temperatura asociadas a valores positivos de A\nobreakdash-SAM y S\nobreakdash-SAM, respectivamente.
+Tanto los máximos locales en el anillo como las anomalías en las regiones del Pacífico están presentes sobre todo en el mapa de regresión de A\nobreakdash-SAM, mientras que los patrones de temperatura ligados a valores positivos de S\nobreakdash-SAM muestran un anillo más consistente zonalmente y menos relacionado con los trópicos.
+Sobre la Antártida, los valores positivos del índice SAM están asociados a anomalías negativas de temperatura, en particular sobre la costa oriental.
+Estas anomalías están asociadas únicamente con el S\nobreakdash-SAM.
+Además, las típicas variaciones longitudinales de las anomalías de temperatura a lo largo de la Península Antártica no son evidentes en las regresiones con el SAM, de acuerdo con trabajos anteriores (por ejemplo \textbf{marshall2016?}).
+Por otro lado, las anomalías de temperatura en el océano Índico, el sur de África y Australia están fuertemente relacionadas con A\nobreakdash-SAM y no están presentes en el patrón de regresión con la SAM.
+
+En otoño, invierno y primavera (filas 2, 3, and 4 en la Figura \ref(fig:regr-air-season)) el anillo positivo sólo está presente a través de sus máximos locales en la regresión con la SAM, lo que refleja la naturaleza más asimétrica de la SAM en comparación con el verano.
+También se observan anomalías negativas en el sur de Australia y anomalías positivas sobre Nueva Zelanda y el sur de Sudamérica.
+(\textbf{jones2019?}) observó características similares en las mediciones de estaciones, aunque utilizando datos de 1957 a 2016.
+En primavera, la señal tropical de A\nobreakdash-SAM es similar a la del verano, revelando de nuevo la importancia del vínculo ENSO-A\nobreakdash-SAM.
+Además, de otoño a primavera, se aprecian anomalías positivas (negativas) de temperatura en la porción norte (sur) de la Península Antártica en las regresiones con el SAM, que también son evidentes en las regresiones con A-SAM. En concordancia, (\textbf{marshall2016?}) encontró la misma señal en asociación con SAM mientras que ese patrón sólo es evidente en otoño para el modo anular baroclínico del sur, que está asociado con variaciones en la amplitud de tormentas extratropicales.
+
+Las mismas regresiones utilizando datos de temperatura del Merged Land Ocean Global Surface Temperature Analysis V4.0.1 (\textbf{smith2008?}; \textbf{vose2012?}) de la NOAA, que combina el análisis de la temperatura del aire de la superficie terrestre y de la temperatura de la superficie del mar (agua) en una cuadrícula global mensual, se muestran en la Figura \ref{fig:A10}.
+Allí donde se dispone de datos, los patrones generales son similares, aunque de menor magnitud, quizá debido a que las temperaturas de la superficie del mar varían menos.
+
+El patrón de anomalías negativas en el polo rodeadas de anomalías positivas que se observa aproximadamente en todas las estaciones -aunque con intensidad variable y detalles a pequeña escala- se traduce en un gradiente de temperatura meridional aumentado maximizado en la línea cero, lo que es coherente con la intensificación y migración hacia el polo de los vientos del oeste comúnmente vinculados a la SAM a través del balance térmico del viento.
+Por tanto, no es sorprendente verlo más claramente asociado al S\nobreakdash-SAM (al menos en verano y primavera).
+Las temperaturas sobre la Antártida Oriental se ven más afectadas por el S\nobreakdash-SAM, mientras que en la Antártida Occidental son más sensibles al A\nobreakdash-SAM.
+Dado que el índice S\nobreakdash-SAM está negativamente correlacionado con la temperatura sobre la Antártida Oriental, es posible que la tendencia positiva en el índice S\nobreakdash-SAM pueda ayudar a explicar la falta de tendencia positiva de la temperatura en la Antártida Oriental en comparación con la Antártida Occidental en el contexto del calentamiento global (\textbf{nicolas2?}).
+
+
+\begin{figure}
+\centering
+\includegraphics{30-sam_files/figure-latex/global-pp-1.pdf}
+\caption{\label{fig:global-pp}Regression of monthly precipitation anomalies (mm per day, shading) with a) SAM, b) A-SAM and c) S-SAM for the 1979 -- 2018 period. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate. Note that the colour scale cuts-off at \(\pm0.25 \mathrm{K}\) to highlight mid- and high-latitude features at the expense of the very high values in the Tropics.}
+\end{figure}
+La figura \ref{fig:global-pp} muestra la regresión de los índices SAM con la precipitación para el Hemisferio Sur. La señal de precipitación asociada a SAM muestra en general una disminución de la precipitación en torno a los 45 grados S, un ligero aumento de la precipitación en torno a los 30 grados S (Fig. \ref{fig:global-pp}a) y un aumento de la precipitación sobre la Antártida, un patrón conocido por otros estudios (p.~ej. \textbf{hendon2014?}).
+Este patrón se mantiene prácticamente sin cambios entre estaciones, aunque varía en intensidad (no se muestra).
+Los paneles b y c de la Figura \ref(fig:global-pp) muestran que la señal A\nobreakdash-SAM sólo se da en los trópicos y latitudes medias, mientras que la señal S\nobreakdash-SAM es fuerte en las latitudes altas.
+En particular, los valores positivos de S\nobreakdash-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.
+
+Para estudiar con más detalle los impactos sobre tierra, las Figuras \ref{fig:pp-regr-oceania} y \ref{fig:pp-regr-america} muestran la regresión de los índices SAM con la precipitación media estacional y la altura geopotencial de 700 hPa para Nueva Zelanda e islas vecinas, y Sudamérica respectivamente.
+No se muestra Sudáfrica porque allí no se detectó ninguna señal significativa.
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/pp-regr-oceania-1} \caption{Regression of (row 1) annual and (rows 2 to 5) seasonal mean precipitation anomalies (mm per day, shading) and 700~hPa geopotential height anomalies (thin lines, positive values as solid lines and negative values as dashed lines) with (column a) SAM, (column (b) A-SAM and (column c) S-SAM for the 1979 -- 2018 period6. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate.}\label{fig:pp-regr-oceania}
+\end{figure*}
+En Australia, la regresión anual muestra que el índice SAM está asociado con anomalías positivas de precipitación en la región sudeste (Figura \ref(fig:pp-regr-oceania)a.1), de acuerdo con (\textbf{gillett2006?}).
+La separación entre A\nobreakdash-SAM y S\nobreakdash-SAM sugiere que esta anomalía positiva se explica por la S\nobreakdash-SAM sólo en la costa este (Figura \ref{fig:pp-regr-oceania}c.1).
+Las anomalías de altura geopotencial asociadas a este índice (contornos negros) son indicativas de un flujo hacia el este procedente del mar de Tasmania, lo que podría explicar las anomalías positivas en las precipitaciones encontradas por (\textbf{hendon2007?}).
+A\nobreakdash-SAM parece estar relacionado con anomalías positivas de precipitación en la costa oeste del sureste de Australia (Figura \ref(fig:pp-regr-oceania)b.2), que podrían explicarse de forma similar por la circulación anómala del oeste que transporta aire húmedo al continente desde el océano Índico.
+
+Las regresiones estacionales muestran anomalías estadísticamente significativas sólo en primavera, cuando una SAM positiva se asocia con anomalías positivas de precipitación en el este de Australia (Figura \ref(fig:pp-regr-oceania)a.5).
+En este trimestre, S\nobreakdash-SAM parece estar asociado con anomalías positivas de precipitación en un área relativamente reducida de la costa oriental (Figura \ref{fig:pp-regr-oceania}c.5) mientras que las anomalías positivas de precipitación relacionadas con A\nobreakdash-SAM positivo afectan a todo el este de Australia (Figura \ref{fig:pp-regr-oceania}b.5).
+
+En verano, un índice SAM positivo se asocia con anomalías de precipitación positivas en Australia occidental y oriental, sobre todo en la región nororiental (Figura \ref{fig:pp-regr-oceania}a.2).
+La parte oriental está dominada por la relación con S\nobreakdash-SAM y la occidental, por A\nobreakdash-SAM.
+En otoño, la regresión con SAM muestra anomalías positivas en el norte, similares a las de verano, que se asocian con el A\nobreakdash-SAM.
+En invierno los coeficientes de regresión son mucho más débiles que durante el resto del año.
+Ninguno de estos coeficientes de regresión es estadísticamente significativo al nivel del 95\%.
+La señal de la primavera coincide en líneas generales con (\textbf{hendon2007?}), pero mientras que ellos también detectaron una fuerte señal en verano, la Figura \ref(fig:pp-regr-oceania)a.2 no muestra ninguna asociación estadísticamente significativa (aunque los coeficientes tienen el signo coherente).
+
+
+\begin{figure*}
+\includegraphics{30-sam_files/figure-latex/pp-regr-america-1} \caption{Igual que la Figura \ref{fig:pp-regr-oceania} pero para Sudamérica.}\label{fig:pp-regr-america}
+\end{figure*}
+En Sudamérica (Figura \ref{fig:pp-regr-america}), la regresión utilizando todas las estaciones muestra que la SAM positiva está asociada con anomalías de precipitación negativas estadísticamente significativas en el Sudeste de Sudamérica (SESA) y el sur de Chile, y anomalías positivas no significativas en el sur de Brasil, cerca de la Zona de Convergencia del Atlántico Sur (SACZ) (Figura \ref{fig:pp-regr-america}a.1).
+Las figuras \ref{fig:pp-regr-america}b.1 y c.1 muestran que mientras la señal sobre SESA y el sur de Brasil está asociada con A\nobreakdash-SAM, la del sur de Chile está relacionada con S\nobreakdash-SAM.
+
+Excepto en invierno, las regresiones estacionales reflejan este mismo patrón.
+Aunque no sean estadísticamente significativas, todas muestran valores negativos en SESA y el sur de Chile junto con valores positivos en el sur de Brasil en relación con la SAM.
+La separación de estas características entre los mapas de regresión A\nobreakdash-SAM y S\nobreakdash-SAM es también bastante consistente.
+
+La circulación anómala a 700 hPa asociada a S\nobreakdash-SAM (Figura \ref{fig:pp-regr-america}c.1) indica un flujo anómalo del este sobre el sur de Chile. Esto conduce a una menor afluencia de aire húmedo desde el Océano Pacífico, que es la principal fuente de agua precipitable en esa región (por ejemplo, \textbf{garreaud2007?}). Por otro lado, la circulación anómala asociada a valores positivos de A\nobreakdash-SAM (Figura \ref(fig:pp-regr-america)b.1) en el Atlántico es anticiclónica en el sur y ciclónica en el norte. Esto promueve un flujo anómalo del sudeste sobre el SESA, que inhibe el flujo del chorro de baja altura de Sudamérica hacia la región (Silvestri and Vera, 2009; \textbf{zamboni2010?}). Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ (\textbf{rosso2018?}).
+Hay una pequeña área de anomalías positivas significativas de precipitación con el SAM cerca del centro de Argentina que también está presente en el análisis basado en estaciones de (\textbf{gillett2006?}) que se explica por el A\nobreakdash-SAM.
 
 Acá iría gran parte \href{https://github.com/eliocamp/asymsam}{del paper del SAM}. Adentrar un poco más en la relación con el cEOF2
 
@@ -670,7 +1027,7 @@ Acá seguiría parte \href{https://github.com/eliocamp/shceof}{del paper de cEOF
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/sam-eof-vertical-1.pdf}
+\includegraphics{40-sam-ceof_files/figure-latex/sam-eof-vertical-1.pdf}
 \caption{\label{fig:sam-eof-vertical}Coefficient of determination (\(r^2\)) between each component of cEOFs and the SAM, Asymmetric SAM (A-SAM) and Symmetric SAM (S-SAM) indices computed at each level for the 1979 -- 2019 period. Thick lines represent estimates with p-value \textless{} 0.01 corrected for False Detection Rate (\textbf{benjamini1995?}).}
 \end{figure}
 Ahora exploramos la relación entre SAM y los cEOFs motivados por el parecido entre los mapas de regresión de los cEOFs y los patrones de SAM mostrados en la Sección \ref{regresiones}.
@@ -683,7 +1040,7 @@ En la estratosfera, la CEOF1 de 0º está correlacionada tanto con la A-SAM como
 Estas correlaciones son consistentes con los mapas de regresión de la altura geopotencial en la Figura \ref{fig:eof1-regr-gh} y su comparación con los obtenidos para SAM, A-SAM y S-SAM por Campitelli et al. (2022).
 
 En el caso de 90º cEOF2, su correlación con la SAM para la troposfera está asociada a la variabilidad asimétrica de la SAM.
-De hecho, el 90º cEOF2 comparte hasta varianza con el A-SAM y sólo como máximo con el S-SAM (Figura \ref{fig:sam-eof-vertical}.
+De hecho, el 90º cEOF2 comparte hasta 50\%, 72\%, 68\%, 78\% varianza con el A-SAM y sólo 18\%, 32\%, 18\%, 22\% como máximo con el S-SAM (Figura \ref{fig:sam-eof-vertical}.
 b2).
 Esta altísima correlación entre A-SAM y 90º cEOF2 sugiere que los modos obtenidos en este trabajo son capaces de caracterizar la componente zonalmente asimétrica de la SAM descrita previamente por Campitelli et al. (2022).
 
@@ -695,14 +1052,19 @@ Esta altísima correlación entre A-SAM y 90º cEOF2 sugiere que los modos obten
 
 \caption{\label{tab:psa-eof2}Correlation coefficients (r) between cEOF2 components and the PSA1 and PSA2 modes computed as Mo and Paegle (2001) for the 1979 -- 2019 period. 95\% confidence intervals in parenthesis. p-values lower than 0.01 in bold.}
 \centering
-\begin{tabular}[t]{l>{}l>{}l}
+\begin{tabular}[t]{ll>{}l>{}l}
 \toprule
-\multicolumn{1}{c}{} & \multicolumn{2}{c}{cEOF2} \\
-\cmidrule(l{3pt}r{3pt}){2-3}
-PC & Real & Imaginario\\
+PC & season & Real & Imaginario\\
 \midrule
-PSA1 & 0.26 (CI: -0.04 -- 0.53) & \textbf{0.82 (CI: 0.69 -- 0.9)}\\
-PSA2 & \textbf{-0.79 (CI: -0.88 -- -0.63)} & 0.02 (CI: -0.29 -- 0.32)\\
+PSA1 & DJF & 0.37 (CI: 0.08 -- 0.61) & \textbf{0.72 (CI: 0.53 -- 0.84)}\\
+PSA2 & DJF & \textbf{0.58 (CI: 0.33 -- 0.75)} & 0.16 (CI: -0.15 -- 0.44)\\
+PSA1 & MAM & -0.17 (CI: -0.44 -- 0.13) & 0.38 (CI: 0.09 -- 0.61)\\
+PSA2 & MAM & \textbf{0.79 (CI: 0.65 -- 0.88)} & \textbf{0.42 (CI: 0.14 -- 0.64)}\\
+PSA1 & JJA & 0.22 (CI: -0.08 -- 0.48) & \textbf{0.49 (CI: 0.23 -- 0.69)}\\
+\addlinespace
+PSA2 & JJA & \textbf{0.71 (CI: 0.52 -- 0.83)} & \textbf{-0.44 (CI: -0.65 -- -0.17)}\\
+PSA1 & SON & 0.13 (CI: -0.17 -- 0.41) & \textbf{0.78 (CI: 0.63 -- 0.87)}\\
+PSA2 & SON & \textbf{0.78 (CI: 0.63 -- 0.87)} & 0.18 (CI: -0.12 -- 0.45)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -716,11 +1078,11 @@ Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y
 
 \begin{figure}
 \centering
-\includegraphics{thesis_files/figure-latex/phase-histogram-1.pdf}
+\includegraphics{40-sam-ceof_files/figure-latex/phase-histogram-1.pdf}
 \caption{\label{fig:phase-histogram}Histograma de distribución de fase de cEOF2 para el periodo 1979 -- 2019. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho de intervalo de 90º. Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.}
 \end{figure}
 La figura \ref{fig:histograma-fase} muestra un histograma que cuenta el número de estaciones SON en las que la fase cEOF2 estaba cerca de cada una de las cuatro fases particulares (positiva/negativa de las fases 0º y 90º), con las observaciones para cada estación marcadas como alfombras en el eje horizontal.
-En 62\% de las estaciones cEOF2 tiene una fase similar a la fase negativa o positiva de 90º, haciendo que la fase de 90º sea la fase más común.
+En 66\% de las estaciones cEOF2 tiene una fase similar a la fase negativa o positiva de 90º, haciendo que la fase de 90º sea la fase más común.
 Esta es también la fase más correlacionada con ENSO según la definición de la fase de 0º descrita en la Sección @ref(métodos).
 
 Por lo tanto, en virtud de ser la fase más común, la cEOF2 de 90º explica más varianza que la cEOF2 de 0º.
@@ -769,6 +1131,9 @@ Campitelli, E., Díaz, L.B., and Vera, C., 2022. \href{https://doi.org/10.1007/s
 
 \leavevmode\vadjust pre{\hypertarget{ref-mo2001}{}}%
 Mo, K.C., and Paegle, J.N., 2001. \href{https://doi.org/10.1002/joc.685}{The {Pacific}\textendash{{South American}} modes and their downstream effects}. International Journal of Climatology, 21, 10, 1211--1229.
+
+\leavevmode\vadjust pre{\hypertarget{ref-silvestri2009}{}}%
+Silvestri, G., and Vera, C., 2009. \href{https://doi.org/10.1175/2009JCLI3036.1}{Nonstationary {Impacts} of the {Southern Annular Mode} on {Southern Hemisphere Climate}}. Journal of Climate, 22, 22, 6142--6148.
 
 \end{CSLReferences}
 

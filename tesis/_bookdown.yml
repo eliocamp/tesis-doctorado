@@ -1,5 +1,6 @@
 book_filename: "thesis"
 chapter_name: "Capítulo "
+new_session: True
 download: [
     ["thesis.pdf", "PDF"],
     ["thesis.epub", "EPUB"],

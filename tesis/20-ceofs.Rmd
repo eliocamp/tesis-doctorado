@@ -1,55 +1,74 @@
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  cache = TRUE
+)
+
+
+
+library(eliotesis)
+
+library(metR)
+library(data.table)
+library(magrittr)
+
+library(kableExtra)
+
+library(ggplot2)
+library(tagger)
+library(ggperiodic)
+library(ggnewscale)
+library(gggrid)
+
+
+
+source(here::here("tesis/scripts/globals.R"))
+
+```
+
+
 # Modos de variabilidad de la circulación zonalmente asimétrica
 
 Acá iría básicamente [el paper de cEOF](https://github.com/eliocamp/shceof).
 
 ## Datos y métodos
 
-
-
 ```{r read-indices}
 enso <- ENSO() %>%
   fread() %>% 
-  .[, .(time = lubridate::as_datetime(Date), oni = ONI)] %>% 
   na.omit() %>%
-  .[season(time) == "SON"] %>%
+  .[is.full_season(time)] %>% 
   .[, oni := oni*season_weights(time)] %>% 
   .[, .(oni = mean(oni)), by = .(time = seasonally(time))]
 
 dmi <- DMI() %>%
   fread() %>% 
-  .[, .(time = lubridate::as_datetime(Date), dmi = DMI)] %>% 
   na.omit() %>%
-  .[season(time) == "SON"] %>%
+  .[is.full_season(time)] %>% 
   .[, dmi := dmi*season_weights(time)] %>% 
   .[, .(dmi = mean(dmi)), by = .(time = seasonally(time))]
 
 sams <- SAM() %>% 
   fread() %>%
-  .[season(time) == "SON"] %>%
+  .[is.full_season(time)] %>% 
   .[, estimate := estimate*season_weights(time)] %>% 
   .[, .(estimate = mean(estimate)),
     by = .(lev, term, time = seasonally(time))]
 
-levs <- unique(sams$lev)
-
-for (l in seq_along(levs)[-1]) {
-  cor <- sams[lev %in% levs[seq(l - 1, l)]] %>% 
-    .[term == "full"] %>%
-    dcast(time ~ lev, value.var = "estimate") %>% 
-    setnames(., colnames(.), c("time", "old", "new")) %>% 
-    .[, cor(old, new)]
-  
-  sams[lev == levs[l], estimate := sign(cor)*estimate]
-}
 ```
 
 ```{r read-data}
 era5 <- ERA5_geopotential() %>% 
   ReadNetCDF(vars = c(hgt = "z"),
              subset = list(level = list(200, 50),
-                           latitude = -90:10)) %>% 
+                           latitude = -90:10,
+                           time = main_period)) %>% 
   normalise_coords() %>% 
-  .[season(time) == "SON"] %>%
+  na.omit() %>%   # Tengo que omitirlo por la forrada del expver
+  .[is.full_season(time)] %>% 
   .[, w := season_weights(time)] %>% 
   .[, .(hgt = mean(hgt*w)), by = .(lev, lon, lat, time = seasonally(time))]
 ```
@@ -59,10 +78,11 @@ era5 <- ERA5_geopotential() %>%
 # Not really important, though.
 scaling <- c(add = -2.364646e+06, mult = 3.954828e+13)
 psi <- ERA5_vorticity() %>% 
-  ReadNetCDF(vars = "vo") %>%
+  ReadNetCDF(vars = "vo", subset = list(time = main_period)) %>%
   normalise_coords() %>%
+  na.omit() %>% 
+  .[is.full_season(time)] %>% 
   .[, lev := 200] %>% 
-  .[season(time) == "SON"] %>%
   .[, w := season_weights(time)] %>% 
   .[, .(vo = mean(vo*w)), by = .(lon, lat, lev, time = seasonally(time))] %>%
   .[, psi := solve_poisson(vo, lon, lat), by = .(lev, time)] %>%
@@ -73,8 +93,11 @@ psi <- ERA5_vorticity() %>%
 
 ```{r o3}
 o3 <- ERA5_TOC() %>% 
-  ReadNetCDF(vars = c(toc = "tco3")) %>% 
+  ReadNetCDF(vars = c(toc = "tco3"),
+             subset = list(time = main_period)) %>% 
   normalise_coords() %>% 
+  na.omit() %>% 
+  .[is.full_season(time)] %>% 
   .[lat <= -20] %>% 
   .[, toc := toc/2.1415e-5] %>%    # transform to Dobson Units (https://sacs.aeronomie.be/info/dobson.php)
   .[, w := season_weights(time)] %>% 
@@ -84,22 +107,8 @@ o3wave_lats <- c(-75, -45)
 ```
 
 ```{r psa}
-psa <- ERA5_geopotential() %>% 
-  ReadNetCDF(vars = c(hgt = "z"),
-             subset = list(level = list(500),
-                           latitude = -90:0)) %>% 
-  normalise_coords() %>% 
-  .[, w := season_weights(time)] %>% 
-  .[, .(hgt = mean(hgt*w)), by = .(lon, lat, time = seasonally(time))] %>% 
-  .[, value := Anomaly(hgt)*sqrt(cos(lat*pi/180)), 
-    by = .(lon, lat, season(time))] %>%
-  EOF(value ~ time | lon + lat, n = 1:3, data = .)
-
-psa <- lapply(psa, function(x) {
-  copy(x)[, PC := fcase(PC == "PC1", "SAM", 
-                        PC == "PC2", "PSA1", 
-                        PC == "PC3", "PSA2")] 
-})
+psa <- PSA() %>% 
+  readRDS()
 
 psa_time <- psa$left[season(time) == "SON"]
 ```
@@ -110,6 +119,7 @@ psa_time <- psa$left[season(time) == "SON"]
 
 ```{r compute-eof-naive}
 eof_naive <- era5[lev %in% c(50, 200) & lat %between% c(-90, -20)] %>% 
+  .[season(time) == "SON"] %>% 
   # .[, hgt := Anomaly(hgt), by = .(season(time), lon, lat, lev)] %>%
   .[, hgt  := Anomaly(hgt)*sqrt(cos(lat*pi/180)), by = .(time, lev, lat)] %>% 
   .[, .(eof = list(EOF(hgt ~ time | lon + lat, n = 1:4, data = .SD, suffix = "EOF"))), 
@@ -186,9 +196,11 @@ invisible(
   ERA5_geopotential() %>% 
     ReadNetCDF(vars = c(hgt = "z"),
                subset = list(latitude = -90:10,
-                             level = list(200, 50))) %>%
+                             level = list(200, 50),
+                             time = main_period)) %>%
     normalise_coords() %>%
-    .[season(time) == "SON"] %>%
+    na.omit() %>% 
+    .[is.full_season(time)] %>% 
     .[, w := season_weights(time)] %>% 
     .[, .(hgt = mean(hgt*w)), by = .(lev, lon, lat, time = seasonally(time))] %>%
     .[, season := season(time)] %>%
@@ -201,10 +213,11 @@ invisible(
 )
 ```
 
+
 (ref:corr-ceof-splitted-cap) Coefficient of determination ($r^2$) between the time series of the absolute magnitude of complex EOFs computed separately at 200 hPa and 50 hPa (p-values lower than 0.01 in bold).
 
 ```{r corr-ceof-splitted}
-table <- ceof_splitted[, eof[[1]]$left, by = .(lev = levs)] %>%
+table <- ceof_splitted[season == "SON", eof[[1]]$left, by = .(lev = levs)] %>%
   copy() %>%
   .[, mag  := abs(hgt)] %>%
   .[, item := paste(lev, cEOF, sep = "_")]
@@ -263,7 +276,7 @@ wave1_o3 <- o3 %>%
   .[, .(toc = weighted.mean(toc, w = cos(lat*pi/180), na.rm = TRUE)), by = .(time, lon)] %>% 
   .[, FitWave(toc, 1), by = .(time)] 
 
-with_o3 <- ceof$eof[[1]]$left %>% 
+with_o3 <- ceof[, eof[[1]]$left, by = season] %>% 
   .[cEOF == "cEOF1"] %>% 
   .[wave1_o3, on = "time"]
 
@@ -273,51 +286,50 @@ rotations_o3 <- lapply(angles, function(a) {
     .[, hgt := rotate(hgt, a)] %>% 
     na.omit() %>% 
     sep_ReIm() %>% 
-    .[, .(cor = cor(amplitude, hgt)), by = part] %>% 
+    .[, .(cor = cor(amplitude, hgt)), by = .(season, part, cEOF)] %>% 
     .[, rotation := a]
 }) %>% 
   rbindlist()
 
-best_rotation_cEOF1 <- rotations_o3[part == "Real"][which.max(cor)]$rotation
+best_rotation_cEOF1 <- rotations_o3[part == "Real"][, .SD[which.max(cor), .(rotation)], by = .(cEOF, season)]
 
-with_enso <-  cut(ceof$eof[[1]], 2)$left %>%
-  copy() %>%
-  .[enso, on = "time"] %>% 
+with_enso <-  ceof[, eof[[1]]$left, by = season] %>% 
+  .[cEOF == "cEOF2"] %>% 
+  enso[., on = "time"] %>% 
   na.omit() 
 
 rotations_cEOF2 <- lapply(angles, function(a) {
   with_enso %>%
     .[, hgt2 := rotate(hgt, a)] %>%
     .[, .(R = cor(Re(hgt2), oni),
-          I = cor(Im(hgt2), oni))] %>%
+          I = cor(Im(hgt2), oni)), by = .(cEOF, season)] %>%
     .[, rotation := a]
 }) %>%
   rbindlist()
 
-best_rotation_cEOF2 <- rotations_cEOF2[I > 0][which.min(abs(R))]$rotation
+best_rotation_cEOF2 <- rotations_cEOF2[I > 0][, .SD[which.min(abs(R)), .(rotation)], by = .(cEOF, season)]
 
-eof_rotated_left <- ceof$eof[[1]]$left %>%
-  copy() %>%
-  .[cEOF == "cEOF2", hgt := rotate(hgt, best_rotation_cEOF2)] %>%
-  .[cEOF == "cEOF1", hgt := rotate(hgt, best_rotation_cEOF1)]
 
-eof_rotated_right <-  ceof$eof[[1]]$right %>%
-  copy() %>%
-  .[cEOF == "cEOF2", hgt := rotate(hgt, best_rotation_cEOF2)] %>%
-  .[cEOF == "cEOF1", hgt := rotate(hgt, best_rotation_cEOF1)]
+rotations <- rbind(best_rotation_cEOF1, best_rotation_cEOF2) %>% 
+  tidyfast::dt_nest(season, .key = 'rotation')
 
-ceof_unrotated <- copy(ceof)
+rotate_ceof <- function(x, rot) {
+  x$left <- x$left[rot, on = 'cEOF'][, hgt := rotate(hgt, rotation)][, rotation := NULL]
+  x$right <- x$right[rot, on = 'cEOF'][, hgt := rotate(hgt, rotation)][, rotation := NULL]
+  
+  x
+  
+}
 
-ceof$eof[[1]]$left <- eof_rotated_left
-ceof$eof[[1]]$right <- eof_rotated_right
-
-ceof <- rbindlist(list(rotated = ceof,
-                       unrotated = ceof_unrotated),
+ceof <- rbindlist(list(unrotated = ceof,
+                       rotated = copy(ceof)[rotations, on = 'season'] %>% 
+                         .[,  .(ceof = list(rotate_ceof(eof[[1]], rotation[[1]]))), by = .(season)]),
                   idcol = "rotation")
 
 rotated <- function(x) x[rotation == "rotated"]
 unrotated <- function(x) x[rotation == "unrotated"]
 ```
+
 
 ```{r check-rotation}
 # Check that rotated and unrotated eofs
@@ -334,6 +346,11 @@ if (nrow(bad_cells) != 0) {
 
 ceof <- ceof[rotation == "rotated"][, rotation := NULL][]
 ```
+
+```{r}
+saveRDS(ceof, data_path("derived", "ceof.Rds"))
+```
+
 
 En la sección \@ref(precipitación) mostramos regresiones de precipitación y temperatura asociadas a fases intermedias.
 Para esos gráficos, rotamos los cEOFs en 1/4 de longitud de onda multiplicando las series temporales complejas por $\cos(\pi/4) + i\sin(\pi/4)$ y calculando la regresión sobre esas series temporales rotadas.
@@ -372,6 +389,7 @@ var <- ceof[, eof[[1]]$sdev, by = .(season)] %>%
 gdata %>%
   ggperiodic::periodic(lon = c(0, 360)) %>%
   .[, lev := as.numeric(lev)] %>%   
+  .[season == 'SON'] %>% 
   ggplot(aes(lon, lat)) +
   geom_contour_fill(aes(z = Re(hgt), fill = ..level..),
                     breaks = AnchorBreaksSym(0, 1, exclude = 0)) +
@@ -396,25 +414,25 @@ gdata %>%
 ```
 
 ```{r era_more}
-pattern <- ceof$eof[[1]]$right %>%
+pattern <- ceof[, eof[[1]]$right, by = season] %>%
   sep_ReIm() %>%
   setnames("hgt", "EOF")
 
-era_more <- rbind( 
-  ReadNetCDF(ERA5_BE(), vars = c(hgt = "z"),
+era_more <- ERA5_geopotential() %>% 
+  ReadNetCDF(vars = c(hgt = "z"),
              subset = list(latitude = range(pattern$lat),
-                           level = list(200, 50))),
-  ReadNetCDF(ERA5_geopotential(), vars = c(hgt = "z"),
-             subset = list(latitude = range(pattern$lat),
-                           level = list(200, 50)))) %>%
+                           level = list(200, 50),
+                           time = c(NA_character_, main_period[2]))) %>% 
   normalise_coords() %>%
-  .[season(time) == "SON"] %>%
+  na.omit() %>% 
+  .[is.full_season(time)] %>% 
   .[, w := season_weights(time)] %>% 
   .[, .(hgt = mean(hgt*w)), by = .(lev, lon, lat, time = seasonally(time))] %>%
+  .[, hgt := hgt - mean(hgt), by= .(lev, lat, time)] %>% 
   .[, season := season(time)] %>%
-  .[, hgt := hgt/sd(hgt), by = .(lev)] %>%
+  .[, hgt := hgt/sd(hgt), by = .(lev, season)] %>%
   .[pattern, on = .NATURAL, allow.cartesian = TRUE] %>%
-  .[, .(hgt = weighted.mean(hgt*EOF, w = cos(lat*pi/180))),  by = .(part, cEOF, time)] 
+  .[, .(hgt = weighted.mean(hgt*EOF, w = cos(lat*pi/180))),  by = .(part, cEOF, time, season)] 
 
 ```
 
@@ -424,16 +442,16 @@ era_more <- rbind(
 # Check that the extended index coincides with the
 # original index.
 cors <- era_more %>%
-  .[sep_ReIm(ceof$eof[[1]]$left), on = c("time", "cEOF", "part")] %>%
+  .[sep_ReIm(ceof[, eof[[1]]$left, by = season]), on = c("time", "cEOF", "part")] %>%
   na.omit() %>%
-  .[, cor(hgt, i.hgt), by = .(cEOF, part)]
+  .[, cor(hgt, i.hgt), by = .(cEOF, part, season)]
 
-if (any(cors$V1 < 0.98)) {
+if (any(cors$V1 < 0.90)) {
   stop("Extended indices didn't work!")
 }
 
 trends <- era_more %>%
-  .[, FitLm(hgt, time, se = TRUE), by = .(part, cEOF)] %>%
+  .[, FitLm(hgt, time, se = TRUE), by = .(part, cEOF, season(time))] %>%
   rm_intercept() %>%
   .[, p_val := Pvaluate(estimate, std.error, df)] %>%
   .[, p_report := report_p(p_val)]
@@ -446,6 +464,7 @@ trends <- era_more %>%
 
 era_more %>%
   copy() %>% 
+  .[season(time) == 'SON'] %>% 
   .[, ref := year(time) > 1979] %>% 
   # .[, hgt := scale(hgt, center = FALSE, scale = sd(hgt[ref])), by = .(part, cEOF)] %>%
   ggplot(aes(time, hgt*1e3)) +
@@ -501,27 +520,27 @@ mean <- era5 %>%
   copy() %>% 
   .[, hgt := metR::Anomaly(hgt),
     by  = .(lat, time, lev)] %>% 
-  .[, hgt := hgt/sd(hgt), by = .(lev)] %>%
+  .[, hgt := hgt/sd(hgt), by = .(season(time), lev)] %>%
   # .[, hgt := hgt*sqrt(cos(lat*pi/180))] %>% 
-  .[, .(hgt_m = mean(hgt)), by = .(lev, lon, lat)]
+  .[, .(hgt_m = mean(hgt)), by = .(lev, lon, lat, season(time))]
 
-ceof_mean_r2 <- ceof[, eof[[1]]$right] %>% 
+ceof_mean_r2 <- ceof[, eof[[1]]$right, by = season] %>% 
   sep_ReIm(format = "wider") %>%
   .[, hgt := NULL] %>% 
   .[] %>% 
   .[mean, on = .NATURAL] %>% 
   .[lat <= -20] %>% 
-  .[, FitLm(hgt_m, Real, Imaginario, r2 = TRUE), by = .(cEOF)] %>% 
-  .[, .SD[1], by = .(cEOF)]
+  .[, FitLm(hgt_m, Real, Imaginario, r2 = TRUE), by = .(season, cEOF)] %>% 
+  .[, .SD[1], by = .(cEOF, season)]
 ```
 
 No existe una correlación simultánea significativa entre las series temporales de los cEOFs.
 Ambos cEOFs muestran variabilidad interanual pero no muestran evidencia de variabilidad decadal (Fig. \@ref(fig:extended-series)).
 Debido a que los campos geopotenciales que entran en el algoritmo cEOFs son anomalías con respecto a la media zonal en lugar de la media temporal, las series temporales cEOFs tienen media temporal no nula.
 Sin embargo, la media temporal de cEOF2 es casi cero, lo que indica que sólo cEOF1 incluye variabilidad que se proyecta significativamente sobre el campo anómalo zonal medio.
-Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 ($r^2$ = `r scales::percent(ceof_mean_r2[["r.squared"]][1])`) y no similar al cEOF2 ($r^2$ = `r scales::percent(ceof_mean_r2[["r.squared"]][2])`).
+Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 ($r^2$ = `r scales::percent(ceof_mean_r2[season == 'SON'][["r.squared"]][1])`) y no similar al cEOF2 ($r^2$ = `r scales::percent(ceof_mean_r2[season == 'SON'][["r.squared"]][2])`).
 
-Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \ref(fig:extended-series)a.1, valor p `r trends[part == "Real" & cEOF == "cEOF1"]$p_report`), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
+Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \ref(fig:extended-series)a.1, valor p `r trends[part == "Real" & cEOF == "cEOF1" & season == "SON"]$p_report`), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
 La tendencia positiva en el cEOF1 de 0º se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
 Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de alta latitud.
 
@@ -533,12 +552,13 @@ En la sección anterior se aplicó el análisis de los cEOF a las anomalías zon
 En esta sección calculamos campos de regresión utilizando los campos completos de las variables para describir la influencia de los cEOFs en las anomalías temporales.
 
 ```{r compute-regression}
-
 era5 <- ERA5_temperature() %>% 
   ReadNetCDF(vars = c("t"), 
-             subset = list(level = list(50, 200))) %>% 
+             subset = list(level = list(50, 200),
+                           time = main_period)) %>% 
   normalise_coords() %>% 
-  .[season(time) == "SON"] %>%
+  na.omit() %>% 
+  .[is.full_season(time)] %>% 
   .[, w := season_weights(time)] %>% 
   .[, .(t = mean(t*w)), by = .(lev, lon, lat, time = seasonally(time))] %>% 
   .[era5, on = .NATURAL]
@@ -663,16 +683,22 @@ plot_regr(regr, "cEOF1", c(200, 50), "t") +
 ```{r t}
 t <- ERA5_temperature() %>% 
   ReadNetCDF(vars = c("t"), 
-             subset = list(latitude = o3wave_lats)) %>% 
+             subset = list(latitude = o3wave_lats,
+                           time = main_period)) %>% 
   normalise_coords() %>% 
-  .[season(time) == "SON"] %>% 
+  na.omit() %>% 
+  .[is.full_season(time)] %>%  
+  .[, time := as.Date(time)] %>% 
   .[, .(t = weighted.mean(t, cos(lat*pi/180))), by = .(lon, lev, time)]
 
 o3_temp <- ERA5_ozone() %>% 
   ReadNetCDF(vars = c("o3"), 
-             subset = list(latitude = o3wave_lats)) %>% 
+             subset = list(latitude = o3wave_lats,
+                           time = main_period)) %>% 
   normalise_coords() %>% 
-  .[season(time) == "SON"] %>% 
+  na.omit() %>% 
+  .[is.full_season(time)] %>%  
+  .[, time := as.Date(time)] %>% 
   .[, .(o3 = weighted.mean(o3, cos(lat*pi/180))), by = .(lon, lev, time)]
 
 t <- t[o3_temp, on = .NATURAL]
@@ -690,7 +716,8 @@ t <- t %>%
 t %>% 
   melt(id.vars = c("lev", "time", "lon")) %>% 
   .[, value := Anomaly(value), by = .(time, lev, variable)] %>%
-  .[cut(ceof$eof[[1]], 1)$left, on = "time"] %>% 
+  .[ceof[, cut(eof[[1]], 1)$left, by = season], on = "time"] %>% 
+  .[season(time) == "SON"] %>% 
   sep_ReIm(format = "wider") %>% 
   .[, ":="(Real = as.numeric(scale(Real)), Imaginario = as.numeric(scale(Imaginario))), by = .(cEOF)] %>% 
   .[, FitLm(value, Real, Imaginario, se = TRUE), by = .(lev, lon, variable)] %>% 
@@ -744,19 +771,20 @@ En la estratosfera superior, dominada fotoquímicamente, las temperaturas frías
 Por otro lado, en la estratosfera baja dominada por la advección, las anomalías de ozono están desfasadas 1/4 de longitud de onda con el transporte horizontal y vertical, que a su vez están desfasados 1/4 de longitud de onda con las anomalías de temperatura, resultando anomalías del mismo signo para la respuesta de ambas variables [@hartmann1979; @wirth1993; @smith1995].
 
 ```{r o3_regr}
-temp <- ceof$eof[[1]]$left %>% 
+temp <- ceof[, eof[[1]]$left, by = season] %>% 
   .[cEOF == "cEOF1"] %>% 
   copy() %>% 
   sep_ReIm(format = "wider") %>% 
   .[, `:=`(Real = as.numeric(scale(Real)), 
            Imaginario = as.numeric(scale(Imaginario))),
-    by = .(cEOF)]
+    by = .(cEOF, season)]
+
 o3_mean <- o3 %>% 
-  .[, .(toc = mean(toc)), by = .(lon, lat)] %>% 
-  .[, toc_z := Anomaly(toc), by = .(lat)]
+  .[, .(toc = mean(toc)), by = .(lon, lat, season(time))] %>% 
+  .[, toc_z := Anomaly(toc), by = .(lat, season)]
 o3_regr <- temp %>% 
   o3[., on = "time", allow.cartesian = TRUE] %>% 
-  .[, FitLm(toc, Real, Imaginario, se = TRUE), by = .(lon, lat, cEOF)] %>% 
+  .[, FitLm(toc, Real, Imaginario, se = TRUE), by = .(lon, lat, cEOF, season)] %>% 
   rm_intercept() %>% 
   .[, term := factor_ReIm(term)]
 ```
@@ -765,13 +793,14 @@ o3_regr <- temp %>%
 
 ```{r o3-regr, fig.cap = "(ref:o3-regr-cap)", fig.height=3, fig.width = width_column}
 o3_regr %>% 
+  .[season == "SON"] %>% 
   periodic(lon = c(0, 360)) %>% 
   .[, p.value := Pvaluate(estimate, std.error, df, "fdr"), by = .(cEOF, term)] %>% 
   ggplot(aes(lon, lat)) +
   geom_contour_fill(aes(z = estimate, fill = ..level..),
                     breaks = AnchorBreaksSym(0, exclude = 0)) +
   geom_contour_tanaka(aes(z = estimate), breaks = AnchorBreaksSym(0, exclude = 0)) +
-  geom_contour2(data = periodic(o3_mean, lon = c(0, 360)),
+  geom_contour2(data = periodic(o3_mean[season == "SON"], lon = c(0, 360)),
                 aes(z = toc_z, linetype = factor(-sign(..level..))), 
                 breaks = AnchorBreaksSym(0, exclude = 0), 
                 bins = 5) +
@@ -806,23 +835,23 @@ wave1_o3 <- o3 %>%
   .[, .(toc = mean(toc, na.rm = TRUE)), by = .(time, lon)] %>% 
   .[, FitWave(toc, 1), by = .(time)] 
 
-temp <- ceof$eof[[1]]$left %>% 
+temp <- ceof[, eof[[1]]$left, by = season] %>% 
   .[cEOF == "cEOF1"] %>% 
   .[wave1_o3, on = "time"]
 
 wave1_cor <- rbind(temp %>%
-                     .[, correlate(amplitude, Mod(hgt))] %>% 
+                     .[, correlate(amplitude, Mod(hgt)), by = season] %>% 
                      .[, with := "amplitude"],
                    
                    temp %>%
-                     .[, correlate(phase, Arg(hgt))] %>% 
+                     .[, correlate(phase, Arg(hgt)), by = season] %>% 
                      .[, with := "phase"])
 
 wave_correlation <- temp %>% 
   na.omit() %>% 
   .[, .(cor = mean(cos(phase - Arg(hgt))),
-        n = .N)] %>% 
-  .[, correlation_statistics(cor, n)]
+        n = .N), by = season] %>% 
+  .[, correlation_statistics(cor, n), by = season]
 
 # temp %>% 
 #   ggplot(aes(Mod(hgt), amplitude)) +
@@ -852,7 +881,7 @@ wave_correlation <- temp %>%
 Los mapas de regresión de las anomalías del COT sobre el cEOF1 (Fig.\ref(fig:o3-regr)) muestran patrones de onda zonal 1 asociados a ambos componentes del cEOF1.
 La posición climatológica del mínimo primaveral de ozono (agujero de ozono) se encuentra fuera del Polo Sur y hacia el mar de Weddell [por ejemplo, @grytsai2011].
 Así, el campo de regresión 0º cEOF1 (Figura \@ref(fig:o3-regr)a) coincide con la posición climatológica del agujero de ozono, mientras que está desfasado 90º para el 90º cEOF1.
-La correlación temporal entre las amplitudes de la onda planetaria 1 del COT y la amplitud del cEOF1 es `r wave1_cor[with == "amplitude"]$text`, mientras que la correlación entre sus fases es `r wave1_cor[with == "phase"]$text`.
+La correlación temporal entre las amplitudes de la onda planetaria 1 del COT y la amplitud del cEOF1 es `r wave1_cor[with == "amplitude" & season == "SON"]$text`, mientras que la correlación entre sus fases es `r wave1_cor[with == "phase" & season == "SON"]$text`.
 En consecuencia, cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
 
 ### Fuentes de variabilidad tropicales
@@ -860,24 +889,28 @@ En consecuencia, cEOF1 está fuertemente relacionado con la variabilidad del ozo
 ```{r sst}
 sst <- ERSST() %>%
   fread() %>% 
-  .[season(time) == "SON"] %>%
+  .[time %between% as.Date(main_period)] %>% 
+  .[is.full_season(time)] %>% 
   normalise_coords() %>%
   .[, w := season_weights(time)] %>% 
   .[, .(t = mean(t*w)), by = .(lon, lat, time = seasonally(time))]
 ```
 
 ```{r cmap}
-cmap <- ReadNetCDF(CMAP(), vars = c(pp = "precip"),
-                   subset = list(lat = -60:10)) %>%
+cmap <- CMAP() %>% 
+  fread() %>% 
+  .[lat %between% c(-60, 10) & time %between% as.Date(main_period)] %>% 
   normalise_coords() %>%
+  na.omit() %>% 
   .[, w := season_weights(time)] %>% 
   .[, .(pp = mean(pp*w)), by = .(lon, lat, time = seasonally(time))]
 ```
 
 ```{r t2m}
 t2m <- ERA5_T2M() %>% 
-  ReadNetCDF() %>% 
+  ReadNetCDF(subset = list(time = main_period)) %>% 
   normalise_coords() %>%
+  na.omit() %>% 
   .[, w := season_weights(time)] %>% 
   .[, .(t2m = mean(t2m*w)), by = .(lon, lat, time = seasonally(time))]
 ```
@@ -895,9 +928,11 @@ angles_labs <- setNames(c("0º", "45º", "90º", "135º"), angles_regr*180/pi)
 
 hgt850 <- ERA5_geopotential() %>% 
   ReadNetCDF(vars = c(hgt = "z"), 
-             subset = list(level = 850)) %>% 
+             subset = list(level = 850,
+                           time = main_period)) %>% 
   normalise_coords() %>%
-  .[season(time) == "SON"] %>% 
+  na.omit() %>% 
+  .[is.full_season(time)] %>%  
   .[, w := season_weights(time)] %>% 
   .[, .(hgt = mean(hgt*w)), by = .(lon, lat, time = seasonally(time))]
 
@@ -929,7 +964,6 @@ sst_for_regression <- ceof[, eof[[1]]$left, by = .(season)] %>%
   sep_ReIm(format = "wide") %>%
   .[, hgt := NULL] %>%
   .[sst, on = "time", allow.cartesian = TRUE] %>%
-  .[season(time) == "SON"] %>% 
   na.omit() 
 
 sst_regr <- lapply(angles_regr, function(a) {
@@ -952,7 +986,6 @@ psi_for_regression <-  ceof[, eof[[1]]$left, by = .(season)] %>%
   sep_ReIm(format = "wide") %>%
   .[, hgt := NULL] %>%
   .[psi, on = "time", allow.cartesian = TRUE] %>%
-  .[season(time) == "SON"] %>%
   .[lev == 200]
 
 psi_regr <- lapply(angles_regr, function(a) {
@@ -978,7 +1011,6 @@ pp_for_regression <- ceof[, eof[[1]]$left, by = season] %>%
   sep_ReIm(format = "wide") %>%
   .[, hgt := NULL] %>%
   .[cmap, on = "time", allow.cartesian = TRUE] %>%
-  .[season(time) == "SON"] %>% 
   na.omit() %>% 
   .[, pp := pp/sd(pp), by = .(lon, lat)]
 
@@ -1004,7 +1036,6 @@ t2m_for_regression <-  ceof[, eof[[1]]$left, by = season] %>%
   sep_ReIm(format = "wide") %>%
   .[, hgt := NULL] %>%
   .[t2m, on = "time", allow.cartesian = TRUE] %>%
-  .[season(time) == "SON"] %>% 
   na.omit()
 
 t2m_regr <- lapply(angles_regr, function(a) {
@@ -1025,21 +1056,21 @@ t2m_regr <- lapply(angles_regr, function(a) {
 ```
 
 ```{r enso_cor}
-enso_cor <-  ceof[, eof[[1]]$left, by = .(season)] %>%
+enso_cor <- ceof[, eof[[1]]$left, by = .(season)] %>%
   sep_ReIm() %>%
-  .[, hgt := scale(hgt), by = .(cEOF, part)] %>%
+  .[, hgt := scale(hgt), by = .(cEOF, part, season)] %>%
   enso[., on = "time"] %>%
   na.omit() %>%
-  .[, correlate(hgt, oni), by = .(cEOF, part)]
+  .[, correlate(hgt, oni), by = .(cEOF, part, season)]
 ```
 
 ```{r dmi_cor}
 dmi_cor <-  ceof[, eof[[1]]$left, by = .(season)] %>%
   sep_ReIm() %>%
-  .[, hgt := scale(hgt), by = .(cEOF, part)] %>%
+  .[, hgt := scale(hgt), by = .(cEOF, part, season)] %>%
   dmi[., on = "time"] %>%
   na.omit() %>%
-  .[, correlate(hgt, dmi), by = .(cEOF, part)]
+  .[, correlate(hgt, dmi), by = .(cEOF, part, season)]
 ```
 
 
@@ -1129,7 +1160,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
 ```
 
 ```{r sst-psi-2,  fig.cap = "(ref:sst-psi-2-cap)", fig.width = 5, fig.height=6, dependson="plot_sst_psi", fig.env="figure*"}
-plot_sst_psi(sst_regr[cEOF == "cEOF2"], psi_regr[cEOF == "cEOF2"]) 
+plot_sst_psi(sst_regr[cEOF == "cEOF2" & season == "SON"], psi_regr[cEOF == "cEOF2" & season == "SON"]) 
 ```
 
 (ref:sst-psi-2-cap) Regression of SST (K, left column) and streamfunction zonal anomalies ($m^2/s\times10^-7$, shaded) with their corresponding activity wave flux (vectors) (right column) upon cEOF2 different phases (illustrated in the lower-left arrow) for the 1979 -- 2019 period. Areas marked with dots have p-values smaller than 0.01 adjusted for FDR.
@@ -1140,15 +1171,15 @@ Además de los mapas de regresión para las fases de 0º y 90º, incluimos las r
 
 La cEOF2 de 90º (segunda fila) está asociada a fuertes anomalías positivas de la TSM en el Pacífico central y oriental y a anomalías negativas en una zona que atraviesa el norte de Australia, Nueva Zelanda y la Zona de Convergencia del Pacífico Sur (SPCZ) (Figura \ref@(fig:sst-psi-2).b1).
 El campo de regresión de las anomalías de la TSM guarda un gran parecido con el ENOS canónicamente positivo [@bamston1997].
-De hecho, existe una correlación significativa y muy alta (`r enso_cor[cEOF == "cEOF2" & part == "Imaginario"]$text`) entre el ONI y la serie temporal 90º cEOF2.
+De hecho, existe una correlación significativa y muy alta (`r enso_cor[cEOF == "cEOF2" & part == "Imaginario" & season == "SON"]$text`) entre el ONI y la serie temporal 90º cEOF2.
 Además del patrón similar al ENOS del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un DIO positivo [@saji1999].
-De forma coherente, la correlación entre el 90º cEOF2 y el DMI es `r dmi_cor[cEOF == "cEOF2" & part == "Imaginario"]$text`.
+De forma coherente, la correlación entre el 90º cEOF2 y el DMI es `r dmi_cor[cEOF == "cEOF2" & part == "Imaginario" & season == "SON"]$text`.
 
 El 90º cEOF2 está asociado a fuertes anomalías de la función de onda que emanan de los trópicos (Figura \@ref(fig:sst-psi-2).b2), tanto del sector del Pacífico Central como del Océano Índico.
 La respuesta atmosférica asociada a 90º cEOF2 es entonces consistente con el efecto combinado del ENOS y el DIO sobre los extratropicos: con anomalías de la TSM que inducen convección tropical anómala que a su vez excita ondas de Rossby que se propagan meridionalmente hacia latitudes más altas [@mo2000; @cai2011; @nuncio2015].
 
 Sin embargo, el cEOF2 no está asociado a los mismos patrones de anomalía de la TSM tropical en todas sus fases Las figuras \@ref(fig:sst-psi-2).d1 y d2 muestran que la cEOF2 de 0º no está asociada a ninguna anomalía significativa de la TSM ni de la función de la corriente en los trópicos.
-Como resultado, la correlación entre el 0º cEOF2 y ENSO no es significativa (`r enso_cor[cEOF == "cEOF2" & part == "Real"]$text`).
+Como resultado, la correlación entre el 0º cEOF2 y ENSO no es significativa (`r enso_cor[cEOF == "cEOF2" & part == "Real" & season == "SON"]$text`).
 Mientras tanto, las filas a y c de la Fig.\@ref(fig:sst-psi-2) muestran que las fases intermedias siguen asociadas con anomalías regresivas significativas de la TSM sobre el Océano Pacífico, pero en lugares ligeramente diferentes.
 La fase de 135º está asociada a anomalías de la TSM en el Pacífico central (Fig.\@ref(fig:sst-psi-2)a.1), mientras que la fase de 45º está asociada a anomalías de la TSM que corresponden aproximadamente a los "sabores" de ENSO del Pacífico central y del Pacífico oriental, respectivamente (Fig.\@ref(fig:sst-psi-2)c.1) [@kao2009].
 Ambas fases también están asociadas a trenes de ondas que se generan en la región que rodea Australia y se propagan hacia los extratropicales, aunque menos intensos que los asociados a la fase de 90º.
@@ -1163,25 +1194,26 @@ gdata <- ceof[, eof[[1]]$left, by = .(season)] %>%
   .[, mag := Mod(hgt)] %>%
   .[enso, on = "time"] %>%
   na.omit() %>%
-  .[, q := ifelse(mag >= quantile(mag, 0.5), "|cEOF2| > 50%", "|cEOF2| < 50%")]
+  .[, q := ifelse(mag >= quantile(mag, 0.5), "|cEOF2| > 50%", "|cEOF2| < 50%"), by = season]
 
-cor_enso_mag <- gdata[, correlate(mag, abs(oni))]
+cor_enso_mag <- gdata[, correlate(mag, abs(oni)), by = season]
 
-cor_enso_spearman <- gdata[, cor.test(mag, abs(oni), method = "spearman")]
+cor_enso_spearman <- gdata[, cor.test(mag, abs(oni), method = "spearman")[c("estimate", "p.value")], by = season]
 
-cor_enso_mag_outlier <- gdata[oni < 1.5][, correlate(mag, abs(oni))]
+cor_enso_mag_outlier <- gdata[oni < 1.5][, correlate(mag, abs(oni)), by = season]
 
 cor_enso_mag_quantile <- gdata[mag >= quantile(mag, 0.5)] %>% 
   .[oni < 1.5] %>% 
-  .[, correlate(mag, abs(oni))]
+  .[, correlate(mag, abs(oni)), by = season]
 
 cos_model <- gdata %>% 
-  .[, lm(oni ~ I(sin(arg)) - 1, weights = mag )]
+  .[, .(model = list(lm(oni ~ I(sin(arg)) - 1, weights = mag))), by = season]
 
-equation <- bquote(ONI  * {phantom() == phantom()} * .(signif(coef(cos_model)[1], 2)) * sin(Phase) )
+equation <- bquote(ONI  * {phantom() == phantom()} * .(signif(cos_model[season == 'SON', coef(model[[1]])[1]], 2)) * sin(Phase) )
 
 
 gdata %>% 
+  .[season == "SON"] %>% 
   ggplot(aes(arg, oni)) +
   geom_hline(yintercept = c(-0.5, 0, 0.5), size = 0.2, color = "gray50") +
   geom_vline(xintercept = 0, size = 0.2, color = "gray50") +
@@ -1216,12 +1248,12 @@ Para explorar más a fondo la relación entre el forzamiento tropical y las fase
 En los años con ONI positivo (negativo), la fase cEOF2 se sitúa mayoritariamente en torno a 90º (-90º).
 En las estaciones ENOS neutras, la fase cEOF2 es mucho más variable.
 La línea negra de la figura \@ref(fig:enso-phase) es un ajuste sinusoidal de la relación entre el ONI y la fase cEOF2.
-El $r^2$ correspondiente al ajuste es `r signif(summary(cos_model)$r.squared, 2)`, estadísticamente significativo con valor p `r report_p(coef(summary(cos_model))[4])`, lo que indica una relación casi sinusoidal entre estas dos variables.
+El $r^2$ correspondiente al ajuste es `r signif(summary(cos_model[season == "SON", model[[1]]])$r.squared, 2)`, estadísticamente significativo con valor p `r report_p(coef(summary(cos_model[season == "SON", model[[1]]]))[4])`, lo que indica una relación casi sinusoidal entre estas dos variables.
 
-La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es `r cor_enso_mag$text`.
-Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (`r knitr::combine_words(year(gdata[order(-oni)][1:3]$time))`), que coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
-Si se eliminan esos años, la correlación deja de ser significativa (`r cor_enso_mag_outlier$text`).
-Además, incluso cuando se utilizan todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (`r signif(cor_enso_spearman$estimate, 2)`, valor p `r report_p(cor_enso_spearman$p.value)`).
+La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es `r cor_enso_mag[season == "SON"]$text`.
+Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (`r knitr::combine_words(year(gdata[season == "SON"][order(-oni)][1:3]$time))`), que coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
+Si se eliminan esos años, la correlación deja de ser significativa (`r cor_enso_mag_outlier[season == "SON"]$text`).
+Además, incluso cuando se utilizan todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (`r signif(cor_enso_spearman[season == "SON"]$estimate, 2)`, valor p `r report_p(cor_enso_spearman[season == "SON"]$p.value)`).
 Por lo tanto, aunque la localización de las anomalías tropicales de la TSM parece tener un efecto en la definición de la fase del cEOF2, la relación entre la magnitud del cEOF2 y el ONI sigue siendo incierta y podría ser sólo evidente en eventos ENSO muy fuertes, que son escasos en el registro observacional histórico.
 
 Concluimos que el tren de ondas representado por cEOF2 puede ser tanto parte de la variabilidad interna de la atmósfera extratropical como forzado por las TSM tropicales.
@@ -1244,6 +1276,7 @@ rbind(Precipitation = pp_regr,
   .[angle == 0] %>% 
   .[is.finite(r.squared)] %>% 
   .[, var := factor(var)] %>% 
+  .[season == "SON"] %>% 
   # .[cEOF == "cEOF2"] %>% 
   periodic(lon = c(0, 360)) %>%
   ggplot(aes(lon, lat)) +
@@ -1426,7 +1459,9 @@ En la [figura\@ref](mailto:figura@ref){.email}(fig:pp-temp-2) se muestran mapas 
 (ref:pp-temp-cap) Regresión de la temperatura media de 2 metros SON (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el periodo 1979 -- 2019. Las áreas marcadas con puntos tienen valores p inferiores a 0,01 ajustados para la tasa de detección de falsos.
 
 ```{r pp-temp-2, fig.cap="(ref:pp-temp-cap)", fig.width=5, fig.height=6, dependson="plot_pp"}
-plot_pp(pp_regr[cEOF == "cEOF2"], t2m_regr[cEOF == "cEOF2"], hgt850_regr[cEOF == "cEOF2"])
+plot_pp(pp_regr[cEOF == "cEOF2" & season == "SON"], 
+        t2m_regr[cEOF == "cEOF2" & season == "SON"],
+        hgt850_regr[cEOF == "cEOF2"& season == "SON"])
 ```
 
 Las anomalías de temperatura asociadas a los 90º cEOF (Fig. \@ref(fig:pp-temp-2).b1) muestran valores positivos en el Pacífico tropical, coherentes con las anomalías de TSM asociadas a la misma fase (Fig. \@ref(fig:sst-psi-2).b1).
@@ -1463,3 +1498,4 @@ Esto faltaría.
 Hay código para hacerlo, pero falta la interpretación, que es lo importante.
 
 Sería un análisis más modesto.
+

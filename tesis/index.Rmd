@@ -26,13 +26,7 @@ language:
     fig: 'Figura '
     tab: 'Tabla '
 chapter: 'Capítulo'
-# This will automatically install the {remotes} package and {thesisdown}
-# Change this to FALSE if you'd like to install them manually on your own.
-params:
-  'Install needed packages for {thesisdown}': True
-  
-# Remove the hashtag to specify which version of output you would like.
-# Can only choose one at a time.
+
 output:
   thesisdown::thesis_pdf: 
         pandoc_args: 
@@ -43,13 +37,7 @@ output:
   thesisdown::thesis_word: default
 
 always_allow_html: true
-# If you are creating a PDF you'll need to write your preliminary content 
-# (e.g., abstract, acknowledgements) below or use code similar to line 25-26 
-# for the .RMD files. If you are NOT producing a PDF, delete or silence
-# lines 25-39 in this YAML header.
-# If you'd rather include the preliminary content in files instead of inline
-# like below, use a command like that for the abstract above.  Note that a tab 
-# is needed on the line after the `|`.
+
 acknowledgements: |
   I want to thank a few people.
 dedication: |
@@ -58,7 +46,7 @@ dedication: |
 
 # Specify the location of the bibliography below
 bibliography:
-  - bib/tesis-doctorado.bib
+  - bib/references.bib
 #   - bib/era.bib
 #   - bib/packages.bib
 # Download your specific csl file and refer to it in the line below.
@@ -67,48 +55,4 @@ link-citation: yes
 lot: true
 lof: true
 ---
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = FALSE,
-	message = FALSE,
-	warning = FALSE,
-	cache = FALSE
-)
-
-
-width_column <- 3.3
-
-
-library(eliotesis)
-
-library(metR)
-library(data.table)
-library(magrittr)
-
-library(kableExtra)
-
-library(ggplot2)
-library(tagger)
-library(ggperiodic)
-library(ggnewscale)
-library(gggrid)
-
-theme_set(theme_tesis(base_size = 10) +
-            theme(legend.box.spacing = grid::unit(-.5, "lines")))
-
-
-lab_lev <- AddSuffix(" hPa")
-lab_cplx <- c("Real" = "0º", 
-              "Imaginario" = "90º")
-
-axis_labs_smol <- function() theme(axis.text = element_text(size = 6)) 
-
-
-r2 <- expression(`$r^2$` = paste("", "r", phantom()^{
-  paste("2")
-}, "", ""))
-  
-```
 

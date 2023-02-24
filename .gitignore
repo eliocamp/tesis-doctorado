@@ -49,8 +49,14 @@ vignettes/*.pdf
 
 # End of https://www.toptal.com/developers/gitignore/api/r
 
-tesis/data/raw_data
 
-tesis/cache/
+/tesis/cache/
 
 dropbox
+
+
+tesis/_bookdown_files/
+
+tesis/thesis.Rmd
+
+tesis/thesis.log

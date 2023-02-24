@@ -23,5 +23,5 @@ normalise_coords <- function(data,
                            names(rules)[[f]], skip_absent = TRUE)
     }
   }
-  return(invisible(data))
+  return(data)
 }

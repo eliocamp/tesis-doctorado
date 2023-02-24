@@ -1,3 +1,39 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  cache = TRUE
+)
+
+library(eliotesis)
+
+library(metR)
+library(data.table)
+library(magrittr)
+
+library(kableExtra)
+
+library(ggplot2)
+library(tagger)
+library(ggperiodic)
+library(ggnewscale)
+library(gggrid)
+
+
+source(here::here("tesis/scripts/globals.R"))
+
+```
+
+```{r read-data}
+ceof <- readRDS(data_path("derived", "ceof.Rds"))
+
+sams <- SAM() %>% 
+  fread() %>% 
+  .[, time := as.Date(time)]
+```
+
+
 # Relación con otros patrones
 
 Acá seguiría parte [del paper de cEOF](https://github.com/eliocamp/shceof).
@@ -14,14 +50,16 @@ time <- ceof[, eof[[1]]$left, by = .(season)] %>%
   .[, hgt := scale(hgt), by = .(cEOF, part)]
 
 sam_r2 <- sams %>%
+  .[, .(estimate = mean(estimate)), by = .(lev, term, time = seasonally(time))] %>% 
   .[time, on = .NATURAL, allow.cartesian = TRUE] %>%
   na.omit() %>% 
-  .[, correlate(hgt, estimate), by = .(lev, term, part, cEOF)]
+  .[, correlate(hgt, estimate), by = .(lev, term, part, cEOF, season(time))]
 
-max_r2 <- sam_r2[part == "Imaginary"] %>% 
-  .[, .SD[which.max(estimate^2)], by = .(cEOF, term)]
+max_r2 <- sam_r2[part == "Imaginario"] %>% 
+  .[, .SD[which.max(estimate^2)], by = .(cEOF, term, season)]
 
 sam_r2 %>%
+  .[season == "SON"] %>% 
   .[, p.value_a := p.adjust(p.value, "fdr")] %>% 
   ggplot(aes(lev, estimate^2)) +
   geom_vline(xintercept = c(50, 200),  size = 0.2, color = "gray50") +
@@ -69,21 +107,27 @@ Esta altísima correlación entre A-SAM y 90º cEOF2 sugiere que los modos obten
 (ref:psa-eof2-cap) Correlation coefficients (r) between cEOF2 components and the PSA1 and PSA2 modes computed as @mo2001 for the 1979 -- 2019 period. 95% confidence intervals in parenthesis. p-values lower than 0.01 in bold.
 
 ```{r psa-eof2, fig.cap = "(ref:psa-eof2-cap)", fig.width=7, fig.height=3, fig.env="figure*"}
-psa2 <- psa$left[PC == "PSA2"][season(time) == "SON"]
-cEOF2 <- ceof$eof[[1]]$left[cEOF == "cEOF2"] %>% 
+psa <- PSA() %>% 
+  readRDS()
+
+psa_time <- psa$left[PC != "SAM"]
+cEOF2 <- ceof[, eof[[1]]$left, by = season] %>% 
+  .[cEOF == "cEOF2"] %>% 
   copy() %>% 
   .[, cEOF := NULL] %>% 
   .[]
 
-rotations_psa <- lapply(angles, function(a) {
-  cEOF2 %>% 
-    copy() %>% 
-    .[, hgt := rotate(hgt, a)] %>% 
-    .[psa2, on = "time"] %>% 
-    .[, cor(value, Re(hgt))] 
-}) 
-
-psa_angle <- angles[which.max(unlist(rotations_psa))]
+# rotations_psa <- lapply(angles, function(a) {
+#   cEOF2 %>% 
+#     copy() %>% 
+#     .[, hgt := rotate(hgt, a)] %>% 
+#     .[psa2, on = "time"] %>% 
+#     .[, cor(value, Re(hgt)), by = season] %>% 
+#     .[, angle := a]
+# }) %>% 
+#   rbindlist()
+# 
+# psa_angle <- angles[which.max(unlist(rotations_psa))]
 
 make_numeric <- function(x) {
   x <- strsplit(x, "\ ")
@@ -95,20 +139,22 @@ background_palette <- grDevices::colorRampPalette(c(scales::muted("blue"),
                                                     scales::muted("red")),
                                                   space = "Lab")
 
-table <- cEOF2[psa_time, on = "time"] %>% 
+table <- cEOF2[psa_time, on = .NATURAL] %>% 
   .[PC != "SAM"] %>% 
   copy() %>% 
   sep_ReIm() %>% 
-  .[, correlate(value, hgt), by = .(PC, part)] 
+  .[, correlate(value, hgt), by = .(PC, part, season)] 
 
 p.val <- table %>% 
-  dcast(PC ~ part, value.var = "p.value") 
+  dcast(PC + season~ part, value.var = "p.value") %>% 
+  .[order(season)] 
 
 table %>% 
-  dcast(PC ~ part, value.var = "text") %>% 
+  dcast(PC + season ~ part, value.var = "text") %>% 
+  .[order(season)] %>% 
   kbl2(booktabs = TRUE, caption = "(ref:psa-eof2-cap)") %>%
-  column_spec2(2:3, bold = p.val[[.col]] < 0.01) %>%
-  add_header_above(c("", "cEOF2" = 2)) %>%
+  column_spec2(3:4, bold = p.val[[.col]] < 0.01) %>%
+  # add_header_above(c("", "cEOF2" = 2)) %>%
   kable_classic() 
 ```
 
@@ -122,10 +168,16 @@ Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y
 (ref:phase-histogram-cap) Histograma de distribución de fase de cEOF2 para el periodo 1979 -- 2019. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho de intervalo de 90º. Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
 
 ```{r phase-histogram, fig.cap = "(ref:phase-histogram-cap)", fig.width=width_column*.8, fig.height=2.5}
-N <- nrow(cut(ceof$eof[[1]], 2)$left)
-plot <- cut(ceof$eof[[1]], 2)$left %>% 
+
+
+
+N <- ceof[, cut(eof[[1]], 2)$left, by = season] %>% 
+  .[, .N, by = season] %>% 
+  .[1, N]
+
+plot <- ceof[, cut(eof[[1]], 2)$left, by = season] %>% 
   .[, arg := Arg(hgt)] %>% 
-  .[, w := Mod(hgt)/mean(Mod(hgt))] %>% 
+  .[, w := Mod(hgt)/mean(Mod(hgt)), by = season] %>% 
   qwrap(arg = c(-pi, pi) ~  c(-pi - 1/4*pi, pi - 1/4*pi)) %>% 
   ggplot(aes(arg)) +
   geom_histogram(binwidth = 90*pi/180, center = 0, size = 0.2,
@@ -135,22 +187,30 @@ plot <- cut(ceof$eof[[1]], 2)$left %>%
   #          color = "black", size = 3,
   #          y = 0.5, x = c(-pi, -pi/2, 0, pi/2), angle = 90, hjust = 0) +
   geom_rug() +
-  scale_y_continuous("Number of years", 
-                     sec.axis = sec_axis(~.x/N, 
-                                         name = "Proportion of years", 
+  scale_y_continuous("Number of years",
+                     sec.axis = sec_axis(~.x/N,
+                                         name = "Proportion of years",
                                          labels = scales::percent)) +
   scale_x_continuous("Phase", trans = scales::reverse_trans(),
                      breaks = seq(-pi - 1/4*pi, pi - 1/4*pi, by = 45*pi/180),
                      labels = function(x) paste0(round(x*180/pi, 5), "º")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  theme(panel.grid = element_blank())
+  theme(panel.grid = element_blank()) +
+  facet_wrap(~season)
 
-imaginary <- sum(ggplot_build(plot)$data[[1]][c(1, 3), ]$count)/N
+imaginary <- ggplot_build(plot)$data[[1]] %>% 
+  as.data.table() %>% 
+  .[, .(x, count, panel = PANEL)] %>% 
+  .[, percent := count/sum(count), by = panel] %>% 
+  .[] %>% 
+  .[, .SD[x %~% 1.570796 | x %~% -1.570796], by = panel] %>% 
+  .[, .(percent = sum(percent)), by = panel]
+  
 plot
 ```
 
 La figura \@ref(fig:histograma-fase) muestra un histograma que cuenta el número de estaciones SON en las que la fase cEOF2 estaba cerca de cada una de las cuatro fases particulares (positiva/negativa de las fases 0º y 90º), con las observaciones para cada estación marcadas como alfombras en el eje horizontal.
-En `r scales::percent(imaginary)` de las estaciones cEOF2 tiene una fase similar a la fase negativa o positiva de 90º, haciendo que la fase de 90º sea la fase más común.
+En `r scales::percent(imaginary[panel == 4]$percent)` de las estaciones cEOF2 tiene una fase similar a la fase negativa o positiva de 90º, haciendo que la fase de 90º sea la fase más común.
 Esta es también la fase más correlacionada con ENSO según la definición de la fase de 0º descrita en la Sección \@ref(métodos).
 
 Por lo tanto, en virtud de ser la fase más común, la cEOF2 de 90º explica más varianza que la cEOF2 de 0º.

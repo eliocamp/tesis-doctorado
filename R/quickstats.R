@@ -95,6 +95,26 @@ correlation_statistics <- function(correlation, n, signif = 2) {
 }
 
 
+#' Partial correlation between x1 and y and x2 and y.
+#'
+#' @param y variable to which partial correlation will be computed
+#' @param x1,x2 variables that will be correlated with y
+# #' @param weights vector of weights
+#'
+#' @export
+partial_cor <- function(y, x1, x2) {
+  estimate1 <- ppcor::pcor.test(y, x1, x2)
+  estimate2 <- ppcor::pcor.test(y, x2, x1)
+
+  list(term = c(deparse(substitute(x1)),
+                deparse(substitute(x2))),
+       partial_correlation = c(estimate1$estimate, estimate2$estimate),
+       p.value = c(estimate1$p.value, estimate2$p.value)
+  )
+}
+
+
+
 #' Computes weights for seasonal weighted means
 #'
 #' [weighted.mean()] is not GForce-optimised in data.table and

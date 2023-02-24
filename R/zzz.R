@@ -32,6 +32,21 @@ rm_intercept <- function(data) {
   data[data$term != "(Intercept)"]
 }
 
+
+#' Remove singleton dimensions
+#'
+#' Removes any column from a dataframe that holds only
+#' 1 unique value.
+#'
+#' @param data a dataframe
+#'
+#' @export
+rm_singleton <- function(data) {
+  data[, vapply(data, data.table::uniqueN, 1) != 1, with = FALSE]
+}
+
+
+
 `%||%` <- function (x, y) {
   if (is.null(x))
     y

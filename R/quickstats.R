@@ -95,7 +95,7 @@ correlation_statistics <- function(correlation, n, signif = 2) {
 }
 
 
-#' Partial correlation between x1 and y and x2 and y.
+#' (Semi) Partial correlation between x1 and y and x2 and y.
 #'
 #' @param y variable to which partial correlation will be computed
 #' @param x1,x2 variables that will be correlated with y
@@ -113,6 +113,18 @@ partial_cor <- function(y, x1, x2) {
   )
 }
 
+#' @export
+#' @rdname partial_cor
+semipartial_cor <- function(y, x1, x2) {
+  estimate1 <- ppcor::spcor.test(y, x1, x2)
+  estimate2 <- ppcor::spcor.test(y, x2, x1)
+
+  list(term = c(deparse(substitute(x1)),
+                deparse(substitute(x2))),
+       semipartial_correlation = c(estimate1$estimate, estimate2$estimate),
+       p.value = c(estimate1$p.value, estimate2$p.value)
+  )
+}
 
 
 #' Computes weights for seasonal weighted means
@@ -140,3 +152,42 @@ season_weights <- function(time, groups = metR::seasonally(time)) {
 }
 
 
+
+
+#' Correlaciona una variable compleja con una real
+#'
+#' Calcula la correlación de una variable real con múltiples rotaciones
+#' de una variable compleja
+#'
+#' @param z vector complejo
+#' @param x vector real
+#' @param angles vector de ángulos para rotar
+#' @param ... parámetros enviados a `cor`
+#'
+#'
+#'
+#' @export
+correlate_complex <- function(z, x, angles = seq(-pi, pi, by = .5*pi/180), ...) {
+  data.table::rbindlist(
+    lapply(angles, function(angle) {
+      data.table::data.table(
+        angle = c(angle, angle),
+        part = c("Real", "Imaginario"),
+        correlation = c(cor(x, Re(rotate(z, angle)), ...),
+                        cor(x, Im(rotate(z, angle)), ...))
+      )
+    })
+  )
+
+}
+
+
+#' Rotar un número complejo
+#'
+#' @param z vector complejo
+#' @param angle ángulo
+#'
+#' @export
+rotate <- function(z, angle = 0) {
+  complex(real = cos(angle), imaginary = sin(angle)) * z
+}

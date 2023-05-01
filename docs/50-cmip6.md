@@ -11,4 +11,4 @@ Acá iría el [análisis de los cEOF en CMIP6](https://htmlpreview.github.io/?ht
 
 ### Tendencias
 
-## Otras estaciones ??
+## Otras estaciones (quizas)

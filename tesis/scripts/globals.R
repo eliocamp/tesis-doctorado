@@ -1,4 +1,44 @@
 
+knitr::opts_hooks$set(label = function(options) {
+  # Tira un error si el chunk no tiene label
+  default_label <- knitr::opts_knit$get("unnamed.chunk.label")
+  if (grepl(default_label, options$label)) {
+    stop("Name your chunks!")
+  }
+  options
+
+  # Setea el default del caption a label-cap
+  if (is.null(options[["fig.cap"]])) {
+    options[["fig.cap"]] <- paste0("(ref:", options[["label"]], "-cap)")
+  }
+
+
+  options
+})
+
+"%||%" <- function (x, y) {
+  if (is.null(x))
+    y
+  else x
+}
+
+format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
+chapter <- tools::file_path_sans_ext(knitr::current_input())
+
+knitr::opts_chunk$set(
+  fig.path = file.path("figures", chapter, ""),
+  cache.path = file.path("cache", chapter, format, "")
+)
+
+is_word <- function() {
+  format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
+  format == "docx"
+}
+
+get_caption <- function() {
+  knitr::opts_current$get("fig.cap")
+}
+
 theme_set(theme_tesis(base_size = 10) +
             theme(legend.box.spacing = grid::unit(-.5, "lines")))
 
@@ -21,4 +61,13 @@ r2 <- expression(`$r^2$` = paste("", "r", phantom()^{
 width_column <- 3.3
 
 
-main_period <- c("1979-01-01", "2022-12-01")
+main_period <- c("1979-01-01", "2019-12-01")
+
+combine_words <- purrr::partial(knitr::combine_words, and = " y ")
+
+
+texto_pval <- function(pval = 0.01, ajustado = TRUE) {
+  ajuste <- if (ajustado) " ajustado por FDR"
+  paste0("Áreas con puntos tienen p-valor menor que ", pval, ajuste, ".")
+
+}

@@ -6,27 +6,21 @@ knitr::opts_chunk$set(
   warning = FALSE,
   cache = TRUE
 )
-
-
-
 library(eliotesis)
-
 library(metR)
 library(data.table)
 library(magrittr)
-
 library(kableExtra)
-
 library(ggplot2)
 library(tagger)
 library(ggperiodic)
 library(ggnewscale)
 library(gggrid)
+library(tidyfast)
 
-
+library(patchwork)
 
 source(here::here("tesis/scripts/globals.R"))
-
 ```
 
 
@@ -115,8 +109,6 @@ psa_time <- psa$left[season(time) == "SON"]
 
 ### Funciones ortogonales complejas (cEOF)
 
-(ref:eof-naive-cap) Spatial patterns of the four leading EOFs of SON geopotential height zonal anomalies at 50 hPa south of 20º S for the 1979 -- 2019 period (arbitrary units).
-
 ```{r compute-eof-naive}
 eof_naive <- era5[lev %in% c(50, 200) & lat %between% c(-90, -20)] %>% 
   .[season(time) == "SON"] %>% 
@@ -131,7 +123,9 @@ explained <- eof_naive[, eof[[1]]$sdev, by = lev] %>%
 
 ```
 
-```{r eof-naive, fig.cap = "(ref:eof-naive-cap)", fig.width=width_column, fig.height=width_column*1.2}
+(ref:eof-naive-cap) Spatial patterns of the four leading EOFs of SON geopotential height zonal anomalies at 50 hPa south of 20º S for the 1979 -- 2019 period (arbitrary units).
+
+```{r eof-naive, fig.width=width_column, fig.height=width_column*1.2}
 eof_naive[, eof[[1]]$right, by = lev] %>%
   .[lev == 50] %>% 
   .[ , hgt := hgt/sd(hgt)] %>% 
@@ -156,40 +150,78 @@ eof_naive[, eof[[1]]$right, by = lev] %>%
   tagger::tag_facets("rc")
 ```
 
-En el análisis EOF estándar, las ondas zonales pueden aparecer como pares de EOFs (posiblemente degenerados) que representan patrones similares pero desplazados en fase [@horel1984].
-La figura \@ref(fig:eof-naive) muestra los cuatro EOFs principales de las anomalías zonales de altura geopotencial SON a 50 hPa al sur de 20º S.
-Está claro que los dos primeros EOFs representan un único patrón de onda zonal 1 con variación de fase y los dos últimos representan un patrón con variación de fase similar con un número de onda más alto y tres centros de acción desplazados 1/4 de longitud de onda (90º en el espacio de frecuencias).
+La Figura \@ref(fig:eof-naive) muestra los cuatro EOFs principales de las anomalías zonales de altura geopotencial SON en 50 hPa al sur de 20º S.
+Está claro que los dos primeros EOFs representan un único patrón de una onda zonal 1 no estacionario (es decir, la localización de los máximos varía). 
+Dado que los EOFs estándar sólo pueden representar patrones estacionarios [@horel1984], ésta onda aparece como un par de EOFs girados en 1/4 de longitud de onda (90º en el espacio de frecuencias).
+La amplitud de esta onda 1 podría medirse como $\sqrt{\mathrm{PC1}^2 + \mathrm{PC2}^2}$ y su fase como $\tan^{-1} \left ( \frac{\mathrm{PC2}}{\mathrm{PC1}} \right )$ (donde $\mathrm{PC1}$ y $\mathrm{PC2}$ son las series temporales asociadas a cada EOF).
+Lo mismo sucede con el siguiente par de EOFs, los cuales representan un patrón de menor escala. 
+Pero esto se fundamenta en la inspección visual cualitativa de estos patrones espaciales y sólo funciona correctamente si ambas fases aparecen claramente divididas en estos dos EOFs, lo cual no está garantizado por construcción. 
 
-Para describir la naturaleza variable en fase de estos dos patrones de onda, una forma es combinar cada par de EOF en índices de amplitud y fase.
-Así, por ejemplo, la amplitud de la onda 1-como EOF podría medirse como $\sqrt{\mathrm{PC1}^2 + \mathrm{PC2}^2}$ y su fase como $\tan^{-1} \left ( \frac{\mathrm{PC2}}{\mathrm{PC1}} \right )$ (donde $\mathrm{PC1}$ y $\mathrm{PC2}$ son las series temporales asociadas a cada EOF).
-Sin embargo, esto se basa en la inspección visual de los patrones espaciales y sólo funciona correctamente si ambas fases aparecen claramente en diferentes EOFs, lo que no está garantizado por construcción.
-En particular, esto no funciona con el patrón de la onda 1 representado como el EOF principal en las anomalías zonales de altura geopotencial de 200 hPa (no mostrado).
+Una mejor alternativa para representar ondas que varían en su fase es utilizando el análisis de Funciones Ortogonales Empíricas Complejas (cEOF, por sus siglas en inglés) [@horel1984].
+Cada cEOF es un conjunto de patrones espaciales y series temporales con números complejos.
+Las componentes real e imaginaria del patrón espacial complejo son la representación de dos patrones espaciales que están desplazados 1/4 de longitud de onda por construcción, de forma similar a EOF1 y EOF2 en la Figura \@ref(fig:eof-naive).
+En este trabajo utilizamos los términos 0º cEOF y 90º cEOF para referirnos a cada parte del cEOF. 
+El campo real reconstruido por cada cEOF es la combinación lineal de los dos campos espaciales ponderados por sus respectivas series temporales.
+Esto es análogo a cómo cualquier onda sinusoidal de fase arbitraria puede construirse mediante la suma de un seno y un coseno de de diferente amplitud pero fase fija
+Esto significa que los cEOF representan de forma natural patrones ondulatorios que cambian tanto su ubicación como su amplitud.
 
-Por otro lado, una alternativa mejor para describir ondas con variación de fase es utilizar el análisis de Funciones Ortogonales Empíricas Complejas (cEOF) [@horel1984].
-Cada cEOF es un conjunto de patrones espaciales de valor complejo y series temporales.
-Los componentes real e imaginario del patrón espacial complejo pueden considerarse como la representación de dos patrones espaciales que están desplazados 1/4 de longitud de onda por construcción, de forma similar a EOF1 y EOF2 en la Figura \@ref(fig:eof-naive).
-En este documento utilizamos los términos 0º cEOF y 90º cEOF para referirnos a cada parte del cEOF completo.
-El campo real reconstruido por cada cEOF es entonces la combinación lineal de los dos campos espaciales ponderados por sus respectivas series temporales.
-Esto es análogo a cómo cualquier onda sinusoidal puede construirse mediante la suma de una onda sinusoidal y una onda cosenoidal con diferente amplitud pero fase constante.
-Esto significa que los CEOF representan de forma natural patrones ondulatorios de fase variable que cambian tanto de ubicación como de amplitud.
+Por ejemplo, cuando las anomalías zonales de altura geopotencial se parecen mucho a la fase 0º del cEOF, entonces la serie temporal de esta fase es positiva y la serie temporal de la fase 90º es cercana a cero. 
+Del mismo modo, cuando las anomalías zonales de altura geopotencial se parecen a la fase 90º, la serie temporal de ésta es positiva y la serie temporal de la fase de 0º es cercana a cero. 
+Cuando las anomalías zonales de altura geopotancial son una onda 1 con los máximos en una localización intermedia, entonces ambas series temporales tienen valores distintos a cero. 
 
-Por ejemplo, cuando la fase de la onda coincide con la fase 0º, entonces la serie temporal de fase 0º es positiva y la serie temporal de fase 90º es cero.
-Del mismo modo, cuando la fase de la onda coincide con la fase 90º, la serie temporal de fase 90º es positiva y la serie temporal de fase 0º es cero.
-Las fases intermedias tienen valores distintos de cero en ambas series temporales.
+El signo de los EOF tradicionales no está determinado, por lo que se puede multiplicar cada EOF por -1 (tanto su serie temporal como su patrón espacial) y obtener una descripción igualmente válida. 
+Este cambio de signo en los números reales corresponde a una rotación en el plano complejo de 0 o $\pi$.
+De forma similar, los cEOF no tienen un argumento (entendiendo los números complejos como una magnitud y un argumento) definido, por lo que pueden rotarse en el plano complejo con cualquier ángulo entre 0 y $2\pi$ [@horel1984]; esto es una multiplicación por $\cos(\alpha) + i\sin(\alpha)$ con $\alpha$ cualquier número real entre 0 y $2\pi$.  
 
-Los EOF tradicionales no son únicos, sino que se definen hasta el signo, que corresponde a una rotación en el plano complejo de 0 o $\pi$.
-Del mismo modo, los cEOF se definen hasta una rotación en el plano complejo de cualquier valor entre 0 y $2\pi$ [@horel1984].
-
-Los cEOF se calculan de la misma forma que los EOF tradicionales, salvo que primero se aumentan los datos calculando su señal analítica.
-Se trata de un número complejo cuya parte real es la serie original y cuya parte imaginaria son los datos originales desplazados 90º en cada frecuencia espectral, es decir, su transformada de Hilbert.
-La transformada de Hilbert suele entenderse en términos de señal variable en el tiempo.
-Sin embargo, en este trabajo aplicamos la transformada de Hilbert en cada círculo de latitud y en cada momento considerado (es decir, la señal sólo depende de la longitud).
+El procedimiento para calcular los cEOF es similar al de computar los EOF con la única diferencia de que los datos de entrada primero se convierten en su señal analítica. 
+Ésta es un número complejo cuya parte real es la serie original y cuya parte imaginaria son los datos originales desplazados 90º en cada frecuencia espectral, es decir, su transformada de Hilbert.
+La transformada de Hilbert suele entenderse en términos de señal variable en el tiempo, pero las ondas zonales son estructuras con forma de onda en el sentido zonal. 
+Por esto calculamos la transformada de Hilbert de las anomalías zonales de altura geopotencial variable en cada longitud; es decir, calculada para cada nivel, tiempo y latitud. 
 Dado que cada círculo de latitud es un dominio periódico, este procedimiento no sufre efectos de borde.
 
-Primero aplicamos el análisis cEOF a las anomalías zonales de altura geopotencial al sur de 20ºS a 50 y a 200 hPa.
-La figura \@ref(fig:ceofs-1) a.1 muestra los patrones espaciales de los dos cEOF principales.
-La fase de 0º se representa con contornos sombreados y la fase de 90º, con contornos negros.
-Las dos fases del cEOF líder son muy similares a los dos EOF líderes mostrados en la Figura \@ref(fig:eof-naive) y representan un patrón de onda zonal 1; la fase de 0º es aproximadamente el EOF1 y la fase de 90º es aproximadamente el EOF2).
+
+(ref:hilbert-ejemplo-cap) Ejemplo de cálculo de la función analítica de la señal de anomalías zonales de altura geopotencial. 
+Los primeros cuatro paneles muestran las cuatro primeras ondas zonales y el último la señal completa. 
+En verde se muestra la señal original y en naranja la transformada de Hilbert. 
+
+```{r hilbert-ejemplo}
+gdata <- era5[lev == 50] %>% 
+  .[lat %~% -50] %>% 
+  .[time == as.Date("1980-04-15")] %>% 
+  .[, hgt := hgt - mean(hgt)] %>%
+  .[, hgt := FilterWave(hgt, 1:4)]
+
+
+gdata %>%  
+  copy() %>% 
+  .[, as.character(c(1:4)) := lapply(1:4, \(x) FilterWave(hgt, x))] %>%
+  .[, hgt := NULL] %>% 
+  dt_pivot_longer(cols = `1`:`4`, names_to = "onda") %>% 
+  .[, value_c := spectral::analyticFunction(value), by = onda] %>% 
+  sep_ReIm() %>% 
+  ggplot(aes(lon, value_c)) + 
+  geom_line(aes(color = part)) +
+  
+  facet_wrap(~onda, labeller = labeller(onda = AddPreffix("Onda "))) +
+  
+  gdata %>% 
+  copy() %>% 
+  .[, hgt := spectral::analyticFunction(hgt)] %>% 
+  sep_ReIm() %>% 
+  ggplot(aes(lon, hgt)) + 
+  geom_line(aes(color = part))  +
+  
+  plot_layout(ncol = 1, guides = "collect") & 
+  
+  scale_y_continuous("Z*") &
+  scale_x_longitude(ticks = 60) &
+  scale_color_brewer(NULL, palette = "Dark2", 
+                     labels = c(Real = "Original", 
+                                Imaginario = "Transformada de Hilbert"))
+```
+
+La Figura \@ref(fig:hilbert-ejemplo) ilustra la señal analítica con las anomalías zonales de geopotencial de otoño de 1980 en 50hPa y 50ºS donde la línea verde es la señal original y la línea naranja es la transformada de Hilbert.
+En los primeros paneles la señal está dividida en las ondas zonales 1 a 4 donde se ve con claridad como la transformada de Hilbert es la misma señal pero desplazada 1/4 de longitud de onda. 
 
 ```{r compute-ceof}
 invisible(
@@ -213,8 +245,7 @@ invisible(
 )
 ```
 
-
-(ref:corr-ceof-splitted-cap) Coefficient of determination ($r^2$) between the time series of the absolute magnitude of complex EOFs computed separately at 200 hPa and 50 hPa (p-values lower than 0.01 in bold).
+(ref:corr-ceof-splitted-cap) Coeficiente de determinación ($r^2$) entre la magnitud de las series temporales de los cEOF computados de forma separada en 50 y 200 hPa (p-valores menores a 0.01 en negrita).
 
 ```{r corr-ceof-splitted}
 table <- ceof_splitted[season == "SON", eof[[1]]$left, by = .(lev = levs)] %>%
@@ -237,88 +268,76 @@ table2 <- table %>%
 pval <- table2 %>% 
   dcast(item1 ~ item2, value.var = c("p.value"))
 
-table2 %>% 
-  dcast(item1 ~ item2, value.var = c("r2")) %>% 
-  setnames("item1", "200 hPa") %>%
-  kbl2(booktabs = TRUE, caption = "(ref:corr-ceof-splitted-cap)") %>%
-  column_spec2(2:4, bold = pval[[.col]] < 0.01) %>%
-  add_header_above(c("", "50 hPa" = 3)) %>%
-  kable_classic() 
+table2 <- table2 %>%
+  dcast(item1 ~ item2, value.var = c("r2")) %>%
+  setnames("item1", "200 hPa") 
+
+if (is_word()) {
+  table2 %>% 
+    flextable::flextable() %>% 
+    flextable::set_caption("(ref:corr-ceof-splitted-cap)")
+} else {
+  table2 %>%
+    kbl2(booktabs = TRUE, caption = "(ref:corr-ceof-splitted-cap)") %>%
+    column_spec2(2:4, bold = pval[[.col]] < 0.01) %>%
+    add_header_above(c("", "50 hPa" = 3)) %>%
+    kable_classic()
+}
+
 ```
 
-La tabla \@ref(tab:corr-ceof-splitted) muestra el coeficiente de determinación entre las series temporales de la amplitud de cada cEOF a través de los niveles.
+La Tabla \@ref(tab:corr-ceof-splitted) muestra el coeficiente de determinación de la magnitud de las series temporales de los cEOF entre 50 y 200 hPa. 
 Existe un alto grado de correlación entre la magnitud de los respectivos cEOF1 y cEOF2 en cada nivel.
 Los patrones espaciales de los cEOF de 50 hPa y 200 hPa también son similares (no se muestra).
 
 Tanto la similitud del patrón espacial como la alta correlación temporal de los cEOF calculados a 50 hPa y 200 hPa sugieren que se trata, en gran medida, de modos de variabilidad conjunta.
-Esto motiva la decisión de realizar los cEOF conjuntamente entre niveles.
-Por lo tanto, los cEOF se calcularon utilizando datos de ambos niveles al mismo tiempo.
-En ese sentido, cada cEOF tiene un componente espacial que depende de la longitud, la latitud y el nivel, y un componente temporal que depende sólo del tiempo.
+Esto motiva la decisión de calcular los cEOF en ambos niveles conjuntamente. 
+Dada las diferencias de magnitud entre la variabilidad de la altura geopotencial en 50 hPa y 200 hPa, estandarizamos las variables de cada nivel por su desvío estándard. 
+El resultado es que cada cEOF tiene un componente espacial que depende de la longitud, la latitud y el nivel, y un componente temporal que sólo depende del tiempo.
 
-Como ya se ha dicho, la elección de las fases es arbitraria e igualmente válida.
-Pero para facilitar la interpretación, elegimos la fase de cada cEOF de modo que o bien el cEOF de 0º o bien el cEOF de 90º estén alineados con variables significativas en nuestro análisis.
+Como mencionamos anteriormente, el argumento de los cEOF no está determinado y se le puede sumar una constante real arbitraria. 
+Para facilitar la interpretación, definimos el argumento de cada cEOF de modo que o bien el cEOF de 0º o bien el cEOF de 90º esté alineado con variables significativas de nuestro análisis.
 Este procedimiento no crea correlaciones espurias, sólo toma una relación existente y la alinea con una fase específica.
 
-El análisis preliminar mostró que el primer cEOF estaba estrechamente relacionado con la onda zonal 1 del COT y el segundo cEOF estaba estrechamente relacionado con el ENSO.
-Por lo tanto, elegimos la fase del cEOF1 de forma que la serie temporal correspondiente al cEOF1 de 0º tuviera la máxima correlación con la onda zonal 1 del COT entre `r knitr::combine_words(LatLabel(o3wave_lats))`.
-Del mismo modo, elegimos la fase del cEOF2 de modo que el coeficiente de determinación entre el ONI y el cEOF2 de 0º sea mínimo, lo que también casi maximiza la correlación con el cEOF2 de 90º.
+Un análisis preliminar mostró que el primer cEOF está estrechamente relacionado con la onda zonal 1 de la Columna Total de Ozono y el segundo cEOF está estrechamente relacionado con el ENSO.
+Por lo tanto, elegimos el argumento del cEOF1 de forma que la serie temporal correspondiente al cEOF1 de 0º tenga la máxima correlación con la onda zonal 1 del CTO entre `r combine_words(LatLabel(o3wave_lats))`.
+Del mismo modo, elegimos el argumento del cEOF2 de modo que el coeficiente de determinación entre el ONI y el cEOF2 de 0º sea mínimo, lo que también casi maximiza la correlación con el cEOF2 de 90º.
+
 
 ```{r rotate_eofs}
-rotate <- function(z, angle = 0) {
-  complex(real = cos(angle), imaginary = sin(angle)) * z
-}
-
-angles <- seq(-pi, pi, by = .5*pi/180)
-
-
 wave1_o3 <- o3 %>% 
   .[lat %between% o3wave_lats] %>% 
   .[, .(toc = weighted.mean(toc, w = cos(lat*pi/180), na.rm = TRUE)), by = .(time, lon)] %>% 
   .[, FitWave(toc, 1), by = .(time)] 
 
-with_o3 <- ceof[, eof[[1]]$left, by = season] %>% 
+rotations_o3 <- ceof[, eof[[1]]$left, by = season] %>% 
   .[cEOF == "cEOF1"] %>% 
-  .[wave1_o3, on = "time"]
+  .[wave1_o3, on = "time"] %>% 
+  .[, correlate_complex(hgt, amplitude), by = .(season, cEOF)]
 
-rotations_o3 <- lapply(angles, function(a) {
-  with_o3 %>% 
-    copy() %>% 
-    .[, hgt := rotate(hgt, a)] %>% 
-    na.omit() %>% 
-    sep_ReIm() %>% 
-    .[, .(cor = cor(amplitude, hgt)), by = .(season, part, cEOF)] %>% 
-    .[, rotation := a]
-}) %>% 
-  rbindlist()
 
-best_rotation_cEOF1 <- rotations_o3[part == "Real"][, .SD[which.max(cor), .(rotation)], by = .(cEOF, season)]
+best_rotation_cEOF1 <- rotations_o3[part == "Real"][, .SD[which.max(correlation), .(angle)], by = .(cEOF, season)]
 
-with_enso <-  ceof[, eof[[1]]$left, by = season] %>% 
+rotations_cEOF2 <-  ceof[, eof[[1]]$left, by = season] %>% 
   .[cEOF == "cEOF2"] %>% 
   enso[., on = "time"] %>% 
-  na.omit() 
+  na.omit() %>% 
+  .[, correlate_complex(hgt, oni), by = .(season, cEOF)]
 
-rotations_cEOF2 <- lapply(angles, function(a) {
-  with_enso %>%
-    .[, hgt2 := rotate(hgt, a)] %>%
-    .[, .(R = cor(Re(hgt2), oni),
-          I = cor(Im(hgt2), oni)), by = .(cEOF, season)] %>%
-    .[, rotation := a]
-}) %>%
-  rbindlist()
-
-best_rotation_cEOF2 <- rotations_cEOF2[I > 0][, .SD[which.min(abs(R)), .(rotation)], by = .(cEOF, season)]
+best_rotation_cEOF2 <- rotations_cEOF2 %>% 
+  dt_pivot_wider(names_from = part, values_from = correlation) %>% 
+  .[Imaginario > 0] %>% 
+  .[, .SD[which.min(abs(Real)), .(angle)], by = .(cEOF, season)]
 
 
 rotations <- rbind(best_rotation_cEOF1, best_rotation_cEOF2) %>% 
-  tidyfast::dt_nest(season, .key = 'rotation')
+  dt_nest(season, .key = 'rotation')
 
 rotate_ceof <- function(x, rot) {
-  x$left <- x$left[rot, on = 'cEOF'][, hgt := rotate(hgt, rotation)][, rotation := NULL]
-  x$right <- x$right[rot, on = 'cEOF'][, hgt := rotate(hgt, rotation)][, rotation := NULL]
+  x$left <- x$left[rot, on = 'cEOF'][, hgt := rotate(hgt, angle)][, angle := NULL]
+  x$right <- x$right[rot, on = 'cEOF'][, hgt := rotate(hgt, angle)][, angle := NULL]
   
   x
-  
 }
 
 ceof <- rbindlist(list(unrotated = ceof,
@@ -326,8 +345,8 @@ ceof <- rbindlist(list(unrotated = ceof,
                          .[,  .(ceof = list(rotate_ceof(eof[[1]], rotation[[1]]))), by = .(season)]),
                   idcol = "rotation")
 
-rotated <- function(x) x[rotation == "rotated"]
-unrotated <- function(x) x[rotation == "unrotated"]
+rotated <- function(x) x[angle == "rotated"]
+unrotated <- function(x) x[angle == "unrotated"]
 ```
 
 
@@ -347,18 +366,19 @@ if (nrow(bad_cells) != 0) {
 ceof <- ceof[rotation == "rotated"][, rotation := NULL][]
 ```
 
-```{r}
+```{r save-ceof}
 saveRDS(ceof, data_path("derived", "ceof.Rds"))
 ```
 
 
-En la sección \@ref(precipitación) mostramos regresiones de precipitación y temperatura asociadas a fases intermedias.
-Para esos gráficos, rotamos los cEOFs en 1/4 de longitud de onda multiplicando las series temporales complejas por $\cos(\pi/4) + i\sin(\pi/4)$ y calculando la regresión sobre esas series temporales rotadas.
+En la sección \@ref(precipitación) mostramos regresiones de precipitación y temperatura asociadas a fases intermedias entre 0º y 90º.
+Para esos gráficos, giramos los cEOF en 1/4 de longitud de onda multiplicando las series temporales complejas por $\cos(\pi/4) + i\sin(\pi/4)$ y calculando la regresión sobre esas series temporales rotadas.
 
-Aunque calculamos estas componentes principales complejas utilizando datos de 1979 a 2019, extendimos las series temporales complejas hasta el periodo 1950 - 1978 proyectando las anomalías zonales mensuales de altura geopotencial normalizadas por nivel al sur de 20ºS sobre los patrones espaciales correspondientes.
+Los cEOF con datos de 1979 a 2019. 
+Extendimos las series temporales complejas hasta el periodo 1950--1978 proyectando las anomalías zonales mensuales de altura geopotencial normalizadas por nivel al sur de 20ºS sobre los patrones espaciales correspondientes.
 
 Realizamos regresiones lineales para cuantificar la asociación entre los cEOF y otras variables (por ejemplo, altura geopotencial, temperatura, precipitaciones y otras).
-Para cada cEOF, calculamos mapas de regresión ajustando un modelo lineal múltiple que incluía tanto la fase de 0º como la de 90º.
+Para cada cEOF, calculamos mapas de regresión ajustando un modelo lineal múltiple que incluye tanto la fase de 0º como la de 90º.
 Para obtener los coeficientes lineales de una variable $X$ con la fase 0º y 90º de cada cEOF ajustamos la ecuación
 
 $$
@@ -367,23 +387,26 @@ $$
 
 donde $\lambda$ y $\phi$ son la longitud y la latitud, $t$ es el tiempo, $\alpha$ y $\beta$ son los coeficientes de regresión lineal para las fases de 0º y 90º respectivamente, $X_0$ y $\epsilon$ son la constante y los términos de error respectivamente.
 
-Evaluamos la significancia estadística mediante una prueba t de dos caras y, en el caso de los mapas de regresión, los valores p se ajustaron controlando la Tasa de Falsos Descubrimientos [@benjamini1995; @wilks2016] para evitar resultados engañosos derivados del elevado número de regresiones [@walker1914; @katz1991].
+Evaluamos la significancia estadística mediante una prueba t a dos colas y, en el caso de los mapas de regresión, ajustamos los p-valores controlando la Tasa de Descubrimiento Falso [@benjamini1995; @wilks2016] para evitar resultados engañosos derivados del elevado número de regresiones [@walker1914; @katz1991].
+
 
 ## Primavera
 
+Primero evaluamos la primavera en detalle porque es la más interesante y donde las señales son más claras. 
+
+
 ### Descripción de los modos
 
-#### Patrones espaciales {#espaciales}
+(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2019. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias. 
 
-(ref:ceofs-1-cap) Spatial patterns for the two leading cEOFs of SON geopotential height zonal anomalies at 50 hPa and 200 hPa for the 1979 -- 2019 period. The shading (contours) corresponds to 0º (90º) phase. Arbitrary units. The proportion of variance explained for each mode with respect to the zonal mean is indicated in parenthesis.
-
-```{r ceofs-1, fig.cap = "(ref:ceofs-1-cap)", fig.width=width_column, fig.height=width_column*1.2}
+```{r ceofs-1, fig.width=width_column, fig.height=width_column*1.2}
 gdata <- ceof[, eof[[1]]$right, by = .(season)] %>% 
   copy() %>% 
   .[, hgt := hgt/sd(abs(hgt))]
 
 var <- ceof[, eof[[1]]$sdev, by = .(season)] %>%
-  .[, setNames(paste0(cEOF, " (", scales::percent(r2), ")"),
+  .[season == "SON"] %>% 
+  .[, setNames(paste0(cEOF, " (", scales::percent(r2, accuracy = 0.1), ")"),
                cEOF)]
 
 gdata %>%
@@ -436,9 +459,9 @@ era_more <- ERA5_geopotential() %>%
 
 ```
 
-(ref:extended-series-cap) Time series of the two leading cEOFs of SON geopotential height zonal anomalies at 50 hPa and 200 hPa. cEOF1 (row a) and cEOF2 (row b) separated in their 0º (column 1) and 90º (column 2) phase. Dark straight line is the linear trend. Black horizontal and vertical line mark the mean value and range of each time series, respectively.
+(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2019. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias. 
 
-```{r extended-series, fig.cap = "(ref:extended-series-cap)", fig.height=3, fig.width = 5, fig.env = "figure*"}
+```{r extended-series, fig.height=3, fig.width = 5}
 # Check that the extended index coincides with the
 # original index.
 cors <- era_more %>%
@@ -494,7 +517,7 @@ era_more %>%
   scale_y_continuous(NULL, minor_breaks = NULL, sec.axis = dup_axis()) +
   scale_color_brewer(NULL, palette = "Dark2", 
                      guide = guide_legend(override.aes = list(fill = NA))) +
-  facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx)) +
+  facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx, cEOF = var)) +
   theme(panel.spacing = grid::unit(1.5, "lines"),
         strip.placement = "outside", 
         panel.grid.minor.x = element_line(linetype = 2))  +
@@ -502,20 +525,18 @@ era_more %>%
   panel_background() 
 ```
 
-Para describir la variabilidad de las anomalías zonales de la circulación, en las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) se muestran las partes espacial y temporal de los dos primeros modos cEOF de las anomalías zonales de la altura geopotencial a 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
-El primer modo (cEOF1) explica el 82% de la varianza de los campos anómalos zonalmente, mientras que el segundo modo (cEOF2) explica una fracción menor (7%).
-En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y posición (es decir, fase) está controlada por la magnitud y fase del cEOF temporal.
-Los patrones de onda descritos por estos cEOF coinciden con los patrones observados en los EOF estándar de la Figura \@ref(fig:eof-naive).
+Las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) muestran las partes espacial y temporal de los dos primeros modos cEOF de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
+El primer modo (cEOF1) explica el `r scales::percent(ceof[season == "SON", eof[[1]]$sdev, by = .(season)][cEOF == "cEOF1"]$r2, 1)` de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (`r scales::percent(ceof[season == "SON", eof[[1]]$sdev, by = .(season)][cEOF == "cEOF2"]$r2, 1)`).
+En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y posición (es decir, fase) está controlada por la magnitud y fase de su serie temporal.
 
-El cEOF1 (Fig. \@ref(fig:ceofs-1) columna 1) es un patrón de onda hemisférica 1 con amplitud máxima en latitudes altas.
-A 50 hPa el cEOF1 de 0º tiene el máximo de la onda 1 a 150ºE y a 200 hPa, el máximo se sitúa en torno a 175ºE indicando un desplazamiento hacia el oeste con la altura.
-La cEOF2 (Fig. \ref(fig:eof-naive) columna 2) muestra también una estructura de onda zonal con amplitud máxima en latitudes altas, pero con escalas espaciales más cortas.
-En particular, la estructura dominante a ambos niveles es una onda 3 pero con mayor amplitud en el sector pacífico.
-No hay cambio de fase aparente con la altura, pero la amplitud del patrón se reduce considerablemente en la estratosfera, lo que es coherente con el hecho de que el cEOF2 calculado por separado para 200 hPa explica un poco más de varianza que el cEOF2 calculado por separado para 50 hPa (`r scales::percent(ceof_splitted[, eof[[1]]$sdev, by = levs][cEOF == "cEOF2", r2][1])` vs. `r scales::percent(ceof_splitted[, eof[[1]]$sdev, by = levs][cEOF == "cEOF2", r2][1])`.
-`r scales::percent(ceof_splitted[, eof[[1]]$sdev, by = levs][cEOF == "cEOF2", r2][2])`, respectivamente).
+El cEOF1 (Fig. \@ref(fig:ceofs-1) columna 1) es un patrón de onda 1 con amplitud máxima en latitudes altas.
+En 50 hPa el cEOF1 0º tiene el máximo de la onda 1 en 150ºE y en 200 hPa, el máximo se sitúa en torno a 175ºE indicando un desplazamiento hacia el oeste con la altura.
+El cEOF2 (Fig. \@ref(fig:eof-naive) columna 2) muestra también una estructura de onda zonal con amplitud máxima en latitudes altas, pero con escalas espaciales más cortas.
+En particular, la estructura dominante a ambos niveles es una onda 3 pero con mayor amplitud en el sector del océano Pacífico.
+No hay cambio de fase aparente con la altura, pero la amplitud del patrón se reduce considerablemente en la estratosfera, lo que es coherente con el hecho de que el cEOF2 calculado por separado para 200 hPa explica un más de varianza que el cEOF2 calculado por separado para 50 hPa (`r scales::percent(ceof_splitted[season == "SON", eof[[1]]$sdev, by = levs][cEOF == "cEOF2", r2][1])` vs. `r scales::percent(ceof_splitted[season == "SON", eof[[1]]$sdev, by = levs][cEOF == "cEOF2", r2][2])`, respectivamente).
 Esto sugiere que este modo barotrópico representa principalmente la variabilidad troposférica.
 
-```{r}
+```{r ceof_mean_r2}
 mean <- era5 %>% 
   copy() %>% 
   .[, hgt := metR::Anomaly(hgt),
@@ -534,22 +555,38 @@ ceof_mean_r2 <- ceof[, eof[[1]]$right, by = season] %>%
   .[, .SD[1], by = .(cEOF, season)]
 ```
 
-No existe una correlación simultánea significativa entre las series temporales de los cEOFs.
-Ambos cEOFs muestran variabilidad interanual pero no muestran evidencia de variabilidad decadal (Fig. \@ref(fig:extended-series)).
-Debido a que los campos geopotenciales que entran en el algoritmo cEOFs son anomalías con respecto a la media zonal en lugar de la media temporal, las series temporales cEOFs tienen media temporal no nula.
+
+```{r cross-correlations}
+# ceof[, eof[[1]]$left, by = season] %>% 
+#   sep_ReIm() %>% 
+#   .[, item := interaction(cEOF, part, sep = "\n")] %>% 
+#   .[, widyr::pairwise_cor(.SD, item, time, hgt), by = season] %>% 
+#   as.data.table() %>% 
+#   .[] %>% 
+#   ggplot(aes(item1, item2)) +
+#   geom_tile(aes(fill = correlation^2)) +
+#   scale_fill_divergent() +
+#   facet_wrap(~season, ncol = 2) 
+```
+
+No existe una correlación significativa entre las series temporales de los cEOFs.
+Ambos cEOF muestran variabilidad interanual pero no muestran evidencia de variabilidad decadal (Fig. \@ref(fig:extended-series)).
+Debido a que los campos que entran en el algoritmo de cEOF son anomalías con respecto a la media zonal en lugar de la media temporal, las series temporales de los cEOF tienen media temporal no nula.
 Sin embargo, la media temporal de cEOF2 es casi cero, lo que indica que sólo cEOF1 incluye variabilidad que se proyecta significativamente sobre el campo anómalo zonal medio.
 Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 ($r^2$ = `r scales::percent(ceof_mean_r2[season == 'SON'][["r.squared"]][1])`) y no similar al cEOF2 ($r^2$ = `r scales::percent(ceof_mean_r2[season == 'SON'][["r.squared"]][2])`).
 
-Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \ref(fig:extended-series)a.1, valor p `r trends[part == "Real" & cEOF == "cEOF1" & season == "SON"]$p_report`), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
-La tendencia positiva en el cEOF1 de 0º se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
-Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de alta latitud.
+Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \@ref(fig:extended-series)a.1, valor p `r trends[part == "Real" & cEOF == "cEOF1" & season == "SON"]$p_report`), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
+La tendencia positiva del cEOF1 de 0º se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
+Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de latitudes altas. 
+
+
 
 ### Relación con otras variables de la atmósfera
 
 #### Geopotencial
 
-En la sección anterior se aplicó el análisis de los cEOF a las anomalías zonales derivadas de la eliminación de los valores medios zonales con el fin de aislar las principales características de las principales ondas zonales que caracterizan la circulación en el SH.
-En esta sección calculamos campos de regresión utilizando los campos completos de las variables para describir la influencia de los cEOFs en las anomalías temporales.
+En la sección anterior mostramos los patrones espaciales de los cEOF obtenidos a partir de las anomalías zonales de altura geopotencial.
+En esta sección calculamos campos de regresión de las series temporales de los cEOF con las anomalías temporales de altura geopotencial para describir la influencia de los cEOF en las anomalías temporales.
 
 ```{r compute-regression}
 era5 <- ERA5_temperature() %>% 
@@ -627,12 +664,14 @@ plot_regr <- function(data, which_cEOF, which_levs, which_var) {
 }
 
 # From latex2exp::TeX('Geopotential height ($m^2s^{-1}$)')
-mpg <- expression('Geopotential height ('*m^{2}*s^{phantom() - 1}*')')
+mpg <- expression('Altura geopotencial ('*m^{2}*s^{phantom() - 1}*')')
 ```
 
-(ref:eof1-regr-gh-cap) Regression of SON geopotential height anomalies ($m^2s^{-1}$) with the (column 1) 0º and (column 2) 90º phases of the first cEOF for the 1979 -- 2019 period at (row a) 50 hPa and (row b) 200 hPa. These coefficients come from multiple linear regression involving the 0º and 90º phases. Areas marked with dots have p-values smaller than 0.01 adjusted for False Detection Rate.
+(ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON  ($m^2s^{-1}$) con la fase 0º (columna 1) y 90º (columna 2) para cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1979 -- 2019. 
+Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. 
+Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
 
-```{r eof1-regr-gh, fig.cap = "(ref:eof1-regr-gh-cap)", fig.height=1.2*width_column, fig.width=width_column, dependson="plot_regr"}
+```{r eof1-regr-gh, fig.height=1.2*width_column, fig.width=width_column, dependson="plot_regr"}
 plot_regr(regr , "cEOF1", c(200, 50), "hgt") +
   scale_fill_divergent(mpg,
                        breaks = AnchorBreaksSym(0, exclude = 0),
@@ -640,16 +679,19 @@ plot_regr(regr , "cEOF1", c(200, 50), "hgt") +
                        limits = c(-2000, 2000)) 
 ```
 
-La figura \@ref(fig:eof1-regr-gh) muestra mapas de regresión de anomalías de altura geopotencial SON sobre cEOF1.
-A 50 hPa (Figura \@ref(fig:eof1-regr-gh) fila a), el cEOF1 de 0º está asociado a un centro positivo situado sobre el Mar de Ross.
-El cEOF1 de 90º está asociado a un patrón de onda 1 distintivo con un máximo sobre la costa de la Antártida Oriental.
-A 200 hPa (Figura \ref(fig:eof1-regr-gh) fila b) el cEOF1 de 0º muestra un único centro de anomalías positivas que abarca la Antártida Occidental rodeado de anomalías opuestas en latitudes más bajas, con su centro desplazado ligeramente hacia el este en comparación con las anomalías de niveles superiores.
-El cEOF1 de 90º muestra un patrón mucho más simétrico zonalmente que se asemeja a la fase SAM negativa [por ejemplo, @fogt2020].
+La Figura \@ref(fig:eof1-regr-gh) muestra mapas de regresión de anomalías de altura geopotencial en SON sobre el cEOF1.
+En 50 hPa (Fig. \@ref(fig:eof1-regr-gh) fila a), la fase 0º del cEOF1 está asociada a un centro de anomalías positivas sobre la Antártida con su centro sobre el Mar de Ross.
+Por otro lado, el centro de anomalías positivas asociado a la fase 90º está corrido hacia Antártida Oriental y tiene un patrón de onda 1 más evidente. 
+
+En 200 hPa (Fig. \@ref(fig:eof1-regr-gh) fila b) la fase 0º del cEOF1 muestra un único centro de anomalías positivas que abarca la Antártida Occidental rodeado de anomalías opuestas en latitudes más bajas, con su centro desplazado ligeramente hacia el este en comparación con las anomalías de niveles superiores.
+La fase de 90º muestra un patrón mucho más simétrico zonalmente que se asemeja al patrón de anomalías características de la fase negativa del SAM [@fogt2020].
+En ambas fases las anomalías negativas en latitudes bajas son débiles y no son estadísticamente significativas
+
 Por lo tanto, la magnitud y la fase del cEOF1 están asociadas a la magnitud y la fase de una onda zonal principalmente en la estratosfera.
 
-(ref:eof2-regr-gh-cap) Same as Figure \@ref(fig:eof1-regr-gh) but for cEOF2.
+(ref:eof2-regr-gh-cap) Igual que la Figura \@ref(fig:eof1-regr-gh) pero para el cEOF2.
 
-```{r eof2-regr-gh, fig.cap = "(ref:eof2-regr-gh-cap)", fig.height=1.3*width_column, fig.width=width_column, dependson="plot_regr"}
+```{r eof2-regr-gh, fig.height=1.3*width_column, fig.width=width_column, dependson="plot_regr"}
 plot_regr(regr, "cEOF2", c(200, 50), "hgt") +
   scale_fill_divergent(mpg, 
                        breaks = AnchorBreaksSym(0, 200, exclude = 0),
@@ -657,25 +699,30 @@ plot_regr(regr, "cEOF2", c(200, 50), "hgt") +
                        limits = c(-1000, 1000))
 ```
 
-La figura \@ref(fig:eof2-regr-gh) muestra los mapas de regresión de las anomalías de altura geopotencial sobre el cEOF2.
-En la troposfera (Fig. \@ref(fig:eof2-regr-gh) fila a) los mapas de regresión muestran trenes de ondas similares a los identificados para los patrones cEOF2 (Fig \@ref(fig:ceofs-1)).
-Las anomalías de regresión asociadas con el cEOF2 de 0º están desfasadas 1/4 de longitud de onda con respecto a las asociadas con el cEOF2 de 90º.
+La Figura \@ref(fig:eof2-regr-gh) muestra los mapas de regresión de las anomalías de altura geopotencial con el cEOF2.
+Tanto en 50 como en 200 hPa se observa un patrón de onda 3 similares a los de la Figura \@ref(fig:ceofs-1) columna 2. 
+Las anomalías de regresión asociadas con la fase 0º del cEOF2 están desfasadas 1/4 de longitud de onda con respecto a las asociadas con la fase 90º.
 Todos los campos tienen una onda zonal dominante 3 limitada al hemisferio occidental, sobre los océanos Pacífico y Atlántico.
-El cEOF2 representa entonces un tren de ondas barotrópico equivalente muy similar al de los Patrones PSA [@mo2001].
-Comparando la localización de la anomalía positiva cerca de 90ºW en la columna 2 de la Figura \ref(fig:eof2-regr-gh) con las Figuras 1.a y b de @mo2001, el mapa de regresión 0º cEOF2 podría identificarse con PSA2, mientras que el 90º cEOF2 se asemeja a PSA1.
 
-Estos patrones de ondas también están presentes en la estratosfera (Fig. \ref(fig:eof2-regr-gh) fila a) apoyando su naturaleza barotrópica equivalente.
-Pero también está presente un monopolo sobre el polo con signo negativo asociado a los 0º cEOF2 y signo positivo asociado a los 90º cEOF2.
+En 50 hPa (Fig. \@ref(fig:eof2-regr-gh) fila a) también se ve un monopolo sobre el polo con signo negativo asociado a la fase 0º y signo positivo asociado a la fase 90º. 
 Este monopolo podría indicar fortalecimiento del vórtice polar asociado a valores positivos del 0º cEOF2 y debilitamiento asociado a valores negativos del 0º cEOF2.
-Sin embargo, dado que estas anomalías no son estadísticamente significativas, esta característica no debe sobreinterpretarse.
+Sin embargo, estas anomalías no son estadísticamente significativas, indicando que su magnitud es baja en comparación a la variabilidad estratosférica y que esta característica no debe sobreinterpretarse.
+
+En 200 hPa (Fig. \@ref(fig:eof2-regr-gh) fila b) el tren de ondas es robusto y los centros son estadísticamente significativos, con anomalías insignificantes por fuera de este patrón. 
+La localización de las anomalías no varía en la vertical, lo cual indica que se trata de un modo barotrópico equivalente. 
+
+El cEOF2 representa entonces un tren de ondas barotrópico equivalente muy similar al de los Patrones PSA [@mo2001].
+Comparando la localización de la anomalía positiva cerca de 90ºW en la columna 2 de la Figura \@ref(fig:eof2-regr-gh) con las Figuras 1.a y b de @mo2001, el mapa de regresión de la fase 0º podría identificarse con el PSA2, mientras que la fase 90º se asemeja al PSA1. 
+Estudiaremos la relación entre el cEOF2 y el PSA con más detalle en la Sección \@ref(psa).
+
 
 #### Temperatura y Ozono
 
-(ref:eof1-regr-t-cap) Same as Figure \@ref(fig:eof1-regr-gh) but for air temperature (K).
+(ref:eof1-regr-t-cap) Igual que la Figura \@ref(fig:eof1-regr-gh) pero para la temperatura del aire (K).
 
-```{r eof1-regr-t, fig.cap = "(ref:eof1-regr-t-cap)",  dependson="plot_regr", fig.height=1.3*width_column, fig.width=width_column}
+```{r eof1-regr-t, dependson="plot_regr", fig.height=1.3*width_column, fig.width=width_column}
 plot_regr(regr, "cEOF1", c(200, 50), "t") +
-  scale_fill_divergent("Temperature (K)", breaks = AnchorBreaksSym(0, exclude = 0),
+  scale_fill_divergent("Temperatura del aire (K)", breaks = AnchorBreaksSym(0, exclude = 0),
                        guide = guide_colorsteps_bottom(15, even.steps = TRUE), 
                        limits = c(-4.5, 4.5))
 ```
@@ -710,9 +757,9 @@ t <- t %>%
         o3  = mean(o3*w)), by = .(lev, lon, time = seasonally(time))]
 ```
 
-(ref:t-vertical-cap) Regression of SON zonal anomalies averaged between `r knitr::combine_words(LatLabel(o3wave_lats))` of mean air temperature (shaded, Kelvin) and ozone mixing ratio (contours, negative contours with dashed lines, labels in parts per billion by mass) with the (a) 0º and (b) 90º phase of the cEOF1 for the 1979 -- 2019 period.
+(ref:t-vertical-cap) Regresión de anomalías zonales de temperatura (sombrado, Kelvin) y razón de mezcla de ozono (contornos, valores negeativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre `r combine_words(LatLabel(o3wave_lats))` en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1979 -- 2019.
 
-```{r t-vertical, fig.cap = "(ref:t-vertical-cap)", fig.height=2.5, fig.width=width_column}
+```{r t-vertical, fig.height=2.5, fig.width=width_column}
 t %>% 
   melt(id.vars = c("lev", "time", "lon")) %>% 
   .[, value := Anomaly(value), by = .(time, lev, variable)] %>%
@@ -739,7 +786,7 @@ t %>%
                     skip = 1, stroke = 0.15, stroke.colour = "white",
                     breaks = AnchorBreaksSym(0, exclude = 0)) +
   
-  scale_fill_divergent_discretised("Air temperature (K)",
+  scale_fill_divergent_discretised("Temperatura del Aire (K)",
                                    # limits = c(-2.25, 2.25),
                                    labels = label_one_less,
                                    guide = guide_colorsteps_bottom(15, show.limits = TRUE)) +
@@ -754,21 +801,21 @@ t %>%
   tag_facets(tag = "panel") 
 ```
 
-También se evaluó la firma de la variabilidad de los cEOFs en la temperatura del aire.
-La figura \@ref(fig:eof1-regr-t) muestra los mapas de regresión de las anomalías de la temperatura del aire a 50 hPa y 200 hPa en el cEOF1.
-La distribución de los coeficientes de regresión de la temperatura a 50 hPa y a 200 hPa refleja los mapas de regresión de la altura geopotencial a 50 hPa (Fig. \@ref(fig:eof1-regr-gh)).
-En ambos niveles, el 0º cEOF1 se asocia a un centro positivo sobre el Polo Sur con su centro desplazado ligeramente hacia 150ºE (Fig. \@ref(fig:eof1-regr-t) columna 1).
-Por otro lado, los mapas de regresión sobre los 90º cEOF1 muestran un patrón de onda 1 más claro con su máximo alrededor de los 60ºE.
+También se evaluó la señal de la variabilidad de los cEOF en la temperatura del aire.
+La Figura \@ref(fig:eof1-regr-t) muestra los mapas de regresión de las anomalías de la temperatura del aire en 50 hPa y 200 hPa con el cEOF1.
+La distribución de los coeficientes de regresión de la temperatura en 50 hPa y en 200 hPa refleja los mapas de regresión de la altura geopotencial en 50 hPa (Fig. \@ref(fig:eof1-regr-gh)).
+En ambos niveles, la fase de 0º está asociada a anomalías positivas sobre el Polo Sur con su centro desplazado ligeramente hacia 150ºE (Fig. \@ref(fig:eof1-regr-t) columna 1).
+Por otro lado, los mapas de regresión con la fase de 90º muestran un patrón de onda 1 más claro con su máximo alrededor de los 60ºE.
 
-La figura \@ref(fig:t-vertical) muestra la distribución vertical de los coeficientes de regresión sobre cEOF1 a partir de anomalías zonales de la temperatura del aire y de la proporción de mezcla de ozono promediadas entre `r knitr::combine_words(LatLabel(o3wave_lats))`.
+La Figura \@ref(fig:t-vertical) muestra la distribución vertical de los coeficientes de regresión del cEOF1 con las anomalías zonales de la temperatura del aire y de la razón de mezcla de ozono promediadas entre `r combine_words(LatLabel(o3wave_lats))`.
 Las anomalías zonales de temperatura asociadas al cEOF1 muestran un claro patrón de onda 1 tanto para la fase de 0º como para la de 90º en toda la atmósfera por encima de 250 hPa con una inversión de signo por encima de 10 hPa.
 Como resultado del balance hidrostático, este es el nivel en el que la anomalía geopotencial tiene máxima amplitud (no mostrado).
 
-Las máximas anomalías regresivas de ozono coinciden con las mínimas anomalías de temperatura por encima de 10 hPa y con las máximas anomalías de temperatura por debajo de 10 hPa (Fig. \@ref(fig:t-vertical)).
-Por tanto, la onda zonal 1 de ozono está correlacionada negativamente con la onda zonal 1 de temperatura en la estratosfera superior, y positivamente en la estratosfera superior.
-Este cambio de fase se observa en las anomalías de ozono forzadas por ondas planetarias que alcanzan la estratosfera.
-En la estratosfera superior, dominada fotoquímicamente, las temperaturas frías inhiben la destrucción de ozono, explicando el comportamiento opuesto para ambas variables, tal y como se dilucidó con modelos químicos dinámicos [@hartmann1979; @wirth1993; @smith1995].
-Por otro lado, en la estratosfera baja dominada por la advección, las anomalías de ozono están desfasadas 1/4 de longitud de onda con el transporte horizontal y vertical, que a su vez están desfasados 1/4 de longitud de onda con las anomalías de temperatura, resultando anomalías del mismo signo para la respuesta de ambas variables [@hartmann1979; @wirth1993; @smith1995].
+Los valores máximos de la regresión con el ozono coinciden con los valores mínimos de temperatura por encima de 10 hPa y con los máximos por debajo de 10 hPa (Fig. \@ref(fig:t-vertical)).
+Por tanto, la onda zonal 1 de ozono está correlacionada negativamente con la onda zonal 1 de temperatura en la estratosfera superior, y positivamente en la estratosfera baja.
+Este cambio de fase es observado en las anomalías de ozono forzadas por ondas planetarias que alcanzan la estratosfera.
+En la estratosfera superior, dominada por procesos fotoquímicos, las temperaturas frías inhiben la destrucción de ozono, explicando el comportamiento opuesto para ambas variables, tal y como se dilucidó con modelos químicos dinámicos [@hartmann1979; @wirth1993; @smith1995].
+Por otro lado, en la estratosfera baja, dominada por la advección, las anomalías de ozono están desfasadas 1/4 de longitud de onda con el transporte horizontal y vertical, que a su vez están desfasados 1/4 de longitud de onda con las anomalías de temperatura, resultando anomalías del mismo signo para la respuesta de ambas variables [@hartmann1979; @wirth1993; @smith1995].
 
 ```{r o3_regr}
 temp <- ceof[, eof[[1]]$left, by = season] %>% 
@@ -789,9 +836,11 @@ o3_regr <- temp %>%
   .[, term := factor_ReIm(term)]
 ```
 
-(ref:o3-regr-cap) Regression of SON mean Total Column Ozone anomalies (shaded, Dobson Units) with the (a) 0º and (b) 90º phases of the cEOF1 for the 1979 -- 2019 period. On contours, the mean zonal anomaly of Total Column Ozone (negative contours in dashed lines, Dobson Units). Areas marked with dots have p-values smaller than 0.01 adjusted for False Detection Rate.
+(ref:o3-regr-cap) Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase 0º (a) y 90º (b) del cEOF1 para el período 1979 -- 2019. 
+En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). 
+Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
 
-```{r o3-regr, fig.cap = "(ref:o3-regr-cap)", fig.height=3, fig.width = width_column}
+```{r o3-regr, fig.height=3, fig.width = width_column}
 o3_regr %>% 
   .[season == "SON"] %>% 
   periodic(lon = c(0, 360)) %>% 
@@ -814,7 +863,7 @@ o3_regr %>%
            size = 0.3, alpha = 0.8
   ) +
   geom_qmap() +
-  scale_fill_divergent_discretised("Total Column Ozone (DU)", 
+  scale_fill_divergent_discretised("Columna Total de Ozono (DU)", 
                                    limits = c(-30, 30), 
                                    breaks = AnchorBreaksSym(exclude = 0, binwidth = 5)(c(-30, 30)),
                                    guide = guide_colorsteps_bottom(15)) + 
@@ -828,6 +877,9 @@ o3_regr %>%
   tag_facets("panel")
 
 ```
+
+
+(ref:wave1-o3-cap) Relación entre la amplitud y la fase de la onda zonal 1 de la Columna Total de Ozono promediada entre `r combine_words(LatLabel(o3wave_lats))` y la amplitud y la fase del cEOF1 para SON en el período 1979 -- 2019.
 
 ```{r wave1-o3, fig.cap = "(ref:wave1-o3-cap)", fig.width=width_column, fig.height=width_column*.7, include = FALSE}
 wave1_o3 <- o3 %>% 
@@ -853,36 +905,37 @@ wave_correlation <- temp %>%
         n = .N), by = season] %>% 
   .[, correlation_statistics(cor, n), by = season]
 
-# temp %>% 
-#   ggplot(aes(Mod(hgt), amplitude)) +
-#   scale_x_continuous("EOF1 Amplitude") +
-#   scale_y_continuous("O3 Wave-1\nAmplitude") +
-#   
-#   temp %>% 
-#   copy() %>%
-#   na.omit() %>% 
-#   qwrap(phase = c(0, 2*pi) ~ c(-pi, pi)) %>% 
-#   ggplot(aes(Arg(hgt), phase)) +
-#   scale_x_continuous("EOF1 Phase",
-#                      breaks = seq(-pi, pi, by = 15*pi/180),
-#                      labels = function(x) paste0(round(x*180/pi, 5), "º")) +
-#   scale_y_continuous("O3 Wave-1\nPhase",
-#                      breaks = seq(-pi, pi, by = 30*pi/180),
-#                      labels = function(x) paste0(round(x*180/pi, 5), "º"))  +
-#   plot_layout(ncol  = 1) &
-#   geom_point()  &
-#   geom_smooth(method = "lm") & 
-#   panel_background
-
+temp %>%
+  # .[season == "SON"] %>% 
+  ggplot(aes(Mod(hgt), amplitude)) +
+  scale_x_continuous("EOF1 Amplitude") +
+  scale_y_continuous("O3 Wave-1\nAmplitude") +
+  
+  temp %>%
+  # .[season == "SON"] %>% 
+  copy() %>%
+  na.omit() %>%
+  # qwrap(phase = c(0, 2*pi) ~ c(-pi, pi)) %>%
+  ggplot(aes(Arg(hgt), phase)) +
+  scale_x_continuous("EOF1 Phase",
+                     breaks = seq(-pi, pi, by = 15*pi/180),
+                     labels = function(x) paste0(round(x*180/pi, 5), "º")) +
+  scale_y_continuous("O3 Wave-1\nPhase",
+                     breaks = seq(-pi, pi, by = 30*pi/180),
+                     labels = function(x) paste0(round(x*180/pi, 5), "º"))  +
+  plot_layout(ncol  = 1) &
+  geom_point()  &
+  geom_smooth(method = "lm") & 
+  facet_wrap(~season)
 ```
 
-(ref:wave1-o3-cap) Relationship between cEOF1 amplitude and phase with amplitude and phase of the zonal wave 1 in Total Column Ozone averaged between `r knitr::combine_words(LatLabel(o3wave_lats))` for the period 1979 -- 2019.
-
-Los mapas de regresión de las anomalías del COT sobre el cEOF1 (Fig.\ref(fig:o3-regr)) muestran patrones de onda zonal 1 asociados a ambos componentes del cEOF1.
-La posición climatológica del mínimo primaveral de ozono (agujero de ozono) se encuentra fuera del Polo Sur y hacia el mar de Weddell [por ejemplo, @grytsai2011].
-Así, el campo de regresión 0º cEOF1 (Figura \@ref(fig:o3-regr)a) coincide con la posición climatológica del agujero de ozono, mientras que está desfasado 90º para el 90º cEOF1.
-La correlación temporal entre las amplitudes de la onda planetaria 1 del COT y la amplitud del cEOF1 es `r wave1_cor[with == "amplitude" & season == "SON"]$text`, mientras que la correlación entre sus fases es `r wave1_cor[with == "phase" & season == "SON"]$text`.
-En consecuencia, cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
+Los mapas de regresión de las anomalías de CTO con el cEOF1 (Fig. \@ref(fig:o3-regr)) muestran patrones de onda zonal 1 asociados a ambas fases del cEOF1.
+La posición climatológica del mínimo de ozono durante la primavera (agujero de ozono) no está centrada sobre el Polo Sur, sino que está desplazada hacia el mar de Weddell [p.e., @grytsai2011]; este desplazamiento se traduce en una onda 1 de la CTO. 
+Así, el campo de regresión de la fase 0º del cEOF1 (Fig. \@ref(fig:o3-regr)a) coincide con la posición climatológica de esta onda 1 del agujero de ozono, mientras que el campo para la fase 90º está defasado en 90º cEOF1.
+La correlación temporal entre la amplitude de la onda 1 de CTO y la amplitud del cEOF1 es `r wave1_cor[with == "amplitude" & season == "SON"]$text`, mientras que la correlación entre sus fases es `r wave1_cor[with == "phase" & season == "SON"]$text`.
+La correlación entre las dos ondas es `r wave_correlation[season == "SON"]$text`.
+Esta relación se muestra en la Figura \@ref(fit:wave1-o3). 
+En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
 
 ### Fuentes de variabilidad tropicales
 
@@ -914,6 +967,7 @@ t2m <- ERA5_T2M() %>%
   .[, w := season_weights(time)] %>% 
   .[, .(t2m = mean(t2m*w)), by = .(lon, lat, time = seasonally(time))]
 ```
+
 
 ```{r rotated-regressions}
 rotate_reim <- function(real, imaginary, angle = 0) {
@@ -1073,10 +1127,81 @@ dmi_cor <-  ceof[, eof[[1]]$left, by = .(season)] %>%
   .[, correlate(hgt, dmi), by = .(cEOF, part, season)]
 ```
 
+```{r parciales}
+gdata <- ceof[, eof[[1]]$left, by = .(season)] %>%
+  sep_ReIm() %>%
+  enso[., on = "time"] %>%
+  dmi[., on = "time"] %>%
+  .[, `:=`(hgt = as.numeric(scale(hgt)),
+           dmi = as.numeric(scale(dmi)),
+           oni = as.numeric(scale(oni))), by = .(cEOF, part, season)] %>%
+    na.omit()
+
+oni_dmi_parciales <- gdata %>%
+  .[season == "SON" & cEOF == "cEOF2"] %>%
+  .[, partial_cor(hgt, dmi, oni), by = .(cEOF, part, season)] %>% 
+  .[, text := paste0(scales::number(partial_correlation, accuracy = 0.01), " (p-valor ", 
+                     report_p(p.value), ")")]
+```
+
+
+(ref:psi-sst-explained-variance-cap) Varianza de la SST (fila a) las anomalías zonales de función corriente (fila b) explicada por el cEOF1 (columna 1) el cEOF2 (columna 2).
+
+```{r psi-sst-explained-variance, fig.width = width_column, fig.height = .7*width_column}
+breaks <- seq(.1, 1, by = .1)
+rbind(sst = sst_regr,
+      psi = psi_regr[, -c("psi.z", "fx", "fy", "lev")], idcol = "variable") %>% 
+  .[angle == 0] %>%
+  .[is.finite(r.squared)] %>% 
+  .[, variable := factor(variable,
+                         levels = c("sst", "psi"), 
+                         labels = c("SST", "Función corriente"))] %>% 
+  periodic(lon = c(0, 360)) %>%
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = r.squared, fill = ..level..), breaks = breaks) +
+  geom_contour_tanaka(aes(z = r.squared), breaks = breaks) +
+  # geom_text_contour(aes(z = r.squared,
+  #                       label = ..level..),
+  #                   breaks = seq(0.4, 1, by = 0.2), size = 2,
+  #                   skip = 0, stroke = 0.15, stroke.colour = "white") +
+  geom_qmap() +
+  scale_fill_divergent_discretised(name = "Explained variance", midpoint = 0,
+                                   labels = scales::percent_format(),
+                                   guide = guide_colorsteps_bottom(15, show.limits = TRUE)) +
+  
+  scale_x_continuous(NULL, expand = c(0, 0),
+                     breaks = seq(0, 360, by = 60),
+                     labels = LonLabel) +
+  scale_y_continuous(NULL, breaks  = seq(-90, 0, by = 30), expand = c(0, 0)) +
+  
+  facet_grid(variable ~ cEOF) +
+  # coord_quickmap(ylim = c(NA, 10)) +
+  coord_sf(ylim = c(NA, 10),
+           default_crs = "+proj=longlat +lon_wrap=180 +over") + 
+  theme(legend.box = "horizontal",
+        legend.text = element_text(size = rel(0.7)), 
+        legend.box.spacing = grid::unit(0, "lines") ) +
+  tag_facets("rc") 
+```
+
+
+Para evaluar si la variabilidad de los cEOF analizados está relacionada con fuentes de variabilidad tropicales calculamos la regresión de distintas fases de los cEOFs con las anomalías de SST y con las anomalías zonales de función corriente a 200 hPa. 
+La Figura \@ref(fig:psi-sst-explained-variance) muestra la varianza de cada variable explicada por cada cEOF. 
+
+El cEOF1 sólo explica una proporción importante de la varianza de la función corriente al sur de 60º, sugiriendo que no está asociado con la variabilidad tropical. 
+
+El cEOF2, en cambio, explica una gran proporción de la variabilidad tropical tanto de la SST como de la función corriente. 
+Este modo comparte más de un 50% de la varianza con las SST en el Pacífico central (sugiriendo el impacto del ENSO). 
+En cuanto a la función corriente, en el Pacífico explica más del 50% de la varianza en la región del cambio de fecha y sobre Indonesia. 
+También explica gran parte de la varianza en al oeste y al este de la Península Antártica, llegando a más del 80% sobre el mar de Amundsen. 
 
 ```{r plot_sst_psi}
 plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
-  
+  angles_labs <- sst_regr$angle %>% 
+    unique() %>% 
+    abs() %>% 
+    setNames(paste0(., "º"), .)
+    
   variables <- c("SST", "Streamfunction")
   
   sst_gdata <- sst_regr %>%
@@ -1088,8 +1213,8 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
     .[, var := factor("SST", levels = variables)] %>% 
     periodic(lon = c(0, 360))
   
-  
-  rsst <- max(range(abs(sst_regr[!is.na(cEOF), ]$estimate), na.rm = TRUE))
+  # browser()
+  rsst <- max(range(abs(sst_gdata[!is.na(cEOF), ]$estimate), na.rm = TRUE))
   breaks_sst <- AnchorBreaks(0, bins = 20, exclude = 0)(c(-rsst, rsst))
   
   
@@ -1139,7 +1264,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
                                      high = scales::muted("blue"),
                                      guide = guide_colorsteps_bottom(15, show.limits = FALSE,
                                                                      order = 99)) +
-    # grid_panel(grob_spoke, aes(angle = -angle, var = "SST"), inherit.aes = FALSE) +
+    grid_panel(grob_spoke, aes(angle = -angle, var = "SST"), inherit.aes = FALSE) +
     scale_x_continuous(NULL, expand = c(0, 0), 
                        breaks = seq(0, 360, by = 60),
                        labels = LonLabel) +
@@ -1159,32 +1284,47 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
 }
 ```
 
-```{r sst-psi-2,  fig.cap = "(ref:sst-psi-2-cap)", fig.width = 5, fig.height=6, dependson="plot_sst_psi", fig.env="figure*"}
+
+
+(ref:sst-psi-2-cap) Regresión de (columan 1) SST (K) y (columna 2) anomalías zonales de función corriente ($m^2/s\times10^-7$) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período 1979 -- 2019. 
+Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
+
+```{r sst-psi-2, fig.width = 5, fig.height=6, dependson="plot_sst_psi"}
 plot_sst_psi(sst_regr[cEOF == "cEOF2" & season == "SON"], psi_regr[cEOF == "cEOF2" & season == "SON"]) 
 ```
 
-(ref:sst-psi-2-cap) Regression of SST (K, left column) and streamfunction zonal anomalies ($m^2/s\times10^-7$, shaded) with their corresponding activity wave flux (vectors) (right column) upon cEOF2 different phases (illustrated in the lower-left arrow) for the 1979 -- 2019 period. Areas marked with dots have p-values smaller than 0.01 adjusted for FDR.
-
-También se evaluaron las conexiones entre los cEOF y las fuentes tropicales de variabilidad.
-La figura \@ref(fig:sst-psi-2) muestra los mapas de regresión de las anomalías de la temperatura de la superficie del mar (TSM) y de la función de corriente a 200 hPa sobre los cEOF2 normalizados.
+La Figura \@ref(fig:sst-psi-2) muestra los mapas de regresión de las anomalías de la temperatura de la superficie del mar (SST) y de la función de corriente a 200 hPa sobre los cEOF2 normalizados.
 Además de los mapas de regresión para las fases de 0º y 90º, incluimos las regresiones correspondientes para dos direcciones intermedias (correspondientes a 45º y 135º).
 
-La cEOF2 de 90º (segunda fila) está asociada a fuertes anomalías positivas de la TSM en el Pacífico central y oriental y a anomalías negativas en una zona que atraviesa el norte de Australia, Nueva Zelanda y la Zona de Convergencia del Pacífico Sur (SPCZ) (Figura \ref@(fig:sst-psi-2).b1).
-El campo de regresión de las anomalías de la TSM guarda un gran parecido con el ENOS canónicamente positivo [@bamston1997].
-De hecho, existe una correlación significativa y muy alta (`r enso_cor[cEOF == "cEOF2" & part == "Imaginario" & season == "SON"]$text`) entre el ONI y la serie temporal 90º cEOF2.
-Además del patrón similar al ENOS del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un DIO positivo [@saji1999].
-De forma coherente, la correlación entre el 90º cEOF2 y el DMI es `r dmi_cor[cEOF == "cEOF2" & part == "Imaginario" & season == "SON"]$text`.
+La fase de 90º (fila b) está asociada a fuertes anomalías positivas de la SST en el Pacífico central y oriental y a anomalías negativas en una zona que atraviesa el norte de Australia, Nueva Zelanda y la Zona de Convergencia del Pacífico Sur (SPCZ) (Fig. \@ref(fig:sst-psi-2).b1).
+Este patrón es muy similar al patrón del ENSO positivo canónico [@bamston1997].
+De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (`r enso_cor[cEOF == "cEOF2" & part == "Imaginario" & season == "SON"]$text`).
+Además del patrón similar al ENSO del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un dipolo del índico en su fase positiva [@saji1999].
+Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es `r dmi_cor[cEOF == "cEOF2" & part == "Imaginario" & season == "SON"]$text`.
+Sin embargo, la correlación parcial es de `r oni_dmi_parciales[cEOF == "cEOF2" & part == "Imaginario" & season == "SON" & term == "dmi"]$text`, indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo. 
+Esto puede observarse en la Figura \@ref(fig:euler), donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI. 
+El DMI aporta, independientemente, sólo un 4.3% de la varianza mientras que el ONI aporta un 23.8% por sí mismo. 
 
-El 90º cEOF2 está asociado a fuertes anomalías de la función de onda que emanan de los trópicos (Figura \@ref(fig:sst-psi-2).b2), tanto del sector del Pacífico Central como del Océano Índico.
-La respuesta atmosférica asociada a 90º cEOF2 es entonces consistente con el efecto combinado del ENOS y el DIO sobre los extratropicos: con anomalías de la TSM que inducen convección tropical anómala que a su vez excita ondas de Rossby que se propagan meridionalmente hacia latitudes más altas [@mo2000; @cai2011; @nuncio2015].
+(ref:eluer-cap) Diagrama de Euler con las proporción de la varianza de cada serie explicada por cada solapamiento (p.e. la región común entre DMI y 90º cEOF2 es la varianza en común entre esas variables). 
 
-Sin embargo, el cEOF2 no está asociado a los mismos patrones de anomalía de la TSM tropical en todas sus fases Las figuras \@ref(fig:sst-psi-2).d1 y d2 muestran que la cEOF2 de 0º no está asociada a ninguna anomalía significativa de la TSM ni de la función de la corriente en los trópicos.
-Como resultado, la correlación entre el 0º cEOF2 y ENSO no es significativa (`r enso_cor[cEOF == "cEOF2" & part == "Real" & season == "SON"]$text`).
-Mientras tanto, las filas a y c de la Fig.\@ref(fig:sst-psi-2) muestran que las fases intermedias siguen asociadas con anomalías regresivas significativas de la TSM sobre el Océano Pacífico, pero en lugares ligeramente diferentes.
-La fase de 135º está asociada a anomalías de la TSM en el Pacífico central (Fig.\@ref(fig:sst-psi-2)a.1), mientras que la fase de 45º está asociada a anomalías de la TSM que corresponden aproximadamente a los "sabores" de ENSO del Pacífico central y del Pacífico oriental, respectivamente (Fig.\@ref(fig:sst-psi-2)c.1) [@kao2009].
-Ambas fases también están asociadas a trenes de ondas que se generan en la región que rodea Australia y se propagan hacia los extratropicales, aunque menos intensos que los asociados a la fase de 90º.
+```{r euler, fig.width=width_column, fig.height=width_column}
+with(gdata[season == "SON" & cEOF == "cEOF2" & part == "Imaginario"],
+     euler_correlation(hgt, oni, dmi, c("90º cEOF2", "ONI", "DMI")))
+```
 
-(ref:enso-phase-cap) SON ONI values plotted against cEOF2 phase for the 1979 -- 2019 period. Years with magnitude of cEOF2 greater (smaller) than the 50th percentile are shown as orange diamonds (green circles). Black line is the fit ONI \~ sin(phase) computed by weighted OLS using the magnitude of the cEOF2 as weights.
+La fase de 90º del cEOF2 está asociado a fuertes anomalías de la función corriente que emanan de los trópicos (Fig. \@ref(fig:sst-psi-2).b2), tanto del sector del Pacífico Central como del Océano Índico.
+Esta respuesta atmosférica es consistente con el efecto combinado del ENSO y el DMI sobre los extratropicos: con anomalías de la SST que inducen convección tropical anómala que a su vez excita ondas de Rossby que se propagan meridionalmente hacia latitudes más altas [@mo2000; @cai2011; @nuncio2015].
+
+Sin embargo, el cEOF2 no está asociado a los mismos patrones de anomalía de las SST tropicales en todas sus fases. 
+Los paneles d1 y d2 de la Figura \@ref(fig:sst-psi-2) muestran que la fase de 0º del cEOF2 no está asociada a ninguna anomalía significativa de las SST ni de la función corriente en los trópicos.
+Tampoco la correlación entre el 0º cEOF2 y ENSO es significativa (`r enso_cor[cEOF == "cEOF2" & part == "Real" & season == "SON"]$text`).
+Las filas a y c de la Fig.\@ref(fig:sst-psi-2) muestran que las fases intermedias siguen asociadas con anomalías significativas de la SST sobre el Océano Pacífico, pero en lugares ligeramente diferentes.
+La fase de 135º está asociada a anomalías de la SST en el Pacífico central (Fig.\@ref(fig:sst-psi-2)a.1), mientras que la fase de 45º está asociada a anomalías de la SST que corresponden aproximadamente a los "sabores" de ENSO del Pacífico central y del Pacífico oriental, respectivamente (Fig.\@ref(fig:sst-psi-2)c.1) [@kao2009].
+Ambas fases también están asociadas a trenes de onda que se generan cerca de Australia y se propagan hacia los extratrópicos, aunque menos intensos que los asociados a la fase de 90º.
+
+(ref:enso-phase-cap) Valores del ONI en SON y la fase del cEOF2 en el período 1979 -- 2019. 
+Los años en los cuales la magnitud del cEOF2 es mayor o menor que la mediana se muestran como diamantes naranja o círculos verdes respectivamente. 
+La línea negra representa el ajuste ONI \~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2. 
 
 ```{r enso-phase, fig.cap = "(ref:enso-phase-cap)", fig.width = width_column, fig.height=3}
 gdata <- ceof[, eof[[1]]$left, by = .(season)] %>%
@@ -1244,27 +1384,34 @@ gdata %>%
   panel_background()
 ```
 
-Para explorar más a fondo la relación entre el forzamiento tropical y las fases del cEOF2, la Figura \@ref(fig:enso-phase) muestra el ONI trazado contra la fase del cEOF2 para cada trimestre SON entre 1979 y 2019, destacando los años en los que la magnitud del cEOF2 está por encima de la mediana.
-En los años con ONI positivo (negativo), la fase cEOF2 se sitúa mayoritariamente en torno a 90º (-90º).
-En las estaciones ENOS neutras, la fase cEOF2 es mucho más variable.
-La línea negra de la figura \@ref(fig:enso-phase) es un ajuste sinusoidal de la relación entre el ONI y la fase cEOF2.
-El $r^2$ correspondiente al ajuste es `r signif(summary(cos_model[season == "SON", model[[1]]])$r.squared, 2)`, estadísticamente significativo con valor p `r report_p(coef(summary(cos_model[season == "SON", model[[1]]]))[4])`, lo que indica una relación casi sinusoidal entre estas dos variables.
+Para explorar la relación entre el forzante tropical y las fases del cEOF2 con más profundidad, la Figura \@ref(fig:enso-phase) muestra la relación entre el ONI y la fase del cEOF2 para cada SON entre 1979 y 2019, destacando los años en los que la magnitud del cEOF2 está por encima de la mediana.
+En los años con ONI positivo, la fase cEOF2 se sitúa mayoritariamente en torno a la fase de 90º; en los años con ONI negativo, en torno a la fase de -90º.
+En las estaciones con ENSO neutro, la fase del cEOF2 es mucho más variable.
+La línea negra de la Figura \@ref(fig:enso-phase) es un ajuste sinusoidal de la relación entre el ONI y la fase del cEOF2.
+El $r^2$ correspondiente al ajuste es `r signif(summary(cos_model[season == "SON", model[[1]]])$r.squared, 2)`, estadísticamente significativo con p-valor `r report_p(coef(summary(cos_model[season == "SON", model[[1]]]))[4])`, lo que indica una relación casi sinusoidal entre estas dos variables.
 
 La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es `r cor_enso_mag[season == "SON"]$text`.
-Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (`r knitr::combine_words(year(gdata[season == "SON"][order(-oni)][1:3]$time))`), que coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
+Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (`r combine_words(year(gdata[season == "SON"][order(-oni)][1:3]$time))`), los cuales coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
 Si se eliminan esos años, la correlación deja de ser significativa (`r cor_enso_mag_outlier[season == "SON"]$text`).
-Además, incluso cuando se utilizan todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (`r signif(cor_enso_spearman[season == "SON"]$estimate, 2)`, valor p `r report_p(cor_enso_spearman[season == "SON"]$p.value)`).
-Por lo tanto, aunque la localización de las anomalías tropicales de la TSM parece tener un efecto en la definición de la fase del cEOF2, la relación entre la magnitud del cEOF2 y el ONI sigue siendo incierta y podría ser sólo evidente en eventos ENSO muy fuertes, que son escasos en el registro observacional histórico.
+Además, incluso cuando utilizando todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (`r signif(cor_enso_spearman[season == "SON"]$estimate, 2)`, p-valor `r report_p(cor_enso_spearman[season == "SON"]$p.value)`).
+Por lo tanto, aunque la localización de las anomalías tropicales de la SST parece tener un efecto en la definición de la fase del cEOF2, la relación entre la magnitud del cEOF2 y el ONI sigue siendo incierta y podría ser sólo evidente en eventos ENSO muy fuertes, que son escasos en el registro observacional histórico.
 
-Concluimos que el tren de ondas representado por cEOF2 puede ser tanto parte de la variabilidad interna de la atmósfera extratropical como forzado por las TSM tropicales.
+Concluimos que el tren de ondas representado por el cEOF2 es tanto parte de la variabilidad interna de la atmósfera extratropical como forzado por las SST tropicales.
 En el primer caso, el tren de ondas tiene poca preferencia de fase.
-Sin embargo, cuando cEOF2 es excitado por la variabilidad de la TSM tropical, tiende a permanecer bloqueado en la fase de 90º.
-Esto explica la relativa sobreabundancia de años con cEOF2 cerca de la fase positiva y negativa de 90º en la figura \@ref(fig:histograma de fase).
+Sin embargo, cuando el cEOF2 es excitado por la variabilidad de la SST tropical, tiende a permanecer fijo en la fase de 90º.
 
-A diferencia del caso cEOF2, no hay anomalías significativas de TSM regresiva asociadas ni con la fase 0º ni con la fase 90º cEOF1 (Sup. Figura \@ref(fig:sst-psi-1)).
-Consistentemente, las anomalías de la función de corriente no muestran ninguna influencia tropical.
-En su lugar, los cEOF1 de 0º y 90º están asociados a flujos de actividad ondulatoria que se propagan zonalmente en los extratropicales alrededor de 60ºS, excepto por un flujo hacia el ecuador desde la costa de la Antártida alrededor de 150ºE en la fase de 0º.
-Esto sugiere que la variabilidad de cEOF1 está impulsada principalmente por la variabilidad interna de los extratropicales.
+(ref:sst-psi-1-cap) Iugal que la Figura \@ref(fig:sst-psi-2) pero para el cEOF1. 
+
+```{r sst-psi-1, fig.width = 5, fig.height=6, dependson="plot_sst_psi"}
+plot_sst_psi(sst_regr[cEOF == "cEOF1"], psi_regr[cEOF == "cEOF1"], min.mag = 0.0005)
+```
+La Figura \@ref(fig:sst-psi-1) muestra las mismas regresiones que la Figura  \@ref(fig:sst-psi-2) pero para el cEOF1. 
+Como anticipó la Figura \@ref(fig:psi-sst-explained-variance), el cEOF1 no está asociado a anomalías significativas de SST ni de función corriente en los trópicos. 
+En vez de eso, las fases de 0º y 90º están asociadas a flujos de actividad de onda que se propagan zonalmente en los extratópicos cerca de de 60ºS, excepto por un flujo hacia el ecuador desde la costa de la Antártida alrededor de 150ºE en la fase de 0º.
+Esto sugiere que la variabilidad de cEOF1 está impulsada principalmente por la variabilidad interna de los extratópicos.
+
+
+XX HASTA ACÁ XXX
 
 ### Impactos en superficie
 
@@ -1308,15 +1455,15 @@ rbind(Precipitation = pp_regr,
 
 (ref:cap-pp-t2m-r2) Explained variance ($r^2$ as percentage) of 2-metre temperature (row a) and precipitation (row b) anomalies by the regression upon cEOF1 (column 1) and cEOF2 (column 2).
 
-También se exploró la influencia de la variabilidad de los cEOFs en las anomalías tanto de la temperatura del aire a 2 metros como de la precipitación en el SH.
-La figura \@ref(fig:pp-t2m-r2) muestra la varianza explicada de las anomalías de temperatura y precipitación a 2 metros por el modelo lineal múltiple tanto de 0º y 90º cEOF1 (columna 1), como de 0º y 90º cEOF2 (columna 2).
+También se exploró la influencia de la variabilidad de los cEOF en las anomalías tanto de la temperatura del aire a 2 metros como de la precipitación en el SH.
+La Figura \@ref(fig:pp-t2m-r2) muestra la varianza explicada de las anomalías de temperatura y precipitación a 2 metros por el modelo lineal múltiple tanto de 0º y 90º cEOF1 (columna 1), como de 0º y 90º cEOF2 (columna 2).
 La varianza explicada por cEOF1 para las anomalías de precipitación y las anomalías de temperatura en la mayoría de las regiones es extremadamente baja, excepto para el extremo norte de la Península Antártica, el norte del Mar de Weddell y la costa del Mar de Ross (Fig.\@ref(fig:pp-t2m-r2)a.1).
 
-Esta falta de relación fuerte entre el cEOF1 y la TSM, la temperatura y la precipitación podría ser sorprendente teniendo en cuenta la correlación entre el cEOF1 y la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1) y la correlación entre la SAM y la TSM del Pacífico Central, la temperatura al este y oeste de la Península Antártica, y con la precipitación en el oeste de Australia [@fogt2020].
+Esta falta de relación fuerte entre el cEOF1 y la SST, la temperatura y la precipitación podría ser sorprendente teniendo en cuenta la correlación entre el cEOF1 y la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1) y la correlación entre la SAM y la SST del Pacífico Central, la temperatura al este y oeste de la Península Antártica, y con la precipitación en el oeste de Australia [@fogt2020].
 Esto se debe principalmente a dos razones.
-En primer lugar, la correlación entre cEOF1 y la SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
-En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM y las TSM del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de la SAM.
-Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
+En primer lugar, la correlación entre cEOF1 y la SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \@ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
+En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM y las SST del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de la SAM.
+Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
 
 Por otro lado, la varianza explicada cEOF2 es superior al 50% en algunas regiones para ambas variables (Fig.\@ref(fig:pp-t2m-r2) columna 2).
 Para la temperatura de 2 metros, hay valores altos en el Pacífico tropical y en la SPCZ, así como en la región que sigue un arco entre Nueva Zelanda y el Atlántico Sur, con valores más altos en el Océano Austral.
@@ -1454,38 +1601,38 @@ box_australia <- data.frame(cEOF = "cEOF2",
 ```
 
 Dado que el cEOF1 tiene una señal relativamente débil en las variables de superficie exploradas aquí, sólo nos centraremos en la influencia del cEOF2.
-En la [figura\@ref](mailto:figura@ref){.email}(fig:pp-temp-2) se muestran mapas de regresión de las anomalías de temperatura a 2 metros (columna 1) y precipitación (columna 2) sobre diferentes fases del cEOF2 normalizado.
+En la Figura \@ref(fig:pp-temp-2) se muestran mapas de regresión de las anomalías de temperatura a 2 metros (columna 1) y precipitación (columna 2) sobre diferentes fases del cEOF2 normalizado.
 
 (ref:pp-temp-cap) Regresión de la temperatura media de 2 metros SON (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el periodo 1979 -- 2019. Las áreas marcadas con puntos tienen valores p inferiores a 0,01 ajustados para la tasa de detección de falsos.
 
-```{r pp-temp-2, fig.cap="(ref:pp-temp-cap)", fig.width=5, fig.height=6, dependson="plot_pp"}
+```{r pp-temp-2, fig.cap = "(ref:pp-temp-cap)", fig.width=5, fig.height=6, dependson="plot_pp"}
 plot_pp(pp_regr[cEOF == "cEOF2" & season == "SON"], 
         t2m_regr[cEOF == "cEOF2" & season == "SON"],
         hgt850_regr[cEOF == "cEOF2"& season == "SON"])
 ```
 
-Las anomalías de temperatura asociadas a los 90º cEOF (Fig. \@ref(fig:pp-temp-2).b1) muestran valores positivos en el Pacífico tropical, coherentes con las anomalías de TSM asociadas a la misma fase (Fig. \@ref(fig:sst-psi-2).b1).
+Las anomalías de temperatura asociadas a los 90º cEOF (Fig. \@ref(fig:pp-temp-2).b1) muestran valores positivos en el Pacífico tropical, coherentes con las anomalías de SST asociadas a la misma fase (Fig. \@ref(fig:sst-psi-2).b1).
 En latitudes más altas existe un patrón ondulatorio de valores positivos y negativos que coincide con los nodos de los patrones de regresión de la altura geopotencial de 850 hPa.
 Esto es coherente con las anomalías de temperatura producidas por la advección meridional de temperatura por los vientos meridionales derivados del equilibrio geostrófico.
-Sobre los continentes, el 90º cEOF2 (Fig.\ref(fig:pp-temp-2)b.1) se asocia con anomalías de temperatura de regresión positiva en el sur de Australia y anomalías de regresión negativa en el sur de Sudamérica y la Península Antártica, que son resultado del tren de ondas descrito anteriormente.
+Sobre los continentes, el 90º cEOF2 (Fig.\@ref(fig:pp-temp-2)b.1) se asocia con anomalías de temperatura de regresión positiva en el sur de Australia y anomalías de regresión negativa en el sur de Sudamérica y la Península Antártica, que son resultado del tren de ondas descrito anteriormente.
 
-Las anomalías de temperatura asociadas al 0º cEOF2 (Fig.\ref(fig:pp-temp-2)d.1) son menos extensas y se limitan a latitudes medias y altas.\
+Las anomalías de temperatura asociadas al 0º cEOF2 (Fig.\@ref(fig:pp-temp-2)d.1) son menos extensas y se limitan a latitudes medias y altas.
 
 Sobre los continentes, las regresiones de las anomalías de temperatura no son significativas, excepto las anomalías positivas cerca de la Península Antártica.
 
 Las anomalías de precipitación tropical asociadas con el 90º cEOF2 son fuertes, con anomalías positivas en el Pacífico central y el Índico occidental, y anomalías negativas en el Pacífico oriental (Fig.\@ref(fig:pp-temp-2)b.2).
-Este campo es consistente con el mapa de regresión de la TSM (Fig.\@ref(fig:pp-temp-2)b.1) ya que las anomalías positivas de la TSM potencian la convección tropical y las anomalías negativas de la TSM la inhiben.
+Este campo es consistente con el mapa de regresión de la SST (Fig.\@ref(fig:pp-temp-2)b.1) ya que las anomalías positivas de la SST potencian la convección tropical y las anomalías negativas de la SST la inhiben.
 
 En los extratropicales, el 90º cEOF2 positivo está relacionado con condiciones más secas sobre el este de Australia y el océano circundante, que es una señal similar a la asociada con ENSO [@cai2011].
 Sin embargo, el 90º cEOF2 no es la fase más correlacionada con las precipitaciones en esa zona.
 La componente de la fase 135º (una intermedia entre las positivas de 90º y 180º cEOF2) está asociada con correlaciones temporales más fuertes y extensas con la precipitación sobre Australia y Nueva Zelanda.
-La influencia del cEOF2 en la precipitación australiana podría estar más relacionada con los impactos directos de las anomalías de la TSM en los océanos circundantes que en el patrón de interconexión representado por el cEOF2.
+La influencia del cEOF2 en la precipitación australiana podría estar más relacionada con los impactos directos de las anomalías de la SST en los océanos circundantes que en el patrón de interconexión representado por el cEOF2.
 
 Sobre Sudamérica, el 90º cEOF2 tiene correlaciones positivas con la precipitación en el sudeste de Sudamérica (SESA) y el centro de Chile, y correlaciones negativas en el este de Brasil.
 Este campo de correlación coincide con la firma de precipitación primaveral de ENSO [e.g. @cai2020a] y también es similar a las anomalías de precipitación asociadas con el A-SAM [@campitelli2022].
 Este resultado no es sorprendente teniendo en cuenta la estrecha relación del 90º cEOF2 tanto con el ONI como con el índice A-SAM, demostrada anteriormente.
 Además, consolida la identificación del cEOF2 con el patrón PSA.
-Semejante a la relación entre ONI y la fase de cEOF2 (Fig.\@ref(fig:enso-fase)), existe una dependencia de fase de cEOF2 de las anomalías de precipitación en SESA (no mostrado).
+Semejante a la relación entre ONI y la fase de cEOF2 (Fig. \@ref(fig:enso-phase)), existe una dependencia de fase de cEOF2 de las anomalías de precipitación en SESA (no mostrado).
 
 Los coeficientes de correlación entre las anomalías de precipitación y el 0º cEOF2 (Fig. \@ref(fig:pp-temp-2)d.2) son más débiles que para 90º cEOF2.
 Hay una correlación positiva residual en el Pacífico oriental ecuatorial y pequeñas correlaciones positivas, no estadísticamente significativas, sobre el este de Australia y negativas sobre Nueva Zelanda.

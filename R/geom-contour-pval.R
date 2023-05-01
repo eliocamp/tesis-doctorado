@@ -20,7 +20,7 @@ pattern_dots <- ggplot2::ggproto("GeomDots", ggpattern::GeomPolygonPattern)
 ggplot2::update_geom_defaults(pattern_dots,
                               list(pattern = "circle",
                                    colour = NA,
-                                   pattern_colour = NA,
+                                   pattern_colour = "black",
                                    pattern_fill = "black",
                                    pattern_density = 0.3,
                                    pattern_alpha = 1,

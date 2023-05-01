@@ -2,9 +2,12 @@
 % Please edit documentation in R/quickstats.R
 \name{partial_cor}
 \alias{partial_cor}
-\title{Partial correlation between x1 and y and x2 and y.}
+\alias{semipartial_cor}
+\title{(Semi) Partial correlation between x1 and y and x2 and y.}
 \usage{
 partial_cor(y, x1, x2)
+
+semipartial_cor(y, x1, x2)
 }
 \arguments{
 \item{y}{variable to which partial correlation will be computed}
@@ -12,5 +15,5 @@ partial_cor(y, x1, x2)
 \item{x1, x2}{variables that will be correlated with y}
 }
 \description{
-Partial correlation between x1 and y and x2 and y.
+(Semi) Partial correlation between x1 and y and x2 and y.
 }

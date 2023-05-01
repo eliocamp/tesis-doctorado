@@ -47,7 +47,7 @@ Acá seguiría parte [del paper de cEOF](https://github.com/eliocamp/shceof).
 ```{r sam-eof-vertical, fig.cap = "(ref:sam-eof-vertical-cap)", fig.height=4, fig.width=width_column}
 time <- ceof[, eof[[1]]$left, by = .(season)] %>%
   sep_ReIm() %>%
-  .[, hgt := scale(hgt), by = .(cEOF, part)]
+  .[, hgt := scale(hgt), by = .(cEOF, part, season)]
 
 sam_r2 <- sams %>%
   .[, .(estimate = mean(estimate)), by = .(lev, term, time = seasonally(time))] %>% 
@@ -102,11 +102,12 @@ De hecho, el 90º cEOF2 comparte hasta `r scales::percent(max_r2[cEOF == "cEOF2"
 b2).
 Esta altísima correlación entre A-SAM y 90º cEOF2 sugiere que los modos obtenidos en este trabajo son capaces de caracterizar la componente zonalmente asimétrica de la SAM descrita previamente por @campitelli2022.
 
-## PSA
+## PSA {#psa}
 
 (ref:psa-eof2-cap) Correlation coefficients (r) between cEOF2 components and the PSA1 and PSA2 modes computed as @mo2001 for the 1979 -- 2019 period. 95% confidence intervals in parenthesis. p-values lower than 0.01 in bold.
 
-```{r psa-eof2, fig.cap = "(ref:psa-eof2-cap)", fig.width=7, fig.height=3, fig.env="figure*"}
+
+```{r psa-eof2, fig.cap = "(ref:psa-eof2-cap)", fig.width=7, fig.height=3}
 psa <- PSA() %>% 
   readRDS()
 
@@ -139,7 +140,7 @@ background_palette <- grDevices::colorRampPalette(c(scales::muted("blue"),
                                                     scales::muted("red")),
                                                   space = "Lab")
 
-table <- cEOF2[psa_time, on = .NATURAL] %>% 
+table <- psa_time[cEOF2, on = .NATURAL] %>% 
   .[PC != "SAM"] %>% 
   copy() %>% 
   sep_ReIm() %>% 
@@ -149,13 +150,23 @@ p.val <- table %>%
   dcast(PC + season~ part, value.var = "p.value") %>% 
   .[order(season)] 
 
-table %>% 
-  dcast(PC + season ~ part, value.var = "text") %>% 
-  .[order(season)] %>% 
-  kbl2(booktabs = TRUE, caption = "(ref:psa-eof2-cap)") %>%
-  column_spec2(3:4, bold = p.val[[.col]] < 0.01) %>%
-  # add_header_above(c("", "cEOF2" = 2)) %>%
-  kable_classic() 
+if (is_word()) {
+  table %>% 
+    dcast(PC + season ~ part, value.var = "text") %>% 
+    .[order(season)] %>% 
+    flextable::flextable() %>% 
+    flextable::set_caption("(ref:psa-eof2-cap)")
+} else {
+  table %>% 
+    dcast(PC + season ~ part, value.var = "text") %>% 
+    .[order(season)] %>% 
+    kbl2(booktabs = TRUE, caption = "(ref:psa-eof2-cap)") %>%
+    column_spec2(3:4, bold = p.val[[.col]] < 0.01) %>%
+    # add_header_above(c("", "cEOF2" = 2)) %>%
+    kable_classic() 
+}
+
+
 ```
 
 Dada la similitud entre las estructuras asociadas al cEOF2 (Fig. \@ref(fig:eof2-regr-gh)) y los patrones de PSA documentados, estudiamos la relación entre ellos.
@@ -205,16 +216,16 @@ imaginary <- ggplot_build(plot)$data[[1]] %>%
   .[] %>% 
   .[, .SD[x %~% 1.570796 | x %~% -1.570796], by = panel] %>% 
   .[, .(percent = sum(percent)), by = panel]
-  
+
 plot
 ```
 
-La figura \@ref(fig:histograma-fase) muestra un histograma que cuenta el número de estaciones SON en las que la fase cEOF2 estaba cerca de cada una de las cuatro fases particulares (positiva/negativa de las fases 0º y 90º), con las observaciones para cada estación marcadas como alfombras en el eje horizontal.
+La figura \@ref(fig:phase-histogram) muestra un histograma que cuenta el número de estaciones SON en las que la fase cEOF2 estaba cerca de cada una de las cuatro fases particulares (positiva/negativa de las fases 0º y 90º), con las observaciones para cada estación marcadas como alfombras en el eje horizontal.
 En `r scales::percent(imaginary[panel == 4]$percent)` de las estaciones cEOF2 tiene una fase similar a la fase negativa o positiva de 90º, haciendo que la fase de 90º sea la fase más común.
 Esta es también la fase más correlacionada con ENSO según la definición de la fase de 0º descrita en la Sección \@ref(métodos).
 
 Por lo tanto, en virtud de ser la fase más común, la cEOF2 de 90º explica más varianza que la cEOF2 de 0º.
 Por lo tanto, el análisis EOF convencional tenderá a separarlos de forma relativamente limpia, con el EOF que representa el 90º cEOF2 siempre por delante del que representa el 0º cEOF2.
-Esta preferencia de fase está de acuerdo con @irving2016, que encontró una distribución bimodal a la variabilidad tipo PSA (compare nuestra Figura \@ref(fig:histograma-fase) con su Figura 6).
+Esta preferencia de fase está de acuerdo con @irving2016, que encontró una distribución bimodal a la variabilidad tipo PSA (compare nuestra Figura \@ref(fig:phase-histogram) con su Figura 6).
 
 ## ENSO

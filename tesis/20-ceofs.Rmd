@@ -1308,7 +1308,7 @@ Sin embargo, la correlación parcial es de `r oni_dmi_parciales[cEOF == "cEOF2" 
 Esto puede observarse en la Figura \@ref(fig:euler), donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI. 
 El DMI aporta, independientemente, sólo un 4.3% de la varianza mientras que el ONI aporta un 23.8% por sí mismo. 
 
-(ref:eluer-cap) Diagrama de Euler con las proporción de la varianza de cada serie explicada por cada solapamiento (p.e. la región común entre DMI y 90º cEOF2 es la varianza en común entre esas variables). 
+(ref:euler-cap) Diagrama de Euler con las proporción de la varianza de cada serie explicada por cada solapamiento (p.e. la región común entre DMI y 90º cEOF2 es la varianza en común entre esas variables). 
 
 ```{r euler, fig.width=width_column, fig.height=width_column}
 with(gdata[season == "SON" & cEOF == "cEOF2" & part == "Imaginario"],

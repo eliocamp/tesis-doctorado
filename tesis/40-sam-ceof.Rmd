@@ -97,6 +97,15 @@ La relación entre la SAM y el cEOF1 en la troposfera se explica en su totalidad
 En la estratosfera, la CEOF1 de 0º está correlacionada tanto con la A-SAM como con la S-SAM, mientras que la CEOF1 de 90º está altamente correlacionada sólo con la A-SAM.
 Estas correlaciones son consistentes con los mapas de regresión de la altura geopotencial en la Figura \@ref(fig:eof1-regr-gh) y su comparación con los obtenidos para SAM, A-SAM y S-SAM por @campitelli2022.
 
+<!-- Viene del cEOF pero hay que moverlo y adaptarlo a esta parte
+-->
+Esta falta de relación fuerte entre el cEOF1 y la SST, la temperatura y la precipitación podría ser sorprendente teniendo en cuenta la correlación entre el cEOF1 y la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1) y la correlación entre la SAM y la SST del Pacífico Central, la temperatura al este y oeste de la Península Antártica, y con la precipitación en el oeste de Australia [@fogt2020].
+Esto se debe principalmente a dos razones.
+En primer lugar, la correlación entre cEOF1 y la SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \@ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
+En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM y las SST del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de la SAM.
+Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
+
+
 En el caso de 90º cEOF2, su correlación con la SAM para la troposfera está asociada a la variabilidad asimétrica de la SAM.
 De hecho, el 90º cEOF2 comparte hasta `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym"]$estimate^2, 2)` varianza con el A-SAM y sólo `r scales::percent(max_r2[cEOF == "cEOF2" & term == "sym"]$estimate^2, 2)` como máximo con el S-SAM (Figura \@ref(fig:sam-eof-vertical).
 b2).

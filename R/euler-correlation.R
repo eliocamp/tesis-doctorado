@@ -66,6 +66,7 @@ euler_correlation <- function(y, x1, x2, labels = NULL) {
                   x1_x2_alone,
                   y_x1_x2_alone)/n
 
+  all_pieces <- pmax(all_pieces, 0)
   labels <- c(labels,
               pasteand(labels[1], labels[2]),
               pasteand(labels[1], labels[3]),

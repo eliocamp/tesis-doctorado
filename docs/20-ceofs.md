@@ -1,3 +1,6 @@
+---
+knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRUE)
+---
 
 
 
@@ -316,7 +319,7 @@ Este patrón es muy similar al patrón del ENSO positivo canónico [@bamston1997
 De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (0.76 (CI: 0.59 -- 0.87)).
 Además del patrón similar al ENSO del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un dipolo del índico en su fase positiva [@saji1999].
 Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es 0.62 (CI: 0.38 -- 0.78).
-Sin embargo, la correlación parcial es de 0.32 (p-valor = 0.046), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo. 
+Sin embargo, la correlación parcial es de 0.32 (p-valor = 0.045), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo. 
 Esto puede observarse en la Figura \@ref(fig:euler), donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI. 
 El DMI aporta, independientemente, sólo un 4.3% de la varianza mientras que el ONI aporta un 23.8% por sí mismo. 
 
@@ -361,30 +364,21 @@ Sin embargo, cuando el cEOF2 es excitado por la variabilidad de la SST tropical,
 ![(\#fig:sst-psi-1)(ref:sst-psi-1-cap)](figures/20-ceofs/sst-psi-1-1.png)
 La Figura \@ref(fig:sst-psi-1) muestra las mismas regresiones que la Figura  \@ref(fig:sst-psi-2) pero para el cEOF1. 
 Como anticipó la Figura \@ref(fig:psi-sst-explained-variance), el cEOF1 no está asociado a anomalías significativas de SST ni de función corriente en los trópicos. 
-En vez de eso, las fases de 0º y 90º están asociadas a flujos de actividad de onda que se propagan zonalmente en los extratópicos cerca de de 60ºS, excepto por un flujo hacia el ecuador desde la costa de la Antártida alrededor de 150ºE en la fase de 0º.
-Esto sugiere que la variabilidad de cEOF1 está impulsada principalmente por la variabilidad interna de los extratópicos.
-
-
-XX HASTA ACÁ XXX
+En vez de eso, las fases de 0º y 90º están asociadas a flujos de actividad de onda que se propagan zonalmente en los extratrópicos cerca de de 60ºS, excepto por un flujo hacia el ecuador desde la costa de la Antártida alrededor de 150ºE en la fase de 0º.
+Esto sugiere que la variabilidad de cEOF1 está impulsada principalmente por la variabilidad interna de los extratrópicos.
 
 ### Impactos en superficie
 
-![(\#fig:pp-t2m-r2)(ref:cap-pp-t2m-r2)](figures/20-ceofs/pp-t2m-r2-1.png)
+![(\#fig:pp-t2m-r2)(ref:pp-t2m-r2-cap)](figures/20-ceofs/pp-t2m-r2-1.png)
 
-(ref:cap-pp-t2m-r2) Explained variance ($r^2$ as percentage) of 2-metre temperature (row a) and precipitation (row b) anomalies by the regression upon cEOF1 (column 1) and cEOF2 (column 2).
+(ref:pp-t2m-r2-cap) Igual que la Figura \@ref(fig:psi-sst-explained-variance) pero para Temperatura a 2 metros y precipitación. 
 
-También se exploró la influencia de la variabilidad de los cEOF en las anomalías tanto de la temperatura del aire a 2 metros como de la precipitación en el SH.
-La Figura \@ref(fig:pp-t2m-r2) muestra la varianza explicada de las anomalías de temperatura y precipitación a 2 metros por el modelo lineal múltiple tanto de 0º y 90º cEOF1 (columna 1), como de 0º y 90º cEOF2 (columna 2).
-La varianza explicada por cEOF1 para las anomalías de precipitación y las anomalías de temperatura en la mayoría de las regiones es extremadamente baja, excepto para el extremo norte de la Península Antártica, el norte del Mar de Weddell y la costa del Mar de Ross (Fig.\@ref(fig:pp-t2m-r2)a.1).
+La Figura \@ref(fig:pp-t2m-r2) muestra la varianza de la temperatura a 2 metros y de la precipitación explicada por cada cEOF.
+  
+La varianza explicada por el cEOF1 para ambas variables es muy baja en la mayoría de las regiones, excepto para el extremo norte de la Península Antártica, el norte del Mar de Weddell y la costa del Mar de Ross (Fig.\@ref(fig:pp-t2m-r2)a.1).
 
-Esta falta de relación fuerte entre el cEOF1 y la SST, la temperatura y la precipitación podría ser sorprendente teniendo en cuenta la correlación entre el cEOF1 y la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1) y la correlación entre la SAM y la SST del Pacífico Central, la temperatura al este y oeste de la Península Antártica, y con la precipitación en el oeste de Australia [@fogt2020].
-Esto se debe principalmente a dos razones.
-En primer lugar, la correlación entre cEOF1 y la SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \@ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
-En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM y las SST del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de la SAM.
-Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
-
-Por otro lado, la varianza explicada cEOF2 es superior al 50% en algunas regiones para ambas variables (Fig.\@ref(fig:pp-t2m-r2) columna 2).
-Para la temperatura de 2 metros, hay valores altos en el Pacífico tropical y en la SPCZ, así como en la región que sigue un arco entre Nueva Zelanda y el Atlántico Sur, con valores más altos en el Océano Austral.
+Por otro lado, la varianza explicada cEOF2 es superior al 50% en algunas regiones para ambas variables (Fig. \@ref(fig:pp-t2m-r2) columna 2).
+Para la temperatura de 2 metros, hay valores altos en el Pacífico tropical y en la región que forma un arco entre Nueva Zelanda y el Atlántico Sur. 
 Sobre los continentes, hay valores moderados de alrededor del 30% de varianza explicada en el sur de Australia, el sur de Sudamérica y la Península Antártica.
 En cuanto a las precipitaciones, los valores son elevados en los trópicos.
 En latitudes más altas, se observan valores moderados sobre el este de Australia y algunas regiones del sur de Sudamérica.
@@ -395,37 +389,35 @@ En latitudes más altas, se observan valores moderados sobre el este de Australi
 
 
 
-Dado que el cEOF1 tiene una señal relativamente débil en las variables de superficie exploradas aquí, sólo nos centraremos en la influencia del cEOF2.
+Dado que el cEOF1 tiene una señal relativamente débil en las variables de superficie exploradas, sólo nos centraremos en la influencia del cEOF2.
 En la Figura \@ref(fig:pp-temp-2) se muestran mapas de regresión de las anomalías de temperatura a 2 metros (columna 1) y precipitación (columna 2) sobre diferentes fases del cEOF2 normalizado.
 
-(ref:pp-temp-cap) Regresión de la temperatura media de 2 metros SON (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el periodo 1979 -- 2019. Las áreas marcadas con puntos tienen valores p inferiores a 0,01 ajustados para la tasa de detección de falsos.
+(ref:pp-temp-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. 
+Para el trimestre SON del periodo 1979 -- 2019. 
+Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
 
-![(\#fig:pp-temp-2)(ref:pp-temp-cap)](figures/20-ceofs/pp-temp-2-1.png)
+![(\#fig:pp-temp-2)(ref:pp-temp-2-cap)](figures/20-ceofs/pp-temp-2-1.png)
 
-Las anomalías de temperatura asociadas a los 90º cEOF (Fig. \@ref(fig:pp-temp-2).b1) muestran valores positivos en el Pacífico tropical, coherentes con las anomalías de SST asociadas a la misma fase (Fig. \@ref(fig:sst-psi-2).b1).
+Las anomalías de temperatura asociadas a la fase de 90º del cEOF2 (Fig. \@ref(fig:pp-temp-2).b1) muestran valores positivos en el Pacífico tropical, coherentes con las anomalías de SST asociadas a esta misma fase (Fig. \@ref(fig:sst-psi-2).b1).
 En latitudes más altas existe un patrón ondulatorio de valores positivos y negativos que coincide con los nodos de los patrones de regresión de la altura geopotencial de 850 hPa.
 Esto es coherente con las anomalías de temperatura producidas por la advección meridional de temperatura por los vientos meridionales derivados del equilibrio geostrófico.
-Sobre los continentes, el 90º cEOF2 (Fig.\@ref(fig:pp-temp-2)b.1) se asocia con anomalías de temperatura de regresión positiva en el sur de Australia y anomalías de regresión negativa en el sur de Sudamérica y la Península Antártica, que son resultado del tren de ondas descrito anteriormente.
+Sobre los continentes, las fase de 90º (Fig.\@ref(fig:pp-temp-2)b.1) está asociada a anomalías de temperatura positiva en el sur de Australia y anomalías de regresión negativa en el sur de Sudamérica y la Península Antártica, que son resultado del tren de ondas descrito anteriormente.
 
-Las anomalías de temperatura asociadas al 0º cEOF2 (Fig.\@ref(fig:pp-temp-2)d.1) son menos extensas y se limitan a latitudes medias y altas.
-
+Las anomalías de temperatura asociadas a la fase de 0º (Fig.\@ref(fig:pp-temp-2)d.1) son menos extensas y se limitan a latitudes medias y altas.
 Sobre los continentes, las regresiones de las anomalías de temperatura no son significativas, excepto las anomalías positivas cerca de la Península Antártica.
 
-Las anomalías de precipitación tropical asociadas con el 90º cEOF2 son fuertes, con anomalías positivas en el Pacífico central y el Índico occidental, y anomalías negativas en el Pacífico oriental (Fig.\@ref(fig:pp-temp-2)b.2).
+Las anomalías de precipitación tropicales asociadas con el 90º cEOF2 son fuertes, con anomalías positivas en el Pacífico central y el Índico occidental, y anomalías negativas en el Pacífico oriental (Fig.\@ref(fig:pp-temp-2)b.2).
 Este campo es consistente con el mapa de regresión de la SST (Fig.\@ref(fig:pp-temp-2)b.1) ya que las anomalías positivas de la SST potencian la convección tropical y las anomalías negativas de la SST la inhiben.
 
-En los extratropicales, el 90º cEOF2 positivo está relacionado con condiciones más secas sobre el este de Australia y el océano circundante, que es una señal similar a la asociada con ENSO [@cai2011].
-Sin embargo, el 90º cEOF2 no es la fase más correlacionada con las precipitaciones en esa zona.
-La componente de la fase 135º (una intermedia entre las positivas de 90º y 180º cEOF2) está asociada con correlaciones temporales más fuertes y extensas con la precipitación sobre Australia y Nueva Zelanda.
-La influencia del cEOF2 en la precipitación australiana podría estar más relacionada con los impactos directos de las anomalías de la SST en los océanos circundantes que en el patrón de interconexión representado por el cEOF2.
+En los extratrópicos, la fase de 90º del cEOF2 se asocia a condiciones más secas sobre el este de Australia y el océano circundante, que es una señal similar a la asociada al ENSO [@cai2011].
+Sin embargo, esta es la fase más fuertemente correlacionada con la precipitación en esa zona.
+La fase de 135º (una intermedia 90º y 180º) está correlacionada más intensa y extensamente con la precipitación sobre Australia y Nueva Zelanda.
+La influencia del cEOF2 en la precipitación australiana podría estar relacionada más con los impactos directos de las anomalías de la SST en los océanos circundantes que en el patrón de teleconexión representado por el cEOF2.
 
-Sobre Sudamérica, el 90º cEOF2 tiene correlaciones positivas con la precipitación en el sudeste de Sudamérica (SESA) y el centro de Chile, y correlaciones negativas en el este de Brasil.
-Este campo de correlación coincide con la firma de precipitación primaveral de ENSO [e.g. @cai2020a] y también es similar a las anomalías de precipitación asociadas con el A-SAM [@campitelli2022].
-Este resultado no es sorprendente teniendo en cuenta la estrecha relación del 90º cEOF2 tanto con el ONI como con el índice A-SAM, demostrada anteriormente.
-Además, consolida la identificación del cEOF2 con el patrón PSA.
-Semejante a la relación entre ONI y la fase de cEOF2 (Fig. \@ref(fig:enso-phase)), existe una dependencia de fase de cEOF2 de las anomalías de precipitación en SESA (no mostrado).
+Sobre Sudamérica, la fase de 90º del cEOF2 está correlacionado positivamente con la precipitación en el sudeste de Sudamérica (SESA) y el centro de Chile, y negativamente negativas en el este de Brasil.
+Este campo de correlación coincide con la señal de ENSO la precipitación de primavera [e.g. @cai2020a].
 
-Los coeficientes de correlación entre las anomalías de precipitación y el 0º cEOF2 (Fig. \@ref(fig:pp-temp-2)d.2) son más débiles que para 90º cEOF2.
+Los coeficientes de correlación entre las anomalías de precipitación y la fase de 0º del cEOF2 (Fig. \@ref(fig:pp-temp-2)d.2) son más débiles que para la fase de 90º. 
 Hay una correlación positiva residual en el Pacífico oriental ecuatorial y pequeñas correlaciones positivas, no estadísticamente significativas, sobre el este de Australia y negativas sobre Nueva Zelanda.
 
 ## Otras estaciones ??

@@ -28,13 +28,17 @@ language:
 chapter: 'Capítulo'
 
 output:
-  thesisdown::thesis_pdf:
-        pandoc_args:
-          - "--lua-filter=resumen-to-meta.lua"
-          - "--lua-filter=abstract-to-meta.lua"
-  bookdown::gitbook: default
-  thesisdown::thesis_epub: default
-  thesisdown::thesis_word: default
+  bookdown::pdf_book:
+      template: "template.tex"
+      toc: TRUE
+      toc_depth: 3
+      pandoc_args:
+        - "--lua-filter=resumen-to-meta.lua"
+        - "--lua-filter=abstract-to-meta.lua"
+  bookdown::gitbook:
+    split_by: "rmd"
+  bookdown::epub_book: default
+  bookdown::word_document2: default
 
 
 # always_allow_html: true

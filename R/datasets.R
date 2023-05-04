@@ -519,9 +519,10 @@ SAM <- new_dataset(
                          subset = list(latitude = c(-90, -20),
                                        level = l)) %>%
         normalise_coords() %>%
+        .[, hgt := hgt/9.8] %>%
         na.omit() %>%
         .[, time := as.Date(time)] %>%
-        .[, period := data.table::year(time) %between% c(1979, 2000)] %>%
+        .[, period := data.table::year(time) %between% c(1979, 2018)] %>%
         .[, hgt := metR::Anomaly(hgt, baseline = period), by = .(lon, lat, lev, data.table::month(time))] %>%
         .[, eof_asym(hgt, lon, lat, time, period = period), by = lev]
     })

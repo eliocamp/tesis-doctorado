@@ -1,3 +1,8 @@
+---
+knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRUE)
+---
+
+
 
 
 
@@ -34,7 +39,7 @@ Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la pa
 
 
 En el caso de 90º cEOF2, su correlación con la SAM para la troposfera está asociada a la variabilidad asimétrica de la SAM.
-De hecho, el 90º cEOF2 comparte hasta 50%, 68%, 72%, 78% varianza con el A-SAM y sólo 20%, 30%, 16%, 14% como máximo con el S-SAM (Figura \@ref(fig:sam-eof-vertical).
+De hecho, el 90º cEOF2 comparte hasta 78% varianza con el A-SAM y sólo 14% como máximo con el S-SAM (Figura \@ref(fig:sam-eof-vertical).
 b2).
 Esta altísima correlación entre A-SAM y 90º cEOF2 sugiere que los modos obtenidos en este trabajo son capaces de caracterizar la componente zonalmente asimétrica de la SAM descrita previamente por @campitelli2022.
 
@@ -60,7 +65,8 @@ Por otro lado, no existe una relación significativa entre PSA1 y 0º cEOF2, y e
 En consecuencia, cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos PSA.
 Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y 90º cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no mostrado).
 
-(ref:phase-histogram-cap) Histograma de distribución de fase de cEOF2 para el periodo 1979 -- 2019. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho de intervalo de 90º. Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
+(ref:phase-histogram-cap) Histograma de distribución de fase de cEOF2 para el periodo 1979 -- 2019. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho de intervalo de 90º.
+Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
 
 ![(\#fig:phase-histogram)(ref:phase-histogram-cap)](figures/40-sam-ceof/phase-histogram-1.png)
 

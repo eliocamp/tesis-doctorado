@@ -884,7 +884,7 @@ o3_regr %>%
 
 (ref:wave1-o3-cap) Relación entre la amplitud y la fase de la onda zonal 1 de la Columna Total de Ozono promediada entre `r combine_words(LatLabel(o3wave_lats))` y la amplitud y la fase del cEOF1 para SON en el período 1979 -- 2019.
 
-```{r wave1-o3, fig.cap = "(ref:wave1-o3-cap)", fig.width=width_column, fig.height=width_column*.7, include = FALSE}
+```{r wave1-o3, fig.width=width_column, fig.height=width_column*.7, include = FALSE}
 wave1_o3 <- o3 %>% 
   .[lat %between% o3wave_lats] %>% 
   .[, .(toc = mean(toc, na.rm = TRUE)), by = .(time, lon)] %>% 
@@ -937,7 +937,6 @@ La posición climatológica del mínimo de ozono durante la primavera (agujero d
 Así, el campo de regresión de la fase 0º del cEOF1 (Fig. \@ref(fig:o3-regr)a) coincide con la posición climatológica de esta onda 1 del agujero de ozono, mientras que el campo para la fase 90º está defasado en 90º cEOF1.
 La correlación temporal entre la amplitude de la onda 1 de CTO y la amplitud del cEOF1 es `r wave1_cor[with == "amplitude" & season == "SON"]$text`, mientras que la correlación entre sus fases es `r wave1_cor[with == "phase" & season == "SON"]$text`.
 La correlación entre las dos ondas es `r wave_correlation[season == "SON"]$text`.
-Esta relación se muestra en la Figura \@ref(fit:wave1-o3). 
 En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
 
 ### Fuentes de variabilidad tropicales
@@ -1329,7 +1328,7 @@ Ambas fases también están asociadas a trenes de onda que se generan cerca de A
 Los años en los cuales la magnitud del cEOF2 es mayor o menor que la mediana se muestran como diamantes naranja o círculos verdes respectivamente. 
 La línea negra representa el ajuste ONI \~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2. 
 
-```{r enso-phase, fig.cap = "(ref:enso-phase-cap)", fig.width = width_column, fig.height=3}
+```{r enso-phase, fig.width = width_column, fig.height=3}
 gdata <- ceof[, eof[[1]]$left, by = .(season)] %>%
   .[cEOF == "cEOF2"] %>% 
   # .[, hgt := Anomaly(hgt)] %>% 
@@ -1408,6 +1407,7 @@ Sin embargo, cuando el cEOF2 es excitado por la variabilidad de la SST tropical,
 ```{r sst-psi-1, fig.width = 5, fig.height=6, dependson="plot_sst_psi"}
 plot_sst_psi(sst_regr[cEOF == "cEOF1"], psi_regr[cEOF == "cEOF1"], min.mag = 0.0005)
 ```
+
 La Figura \@ref(fig:sst-psi-1) muestra las mismas regresiones que la Figura  \@ref(fig:sst-psi-2) pero para el cEOF1. 
 Como anticipó la Figura \@ref(fig:psi-sst-explained-variance), el cEOF1 no está asociado a anomalías significativas de SST ni de función corriente en los trópicos. 
 En vez de eso, las fases de 0º y 90º están asociadas a flujos de actividad de onda que se propagan zonalmente en los extratrópicos cerca de de 60ºS, excepto por un flujo hacia el ecuador desde la costa de la Antártida alrededor de 150ºE en la fase de 0º.

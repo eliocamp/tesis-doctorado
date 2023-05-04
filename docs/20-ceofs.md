@@ -266,7 +266,6 @@ La posición climatológica del mínimo de ozono durante la primavera (agujero d
 Así, el campo de regresión de la fase 0º del cEOF1 (Fig. \@ref(fig:o3-regr)a) coincide con la posición climatológica de esta onda 1 del agujero de ozono, mientras que el campo para la fase 90º está defasado en 90º cEOF1.
 La correlación temporal entre la amplitude de la onda 1 de CTO y la amplitud del cEOF1 es 0.77 (CI: 0.61 -- 0.87), mientras que la correlación entre sus fases es -0.84 (CI: -0.91 -- -0.72).
 La correlación entre las dos ondas es -0.87 (CI: -0.93 -- -0.77).
-Esta relación se muestra en la Figura \@ref(fit:wave1-o3). 
 En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
 
 ### Fuentes de variabilidad tropicales
@@ -362,6 +361,7 @@ Sin embargo, cuando el cEOF2 es excitado por la variabilidad de la SST tropical,
 (ref:sst-psi-1-cap) Iugal que la Figura \@ref(fig:sst-psi-2) pero para el cEOF1. 
 
 ![(\#fig:sst-psi-1)(ref:sst-psi-1-cap)](figures/20-ceofs/sst-psi-1-1.png)
+
 La Figura \@ref(fig:sst-psi-1) muestra las mismas regresiones que la Figura  \@ref(fig:sst-psi-2) pero para el cEOF1. 
 Como anticipó la Figura \@ref(fig:psi-sst-explained-variance), el cEOF1 no está asociado a anomalías significativas de SST ni de función corriente en los trópicos. 
 En vez de eso, las fases de 0º y 90º están asociadas a flujos de actividad de onda que se propagan zonalmente en los extratrópicos cerca de de 60ºS, excepto por un flujo hacia el ecuador desde la costa de la Antártida alrededor de 150ºE en la fase de 0º.

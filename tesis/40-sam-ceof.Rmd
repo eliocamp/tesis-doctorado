@@ -1,3 +1,8 @@
+---
+knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRUE)
+---
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -107,7 +112,7 @@ Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la pa
 
 
 En el caso de 90º cEOF2, su correlación con la SAM para la troposfera está asociada a la variabilidad asimétrica de la SAM.
-De hecho, el 90º cEOF2 comparte hasta `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym"]$estimate^2, 2)` varianza con el A-SAM y sólo `r scales::percent(max_r2[cEOF == "cEOF2" & term == "sym"]$estimate^2, 2)` como máximo con el S-SAM (Figura \@ref(fig:sam-eof-vertical).
+De hecho, el 90º cEOF2 comparte hasta `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym" & season == "SON"]$estimate^2, 2)` varianza con el A-SAM y sólo `r scales::percent(max_r2[cEOF == "cEOF2" & term == "sym" & season == "SON"]$estimate^2, 2)` como máximo con el S-SAM (Figura \@ref(fig:sam-eof-vertical).
 b2).
 Esta altísima correlación entre A-SAM y 90º cEOF2 sugiere que los modos obtenidos en este trabajo son capaces de caracterizar la componente zonalmente asimétrica de la SAM descrita previamente por @campitelli2022.
 
@@ -185,12 +190,10 @@ Por otro lado, no existe una relación significativa entre PSA1 y 0º cEOF2, y e
 En consecuencia, cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos PSA.
 Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y 90º cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no mostrado).
 
-(ref:phase-histogram-cap) Histograma de distribución de fase de cEOF2 para el periodo 1979 -- 2019. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho de intervalo de 90º. Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
+(ref:phase-histogram-cap) Histograma de distribución de fase de cEOF2 para el periodo 1979 -- 2019. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho de intervalo de 90º.
+Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
 
-```{r phase-histogram, fig.cap = "(ref:phase-histogram-cap)", fig.width=width_column*.8, fig.height=2.5}
-
-
-
+```{r phase-histogram, fig.width=width_column*.8, fig.height=2.5}
 N <- ceof[, cut(eof[[1]], 2)$left, by = season] %>% 
   .[, .N, by = season] %>% 
   .[1, N]

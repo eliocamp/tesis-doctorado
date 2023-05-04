@@ -18,9 +18,9 @@ eof_asym <- function(value, lon, lat, time, period = data.table::year(time) >= 1
   indexes <- eof$right %>%
     data[., on = .NATURAL, allow.cartesian = TRUE]
 
-  indexes[, rbind(data.table::as.data.table(metR::FitLm(value, full, r2 = TRUE)),
-                  data.table::as.data.table(metR::FitLm(value,  sym, r2 = TRUE)),
-                  data.table::as.data.table(metR::FitLm(value, asym, r2 = TRUE))),
+  indexes[, rbind(data.table::as.data.table(metR::FitLm(value, full, weights = cos(lat*pi/180), r2 = TRUE)),
+                  data.table::as.data.table(metR::FitLm(value,  sym, weights = cos(lat*pi/180), r2 = TRUE)),
+                  data.table::as.data.table(metR::FitLm(value, asym, weights = cos(lat*pi/180), r2 = TRUE))),
           keyby = .(time, PC)] %>%
     .[term != "(Intercept)"] %>%
     .[, estimate_norm := estimate/stats::sd(estimate[term == "full"]), by = PC] %>%

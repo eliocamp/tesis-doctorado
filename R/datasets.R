@@ -522,36 +522,39 @@ SAM <- new_dataset(
         .[, hgt := hgt/9.8] %>%
         na.omit() %>%
         .[, time := as.Date(time)] %>%
-        .[, period := data.table::year(time) %between% c(1979, 2018)] %>%
+        .[, period := data.table::between(data.table::year(time), 1979, 2022)] %>%
         .[, hgt := metR::Anomaly(hgt, baseline = period), by = .(lon, lat, lev, data.table::month(time))] %>%
         .[, eof_asym(hgt, lon, lat, time, period = period), by = lev]
     })
 
-
-
     # Asegurar consistencia
-
     for (l in seq_along(sams)[-1]) {
-
       cor <- cor(sams[[l]][term == "full"]$estimate,
                  sams[[l-1]][term == "full"]$estimate)
 
       sams[[l]][, estimate := estimate*sign(cor)]
     }
 
-
+    # Asegurar que el signo es consistente con la literatura
     aao <- rsoi::download_aao(TRUE, data_path("raw", "aao.csv")) %>%
-      as.data.table() %>%
+      data.table::as.data.table() %>%
       .[, .(time = as.Date(Date), aao = AAO)] %>%
-      .[time %between% range(sams[[1]]$time)]
+      .[ data.table::between(time, range(sams[[1]]$time)[1], range(sams[[1]]$time)[2])]
 
     cor <- sams[["700"]][term == "full"][aao, on = "time"][, cor(estimate, aao)]
 
     sams <- data.table::rbindlist(sams)
 
     sams[, estimate := estimate*sign(cor)]
+    sams[, estimate_norm := estimate/stats::sd(estimate[term == "full"]), by = .(lev, PC)]
 
     data.table::fwrite(sams, file)
     file
   }
 )
+
+#' @export
+#' @rdname datasets
+cEOF <- function() {
+  data_path("derived", "ceof.Rds")
+}

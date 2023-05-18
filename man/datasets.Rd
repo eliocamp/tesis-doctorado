@@ -16,6 +16,7 @@
 \alias{DMI}
 \alias{PSA}
 \alias{SAM}
+\alias{cEOF}
 \title{Datasets}
 \usage{
 ERA5_TOC(force_download = FALSE, from_source = FALSE)
@@ -45,6 +46,8 @@ DMI(force_download = FALSE, from_source = FALSE)
 PSA(force_download = FALSE, from_source = FALSE)
 
 SAM(force_download = FALSE, from_source = FALSE)
+
+cEOF()
 }
 \arguments{
 \item{from_source}{Lógico indicando si hay que descargar los datos desde la fuente

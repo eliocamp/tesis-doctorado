@@ -23,7 +23,6 @@ eof_asym <- function(value, lon, lat, time, period = data.table::year(time) >= 1
                   data.table::as.data.table(metR::FitLm(value, asym, weights = cos(lat*pi/180), r2 = TRUE))),
           keyby = .(time, PC)] %>%
     .[term != "(Intercept)"] %>%
-    .[, estimate_norm := estimate/stats::sd(estimate[term == "full"]), by = PC] %>%
     .[, term := factor(term, levels = names(lab_sam), ordered = TRUE)] %>%
     .[]
 }

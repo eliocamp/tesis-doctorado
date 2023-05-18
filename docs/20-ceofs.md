@@ -118,9 +118,10 @@ Realizamos regresiones lineales para cuantificar la asociación entre los cEOF y
 Para cada cEOF, calculamos mapas de regresión ajustando un modelo lineal múltiple que incluye tanto la fase de 0º como la de 90º.
 Para obtener los coeficientes lineales de una variable $X$ con la fase 0º y 90º de cada cEOF ajustamos la ecuación
 
-$$
+\begin{equation}
 X(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{cEOF_{0º}} + \beta(\lambda, \phi) \operatorname{cEOF_{90º}} + X_0(\lambda, \phi) + \epsilon(\lambda, \phi, t)
-$$
+ (\#eq:multiple-regression)
+\end{equation}
 
 donde $\lambda$ y $\phi$ son la longitud y la latitud, $t$ es el tiempo, $\alpha$ y $\beta$ son los coeficientes de regresión lineal para las fases de 0º y 90º respectivamente, $X_0$ y $\epsilon$ son la constante y los términos de error respectivamente.
 
@@ -134,13 +135,21 @@ Primero evaluamos la primavera en detalle porque es la más interesante y donde 
 
 ### Descripción de los modos
 
-(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2019. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias. 
+(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2019. 
+El sombreado corresponde a la fase 0º y los contornos, a la fase 90º.
+La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. 
+Las unidades son arbitrarias. 
 
 ![(\#fig:ceofs-1)(ref:ceofs-1-cap)](figures/20-ceofs/ceofs-1-1.png)
 
 
 
-(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2019. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias. 
+(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2019. 
+El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). 
+Las líneas oscuras muestran la tendencia lineal de todo el período.
+Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente.
+La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. 
+Las unidades son arbitrarias. 
 
 ![(\#fig:extended-series)(ref:extended-series-cap)](figures/20-ceofs/extended-series-1.png)
 
@@ -392,7 +401,7 @@ En latitudes más altas, se observan valores moderados sobre el este de Australi
 Dado que el cEOF1 tiene una señal relativamente débil en las variables de superficie exploradas, sólo nos centraremos en la influencia del cEOF2.
 En la Figura \@ref(fig:pp-temp-2) se muestran mapas de regresión de las anomalías de temperatura a 2 metros (columna 1) y precipitación (columna 2) sobre diferentes fases del cEOF2 normalizado.
 
-(ref:pp-temp-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. 
+(ref:pp-temp-2-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. 
 Para el trimestre SON del periodo 1979 -- 2019. 
 Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
 

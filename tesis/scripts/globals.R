@@ -5,7 +5,6 @@ knitr::opts_hooks$set(label = function(options) {
   if (grepl(default_label, options$label)) {
     stop("Name your chunks!")
   }
-  options
 
   # Setea el default del caption a label-cap
   if (is.null(options[["fig.cap"]])) {
@@ -51,6 +50,12 @@ lab_sam <-  c(full = "SAM",
               asym = "A-SAM",
               sym  = "S-SAM")
 
+factor_sam <- function(term) {
+  factor(term, levels = names(lab_sam), ordered = TRUE)
+}
+
+
+
 axis_labs_smol <- function() theme(axis.text = element_text(size = 6))
 
 
@@ -70,4 +75,17 @@ texto_pval <- function(pval = 0.01, ajustado = TRUE) {
   ajuste <- if (ajustado) " ajustado por FDR"
   paste0("Áreas con puntos tienen p-valor menor que ", pval, ajuste, ".")
 
+}
+
+
+todo <- function(text) {
+  if (knitr::is_html_output()) {
+    text <- paste0("<span style='background-color:#FF8000;'>", text, "</p>")
+  } else if (knitr::is_latex_output()) {
+    text <- paste0(" \\todo[inline]{", text, "}")
+  } else {
+    text <- paste0("**TODO: ", text, "**")
+  }
+
+  return(text)
 }

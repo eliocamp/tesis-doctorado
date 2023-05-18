@@ -1,0 +1,28 @@
+redoc-yamlheader:
+  code: "---\ntitle: 'Ondas de Rossby planetarias en la circulación atmosférica del
+    hemisferio sur y su influencia en Sudamérica'\nauthor: 'Lic. Elio Campitelli'\ndate:
+    'BUENOS AIRES, 2023'\ninstitution: 'Universidad de Buenos Aires'\ndivision: 'Facultad
+    de Ciencias Exactas y Naturales'\nadvisor: 'Carolina Vera'\n\naltadvisor: 'Leandro
+    Diaz'\nconsejere: 'Claudio Menendez'\ndepartment: 'Departamento de Ciencias de
+    la Atmósfera y los Océanos'\ndegree: 'Tesis presentada para optar al título de
+    Doctore de la Universidad de Buenos Aires en el Área de Ciencias de la Atmósfera
+    y los Océanos'\nplace: 'Centro de Investigaciones del Mar y la Atmósfera. CONICET-UBA'\nknit:
+    purrr::partial(bookdown::render_book, output_format = 'all')\n\nsite: bookdown::bookdown_site\n\n#
+    The next two lines allow you to change the spacing in your thesis. You can \n#
+    switch out \\onehalfspacing with \\singlespacing or \\doublespacing, if desired.\nheader-includes:\n
+    \   - \\usepackage{setspace}\\onehalfspacing\n    - \\usepackage[spanish,es-tabla]{babel}\n\nlanguage:\n
+    \ label:\n    fig: 'Figura '\n    tab: 'Tabla '\nchapter: 'Capítulo'\n\noutput:\n
+    \ redoc::redoc: default\n  # bookdown::pdf_book:\n  #     template: \"template.tex\"\n
+    \ #     toc: TRUE\n  #     toc_depth: 3\n  #     pandoc_args:\n  #       - \"--lua-filter=resumen-to-meta.lua\"\n
+    \ #       - \"--lua-filter=abstract-to-meta.lua\"\n  # bookdown::gitbook:\n  #
+    \  split_by: \"rmd\"\n  # bookdown::epub_book: default\n  # bookdown::word_document2:
+    default\n\n\n# always_allow_html: true\n\nacknowledgements: |\n  I want to thank
+    a few people.\ndedication: |\n  You can have a dedication here if you wish. \n\n\n#
+    Specify the location of the bibliography below\nbibliography:\n  - bib/tesis-doctorado.bib\n#
+    \  - bib/era.bib\n#   - bib/packages.bib\n# Download your specific csl file and
+    refer to it in the line below.\ncsl: csl/meteorologica.csl\nlink-citation: yes\nlot:
+    true\nlof: true\n---"
+  label: yamlheader
+  type: header
+  name: redoc-yamlheader
+  lineno: 1

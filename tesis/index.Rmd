@@ -20,6 +20,8 @@ site: bookdown::bookdown_site
 header-includes:
     - \usepackage{setspace}\onehalfspacing
     - \usepackage[spanish,es-tabla]{babel}
+    - \usepackage[colorinlistoftodos]{todonotes}
+    - \usepackage[inline]{showlabels}
 
 language:
   label:
@@ -30,16 +32,22 @@ chapter: 'Capítulo'
 output:
   bookdown::pdf_book:
       template: "template.tex"
+      keep_tex: TRUE
       toc: TRUE
       toc_depth: 3
       pandoc_args:
         - "--lua-filter=resumen-to-meta.lua"
         - "--lua-filter=abstract-to-meta.lua"
   bookdown::gitbook:
-    split_by: "rmd"
-  bookdown::epub_book: default
-  bookdown::word_document2: default
-
+      split_by: "rmd"
+      pandoc_args:
+        - --wrap=none
+  bookdown::epub_book: 
+      pandoc_args:
+        - --wrap=none  
+  bookdown::word_document2: 
+      pandoc_args:
+        - --wrap=none  
 
 # always_allow_html: true
 
@@ -61,3 +69,9 @@ lot: true
 lof: true
 ---
 
+<!-- Required to number equations in HTML files -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>

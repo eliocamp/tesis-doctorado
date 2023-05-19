@@ -682,7 +682,7 @@ mpg <- expression('Altura geopotencial ('*m^{2}*s^{phantom() - 1}*')')
 
 (ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON  ($m^2s^{-1}$) con la fase 0º (columna 1) y 90º (columna 2) para cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1979 -- 2019. 
 Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. 
-Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
+`r pval_contours()`.
 
 ```{r eof1-regr-gh, fig.height=1.2*width_column, fig.width=width_column, dependson="plot_regr"}
 plot_regr(regr , "cEOF1", c(200, 50), "hgt") +
@@ -851,7 +851,7 @@ o3_regr <- temp %>%
 
 (ref:o3-regr-cap) Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase 0º (a) y 90º (b) del cEOF1 para el período 1979 -- 2019. 
 En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). 
-Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
+`r pval_contours()`.
 
 ```{r o3-regr, fig.height=3, fig.width = width_column}
 o3_regr %>% 
@@ -1299,7 +1299,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
 
 
 (ref:sst-psi-2-cap) Regresión de (columan 1) SST (K) y (columna 2) anomalías zonales de función corriente ($m^2/s\times10^-7$) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período 1979 -- 2019. 
-Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
+`r pval_contours()`.
 
 ```{r sst-psi-2, fig.width = 5, fig.height=6, dependson="plot_sst_psi"}
 plot_sst_psi(sst_regr[cEOF == "cEOF2" & season == "SON"], psi_regr[cEOF == "cEOF2" & season == "SON"]) 
@@ -1609,7 +1609,7 @@ En la Figura \@ref(fig:pp-temp-2) se muestran mapas de regresión de las anomal�
 
 (ref:pp-temp-2-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. 
 Para el trimestre SON del periodo 1979 -- 2019. 
-Áreas con puntos tienen p-valor menor que 0.01 ajustado por FDR.
+`r pval_contours()`.
 
 ```{r pp-temp-2, fig.width=5, fig.height=6}
 plot_pp(pp_regr[cEOF == "cEOF2" & season == "SON"], 

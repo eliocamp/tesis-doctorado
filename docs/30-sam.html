@@ -221,9 +221,9 @@ Figure 3.3: Igual que la Figura <a href="30-sam.html#fig:sign-regression-50">3.2
 <p>Estos resultados sugieren que la suposición de estabilidad estacional se cumple excepto por DJF en la estratósfera. Esto indica que hay que tener cuidado en la interpretación del SAM asimétrico en DJF en la estratosfera ya que el patrón de SAM asimétrico impuesto por la metodología no coincide con el patrón de SAM asimétrico “natural” de este trimestre.</p>
 
 <div class="figure"><span style="display:block;" id="fig:season-regression"></span>
-<img src="figures/30-sam/season-regression-1.png" alt="Regresión múltiple de las anomalías zonales de altura geopotencial con el índice SAM y la estación del año, usando SON como base. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor de la regresión es menor que 0.01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON." width="864"  />
+<img src="figures/30-sam/season-regression-1.png" alt="Regresión múltiple de las anomalías zonales de altura geopotencial con el índice SAM y la estación del año, usando SON como base. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON." width="864"  />
 <p class="caption">
-Figure 3.4: Regresión múltiple de las anomalías zonales de altura geopotencial con el índice SAM y la estación del año, usando SON como base. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor de la regresión es menor que 0.01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON.
+Figure 3.4: Regresión múltiple de las anomalías zonales de altura geopotencial con el índice SAM y la estación del año, usando SON como base. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON.
 </p>
 </div>
 <p>El método también asume que el patrón zonalmente asimétrico del SAM permanece estacionario a lo largo del periodo considerado. <span class="citation">Silvestri and Vera (2009)</span> sugiere que este podría no ser el caso entre 1958 y 2004. Para probar esta suposición, calculamos el SAM para las dos mitades del periodo (1979 a 1998 y 1999 a 2022), que se muestran en la Figura <a href="30-sam.html#fig:sam-period">3.5</a>. Las diferencias entre los dos periodos parecen ser relativamente pequeñas, tanto en la troposfera como en la estratosfera.</p>
@@ -262,7 +262,7 @@ X(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{A-SAM} + \beta(\lambda
 Figure 3.6: Serie temporal de A-SAM y S-SAM en 50 hPa (panel a) y 700 hPa (panel b). A la derecha, la densidad de probabilidad de cada índice. Las series están estandarizadas por el desvío estándard del SAM en cada nivel.
 </p>
 </div>
-<p>Primero evaluamos la evolución temporal del A-SAM y S-SAM. La figura <a href="30-sam.html#fig:asymsam-timeseries">3.6</a> muestra las series temporales en 700 hPa y 50 hPa y sus correspondientes estimaciones de densidad. Seleccionamos estos dos niveles como representativos de la variabilidad troposférica y estratosférica respectivamente. Como se muestra a continuación, las variabilidades de ambos índices son muy coherentes dentro de cada región de la atmósfera, por lo que es razonable tomar un nivel como representativo de cada capa.</p>
+<p>Primero evaluamos la evolución temporal del A-SAM y S-SAM. La Figura <a href="30-sam.html#fig:asymsam-timeseries">3.6</a> muestra las series temporales en 700 hPa y 50 hPa y sus correspondientes estimaciones de densidad. Seleccionamos estos dos niveles como representativos de la variabilidad troposférica y estratosférica respectivamente. Como se muestra a continuación, las variabilidades de ambos índices son muy coherentes dentro de cada región de la atmósfera, por lo que es razonable tomar un nivel como representativo de cada capa.</p>
 <p>La variabilidad mes a mes es evidente para ambos índices, con variaciones ruidosas en las frecuencias bajas.</p>
 
 <div class="figure"><span style="display:block;" id="fig:spectrum"></span>
@@ -272,7 +272,7 @@ Figure 3.7: Espectro de cada serie temporal suavizada. El sombreado indica el in
 </p>
 </div>
 <p>Los espectros de estas series temporales se muestran en la Figura <a href="30-sam.html#fig:spectrum">3.7</a>. El S-SAM estratosférico varía fuertemente con un periodo entre 10 y 30 meses (Fig. <a href="30-sam.html#fig:spectrum">3.7</a> a.3). En el periodograma del S-SAM troposférico (Fig.<a href="30-sam.html#fig:spectrum">3.7</a> b.3) se aprecia un pico local en un rango de frecuencias similar, aunque no es estadísticamente significativo. Esta banda de periodicidad está alrededor del rango de periodicidad de la Oscilación Cuasi-Bienal (QBO, por su siglas en inglés, <span class="citation">Baldwin et al. (2001)</span>) y es consistente con <span class="citation">(Vasconcellos et al., 2022)</span>, quien encontró que el SAM y la QBO comparten una alta potencia común significativa alrededor de la banda de 2 años. El hecho de que esta periodicidad no sea evidente en el índice A-SAM, también es consistente con sus composiciones de anomalías de altura geopotencial durante la QBO oriental y occidental, que muestran un monopolo bastante simétrico sobre la Antártida. En la troposfera, el pico de variabilidad más significativo se encuentra en A-SAM en torno a 36 meses.</p>
-<p>Las series temporales A-SAM y S-SAM parecen estar correlacionadas. Además, observando los extremos en la estratosfera, la serie S-SAM parece ir por detrás de la serie A-SAM (véanse, por ejemplo, los eventos positivos de finales de 1987). La Figura <a href="30-sam.html#fig:cor-lev">3.8</a> muestra la correlación entre A-SAM y S-SAM en cada nivel para los retrasos cero y -1. Los valores de las correlaciones instantáneas entre A-SAM y S-SAM son relativamente constantes en toda la troposfera, fluctuando entre 0.39 y 0.45. Las correlaciones con desfase de un mes son igualmente constantes pero muy reducidas. En la estratosfera, las correlaciones instantáneas caen a un mínimo de 0.25 en 20 hPa y luego aumentan nuevamente monotónicamente con la altura hasta el nivel más alto del reanálisis (aunque los resultados cerca de la parte superior de los modelos deben interpretarse con cuidado). Al mismo tiempo, las correlaciones con un mes de defasaje aumentan con la altura. Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SAM.</p>
+<p>Las series temporales A-SAM y S-SAM parecen estar correlacionadas. Además, observando los extremos en la estratosfera, la serie S-SAM parece ir por detrás de la serie A-SAM (véanse, por ejemplo, los eventos positivos de finales de 1987). La Figura <a href="30-sam.html#fig:cor-lev">3.8</a> muestra la correlación entre A-SAM y S-SAM en cada nivel para los retrasos cero y -1. Los valores de las correlaciones instantáneas entre A-SAM y S-SAM son relativamente constantes en toda la troposfera, fluctuando entre 0.38 y 0.45. Las correlaciones con desfase de un mes son igualmente constantes pero muy reducidas. En la estratosfera, las correlaciones instantáneas caen a un mínimo de 0.28 en 20 hPa y luego aumentan nuevamente monotónicamente con la altura hasta el nivel más alto del reanálisis (aunque los resultados cerca de la parte superior de los modelos deben interpretarse con cuidado). Al mismo tiempo, las correlaciones con un mes de defasaje aumentan con la altura. Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SAM.</p>
 
 <div class="figure"><span style="display:block;" id="fig:cor-lev"></span>
 <img src="figures/30-sam/cor-lev-1.png" alt="Correlación entre S-SAM y A-SAM en cada nivel instantáneas y con un mes de defasaje para el período 1979 – 2022." width="288"  />
@@ -287,7 +287,7 @@ Figure 3.8: Correlación entre S-SAM y A-SAM en cada nivel instantáneas y con u
 Figure 3.9: Correlación cruzada entre niveles para el índice SAM (a), A-SAM (b) y S-SAM (c) para el período 1979 – 2022.
 </p>
 </div>
-<p>La figura <a href="30-sam.html#fig:cross-correlation">3.9</a> muestra la correlación cruzada (lag cero) entre niveles para los índices SAM, A-SAM y S-SAM. Para el SAM (Fig. <a href="30-sam.html#fig:cross-correlation">3.9</a>a), los valores altos por debajo de 100 hPa reflejan la coherencia vertical en toda la troposfera. Por encima de 100 hPa, la correlación entre niveles disminuye más rápidamente, lo que indica una variabilidad menos coherente. Sin embargo, las correlaciones entre los niveles troposféricos y los niveles estratosféricos bajos y medios siguen siendo relativamente altas (por ejemplo, más de 0,4 entre los niveles troposféricos y los niveles por debajo de 30 hPa). A-SAM y S-SAM (Fig. <a href="30-sam.html#fig:cross-correlation">3.9</a>b y c, respectivamente) comparten un alto nivel de coherencia similar en la troposfera, pero difieren en su comportamiento estratosférico. La coherencia estratosférica es mayor para el A-SAM que para el S-SAM. El S-SAM estratosférico tiene una conexión con el S-SAM troposférico algo más intensa que el A-SAM estratosférico con el A-SAM troposférico.</p>
+<p>La Figura <a href="30-sam.html#fig:cross-correlation">3.9</a> muestra la correlación cruzada (lag cero) entre niveles para los índices SAM, A-SAM y S-SAM. Para el SAM (Fig. <a href="30-sam.html#fig:cross-correlation">3.9</a>a), los valores altos por debajo de 100 hPa reflejan la coherencia vertical en toda la troposfera. Por encima de 100 hPa, la correlación entre niveles disminuye más rápidamente, lo que indica una variabilidad menos coherente. Sin embargo, las correlaciones entre los niveles troposféricos y los niveles estratosféricos bajos y medios siguen siendo relativamente altas (por ejemplo, más de 0,4 entre los niveles troposféricos y los niveles por debajo de 30 hPa). A-SAM y S-SAM (Fig. <a href="30-sam.html#fig:cross-correlation">3.9</a>b y c, respectivamente) comparten un alto nivel de coherencia similar en la troposfera, pero difieren en su comportamiento estratosférico. La coherencia estratosférica es mayor para el A-SAM que para el S-SAM. El S-SAM estratosférico tiene una conexión con el S-SAM troposférico algo más intensa que el A-SAM estratosférico con el A-SAM troposférico.</p>
 
 <div class="figure"><span style="display:block;" id="fig:trends"></span>
 <img src="figures/30-sam/trends-1.png" alt="Tendencias lineales (en desvio estandard por década) del SAM (columna a), A-SAM (columna b) y S-SAM (columna c) para cada nivel usando datos del todo el año (fila 1) y promedios estacionales (filas 2 a 5) para el período 1979 – 2022. El sombreado indica el intervalo de confianza de 95%." width="576"  />
@@ -328,7 +328,7 @@ Figure 3.13: Regresión de altura geopotencial (metros) en 50 hPa (fila a) y 700
 </div>
 <p>A continuación calculamos la regresión espacial de las anomalías de altura geopotencial sobre los índices SAM, A-SAM y S-SAM en los niveles de 50 hPa y 700 hPa (Fig. <a href="30-sam.html#fig:2d-regr">3.13</a>). Los coeficientes de regresión de la columna 1 de la Figura <a href="30-sam.html#fig:2d-regr">3.13</a> se calcularon utilizando el índice del SAM. Los coeficientes de regresión de las columnas 2 y 3 se calcularon mediante regresión múltiple utilizando los índices A-SAM y S-SAM al mismo tiempo, de manera que deben interpretarse como los patrones asociados a cada índice, eliminando la variabilidad (linealmente) explicada por el otro.</p>
 <p>En la estratosfera, el patrón espacial asociado al SAM está claramente dominado por un monopolo que no está centrada en el Polo Sur (Fig. <a href="30-sam.html#fig:2d-regr">3.13</a>a.1). El patrón asociado a la parte asimétrica se caracteriza por una estructura de onda-1 con centros sobre el Pasaje de Drake en el Hemisferio Occidental y el Mar de Davis en el Hemisferio Oriental. Este eje se alinea con el defasaje del monopolo del SAM. Finalmente, el patrón asocaido al S-SAM, es un monopolo más simétrico aunque todavía no perfectamente centrado en el Polo Sur.</p>
-<p>En la troposfera, el patrón de regresión asociado al SAM muestra la ya conocida combinación de modo anular zonalmente simétrico con asimetrías zonales en forma de onda-3 (Fig. <a href="30-sam.html#fig:2d-regr">3.13</a>b.1, <span class="citation">(Fogt et al., 2012)</span>). Los patrones de regresión asociados a los índices A-SAM y S-SAM separan ambas estructuras correctamente. El A-SAM se ve asociado a un patrón de onda 3 zonalmente asimétrico y de amplitud modulada; con mayor amplitud en hemisferio occidental y casi nula amplitud en el oriental. El S-SAM, por su parte, se asocia a una estructura anular mucho más zonalmente simétrica que el SAM. El patrón de onda-3 observado en la Figura <a href="30-sam.html#fig:2d-regr">3.13</a>b.2 está girado media longitud de onda respecto a la posición media del patrón de onda-3 medio descrito por <span class="citation">Raphael (2004)</span>, cuyas posiciones de referencia están marcadas con puntos en la figura. De hecho, no existe correlación entre el índice de <span class="citation">Raphael (2004)</span> y el A-SAM (cor = -0.04 (CI: -0.11 – 0.03)). Así, el índice A-SAM troposférico representa un desplazamiento zonal en la posición de la onda 3 climatológica.</p>
+<p>En la troposfera, el patrón de regresión asociado al SAM muestra la ya conocida combinación de modo anular zonalmente simétrico con asimetrías zonales en forma de onda-3 (Fig. <a href="30-sam.html#fig:2d-regr">3.13</a>b.1, <span class="citation">(Fogt et al., 2012)</span>). Los patrones de regresión asociados a los índices A-SAM y S-SAM separan ambas estructuras correctamente. El A-SAM se ve asociado a un patrón de onda 3 zonalmente asimétrico y de amplitud modulada; con mayor amplitud en hemisferio occidental y casi nula amplitud en el oriental. El S-SAM, por su parte, se asocia a una estructura anular mucho más zonalmente simétrica que el SAM. El patrón de onda-3 observado en la Figura <a href="30-sam.html#fig:2d-regr">3.13</a>b.2 está girado media longitud de onda respecto a la posición media del patrón de onda-3 medio descrito por <span class="citation">Raphael (2004)</span>, cuyas posiciones de referencia están marcadas con puntos en la figura. De hecho, no existe correlación entre el índice de <span class="citation">Raphael (2004)</span> y el A-SAM (cor = 0.06 (CI: -0.01 – 0.13)). Así, el índice A-SAM troposférico representa un desplazamiento zonal en la posición de la onda 3 climatológica.</p>
 
 <div class="figure"><span style="display:block;" id="fig:wave-amplitude"></span>
 <img src="figures/30-sam/wave-amplitude-1.png" alt="Amplitud (metros) de las ondas zonales de los patrones de regresión de altura geopotencial de la Figura 3.13 para ondas zonales con número de onda 0, 1, 2 y 3, donde el número de onda 0 representa la amplitud de la media zonal." width="384"  />
@@ -386,13 +386,13 @@ S-SAM
 Year
 </td>
 <td style="text-align:center;font-weight: bold;">
--0.18
+-0.19
 </td>
 <td style="text-align:center;font-weight: bold;">
-0.23
+-0.25
 </td>
 <td style="text-align:center;">
-0.04
+-0.04
 </td>
 </tr>
 <tr>
@@ -406,7 +406,7 @@ Year
 (&lt;0.001)
 </td>
 <td style="text-align:center;">
-(0.321)
+(0.421)
 </td>
 </tr>
 <tr>
@@ -417,10 +417,10 @@ DJF
 -0.28
 </td>
 <td style="text-align:center;font-weight: bold;">
-0.22
+-0.25
 </td>
 <td style="text-align:center;">
-0.17
+-0.16
 </td>
 </tr>
 <tr>
@@ -431,10 +431,10 @@ DJF
 (&lt;0.001)
 </td>
 <td style="text-align:center;font-weight: bold;">
-(0.005)
+(0.001)
 </td>
 <td style="text-align:center;">
-(0.035)
+(0.045)
 </td>
 </tr>
 <tr>
@@ -442,13 +442,13 @@ DJF
 MAM
 </td>
 <td style="text-align:center;">
--0.13
+-0.14
+</td>
+<td style="text-align:center;font-weight: bold;">
+-0.22
 </td>
 <td style="text-align:center;">
-0.20
-</td>
-<td style="text-align:center;">
--0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -456,13 +456,13 @@ MAM
 MAM
 </td>
 <td style="text-align:center;">
-(0.099)
+(0.077)
+</td>
+<td style="text-align:center;font-weight: bold;">
+(0.004)
 </td>
 <td style="text-align:center;">
-(0.011)
-</td>
-<td style="text-align:center;">
-(0.902)
+(0.812)
 </td>
 </tr>
 <tr>
@@ -470,13 +470,13 @@ MAM
 JJA
 </td>
 <td style="text-align:center;">
--0.05
+-0.06
 </td>
 <td style="text-align:center;">
-0.14
+-0.16
 </td>
 <td style="text-align:center;">
--0.04
+0.04
 </td>
 </tr>
 <tr>
@@ -484,13 +484,13 @@ JJA
 JJA
 </td>
 <td style="text-align:center;">
-(0.626)
+(0.531)
 </td>
 <td style="text-align:center;">
-(0.095)
+(0.045)
 </td>
 <td style="text-align:center;">
-(0.687)
+(0.632)
 </td>
 </tr>
 <tr>
@@ -498,13 +498,13 @@ JJA
 SON
 </td>
 <td style="text-align:center;font-weight: bold;">
--0.24
+-0.25
 </td>
 <td style="text-align:center;font-weight: bold;">
-0.38
+-0.40
 </td>
 <td style="text-align:center;">
--0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -512,13 +512,13 @@ SON
 SON
 </td>
 <td style="text-align:center;font-weight: bold;">
-(0.003)
+(0.001)
 </td>
 <td style="text-align:center;font-weight: bold;">
 (&lt;0.001)
 </td>
 <td style="text-align:center;">
-(0.902)
+(0.812)
 </td>
 </tr>
 </tbody>
@@ -530,36 +530,36 @@ SON
 <h2><span class="header-section-number">3.4</span> Impactos<a href="30-sam.html#impacts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 <div class="figure"><span style="display:block;" id="fig:regr-air-season"></span>
-<img src="figures/30-sam/regr-air-season-1.png" alt="Regression of seasonal mean 2-metre temperature anomalies (Kelvin) from ERA5 with SAM, A-SAM and S-SAM for the 1979 – 2022 period. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate. Note that the colour scale cuts-off at \(\pm0.6 \mathrm{K}\) to highlight mid-latitudes and tropics features at the expense of the higher values in polar regions2." width="576"  />
+<img src="figures/30-sam/regr-air-season-1.png" alt="Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período 1979 – 2022. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR. La escala de colores se corta en \(\pm0.6 \mathrm{K}\) para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares." width="576"  />
 <p class="caption">
-Figure 3.16: Regression of seasonal mean 2-metre temperature anomalies (Kelvin) from ERA5 with SAM, A-SAM and S-SAM for the 1979 – 2022 period. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate. Note that the colour scale cuts-off at <span class="math inline">\(\pm0.6 \mathrm{K}\)</span> to highlight mid-latitudes and tropics features at the expense of the higher values in polar regions2.
+Figure 3.16: Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período 1979 – 2022. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR. La escala de colores se corta en <span class="math inline">\(\pm0.6 \mathrm{K}\)</span> para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
 </p>
 </div>
-<p>Para evaluar las diferencias en los impactos asociados a los índices SAM, A-SAM y S-SAM, realizamos una regresión de la temperatura del aire y la precipitación a 2 metros sobre cada uno de los tres índices SAM a 700 hPa. Como se ha mostrado en secciones anteriores, los tres índices son muy coherentes en la troposfera, por lo que seleccionamos este nivel para representar la circulación troposférica por coherencia con estudios anteriores. Las regresiones se realizaron sin desdiferenciar ni las variables ni los índices, pero calcular las regresiones con valores desdiferenciados no cambia los resultados considerablemente (no se muestra).</p>
-<p>La figura <a href="30-sam.html#fig:regr-air-season">3.16</a> muestra los coeficientes de regresión de cada índice a 700 hPa con la temperatura del aire terrestre superficial y del mar para cada trimestre. En verano, los valores positivos del índice SAM (Fig. <a href="30-sam.html#fig:regr-air-season">3.16</a>a.1) se asocian con anomalías negativas de temperatura cerca de la Antártida que están rodeadas por un anillo de anomalías positivas en las latitudes medias. El anillo no es zonalmente simétrico, ya que hay cuatro máximos locales distintivos en torno a los 30º W, 120º W, 150º E y 90º E respectivamente. En los trópicos, las anomalías son negativas en el Pacífico ecuatorial, lo que concuerda con la correlación negativa entre SAM y ENSO. La figura <a href="30-sam.html#fig:regr-air-season">3.16</a>b.1 y c.1 muestra anomalías de temperatura asociadas a valores positivos de A-SAM y S-SAM, respectivamente. Tanto los máximos locales en el anillo como las anomalías en las regiones del Pacífico están presentes sobre todo en el mapa de regresión de A-SAM, mientras que los patrones de temperatura ligados a valores positivos de S-SAM muestran un anillo más consistente zonalmente y menos relacionado con los trópicos. Sobre la Antártida, los valores positivos del índice SAM están asociados a anomalías negativas de temperatura, en particular sobre la costa oriental. Estas anomalías están asociadas únicamente con el S-SAM. Además, las típicas variaciones longitudinales de las anomalías de temperatura a lo largo de la Península Antártica no son evidentes en las regresiones con el SAM, de acuerdo con trabajos anteriores <span class="citation">(por ejemplo Marshall and Thompson, 2016)</span>. Por otro lado, las anomalías de temperatura en el océano Índico, el sur de África y Australia están fuertemente relacionadas con A-SAM y no están presentes en el patrón de regresión con el SAM.</p>
-<p>En otoño, invierno y primavera (filas 2, 3, y 4 en la Figura <a href="30-sam.html#fig:regr-air-season">3.16</a>) el anillo positivo sólo está presente a través de sus máximos locales en la regresión con el SAM, lo que refleja la naturaleza más asimétrica del SAM en comparación con el verano. También se observan anomalías negativas en el sur de Australia y anomalías positivas sobre Nueva Zelanda y el sur de Sudamérica. <span class="citation">Jones et al. (2019)</span> observó características similares en las mediciones de estaciones, aunque utilizando datos de 1957 a 2016. En primavera, la señal tropical de A-SAM es similar a la del verano, revelando de nuevo la importancia del vínculo ENSO-A-SAM. Además, de otoño a primavera, se aprecian anomalías positivas (negativas) de temperatura en la porción norte (sur) de la Península Antártica en las regresiones con el SAM, que también son evidentes en las regresiones con A-SAM. En concordancia, <span class="citation">Marshall and Thompson (2016)</span> encontró la misma señal en asociación con SAM mientras que ese patrón sólo es evidente en otoño para el modo anular baroclínico del sur, que está asociado con variaciones en la amplitud de tormentas extratropicales.</p>
-<!-- Las mismas regresiones utilizando datos de temperatura del Merged Land Ocean Global Surface Temperature Analysis V4.0.1 [@smith2008; @vose2012] de la NOAA, que combina el análisis de la temperatura del aire de la superficie terrestre y de la temperatura de la superficie del mar (agua) en una cuadrícula global mensual, se muestran en la Figura \@ref(fig:A10). -->
-<!-- Allí donde se dispone de datos, los patrones generales son similares, aunque de menor magnitud, quizá debido a que las temperaturas de la superficie del mar varían menos. -->
-<p>El patrón de anomalías negativas en el polo rodeadas de anomalías positivas que se observa aproximadamente en todas las estaciones -aunque con intensidad variable y detalles a pequeña escala- se traduce en un gradiente de temperatura meridional aumentado maximizado en la línea cero, lo que es coherente con la intensificación y migración hacia el polo de los vientos del oeste comúnmente vinculados a el SAM a través del balance térmico del viento. Por tanto, no es sorprendente verlo más claramente asociado al S-SAM (al menos en verano y primavera). Las temperaturas sobre la Antártida Oriental se ven más afectadas por el S-SAM, mientras que en la Antártida Occidental son más sensibles al A-SAM. Dado que el índice S-SAM está negativamente correlacionado con la temperatura sobre la Antártida Oriental, es posible que la tendencia positiva en el índice S-SAM pueda ayudar a explicar la falta de tendencia positiva de la temperatura en la Antártida Oriental en comparación con la Antártida Occidental en el contexto del calentamiento global <span class="citation">(Nicolas and Bromwich, 2014)</span>.</p>
+<p>Para evaluar las diferencias en los impactos asociados a los índices SAM, A-SAM y S-SAM, realizamos una regresión de la temperatura del aire y la precipitación a 2 metros sobre cada uno de los tres índices del SAM de 700 hPa. Como se mostró en secciones anteriores, los tres índices son muy coherentes en la troposfera, por lo que seleccionamos este nivel para representar la circulación troposférica por compatibilidad con la literatura previa. Las regresiones se realizaron sin quitarle la tendencia ni a las variables ni a los índices, pero calcular las regresiones con valores sin tendencias no cambia los resultados considerablemente (no se muestra).</p>
+La Figura <a href="30-sam.html#fig:regr-air-season">3.16</a> muestra las regresiones con la temperatura a 2 metros. En verano, los valores positivos del índice SAM (Fig. <a href="30-sam.html#fig:regr-air-season">3.16</a>a.1) se asocian a anomalías negativas de temperatura cerca de la Antártida rodeadas por un anillo de anomalías positivas en las latitudes medias. El anillo no es zonalmente simétrico, ya que hay cuatro máximos locales distintivos en torno a 30ºW, 120ºW, 150ºE y 90ºE respectivamente. En los trópicos, las anomalías son negativas en el Pacífico ecuatorial, lo que concuerda con la correlación negativa entre SAM y ENSO observada en la Tabla <a href="30-sam.html#tab:enso-cor-table">3.1</a>. Los paneles a.2 y a.3 de la Figura <a href="30-sam.html#fig:regr-air-season">3.16</a> muestran que tanto las anomalías zonales de este patrón como los altos valores en los trópcios están asociados principalmente al A-SAM y que el S-SAM está asociado a anomalías de temperatura más zonalmente simétricas en latitudes altas. Sobre la Antártida, los valores positivos del índice SAM están asociados a anomalías negativas de temperatura, en particular sobre la costa oriental. Estas anomalías están asociadas únicamente con el S-SAM. Además, las típicas variaciones longitudinales de las anomalías de temperatura a lo largo de la Península Antártica no son evidentes en las regresiones con el SAM, de acuerdo con trabajos anteriores <span class="citation">(por ejemplo Marshall and Thompson, 2016)</span>. <span style='background-color:#FF8000;'>¿Qué quisimo decir con esto?
+</p>
+<p>Por otro lado, las anomalías de temperatura en el océano Índico, el sur de África y Australia están fuertemente relacionadas con A-SAM y no están presentes en el patrón de regresión con el SAM.</p>
+<p>En otoño, invierno y primavera (filas b, c, y d en la Figura <a href="30-sam.html#fig:regr-air-season">3.16</a>) el SAM está asociado a un patrón de anomalías de temperatura zonalmente asimétrico en latitudes altas, con valores negativos sobre la Antártida y el Mar de Amundsen y positivas al sur de Nueva Zelanda y centradas en el pasaje de Drake que se extienden hasta la Patagonia. Esto refleja la naturaleza más asimétrica del SAM durante estas estaciones en comparación al verano. <span class="citation">Jones et al. (2019)</span> observó características similares en las mediciones de estaciones, aunque utilizando datos de 1957 a 2016. En general se observa que la señal sobre la Antártida está asociada al S-SAM (aunque estadísticamente significativa sólo en invierno), mientras que las anomalías sobre el Océano Antártico y latitudes más bajas se asocian al A-SAM. En primavera, la señal tropical de A-SAM es similar a la del verano, revelando de nuevo la importancia del vínculo ENSO-A-SAM.</p>
+<p>El patrón de anomalías negativas en el polo rodeadas de anomalías positivas que se observa aproximadamente en todas las estaciones -aunque con intensidad variable y detalles a pequeña escala- se traduce en un gradiente de temperatura meridional aumentado maximizado en la línea cero, lo que es coherente con la intensificación y migración hacia el polo de los vientos del oeste comúnmente vinculados a el SAM a través del balance térmico del viento. Por tanto, no es sorprendente verlo más claramente asociado al S-SAM. Las temperaturas sobre la Antártida Oriental se ven más afectadas por el S-SAM, mientras que en la Antártida Occidental son más sensibles al A-SAM. Dado que el índice S-SAM está negativamente correlacionado con la temperatura sobre la Antártida Oriental, es posible que la tendencia positiva en el índice S-SAM pueda ayudar a explicar la falta de tendencia positiva de la temperatura en la Antártida Oriental en comparación con la Antártida Occidental en el contexto del calentamiento global <span class="citation">(Nicolas and Bromwich, 2014)</span>.</p>
 
 <div class="figure"><span style="display:block;" id="fig:global-pp"></span>
-<img src="figures/30-sam/global-pp-1.png" alt="Regression of monthly precipitation anomalies (mm per day, shading) with a) SAM, b) A-SAM and c) S-SAM for the 1979 – 2022 period. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate. Note that the colour scale cuts-off at \(\pm0.25 \mathrm{K}\) to highlight mid- and high-latitude features at the expense of the very high values in the Tropics." width="576"  />
+<img src="figures/30-sam/global-pp-1.png" alt="Regresión de anomalías de precipitación (mm por día) con el SAM (a), A-SAM (b) y S-SAM (c) para el período 1979 – 2022. En gris, las zonas con valores faltantes. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR. La escala de colores se corta en \(\pm0.25 \mathrm{K}\) para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares." width="672"  />
 <p class="caption">
-Figure 3.17: Regression of monthly precipitation anomalies (mm per day, shading) with a) SAM, b) A-SAM and c) S-SAM for the 1979 – 2022 period. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate. Note that the colour scale cuts-off at <span class="math inline">\(\pm0.25 \mathrm{K}\)</span> to highlight mid- and high-latitude features at the expense of the very high values in the Tropics.
+Figure 3.17: Regresión de anomalías de precipitación (mm por día) con el SAM (a), A-SAM (b) y S-SAM (c) para el período 1979 – 2022. En gris, las zonas con valores faltantes. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR. La escala de colores se corta en <span class="math inline">\(\pm0.25 \mathrm{K}\)</span> para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
 </p>
 </div>
-<p>La figura <a href="30-sam.html#fig:global-pp">3.17</a> muestra la regresión de los índices SAM con la precipitación para el Hemisferio Sur. La señal de precipitación asociada a SAM muestra en general una disminución de la precipitación en torno a los 45 grados S, un ligero aumento de la precipitación en torno a los 30 grados S (Fig. <a href="30-sam.html#fig:global-pp">3.17</a>a) y un aumento de la precipitación sobre la Antártida, un patrón conocido por otros estudios <span class="citation">(p. ej. Hendon et al., 2014)</span>. Este patrón se mantiene prácticamente sin cambios entre estaciones, aunque varía en intensidad (no se muestra). Los paneles b y c de la Figura <a href="30-sam.html#fig:global-pp">3.17</a> muestran que la señal A-SAM sólo se da en los trópicos y latitudes medias, mientras que la señal S-SAM es fuerte en las latitudes altas. En particular, los valores positivos de S-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.</p>
-<p>Para estudiar con más detalle los impactos sobre tierra, las Figuras <a href="30-sam.html#fig:pp-regr-oceania">3.18</a> y <a href="30-sam.html#fig:pp-regr-america">3.19</a> muestran la regresión de los índices SAM con la precipitación media estacional y la altura geopotencial de 700 hPa para Nueva Zelanda e islas vecinas, y Sudamérica respectivamente. No se muestra Sudáfrica porque allí no se detectó ninguna señal significativa.</p>
+<p>La Figura <a href="30-sam.html#fig:global-pp">3.17</a> muestra la regresión de los índices SAM con la precipitación para el hemisferio sur. La señal de precipitación asociada a SAM (Fig. <a href="30-sam.html#fig:global-pp">3.17</a>a) muestra en general una disminución de la precipitación en torno a los 45ºS, un ligero aumento de la precipitación en torno a los 30ºS y un aumento de la precipitación sobre la Antártida, un patrón descrito por otros estudios <span class="citation">(p. ej. Hendon et al., 2014)</span>. Este patrón se mantiene prácticamente sin cambios entre estaciones, aunque varía en intensidad (no se muestra). Los paneles b y c de la Figura <a href="30-sam.html#fig:global-pp">3.17</a> muestran que la señal A-SAM sólo se da en los trópicos y latitudes medias, mientras que la señal S-SAM es fuerte en las latitudes altas. En particular, los valores positivos de S-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.</p>
+<p>Para estudiar con más detalle los impactos locales, las Figuras <a href="30-sam.html#fig:pp-regr-oceania">3.18</a> y <a href="30-sam.html#fig:pp-regr-america">3.19</a> muestran la regresión de los índices SAM con la precipitación media estacional y la altura geopotencial de 700 hPa para Nueva Zelanda e islas aledañas, y Sudamérica respectivamente. No se muestra Sudáfrica porque allí no se detectó ninguna señal significativa.</p>
 
 <div class="figure"><span style="display:block;" id="fig:pp-regr-oceania"></span>
-<img src="figures/30-sam/pp-regr-oceania-1.png" alt="Regression of (row 1) annual and (rows 2 to 5) seasonal mean precipitation anomalies (mm per day, shading) and 700~hPa geopotential height anomalies (thin lines, positive values as solid lines and negative values as dashed lines) with (column a) SAM, (column (b) A-SAM and (column c) S-SAM for the 1979 – 2022 period6. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate." width="576"  />
+<img src="figures/30-sam/pp-regr-oceania-1.png" alt="Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1979 –2022. Nueva Zelanda e islas aledañas. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR." width="576"  />
 <p class="caption">
-Figure 3.18: Regression of (row 1) annual and (rows 2 to 5) seasonal mean precipitation anomalies (mm per day, shading) and 700~hPa geopotential height anomalies (thin lines, positive values as solid lines and negative values as dashed lines) with (column a) SAM, (column (b) A-SAM and (column c) S-SAM for the 1979 – 2022 period6. Black contours indicate areas with p-value smaller than 0.05 controlling for False Detection Rate.
+Figure 3.18: Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1979 –2022. Nueva Zelanda e islas aledañas. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR.
 </p>
 </div>
-<p>En Australia, la regresión anual muestra que el índice SAM está asociado con anomalías positivas de precipitación en la región sudeste (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.1), de acuerdo con <span class="citation">Gillett et al. (2006)</span>. La separación entre A-SAM y S-SAM sugiere que esta anomalía positiva se explica por la S-SAM sólo en la costa este (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>c.1). Las anomalías de altura geopotencial asociadas a este índice (contornos negros) son indicativas de un flujo hacia el este procedente del mar de Tasmania, lo que podría explicar las anomalías positivas en las precipitaciones encontradas por <span class="citation">Hendon et al. (2007)</span>. A-SAM parece estar relacionado con anomalías positivas de precipitación en la costa oeste del sureste de Australia (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>b.2), que podrían explicarse de forma similar por la circulación anómala del oeste que transporta aire húmedo al continente desde el océano Índico.</p>
-<p>Las regresiones estacionales muestran anomalías estadísticamente significativas sólo en primavera, cuando una SAM positiva se asocia con anomalías positivas de precipitación en el este de Australia (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.5). En este trimestre, S-SAM parece estar asociado con anomalías positivas de precipitación en un área relativamente reducida de la costa oriental (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>c.5) mientras que las anomalías positivas de precipitación relacionadas con A-SAM positivo afectan a todo el este de Australia (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>b.5).</p>
-<p>En verano, un índice SAM positivo se asocia con anomalías de precipitación positivas en Australia occidental y oriental, sobre todo en la región nororiental (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.2). La parte oriental está dominada por la relación con S-SAM y la occidental, por A-SAM. En otoño, la regresión con SAM muestra anomalías positivas en el norte, similares a las de verano, que se asocian con el A-SAM. En invierno los coeficientes de regresión son mucho más débiles que durante el resto del año. Ninguno de estos coeficientes de regresión es estadísticamente significativo al nivel del 95%. La señal de la primavera coincide en líneas generales con <span class="citation">Hendon et al. (2007)</span>, pero mientras que ellos también detectaron una fuerte señal en verano, la Figura <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.2 no muestra ninguna asociación estadísticamente significativa (aunque los coeficientes tienen el signo coherente).</p>
+<p>En Australia, la regresión anual muestra que el índice SAM está asociado con anomalías positivas de precipitación en la región sudeste (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.1), en acuerdo con <span class="citation">Gillett et al. (2006)</span>. La separación entre A-SAM y S-SAM sugiere que esta anomalía positiva se explica por el S-SAM sólo en la costa este (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>c.1). Las anomalías de altura geopotencial asociadas a este índice (contornos negros) son indicativas de un flujo hacia el este procedente del mar de Tasmania, lo que podría explicar las anomalías positivas en las precipitaciones encontradas por <span class="citation">Hendon et al. (2007)</span>. El A-SAM parece estar relacionado con anomalías positivas de precipitación en la costa oeste del sureste de Australia (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>b.2), que podrían explicarse de forma similar por la circulación anómala del oeste que transporta aire húmedo al continente desde el océano Índico.</p>
+<p>Las regresiones estacionales muestran anomalías estadísticamente significativas sólo en primavera, cuando un SAM positivo se asocia con anomalías positivas de precipitación en el este y centro de Australia (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.5). En este trimestre, el S-SAM parece estar asociado con anomalías positivas de precipitación en un área relativamente reducida de la costa oriental (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>c.5) mientras que las anomalías positivas de precipitación relacionadas con A-SAM positivo afectan a todo el este de Australia (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>b.5).</p>
+<p>En verano, un índice SAM positivo se asocia con anomalías de precipitación positivas en Australia occidental y oriental, sobre todo en la región noreste (Fig. <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.2). La parte oriental está dominada por la relación con el S-SAM y la occidental, por el A-SAM. En otoño, la regresión con el SAM muestra anomalías positivas en el norte, similares a las de verano, que se asocian con el A-SAM. En invierno los coeficientes de regresión son mucho más débiles que durante el resto del año. Ninguno de estos coeficientes de regresión es estadísticamente significativo al nivel del 95%. La señal de la primavera coincide en líneas generales con <span class="citation">Hendon et al. (2007)</span>, pero mientras que ellos también detectaron una fuerte señal en verano, la Figura <a href="30-sam.html#fig:pp-regr-oceania">3.18</a>a.2 no muestra ninguna asociación estadísticamente significativa (aunque los coeficientes tienen un signo coherente).</p>
 
 <div class="figure"><span style="display:block;" id="fig:pp-regr-america"></span>
 <img src="figures/30-sam/pp-regr-america-1.png" alt="Igual que la Figura 3.18 pero para Sudamérica." width="576"  />
@@ -567,9 +567,9 @@ Figure 3.18: Regression of (row 1) annual and (rows 2 to 5) seasonal mean precip
 Figure 3.19: Igual que la Figura <a href="30-sam.html#fig:pp-regr-oceania">3.18</a> pero para Sudamérica.
 </p>
 </div>
-<p>En Sudamérica (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>), la regresión utilizando todas las estaciones muestra que el SAM positiva está asociada con anomalías de precipitación negativas estadísticamente significativas en el Sudeste de Sudamérica (SESA) y el sur de Chile, y anomalías positivas no significativas en el sur de Brasil, cerca de la Zona de Convergencia del Atlántico Sur (SACZ) (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>a.1). Las figuras <a href="30-sam.html#fig:pp-regr-america">3.19</a>b.1 y c.1 muestran que mientras la señal sobre SESA y el sur de Brasil está asociada con A-SAM, la del sur de Chile está relacionada con S-SAM.</p>
+<p>En Sudamérica (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>), la regresión anual muestra que el SAM positivo está asociado a anomalías de precipitación negativas en el Sudeste de Sudamérica (SESA) y el sur de Chile, y anomalías positivas en el sur de Brasil, cerca de la Zona de Convergencia del Atlántico Sur (SACZ) (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>a.1). Las figuras <a href="30-sam.html#fig:pp-regr-america">3.19</a>b.1 y c.1 muestran que mientras la señal sobre SESA y el sur de Brasil está asociada con A-SAM, la del sur de Chile está relacionada con S-SAM.</p>
 <p>Excepto en invierno, las regresiones estacionales reflejan este mismo patrón. Aunque no sean estadísticamente significativas, todas muestran valores negativos en SESA y el sur de Chile junto con valores positivos en el sur de Brasil en relación con el SAM. La separación de estas características entre los mapas de regresión A-SAM y S-SAM es también bastante consistente.</p>
-<p>La circulación anómala a 700 hPa asociada a S-SAM (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>c.1) indica un flujo anómalo del este sobre el sur de Chile. Esto conduce a una menor afluencia de aire húmedo desde el Océano Pacífico, que es la principal fuente de agua precipitable en esa región <span class="citation">(por ejemplo, Garreaud, 2007)</span>. Por otro lado, la circulación anómala asociada a valores positivos de A-SAM (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>b.1) en el Atlántico es anticiclónica en el sur y ciclónica en el norte. Esto promueve un flujo anómalo del sudeste sobre el SESA, que inhibe el flujo del chorro de baja altura de Sudamérica hacia la región <span class="citation">(Silvestri and Vera, 2009; Zamboni et al., 2010)</span>. Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ <span class="citation">(Rosso et al., 2018)</span>. Hay una pequeña área de anomalías positivas significativas de precipitación con el SAM cerca del centro de Argentina que también está presente en el análisis basado en estaciones de <span class="citation">Gillett et al. (2006)</span> que se explica por el A-SAM.</p>
+<p>La circulación anómala a 700 hPa asociada a S-SAM (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>c.1) indica un flujo anómalo del este sobre el sur de Chile. Esto conduce a una menor advección de aire húmedo desde el Océano Pacífico, que es la principal fuente de agua precipitable en esa región <span class="citation">(Garreaud, 2007)</span>. Por otro lado, la circulación anómala asociada a valores positivos del A-SAM (Fig. <a href="30-sam.html#fig:pp-regr-america">3.19</a>b.1) en el Atlántico es anticiclónica al este y ciclónica al oeste de Sudamérica. Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo del chorro de baja altura desde Sudamérica hacia la región <span class="citation">(Silvestri and Vera, 2009; Zamboni et al., 2010)</span>. Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ <span class="citation">(Rosso et al., 2018)</span>. Hay una pequeña área de anomalías positivas significativas de precipitación con el SAM cerca del centro de Argentina, también observado en el análisis basado en estaciones de <span class="citation">Gillett et al. (2006)</span>, que se explica por el A-SAM.</p>
 <!-- ```{r compute-air-regr-noaa} -->
 <!-- time_subset <- list(time = range(indices$time)) -->
 <!-- air <- NOAATemp() %>%  -->

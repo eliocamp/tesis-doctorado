@@ -89,3 +89,14 @@ todo <- function(text) {
 
   return(text)
 }
+
+
+pval_contours <- function(pval = 0.01, adjust = TRUE) {
+  if (adjust) {
+    adjust <- " ajustado por FDR"
+  } else {
+    adjust <- NULL
+  }
+
+  paste0("Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que ", pval, adjust)
+}

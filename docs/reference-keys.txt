@@ -65,12 +65,11 @@ temporal
 spatial
 impacts
 relación-con-otros-patrones
-datos-y-métodos-2
 sam
 psa
 enso
 análisis-de-estos-modos-en-los-modelos-de-cmip6
-datos-y-métodos-3
+datos-y-métodos-2
 primavera-1
 comparación-con-los-modos-observados
 tendencias

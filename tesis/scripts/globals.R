@@ -1,4 +1,25 @@
 
+"%||%" <- function (x, y) {
+  if (is.null(x))
+    y
+  else x
+}
+
+format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
+chapter <- tools::file_path_sans_ext(knitr::current_input())
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  cache = TRUE,
+  cache.extra = 42,
+  out.extra = "",
+  fig.path = file.path("figures", chapter, ""),
+  cache.path = file.path("cache", chapter, format, "")
+)
+
+
 knitr::opts_hooks$set(label = function(options) {
   # Tira un error si el chunk no tiene label
   default_label <- knitr::opts_knit$get("unnamed.chunk.label")
@@ -11,23 +32,10 @@ knitr::opts_hooks$set(label = function(options) {
     options[["fig.cap"]] <- paste0("(ref:", options[["label"]], "-cap)")
   }
 
-
   options
 })
 
-"%||%" <- function (x, y) {
-  if (is.null(x))
-    y
-  else x
-}
 
-format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
-chapter <- tools::file_path_sans_ext(knitr::current_input())
-
-knitr::opts_chunk$set(
-  fig.path = file.path("figures", chapter, ""),
-  cache.path = file.path("cache", chapter, format, "")
-)
 
 is_word <- function() {
   format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
@@ -38,11 +46,11 @@ get_caption <- function() {
   knitr::opts_current$get("fig.cap")
 }
 
-theme_set(theme_tesis(base_size = 10) +
-            theme(legend.box.spacing = grid::unit(-.5, "lines")))
+ggplot2::theme_set(eliotesis::theme_tesis(base_size = 10) +
+                     ggplot2::theme(legend.box.spacing = grid::unit(-.5, "lines")))
 
 
-lab_lev <- AddSuffix(" hPa")
+lab_lev <- eliotesis::AddSuffix(" hPa")
 lab_cplx <- c("Real" = "0º",
               "Imaginario" = "90º")
 
@@ -56,7 +64,7 @@ factor_sam <- function(term) {
 
 
 
-axis_labs_smol <- function() theme(axis.text = element_text(size = 6))
+axis_labs_smol <- function() ggplot2::theme(axis.text = ggplot2::element_text(size = 6))
 
 
 r2 <- expression(`$r^2$` = paste("", "r", phantom()^{
@@ -91,12 +99,15 @@ todo <- function(text) {
 }
 
 
-pval_contours <- function(pval = 0.01, adjust = TRUE) {
+pval_contours <- function(pval = 0.01, de = NULL, adjust = TRUE) {
   if (adjust) {
     adjust <- " ajustado por FDR"
   } else {
     adjust <- NULL
   }
 
-  paste0("Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que ", pval, adjust)
+
+  paste0("Áreas con puntos marcan regiones donde el p-valor", de, " es menor que ", pval, adjust)
 }
+
+ZeroBreaks <- metR::AnchorBreaks(0, NULL, 0)

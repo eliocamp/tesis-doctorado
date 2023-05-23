@@ -3,13 +3,6 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = FALSE,
-  message = FALSE,
-  warning = FALSE,
-  cache = TRUE,
-  out.extra = ""
-)
 library(eliotesis)
 library(metR)
 library(data.table)
@@ -418,7 +411,7 @@ var <- ceof[, eof[[1]]$sdev, by = .(season)] %>%
                cEOF)]
 
 gdata %>%
-  ggperiodic::periodic(lon = c(0, 360)) %>%
+  periodic(lon = c(0, 360)) %>%
   .[, lev := as.numeric(lev)] %>%   
   .[season == 'SON'] %>% 
   ggplot(aes(lon, lat)) +
@@ -1647,4 +1640,6 @@ Esto faltaría.
 Hay código para hacerlo, pero falta la interpretación, que es lo importante.
 
 Sería un análisis más modesto.
+
+
 

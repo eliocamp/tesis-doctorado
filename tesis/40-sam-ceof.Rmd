@@ -4,13 +4,7 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = FALSE,
-  message = FALSE,
-  warning = FALSE,
-  cache = TRUE
-)
-
+source(here::here("tesis/scripts/globals.R"))
 library(eliotesis)
 
 library(metR)
@@ -22,12 +16,6 @@ library(kableExtra)
 library(ggplot2)
 library(tagger)
 library(ggperiodic)
-library(ggnewscale)
-library(gggrid)
-
-
-source(here::here("tesis/scripts/globals.R"))
-
 ```
 
 ```{r read-data}
@@ -41,15 +29,15 @@ sams <- SAM() %>%
 
 # Relación con otros patrones
 
-Acá seguiría parte [del paper de cEOF](https://github.com/eliocamp/shceof).
 
-## Datos y métodos
+
 
 ## SAM
 
-(ref:sam-eof-vertical-cap) Coefficient of determination ($r^2$) between each component of cEOFs and the SAM, Asymmetric SAM (A-SAM) and Symmetric SAM (S-SAM) indices computed at each level for the 1979 -- 2019 period. Thick lines represent estimates with p-value \< 0.01 corrected for False Detection Rate [@benjamini1995].
+(ref:sam-eof-vertical-cap) Coefficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979 -- 2022. 
+Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.
 
-```{r sam-eof-vertical, fig.cap = "(ref:sam-eof-vertical-cap)", fig.height=4, fig.width=width_column}
+```{r sam-eof-vertical, fig.height=4, fig.width=width_column}
 time <- ceof[, eof[[1]]$left, by = .(season)] %>%
   sep_ReIm() %>%
   .[, hgt := scale(hgt), by = .(cEOF, part, season)]
@@ -74,9 +62,7 @@ sam_r2 %>%
             size = 2) +
   geom_line(aes(color = term, group = term)) +
   
-  scale_x_level("Level (hPa)", minor_breaks = NULL, 
-                sec.axis = sa_height_axis(breaks = seq(0, 50, by = 10),
-                                          labels = function(x) paste0("~", x, " km"))) +
+  scale_x_level("Level (hPa)", minor_breaks = NULL) +
   scale_y_continuous(r2, limits = c(0, 1), 
                      guide = guide_axis(check.overlap = TRUE)) +
   scale_size_manual("p-value", values = c("TRUE" = 1, 
@@ -88,19 +74,18 @@ sam_r2 %>%
   facet_grid(part ~ cEOF, labeller = labeller(part = lab_cplx)) +
   coord_flip() +
   tag_facets("rc") +
-  panel_background() +
-  theme(panel.spacing = grid::unit(1, "lines"), 
-        strip.placement = "outside")
+  panel_background() 
 ```
 
-Ahora exploramos la relación entre SAM y los cEOFs motivados por el parecido entre los mapas de regresión de los cEOFs y los patrones de SAM mostrados en la Sección \@ref(regresiones).
-Calculamos el coeficiente de determinación entre las series temporales de los cEOFs y los tres índices SAM (SAM, A-SAM y S-SAM) definidos por @campitelli2022 en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
-El índice SAM está correlacionado de forma estadísticamente significativa con el 0º cEOF1 en todos los niveles, y con los 90º cEOF1 y 90º cEOF2 en la troposfera.
-Por otro lado, las correlaciones entre SAM y el 0º cEOF2 no son significativas.
+Ahora exploramos la relación entre SAM y los cEOFs, motivados por el parecido entre los mapas de regresión de los cEOFs y los patrones asociados al SAM.
+Calculamos el coeficiente de determinación entre las series temporales de los cEOFs y los tres índices SAM (SAM, A-SAM y S-SAM) definidos en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
+El índice SAM está correlacionado de forma estadísticamente significativa con la fase de 0º del cEOF1 en todos los niveles, y con la fase de 90º del cEOF1 y la fase de 90º del cEOF2 en la tropósfera.
+Por otro lado, las correlaciones entre SAM y la fase de  0º del cEOF2 son prácticamente nulas. 
 
-La relación entre la SAM y el cEOF1 en la troposfera se explica en su totalidad por el componente zonalmente simétrico de la SAM, como muestran la alta correlación con la S-SAM por debajo de 100 hPa y las correlaciones bajas y estadísticamente no significativas entre la A-SAM y el 0º o el 90º cEOF1.
-En la estratosfera, la CEOF1 de 0º está correlacionada tanto con la A-SAM como con la S-SAM, mientras que la CEOF1 de 90º está altamente correlacionada sólo con la A-SAM.
-Estas correlaciones son consistentes con los mapas de regresión de la altura geopotencial en la Figura \@ref(fig:eof1-regr-gh) y su comparación con los obtenidos para SAM, A-SAM y S-SAM por @campitelli2022.
+En la tropósfera la correlación de ambas fases del cEOF1 y el SAM es igual a su correlación con el S-SAM, y su correlación con el A-SAM es mucho más baja y no significativa. 
+Esto indica que la relación entre el SAM y el cEOF1 en la tropósfera se explica en su totalidad por la componente zonalmente simétrica del SAM. 
+En la estratosfera, la fase de 0º del cEOF1 está correlacionada tanto con la A-SAM como con la S-SAM, mientras que la fase de 90º está altamente correlacionada sólo con la A-SAM.
+Estas correlaciones son consistentes con los mapas de regresión de la altura geopotencial en la Figura \@ref(fig:eof1-regr-gh) y su comparación con los obtenidos para SAM, A-SAM y S-SAM (Fig. \@ref(fig:2d-regr)).
 
 <!-- Viene del cEOF pero hay que moverlo y adaptarlo a esta parte
 -->
@@ -111,17 +96,17 @@ En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM
 Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
 
 
-En el caso de 90º cEOF2, su correlación con la SAM para la troposfera está asociada a la variabilidad asimétrica de la SAM.
-De hecho, el 90º cEOF2 comparte hasta `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym" & season == "SON"]$estimate^2, 2)` varianza con el A-SAM y sólo `r scales::percent(max_r2[cEOF == "cEOF2" & term == "sym" & season == "SON"]$estimate^2, 2)` como máximo con el S-SAM (Figura \@ref(fig:sam-eof-vertical).
-b2).
-Esta altísima correlación entre A-SAM y 90º cEOF2 sugiere que los modos obtenidos en este trabajo son capaces de caracterizar la componente zonalmente asimétrica de la SAM descrita previamente por @campitelli2022.
+El cEOF2 sólo tiene relación con el SAM en su fase de 90º y asociada a la parte asimétrica y únicamente en la tropósfera.
+La correlación entre ambos índices es muy alta, con valores superiores al 75% de la varianza compartida en toda la tropósfera y un máximo de `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym" & season == "SON"]$estimate^2, 2)` en `r max_r2[cEOF == "cEOF2" & term == "asym" & season == "SON"]$lev` hPa. 
+Esta altísima correlación es comparable a la correlación observada entre distintos índices del SAM (@ho2012) y sugiere que esta fase es capaz de caracterizar la componente zonalmente asimétrica de la SAM prácticamente en su totalidad. 
 
 ## PSA {#psa}
 
-(ref:psa-eof2-cap) Correlation coefficients (r) between cEOF2 components and the PSA1 and PSA2 modes computed as @mo2001 for the 1979 -- 2019 period. 95% confidence intervals in parenthesis. p-values lower than 0.01 in bold.
+(ref:psa-eof2-cap) Coeficiente de correlación entre las fases del cEOF2 y los modos PSA1 y PSA2 para el período 1979 -- 2022. 
+Los intervalos de confianza de 95% se muestran en paréntesis. 
+Estimaciones con p-valor menor a 0.01 en negrita. 
 
-
-```{r psa-eof2, fig.cap = "(ref:psa-eof2-cap)", fig.width=7, fig.height=3}
+```{r psa-eof2, fig.width=7, fig.height=3}
 psa <- PSA() %>% 
   readRDS()
 
@@ -177,20 +162,23 @@ if (is_word()) {
     kbl2(booktabs = TRUE, caption = "(ref:psa-eof2-cap)") %>%
     column_spec2(3:4, bold = p.val[[.col]] < 0.01) %>%
     # add_header_above(c("", "cEOF2" = 2)) %>%
+    collapse_rows(columns = 2, valign = "top") %>% 
     kable_classic() 
 }
 
 
 ```
 
-Dada la similitud entre las estructuras asociadas al cEOF2 (Fig. \@ref(fig:eof2-regr-gh)) y los patrones de PSA documentados, estudiamos la relación entre ellos.
-La tabla \@ref(tab:psa-eof2) muestra las correlaciones entre los dos índices PSA y las series temporales para las fases 0º y 90º de CEOF2.
-Como anticipaba visualmente la figura \@ref(fig:eof2-regr-gh), existe una gran correlación positiva entre PSA1 y 90º cEOF2, y entre PSA2 y 0º cEOF2.
-Por otro lado, no existe una relación significativa entre PSA1 y 0º cEOF2, y entre PSA2 y 90º cEOF2.
-En consecuencia, cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos PSA.
-Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y 90º cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no mostrado).
+Dada la similitud entre las estructuras asociadas al cEOF2 (Fig. \@ref(fig:eof2-regr-gh)) y los patrones del PSA, estudiamos la relación entre ellos.
+La tabla \@ref(tab:psa-eof2) muestra las correlaciones entre los dos índices del PSA y las series temporales para las fases de 0º y 90º del cEOF2.
+Como se anticipaba visualmente la figura \@ref(fig:eof2-regr-gh), en SON existe una gran correlación positiva entre el PSA1 y la fase de 90º y  entre el PSA2 y la fase de 0º cEOF2.
+Por otro lado, no existe una relación significativa entre el PSA1 y la fase de 0º ni entre el PSA2 y la fase de 90º cEOF2.
+Estas relaciones también se mantienen en DJF, aunque no en los otros trimestres. 
+En consecuencia, cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos del PSA.
+Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y la fase de 90º del cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no mostrado).
 
-(ref:phase-histogram-cap) Histograma de distribución de fase de cEOF2 para el periodo 1979 -- 2019. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho de intervalo de 90º.
+(ref:phase-histogram-cap) Histograma de la distribución de fases del cEOF2 para el periodo 1979 -- 2022. 
+Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho del intervalo de 90º.
 Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
 
 ```{r phase-histogram, fig.width=width_column*.8, fig.height=2.5}
@@ -232,12 +220,10 @@ imaginary <- ggplot_build(plot)$data[[1]] %>%
 plot
 ```
 
-La figura \@ref(fig:phase-histogram) muestra un histograma que cuenta el número de estaciones SON en las que la fase cEOF2 estaba cerca de cada una de las cuatro fases particulares (positiva/negativa de las fases 0º y 90º), con las observaciones para cada estación marcadas como alfombras en el eje horizontal.
-En `r scales::percent(imaginary[panel == 4]$percent)` de las estaciones cEOF2 tiene una fase similar a la fase negativa o positiva de 90º, haciendo que la fase de 90º sea la fase más común.
-Esta es también la fase más correlacionada con ENSO según la definición de la fase de 0º descrita en la Sección \@ref(métodos).
-
-Por lo tanto, en virtud de ser la fase más común, la cEOF2 de 90º explica más varianza que la cEOF2 de 0º.
-Por lo tanto, el análisis EOF convencional tenderá a separarlos de forma relativamente limpia, con el EOF que representa el 90º cEOF2 siempre por delante del que representa el 0º cEOF2.
+La Figura \@ref(fig:phase-histogram) muestra un histograma para cada trimestre con la distribución de la fase del cEOF2 con las observaciones marcadas con líneas verticales en el eje horizontal.
+En SON (panel 4), el cEOF2 tiene una fase similar a $\pm$ 90º un `r scales::percent(imaginary[panel == 4]$percent)` de los años, indicando que es la fase más común. 
 Esta preferencia de fase está de acuerdo con @irving2016, que encontró una distribución bimodal a la variabilidad tipo PSA (compare nuestra Figura \@ref(fig:phase-histogram) con su Figura 6).
+
+`r todo("Faltaría analizar las otras estaciones, pero quiero ver lo anterior primero")`
 
 ## ENSO

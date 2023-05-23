@@ -194,7 +194,7 @@ En esta sección calculamos campos de regresión de las series temporales de los
 
 (ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON  ($m^2s^{-1}$) con la fase 0º (columna 1) y 90º (columna 2) para cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1979 -- 2019. 
 Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. 
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR.
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
 
 ![(\#fig:eof1-regr-gh)(ref:eof1-regr-gh-cap)](figures/20-ceofs/eof1-regr-gh-1.png)
 
@@ -261,7 +261,7 @@ Por otro lado, en la estratosfera baja, dominada por la advección, las anomalí
 
 (ref:o3-regr-cap) Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase 0º (a) y 90º (b) del cEOF1 para el período 1979 -- 2019. 
 En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). 
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR.
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
 
 ![(\#fig:o3-regr)(ref:o3-regr-cap)](figures/20-ceofs/o3-regr-1.png)
 
@@ -315,7 +315,7 @@ También explica gran parte de la varianza en al oeste y al este de la Penínsul
 
 
 (ref:sst-psi-2-cap) Regresión de (columan 1) SST (K) y (columna 2) anomalías zonales de función corriente ($m^2/s\times10^-7$) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período 1979 -- 2019. 
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR.
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
 
 ![(\#fig:sst-psi-2)(ref:sst-psi-2-cap)](figures/20-ceofs/sst-psi-2-1.png)
 
@@ -327,7 +327,7 @@ Este patrón es muy similar al patrón del ENSO positivo canónico [@bamston1997
 De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (0.76 (CI: 0.59 -- 0.87)).
 Además del patrón similar al ENSO del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un dipolo del índico en su fase positiva [@saji1999].
 Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es 0.62 (CI: 0.38 -- 0.78).
-Sin embargo, la correlación parcial es de 0.32 (p-valor = 0.045), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo. 
+Sin embargo, la correlación parcial es de 0.32 (p-valor = 0.046), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo. 
 Esto puede observarse en la Figura \@ref(fig:euler), donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI. 
 El DMI aporta, independientemente, sólo un 4.3% de la varianza mientras que el ONI aporta un 23.8% por sí mismo. 
 
@@ -403,7 +403,7 @@ En la Figura \@ref(fig:pp-temp-2) se muestran mapas de regresión de las anomal�
 
 (ref:pp-temp-2-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. 
 Para el trimestre SON del periodo 1979 -- 2019. 
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR.
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
 
 ![(\#fig:pp-temp-2)(ref:pp-temp-2-cap)](figures/20-ceofs/pp-temp-2-1.png)
 
@@ -437,4 +437,6 @@ Esto faltaría.
 Hay código para hacerlo, pero falta la interpretación, que es lo importante.
 
 Sería un análisis más modesto.
+
+
 

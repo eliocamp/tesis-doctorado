@@ -108,7 +108,7 @@ A su vez, también es similar la intensidad de los coeficientes de correlación,
 
 (ref:sign-regression-50-cap) Regresión múltiple de la anomalía zonal de altura geopotencial en 50 hPa son el índice SAM y el signo del SAM para el período 1979 -- 2022. 
 La correlación espacial al cuadrado entre cada campo en cada estación se detalla debajo de la estación.
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR (no hay áreas).
+Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo  es menor que 0.01 ajustado por FDR (no hay áreas).
 
 ![(\#fig:sign-regression-50)(ref:sign-regression-50-cap)](figures/30-sam/sign-regression-50-1.png)
 
@@ -135,7 +135,7 @@ Esto indica que hay que tener cuidado en la interpretación del SAM asimétrico 
 (ref:season-regression-cap) Regresión múltiple de las anomalías zonales de altura geopotencial con el índice SAM y la estación del año, usando SON como base. 
 El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). 
 La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. 
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON. 
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON. 
 
 ![(\#fig:season-regression)(ref:season-regression-cap)](figures/30-sam/season-regression-1.png)
 
@@ -365,7 +365,7 @@ Esto último nos permite concluir que estos resultados no dependen del índice E
 
 
 (ref:regr-air-season-cap) Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período 1979 -- 2022. 
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR.
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
 La escala de colores se corta en $\pm0.6 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
 
 ![(\#fig:regr-air-season)(ref:regr-air-season-cap)](figures/30-sam/regr-air-season-1.png)
@@ -406,7 +406,7 @@ Dado que el índice S-SAM está negativamente correlacionado con la temperatura 
 
 (ref:global-pp-cap) Regresión de anomalías de precipitación (mm por día) con el SAM (a), A-SAM (b) y S-SAM (c) para el período 1979 -- 2022.
 En gris, las zonas con valores faltantes. 
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR. 
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR. 
 La escala de colores se corta en $\pm0.25 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
 
 
@@ -425,7 +425,7 @@ No se muestra Sudáfrica porque allí no se detectó ninguna señal significativ
 
 (ref:pp-regr-oceania-cap) Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1979 --2022.
 Nueva Zelanda e islas aledañas.
-Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR.
+Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
 
 ![(\#fig:pp-regr-oceania)(ref:pp-regr-oceania-cap)](figures/30-sam/pp-regr-oceania-1.png)
 

@@ -61,6 +61,15 @@ correlate <- function(x, y, signif = 2, sep = "\ ", ...) {
   out
 }
 
+#' Computa correlación pesada
+#'
+#' @param x,y vectores numéricos a correlacionar
+#' @param w vector de peso
+#'
+#' @export
+weighted_correlation <- function(x, y, w) {
+  stats::cov.wt(cbind(x, y), wt = w, cor = TRUE)$cor[1, 2]
+}
 
 #' Computa p-valor y demás en correlación
 #'
@@ -190,4 +199,33 @@ correlate_complex <- function(z, x, angles = seq(-pi, pi, by = .5*pi/180), ...) 
 #' @export
 rotate <- function(z, angle = 0) {
   complex(real = cos(angle), imaginary = sin(angle)) * z
+}
+
+#' Rotar un cEOF
+#'
+#' @param x cEOF
+#' @param variable nombre de la variable a rotar (sin comillas)
+#' @param rot data.table que se une a x con una variable llamada
+#'  `angle`con el ángulo a rotar.
+#'
+#' @returns un cEOF
+#'
+#' @export
+rotate_ceof <- function(x, variable, rot) {
+
+  variable <- deparse(substitute(variable))
+
+  x$left <- x$left[rot, on = 'cEOF']
+
+  x$left[[variable]] <- rotate(x$left[[variable]], x$left$angle)
+
+  x$left[, angle := NULL]
+
+  x$right <- x$right[rot, on = 'cEOF']
+
+  x$right[[variable]] <- rotate(x$right[[variable]], x$right$angle)
+
+  x$right[, angle := NULL]
+
+  x
 }

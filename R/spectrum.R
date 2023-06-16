@@ -42,7 +42,7 @@ null_ar_spectrum_ <- function(B = 100, n, ar, spans = NULL, ..., probs = 0.95) {
     stats::spec.pgram(y, spans = spans, plot = FALSE)$spec
 
   }, numeric(nfreq))
-  data.table::as.data.table(t(apply(boots, 1, stats::quantile, probs = probs)))
+  data.table::as.data.table(apply(boots, 1, stats::quantile, probs = probs))
 }
 
 null_ar_spectrum <- memoise::memoise(null_ar_spectrum_)

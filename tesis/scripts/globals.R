@@ -7,11 +7,11 @@
 
 format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
 chapter <- tools::file_path_sans_ext(knitr::current_input())
-
+verbose <- interactive()
 knitr::opts_chunk$set(
   echo = FALSE,
-  message = FALSE,
-  warning = FALSE,
+  message = verbose,
+  warning = verbose,
   cache = TRUE,
   cache.extra = 42,
   out.extra = "",
@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
   cache.path = file.path("cache", chapter, format, "")
 )
 
+cache <- cachem::cache_disk(file.path("cache", "memoise"))
 
 knitr::opts_hooks$set(label = function(options) {
   # Tira un error si el chunk no tiene label

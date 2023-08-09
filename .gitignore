@@ -62,5 +62,7 @@ tesis/thesis.Rmd
 tesis/thesis.log
 
 tesis/data/derived_data/cmip_sam.Rds
+tesis/data/derived_data/sam.Rds
+tesis/data/derived_data/ceofs_cmip.Rds
 tesis/data/derived_data/cmip
 tesis/data/raw_data

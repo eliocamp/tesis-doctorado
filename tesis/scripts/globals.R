@@ -13,13 +13,12 @@ knitr::opts_chunk$set(
   message = verbose,
   warning = verbose,
   cache = TRUE,
-  cache.extra = 42,
+  cache.extra = 41,
   out.extra = "",
   fig.path = file.path("figures", chapter, ""),
   cache.path = file.path("cache", chapter, format, "")
 )
 
-cache <- cachem::cache_disk(file.path("cache", "memoise"))
 
 knitr::opts_hooks$set(label = function(options) {
   # Tira un error si el chunk no tiene label

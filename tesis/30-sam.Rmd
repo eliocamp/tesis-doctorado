@@ -1558,6 +1558,7 @@ Se encontró que este mismo patrón está asociado con el aumento de las precipi
 Hay una pequeña área de anomalías positivas significativas de precipitación con el SAM cerca del centro de Argentina, también observado en el análisis basado en estaciones de @gillett2006, que se explica por el A-SAM.
 
 
+
 <!-- ```{r compute-air-regr-noaa} -->
 <!-- time_subset <- list(time = range(indices$time)) -->
 <!-- air <- NOAATemp() %>%  -->

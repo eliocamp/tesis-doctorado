@@ -2,17 +2,952 @@
 knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRUE)
 ---
 
+```{r setup, include=FALSE}
+source(here::here("tesis/scripts/globals.R"))
+
+library(knitr)
+
+library(eliotesis)
+
+library(metR)
+library(data.table)
+library(magrittr)
+
+library(kableExtra)
+
+library(ggplot2)
+library(tagger)
+library(ggperiodic)
+library(ggnewscale)
+library(tidyfast)
+
+Sys.setenv(HDF5_USE_FILE_LOCKING = FALSE)
+
+```
+
+
+```{r scales}
+experiments <- c("historical", "hist-GHG", "hist-stratO3", "hist-nat", "hist-aer")
+
+scale_color_experiments <- function(...) {
+  scale_color_manual(..., name = NULL, 
+                     values = RColorBrewer::brewer.pal(5, "Dark2") %>% 
+                       setNames(experiments))   
+}
+
+
+scale_fill_experiments <- function(...) {
+  scale_fill_manual(..., name = NULL, 
+                    values = RColorBrewer::brewer.pal(4, "Dark2") %>% 
+                      setNames(experiments))   
+}
+
+```
+
+`r todo("Cambiar la nomenclatura de real e imaginaria a fase de 0º y 90º.")`
+
 # Análisis de estos modos en los modelos de CMIP6
 
-Acá iría el [análisis de los cEOF en CMIP6](https://htmlpreview.github.io/?https://github.com/eliocamp/onda3/blob/master/35-cEOF-CMIP6-superensemble-SON.html) que ya hice. Está analizado bastante de primavera, faltaría el resto del año. 
 
 
-## Datos y métodos
+## Métodos
 
-## Primavera
 
-### Comparación con los modos observados
 
-### Tendencias
+```{r simulaciones}
+son_cmip_files <-  data_path("derived", "cmip", "SON") %>% 
+  list.files(pattern = ".nc", full.names = TRUE) 
 
-## Otras estaciones (quizas)
+simulaciones <- son_cmip_files %>% 
+  basename() %>% 
+  unglue::unglue_data("{variable}_{mean}_{model}_{experiment}_r{member}i{init}p{physics}f{forcing}_{grid}_{start_date}-{end_date}.nc", 
+                      convert = TRUE) %>% 
+  data.table::as.data.table() %>% 
+  .[, file := son_cmip_files] %>% 
+  .[mean != "Emon"] %>% 
+  .[order(variable, model, member)] %>% 
+  .[, member := interaction(member, init, physics, forcing)] 
+```
+
+
+```{r modelos}
+simulaciones %>% 
+  .[, .(miembros = .N), by = .(model, experiment)] %>% 
+  tidyr::pivot_wider(names_from = experiment, values_from = miembros, values_fill = 0) %>% 
+  as.data.table() %>% 
+  .[order(-historical, -(`hist-GHG` + `hist-nat` + `hist-stratO3` + `hist-aer`))] %>% 
+  knitr::kable(caption = "Modelos analizados y la cantidad de miembros para cada experimento.")
+```
+
+Los modelos usados se listan en la Tabla \@ref(tab:modelos) se listan todos los modelos y la cantidad de miembros de cada uno. 
+Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat") y sólo el efecto de el ozono estratosférico ("hist-stratO3").
+
+Algunos miembros tienen más de una inicialización, parametrización física o datos usados para el forzante.
+Elegimos un único miembro de esos. 
+
+Para calcular los cEOFs y evaluar su desempeño, concatenamos todos los miembros para computar un único set de cEOFs para cada modelo y experimento. 
+Este método trata k simulaciones de n años como una única simulación de k*n 
+Luego, calculamos los cEOFs siguiendo la metodología de la Sección XXX. 
+
+Para que sea comparable al ERA5, computamos los cEOFs para el período moderno, entre 1979 y 2014 (el último año disponible para todos los miembros).
+
+Como se explicó anteriormente, los cEOFs no están definidos unívocamente ya que aceptan cualquier rotación en el plano complejo análogamente a como los EOFs aceptan cambios de signo. 
+Los cEOFs computados en ERA5 fueron rotados para maximizar la correlación con el ozono estatosférico o el ENSO como se describe en la Sección XXX. 
+Para los modelos de CMIP, rotamos los cEOFs para maximisar la correlación espacial de los patrones con el correspondiente cEOF de ERA5. 
+Esto busca que la localización del patrón sea parecido al observado. 
+
+```{r read-data}
+ceof_era5 <- readRDS(data_path("derived", "ceof.Rds")) %>% 
+  .[season == "SON"] %>% 
+  .[, `:=`(model = "ERA5", experiment = "reanalysis", season = NULL)] %>% 
+  .[]
+
+ceof_era5$eof[[1]]$sdev <- ceof_era5[, eof[[1]]]$sdev[, `:=`(correlation = 1,  angle = 0)]
+ceof_era5$eof[[1]]$left <- ceof_era5$eof[[1]]$left[, ensemble := factor("1.1.1.1")]
+ceof_era5$eof[[1]]$left[, time := as.integer(year(time))]
+
+setcolorder(ceof_era5$eof[[1]]$left, c("time", "ensemble", "cEOF", "hgt"))
+
+```
+
+
+```{r ref_era5}
+ref_era5 <- ceof_era5$eof[[1]]$right %>%
+  copy() %>% 
+  setnames("hgt", "eof_ref")
+
+```
+
+
+```{r pad_longitudes}
+
+grid <- ceof_era5[, eof[[1]]$right] %>% 
+  unique(by = c("lon", "lat")) %>% 
+  .[, .(lon, lat)] 
+
+interpolate_to_era <- function(data, formula = hgt ~ lon + lat) {
+  Interpolate(formula, x.out = unique(ref_era5$lon), y.out = unique(ref_era5$lat), 
+              data = pad_longitudes(data)) 
+}
+
+```
+
+
+```{r ceofs}
+times <- seq(as.Date("1979-01-01"), as.Date("2014-11-01"), by = "1 month") 
+times <- range(seasonally(times[season(times) == "SON"]))
+
+ceof_file <- data_path("derived", "ceofs_cmip.Rds")
+
+if (file.exists(ceof_file)) {
+  ceofs <- readRDS(ceof_file)
+} else {
+  ceofs <- simulaciones %>% 
+    .[variable == "zg"] %>%
+    .[, .(eof = list(compute_ceof_cmip(file, member, time = times, ref = ref_era5))),
+      by = .(experiment, model)]
+  
+  saveRDS(ceofs, ceof_file)
+}
+
+ceofs <- rbind(ceofs, ceof_era5)
+```
+
+
+```{r plot_ceof} 
+plot_ceof <- function(data, n, which_lev = 200) {
+  data <- data[, .(eof = list(cut(eof[[1]], n))), by = model]
+  
+  which_pc <- paste0("cEOF", n)
+  
+  models <- data %>% 
+    .[, eof[[1]]$sdev, by = model] %>%
+    .[cEOF == which_pc] %>% 
+    .[order(-correlation)] 
+  
+  labels <- models %>%
+    .[, setNames(paste0(model, "\n(", scales::number(correlation^2, 0.01), ")"), model)]
+  
+  data %>% 
+    .[, eof[[1]]$right, by = model] %>%
+    # .[, denormalise(eof[[1]], "right"), by = model] %>%
+    .[cEOF == which_pc] %>% 
+    # .[, eof[[1]]$right, by = model] %>%
+    .[, model := factor(model, levels = models$model)] %>%
+    .[lev == which_lev] %>% 
+    .[, eof := eof/max(Mod(eof)), by = model] %>% 
+    .[, interpolate_to_era(.SD), by = .(model, lev, cEOF)] %>% 
+    # .[, eof := eof/sd(eof), by = .(model)] %>% 
+    ggperiodic::periodic(lon = c(0, 360)) %>% 
+    ggplot(aes(lon, lat)) +
+    geom_contour_fill(aes(z = Re(eof)), breaks = AnchorBreaks(exclude = 0)) +
+    geom_contour2(aes(z = Im(eof), linetype = factor(-sign(..level..))), 
+                  breaks = AnchorBreaks(exclude = 0)) +
+    scale_linetype(guide = "none") +
+    scale_fill_divergent(guide = "none") +
+    geom_qmap(crop = c(ymax = -20)) +
+    scale_x_longitude() +
+    scale_y_latitude(limits = c(-90, NA)) +
+    coord_polar() +
+    facet_wrap(model ~., labeller = labeller(model = labels))
+}
+```
+
+
+```{r cors}
+cors <- ceofs %>% 
+  # .[model != "ERA5"] %>%
+  .[, eof[[1]]$sdev, by = .(experiment, model)] %>% 
+  copy() %>% 
+  .[, r2 := correlation^2] %>% 
+  .[, label := paste0(model, "\n(", scales::number(correlation^2, 0.01), ")")]
+```
+
+## Comparación con los modos observados
+
+En esta sección, primero analizamos los modos en el experimento "historical". 
+
+
+(ref:comparacion-r2-cap) $r^2$ de los patrones espaciales de cada modelo con ERA5 para cada cEOF. 
+
+```{r comparacion-r2, fig.height=6, fig.width=6, one_figure = TRUE, cache = FALSE}
+cors %>% 
+  .[experiment == "historical"] %>%
+  .[, model := reorder(model, r2, fun = mean)] %>% 
+  # .[, cEOF := forcats::fct_rev(cEOF)] %>%
+  ggplot(aes(r2, model)) +
+  geom_col(aes(fill = cEOF), 
+           position = position_dodge2(reverse = TRUE, padding = 0)) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous("R^2 espacial", limits = c(0, 1)) +
+  scale_y_discrete(NULL)
+```
+
+La Figura\ \@ref(fig:comparacion-r2) muestra el $r^2$ de los modelos para los dos cEOFs. 
+La correlación entre los modos simulados y los observados es alta, indicando que los modelos logran capturar los modos correctamente, aunque mejor el cEOF1 que el cEOF2. 
+
+`r todo("¿Debería agregar la figura gigante con los cEOFs de cada modelo? Creo que es mucho")`
+
+
+
+```{r mmm}
+interpolated <- ceofs[, eof[[1]]$right, by = .(experiment, model)] %>% 
+  copy() %>% 
+  .[model != "ERA5"] %>% 
+  .[, interpolate_to_era(.SD),
+    by = .(model, experiment, lev, cEOF)] %>% 
+  .[, hgt_norm := hgt/max(Mod(hgt), na.rm = TRUE), by = .(cEOF, lev, model, experiment)]
+
+
+base <- ceof_era5[, eof[[1]]$right] %>% 
+  copy() %>% 
+  setnames("hgt", "base") %>%
+  .[, base := base/max(Mod(base)), by = .(cEOF, lev)] %>% 
+  .[, experiment := "historical"]
+
+cor_mmm <- interpolated %>% 
+  na.omit() %>% 
+  .[, mean(hgt_norm), by = .(cEOF, experiment, lon, lat, lev)] %>% 
+  .[base, on = .NATURAL] %>% 
+  na.omit() %>% 
+  .[, weighted_correlation(Re(V1), Re(base), cos(lat*pi/180)), 
+    by = .(cEOF, experiment)] %>% 
+  .[, experiment := factor(experiment, levels = experiments)]
+
+ceof_labs <- cor_mmm %>% 
+  .[, paste0(cEOF, "\n(", scales::percent(V1^2, 0.1), ")") %>% 
+      setNames(cEOF)
+  ]
+
+interpolated %>% 
+  .[experiment == "historical"] %>% 
+  .[, mean(hgt_norm), by = .(cEOF, experiment, lon, lat, lev)] %>% 
+  # .[(cEOF == "cEOF1" & lev == 50) | (cEOF == "cEOF2" & lev == 200)] %>% 
+  
+  sep_ReIm() %>% 
+  periodic(lon = c(0, 360)) %>%
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = V1), breaks = AnchorBreaks(exclude = 0)) +
+  geom_contour2(aes(z = base, linetype = factor(-sign(..level..))),
+                data = sep_ReIm(base) %>% 
+                  # .[(cEOF == "cEOF1" & lev == 50) | (cEOF == "cEOF2" & lev == 200)] %>% 
+                  periodic(lon = c(0, 360)),
+                breaks = AnchorBreaks(exclude = 0)) +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent(guide = "none") +
+  # geom_qmap(crop = c(ymax = -20)) +
+  scale_x_longitude() +
+  scale_y_latitude(limits = c(-90, NA)) +
+  coord_polar2() +
+  ggh4x::facet_nested(lev ~ experiment + cEOF + part, 
+                      labeller = labeller(lev = AddSuffix(" hPa"),
+                                          cEOF = ceof_labs)) 
+```
+
+
+(ref:mmm-cap) Media multimodelo (sombreado) de los campos espaciales de cada cEOF, parte y nivel. Los contornos marcan los patrones de ERA5. El $r^2$ entre ERA5 y la media multimodelo está entre paréntesis. 
+
+La Figura \@ref(fig:mmm) muestra los patrones promedio multimodelo para cada cEOF y cada parte (es decir, el promedio de los patrones espaciales de cada modelo). 
+El patrón medio multimodelo es increíblemente similar al patrón de ERA5, con niveles de $r^2$ del orden del 90%. 
+
+## Parte temporal
+
+Para analizar las propiedades de los modos de cada modelo uso las series temporales propias de cada modelo. 
+
+
+
+```{r ceof_largo_p}
+campos <- ceofs[, denormalise(eof[[1]], "right"), by = .(experiment, model)] %>% 
+  sep_ReIm()
+
+setorder(campos, experiment, model, part, cEOF, -lev, lat, lon)
+ceof_largo_file <- data_path("derived", "ceof_largo.Rds")
+
+if (file.exists(ceof_largo_file)) {
+  ceof_largo_p <- readRDS(ceof_largo_file)
+} else {
+  ceof_largo_p <- simulaciones %>%
+    .[variable == "zg"] %>%
+    .[, ceof_proyectado(file, member, model, experiment, fields = campos,
+                        time = c(lubridate::NA_Date_, times[2])),
+      by = .(experiment, model)]
+  saveRDS(ceof_largo_p, ceof_largo_file)
+}
+```
+
+
+
+```{r fft}
+fft <- ceofs %>% 
+  .[, eof[[1]]$left, by = .(experiment, model)] %>% 
+  .[, hgt := hgt/sd(Mod(hgt)), by = .(model, experiment, cEOF)] %>%
+  sep_ReIm() %>% 
+  copy() %>% 
+  .[order(time)] %>% 
+  .[, fftspectrum(hgt, c(3, 5), B = 0, probs = c(0, 0.95)), by = .(model, experiment, ensemble, cEOF, part)]
+```
+
+
+
+```{r enso_cmip}
+compute_enso <- function(file) {
+  ReadNetCDF(file, vars = c(sst = "tos"), 
+             subset = list(lat = c(-5, 5),
+                           time = c("1979-09-01", "2014-12-31"),
+                           lon = ConvertLongitude(c(-170, -120)))) %>% 
+    .[!is.na(sst)] %>% 
+    .[, time := year(time)] %>% 
+    .[, .(oni = mean(sst)), by = .(time)] %>% 
+    .[, oni := (oni - mean(oni))/sd(oni)] %>% 
+    .[]
+}
+
+enso_cmip <- simulaciones %>% 
+  .[variable == "tos"] %>%
+  .[, compute_enso(file), by = .(model, experiment, member)] 
+
+enso_cmip <- ENSO() %>% 
+  fread() %>% 
+  .[season(time) == "SON"] %>% 
+  .[, .(oni = mean(oni)), by = .(time = year(time))] %>% 
+  .[, `:=`(model = "ERA5", member = factor("1.1.1.1"), experiment = "reanalysis")] %>% 
+  rbind(enso_cmip)
+
+
+enso_fft <- enso_cmip %>% 
+  # .[experiment %in% c("historical", "reanalysis")] %>% 
+  .[order(time)] %>% 
+  .[, fftspectrum(oni, c(3, 5), B = 0, probs = c(0, 0.95)), by = .(model, member, experiment)] 
+
+cors_enso_all <- ceofs[, eof[[1]]$left, by = .(experiment, model)] %>% 
+  .[cEOF == "cEOF2"] %>% 
+  .[experiment %in% c("historical", "reanalysis")] %>% 
+  setnames("ensemble", "member") %>% 
+  enso_cmip[., on = .NATURAL, allow.cartesian = TRUE] %>% 
+  na.omit() %>% 
+  .[, correlate_complex(hgt, oni), by = .(model, member, experiment)]  
+
+
+cors_enso <- cors_enso_all %>%
+  .[angle == 0] %>%
+  .[, .(correlacion = mean(correlation)), 
+    by = .(model, experiment, part)]
+
+labs <- cors_enso %>% 
+  .[part == "Imaginario"] %>% 
+  .[, label := paste0(model, "\n(", signif(correlacion, 2), ")")] %>% 
+  .[, setNames(label, model)]
+```
+
+```{r alpha_from_n}
+alpha_from_n <- function(n, max_alpha = 0.99) {
+  1 - (1 - max_alpha)^(1/n)
+}
+```
+
+
+
+```{r con_picos}
+con_picos <- data.table(
+  model = c("FGOALS-g3", "MIROC6", "GISS-E2-1-G", 
+            "CESM2", "CNRM-ESM2-1", "CNRM-CM6-1")
+)
+
+rect <- geom_rect(data = ~.x[con_picos, on = "model"] %>% 
+                    .[, model := reorder(model, -(correlacion^2)*(part == "Imaginario"))],
+                  inherit.aes = FALSE,
+                  xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf,
+                  fill = NA, color = "#7e8087") 
+```
+
+
+
+```{r fft-ceof2, fig.height=8, fig.width=9}
+fft %>% 
+  .[cEOF == "cEOF2"] %>% 
+  .[experiment %in% c("historical", "reanalysis")] %>% 
+  # .[, .(spec = mean(spec)), by = .(freq, part, model, cEOF)] %>% 
+  .[cors_enso, on = .NATURAL] %>% 
+  .[, model := reorder(model, -(correlacion^2)*(part == "Imaginario"))] %>% 
+  .[, ensembleN := uniqueN(ensemble), by = model] %>% 
+  ggplot(aes(1/freq, spec)) +
+  # geom_ribbon(aes(ymin = 0, ymax = `95%`), position = "dodge", alpha = 0.1) +
+  # geom_line(aes(y = ar_spectrum), alpha = 0.15) +
+  geom_line(aes(color = part, group = interaction(part, ensemble),
+                alpha = alpha_from_n(ensembleN, 0.9))) +
+  geom_line(data = ~.x[, .(spec = mean(spec)), by = .(freq, part, model, cEOF)],
+            aes(color = part)) +
+  # annotation_logticks(sides = "b") +
+  scale_color_brewer("cEOF2", palette = "Set1", 
+                     aesthetics = c("color", "fill")) +
+  scale_x_log10("Period (years)") +
+  scale_y_continuous("Spectrum")  +
+  scale_alpha_identity() +
+  facet_wrap(model ~ ., labeller = labeller(model = labs)) +
+  rect
+```
+
+
+(ref:fft-ceof2-cap) Espectros de Fourier para la parte Real e Imaginaria del cEOF1. 
+En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas.
+
+La Figura \@ref(fig:fft-ceof2) muestra el periodograma para el cEOF2 con una línea por miembro y una línea gruesa marcando el periodograma promedio.
+ERA5 tiene una señal claraen ~3 años en la parte imaginaria del cEOF2.
+Esta señal es representada sólo en algunos modelos (destacados en la figura con recuadro negro). 
+
+Esta periodicidad muy probablamente esté asociada con la periodicidad deL ENSO, dada la relación entre ENSO y la parte imaginaria del cEOF2 descrita en la Sección XXX. 
+
+(ref:ensofft-cap) Espectros de Fourier para los índices ENSO34 de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. En recuadro negro, los mismos modelos recuadrados en la Figura \@ref(fig:fft-2). 
+
+```{r ensofft, fig.height=8, fig.width=9}
+enso_fft %>% 
+  .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
+  .[, model := reorder(model, -(correlacion^2)*(part == "Imaginario"))] %>% 
+  .[, ensembleN := uniqueN(member), by = model] %>% 
+  ggplot(aes(1/freq, spec)) +
+  geom_line(aes(group = member, alpha = alpha_from_n(ensembleN, 0.9))) +
+  geom_line(data = ~.x[, .(spec = mean(spec)), by = .(freq, model)]) +
+  # annotation_logticks(sides = "b") +
+  scale_x_log10("Period (years)") +
+  scale_y_continuous("Spectrum")  +
+  scale_alpha_identity() +
+  facet_wrap(model ~ ., labeller = labeller(model = labs)) +
+  rect 
+```
+
+La Figura \@ref(fig:ensofft) muestra el periodograma del índice ENSO34 de cada modelo y miembro, incluyendo a ERA5. 
+La mayoría de los modelos tiene una periodicidad de ~3 años similar a la observada en ERA5, aunque la intensidad y período máximo varía significativamente. 
+
+Todos los los modelos que tienen una periodicidad clara en ~3 años en la parte imaginaria del cEOF2 también tienen una periodicidad del ENSO muy clara y además tienden a tener una correlación entre la parte imaginaria del cEOF2 y el ENSO más alta. 
+Por otro lado, ninguno de los modelos con muy baja correlación con el ENSO pero periodicidad del ENSO clara presenta periocididad clara en el cEOF2.
+
+Sin embargo existen modelos con periodicidad del ENSO clara y correlación relativamente alta que no tienen periodicidad del cEOF2 clara. 
+MRI-ENSM2-0, UKESM1-0-LL, MPI-ESM1-2-LR son algunos ejemplos. 
+
+Estas observaciones sugieren que el ENSO es la fuente de periodicidad del cEOF2 en los modelos de CMIP6 pero que su capacidad para representar la periodicidad observada no sólo depende de la periodiciad del ENSO y del grado de correlación entre los índices.
+
+
+## SST
+
+
+```{r regress_sst}
+standardised <- ceofs[, eof[[1]]$left, by = .(experiment, model)] %>% 
+  .[experiment == "historical"] %>% 
+  copy() %>% 
+  .[, hgt := hgt/sd(Mod(hgt)), by = .(model, ensemble, cEOF)]
+
+
+regress_sst_ <- function(..model, ..experiment) {
+  sst_files <- simulaciones %>% 
+    .[variable == "tos"] %>% 
+    .[model == ..model & experiment == ..experiment] 
+  
+  message("Procesando: ", sst_files$file[1])
+  
+  data <- lapply(seq_len(nrow(sst_files)), function(i) {
+    ReadNetCDF(sst_files[i, ]$file, c(sst = "tos"), 
+               subset = list(lat  = c(-90, 10), 
+                             time = c("1979-10-01", "2014-12-31"))) %>% 
+      .[!is.na(sst)] %>% 
+      .[, time := year(time)] %>% 
+      .[, ensemble := sst_files[i, ]$member] 
+  })
+  
+  data <- rbindlist(data) %>% 
+    .[, sst := sst - mean(sst), by = .(lon, lat, ensemble)]
+  
+  # data[, sst := Detrend2(sst), by = .(lon, lat, ensemble)]
+  
+  regression <- standardised %>% 
+    .[model == ..model & experiment == ..experiment & ensemble %in% unique(sst_files$member)] %>% 
+    data[., on = c("time", "ensemble"), allow.cartesian = TRUE] %>% 
+    sep_ReIm(format = "wider") %>% 
+    .[, FitLm(sst, Real, Imaginario, se = TRUE), 
+      by = .(lon, lat, cEOF, model)] %>% 
+    .[term != "(Intercept)"] %>% 
+    .[, model := NULL]
+  
+  return(regression)
+}
+
+
+regress_sst <- memoise::memoise(regress_sst_, cache = cachem::cache_disk(here::here("cache", "memoise", "regress_sst")))
+```
+
+
+```{r sst_regression}
+sst_regression <- simulaciones %>% 
+  .[experiment == "historical"] %>%
+  # .[model == "EC-Earth3"] %>% 
+  .[variable == "tos"] %>% 
+  .[, regress_sst(model[1], experiment[1]), by = .(model, experiment)]
+```
+
+
+
+```{r plot_sst_regression}
+plot_sst_regression <- function(sst_regression, which_ceof) {
+  which_ceof <- paste0("cEOF", which_ceof)
+  sst_regression %>% 
+    .[cEOF == which_ceof] %>% 
+    copy() %>% 
+    .[!is.na(estimate)] %>% 
+    .[, p.val := Pvaluate(estimate, std.error, df, "fdr"), 
+      by = .(cEOF, term, model)] %>%
+    # .[, estimate := estimate/sd(estimate), by = .(model)] %>%
+    .[, enso := mean(estimate[is.enso34(lon, lat) & term == "Imaginario"]), 
+      by = .(cEOF, model)] %>%
+    # .[, model := reorder(model, -enso)] %>%
+    # .[model == "CESM2"] %>%
+    ggplot(aes(lon, lat)) +
+    geom_contour_fill(aes(z = estimate)) +
+    geom_contour_pval(aes(z = p.val)) +
+    scale_fill_divergent(guide = "none") +
+    ggnewscale::new_scale_fill() +
+    geom_qmap() +
+    coord_sf(ylim = c(10, -90)) +
+    scale_y_latitude() +
+    scale_x_longitude() +
+    facet_grid(model ~ term) 
+}
+```
+
+
+
+
+```{r sst_regression_ERA5}
+sst_regression_ERA5 <- readRDS(data_path("derived", "sst_regr_ERA5.Rds")) %>% 
+  .[angle %in% c(0, -90) & season == "SON" & lat <= max(sst_regression$lat)] %>% 
+  .[, term := ifelse(angle == 0, "Real", "Imaginario")] %>% 
+  .[, .(lon, lat, cEOF, term, era5 = estimate)]
+
+```
+
+
+(ref:sst-mmm-cap) Media multimodelo de regresión de SST con los cEOFs. El área sombreada muestra las zonas donde más de la mitad de los modelos tienen p-valor menor a 0.01. Los contornos negros muestran la regresión de SST observada en ERA5.
+
+```{r sst-mmm}
+sst_regression %>% 
+  .[, pval := Pvaluate(estimate, std.error, df)] %>% 
+  .[, .(estimate = mean(estimate), 
+        prop = mean(pval < 0.01)), by = .(lon, lat, experiment, cEOF, term)] %>% 
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = estimate, fill = after_stat(level)), 
+                    breaks = AnchorBreaks(exclude = 0)) +
+  geom_contour_pval(aes(z = prop), p.value = 0.5, hatch = 9) +
+  
+  geom_contour2(aes(z = era5, linetype = factor(-sign(..level..))),
+                data = sst_regression_ERA5,
+                breaks = AnchorBreaks(exclude = 0)) +
+  geom_qmap() +
+  coord_sf(ylim = c(10, -90)) +
+  scale_y_latitude() +
+  scale_x_longitude() +
+  scale_fill_divergent_discretised("SST (K)",
+                                   labels = label_one_less,
+                                   guide = guide_colorsteps_bottom(width = 15,
+                                                                   show.limits = FALSE,
+                                                                   ticks = TRUE,
+                                                                   order = 1)) +
+  scale_linetype(guide = "none") +
+  facet_grid(cEOF ~ term) 
+```
+
+
+También es relevante evaluar si los modelos capturan correctamente la relación entre los modos y las anomalías de temperatura de la superficie del mar. 
+La Figura \@ref(fig:sst-mmm) muestra la media multimodelo de la regresión entre SST y las dos fases de cada cEOF, marcando las zonas donde más de la mitad de los modelos tienen p-valores menores a 0.01.
+Los modelos de CMIP6 reproducen los patrones de regresión el cEOF2 relativamente bien. 
+Se observa un exceso de señal en el Pacífico ecuatorial en la parte Real del cEOF2 que probablemente se deba a que estos modos no están alineados para minimizar esta relación. 
+Por otro lado, la señal asociada a la parte imaginaria del cEOF1 sí muestra valores excesivamente altos no observados en ERA5. 
+
+(ref:cor-sst-regr-cap) R^2 entre los patrones de regresión de SST cada modelo y el patrón de regresión de SST en ERA5.  
+
+```{r cor-sst-regr}
+sst_cors <- sst_regression %>% 
+  .[, Interpolate(estimate ~ lon + lat,
+                  x.out = unique(sst_regression_ERA5$lon),
+                  y.out = unique(sst_regression_ERA5$lat)),
+    by = .(model, experiment, term, cEOF)] %>%
+  na.omit() %>% 
+  .[sst_regression_ERA5, on = .NATURAL] %>% 
+  .[, correlate(estimate, era5), by = .(model, experiment, term, cEOF)] %>% 
+  .[, r2 := estimate^2]
+
+sst_cors %>% 
+  .[, r2_ceof2 := r2[cEOF == "cEOF2" & term == "Imaginario"],
+    by = .(model, experiment)] %>% 
+  .[, model := reorder(model, r2_ceof2, fun = mean)] %>% 
+  {
+    models_sst_cor <<- levels(.$model)
+    .
+  } %>% 
+  
+  .[, picos := model %in% con_picos$model & cEOF == "cEOF2" & term == "Imaginario"] %>% 
+  ggplot(aes(r2, model)) +
+  # geom_col(aes(x = 1 , 
+  #               y = ifelse(picos, model, NA)), alpha = 0.2, fill = "gray50") +
+  geom_col(aes(fill = term), 
+           position = position_dodge2(reverse = TRUE, padding = 0)) +
+  
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous("R^2 espacial", limits = c(0, 1)) +
+  scale_y_discrete(NULL) +
+  facet_wrap(~cEOF)
+
+```
+
+
+La Figura \@ref(fig:cor-sst-regr-cap) muestra el r^2 los campos de regresión de cada modelo y el campo de regresión de ERA5. 
+La figura confirma que lo observado para la media multimodelo se cumple para casi todos los modelos individuales. 
+La mayoría de los modelos tiene un campo de regresión similar a ERA5 para el cEOF2, aunque más para la fase imaginaria que para la fase real. 
+Para la parte real del cEOF1, las similitudes son muy bajas, pero esto principalmente refleja que ni los modelos ni ERA5 tienen mucha señal. 
+Para la parte imaginaria, en cambio, los valores de correlación espacial son esencialmente nulos, fruto de la señal presente en los modelos que está ausente en las observaciones.
+
+
+
+## Relación con el SAM
+
+```{r cmip_sam_series, cache = FALSE}
+sam_rename <- c(sam = "full",
+                asam = "asym",
+                ssam = "sym")
+
+
+cmip_sam <- readRDS(data_path("derived", "cmip_sam.Rds")) 
+
+cmip_sam_series <- cmip_sam %>% 
+  .[, time_series[[1]], by = .(model, experiment, lev)] %>% 
+  setnames("type", "term") %>% 
+  .[, term := sam_rename[term]] %>% 
+  .[, estimate_norm := estimate/sd(estimate[term == "full" & year(time) %between% c(1979, 2014)]),
+    by = .(model, experiment, lev)]
+
+indices <- SAM() %>% 
+  fread() %>% 
+  .[, time := as.Date(time)] %>% 
+  .[, `:=`(model = "ERA5",
+           experiment = "reanalysis",
+           ensemble = "1.1.1.1", 
+           PC = NULL, 
+           adj.r.squared = NULL)] 
+
+sam_series <- rbind(indices, cmip_sam_series)
+rm(indices, cmip_sam_series, cmip_sam)
+```
+
+
+```{r cor-sam-cmip6}
+
+# TODO: La correlación podría hacerla usando un modelo mixto.
+
+levs <- sam_series[model == "ERA5", unique(lev)]
+
+gdata <- sam_series %>% 
+  .[season(time) == "SON"] %>% 
+  .[, .(estimate = mean(estimate)), 
+    by = .(model, experiment, ensemble, term, time = year(time), lev)] %>% 
+  .[ceofs[, eof[[1]]$left, by = .(model, experiment)], 
+    on = c("model", "experiment", "ensemble", "time")] %>% 
+  # best_angle[., on = .NATURAL] %>% 
+  # .[cEOF == "cEOF2", hgt := rotate(hgt, angle)] %>% 
+  sep_ReIm() %>% 
+  na.omit() %>% 
+  # .[experiment %in% c("historical", "reanalysis")] %>% 
+  .[, .(correlation = cor(estimate, hgt)), 
+    by = .(model, ensemble, experiment, cEOF, term, part, lev)] %>% 
+  .[, .(correlation = mean(correlation)), by = .(cEOF, term, model, experiment, part, lev)] %>% 
+  .[, approx(lev, correlation, xout = levs), by = .(cEOF, term, model, experiment, part)] %>% 
+  setnames(c("x", "y"), c("lev", "correlation")) 
+
+
+# gdata <- gdata %>% 
+#   .[, ggplot2::mean_se(correlation^2), by = .(lev, experiment, cEOF, part, term)]
+
+ggplot(mapping = aes(lev, correlation^2)) +
+  
+  stat_summary(data = gdata[experiment != "reanalysis"][experiment == "historical"],
+               fun.data = \(x) mean_se(x,
+                                       mult = qt(.025, length(x), 
+                                                 lower.tail = FALSE)), 
+               
+               geom = "ribbon", alpha = 0.4, aes(fill = term)) +
+  
+  
+  stat_summary(data = gdata[experiment != "reanalysis"][experiment == "historical"],
+               fun = mean, 
+               geom = "line", alpha = 1, aes(color = term)) +
+  
+  geom_line(data = gdata[experiment != "reanalysis"][experiment == "historical"],
+            aes(group = interaction(term, model), color = term), alpha = 0.1) +
+  
+  # geom_line(data = gdata[experiment != "reanalysis"][experiment == "historical"] %>% 
+  #             .[model == "NorCPM1"],
+  #           aes(group = interaction(term, model))) +
+  
+  geom_line(data = gdata[experiment == "reanalysis"][, experiment := NULL],
+            aes(color = term), 
+            linewidth = 2) +
+  ggh4x::facet_grid2(experiment + part ~ cEOF, 
+                     strip = ggh4x::strip_nested()) +
+  # facet_grid(experiment + part ~ cEOF) +
+  coord_flip() +
+  scale_x_level() +
+  scale_color_brewer(NULL, palette = "Dark2", labels = c(full = "SAM",
+                                                         asym = "A-SAM",
+                                                         sym = "S-SAM"), 
+                     aesthetics = c("colour", "fill")) +
+  tag_facets("rc") +
+  panel_background() 
+
+```
+
+(ref:cor-sam-cmip6-cap) Igual que la Figura \@ref(fig:sam-eof-vertical) pero para los modelos del CMIP6.
+
+Otra característica interesante de los cEOFs es su relación con el SAM (Sección XXX). 
+En la Figura \@ref(fig:cor-sam-cmip6) se muestra el coeficiente de determinación entre las componentes del SAM y las fases de los cEOFs. 
+Las líneas translúcidas son los valores promedio de cada modelo y las áreas llenas representan el promedio multimodelo y su intervalo de confianza del 95%; la línea gruesa es el valor de ERA5. 
+
+Se observa que la relación entre el SAM y el cEOF2 en los modelos del CMIP6 es prácticamente nula en todos los niveles de la atmósfera, sugiriendo que éstos no capturan esta interacción entre el PSA2 y el SAM. 
+Sin embargo, sí logran capturar su relación con el A-SAM en la tropósfera; y aunque esta relación tiene menor magnitud en promedio, se observa que ciertos modelos sí consiguen correlaciones comparables con las observadas. 
+
+## Tendencias
+
+Para extender las series temporales de estos modos para todo el período disponible en CMIP6, proyectamos los campos espaciales del período moderno en los campos desde 19850 hasta 2014. 
+
+```{r series-largas, fig.width=6, fig.height=4}
+ceof_largo_p %>% 
+  sep_ReIm() %>% 
+  .[experiment %in% c("historical", "reanalysis")] %>%
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  # .[, eof := scale_eof(eof, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
+  # .[, eof := scale(eof, center = mean(eof[time <= 1900]), 
+  #                  scale = sd(eof[time <= 1900])),
+  #   by = .(model, part, cEOF)] %>% 
+  .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>% 
+  
+  ggplot(aes(time, hgt)) +
+  geom_line(aes(group = model), 
+            alpha = 0.1) +
+  geom_line(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, cEOF, part)]) +
+  geom_smooth(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, part, cEOF)]) +
+  
+  # geom_line(color = "black", 
+  #             # method = "lm", 
+  #           data = ceof_era5[, eof[[1]]$left] %>%
+  #             sep_ReIm() %>%
+  #             .[, hgt := Anomaly(hgt, time >= 1979), by = .(part, cEOF)] %>% 
+  #             .[, hgt := hgt/sd(hgt[time >= 1979]), by = .(part, cEOF)] 
+  # 
+  #           
+  #           ) + 
+  scale_x_continuous(NULL) +
+  scale_y_continuous(NULL) +
+  # coord_cartesian(ylim = c(-1.5, 1.5)) +
+  facet_grid(part ~ cEOF)
+```
+
+(ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 -- 2014. 
+Las anomalías están computadas sobre el período 1850 -- 1900. 
+En líneas translúcidas, las series promedio de cada modelo. 
+En línea oscura, la media multimodelo. 
+La línea azul es un loess smooth de la media multimodelo. 
+
+La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período. 
+Se observa que la parte real del cEOF1 tiene una tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)). 
+El resto de las series no presentan tendencias. 
+
+
+```{r ceof-damip} 
+ceof_largo_p %>% 
+  sep_ReIm() %>% 
+  # .[experiment == "historical"] %>% 
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  # .[, eof := scale_eof(eof, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
+  # .[, eof := scale(eof, center = mean(eof[time <= 1900]), 
+  #                  scale = sd(eof[time <= 1900])),
+  #   by = .(model, part, cEOF)] %>% 
+  .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>% 
+  
+  ggplot(aes(time, hgt, color = experiment)) +
+  # geom_line(aes(group = model), alpha = 0.1) +
+  geom_line(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, cEOF, part)]) +
+  geom_smooth(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, part, cEOF)]) +
+  
+  # geom_line(data = ceof_era5[, eof[[1]]$left] %>% sep_ReIm() %>% .[, eof := scale_eof(eof), by = .(cEOF, part)]) +
+  scale_x_continuous(NULL) +
+  scale_y_continuous(NULL) +
+  scale_color_experiments() +
+  # coord_cartesian(ylim = c(-1.5, 1.5)) +
+  facet_grid(part ~ cEOF)
+```
+
+
+```{r suma}
+# ceof_largo_p %>%
+#   sep_ReIm() %>%
+#   # .[experiment == "historical"] %>%
+#   .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
+#   .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>%
+#   .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>%
+#   .[, .(hist = hgt[experiment == "historical"],
+#         suma_forzantes = sum(hgt[experiment != "historical"])),
+#     by = .(model, time, part, cEOF)] %>%
+#   na.omit() %>%
+#   dt_pivot_longer(cols = c(hist, suma_forzantes)) %>%
+#   .[, .(value = mean(value)), by = .(time, name, part, cEOF)] %>%
+#   ggplot(aes(time, value)) +
+#   geom_line(aes(color = name), alpha = 0.4) +
+#   geom_smooth(aes(color = name)) +
+#   facet_grid(part ~ cEOF)
+```
+
+
+Para tratar de atribuir esta tendencia, computamos los mismos cEOFs para experimentos de DAMIP. 
+La Figura \@ref(fig:ceof-damip) muestra las series temporales para los experimentos hist-GHG, hist-nat, hist-stratO3 e hist-aer junto a las corridas históricas. 
+
+Para el cOEF1, el experimento hist-nat no presenta la tendencia observada, sugiriendo que ésta no se debe a variabilidad natural sino a forzantes externos. 
+La tendencia sí se detecta en el experimento hist-GHG y, más levemente, en el experimento hist-stratO3. 
+Esto sugiere que tanto las emisiones de gases de efecto invernadero como los cambios en el ozono estatosférico juegan un rol en la tendencia observada. 
+Por otro lado, el experimento hist-aer muestra una tendencia negativa comenzando al rededor de 1900, indicando que el aumento de los aerosoles compensa el efecto de los dos forzantes anteriores. 
+Esto podría explicar por qué la tendencia positiva en hist-GHG comienza también en 1900, mucho antes de que se observada la tendencia en la corrida histórica. 
+
+La parte imaginaria del cEOF1, que tanto en las observaciones como en la corrida histórica no presenta tendencia, sí tiene tendencias en los experimentos hist-GHG e hist-stratO3, aunque en direcciones opuestas y de magnitud similar. 
+Parecería que el cambio en el ozono estatosférico está contrarrestando el efecto del aumento de los gases de efecto invernadero. 
+Dado que se espera que en las próximas décadas el ozono estratosférico empiece a recuperarse, es posible que este efecto se revierta y la parte imaginaria del cEOF2 comience a presentar una tendencia negativa. 
+
+
+```{r trends_cmip, eval = FALSE}
+
+no_poolling <- ceof_largo_p %>% 
+  sep_ReIm() %>% 
+  # .[experiment == "historical"] %>% 
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[time >= 1960] %>% 
+  .[, FitLm(hgt, time, se = TRUE), by = .(experiment, model, ensemble, part)] %>% 
+  rm_intercept()
+
+
+trends_cmip <-ceof_largo_p %>% 
+  sep_ReIm() %>% 
+  # .[experiment == "historical"] %>% 
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[time >= 1960] %>% 
+  .[, model := as.factor(model)] %>% 
+  .[, .(model = list(lme4::lmer(hgt ~ time  + (time | model/ensemble), data = .SD))), by = .(part, cEOF, experiment)]
+```
+
+
+
+```{r lmer-funs, eval = FALSE}
+
+
+lmer_fixed <- function(model) {
+  summary <- summary(model)
+  
+  data.table::data.table(
+    term = rownames(summary$coefficients),
+    estimate = summary$coefficients[, 1],
+    std.error = summary$coefficients[, 2],
+    t.value = summary$coefficients[, 3]
+  )
+}
+
+lmer_rand <- function(model, level) {
+  
+  coef(model)[[level]] %>% 
+    data.table::as.data.table(keep.rownames = "level") %>% 
+    tidyfast::dt_pivot_longer(cols = -level, names_to = "term", values_to = "estimate") %>% 
+    tidyfast::dt_separate(level, sep = ":", into = strsplit(level, split = ":", fixed = TRUE)[[1]])
+  
+}
+
+```
+
+
+
+```{r trends-cmip, eval=FALSE, include=FALSE}
+trends_cmip %>% 
+  # [experiment == "historical"] %>% 
+  .[cEOF == "cEOF1"] %>%
+  ggplot() +
+  geom_point(data = \(x) x[, lmer_rand(model[[1]], "ensemble:model"), by = .(part, experiment, cEOF)] %>%
+               rm_intercept(),
+             aes(estimate, model)) +
+  geom_point(data = \(x) x[, lmer_rand(model[[1]], "model"), by = .(part, experiment, cEOF)] %>% rm_intercept(),
+             aes(estimate, model), size  = 3) +
+  geom_vline(data = \(x) x[, lmer_fixed(model[[1]]), by = .(part, experiment, cEOF)] %>% rm_intercept(),
+             aes(xintercept = estimate)) +
+  # geom_vline(data = \(x) x[, lmer_fixed(model[[1]]), by = .(part, cEOF)] %>% rm_intercept(),
+  #            aes(xintercept = estimate + 2*std.error)) +
+  #   geom_vline(data = \(x) x[, lmer_fixed(model[[1]]), by = .(part, cEOF)] %>% rm_intercept(),
+  #            aes(xintercept = estimate - 2*std.error)) +
+  
+  facet_grid(experiment + cEOF ~ part, scales = "free") +
+  panel_background()
+```
+
+
+
+```{r trends_cmip2,  eval=FALSE}
+trends_cmip %>% 
+  # .[cEOF == "cEOF1"] %>% 
+  .[, broom.mixed::tidy(model[[1]]), by = .(part, cEOF, experiment)] %>% 
+  .[effect == "fixed"] %>% 
+  rm_intercept() %>% 
+  ggplot(aes(part, estimate)) +
+  geom_col(aes(fill = experiment), position = position_dodge()) +
+  # geom_errorbar(aes(ymin = estimate - 2*std.error, ymax = estimate  + 2*std.error, 
+  #                   group = experiment), 
+  #               width = 0.3,
+  #               position = position_dodge(width = 0.9)) +
+  # scale_fill_experiments() +
+  facet_wrap(~cEOF) +
+  coord_flip() 
+
+```
+
+

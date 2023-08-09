@@ -1039,6 +1039,8 @@ sst_regr <- lapply(angles_regr, function(a) {
 }) %>% 
   rbindlist()
 
+saveRDS(sst_regr, data_path("derived","sst_regr_ERA5.Rds"))
+
 psi_for_regression <-  ceof[, eof[[1]]$left, by = .(season)] %>%
   # .[cEOF == "cEOF2"] %>% 
   copy() %>% 
@@ -1113,6 +1115,8 @@ t2m_regr <- lapply(angles_regr, function(a) {
 }) %>%
   rbindlist()
 ```
+
+
 
 ```{r enso_cor}
 enso_cor <- ceof[, eof[[1]]$left, by = .(season)] %>%

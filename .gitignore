@@ -49,7 +49,7 @@ vignettes/*.pdf
 
 # End of https://www.toptal.com/developers/gitignore/api/r
 
-
+log
 /tesis/cache/
 
 dropbox

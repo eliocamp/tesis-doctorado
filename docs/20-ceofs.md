@@ -175,7 +175,7 @@ Debido a que los campos que entran en el algoritmo de cEOF son anomalías con re
 Sin embargo, la media temporal de cEOF2 es casi cero, lo que indica que sólo cEOF1 incluye variabilidad que se proyecta significativamente sobre el campo anómalo zonal medio.
 Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 ($r^2$ = 98%) y no similar al cEOF2 ($r^2$ = 0%).
 
-Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \@ref(fig:extended-series)a.1, valor p = 0.0077), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
+Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \@ref(fig:extended-series)a.1, valor p = 0.58), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
 La tendencia positiva del cEOF1 de 0º se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
 Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de latitudes altas. 
 
@@ -274,10 +274,12 @@ Los mapas de regresión de las anomalías de CTO con el cEOF1 (Fig. \@ref(fig:o3
 La posición climatológica del mínimo de ozono durante la primavera (agujero de ozono) no está centrada sobre el Polo Sur, sino que está desplazada hacia el mar de Weddell [p.e., @grytsai2011]; este desplazamiento se traduce en una onda 1 de la CTO. 
 Así, el campo de regresión de la fase 0º del cEOF1 (Fig. \@ref(fig:o3-regr)a) coincide con la posición climatológica de esta onda 1 del agujero de ozono, mientras que el campo para la fase 90º está defasado en 90º cEOF1.
 La correlación temporal entre la amplitude de la onda 1 de CTO y la amplitud del cEOF1 es 0.77 (CI: 0.61 -- 0.87), mientras que la correlación entre sus fases es -0.84 (CI: -0.91 -- -0.72).
-La correlación entre las dos ondas es -0.87 (CI: -0.93 -- -0.77).
+La correlación entre las dos ondas es 0.12 (CI: -0.2 -- 0.41).
 En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
 
 ### Fuentes de variabilidad tropicales
+
+
 
 
 
@@ -324,10 +326,10 @@ Además de los mapas de regresión para las fases de 0º y 90º, incluimos las r
 
 La fase de 90º (fila b) está asociada a fuertes anomalías positivas de la SST en el Pacífico central y oriental y a anomalías negativas en una zona que atraviesa el norte de Australia, Nueva Zelanda y la Zona de Convergencia del Pacífico Sur (SPCZ) (Fig. \@ref(fig:sst-psi-2).b1).
 Este patrón es muy similar al patrón del ENSO positivo canónico [@bamston1997].
-De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (0.76 (CI: 0.59 -- 0.87)).
+De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (0.01 (CI: -0.3 -- 0.31)).
 Además del patrón similar al ENSO del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un dipolo del índico en su fase positiva [@saji1999].
-Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es 0.62 (CI: 0.38 -- 0.78).
-Sin embargo, la correlación parcial es de 0.32 (p-valor = 0.046), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo. 
+Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es -0.14 (CI: -0.43 -- 0.17).
+Sin embargo, la correlación parcial es de -0.18 (p-valor = 0.26), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo. 
 Esto puede observarse en la Figura \@ref(fig:euler), donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI. 
 El DMI aporta, independientemente, sólo un 4.3% de la varianza mientras que el ONI aporta un 23.8% por sí mismo. 
 
@@ -340,7 +342,7 @@ Esta respuesta atmosférica es consistente con el efecto combinado del ENSO y el
 
 Sin embargo, el cEOF2 no está asociado a los mismos patrones de anomalía de las SST tropicales en todas sus fases. 
 Los paneles d1 y d2 de la Figura \@ref(fig:sst-psi-2) muestran que la fase de 0º del cEOF2 no está asociada a ninguna anomalía significativa de las SST ni de la función corriente en los trópicos.
-Tampoco la correlación entre el 0º cEOF2 y ENSO es significativa (0 (CI: -0.31 -- 0.31)).
+Tampoco la correlación entre el 0º cEOF2 y ENSO es significativa (0.76 (CI: 0.59 -- 0.87)).
 Las filas a y c de la Fig.\@ref(fig:sst-psi-2) muestran que las fases intermedias siguen asociadas con anomalías significativas de la SST sobre el Océano Pacífico, pero en lugares ligeramente diferentes.
 La fase de 135º está asociada a anomalías de la SST en el Pacífico central (Fig.\@ref(fig:sst-psi-2)a.1), mientras que la fase de 45º está asociada a anomalías de la SST que corresponden aproximadamente a los "sabores" de ENSO del Pacífico central y del Pacífico oriental, respectivamente (Fig.\@ref(fig:sst-psi-2)c.1) [@kao2009].
 Ambas fases también están asociadas a trenes de onda que se generan cerca de Australia y se propagan hacia los extratrópicos, aunque menos intensos que los asociados a la fase de 90º.
@@ -355,7 +357,7 @@ Para explorar la relación entre el forzante tropical y las fases del cEOF2 con 
 En los años con ONI positivo, la fase cEOF2 se sitúa mayoritariamente en torno a la fase de 90º; en los años con ONI negativo, en torno a la fase de -90º.
 En las estaciones con ENSO neutro, la fase del cEOF2 es mucho más variable.
 La línea negra de la Figura \@ref(fig:enso-phase) es un ajuste sinusoidal de la relación entre el ONI y la fase del cEOF2.
-El $r^2$ correspondiente al ajuste es 0.56, estadísticamente significativo con p-valor < 0.001, lo que indica una relación casi sinusoidal entre estas dos variables.
+El $r^2$ correspondiente al ajuste es 10^{-4}, estadísticamente significativo con p-valor = 0.95, lo que indica una relación casi sinusoidal entre estas dos variables.
 
 La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es 0.45 (CI: 0.17 -- 0.67).
 Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (2015, 1997, y 1982), los cuales coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).

@@ -5,11 +5,11 @@
 #'
 #'
 #' @export
-geom_contour_pval <- function(mapping, p.value = 0.01, size = 0.1, ...) {
+geom_contour_pval <- function(mapping, p.value = 0.01, size = 0.1, hatch = 0, ...) {
   mapping2 <- mapping
   mapping2$fill <- aes(fill = NA)$fill
   list(
-    stat_contour_filled(mapping2, breaks = c(0, p.value), fill = NA, geom = pattern_dots, ...),
+    stat_contour_filled(mapping2, breaks = c(hatch, p.value), fill = NA, geom = pattern_dots, ...),
     geom_contour2(mapping, breaks = p.value, size = size, ...)
   )
 }

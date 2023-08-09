@@ -3,11 +3,12 @@
 #' @param files vector de archivos NetCDF con las corridas del modelo
 #' @param members nombres de los miembros de la simulación
 #' @param time vector que define el rango de fechas a usar
+#' @param ref cEOF de referencia
 #'
 #' @returns un objeto de clase EOF
 #'
 #' @export
-compute_ceof_cmip <- function(files, members, time = c("1979-10-01", "2014-12-31")) {
+compute_ceof_cmip <- function(files, members, time = c("1979-10-01", "2014-12-31"), ref = NULL) {
   message("procesando ", files[1])
 
   array <- lapply(files, function(file) {
@@ -85,15 +86,21 @@ compute_ceof_cmip <- function(files, members, time = c("1979-10-01", "2014-12-31
                                                 ordered = TRUE),
                                   sd = eof$d,
                                   r2 = eof$d^2/variance^2)
-  message("  terminado.")
-  return(structure(
+  ceof <- structure(
     list(left = eof$u,
          right = eof$v,
          sdev = eof$d),
     call = match.call(),
     class = c("eof", "list"),
     suffix = "cEOF",
-    value.var = "hgt"))
+    value.var = "hgt")
+
+  if (!is.null(ref)) {
+    ceof <- optimise_rotation(ceof, ref)
+  }
+
+  message("  terminado.")
+  return(ceof)
 }
 
 

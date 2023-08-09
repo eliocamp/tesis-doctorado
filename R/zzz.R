@@ -46,6 +46,16 @@ rm_singleton <- function(data) {
 }
 
 
+#' Testea si puntos están en la región ENSO 34
+#'
+#' @param lon,lat vectores de longitud y latitud
+#'
+#' @returns Un vector lógico para cada punto indicando si está dentro de la región de ENSO 34 o no
+#'
+#' @export
+is.enso34 <- function(lon, lat) {
+  (abs(lat) < 5) & (ConvertLongitude(lon) %between% c(-170, -120))
+}
 
 `%||%` <- function (x, y) {
   if (is.null(x))
@@ -57,3 +67,20 @@ rm_singleton <- function(data) {
 globalVariables(c(":=", ".", ".NATURAL"))
 
 .datatable.aware <- TRUE
+
+
+# zzz.R
+.onLoad <- function(libname, pkgname) {
+  cache_root <- here::here("cache", "memoise")
+  compute_sam_cmip_one <<- memoise::memoise(compute_sam_cmip_one,
+                                            cache = cachem::cache_disk(file.path(cache_root, "compute_sam_cmip_one"),
+                                                                       max_size = Inf))
+  ceof_proyectado <<- memoise::memoise(ceof_proyectado,
+                                       cache = cachem::cache_disk(file.path(cache_root, "ceof_proyectado"),
+                                                                  max_size = Inf))
+
+  compute_ceof_cmip <<- memoise::memoise(compute_ceof_cmip,
+                                         cache = cachem::cache_disk(file.path(cache_root, "compute_ceof_cmip"),
+                                                                    max_size = Inf))
+
+}

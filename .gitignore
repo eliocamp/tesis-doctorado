@@ -60,3 +60,7 @@ tesis/_bookdown_files/
 tesis/thesis.Rmd
 
 tesis/thesis.log
+
+tesis/data/derived_data/cmip_sam.Rds
+tesis/data/derived_data/cmip
+tesis/data/raw_data

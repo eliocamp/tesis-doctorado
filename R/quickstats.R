@@ -176,19 +176,36 @@ season_weights <- function(time, groups = metR::seasonally(time)) {
 #'
 #'
 #' @export
-correlate_complex <- function(z, x, angles = seq(-pi, pi, by = .5*pi/180), ...) {
-  data.table::rbindlist(
-    lapply(angles, function(angle) {
-      data.table::data.table(
-        angle = c(angle, angle),
-        part = c("Real", "Imaginario"),
-        correlation = c(cor(x, Re(rotate(z, angle)), ...),
-                        cor(x, Im(rotate(z, angle)), ...))
-      )
-    })
-  )
+correlate_complex <- function(z, x, angles = seq(0, pi, by = .5*pi/180), ...) {
+  cov_real <- stats::cov(Re(z), x)
+  cov_im <- stats::cov(Im(z), x)
+  cov_z <- stats::cov(Re(z), Im(z))
+  var_x <- stats::var(x)
+  var_real <- stats::var(Re(z))
+  var_im <- stats::var(Im(z))
+
+  cosa <- cos(angles)
+  sina <- sin(angles)
+
+
+  var <- cosa^2*var_real + sina^2*var_im - 2*cosa*sina*cov_z
+  cov <- (cosa*cov_real - sina*cov_im)
+
+  cor_real <- cov/sqrt(var*var_x)
+
+
+  var <- sina^2*var_real + cosa^2*var_im + 2*cosa*sina*cov_z
+  cov <- (sina*cov_real + cosa*cov_im)
+
+  cor_im <- cov/sqrt(var*var_x)
+
+
+  list(angle = c(angles, angles),
+       part = rep(c("Real", "Imaginario"), length(angles)),
+       correlation = c(cor_real, cor_im))
 
 }
+
 
 
 #' Rotar un número complejo

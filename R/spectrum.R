@@ -34,7 +34,7 @@ arspectrum <- function(freq, rho, var) {
 
 
 
-null_ar_spectrum_ <- function(B = 100, n, ar, spans = NULL, ..., probs = 0.95) {
+null_ar_spectrum <- function(B = 100, n, ar, spans = NULL, ..., probs = 0.95) {
   y <- as.vector(stats::arima.sim(model = list(ar = ar$ar), n = n))*sqrt(ar$var.pred)
   nfreq <- length(stats::spec.pgram(y, spans = spans, ..., plot = FALSE)$spec)
   boots <- vapply(seq_len(B), function(b) {
@@ -42,10 +42,9 @@ null_ar_spectrum_ <- function(B = 100, n, ar, spans = NULL, ..., probs = 0.95) {
     stats::spec.pgram(y, spans = spans, plot = FALSE)$spec
 
   }, numeric(nfreq))
-  data.table::as.data.table(apply(boots, 1, stats::quantile, probs = probs))
-}
 
-null_ar_spectrum <- memoise::memoise(null_ar_spectrum_)
+  data.table::as.data.table(t(apply(boots, 1, stats::quantile, probs = probs)))
+}
 
 null_spec <- memoise::memoise(function(x, spans, B = 1000, ..., probs = 0.95) {
 

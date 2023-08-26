@@ -201,7 +201,7 @@ correlate_complex <- function(z, x, angles = seq(0, pi, by = .5*pi/180), ...) {
 
 
   list(angle = c(angles, angles),
-       part = rep(c("Real", "Imaginario"), length(angles)),
+       part = rep(c("Real", "Imaginario"), each = length(angles)),
        correlation = c(cor_real, cor_im))
 
 }

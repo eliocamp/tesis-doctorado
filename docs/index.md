@@ -2,7 +2,7 @@
 title: 'Ondas de Rossby planetarias en la circulación atmosférica del hemisferio sur y su influencia en Sudamérica'
 author: 'Lic. Elio Campitelli'
 # date: 'BUENOS AIRES, 2023'
-date: "2023-08-09 15:54:56"
+date: "2023-08-23 17:23:16"
 institution: 'Universidad de Buenos Aires'
 division: 'Facultad de Ciencias Exactas y Naturales'
 advisor: 'Carolina Vera'
@@ -60,7 +60,9 @@ dedication: |
 
 # Specify the location of the bibliography below
 bibliography:
+  - bib/cmip-models.bib
   - bib/tesis-doctorado.bib
+
 #   - bib/era.bib
 #   - bib/packages.bib
 # Download your specific csl file and refer to it in the line below.

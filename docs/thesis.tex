@@ -84,7 +84,7 @@
 \title{Ondas de Rossby planetarias en la circulación atmosférica del hemisferio sur y su influencia en Sudamérica}
 \author{Lic. Elio Campitelli}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
-\date{BUENOS AIRES, 2023}
+\date{2023-08-23 17:16:06}
 \division{Facultad de Ciencias Exactas y Naturales}
 \advisor{Carolina Vera}
 \institution{Universidad de Buenos Aires}
@@ -414,17 +414,12 @@ Para obtener los coeficientes lineales de una variable \(X\) con la fase 0º y 9
 
 \begin{equation}
 X(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{cEOF_{0º}} + \beta(\lambda, \phi) \operatorname{cEOF_{90º}} + X_0(\lambda, \phi) + \epsilon(\lambda, \phi, t)
- \label{eq:multiple-regression}
+\label{eq:multiple-regression}
 \end{equation}
 
 donde \(\lambda\) y \(\phi\) son la longitud y la latitud, \(t\) es el tiempo, \(\alpha\) y \(\beta\) son los coeficientes de regresión lineal para las fases de 0º y 90º respectivamente, \(X_0\) y \(\epsilon\) son la constante y los términos de error respectivamente.
 
 Evaluamos la significancia estadística mediante una prueba t a dos colas y, en el caso de los mapas de regresión, ajustamos los p-valores controlando la Tasa de Descubrimiento Falso (Benjamini and Hochberg, 1995; Wilks, 2016) para evitar resultados engañosos derivados del elevado número de regresiones (Walker, 1914; Katz and Brown, 1991).
-
-\hypertarget{primavera}{%
-\subsection{Primavera}\label{primavera}}
-
-Primero evaluamos la primavera en detalle porque es la más interesante y donde las señales son más claras.
 
 \hypertarget{descripciuxf3n-de-los-modos}{%
 \subsubsection{Descripción de los modos}\label{descripciuxf3n-de-los-modos}}
@@ -474,7 +469,7 @@ Debido a que los campos que entran en el algoritmo de cEOF son anomalías con re
 Sin embargo, la media temporal de cEOF2 es casi cero, lo que indica que sólo cEOF1 incluye variabilidad que se proyecta significativamente sobre el campo anómalo zonal medio.
 Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 (\(r^2\) = 98\%) y no similar al cEOF2 (\(r^2\) = 0\%).
 
-Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \ref{fig:extended-series}a.1, valor p = 0.59), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
+Es evidente una tendencia positiva significativa en la fase 0º de cEOF1 (Fig. \ref{fig:extended-series}a.1, valor p = 0.0086), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
 La tendencia positiva del cEOF1 de 0º se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
 Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de latitudes altas.
 
@@ -576,7 +571,7 @@ Los mapas de regresión de las anomalías de CTO con el cEOF1 (Fig. \ref{fig:o3-
 La posición climatológica del mínimo de ozono durante la primavera (agujero de ozono) no está centrada sobre el Polo Sur, sino que está desplazada hacia el mar de Weddell (p.e., Grytsai, 2011); este desplazamiento se traduce en una onda 1 de la CTO.
 Así, el campo de regresión de la fase 0º del cEOF1 (Fig.~\ref{fig:o3-regr}a) coincide con la posición climatológica de esta onda 1 del agujero de ozono, mientras que el campo para la fase 90º está defasado en 90º cEOF1.
 La correlación temporal entre la amplitude de la onda 1 de CTO y la amplitud del cEOF1 es 0.77 (CI: 0.61 -- 0.87), mientras que la correlación entre sus fases es -0.84 (CI: -0.91 -- -0.72).
-La correlación entre las dos ondas es 0.12 (CI: -0.2 -- 0.41).
+La correlación entre las dos ondas es -0.7 (CI: -0.83 -- -0.5).
 En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del ozono SH.
 
 \hypertarget{fuentes-de-variabilidad-tropicales}{%
@@ -614,7 +609,7 @@ Este patrón es muy similar al patrón del ENSO positivo canónico (Bamston et a
 De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (0.76 (CI: 0.59 -- 0.87)).
 Además del patrón similar al ENSO del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja a un dipolo del índico en su fase positiva (Saji et al., 1999).
 Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es 0.62 (CI: 0.38 -- 0.78).
-Sin embargo, la correlación parcial es de 0.32 (p-valor = 0.046), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo.
+Sin embargo, la correlación parcial es de 0.32 (p-valor = 0.045), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo.
 Esto puede observarse en la Figura \ref{fig:euler}, donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI.
 El DMI aporta, independientemente, sólo un 4.3\% de la varianza mientras que el ONI aporta un 23.8\% por sí mismo.
 
@@ -629,7 +624,7 @@ Esta respuesta atmosférica es consistente con el efecto combinado del ENSO y el
 
 Sin embargo, el cEOF2 no está asociado a los mismos patrones de anomalía de las SST tropicales en todas sus fases.
 Los paneles d1 y d2 de la Figura \ref{fig:sst-psi-2} muestran que la fase de 0º del cEOF2 no está asociada a ninguna anomalía significativa de las SST ni de la función corriente en los trópicos.
-Tampoco la correlación entre el 0º cEOF2 y ENSO es significativa (0 (CI: -0.31 -- 0.31)).
+Tampoco la correlación entre el 0º cEOF2 y ENSO es significativa (0 (CI: -0.31 -- 0.3)).
 Las filas a y c de la Fig.\ref{fig:sst-psi-2} muestran que las fases intermedias siguen asociadas con anomalías significativas de la SST sobre el Océano Pacífico, pero en lugares ligeramente diferentes.
 La fase de 135º está asociada a anomalías de la SST en el Pacífico central (Fig.\ref{fig:sst-psi-2}a.1), mientras que la fase de 45º está asociada a anomalías de la SST que corresponden aproximadamente a los ``sabores'' de ENSO del Pacífico central y del Pacífico oriental, respectivamente (Fig.\ref{fig:sst-psi-2}c.1) (Kao and Yu, 2009).
 Ambas fases también están asociadas a trenes de onda que se generan cerca de Australia y se propagan hacia los extratrópicos, aunque menos intensos que los asociados a la fase de 90º.
@@ -724,16 +719,6 @@ Este campo de correlación coincide con la señal de ENSO la precipitación de p
 
 Los coeficientes de correlación entre las anomalías de precipitación y la fase de 0º del cEOF2 (Fig.~\ref{fig:pp-temp-2}d.2) son más débiles que para la fase de 90º.
 Hay una correlación positiva residual en el Pacífico oriental ecuatorial y pequeñas correlaciones positivas, no estadísticamente significativas, sobre el este de Australia y negativas sobre Nueva Zelanda.
-
-\hypertarget{otras-estaciones}{%
-\subsection{Otras estaciones ??}\label{otras-estaciones}}
-
-Definitivamente extender al resto del año.
-(índice mensual).
-Esto faltaría.
-Hay código para hacerlo, pero falta la interpretación, que es lo importante.
-
-Sería un análisis más modesto.
 
 \hypertarget{estructura-simuxe9trica-y-asimuxe9trica-del-sam}{%
 \section{Estructura simétrica y asimétrica del SAM}\label{estructura-simuxe9trica-y-asimuxe9trica-del-sam}}
@@ -1293,20 +1278,20 @@ Estimaciones con p-valor menor a 0.01 en negrita.}
 \toprule
 PC & season & Real & Imaginario\\
 \midrule
-PSA1 &  & 0.4 (CI: 0.1 -- 0.63) & \textbf{0.72 (CI: 0.53 -- 0.84)}\\
+PSA1 &  & \textbf{0.75 (CI: 0.57 -- 0.86)} & -0.19 (CI: -0.48 -- 0.13)\\
 \cmidrule{1-1}
 \cmidrule{3-4}
-PSA2 & \multirow[t]{-2}{*}{\raggedright\arraybackslash DJF} & \textbf{0.54 (CI: 0.28 -- 0.73)} & 0.22 (CI: -0.1 -- 0.5)\\
+PSA2 & \multirow[t]{-2}{*}{\raggedright\arraybackslash DJF} & 0.33 (CI: 0.02 -- 0.58) & \textbf{-0.5 (CI: -0.7 -- -0.22)}\\
 \cmidrule{1-4}
-PSA1 &  & 0.36 (CI: 0.06 -- 0.6) & 0.17 (CI: -0.14 -- 0.46)\\
+PSA1 &  & -0.17 (CI: -0.46 -- 0.14) & 0.36 (CI: 0.06 -- 0.6)\\
 \cmidrule{1-1}
 \cmidrule{3-4}
-PSA2 & \multirow[t]{-2}{*}{\raggedright\arraybackslash MAM} & \textbf{0.49 (CI: 0.22 -- 0.7)} & \textbf{-0.72 (CI: -0.84 -- -0.53)}\\
+PSA2 & \multirow[t]{-2}{*}{\raggedright\arraybackslash MAM} & \textbf{0.72 (CI: 0.53 -- 0.84)} & \textbf{0.49 (CI: 0.22 -- 0.69)}\\
 \cmidrule{1-4}
-PSA1 &  & 0.06 (CI: -0.25 -- 0.36) & \textbf{0.44 (CI: 0.15 -- 0.66)}\\
+PSA1 &  & 0.2 (CI: -0.12 -- 0.48) & \textbf{0.41 (CI: 0.11 -- 0.63)}\\
 \cmidrule{1-1}
 \cmidrule{3-4}
-PSA2 & \multirow[t]{-2}{*}{\raggedright\arraybackslash JJA} & \textbf{0.83 (CI: 0.69 -- 0.9)} & -0.14 (CI: -0.43 -- 0.17)\\
+PSA2 & \multirow[t]{-2}{*}{\raggedright\arraybackslash JJA} & \textbf{0.71 (CI: 0.52 -- 0.84)} & \textbf{-0.4 (CI: -0.63 -- -0.11)}\\
 \cmidrule{1-4}
 PSA1 &  & 0.15 (CI: -0.16 -- 0.44) & \textbf{0.74 (CI: 0.56 -- 0.85)}\\
 \cmidrule{1-1}
@@ -1338,8 +1323,6 @@ La Figura \ref{fig:phase-histogram} muestra un histograma para cada trimestre co
 En SON (panel 4), el cEOF2 tiene una fase similar a \(\pm\) 90º un 61\% de los años, indicando que es la fase más común.
 Esta preferencia de fase está de acuerdo con Irving and Simmonds (2016), que encontró una distribución bimodal a la variabilidad tipo PSA (compare nuestra Figura \ref{fig:phase-histogram} con su Figura 6).
 
-\todo[inline]{Faltaría analizar las otras estaciones, pero quiero ver lo anterior primero}
-
 \hypertarget{enso}{%
 \subsection{ENSO}\label{enso}}
 
@@ -1351,69 +1334,77 @@ Esta preferencia de fase está de acuerdo con Irving and Simmonds (2016), que en
 \hypertarget{muxe9todos}{%
 \subsection{Métodos}\label{muxe9todos}}
 
-\begin{table}
-
-\caption{\label{tab:modelos}Modelos analizados y la cantidad de miembros para cada experimento.}
-\centering
-\begin{tabular}[t]{l|r|r|r|r|r}
-\hline
-model & historical & hist-GHG & hist-nat & hist-aer & hist-stratO3\\
-\hline
-MIROC6 & 100 & 50 & 50 & 3 & 10\\
-\hline
-ACCESS-ESM1-5 & 80 & 3 & 3 & 0 & 0\\
-\hline
-IPSL-CM6A-LR & 66 & 10 & 10 & 10 & 10\\
-\hline
-CNRM-CM6-1 & 60 & 10 & 10 & 10 & 0\\
-\hline
-MIROC-ES2L & 60 & 0 & 0 & 0 & 0\\
-\hline
-MPI-ESM1-2-LR & 60 & 0 & 0 & 0 & 0\\
-\hline
-NorCPM1 & 60 & 0 & 0 & 0 & 0\\
-\hline
-CanESM5 & 50 & 50 & 50 & 10 & 10\\
-\hline
-UKESM1-0-LL & 30 & 0 & 0 & 0 & 0\\
-\hline
-GISS-E2-1-G & 24 & 10 & 20 & 0 & 5\\
-\hline
-CESM2 & 22 & 3 & 3 & 0 & 0\\
-\hline
-CNRM-ESM2-1 & 21 & 0 & 0 & 0 & 0\\
-\hline
-MRI-ESM2-0 & 20 & 5 & 5 & 2 & 3\\
-\hline
-INM-CM5-0 & 20 & 0 & 0 & 0 & 0\\
-\hline
-MPI-ESM1-2-HR & 20 & 0 & 0 & 0 & 0\\
-\hline
-FGOALS-g3 & 12 & 3 & 3 & 0 & 0\\
-\hline
-HadGEM3-GC31-LL & 10 & 5 & 10 & 4 & 0\\
-\hline
-ACCESS-CM2 & 10 & 3 & 3 & 0 & 0\\
-\hline
-E3SM-1-0 & 10 & 3 & 0 & 0 & 0\\
-\hline
-AWI-CM-1-1-MR & 10 & 0 & 0 & 0 & 0\\
-\hline
-NESM3 & 10 & 0 & 0 & 0 & 0\\
-\hline
-BCC-CSM2-MR & 0 & 3 & 3 & 3 & 0\\
-\hline
-NorESM2-LM & 0 & 3 & 3 & 0 & 0\\
-\hline
-GFDL-ESM4 & 0 & 1 & 3 & 0 & 0\\
-\hline
-GFDL-CM4 & 0 & 0 & 3 & 0 & 0\\
-\hline
-\end{tabular}
-\end{table}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.6304}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0797}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0652}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0652}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0652}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0942}}@{}}
+\caption{\label{tab:modelos}Modelos analizados y la cantidad de miembros para cada experimento.}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Modelo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+historical
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-GHG
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-nat
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-aer
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-stratO3
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Modelo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+historical
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-GHG
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-nat
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-aer
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hist-stratO3
+\end{minipage} \\
+\midrule()
+\endhead
+AWI-CM-1-1-MR (Semmler et al., 2018) & 10 & 0 & 0 & 0 & 0 \\
+FGOALS-g3 (Li, 2019, 2020) & 12 & 3 & 3 & 0 & 0 \\
+CanESM5 (Swart et al., 2019a, 2019b) & 50 & 50 & 50 & 10 & 10 \\
+CNRM-CM6-1 (Voldoire, 2018, 2019) & 60 & 10 & 10 & 10 & 0 \\
+CNRM-ESM2-1 (Seferian, 2018) & 21 & 0 & 0 & 0 & 0 \\
+ACCESS-ESM1-5 (Ziehn et al., 2019, 2020) & 80 & 3 & 3 & 0 & 0 \\
+ACCESS-CM2 (Dix et al., 2019, 2020) & 10 & 3 & 3 & 0 & 0 \\
+IPSL-CM6A-LR (Boucher et al., 2018a, 2018b) & 66 & 10 & 10 & 10 & 10 \\
+MIROC6 (Tatebe and Watanabe, 2018; Shiogama, 2019) & 100 & 50 & 50 & 3 & 10 \\
+HadGEM3-GC31-LL (Ridley et al., 2018; Jones, 2019) & 10 & 5 & 10 & 4 & 0 \\
+UKESM1-0-LL (Tang et al., 2019; Shim et al., 2020) & 30 & 0 & 0 & 0 & 0 \\
+MPI-ESM1-2-HR (Jungclaus et al., 2019) & 20 & 0 & 0 & 0 & 0 \\
+MPI-ESM1-2-LR (Wieners et al., 2019) & 60 & 0 & 0 & 0 & 0 \\
+GISS-E2-1-G (Space Studies (NASA/GISS), 2018a, 2018b) & 24 & 10 & 20 & 0 & 5 \\
+CESM2 (Danabasoglu, 2019a, 2019b) & 22 & 3 & 3 & 0 & 0 \\
+NorCPM1 (Bethke et al., 2019) & 60 & 0 & 0 & 0 & 0 \\
+NESM3 (Cao and Wang, 2019) & 10 & 0 & 0 & 0 & 0 \\
+E3SM-1-0 (Bader et al., 2019; E3SM-project E3SM1.0 model output prepared for CMIP6 DAMIP, 2022) & 10 & 3 & 0 & 0 & 0 \\
+INM-CM5-0 (Volodin et al., 2019) & 20 & 0 & 0 & 0 & 0 \\
+BCC-CSM2-MR (Xin et al., 2019) & 0 & 3 & 3 & 3 & 0 \\
+MRI-ESM2-0 (Yukimoto et al., 2019) & 20 & 5 & 5 & 2 & 3 \\
+NorESM2-LM (Seland et al., 2019) & 0 & 3 & 3 & 0 & 0 \\
+GFDL-CM4 (Ploshay et al., 2018) & 0 & 0 & 3 & 0 & 0 \\
+GFDL-ESM4 (Horowitz et al., 2018) & 0 & 1 & 3 & 0 & 0 \\
+\bottomrule()
+\end{longtable}
 
 Los modelos usados se listan en la Tabla \ref{tab:modelos} se listan todos los modelos y la cantidad de miembros de cada uno.
 Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas (``historical'') y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero (``hist-GHG''), variabilidad natural sin forzantes antropogénicos (``hist-nat'') y sólo el efecto de el ozono estratosférico (``hist-stratO3'').
+
+Semmler et al. (2018)
 
 Algunos miembros tienen más de una inicialización, parametrización física o datos usados para el forzante.
 Elegimos un único miembro de esos.
@@ -1573,6 +1564,15 @@ La parte imaginaria del cEOF1, que tanto en las observaciones como en la corrida
 Parecería que el cambio en el ozono estatosférico está contrarrestando el efecto del aumento de los gases de efecto invernadero.
 Dado que se espera que en las próximas décadas el ozono estratosférico empiece a recuperarse, es posible que este efecto se revierta y la parte imaginaria del cEOF2 comience a presentar una tendencia negativa.
 
+(ref:suma-cap)
+
+\begin{figure}
+\includegraphics{figures/50-cmip6/suma-1} \caption{(ref:suma-cap)}\label{fig:suma}
+\end{figure}
+
+Como una aproximación, la Figura \ref{fig:suma} muestra la media multimodelo de la corrida histórica junto con la suma de las medias multimodelo de las corridas hist-GHG, hist-stratO3 e hist-aer.
+Sorpendentemente ambas series presentan una variabilidad a largo plazo virtualmente id éntica, sugiriendo que el efecto de los forzantes es aproximadamente lineal.
+
 \hypertarget{conclusiones}{%
 \section{Conclusiones}\label{conclusiones}}
 
@@ -1593,6 +1593,9 @@ Dado que se espera que en las próximas décadas el ozono estratosférico empiec
 \leavevmode\vadjust pre{\hypertarget{ref-arblaster2006}{}}%
 Arblaster, J.M., and Meehl, G.A., 2006. \href{https://doi.org/10.1175/JCLI3774.1}{Contributions of {External Forcings} to {Southern Annular Mode Trends}}. Journal of Climate, 19, 12, 2896--2905.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.E3SM-Project.E3SM-1-0}{}}%
+Bader, D.C., Leung, R., Taylor, M., and McCoy, R.B., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.2294}{E3SM-project E3SM1.0 model output prepared for CMIP6 CMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-baldwin2001}{}}%
 Baldwin, M.P., 2001. \href{https://doi.org/10.1029/2001GL013564}{Annular modes in global daily surface pressure}. Geophysical Research Letters, 28, 21, 4115--4118.
 
@@ -1611,6 +1614,15 @@ Bamston, A.G., Chelliah, M., and Goldenberg, S.B., 1997. \href{https://doi.org/1
 \leavevmode\vadjust pre{\hypertarget{ref-benjamini1995}{}}%
 Benjamini, Y., and Hochberg, Y., 1995. \href{https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}{Controlling the {False Discovery Rate}: {A Practical} and {Powerful Approach} to {Multiple Testing}}. Journal of the Royal Statistical Society: Series B (Methodological), 57, 1, 289--300.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.NCC.NorCPM1}{}}%
+Bethke, I., Wang, Y., Counillon, F., Kimmritz, M., Fransner, F., Samuelsen, A., Langehaug, H.R., Chiu, P.-G., Bentsen, M., Guo, C., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.10843}{NCC NorCPM1 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.IPSL.IPSL-CM6A-LR}{}}%
+Boucher, O., Denvil, S., Levavasseur, G., Cozic, A., Caubel, A., Foujols, M.-A., Meurdesoif, Y., Cadule, P., Devilliers, M., Ghattas, J., and others, 2018a. \href{https://doi.org/10.22033/ESGF/CMIP6.1534}{IPSL IPSL-CM6A-LR model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.IPSL.IPSL-CM6A-LR}{}}%
+Boucher, O., Denvil, S., Levavasseur, G., Cozic, A., Caubel, A., Foujols, M.-A., Meurdesoif, Y., and Gastineau, G., 2018b. \href{https://doi.org/10.22033/ESGF/CMIP6.13801}{IPSL IPSL-CM6A-LR model output prepared for CMIP6 DAMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-cai2011}{}}%
 Cai, W., Rensch, P. van, Cowan, T., and Hendon, H.H., 2011. \href{https://doi.org/10.1175/2011JCLI4129.1}{Teleconnection {Pathways} of {ENSO} and the {IOD} and the {Mechanisms} for {Impacts} on {Australian Rainfall}}. Journal of Climate, 24, 15, 3910--3923.
 
@@ -1620,11 +1632,29 @@ Cai, W., McPhaden, M.J., Grimm, A.M., Rodrigues, R.R., Taschetto, A.S., Garreaud
 \leavevmode\vadjust pre{\hypertarget{ref-campitelli2022}{}}%
 Campitelli, E., Díaz, L.B., and Vera, C., 2022. \href{https://doi.org/10.1007/s00382-021-05896-5}{Assessment of zonally symmetric and asymmetric components of the {Southern Annular Mode} using a novel approach}. Climate Dynamics, 58, 1, 161--178.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.NUIST.NESM3}{}}%
+Cao, J., and Wang, B., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.2021}{NUIST NESMv3 model output prepared for CMIP6 CMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-chung1999}{}}%
 Chung, C., and Nigam, S., 1999. \href{https://doi.org/10.1029/1999JD900234}{Weighting of geophysical data in {Principal Component Analysis}}. Journal of Geophysical Research: Atmospheres, 104, D14, 16925--16928.
 
 \leavevmode\vadjust pre{\hypertarget{ref-clem2013}{}}%
 Clem, K.R., and Fogt, R.L., 2013. \href{https://doi.org/10.1002/jgrd.50860}{Varying roles of {ENSO} and {SAM} on the {Antarctic Peninsula} climate in austral spring}. Journal of Geophysical Research: Atmospheres, 118, 20, 11, 481--11, 492.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.NCAR.CESM2}{}}%
+Danabasoglu, G., 2019a. \href{https://doi.org/10.22033/ESGF/CMIP6.2185}{NCAR CESM2 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.NCAR.CESM2}{}}%
+---------, 2019b. \href{https://doi.org/10.22033/ESGF/CMIP6.2187}{NCAR CESM2 model output prepared for CMIP6 DAMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.CSIRO-ARCCSS.ACCESS-CM2}{}}%
+Dix, M., Bi, D., Dobrohotoff, P., Fiedler, R., Harman, I., Law, R., Mackallah, C., Marsland, S., O'Farrell, S., Rashid, H., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.2281}{CSIRO-ARCCSS ACCESS-CM2 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.CSIRO-ARCCSS.ACCESS-CM2}{}}%
+Dix, M., Mackallah, C., Bi, D., Bodman, R., Marsland, S., Rashid, H., Woodhouse, M., and Druken, K., 2020. \href{https://doi.org/10.22033/ESGF/CMIP6.14361}{CSIRO-ARCCSS ACCESS-CM2 model output prepared for CMIP6 DAMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.E3SM-Project.E3SM-1-0}{}}%
+\href{http://cera-www.dkrz.de/WDCC/meta/CMIP6/CMIP6.DAMIP.E3SM-Project.E3SM-1-0}{E3SM-project E3SM1.0 model output prepared for CMIP6 DAMIP}, 2022.
 
 \leavevmode\vadjust pre{\hypertarget{ref-fan2007}{}}%
 Fan, K., 2007. \href{https://doi.org/10.1029/2006GL028045}{Zonal asymmetry of the {Antarctic Oscillation}}. Geophysical Research Letters, 34, 2.
@@ -1674,14 +1704,23 @@ Ho, M., Kiem, A.S., and Verdon-Kidd, D.C., 2012. \href{https://doi.org/10.5194/h
 \leavevmode\vadjust pre{\hypertarget{ref-horel1984}{}}%
 Horel, J.D., 1984. \href{https://doi.org/10.1175/1520-0450(1984)023\%3C1660:CPCATA\%3E2.0.CO;2}{Complex {Principal Component Analysis}: {Theory} and {Examples}}. Journal of Applied Meteorology and Climatology, 23, 12, 1660--1673.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.NOAA-GFDL.GFDL-ESM4}{}}%
+Horowitz, L.W., John, J.G., Blanton, C., McHugh, C., Radhakrishnan, A., Rand, K., Vahlenkamp, H., Zadeh, N.T., Wilson, C., Dunne, J.P., and others, 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.1408}{NOAA-GFDL GFDL-ESM4 model output prepared for CMIP6 DAMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-irving2016}{}}%
 Irving, D., and Simmonds, I., 2016. \href{https://doi.org/10.1175/JCLI-D-15-0843.1}{A {New Method} for {Identifying} the {Pacific}\textendash{{South American Pattern}} and {Its Influence} on {Regional Climate Variability}}. Journal of Climate, 29, 17, 6109--6125.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.MOHC.HadGEM3-GC31-LL}{}}%
+Jones, G., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.471}{MOHC HadGEM3-GC31-LL model output prepared for CMIP6 DAMIP}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-jones2009}{}}%
 Jones, J.M., Fogt, R.L., Widmann, M., Marshall, G.J., Jones, P.D., and Visbeck, M., 2009. \href{https://doi.org/10.1175/2009JCLI2785.1}{Historical {SAM Variability}. {Part I}: {Century-Length Seasonal Reconstructions}}. Journal of Climate, 22, 20, 5319--5345.
 
 \leavevmode\vadjust pre{\hypertarget{ref-jones2019}{}}%
 Jones, M.E., Bromwich, D.H., Nicolas, J.P., Carrasco, J., Plavcová, E., Zou, X., and Wang, S.-H., 2019. \href{https://doi.org/10.1175/JCLI-D-18-0565.1}{Sixty {Years} of {Widespread Warming} in the {Southern Middle} and {High Latitudes} (1957\textendash 2016)}. Journal of Climate, 32, 20, 6875--6898.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.MPI-M.MPI-ESM1-2-HR}{}}%
+Jungclaus, J., Bittner, M., Wieners, K.-H., Wachsmann, F., Schupfner, M., Legutke, S., Giorgetta, M., Reick, C., Gayler, V., Haak, H., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.741}{MPI-m MPIESM1.2-HR model output prepared for CMIP6 CMIP}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-kao2009}{}}%
 Kao, H.-Y., and Yu, J.-Y., 2009. \href{https://doi.org/10.1175/2008JCLI2309.1}{Contrasting {Eastern-Pacific} and {Central-Pacific Types} of {ENSO}}. Journal of Climate, 22, 3, 615--632.
@@ -1694,6 +1733,12 @@ Katz, R.W., and Brown, B.G., 1991. \href{https://doi.org/10.1002/joc.3370110504}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kidson1988}{}}%
 Kidson, J.W., 1988. \href{https://doi.org/10.1175/1520-0442(1988)001\%3C1177:IVITSH\%3E2.0.CO;2}{Interannual {Variations} in the {Southern Hemisphere Circulation}}. Journal of Climate, 1, 12, 1177--1198.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.CAS.FGOALS-g3}{}}%
+Li, L., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.1783}{CAS FGOALS-g3 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.CAS.FGOALS-g3}{}}%
+---------, 2020. \href{https://doi.org/10.22033/ESGF/CMIP6.2048}{CAS FGOALS-g3 model output prepared for CMIP6 DAMIP}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-lim2016}{}}%
 Lim, E.-P., Hendon, H.H., Arblaster, J.M., Delage, F., Nguyen, H., Min, S.-K., and Wheeler, M.C., 2016. \href{https://doi.org/10.1002/2016GL069453}{The impact of the {Southern Annular Mode} on future changes in {Southern Hemisphere} rainfall}. Geophysical Research Letters, 43, 13, 7160--7167.
@@ -1722,8 +1767,14 @@ Nicolas, J.P., and Bromwich, D.H., 2014. \href{https://doi.org/10.1175/JCLI-D-13
 \leavevmode\vadjust pre{\hypertarget{ref-nuncio2015}{}}%
 Nuncio, M., and Yuan, X., 2015. \href{https://doi.org/10.1175/JCLI-D-14-00390.1}{The {Influence} of the {Indian Ocean Dipole} on {Antarctic Sea Ice}}. Journal of Climate, 28, 7, 2682--2690.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.NOAA-GFDL.GFDL-CM4}{}}%
+Ploshay, J., Hurlin, W., John, J.G., Blanton, C., McHugh, C., Radhakrishnan, A., Rand, K., Vahlenkamp, H., Zadeh, N.T., Wilson, C., and others, 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.11383}{NOAA-GFDL GFDL-CM4 model output prepared for CMIP6 DAMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-raphael2004}{}}%
 Raphael, M.N., 2004. \href{https://doi.org/10.1029/2004GL020365}{A zonal wave 3 index for the {Southern Hemisphere}}. Geophysical Research Letters, 31, 23.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.MOHC.HadGEM3-GC31-LL}{}}%
+Ridley, J., Menary, M., Kuhlbrodt, T., Andrews, M., and Andrews, T., 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.419}{MOHC HadGEM3-GC31-LL model output prepared for CMIP6 CMIP}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-rogers1982}{}}%
 Rogers, J.C., and van Loon, H., 1982. \href{https://doi.org/10.1175/1520-0493(1982)110\%3C1375:SVOSLP\%3E2.0.CO;2}{Spatial {Variability} of {Sea Level Pressure} and 500 mb {Height Anomalies} over the {Southern Hemisphere}}. Monthly Weather Review, 110, 10, 1375--1392.
@@ -1737,8 +1788,23 @@ Rosso, F.V., Boiaski, N.T., Ferraz, S.E.T., and Robles, T.C., 2018. \href{https:
 \leavevmode\vadjust pre{\hypertarget{ref-saji1999}{}}%
 Saji, N.H., Goswami, B.N., Vinayachandran, P.N., and Yamagata, T., 1999. \href{https://doi.org/10.1038/43854}{A dipole mode in the tropical {Indian Ocean}}. Nature, 401, 6751, 360--363.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.CNRM-CERFACS.CNRM-ESM2-1}{}}%
+Seferian, R., 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.1391}{CNRM-CERFACS CNRM-ESM2-1 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.NCC.NorESM2-LM}{}}%
+Seland, ?yvind., Bentsen, M., Oliviè, D.J.L., Toniazzo, T., Gjermundsen, A., Graff, L.S., Debernard, J.B., Gupta, A.K., He, Y., Kirkevåg, A., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.580}{NCC NorESM2-LM model output prepared for CMIP6 DAMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.AWI.AWI-CM-1-1-MR}{}}%
+Semmler, T., Danilov, S., Rackow, T., Sidorenko, D., Barbi, D., Hegewald, J., Sein, D., Wang, Q., and Jung, T., 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.359}{AWI AWI-CM1.1MR model output prepared for CMIP6 CMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-sheather1991}{}}%
 Sheather, S.J., and Jones, M.C., 1991. \href{https://www.jstor.org/stable/2345597}{A {Reliable Data-Based Bandwidth Selection Method} for {Kernel Density Estimation}}. Journal of the Royal Statistical Society. Series B (Methodological), 53, 3, 683--690.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.NIMS-KMA.UKESM1-0-LL}{}}%
+Shim, S., Lim, Y.-J., Byun, Y.-H., Seo, J., Kwon, S., and Kim, B.-H., 2020. \href{https://doi.org/10.22033/ESGF/CMIP6.2245}{NIMS-KMA UKESM1.0-LL model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.MIROC.MIROC6}{}}%
+Shiogama, H., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.894}{MIROC MIROC6 model output prepared for CMIP6 DAMIP}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-silvestri2009}{}}%
 Silvestri, G., and Vera, C., 2009. \href{https://doi.org/10.1175/2009JCLI3036.1}{Nonstationary {Impacts} of the {Southern Annular Mode} on {Southern Hemisphere Climate}}. Journal of Climate, 22, 22, 6142--6148.
@@ -1746,11 +1812,41 @@ Silvestri, G., and Vera, C., 2009. \href{https://doi.org/10.1175/2009JCLI3036.1}
 \leavevmode\vadjust pre{\hypertarget{ref-smith1995}{}}%
 Smith, A.K., 1995. \href{https://doi.org/10.1029/94JD02395}{Numerical simulation of global variations of temperature, ozone, and trace species in the stratosphere}. Journal of Geophysical Research: Atmospheres, 100, D1, 1253--1269.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.NASA-GISS.GISS-E2-1-G}{}}%
+Space Studies (NASA/GISS), N.G.I. for, 2018a. \href{https://doi.org/10.22033/ESGF/CMIP6.1400}{NASA-GISS GISS-E2.1G model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.NASA-GISS.GISS-E2-1-G}{}}%
+---------, 2018b. \href{https://doi.org/10.22033/ESGF/CMIP6.2062}{NASA-GISS GISS-E2.1G model output prepared for CMIP6 DAMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.CCCma.CanESM5}{}}%
+Swart, N.C., Cole, J.N.S., Kharin, V.V., Lazare, M., Scinocca, J.F., Gillett, N.P., Anstey, J., Arora, V., Christian, J.R., Jiao, Y., and others, 2019a. \href{https://doi.org/10.22033/ESGF/CMIP6.1303}{CCCma CanESM5 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.CCCma.CanESM5}{}}%
+---------, and others, 2019b. \href{https://doi.org/10.22033/ESGF/CMIP6.1305}{CCCma CanESM5 model output prepared for CMIP6 DAMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.MOHC.UKESM1-0-LL}{}}%
+Tang, Y., Rumbold, S., Ellis, R., Kelley, D., Mulcahy, J., Sellar, A., Walton, J., and Jones, C., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.1569}{MOHC UKESM1.0-LL model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.MIROC.MIROC6}{}}%
+Tatebe, H., and Watanabe, M., 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.881}{MIROC MIROC6 model output prepared for CMIP6 CMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-vasconcellos2022}{}}%
 Vasconcellos, F.C., Mattos-Gava, M.L.L., and Sansigolo, C.A., 2022. \href{https://doi.org/10.20937/ATM.52910}{Statistical analysis of the relationship between {Quasi-Biennial Oscillation} and {Southern Annular Mode}}. Atmósfera, 35, 2, 221--235.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.CNRM-CERFACS.CNRM-CM6-1}{}}%
+Voldoire, A., 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.1375}{CNRM-CERFACS CNRM-CM6-1 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.CNRM-CERFACS.CNRM-CM6-1}{}}%
+---------, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.1376}{CNRM-CERFACS CNRM-CM6-1 model output prepared for CMIP6 DAMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.INM.INM-CM5-0}{}}%
+Volodin, E., Mortikov, E., Gritsun, A., Lykossov, V., Galin, V., Diansky, N., Gusev, A., Kostrykin, S., Iakovlev, N., Shestakova, A., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.1423}{INM INM-CM5-0 model output prepared for CMIP6 CMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-walker1914}{}}%
 Walker, S.G.T., 1914. Correlation in {Seasonal Variations} of {Weather}, {III}: {On} the {Criterion} for the {Reality} of {Relationships Or Periodicities}, {Meteorological Office},.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.MPI-M.MPI-ESM1-2-LR}{}}%
+Wieners, K.-H., Giorgetta, M., Jungclaus, J., Reick, C., Esch, M., Bittner, M., Legutke, S., Schupfner, M., Wachsmann, F., Gayler, V., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.742}{MPI-m MPIESM1.2-LR model output prepared for CMIP6 CMIP}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-wilks2016}{}}%
 Wilks, D.S., 2016. \href{https://doi.org/10.1175/BAMS-D-15-00267.1}{{``{The Stippling Shows Statistically Significant Grid Points}''}: {How Research Results} are {Routinely Overstated} and {Overinterpreted}, and {What} to {Do} about {It}}. Bulletin of the American Meteorological Society, 97, 12, 2263--2273.
@@ -1761,8 +1857,20 @@ Wirth, V., 1993. \href{https://doi.org/10.1029/92JD02820}{Quasi-stationary plane
 \leavevmode\vadjust pre{\hypertarget{ref-wolter2011}{}}%
 Wolter, K., and Timlin, M.S., 2011. \href{https://doi.org/10.1002/joc.2336}{El {Niño}/{Southern Oscillation} behaviour since 1871 as diagnosed in an extended multivariate {ENSO} index ({MEI}.ext)}. International Journal of Climatology, 31, 7, 1074--1087.
 
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.BCC.BCC-CSM2-MR}{}}%
+Xin, X., Wu, T., Shi, X., Zhang, F., Li, J., Chu, M., Liu, Q., Yan, J., Ma, Q., and Wei, M., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.1726}{BCC BCC-CSM2MR model output prepared for CMIP6 DAMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.MRI.MRI-ESM2-0}{}}%
+Yukimoto, S., Koshiro, T., Kawai, H., Oshima, N., Yoshida, K., Urakawa, S., Tsujino, H., Deushi, M., Tanaka, T., Hosaka, M., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.634}{MRI MRI-ESM2.0 model output prepared for CMIP6 DAMIP}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-zamboni2010}{}}%
 Zamboni, L., Mechoso, C.R., and Kucharski, F., 2010. \href{https://doi.org/10.1175/2009JCLI3129.1}{Relationships between {Upper-Level Circulation} over {South America} and {Rainfall} over {Southeastern South America}: {A Physical Base} for {Seasonal Predictions}}. Journal of Climate, 23, 12, 3300--3315.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.CSIRO.ACCESS-ESM1-5}{}}%
+Ziehn, T., Chamberlain, M., Lenton, A., Law, R., Bodman, R., Dix, M., Wang, Y., Dobrohotoff, P., Srbinovsky, J., Stevens, L., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.2288}{CSIRO ACCESS-ESM1.5 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.CSIRO.ACCESS-ESM1-5}{}}%
+Ziehn, T., Dix, M., Mackallah, C., Chamberlain, M., Lenton, A., Law, R., Druken, K., and Ridzwan, S.M., 2020. \href{https://doi.org/10.22033/ESGF/CMIP6.14362}{CSIRO ACCESS-ESM1.5 model output prepared for CMIP6 DAMIP}.
 
 \end{CSLReferences}
 

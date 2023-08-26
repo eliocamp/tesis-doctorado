@@ -109,15 +109,11 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="20-ceofs.html"><a href="20-ceofs.html#datos-y-métodos"><i class="fa fa-check"></i><b>2.1</b> Datos y métodos</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="20-ceofs.html"><a href="20-ceofs.html#funciones-ortogonales-complejas-ceof"><i class="fa fa-check"></i><b>2.1.1</b> Funciones ortogonales complejas (cEOF)</a></li>
+<li class="chapter" data-level="2.1.2" data-path="20-ceofs.html"><a href="20-ceofs.html#descripción-de-los-modos"><i class="fa fa-check"></i><b>2.1.2</b> Descripción de los modos</a></li>
+<li class="chapter" data-level="2.1.3" data-path="20-ceofs.html"><a href="20-ceofs.html#relación-con-otras-variables-de-la-atmósfera"><i class="fa fa-check"></i><b>2.1.3</b> Relación con otras variables de la atmósfera</a></li>
+<li class="chapter" data-level="2.1.4" data-path="20-ceofs.html"><a href="20-ceofs.html#fuentes-de-variabilidad-tropicales"><i class="fa fa-check"></i><b>2.1.4</b> Fuentes de variabilidad tropicales</a></li>
+<li class="chapter" data-level="2.1.5" data-path="20-ceofs.html"><a href="20-ceofs.html#impactos-en-superficie"><i class="fa fa-check"></i><b>2.1.5</b> Impactos en superficie</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="20-ceofs.html"><a href="20-ceofs.html#primavera"><i class="fa fa-check"></i><b>2.2</b> Primavera</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="20-ceofs.html"><a href="20-ceofs.html#descripción-de-los-modos"><i class="fa fa-check"></i><b>2.2.1</b> Descripción de los modos</a></li>
-<li class="chapter" data-level="2.2.2" data-path="20-ceofs.html"><a href="20-ceofs.html#relación-con-otras-variables-de-la-atmósfera"><i class="fa fa-check"></i><b>2.2.2</b> Relación con otras variables de la atmósfera</a></li>
-<li class="chapter" data-level="2.2.3" data-path="20-ceofs.html"><a href="20-ceofs.html#fuentes-de-variabilidad-tropicales"><i class="fa fa-check"></i><b>2.2.3</b> Fuentes de variabilidad tropicales</a></li>
-<li class="chapter" data-level="2.2.4" data-path="20-ceofs.html"><a href="20-ceofs.html#impactos-en-superficie"><i class="fa fa-check"></i><b>2.2.4</b> Impactos en superficie</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="20-ceofs.html"><a href="20-ceofs.html#otras-estaciones"><i class="fa fa-check"></i><b>2.3</b> Otras estaciones ??</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="30-sam.html"><a href="30-sam.html"><i class="fa fa-check"></i><b>3</b> Estructura simétrica y asimétrica del SAM</a>
 <ul>
@@ -172,536 +168,223 @@ div.csl-indent {
 <h1><span class="header-section-number">Capítulo 5</span> Análisis de estos modos en los modelos de CMIP6<a href="50-cmip6.html#análisis-de-estos-modos-en-los-modelos-de-cmip6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="métodos" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Métodos<a href="50-cmip6.html#métodos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<table>
-<caption>
-<span id="tab:modelos">Table 5.1: </span>Modelos analizados y la cantidad de miembros para cada experimento.
-</caption>
+<table style="width:100%;">
+<caption><span id="tab:modelos">Table 5.1: </span>Modelos analizados y la cantidad de miembros para cada experimento.</caption>
+<colgroup>
+<col width="63%" />
+<col width="7%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="9%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-model
-</th>
-<th style="text-align:right;">
-historical
-</th>
-<th style="text-align:right;">
-hist-GHG
-</th>
-<th style="text-align:right;">
-hist-nat
-</th>
-<th style="text-align:right;">
-hist-aer
-</th>
-<th style="text-align:right;">
-hist-stratO3
-</th>
+<tr class="header">
+<th align="left">Modelo</th>
+<th align="right">historical</th>
+<th align="right">hist-GHG</th>
+<th align="right">hist-nat</th>
+<th align="right">hist-aer</th>
+<th align="right">hist-stratO3</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-MIROC6
-</td>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-10
-</td>
+<tr class="odd">
+<td align="left">AWI-CM-1-1-MR <span class="citation">(Semmler et al., 2018)</span></td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ACCESS-ESM1-5
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">FGOALS-g3 <span class="citation">(Li, 2019, 2020)</span></td>
+<td align="right">12</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-IPSL-CM6A-LR
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
+<tr class="odd">
+<td align="left">CanESM5 <span class="citation">(Swart et al., 2019a, 2019b)</span></td>
+<td align="right">50</td>
+<td align="right">50</td>
+<td align="right">50</td>
+<td align="right">10</td>
+<td align="right">10</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-CNRM-CM6-1
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">CNRM-CM6-1 <span class="citation">(Voldoire, 2018, 2019)</span></td>
+<td align="right">60</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MIROC-ES2L
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">CNRM-ESM2-1 <span class="citation">(Seferian, 2018)</span></td>
+<td align="right">21</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MPI-ESM1-2-LR
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">ACCESS-ESM1-5 <span class="citation">(Ziehn et al., 2019, 2020)</span></td>
+<td align="right">80</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NorCPM1
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">ACCESS-CM2 <span class="citation">(Dix et al., 2019, 2020)</span></td>
+<td align="right">10</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-CanESM5
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
+<tr class="even">
+<td align="left">IPSL-CM6A-LR <span class="citation">(Boucher et al., 2018a, 2018b)</span></td>
+<td align="right">66</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">10</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-UKESM1-0-LL
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">MIROC6 <span class="citation">(Tatebe and Watanabe, 2018; Shiogama, 2019)</span></td>
+<td align="right">100</td>
+<td align="right">50</td>
+<td align="right">50</td>
+<td align="right">3</td>
+<td align="right">10</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-GISS-E2-1-G
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-5
-</td>
+<tr class="even">
+<td align="left">HadGEM3-GC31-LL <span class="citation">(Ridley et al., 2018; Jones, 2019)</span></td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-CESM2
-</td>
-<td style="text-align:right;">
-22
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">UKESM1-0-LL <span class="citation">(Tang et al., 2019; Shim et al., 2020)</span></td>
+<td align="right">30</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-CNRM-ESM2-1
-</td>
-<td style="text-align:right;">
-21
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">MPI-ESM1-2-HR <span class="citation">(Jungclaus et al., 2019)</span></td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MRI-ESM2-0
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-3
-</td>
+<tr class="odd">
+<td align="left">MPI-ESM1-2-LR <span class="citation">(Wieners et al., 2019)</span></td>
+<td align="right">60</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-INM-CM5-0
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">GISS-E2-1-G <span class="citation">(Space Studies (NASA/GISS), 2018a, 2018b)</span></td>
+<td align="right">24</td>
+<td align="right">10</td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">5</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MPI-ESM1-2-HR
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">CESM2 <span class="citation">(Danabasoglu, 2019a, 2019b)</span></td>
+<td align="right">22</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-FGOALS-g3
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">NorCPM1 <span class="citation">(Bethke et al., 2019)</span></td>
+<td align="right">60</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-HadGEM3-GC31-LL
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">NESM3 <span class="citation">(Cao and Wang, 2019)</span></td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ACCESS-CM2
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">E3SM-1-0 <span class="citation">(Bader et al., 2019; E3SM-project E3SM1.0 model output prepared for CMIP6 DAMIP, 2022)</span></td>
+<td align="right">10</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-E3SM-1-0
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">INM-CM5-0 <span class="citation">(Volodin et al., 2019)</span></td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-AWI-CM-1-1-MR
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">BCC-CSM2-MR <span class="citation">(Xin et al., 2019)</span></td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NESM3
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">MRI-ESM2-0 <span class="citation">(Yukimoto et al., 2019)</span></td>
+<td align="right">20</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">3</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-BCC-CSM2-MR
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">NorESM2-LM <span class="citation">(Seland et al., 2019)</span></td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NorESM2-LM
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">GFDL-CM4 <span class="citation">(Ploshay et al., 2018)</span></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-GFDL-ESM4
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-GFDL-CM4
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">GFDL-ESM4 <span class="citation">(Horowitz et al., 2018)</span></td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 </tbody>
 </table>
 <p>Los modelos usados se listan en la Tabla <a href="50-cmip6.html#tab:modelos">5.1</a> se listan todos los modelos y la cantidad de miembros de cada uno. Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas (“historical”) y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero (“hist-GHG”), variabilidad natural sin forzantes antropogénicos (“hist-nat”) y sólo el efecto de el ozono estratosférico (“hist-stratO3”).</p>
+<p><span class="citation">Semmler et al. (2018)</span></p>
 <p>Algunos miembros tienen más de una inicialización, parametrización física o datos usados para el forzante. Elegimos un único miembro de esos.</p>
 <p>Para calcular los cEOFs y evaluar su desempeño, concatenamos todos los miembros para computar un único set de cEOFs para cada modelo y experimento. Este método trata k simulaciones de n años como una única simulación de k*n Luego, calculamos los cEOFs siguiendo la metodología de la Sección XXX.</p>
 <p>Para que sea comparable al ERA5, computamos los cEOFs para el período moderno, entre 1979 y 2014 (el último año disponible para todos los miembros).</p>
@@ -712,7 +395,7 @@ GFDL-CM4
 <p>En esta sección, primero analizamos los modos en el experimento “historical”.</p>
 
 <div class="figure"><span style="display:block;" id="fig:comparacion-r2"></span>
-<img src="figures/50-cmip6/comparacion-r2-1.png" alt="\(r^2\) de los patrones espaciales de cada modelo con ERA5 para cada cEOF." width="576"  />
+<img src="figures/50-cmip6/comparacion-r2-1.png" alt="\(r^2\) de los patrones espaciales de cada modelo con ERA5 para cada cEOF." width="672"  />
 <p class="caption">
 Figure 5.1: <span class="math inline">\(r^2\)</span> de los patrones espaciales de cada modelo con ERA5 para cada cEOF.
 </p>
@@ -804,6 +487,14 @@ Figure 5.9: (ref:ceof-damip-cap)
 <p>Para tratar de atribuir esta tendencia, computamos los mismos cEOFs para experimentos de DAMIP. La Figura <a href="50-cmip6.html#fig:ceof-damip">5.9</a> muestra las series temporales para los experimentos hist-GHG, hist-nat, hist-stratO3 e hist-aer junto a las corridas históricas.</p>
 <p>Para el cOEF1, el experimento hist-nat no presenta la tendencia observada, sugiriendo que ésta no se debe a variabilidad natural sino a forzantes externos. La tendencia sí se detecta en el experimento hist-GHG y, más levemente, en el experimento hist-stratO3. Esto sugiere que tanto las emisiones de gases de efecto invernadero como los cambios en el ozono estatosférico juegan un rol en la tendencia observada. Por otro lado, el experimento hist-aer muestra una tendencia negativa comenzando al rededor de 1900, indicando que el aumento de los aerosoles compensa el efecto de los dos forzantes anteriores. Esto podría explicar por qué la tendencia positiva en hist-GHG comienza también en 1900, mucho antes de que se observada la tendencia en la corrida histórica.</p>
 <p>La parte imaginaria del cEOF1, que tanto en las observaciones como en la corrida histórica no presenta tendencia, sí tiene tendencias en los experimentos hist-GHG e hist-stratO3, aunque en direcciones opuestas y de magnitud similar. Parecería que el cambio en el ozono estatosférico está contrarrestando el efecto del aumento de los gases de efecto invernadero. Dado que se espera que en las próximas décadas el ozono estratosférico empiece a recuperarse, es posible que este efecto se revierta y la parte imaginaria del cEOF2 comience a presentar una tendencia negativa.</p>
+<p>(ref:suma-cap)</p>
+<div class="figure"><span style="display:block;" id="fig:suma"></span>
+<img src="figures/50-cmip6/suma-1.png" alt="(ref:suma-cap)" width="672"  />
+<p class="caption">
+Figure 5.10: (ref:suma-cap)
+</p>
+</div>
+<p>Como una aproximación, la Figura <a href="50-cmip6.html#fig:suma">5.10</a> muestra la media multimodelo de la corrida histórica junto con la suma de las medias multimodelo de las corridas hist-GHG, hist-stratO3 e hist-aer. Sorpendentemente ambas series presentan una variabilidad a largo plazo virtualmente id éntica, sugiriendo que el efecto de los forzantes es aproximadamente lineal.</p>
 
 </div>
 </div>

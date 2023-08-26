@@ -661,7 +661,7 @@ indices %>%
   .[, lapply(.SD, mean), by = .(lev, PC, term, time = seasonally(time))] %>% 
   .[, season := season(time)] %>% 
   rbind(., copy(indices)[, season := "Annual"]) %>% 
-  .[year(time) > c(1979)] %>% 
+  .[year(time) >= c(1979)] %>% 
   .[, estimate_norm := estimate_norm/sd(estimate_norm), by = .(lev, term)] %>%
   .[, FitLm(estimate_norm, time = time, se = TRUE), by = .(type = term, lev, season)] %>% 
   rm_intercept() %>% 

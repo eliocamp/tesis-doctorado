@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   message = verbose,
   warning = verbose,
   cache = TRUE,
-  cache.extra = 41,
+  cache.extra = 32453,
   out.extra = "",
   fig.path = file.path("figures", chapter, ""),
   cache.path = file.path("cache", chapter, format, "")

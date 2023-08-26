@@ -52,11 +52,20 @@ scale_fill_experiments <- function(...) {
 
 ## Métodos
 
+```{r references}
+sims <- readRDS(data_path("derived", "sims.Rds")) %>% 
+  .[, .(model = source_id,
+        # experiment = experiment_id,
+        id)] %>% 
+  unique() %>% 
+  .[, .(ref = paste0("[", paste0(paste0("@", id), collapse = "; "), "]")), by = model]
+```
 
 
 ```{r simulaciones}
 son_cmip_files <-  data_path("derived", "cmip", "SON") %>% 
   list.files(pattern = ".nc", full.names = TRUE) 
+
 
 simulaciones <- son_cmip_files %>% 
   basename() %>% 
@@ -76,11 +85,18 @@ simulaciones %>%
   tidyr::pivot_wider(names_from = experiment, values_from = miembros, values_fill = 0) %>% 
   as.data.table() %>% 
   .[order(-historical, -(`hist-GHG` + `hist-nat` + `hist-stratO3` + `hist-aer`))] %>% 
-  knitr::kable(caption = "Modelos analizados y la cantidad de miembros para cada experimento.")
+  .[sims, on = "model"] %>% 
+  .[, model := paste(model, ref)] %>% 
+  .[, ref := NULL] %>% 
+  setnames("model", "Modelo") %>% 
+  knitr::kable(caption = "Modelos analizados y la cantidad de miembros para cada experimento.",
+               format = "markdown")
 ```
 
 Los modelos usados se listan en la Tabla \@ref(tab:modelos) se listan todos los modelos y la cantidad de miembros de cada uno. 
 Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat") y sólo el efecto de el ozono estratosférico ("hist-stratO3").
+
+@CMIP6.CMIP.AWI.AWI-CM-1-1-MR
 
 Algunos miembros tienen más de una inicialización, parametrización física o datos usados para el forzante.
 Elegimos un único miembro de esos. 
@@ -207,10 +223,9 @@ cors <- ceofs %>%
 
 En esta sección, primero analizamos los modos en el experimento "historical". 
 
-
 (ref:comparacion-r2-cap) $r^2$ de los patrones espaciales de cada modelo con ERA5 para cada cEOF. 
 
-```{r comparacion-r2, fig.height=6, fig.width=6, one_figure = TRUE, cache = FALSE}
+```{r comparacion-r2, one_figure = TRUE, cache = FALSE}
 cors %>% 
   .[experiment == "historical"] %>%
   .[, model := reorder(model, r2, fun = mean)] %>% 
@@ -682,7 +697,7 @@ rm(indices, cmip_sam_series, cmip_sam)
 
 levs <- sam_series[model == "ERA5", unique(lev)]
 
-gdata <- sam_series %>% 
+sam_cors <- sam_series %>% 
   .[season(time) == "SON"] %>% 
   .[, .(estimate = mean(estimate)), 
     by = .(model, experiment, ensemble, term, time = year(time), lev)] %>% 
@@ -694,7 +709,10 @@ gdata <- sam_series %>%
   na.omit() %>% 
   # .[experiment %in% c("historical", "reanalysis")] %>% 
   .[, .(correlation = cor(estimate, hgt)), 
-    by = .(model, ensemble, experiment, cEOF, term, part, lev)] %>% 
+    by = .(model, ensemble, experiment, cEOF, term, part, lev)]
+
+
+gdata <- sam_cors %>% 
   .[, .(correlation = mean(correlation)), by = .(cEOF, term, model, experiment, part, lev)] %>% 
   .[, approx(lev, correlation, xout = levs), by = .(cEOF, term, model, experiment, part)] %>% 
   setnames(c("x", "y"), c("lev", "correlation")) 
@@ -749,6 +767,25 @@ Las líneas translúcidas son los valores promedio de cada modelo y las áreas l
 
 Se observa que la relación entre el SAM y el cEOF2 en los modelos del CMIP6 es prácticamente nula en todos los niveles de la atmósfera, sugiriendo que éstos no capturan esta interacción entre el PSA2 y el SAM. 
 Sin embargo, sí logran capturar su relación con el A-SAM en la tropósfera; y aunque esta relación tiene menor magnitud en promedio, se observa que ciertos modelos sí consiguen correlaciones comparables con las observadas. 
+
+```{r cor-sam-cmip6-200}
+# 
+# sam_cors %>% 
+#   .[lev == 200] %>% 
+#   .[cEOF == "cEOF2" & experiment == "historical"] %>% 
+#   ggplot(aes(correlation^2)) +
+#   geom_density(aes(color = term), bounds = c(0, 1)) +
+#   scale_x_continuous(limits = c(0, 1)) +
+#   # scale_y_discrete(NULL) +
+#   facet_wrap(~model) +
+#   scale_color_brewer(NULL, 
+#                      palette = "Dark2", 
+#                      labels = c(full = "SAM",
+#                                 asym = "A-SAM",
+#                                 sym  = "S-SAM"), 
+#                      aesthetics = c("colour", "fill")) 
+```
+
 
 ## Tendencias
 
@@ -824,26 +861,6 @@ ceof_largo_p %>%
 ```
 
 
-```{r suma}
-# ceof_largo_p %>%
-#   sep_ReIm() %>%
-#   # .[experiment == "historical"] %>%
-#   .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
-#   .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>%
-#   .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>%
-#   .[, .(hist = hgt[experiment == "historical"],
-#         suma_forzantes = sum(hgt[experiment != "historical"])),
-#     by = .(model, time, part, cEOF)] %>%
-#   na.omit() %>%
-#   dt_pivot_longer(cols = c(hist, suma_forzantes)) %>%
-#   .[, .(value = mean(value)), by = .(time, name, part, cEOF)] %>%
-#   ggplot(aes(time, value)) +
-#   geom_line(aes(color = name), alpha = 0.4) +
-#   geom_smooth(aes(color = name)) +
-#   facet_grid(part ~ cEOF)
-```
-
-
 Para tratar de atribuir esta tendencia, computamos los mismos cEOFs para experimentos de DAMIP. 
 La Figura \@ref(fig:ceof-damip) muestra las series temporales para los experimentos hist-GHG, hist-nat, hist-stratO3 e hist-aer junto a las corridas históricas. 
 
@@ -856,6 +873,34 @@ Esto podría explicar por qué la tendencia positiva en hist-GHG comienza tambi�
 La parte imaginaria del cEOF1, que tanto en las observaciones como en la corrida histórica no presenta tendencia, sí tiene tendencias en los experimentos hist-GHG e hist-stratO3, aunque en direcciones opuestas y de magnitud similar. 
 Parecería que el cambio en el ozono estatosférico está contrarrestando el efecto del aumento de los gases de efecto invernadero. 
 Dado que se espera que en las próximas décadas el ozono estratosférico empiece a recuperarse, es posible que este efecto se revierta y la parte imaginaria del cEOF2 comience a presentar una tendencia negativa. 
+
+(ref:suma-cap) 
+
+```{r suma}
+ceof_largo_p %>%
+  sep_ReIm() %>%
+  # .[experiment == "historical"] %>%
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>%
+  .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>%
+  .[, .(hgt = mean(hgt)), by = .(experiment, time, part, cEOF)] %>%
+  .[, .(hist = hgt[experiment == "historical"],
+        # suma_forzantes = sum(hgt[experiment != "historical"]),
+        antropogénicos = sum(hgt[!(experiment %in% c("historical", "hist-nat"))])),
+    by = .(time, part, cEOF)] %>%
+  
+  dt_pivot_longer(cols = hist:antropogénicos) %>%
+  ggplot(aes(time, value)) +
+  geom_line(aes(color = name), alpha = 0.4) +
+  geom_smooth(aes(color = name)) +
+  facet_grid(part ~ cEOF)
+```
+
+
+Como una aproximación, la Figura \@ref(fig:suma) muestra la media multimodelo de la corrida histórica junto con la suma de las medias multimodelo de las corridas hist-GHG, hist-stratO3 e hist-aer. 
+Sorpendentemente ambas series presentan una variabilidad a largo plazo virtualmente id éntica, sugiriendo que el efecto de los forzantes es aproximadamente lineal. 
+
+
 
 
 ```{r trends_cmip, eval = FALSE}
@@ -879,6 +924,7 @@ trends_cmip <-ceof_largo_p %>%
   .[, model := as.factor(model)] %>% 
   .[, .(model = list(lme4::lmer(hgt ~ time  + (time | model/ensemble), data = .SD))), by = .(part, cEOF, experiment)]
 ```
+
 
 
 

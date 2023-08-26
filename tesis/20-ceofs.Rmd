@@ -221,6 +221,7 @@ La Figura \@ref(fig:hilbert-ejemplo) ilustra la señal analítica con las anomal
 En los primeros paneles la señal está dividida en las ondas zonales 1 a 4 donde se ve con claridad como la transformada de Hilbert es la misma señal pero desplazada 1/4 de longitud de onda. 
 
 ```{r compute-ceof}
+set.seed(42)
 invisible(
   ERA5_geopotential() %>% 
     ReadNetCDF(vars = c(hgt = "z"),
@@ -312,7 +313,6 @@ rotations_o3 <- ceof[, eof[[1]]$left, by = season] %>%
   .[wave1_o3, on = "time"] %>% 
   .[, correlate_complex(hgt, amplitude), by = .(season, cEOF)]
 
-
 best_rotation_cEOF1 <- rotations_o3[part == "Real"][, .SD[which.max(correlation), .(angle)], by = .(cEOF, season)]
 
 rotations_cEOF2 <-  ceof[, eof[[1]]$left, by = season] %>% 
@@ -380,17 +380,12 @@ Para obtener los coeficientes lineales de una variable $X$ con la fase 0º y 90�
 
 \begin{equation}
 X(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{cEOF_{0º}} + \beta(\lambda, \phi) \operatorname{cEOF_{90º}} + X_0(\lambda, \phi) + \epsilon(\lambda, \phi, t)
- (\#eq:multiple-regression)
+(\#eq:multiple-regression)
 \end{equation}
 
 donde $\lambda$ y $\phi$ son la longitud y la latitud, $t$ es el tiempo, $\alpha$ y $\beta$ son los coeficientes de regresión lineal para las fases de 0º y 90º respectivamente, $X_0$ y $\epsilon$ son la constante y los términos de error respectivamente.
 
 Evaluamos la significancia estadística mediante una prueba t a dos colas y, en el caso de los mapas de regresión, ajustamos los p-valores controlando la Tasa de Descubrimiento Falso [@benjamini1995; @wilks2016] para evitar resultados engañosos derivados del elevado número de regresiones [@walker1914; @katz1991].
-
-
-## Primavera
-
-Primero evaluamos la primavera en detalle porque es la más interesante y donde las señales son más claras. 
 
 
 ### Descripción de los modos
@@ -1144,7 +1139,7 @@ gdata <- ceof[, eof[[1]]$left, by = .(season)] %>%
   .[, `:=`(hgt = as.numeric(scale(hgt)),
            dmi = as.numeric(scale(dmi)),
            oni = as.numeric(scale(oni))), by = .(cEOF, part, season)] %>%
-    na.omit()
+  na.omit()
 
 oni_dmi_parciales <- gdata %>%
   .[season == "SON" & cEOF == "cEOF2"] %>%
@@ -1210,7 +1205,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
     unique() %>% 
     abs() %>% 
     setNames(paste0(., "º"), .)
-    
+  
   variables <- c("SST", "Streamfunction")
   
   sst_gdata <- sst_regr %>%
@@ -1463,7 +1458,7 @@ rbind(`Precipitación` = pp_regr,
 (ref:pp-t2m-r2-cap) Igual que la Figura \@ref(fig:psi-sst-explained-variance) pero para Temperatura a 2 metros y precipitación. 
 
 La Figura \@ref(fig:pp-t2m-r2) muestra la varianza de la temperatura a 2 metros y de la precipitación explicada por cada cEOF.
-  
+
 La varianza explicada por el cEOF1 para ambas variables es muy baja en la mayoría de las regiones, excepto para el extremo norte de la Península Antártica, el norte del Mar de Weddell y la costa del Mar de Ross (Fig.\@ref(fig:pp-t2m-r2)a.1).
 
 Por otro lado, la varianza explicada cEOF2 es superior al 50% en algunas regiones para ambas variables (Fig. \@ref(fig:pp-t2m-r2) columna 2).
@@ -1635,15 +1630,3 @@ Este campo de correlación coincide con la señal de ENSO la precipitación de p
 
 Los coeficientes de correlación entre las anomalías de precipitación y la fase de 0º del cEOF2 (Fig. \@ref(fig:pp-temp-2)d.2) son más débiles que para la fase de 90º. 
 Hay una correlación positiva residual en el Pacífico oriental ecuatorial y pequeñas correlaciones positivas, no estadísticamente significativas, sobre el este de Australia y negativas sobre Nueva Zelanda.
-
-## Otras estaciones ??
-
-Definitivamente extender al resto del año.
-(índice mensual).
-Esto faltaría.
-Hay código para hacerlo, pero falta la interpretación, que es lo importante.
-
-Sería un análisis más modesto.
-
-
-

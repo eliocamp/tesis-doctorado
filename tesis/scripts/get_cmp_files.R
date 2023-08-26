@@ -19,6 +19,14 @@ sims <- cmip_available(mip_era = "CMIP6",
 
 # Algunos modelos tienen distintas parametrizaciones, inicializaciones y demás.
 # Me quedo sólo con una combinación para no volverme loque.
+
+## TODO: asegurarse de que coincidan los tos y zg.
+# sims <- sims %>%
+#   # .[source_id == "MRI-ESM2-0" & variable_id == "zg"] %>%
+#   .[, n := .N, by =  .(source_id, variable_id, physics,  init, forcing)] %>%
+#   .[, .SD[n == max(n)], by = .(source_id, variable_id)] %>%
+#   .[, n]
+
 sims <- sims[, .SD[physics == physics[1] & init == init[1] & forcing == forcing[1]],
              by =  .(source_id, variable_id)] %>%
   .[, .SD[uniqueN(ensemble) >= 5], by = source_id]
@@ -59,4 +67,36 @@ sims_damip <- cmip_available(mip_era = "CMIP6",
 
 
 sims <- rbind(sims, sims_damip)
+
+sims[, id := paste(mip_era, activity_drs, institution_id, source_id, sep = ".")]
+
+urls <- paste0("https://www.wdc-climate.de/ui/cerarest/cmip6?input=", sims$id, "&exporttype=bibtex")
+
+get_citation_file <- function(url) {
+  temp_file <- tempfile()
+  res <- httr::GET(url = url, httr::accept("application/*"), httr::write_disk(temp_file, overwrite = TRUE))
+
+  if (res$status_code == 200) {
+    temp_file
+  } else {
+    NA_character_
+  }
+}
+
+files <- vapply(unique(urls), get_citation_file, character(1))
+
+# files <- files[-27]
+all_lines <- vector("character")
+for (i in seq_along(files)) {
+  lines <- readLines(files[i])
+  lines[1] <- paste0("@misc{", unique(sims$id)[i], ",")
+  all_lines <- c(all_lines, lines, "\n")
+}
+
+
+
+cmip_bib_file <- here::here("tesis/bib/cmip-models.bib")
+writeLines(all_lines, cmip_bib_file)
+
+
 saveRDS(sims, data_path("derived", "sims.Rds"))

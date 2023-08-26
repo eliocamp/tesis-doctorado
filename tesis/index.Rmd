@@ -60,7 +60,9 @@ dedication: |
 
 # Specify the location of the bibliography below
 bibliography:
+  - bib/cmip-models.bib
   - bib/tesis-doctorado.bib
+
 #   - bib/era.bib
 #   - bib/packages.bib
 # Download your specific csl file and refer to it in the line below.

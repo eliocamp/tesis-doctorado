@@ -30,8 +30,6 @@ sams <- SAM() %>%
 # Relación con otros patrones
 
 
-
-
 ## SAM
 
 (ref:sam-eof-vertical-cap) Coefficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979 -- 2022. 
@@ -223,7 +221,5 @@ plot
 La Figura \@ref(fig:phase-histogram) muestra un histograma para cada trimestre con la distribución de la fase del cEOF2 con las observaciones marcadas con líneas verticales en el eje horizontal.
 En SON (panel 4), el cEOF2 tiene una fase similar a $\pm$ 90º un `r scales::percent(imaginary[panel == 4]$percent)` de los años, indicando que es la fase más común. 
 Esta preferencia de fase está de acuerdo con @irving2016, que encontró una distribución bimodal a la variabilidad tipo PSA (compare nuestra Figura \@ref(fig:phase-histogram) con su Figura 6).
-
-`r todo("Faltaría analizar las otras estaciones, pero quiero ver lo anterior primero")`
 
 ## ENSO

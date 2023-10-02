@@ -84,7 +84,7 @@
 \title{Ondas de Rossby planetarias en la circulación atmosférica del hemisferio sur y su influencia en Sudamérica}
 \author{Lic. Elio Campitelli}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
-\date{2023-08-23 17:16:06}
+\date{2023-10-02 17:38:22}
 \division{Facultad de Ciencias Exactas y Naturales}
 \advisor{Carolina Vera}
 \institution{Universidad de Buenos Aires}
@@ -175,9 +175,24 @@ You can have a dedication here if you wish.
 }
 
 \Abstract{
-asbal albal
+This work aims to advance in the characterization and understanding of the zonally asymmetric circulation of the Southern Hemisphere at seasonal and longer time scales.
+To achieve this, we analyzed ERA5 data and historical runs from CMIP6.
 
-fdsg dfg sdfg
+We computed Complex Empirical Orthogonal Functions (cEOFs) of geopotential height zonal anomalies at 200 hPa and 50 hPa.
+These are similar to traditional EOFs but allow us to characterize patterns that have both phase and amplitude.
+
+cEOF1 represents the variability of zonal wave 1 in the stratosphere and is closely associated with ozone anomalies.
+cEOF2, on the other hand, represents a wave-3 pattern with maximum magnitude in the Pacific sector, which turns out to be an alternative description of the PSA modes.
+The analysis of this mode indicates that it is an internal variability mode of the subtropical atmosphere that takes a preferential phase in response to tropical forcing.
+Only cEOF2 is associated with surface impacts.
+
+To study the relationship between these modes of variability of the asymmetric circulation and the Southern Annular Mode (SAM), which primarily represents symmetric variability, we separated SAM variability into its zonally symmetric (S-SAM) and asymmetric (A-SAM) components.
+Based on the separation of SAM into S-SAM and A-SAM, we observed that the 90º phase of cEOF2 has an extremely high correlation with A-SAM, suggesting that, either both methodoloties capture the same phenomenon, or that the asymmetric part of SAM may actually be a statistical contamination of the PSA mode in a more zonally symmetric SAM.
+
+Finally, we analyzed these modes of variability in historical CMIP6 runs.
+We found that the representation of these modes varies greatly among models and even among members of the same model.
+However, the multimodel mean represents the modes very well.
+Nonetheless, most models exaggerate the relationship between these modes and sea surface temperature.
 }
 
 
@@ -197,7 +212,7 @@ En base a la separación del SAM en S-SAM y A-SAM, observamos que la fase de 90�
 
 Finalmente, analizamos estos modos de variabilidad en las corridas históricas del CMIP6.
 Encontramos que la representación de los modos es muy variable entre modelos e incluso entre los miembros de un mismo modelo, sin embargo, la media multimodelo representa los modos muy bien.
-Sin embargo, la mayoría de los modelos exageran la relación entre los modos y la temperatura de la superficie del mar
+Sin embargo, la mayoría de los modelos exageran la relación entre los modos y la temperatura de la superficie del mar.
 }
 
 	\usepackage{setspace}\onehalfspacing
@@ -249,14 +264,29 @@ Sin embargo, la mayoría de los modelos exageran la relación entre los modos y 
 
     Finalmente, analizamos estos modos de variabilidad en las corridas históricas del CMIP6.
     Encontramos que la representación de los modos es muy variable entre modelos e incluso entre los miembros de un mismo modelo, sin embargo, la media multimodelo representa los modos muy bien.
-    Sin embargo, la mayoría de los modelos exageran la relación entre los modos y la temperatura de la superficie del mar
+    Sin embargo, la mayoría de los modelos exageran la relación entre los modos y la temperatura de la superficie del mar.
   \end{resumen}
 
 
   \begin{abstract}
-    asbal albal
+    This work aims to advance in the characterization and understanding of the zonally asymmetric circulation of the Southern Hemisphere at seasonal and longer time scales.
+    To achieve this, we analyzed ERA5 data and historical runs from CMIP6.
 
-    fdsg dfg sdfg
+    We computed Complex Empirical Orthogonal Functions (cEOFs) of geopotential height zonal anomalies at 200 hPa and 50 hPa.
+    These are similar to traditional EOFs but allow us to characterize patterns that have both phase and amplitude.
+
+    cEOF1 represents the variability of zonal wave 1 in the stratosphere and is closely associated with ozone anomalies.
+    cEOF2, on the other hand, represents a wave-3 pattern with maximum magnitude in the Pacific sector, which turns out to be an alternative description of the PSA modes.
+    The analysis of this mode indicates that it is an internal variability mode of the subtropical atmosphere that takes a preferential phase in response to tropical forcing.
+    Only cEOF2 is associated with surface impacts.
+
+    To study the relationship between these modes of variability of the asymmetric circulation and the Southern Annular Mode (SAM), which primarily represents symmetric variability, we separated SAM variability into its zonally symmetric (S-SAM) and asymmetric (A-SAM) components.
+    Based on the separation of SAM into S-SAM and A-SAM, we observed that the 90º phase of cEOF2 has an extremely high correlation with A-SAM, suggesting that, either both methodoloties capture the same phenomenon, or that the asymmetric part of SAM may actually be a statistical contamination of the PSA mode in a more zonally symmetric SAM.
+
+    Finally, we analyzed these modes of variability in historical CMIP6 runs.
+    We found that the representation of these modes varies greatly among models and even among members of the same model.
+    However, the multimodel mean represents the modes very well.
+    Nonetheless, most models exaggerate the relationship between these modes and sea surface temperature.
   \end{abstract}
 
 
@@ -306,6 +336,121 @@ Acá irían figuras mostrando los problemas con la onda3 de fourier (que están 
 
 \hypertarget{problemas}{%
 \subsubsection{Problemas}\label{problemas}}
+
+\hypertarget{exploraciuxf3n-de-la-onda-3}{%
+\section{Exploración de la onda 3}\label{exploraciuxf3n-de-la-onda-3}}
+
+\hypertarget{introducciuxf3n-1}{%
+\subsection{Introducción}\label{introducciuxf3n-1}}
+
+Existen múltiples índices utilizados para caracterizar a la onda 3 estacionaria del hemisferio Sur.
+\ldots.
+
+\hypertarget{raphael}{%
+\subsection{Raphael}\label{raphael}}
+
+Uno de los pocos índices establecidos en la literatura para medir la onda zonal 3 del hemisferio sur fue propuesto por Raphael (2004).
+Consiste en el promedio de las anomalías zonales estandarizadas del promedio corrido de tres meses de altura geopotencial en 500 hPa en tres puntos, elegidos para coincidir aproximadamente con los máximos climatológicos de la onda 3 según van Loon and Jenne (1972).
+El promedio corrido de tres meses se aplica para evitar que el índice sea sensible al ciclo estacional de la localización de la onda 3 climatológica.
+
+\begin{figure}
+\includegraphics{figures/15-onda3/raphael-regr-1} \caption{(ref:raphael-regr-cap)}\label{fig:raphael-regr}
+\end{figure}
+
+La Figura \ref{fig:raphael-regr} muestra los puntos definidos por Raphael (2004) y el mapa de regresión entre el índice propuesto y la anomalía zonal de altura geopotencial en 500 hPa.
+Se observa que representa una onda 3 relativamente pura con una amplitud ligeramente más alta en la región del Pacífico.
+Sin embargo, notar que los máximos al sur de Nueva Zelanda y sobre el pasaje de Drake se encuentran más al sur que los puntos usados de referencia.
+
+La onda 3 descripta por el índice de Raphael (2004) coincide bien con la onda 3 climatológica (contornos negtros en la Fig \ref{fig:raphael-regr}).
+Esto es por construcción, ya que al usar puntos fijos, el índice de (\textbf{raphael?}) busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
+
+\begin{figure}
+\includegraphics{figures/15-onda3/pseudo-raphael-1} \caption{(ref:pseudo-raphael-cap)}\label{fig:pseudo-raphael}
+\end{figure}
+
+La Figura \ref{fig:pseudo-raphael} muestra la relación entre la anomalía zonal de altura geopotencial promediada en los tres puntos (índice de Raphael (2004) agrega promedio de 3 meses y estandarización) y la amplitud de la proyección del campo de anomalías de geopotencial en la dirección de la onda 3 climatológica.\\
+La correlación entre ambas series es 0.97 (CI: 0.96 -- 0.97).
+Esto es importante al comparar el índice con otros índices que miden cosas distintas, como la amplitud de la onda 3 o la amplitud de las anomalías de la onda 3.
+
+No es del todo sorprendente que un índice basado en el promedio de 3 puntos esté altamente correlacionado con regiones cercanas a esos puntos.
+Esto no demuestra que éste sea un patrón físicamente coherente.
+
+La Tabla \ref{tab:raphael-correlation} muestra la matriz de correlación entre la anomalía zonal de altura geopotencial en los puntos en el índice de Raphael (2004), indicados por su longitud.
+Se observa que los puntos no son covariantes.
+Esto sugiere que no representan un patrón coherente.
+
+\begin{table}
+
+\caption{\label{tab:raphael-correlation}Correlación entre la anomalía zonal de geopotential en los tres puntos considerados por Raphael.}
+\centering
+\begin{tabular}[t]{l|r|r|r}
+\hline
+item1 & 50 & 165 & 285\\
+\hline
+50 & 1.000 & 0.157 & -0.133\\
+\hline
+165 & 0.157 & 1.000 & 0.033\\
+\hline
+285 & -0.133 & 0.033 & 1.000\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\includegraphics{figures/15-onda3/cor-puntos-1} \caption{(ref:cor-puntos-cap)}\label{fig:cor-puntos}
+\end{figure}
+
+La Figura \ref{fig:cor-puntos} muestra los campos de regresión de anomalía zonal de altura geopotencial con las anomalías zonales de altura geopotencial en los puntos individuales y las combinaciones de dos puntos.
+No hay un patrón coherente asociado a los puntos individuales.
+Sólo el punto en 165ºE pareciera asociado a un patrón de onda emergente, aunque no muy claro.
+Las combinaciones de dos puntos se asocian a anomalías positivas en los dos puntos relevantes y negativas en el resto del dominio (esperable ya que se tratan de anomalías zonales) pero, crucialmente, no hay una asociación positiva con el tercer punto no incluido en el índice.
+
+\begin{figure}
+\includegraphics{figures/15-onda3/raphael-top8-1} \caption{(ref:raphael-top8-cap)}\label{fig:raphael-top8-1}
+\end{figure}
+\begin{figure}
+\includegraphics{figures/15-onda3/raphael-top8-2} \caption{(ref:raphael-top8-cap)}\label{fig:raphael-top8-2}
+\end{figure}
+
+Finalmente, las Figuras \ref{fig:raphael-top8-1} y \ref{fig:raphael-top8-2} muestran la anomalía zonal y la anomalía mensual de la anomalía zonal de altura geopotencial en los los 8 meses con mayor y menor valor del índice, respectivamente.
+En pocos casos se observa un patrón de onda 3 bien marcado; en muchos casos no hay siquiera anomalías positivas en los tres puntos.
+En los casos negativos, parece haber un patrón de onda tipo PSA algo más definido, sin embargo, tampoco en estos casos hay buena consistencia entre los puntos.
+
+De este análisis se desprende que el índice propuesto por Raphael (2004) no parece representar un fenómeno distintivo de onda 3.
+
+\hypertarget{fourier}{%
+\subsection{Fourier}\label{fourier}}
+
+Otra forma de medir la onda 3 es computando la amplitud de fourier de esta onda a lo largo de un circulo de latitud.
+Esta medida no mide exactamente lo mismo que el índice de Raphael (2004), ya que es sensible a la amplitud de la onda 3 sin importar dónde este localizada.
+Esto puede observarse en la Figura \ref{fig:fase-histogram}, donde se observa que la localización de la onda 3 varía considerablemente.
+
+\begin{figure}
+\includegraphics{figures/15-onda3/fase-histogram-1} \caption{(ref:fase-histogram-cap)}\label{fig:fase-histogram}
+\end{figure}
+
+Por otro lado, la onda 3 de la altura geopotencial no es idéntica a la onda 3 de las anomalías mensuales de altura geopotencial.
+Dado que la variable relevante para estudiar la variabilidad, los impactos, los forzantes y las tendencias son las anomalías con respecto a la media, desde ahora vamos a analizar las anomalías mensuales.
+
+\begin{figure}
+\includegraphics{figures/15-onda3/zw3-top8-1} \caption{(ref:zw3-top8-cap)}\label{fig:zw3-top8}
+\end{figure}
+
+El modelo de fourier también asume que las onda 3 tiene una amplitud constante a lo largo de todo el círculo de latitud y que no presenta propagación meridional.
+La Figura \ref{fig:zw3-top8} es equivalente a la Figura \ref{fig:raphael-top8}.
+Se observa que amplitud alta se asocia a una onda 3 relativamente clara, aunque su amplitud no es constante en todo el hemisferio.
+Aún cuando hay 3 máximos claros, éstos no están en la misma latitud, sugiriendo un nivel de propagación meridional
+
+\begin{figure}
+\includegraphics{figures/15-onda3/envelope-regr-1} \caption{(ref:envelope-regr-cap)}\label{fig:envelope-regr}
+\end{figure}
+
+La Figura \ref{fig:envelope-regr} muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales (una medida de la actividad local de las ondas; ver (\textbf{virving2015?})) de las anomalías de altura geopotencial.
+Se observa que la amplitud de la onda 1 se asocia a mayor actividad de onda en una banda aproximadamente zonalmente simétrica, indicando que la onda 1 contribuye con las anomalías zonales aproximadamente en todas las longitudes.
+Las ondas 2 y 3, en cambio, contribuyen a las anomalías mensuales de altura geopotencial principalmente en el Pacífico sur.
+
+De este análisis concluimos que ni el modelo de Raphael (2004) ni el modelo de Fourier son adecuados para estudiar la onda 3 en el hemisferio sur.
+Es necesario un modelo que permita detectar cambios en la fase, modulación zonal de la amplitud y propagación meridional.
 
 \hypertarget{modos-de-variabilidad-de-la-circulaciuxf3n-zonalmente-asimuxe9trica}{%
 \section{Modos de variabilidad de la circulación zonalmente asimétrica}\label{modos-de-variabilidad-de-la-circulaciuxf3n-zonalmente-asimuxe9trica}}
@@ -723,8 +868,8 @@ Hay una correlación positiva residual en el Pacífico oriental ecuatorial y peq
 \hypertarget{estructura-simuxe9trica-y-asimuxe9trica-del-sam}{%
 \section{Estructura simétrica y asimétrica del SAM}\label{estructura-simuxe9trica-y-asimuxe9trica-del-sam}}
 
-\hypertarget{introducciuxf3n-1}{%
-\subsection{Introducción}\label{introducciuxf3n-1}}
+\hypertarget{introducciuxf3n-2}{%
+\subsection{Introducción}\label{introducciuxf3n-2}}
 
 El Modo Anular del Sur (SAM, por sus siglas en inglés) es el principal modo de variabilidad de la circulación extratropical del hemisferio sur (Rogers and van Loon, 1982) en escalas temporales diarias, mensuales y decadales (Baldwin and Dunkerton, 2001; Fogt and Bromwich, 2006).
 Influencia fuertemente las anomalías de temperatura, precipitación y concentraciones de hielo marino (p.~ej. Fogt and Marshall, 2020).
@@ -1829,6 +1974,9 @@ Tang, Y., Rumbold, S., Ellis, R., Kelley, D., Mulcahy, J., Sellar, A., Walton, J
 
 \leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.MIROC.MIROC6}{}}%
 Tatebe, H., and Watanabe, M., 2018. \href{https://doi.org/10.22033/ESGF/CMIP6.881}{MIROC MIROC6 model output prepared for CMIP6 CMIP}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vanloon1972}{}}%
+van Loon, H., and Jenne, R.L., 1972. \href{https://doi.org/10.1029/JC077i006p00992}{The zonal harmonic standing waves in the southern hemisphere}. Journal of Geophysical Research, 77, 6, 992--1003.
 
 \leavevmode\vadjust pre{\hypertarget{ref-vasconcellos2022}{}}%
 Vasconcellos, F.C., Mattos-Gava, M.L.L., and Sansigolo, C.A., 2022. \href{https://doi.org/10.20937/ATM.52910}{Statistical analysis of the relationship between {Quasi-Biennial Oscillation} and {Southern Annular Mode}}. Atmósfera, 35, 2, 221--235.

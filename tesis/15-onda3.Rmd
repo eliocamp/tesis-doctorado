@@ -1,0 +1,409 @@
+---
+knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRUE)
+---
+
+```{r setup, include=FALSE}
+library(eliotesis)
+library(metR)
+library(data.table)
+library(magrittr)
+library(ggplot2)
+library(tagger)
+library(ggperiodic)
+
+library(patchwork)
+library(rlang)
+
+source(here::here("tesis/scripts/globals.R"))
+
+blue <- "#0d52bf"
+gray <- "#d4d4d4"
+```
+
+# Exploración de la onda 3
+
+## Introducción
+
+Existen múltiples índices utilizados para caracterizar a la onda 3 estacionaria del hemisferio Sur.
+....
+
+## Raphael
+
+Uno de los pocos índices establecidos en la literatura para medir la onda zonal 3 del hemisferio sur fue propuesto por @raphael2004. 
+Consiste en el promedio de las anomalías zonales estandarizadas del promedio corrido de tres meses de altura geopotencial en 500 hPa en tres puntos, elegidos para coincidir aproximadamente con los máximos climatológicos de la onda 3 según @vanloon1972. 
+El promedio corrido de tres meses se aplica para evitar que el índice sea sensible al ciclo estacional de la localización de la onda 3 climatológica. 
+
+```{r point_raphael}
+# The three grid points chosen to represent ZW3 lie in the approximate
+# location of the ridges of the wave at latitude 49S and
+# longitudes 50E, 166E and 76W. The locations are based
+# on van Loon and Jenne [1972, Figure 2] which shows the
+# annual average location of the ridges of ZW3 in the 500 hPa
+# field.
+#      - Raphael 2003
+
+points_raphael <- data.table(lat = -49, 
+                             lon = metR::ConvertLongitude(c(50, 166, -76)))
+
+filter_raphael <- function(data, points = points_raphael) {
+  data[lat %~% points_raphael$lat][lon %~% points_raphael$lon]
+}
+```
+
+```{r hgt}
+hgt <- ERA5_geopotential() %>%
+  ReadNetCDF(vars = c(hgt = "z"),
+             subset = list(level = 500,
+                           latitude = -90:10,
+                           time = main_period)) %>% 
+  na.omit() %>% 
+  normalise_coords() %>% 
+  .[, hgt_z := Anomaly(hgt), by = .(time, lat)] 
+```
+
+```{r raphael}
+
+puntos <- hgt %>%
+  copy() %>% 
+  filter_raphael()
+
+
+raphael_aes_used <- list(fill = blue, size = 3, shape = 21, color = gray)
+
+raphael_aes_unused <- list(color = "black", size = 3)
+
+
+raphael <- puntos %>% 
+  copy() %>% 
+  .[, hgt_z := frollmean(hgt_z, 3, fill = NA, align = "center"), 
+    by = .(lon, lat, lev)] %>%
+  na.omit() %>% 
+  .[, hgt_z := scale(hgt_z), by = .(lon, lat, month(time), lev)] %>% 
+  .[, .(zw3 = mean(hgt_z)), by = .(time, lev)]
+```
+
+
+```{r raphael-regr}
+hgt %>% 
+  .[raphael, on = "time"] %>% 
+  .[, FitLm(hgt_z, zw3), by = .(lon, lat)] %>% 
+  rm_intercept() %>% 
+  # .[, envelope := WaveEnvelope(estimate), by = .(lat)] %>% 
+  ggperiodic::periodic(lon = c(0, 360)) %>% 
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = estimate, fill = after_stat(level)),
+                    breaks = AnchorBreaks(0, exclude = 0)) +
+  geom_contour_tanaka(aes(z = estimate), breaks = AnchorBreaks(0, exclude = 0)) +
+  geom_contour2(data = copy(hgt) %>% 
+                  .[, .(mean = mean(hgt_z)), by = .(lon, lat)] %>% 
+                  .[, mean := FilterWave(mean, 3), by = lat] %>% 
+                  periodic(lon = c(0, 360)), 
+                aes(z = mean, linetype = after_stat(factor(-sign(level)))), 
+                breaks = AnchorBreaks(0, exclude = 0), size = 0.5) +
+  inject(geom_point(data = points_raphael, !!!raphael_aes_used)) +
+  geom_qmap() +
+  scale_y_latitude(limits = c(-90, 0)) +
+  scale_x_longitude() +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent_discretised(NULL, guide = guide_colorsteps_bottom(10)) +
+  annotate_grid() +
+  coord_polar2() 
+```
+
+La Figura \@ref(fig:raphael-regr) muestra los puntos definidos por @raphael2004 y el mapa de regresión entre el índice propuesto y la anomalía zonal de altura geopotencial en 500 hPa.
+Se observa que representa una onda 3 relativamente pura con una amplitud ligeramente más alta en la región del Pacífico. 
+Sin embargo, notar que los máximos al sur de Nueva Zelanda y sobre el pasaje de Drake se encuentran más al sur que los puntos usados de referencia. 
+
+La onda 3 descripta por el índice de @raphael2004 coincide bien con la onda 3 climatológica (contornos negtros en la Fig \@ref(fig:raphael-regr)). 
+Esto es por construcción, ya que al usar puntos fijos, el índice de @raphael busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica. 
+
+```{r pseudo-raphael}
+qs3 <- hgt %>% 
+  .[lat == -50] %>% 
+  .[, .(qs3 = mean(hgt_z)), by = .(lon)] %>% 
+  .[, qs3 := FilterWave(qs3, 3)]
+
+
+
+raphael2 <- puntos %>% 
+  .[, .(zw3 = mean(hgt_z)), by = .(time, lev)]
+
+pseudo_raphael <- hgt %>% 
+  .[lat == -50] %>% 
+  .[qs3, on = "lon"] %>% 
+  .[, wave3 := FilterWave(hgt_z, 3), by = time] %>% 
+  .[, .(value = sum(qs3*wave3)), by = time]
+
+pseudo_raphael %>% 
+  .[raphael2, on = "time"] %>% 
+  {
+    cor_pseudo_raphael <<- .[, correlate(zw3, value)]
+    .
+  } %>% 
+  ggplot(aes(zw3, value)) +
+  geom_point()
+```
+
+La Figura \@ref(fig:pseudo-raphael) muestra la relación entre la anomalía zonal de altura geopotencial promediada en los tres puntos (índice de @raphael2004 agrega promedio de 3 meses y estandarización) y la  amplitud de la proyección del campo de anomalías de geopotencial en la dirección de la onda 3 climatológica.  
+La correlación entre ambas series es `r cor_pseudo_raphael$text`. 
+Esto es importante al comparar el índice con otros índices que miden cosas distintas, como la amplitud de la onda 3 o la amplitud de las anomalías de la onda 3. 
+
+No es del todo sorprendente que un índice basado en el promedio de 3 puntos esté altamente correlacionado con regiones cercanas a esos puntos.
+Esto no demuestra que éste sea un patrón físicamente coherente.
+
+La Tabla \@ref(tab:raphael-correlation) muestra la matriz de correlación entre la anomalía zonal de altura geopotencial en los puntos en el índice de @raphael2004, indicados por su longitud. 
+Se observa que los puntos no son covariantes. 
+Esto sugiere que no representan un patrón coherente. 
+
+```{r raphael-correlation}
+concordance <- puntos %>% 
+  .[lev == 500] %>% 
+  .[, .(concordant = sum(sign(hgt) == sign(hgt[1])) == 3), by = time] 
+
+puntos %>% 
+  copy() %>% 
+  .[, lon := factor(lon)] %>% 
+  widyr::pairwise_cor(lon, time, hgt_z, diag = TRUE) %>% 
+  dcast(item1 ~ item2) %>% 
+  knitr::kable(digits = 3, 
+               caption = "Correlación entre la anomalía zonal de geopotential en los tres puntos considerados por Raphael.")
+```
+
+
+```{r cor_singles}
+pares <- list(izquierdos = puntos %>% 
+                .[lon %~% c(50, 165)] ,
+              derechos = puntos %>% 
+                .[lon %~% c(165, 285)],
+              extremos = puntos %>% 
+                .[lon %~% c(50, 285)]) %>% 
+  rbindlist(idcol = "index")
+
+
+pares_labs <- c(izquierdos = "50°E y 165°E", 
+                derechos = "165°E y 75°O",
+                extremos = "50°E y 75°O")
+
+pares[, index := pares_labs[index]]
+
+indexes <- pares %>% 
+  .[, .(value = mean(hgt_z)), by = .(time, index)]
+
+cor_singles <- hgt %>% 
+  .[lat > -90] %>% 
+  .[puntos[, .(lon_point = lon, value = hgt_z, time)], 
+    on = "time", allow.cartesian = TRUE] %>%
+  .[, FitLm(hgt_z, value), 
+    by = .(lon, lat, lon_point)] %>% 
+  rm_intercept() %>% 
+  .[, index := LonLabel(lon_point)] %>% 
+  .[, lon_point := NULL]
+
+
+cor_dobles <- hgt %>% 
+  .[indexes, on = "time", allow.cartesian = TRUE] %>% 
+  .[, FitLm(hgt_z, value),
+    by = .(lon, lat, index)] %>% 
+  rm_intercept() 
+
+
+```
+
+```{r cor-puntos}
+gdata <- rbind(cor_singles, 
+               cor_dobles) %>% 
+  .[, index := forcats::fct_inorder(index)] 
+
+levels <- levels(gdata$index)
+
+gdata %>%   
+  periodic(lon = c(0, 360)) %>% 
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = estimate, fill = after_stat(level)), 
+                    breaks = AnchorBreaks(0, exclude = 0)) +
+  geom_contour_tanaka(aes(z = estimate), breaks = AnchorBreaks(0, exclude = 0)) +
+  inject(geom_point(data = unique(puntos[, .(lat, lon)]),
+                    !!!raphael_aes_unused)) +
+  
+  inject(geom_point(data = unique(puntos[, .(lat, lon)] %>% 
+                                    .[, index := factor(LonLabel(lon),
+                                                        levels = levels)]),
+                    !!!raphael_aes_used)) +
+  
+  inject(geom_point(data = unique(pares[, .(lon ,lat, index = factor(index, levels = levels))]),
+                    !!!raphael_aes_used)) +
+  
+  geom_qmap() +
+  scale_y_latitude(limits = c(-90, 0)) +
+  scale_x_longitude() +
+  scale_fill_divergent_discretised(NULL, guide = guide_colorsteps_bottom(20)) +
+  annotate_grid() +
+  coord_polar2() +
+  facet_wrap(index~., ncol = 3)
+
+```
+
+La Figura \@ref(fig:cor-puntos) muestra los campos de regresión de anomalía zonal de altura geopotencial con las anomalías zonales de altura geopotencial en los puntos individuales y las combinaciones de dos puntos. 
+No hay un patrón coherente asociado a los puntos individuales.
+Sólo el punto en 165ºE pareciera asociado a un patrón de onda emergente, aunque no muy claro. 
+Las combinaciones de dos puntos se asocian a anomalías positivas en los dos puntos relevantes y negativas en el resto del dominio (esperable ya que se tratan de anomalías zonales) pero, crucialmente, no hay una asociación positiva con el tercer punto no incluido en el índice. 
+
+
+```{r raphael-top8}
+gplot <- function(data, breaks =  AnchorBreaks(0, binwidth = 400, exclude = 0)(c(-3200, 3200))) {
+  
+  data %>% 
+    ggplot(aes(lon, lat)) +
+    geom_contour_fill(aes(z = hgt_z, fill = after_stat(level)),
+                      breaks = breaks) +
+    geom_contour2(aes(z = hgt_za, linetype = after_stat(factor(-sign(level)))),
+                  breaks = breaks) +
+    inject(geom_point(data = unique(puntos[, .(lon, lat)]),
+                      !!!raphael_aes_used)) +
+    geom_qmap() +
+    scale_y_latitude(limits = c(-90, 0)) +
+    scale_x_longitude() +
+    scale_linetype(guide = "none") +
+    scale_fill_divergent_discretised(NULL, guide = guide_colorsteps_bottom(20), 
+                                     labels = label_one_less) +
+    annotate_grid() +
+    coord_polar2() +
+    facet_wrap(~time_factor, ncol = 4)
+}
+
+raphael <- raphael[order(-zw3)] %>% 
+  .[, time_factor := forcats::fct_inorder(format(time))]
+
+hgt %>% 
+  copy() %>% 
+  .[, hgt_za := Anomaly(hgt_z), by = .(lon, lat, month(time))] %>% 
+  .[raphael[1:8], on = "time"] %>%
+  periodic(lon = c(0, 360)) %>% 
+  gplot()
+
+raphael <- raphael[order(zw3)] %>% 
+  .[, time_factor := forcats::fct_inorder(format(time))]
+
+hgt %>% 
+  copy() %>% 
+  .[, hgt_za := Anomaly(hgt_z), by = .(lon, lat, month(time))] %>% 
+  .[raphael[1:8], on = "time"] %>%
+  periodic(lon = c(0, 360)) %>% 
+  gplot()
+```
+
+Finalmente, las Figuras \@ref(fig:raphael-top8-1) y \@ref(fig:raphael-top8-2) muestran la anomalía zonal y la anomalía mensual de la anomalía zonal de altura geopotencial en los los 8 meses con mayor y menor valor del índice, respectivamente.
+En pocos casos se observa un patrón de onda 3 bien marcado; en muchos casos no hay siquiera anomalías positivas en los tres puntos.
+En los casos negativos, parece haber un patrón de onda tipo PSA algo más definido, sin embargo, tampoco en estos casos hay buena consistencia entre los puntos. 
+
+De este análisis se desprende que el índice propuesto por @raphael2004 no parece representar un fenómeno distintivo de onda 3. 
+
+## Fourier
+
+Otra forma de medir la onda 3 es computando la amplitud de fourier de esta onda a lo largo de un circulo de latitud. 
+Esta medida no mide exactamente lo mismo que el índice de @raphael2004, ya que es sensible a la amplitud de la onda 3 sin importar dónde este localizada. 
+Esto puede observarse en la Figura \@ref(fig:fase-histogram), donde se observa que la localización de la onda 3 varía considerablemente. 
+
+```{r zw}
+zw <- hgt %>% 
+  .[lat == -50] %>% 
+  .[, hgt_za := Anomaly(hgt_z), by = .(lon, lat, month(time))] %>% 
+  {
+    d <- .
+    rbind(d[, FitWave(hgt_z, 1:4), by = time][, type := "zonal"],
+          d[, FitWave(hgt_za, 1:4), by = time][, type := "time"])
+    
+  }
+
+zw3 <- zw[k == 3]
+```
+
+```{r fase-histogram}
+zw %>%
+  .[k == 3] %>% 
+  .[type == "zonal"] %>% 
+  ggplot(aes(phase*180/pi)) +
+  geom_histogram(binwidth = 5, boundary = 0, color = "black", fill = "gray70") +
+  geom_rug() +
+  scale_x_continuous("Fase", labels = LonLabel) +
+  scale_y_continuous(NULL)
+```
+
+
+Por otro lado, la onda 3 de la altura geopotencial no es idéntica a la onda 3 de las anomalías mensuales de altura geopotencial. 
+Dado que la variable relevante para estudiar la variabilidad, los impactos, los forzantes y las tendencias son las anomalías con respecto a la media, desde ahora vamos a analizar las anomalías mensuales.
+
+```{r time}
+zw <- zw[type == "time"][, type := NULL]
+zw3 <- zw[k == 3]
+```
+
+```{r zw3-top8}
+zw3 <- zw3 %>% 
+  .[order(-amplitude)] %>% 
+  .[, time_factor := forcats::fct_inorder(format(time))]
+
+hgt %>% 
+  copy() %>% 
+  .[, hgt_za := Anomaly(hgt_z), by = .(lon, lat, month(time))] %>% 
+  .[zw3[1:8], on = "time"] %>%
+  periodic(lon = c(0, 360)) %>% 
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = hgt_z, fill = after_stat(level)),
+                    breaks = AnchorBreaks(0, exclude = 0)) +
+  geom_contour2(aes(z = hgt_za, linetype = after_stat(factor(-sign(level)))),
+                breaks = AnchorBreaks(0, exclude = 0)) +
+  # inject(geom_point(data = unique(puntos[, .(lon, lat)]),
+  #                   !!!raphael_aes_unused)) +
+  geom_qmap() +
+  scale_y_latitude(limits = c(-90, 0)) +
+  scale_x_longitude() +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent_discretised(NULL, guide = guide_colorsteps_bottom(20), 
+                                   labels = label_one_less) +
+  annotate_grid() +
+  coord_polar2() +
+  facet_wrap(~time_factor, ncol = 4)
+```
+
+
+El modelo de fourier también asume que las onda 3 tiene una amplitud constante a lo largo de todo el círculo de latitud y que no presenta propagación meridional. 
+La Figura \@ref(fig:zw3-top8) es equivalente a la Figura \@ref(fig:raphael-top8). 
+Se observa que amplitud alta se asocia a una onda 3 relativamente clara, aunque su amplitud no es constante en todo el hemisferio. 
+Aún cuando hay 3 máximos claros, éstos no están en la misma latitud, sugiriendo un nivel de propagación meridional 
+
+
+```{r envelope-regr}
+hgt %>% 
+  copy() %>% 
+  .[lat > -90] %>% 
+  .[, hgt_za := Anomaly(hgt_z), by = .(lon, lat, month(time))] %>% 
+  .[, envelope := WaveEnvelope(hgt_za), by = .(lat, time)] %>%  
+  .[zw, on = c("time"), allow.cartesian = TRUE] %>%
+  .[, FitLm(envelope, amplitude), by = .(lat, lon, k)] %>% 
+  rm_intercept() %>%
+  periodic(lon = c(0, 360)) %>% 
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = estimate, fill = after_stat(level)),
+                    breaks = AnchorBreaks(0, exclude = 0)) +
+  geom_contour_tanaka(aes(z = estimate),
+                      breaks = AnchorBreaks(0, exclude = 0)) +
+  # geom_contour2(aes(z = hgt_za, linetype = after_stat(factor(-sign(level)))),
+  #               breaks = breaks) +
+  geom_qmap() +
+  scale_y_latitude(limits = c(-90, 0)) +
+  scale_x_longitude() +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent_discretised(NULL, guide = guide_colorsteps_bottom(20),
+                                   labels = label_one_less) +
+  annotate_grid() +
+  coord_polar2() +
+  facet_wrap(~k, ncol = 2)
+```
+
+La Figura \@ref(fig:envelope-regr) muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales (una medida de la actividad local de las ondas; ver @virving2015) de las anomalías de altura geopotencial. 
+Se observa que la amplitud de la onda 1 se asocia a mayor actividad de onda en una banda aproximadamente zonalmente simétrica, indicando que la onda 1 contribuye con las anomalías zonales aproximadamente en todas las longitudes. 
+Las ondas 2 y 3, en cambio, contribuyen a las anomalías mensuales de altura geopotencial principalmente en el Pacífico sur. 
+
+De este análisis concluimos que ni el modelo de @raphael2004 ni el modelo de Fourier son adecuados para estudiar la onda 3 en el hemisferio sur.
+Es necesario un modelo que permita detectar cambios en la fase, modulación zonal de la amplitud y propagación meridional. 

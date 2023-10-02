@@ -50,6 +50,7 @@ ggplot2::theme_set(eliotesis::theme_tesis(base_size = 10) +
                      ggplot2::theme(legend.box.spacing = grid::unit(-.5, "lines")))
 
 
+LonLabel <- purrr::partial(metR::LonLabel, west = "°O")
 lab_lev <- eliotesis::AddSuffix(" hPa")
 lab_cplx <- c("Real" = "0º",
               "Imaginario" = "90º")

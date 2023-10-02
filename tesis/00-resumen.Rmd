@@ -15,4 +15,4 @@ En base a la separación del SAM en S-SAM y A-SAM, observamos que la fase de 90�
 
 Finalmente, analizamos estos modos de variabilidad en las corridas históricas del CMIP6.
 Encontramos que la representación de los modos es muy variable entre modelos e incluso entre los miembros de un mismo modelo, sin embargo, la media multimodelo representa los modos muy bien.
-Sin embargo, la mayoría de los modelos exageran la relación entre los modos y la temperatura de la superficie del mar
+Sin embargo, la mayoría de los modelos exageran la relación entre los modos y la temperatura de la superficie del mar.

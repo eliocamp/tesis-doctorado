@@ -60,6 +60,8 @@ fig:cor-sam-cmip6
 fig:series-largas
 fig:ceof-damip
 fig:suma
+dinámica-de-la-circulación-zonalmente-asimétrica-del-hemisferio-sur
+dynamics-of-the-southern-hemisphere-zonally-asymmetric-circulation
 introducción
 visión-tradicional-dela-onda-3-del-hemisferio-sur
 problemas

@@ -1,8 +1,9 @@
 ---
-title: 'Ondas de Rossby planetarias en la circulación atmosférica del hemisferio sur y su influencia en Sudamérica'
+title: Dinámica de la circulación zonalmente asimétrica del hemisferio sur
+title_en: Dynamics of the Southern Hemisphere zonally asymmetric circulation
 author: 'Lic. Elio Campitelli'
 # date: 'BUENOS AIRES, 2023'
-date: "2023-10-02 17:45:47"
+date: "2023"
 institution: 'Universidad de Buenos Aires'
 division: 'Facultad de Ciencias Exactas y Naturales'
 advisor: 'Carolina Vera'
@@ -10,7 +11,7 @@ advisor: 'Carolina Vera'
 altadvisor: 'Leandro Diaz'
 consejere: 'Claudio Menendez'
 department: 'Departamento de Ciencias de la Atmósfera y los Océanos'
-degree: 'Tesis presentada para optar al título de Doctore de la Universidad de Buenos Aires en el Área de Ciencias de la Atmósfera y los Océanos'
+degree: 'Tesis presentada para optar al título de Doctor de la Universidad de Buenos Aires en el Área de Ciencias de la Atmósfera y los Océanos'
 place: 'Centro de Investigaciones del Mar y la Atmósfera. CONICET-UBA'
 knit: purrr::partial(bookdown::render_book, output_format = 'all')
 

@@ -84,6 +84,18 @@
       ],
       "Hash": "31262fd18481fab05c5e7258dac163ca"
     },
+    "PCICt": {
+      "Package": "PCICt",
+      "Version": "0.5-4.4",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "graphics",
+        "methods"
+      ],
+      "Hash": "b9aeb5981f814215cbc049bfee73f715"
+    },
     "R6": {
       "Package": "R6",
       "Version": "2.5.1",
@@ -498,14 +510,14 @@
     },
     "data.table": {
       "Package": "data.table",
-      "Version": "1.14.9",
+      "Version": "1.14.8",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "b11433606c156cc08a797faffd9c65f1"
+      "Hash": "b4c06e554f33344e044ccd7fdca750a9"
     },
     "desc": {
       "Package": "desc",
@@ -1616,6 +1628,13 @@
         "methods"
       ],
       "Hash": "6dfe8bf774944bd5595785e3229d8771"
+    },
+    "ncdf4": {
+      "Package": "ncdf4",
+      "Version": "1.21",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "a7b262641ef4659767d415c6bb78413f"
     },
     "nlme": {
       "Package": "nlme",

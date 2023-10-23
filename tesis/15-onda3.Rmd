@@ -117,7 +117,7 @@ Se observa que representa una onda 3 relativamente pura con una amplitud ligeram
 Sin embargo, notar que los máximos al sur de Nueva Zelanda y sobre el pasaje de Drake se encuentran más al sur que los puntos usados de referencia.
 
 La onda 3 descripta por el índice de @raphael2004 coincide bien con la onda 3 climatológica (contornos negtros en la Fig \@ref(fig:raphael-regr)).
-Esto es por construcción, ya que al usar puntos fijos, el índice de @raphael busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
+Esto es por construcción, ya que al usar puntos fijos, el índice de @raphael2004 busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
 
 ```{r pseudo-raphael}
 qs3 <- hgt %>% 
@@ -381,7 +381,7 @@ hgt %>%
   facet_wrap(~time_factor, ncol = 4)
 ```
 
-(ref:raphael-top8-cap) Igual que la Figura \@ref(fig:raphael-top8), pero para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
+(ref:zw3-top8-cap) Igual que la Figura \@ref(fig:raphael-top8), pero para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
 
 El modelo de fourier también asume que las onda 3 tiene una amplitud constante a lo largo de todo el círculo de latitud y que no presenta propagación meridional.
 La Figura \@ref(fig:zw3-top8) es equivalente a la Figura \@ref(fig:raphael-top8).
@@ -418,7 +418,7 @@ hgt %>%
 
 (ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial.
 
-La Figura \@ref(fig:envelope-regr) muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales (una medida de la actividad local de las ondas; ver @virving2015) de las anomalías de altura geopotencial.
+La Figura \@ref(fig:envelope-regr) muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales (una medida de la actividad local de las ondas; ver @irving2015) de las anomalías de altura geopotencial.
 Se observa que la amplitud de la onda 1 se asocia a mayor actividad de onda en una banda aproximadamente zonalmente simétrica, indicando que la onda 1 contribuye con las anomalías zonales aproximadamente en todas las longitudes.
 Las ondas 2 y 3, en cambio, contribuyen a las anomalías mensuales de altura geopotencial principalmente en el Pacífico sur.
 

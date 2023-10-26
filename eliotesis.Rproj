@@ -24,3 +24,5 @@ PackageRoxygenize: rd,collate,namespace
 UseNativePipeOperator: No
 
 MarkdownWrap: Sentence
+
+SpellingDictionary: es_ES

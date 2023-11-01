@@ -66,3 +66,12 @@ tesis/data/derived_data/sam.Rds
 tesis/data/derived_data/ceofs_cmip.Rds
 tesis/data/derived_data/cmip
 tesis/data/raw_data
+tesis/*.md
+tesis/*.rds
+tesis/figures/
+tesis/thesis.aux
+tesis/thesis.lof
+tesis/thesis.lot
+tesis/thesis.out
+tesis/thesis.toc
+tesis/thesis.tex

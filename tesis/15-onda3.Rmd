@@ -1,5 +1,5 @@
 ---
-knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRUE)
+knit: purrr::partial(bookdown::render_book, output_format = 'bookdown::gitbook', preview = TRUE)
 ---
 
 ```{r setup, include=FALSE}
@@ -21,18 +21,59 @@ blue <- "#0d52bf"
 gray <- "#d4d4d4"
 ```
 
-# Exploración de la onda 3
+# Exploración de índice de onda 3
 
-## Introducción
+El capítulo anterior introdujo conceptualmente algunos aspectos problemáticos de las metodologías e índices normalmente utilizados en la literatura para estudiar la circulación zonalmente asimétrica el hemisferio sur.
+Este capítulo analiza empíricamente en más detalle el índice propuesto por @raphael2004 (R04) y la amplitud de la onda calculada a partir de Fourier.
 
-Existen múltiples índices utilizados para caracterizar a la onda 3 estacionaria del hemisferio Sur.
-....
+## Métodos
 
-## Raphael
+### Índice R04
 
-Uno de los pocos índices establecidos en la literatura para cuantificar la actividad de la onda zonal 3 del hemisferio sur fue propuesto por @raphael2004.
-Este índice, que denominaremos (R04) se calcula como el promedio de las anomalías zonales estandarizadas del promedio móvil de tres meses de altura geopotencial en 500 hPa en tres ubicaciones, elegides para coincidir aproximadamente con los máximos climatológicos de la onda 3 según @vanloon1972.
+El índice R04 era, hasta hace poco, el único índice establecido en la literatura para cuantificar la actividad de la onda zonal 3 del hemisferio sur.
+Se calcula como el promedio de las anomalías zonales estandarizadas del promedio móvil de tres meses de altura geopotencial en 49ºS y en 500 hPa en tres ubicaciones elegidas para coincidir aproximadamente con los máximos climatológicos de la onda 3 según @vanloon1972: 50ºE, 166ºE y 76ºO.
 El promedio móvil de tres meses se aplica para evitar que el índice sea sensible al ciclo estacional de la localización de la onda 3 climatológica.
+
+### Envolvente
+
+Para cuantificar la actividad de las ondas zonales, calculamos la envolvente de las ondas siguiendo a @irving2015.
+Primero se calcula la transformada de Fourier de las anomalías de geopotencial en un círculo de latitud determinado, luego se le aplica la transformada inversa sólo al espectro positivo y finalmente se toma el doble de la amplitud de este resultado complejo.
+
+```{r envolvente-ejemplo, fig.height=6, fig.width=5}
+fecha_ejemplo <- "1986-06-01" 
+ejemplo_datos <- ERA5_geopotential() %>%
+  ReadNetCDF(vars = c(hgt = "z"),
+             subset = list(level = 500,
+                           latitude = c(-90, 0),
+                           time = fecha_ejemplo)) %>% 
+  na.omit() %>% 
+  normalise_coords() %>% 
+  .[, hgt_z := Anomaly(hgt), by = .(time, lat)] %>% 
+  .[, env := WaveEnvelope(hgt_z), by = lat] 
+
+
+ejemplo_datos %>% 
+  periodic(lon = c(0, 360)) %>% 
+  ggplot(aes(lon, lat)) + 
+  geom_contour_fill(aes(z = env, fill = after_stat(level))) +
+  # geom_hline(yintercept = -60, linetype = 2) +
+  geom_contour2(aes(z = hgt_z, linetype = after_stat(factor(-sign(level)))), 
+                breaks = AnchorBreaks(0, exclude = 0)) +  geom_qmap() +
+  scale_y_latitude(limits = c(-90, 0)) +
+  scale_x_longitude() +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent_discretised(NULL, guide = guide_colorsteps_bottom(10)) +
+  annotate_grid() +
+  coord_polar2() 
+```
+
+(ref:envolvente-ejemplo-cap) Anomalías zonales de altura geopotencial en 500 hPa el 1 de junio de 1986 (contornos, líneas sólidas indican valores positivos y líneas punteadas indican valores negativos) y envolvente de ondas zonales (sombreado).
+
+La Figura \@ref(fig:envolvente-ejemplo) muestra un ejemplo de la envolvente de la altura geopotencial en 500 hPa el 1 de junio de 1986.
+Las anomalías zonales de altura geopotencial son intensas en región del Pacífico sur, aparentemente formando un tren de ondas emanando desde el sur de Australia.
+La envolvente captura esa región.
+
+## Resultados
 
 ```{r point_raphael}
 # The three grid points chosen to represent ZW3 lie in the approximate
@@ -117,7 +158,7 @@ La Figura \@ref(fig:raphael-regr) muestra las ubicaciones definidas por @raphael
 Se observa que representa una onda 3 relativamente pura con una amplitud ligeramente más alta en la región del Pacífico.
 Sin embargo, se puede notar que los máximos al sur de Nueva Zelanda y sobre el pasaje de Drake se encuentran más al sur que los puntos usados de referencia.
 
-La onda 3 descripta por el índice de @raphael2004 coincide bien con la onda 3 climatológica (contornos negtros en la Fig \@ref(fig:raphael-regr)).
+La onda 3 descrita por el índice de @raphael2004 coincide bien con la onda 3 climatológica (contornos negros en la Fig \@ref(fig:raphael-regr)).
 Esto es por construcción, ya que al usar puntos fijos, el índice de @raphael2004 busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
 
 ```{r pseudo-raphael}
@@ -132,8 +173,7 @@ raphael2 <- puntos %>%
 pseudo_raphael <- hgt %>% 
   .[lat == -50] %>% 
   .[qs3, on = "lon"] %>% 
-  .[, wave3 := FilterWave(hgt_z, 3), by = time] %>% 
-  .[, .(value = sum(qs3*wave3)), by = time]
+  .[, .(value = sum(qs3*hgt)), by = time]
 
 pseudo_raphael %>% 
   .[raphael2, on = "time"] %>% 
@@ -144,18 +184,17 @@ pseudo_raphael %>%
   ggplot(aes(zw3, value)) +
   geom_point() +
   scale_x_continuous("Anomalía de altura geopotencial promedio") +
-  scale_y_continuous("Amplitud") 
+  scale_y_continuous("Proyección") 
 ```
 
-(ref:pseudo-raphael-cap) Relación entre la anomalía zonal de altura geopotencial en los tres puntos utilizados por R04 y la amplitud de la proyección del campo de anomalías de geopotencial en la dirección de la onda 3 climatológica.
+(ref:pseudo-raphael-cap) Relación entre la anomalía zonal de altura geopotencial en los tres puntos utilizados por R04 y la amplitud de la proyección de la geopotencial en 50ºS, 500 hPa con la onda 3 climatológica.
 
-La Figura \@ref(fig:pseudo-raphael) muestra la relación entre la amplitud de la proyección del campo de anomalías de geopotencial en la dirección de la onda 3 climatológica y la anomalía zonal de altura geopotencial promediada en las tres ubicaciones del índice R04 --esto no es exactamente el íncie R04 ya que éste realiza un promedio móvil de 3 meses y una estandarización previa al promediado. 
-La correlación entre ambas series es `r cor_pseudo_raphael$text`.
-Esto es importante al comparar el índice con otros índices que miden cosas distintas, como la amplitud de la onda 3 o la amplitud de las anomalías de la onda 3.
+La Figura \@ref(fig:pseudo-raphael) muestra la relación entre la proyección de la altura geopotencial en 50ºS con la onda 3 climatológica en esa latitud y la anomalía zonal de altura geopotencial promediada en las tres ubicaciones de R04 --esto no es exactamente el índice R04 ya que éste se calcula a partir de un promedio móvil de 3 meses y una estandarización previa al promediado.
+Ambas series son casi idénticas, con una correlación de `r cor_pseudo_raphael$text`.
+Esto ilustra que el índice R04 no es un índice de la amplitud de al onda 3, sino un índice de cuánto se parecen la altura geopotencial en 50ºS a la onda 3 media en 50ºS.
 
-No es del todo sorprendente que un índice basado en el promedio de 3 puntos esté altamente correlacionado con regiones cercanas a esos puntos.
+Si bien la Figura \@ref(fig:raphael-regr) muestra que R04 está asociado con una onda 3 relativamente pura, no es sorprendente que un índice basado en el promedio de 3 puntos esté altamente correlacionado con regiones cercanas a esos puntos.
 Esto no demuestra que éste sea un patrón físicamente coherente.
-
 
 ```{r raphael-correlation}
 concordance <- puntos %>% 
@@ -176,8 +215,10 @@ cor_puntos %>%
   kable_classic_2(full_width = F)
 ```
 
+Para investigar la consistencia física de R04 se puede analizar la covariabilidad entre las tres regiones utilizadas para calcularlo.
+
 La Tabla \@ref(tab:raphael-correlation) muestra la matriz de correlación entre la anomalía zonal de altura geopotencial en las ubicaciones utilizada para calcular el índice R04, indicadas por su longitud.
-Las bajas correlaciones son muy cercanas a cero, e incluso la correlación entre el punto de 75ºO y 50ºE es negativa. 
+Las correlaciones son muy cercanas a cero, e incluso la correlación entre el punto de 75ºO y 50ºE es negativa.
 Esto indica que los puntos no son covariantes y sugiere que no representan un patrón coherente.
 
 ```{r cor_singles}
@@ -257,11 +298,11 @@ gdata %>%
   facet_wrap(index~., ncol = 3)
 ```
 
-(ref:cor-puntos-cap) Regresión entre la anomalía zonal de altura geopotencial en 500 hPa y índices R04 usando combinacinoes de 1 y 2 puntos. En azul se muestran los puntos usados para calcular el índice en cada panel.
+(ref:cor-puntos-cap) Regresión entre la anomalía zonal de altura geopotencial en 500 hPa e índices R04 usando combinaciones de 1 y 2 puntos. En cada panel, los puntos azules son los puntos usados para calcular el índice y los negros, los excluidos.
 
 La Figura \@ref(fig:cor-puntos) muestra los campos de regresión de anomalía zonal de altura geopotencial con las anomalías zonales de altura geopotencial en los puntos individuales y las combinaciones de dos puntos.
 No hay un patrón coherente asociado a los puntos individuales.
-Las combinaciones de dos puntos se asocian a anomalías positivas en los dos puntos relevantes y negativas etre los mismos --esperable ya que se tratan de anomalías zonales-- pero, crucialmente, no hay una asociación positiva con el tercer punto no incluido en el índice.
+Las combinaciones de dos puntos se asocian a anomalías positivas en los dos puntos relevantes y negativas entre los mismos --esperable ya que se trata de anomalías zonales-- pero, crucialmente, no hay una asociación positiva con el tercer punto no incluido en el índice.
 
 ```{r raphael-top8}
 #| fig.subcap = c("Meses con mayor valor de R04", "Meses con menor valor de R04")
@@ -309,22 +350,19 @@ hgt %>%
   tag_facets(tag_pool = letters[-c(1:8)])
 ```
 
-(ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04.
-Los puntos azules indican las ubicaciones usadas en el índice R04.
+(ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04. Los puntos azules indican las ubicaciones usadas en el índice R04.
 
 Finalmente, las Figuras \@ref(fig:raphael-top8-1) y \@ref(fig:raphael-top8-2) muestran la anomalía zonal y la anomalía mensual de la anomalía zonal de altura geopotencial en los los 8 meses con mayor y menor valor del índice, respectivamente.
-En pocos casos se observa un patrón de onda 3 bien marcado; por ejemplo, en abril de 2003 y noviembre de 1985 (paneles f y g) se observan tres zonas de anomalías positivas cercanas a las ubicacinoes utilizadas para calcular el ídnie R04 y tres zonas de anomamlías negativas entre las mismas. 
-En octubre de 2009 (panel o) se observa lo contrario. 
-En casos para los cuales el índice es positivo no hay siquiera anomalías positivas en los tres puntos, como en noviembre de 2018 (panel b) diciembre de 1998 (panel e)
+En pocos casos se observa un patrón de onda 3 bien marcado; por ejemplo, en abril de 2003 y noviembre de 1985 (paneles f y g) se observan tres zonas de anomalías positivas cercanas a las ubicaciones utilizadas para calcular R04 y tres zonas de anomalías negativas entre las mismas.
+En octubre de 2009 (panel o) se observa lo contrario.
+En casos para los cuales el índice es positivo no hay siquiera anomalías positivas en los tres puntos, como en noviembre de 2018 (panel b) diciembre de 1998 (panel e).
 En los casos negativos, parece haber un patrón de onda tipo PSA algo más definido, sin embargo, tampoco en estos casos hay buena consistencia entre los puntos.
 
 De este análisis se desprende que el índice propuesto por @raphael2004 no parece representar un fenómeno distintivo de onda 3.
 
-## Fourier
-
 Otra forma de medir la onda 3 es computando la amplitud de fourier de esta onda a lo largo de un circulo de latitud.
 El modelo de fourier también asume que la onda 3 tiene una amplitud constante a lo largo de todo el círculo de latitud y que no presenta propagación meridional.
-Esta medida no mide exactamente lo mismo que el índice R04, ya que es sensible a la amplitud de la onda 3 sin importar dónde este localizada
+Esta medida no mide exactamente lo mismo que R04, ya que es sensible a la amplitud de la onda 3 sin importar dónde este localizada.
 Esto puede observarse en la Figura \@ref(fig:fase-histogram), donde se observa que la localización de la onda 3 varía considerablemente.
 
 ```{r zw}
@@ -387,14 +425,16 @@ hgt %>%
                                    labels = label_one_less) +
   annotate_grid() +
   coord_polar2() +
-  facet_wrap(~time_factor, ncol = 4)
+  facet_wrap(~time_factor, ncol = 4) +
+  tag_facets()
 ```
 
 (ref:zw3-top8-cap) Igual que la Figura \@ref(fig:raphael-top8), pero para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
 
 La Figura \@ref(fig:zw3-top8) es equivalente a la Figura \@ref(fig:raphael-top8).
-Se observa que amplitud alta se asocia a una onda 3 relativamente clara, aunque su amplitud no es constante en todo el hemisferio.
-Aún cuando hay 3 máximos claros, éstos no están en la misma latitud, sugiriendo un nivel de propagación meridional
+Se observa que una amplitud alta se asocia a una onda 3 relativamente clara, pero que su amplitud no es constante en todo el hemisferio.
+Por ejemplo, la mayor amplitud de la onda 3 se observa en septiembre de 2008 (panel a).
+Las anomalías zonales tienen mayor intensidad y se encuentran más al sur en la zona del pacífico y al este de Sudamérica que en el Índico y al sur de Australia.
 
 ```{r envelope-regr}
 hgt %>% 
@@ -432,3 +472,4 @@ Las ondas 2 y 3, en cambio, contribuyen a las anomalías mensuales de altura geo
 
 De este análisis concluimos que ni el modelo de @raphael2004 ni el modelo de Fourier son adecuados para estudiar la onda 3 en el hemisferio sur.
 Es necesario un modelo que permita detectar cambios en la fase, modulación zonal de la amplitud y propagación meridional.
+En el próximo capítulo presentamos un índice basado en Funciones Empíricas Ortogonales Complejas (cEOF) que resuelve estos problemas.

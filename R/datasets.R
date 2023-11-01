@@ -522,7 +522,7 @@ SAM <- new_dataset(
         .[, hgt := hgt/9.8] %>%
         na.omit() %>%
         .[, time := as.Date(time)] %>%
-        .[, period := data.table::between(data.table::year(time), 1979, 2022)] %>%
+        .[, period := data.table::between(data.table::year(time), 1979, 2019)] %>%
         .[, hgt := metR::Anomaly(hgt, baseline = period), by = .(lon, lat, lev, data.table::month(time))] %>%
         .[, eof_asym(hgt, lon, lat, time, period = period), by = lev]
     })

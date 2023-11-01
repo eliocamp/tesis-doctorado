@@ -29,6 +29,7 @@ Z(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{X} + \beta(\lambda, \p
 (\#eq:multiple-regression-sam)
 \end{equation}
 ```
+
 donde $\lambda$ y $\phi$ son la longitud y la latitud, $t$ es el tiempo, $\alpha$ y $\beta$ son los coeficientes de regresión lineal, $X_0$ y $\epsilon$ son la constante y los términos de error.
 A partir de esta ecuación, $\alpha$ representa la asociación (lineal) de $Z$ con la variabilidad de $X$ que no se explica por la variabilidad de $Y$; es decir, es proporcional a la correlación parcial de $Z$ y $X$, controlando el efecto de $Y$, y viceversa para $\beta$.
 
@@ -39,3 +40,9 @@ La significancia estadística de los campos de regresión se evaluó ajustando l
 Calculamos las tendencias lineales mediante mínimos cuadrados ordinarios y el intervalo de confianza del 95% se calculó asumiendo una distribución t con los grados de libertad de los residuos apropiados.
 
 Calculamos las estimaciones de probabilidad de densidad utilizando un kernel gaussiano de anchura óptima según @sheather1991.
+
+
+## EOF
+
+Calculamos los EOFs haciendo la descomposición en valores singulares de la matriz de datos.
+Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener en cuenta que el área representada por cada punto de grilla [@chung1999].

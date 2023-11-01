@@ -466,10 +466,15 @@ hgt %>%
 
 (ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial.
 
-La Figura \@ref(fig:envelope-regr) muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales (una medida de la actividad local de las ondas; ver @irving2015) de las anomalías de altura geopotencial.
+Esta diferencia longitudinal en la amplitud de las ondas puede capturarse a partir de la envolvente de las ondas.
+La Figura \@ref(fig:envelope-regr) muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial.
 Se observa que la amplitud de la onda 1 se asocia a mayor actividad de onda en una banda aproximadamente zonalmente simétrica, indicando que la onda 1 contribuye con las anomalías zonales aproximadamente en todas las longitudes.
 Las ondas 2 y 3, en cambio, contribuyen a las anomalías mensuales de altura geopotencial principalmente en el Pacífico sur.
+Esto es consistente con lo observado en casos particulares en la Figura \@ref(fig:zw3-top8) y sugiere que la onda 3 es más localizada que un modelo sinusoidal puro.
+
+## Conclusiones
 
 De este análisis concluimos que ni el modelo de @raphael2004 ni el modelo de Fourier son adecuados para estudiar la onda 3 en el hemisferio sur.
 Es necesario un modelo que permita detectar cambios en la fase, modulación zonal de la amplitud y propagación meridional.
 En el próximo capítulo presentamos un índice basado en Funciones Empíricas Ortogonales Complejas (cEOF) que resuelve estos problemas.
+

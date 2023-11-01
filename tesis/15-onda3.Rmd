@@ -1,5 +1,7 @@
 ---
 knit: purrr::partial(bookdown::render_book, output_format = 'bookdown::gitbook', preview = TRUE)
+
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -477,4 +479,3 @@ Esto es consistente con lo observado en casos particulares en la Figura \@ref(fi
 De este análisis concluimos que ni el modelo de @raphael2004 ni el modelo de Fourier son adecuados para estudiar la onda 3 en el hemisferio sur.
 Es necesario un modelo que permita detectar cambios en la fase, modulación zonal de la amplitud y propagación meridional.
 En el próximo capítulo presentamos un índice basado en Funciones Empíricas Ortogonales Complejas (cEOF) que resuelve estos problemas.
-

@@ -11,9 +11,21 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 
 # Análisis de estos modos en los modelos de CMIP6
 
+El análisis previo estudió la circulación zonalmente asimétrica en los datos de reanálisis. 
+Sin embargo, el estudio de tendencias y variabilidad de estos modelos se ve limitada por la corta longitud de los datos observacionales y la posible inhomogeneidad del reanálisis al cambiar la densidad y tipo de observaciones; un problema que afecta particularmente al hemisferio sur. 
+Además, es imposible abordar la atribución de las tendencias observadas utilizando únicamente observaciones. 
 
-
+Estas limitaciones motivan la inclusión de datos de modelos climáticos. 
+En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparacion de Modelos Acoplados (CMIP6) y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) de capturar estos modos y sus principales características. 
+Al contar con corridas mucho más largas y múltiples miembros por modelo, es posible evaluar las tendencias a largo plazo con mayor robustez. 
+Utilizando los modelos incluidos en DAMPI, además podemos avanzar en la atribución de las tendencias observadas. 
 ## Métodos
+
+### Datos
+
+Descripción CMIP
+
+Descripción DAMPI
 
 
 
@@ -54,8 +66,6 @@ Table: (\#tab:modelos)Modelos analizados y la cantidad de miembros para cada exp
 Los modelos usados se listan en la Tabla \@ref(tab:modelos) se listan todos los modelos y la cantidad de miembros de cada uno. 
 Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat") y sólo el efecto de el ozono estratosférico ("hist-stratO3").
 
-@CMIP6.CMIP.AWI.AWI-CM-1-1-MR
-
 Algunos miembros tienen más de una inicialización, parametrización física o datos usados para el forzante.
 Elegimos un único miembro de esos. 
 
@@ -69,6 +79,8 @@ Como se explicó anteriormente, los cEOFs no están definidos unívocamente ya q
 Los cEOFs computados en ERA5 fueron rotados para maximizar la correlación con el ozono estatosférico o el ENSO como se describe en la Sección XXX. 
 Para los modelos de CMIP, rotamos los cEOFs para maximisar la correlación espacial de los patrones con el correspondiente cEOF de ERA5. 
 Esto busca que la localización del patrón sea parecido al observado. 
+
+
 
 
 

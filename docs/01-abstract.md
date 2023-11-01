@@ -1,6 +1,6 @@
 # Abstract {.unnumbered}
 
-## Dynamics of the Southern Hemisphere zonally asymmetric circulation
+**Dynamics of the Southern Hemisphere zonally asymmetric circulation**
 
 The goal of this work is to better understand the asymmetric zonal circulation in the Southern Hemisphere on seasonal and longer time scales.
 To do this, we used data from ERA5 reanalysis and historical simulations from CMIP6.

@@ -53,7 +53,7 @@ output:
       pandoc_args:
         - --wrap=none  
 
-# always_allow_html: true
+always_allow_html: true
 
 acknowledgements: |
   I want to thank a few people.

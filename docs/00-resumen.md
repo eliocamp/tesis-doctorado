@@ -1,6 +1,6 @@
 # Resumen {.unnumbered}
 
-## Dinámica de la circulación zonalmente asimétrica del hemisferio sur
+**Dinámica de la circulación zonalmente asimétrica del hemisferio sur**
 
 El objetivo de este trabajo es comprender mejor la circulación zonalmente asimétrica en el Hemisferio Sur en escalas estacionales y más largas. Para ello, utlizamos datos de reanálisis de ERA5 y simulaciones históricas de CMIP6. Computamos Funciones Empíricas Ortogonales Complejas (cEOF) a las anomalías zonales de altura geopotencial en 200 hPa y 50 hPa, lo que permitió caracterizar patrones de variabilidad con fase y amplitud.
 

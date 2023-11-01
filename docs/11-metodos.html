@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Métodos | Dinámica de la circulación zonalmente asimétrica del hemisferio sur</title>
+  <meta name="description" content="Capítulo 2 Métodos | Dinámica de la circulación zonalmente asimétrica del hemisferio sur" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Métodos | Dinámica de la circulación zonalmente asimétrica del hemisferio sur" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Métodos | Dinámica de la circulación zonalmente asimétrica del hemisferio sur" />
+  
+  
+  
+
+<meta name="author" content="Lic. Elio Campitelli" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="10-introduccion.html"/>
+<link rel="next" href="15-onda3.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="00-resumen.html"><a href="00-resumen.html"><i class="fa fa-check"></i>Resumen</a></li>
+<li class="chapter" data-level="" data-path="01-abstract.html"><a href="01-abstract.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="10-introduccion.html"><a href="10-introduccion.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="11-metodos.html"><a href="11-metodos.html"><i class="fa fa-check"></i><b>2</b> Métodos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="11-metodos.html"><a href="11-metodos.html#datos"><i class="fa fa-check"></i><b>2.1</b> Datos</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="11-metodos.html"><a href="11-metodos.html#regresiones"><i class="fa fa-check"></i><b>2.1.1</b> Regresiones</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="11-metodos.html"><a href="11-metodos.html#eof"><i class="fa fa-check"></i><b>2.2</b> EOF</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="15-onda3.html"><a href="15-onda3.html"><i class="fa fa-check"></i><b>3</b> Exploración de índice de onda 3</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="15-onda3.html"><a href="15-onda3.html#métodos-1"><i class="fa fa-check"></i><b>3.1</b> Métodos</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="15-onda3.html"><a href="15-onda3.html#índice-r04"><i class="fa fa-check"></i><b>3.1.1</b> Índice R04</a></li>
+<li class="chapter" data-level="3.1.2" data-path="15-onda3.html"><a href="15-onda3.html#envolvente"><i class="fa fa-check"></i><b>3.1.2</b> Envolvente</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="15-onda3.html"><a href="15-onda3.html#resultados"><i class="fa fa-check"></i><b>3.2</b> Resultados</a></li>
+<li class="chapter" data-level="3.3" data-path="15-onda3.html"><a href="15-onda3.html#conclusiones"><i class="fa fa-check"></i><b>3.3</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="20-ceofs.html"><a href="20-ceofs.html"><i class="fa fa-check"></i><b>4</b> Modos de variabilidad de la circulación zonalmente asimétrica en primavera</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="20-ceofs.html"><a href="20-ceofs.html#introducción-1"><i class="fa fa-check"></i><b>4.1</b> Introducción</a></li>
+<li class="chapter" data-level="4.2" data-path="20-ceofs.html"><a href="20-ceofs.html#métodos-2"><i class="fa fa-check"></i><b>4.2</b> Métodos</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="20-ceofs.html"><a href="20-ceofs.html#funciones-ortogonales-complejas-ceof"><i class="fa fa-check"></i><b>4.2.1</b> Funciones ortogonales complejas (cEOF)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="20-ceofs.html"><a href="20-ceofs.html#resultados-1"><i class="fa fa-check"></i><b>4.3</b> Resultados</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="20-ceofs.html"><a href="20-ceofs.html#caracterización-espacio-temporal-de-los-modos"><i class="fa fa-check"></i><b>4.3.1</b> Caracterización espacio-temporal de los modos</a></li>
+<li class="chapter" data-level="4.3.2" data-path="20-ceofs.html"><a href="20-ceofs.html#mapas-de-regresión-con-los-modos-ceof"><i class="fa fa-check"></i><b>4.3.2</b> Mapas de regresión con los modos cEOF</a></li>
+<li class="chapter" data-level="4.3.3" data-path="20-ceofs.html"><a href="20-ceofs.html#fuentes-de-variabilidad-tropicales"><i class="fa fa-check"></i><b>4.3.3</b> Fuentes de variabilidad tropicales</a></li>
+<li class="chapter" data-level="4.3.4" data-path="20-ceofs.html"><a href="20-ceofs.html#impactos-en-superficie"><i class="fa fa-check"></i><b>4.3.4</b> Impactos en superficie</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="20-ceofs.html"><a href="20-ceofs.html#conclusión"><i class="fa fa-check"></i><b>4.4</b> Conclusión</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="30-sam.html"><a href="30-sam.html"><i class="fa fa-check"></i><b>5</b> Estructura simétrica y asimétrica del Modo Anular del Sur</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="30-sam.html"><a href="30-sam.html#introducción-2"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
+<li class="chapter" data-level="5.2" data-path="30-sam.html"><a href="30-sam.html#métodos-3"><i class="fa fa-check"></i><b>5.2</b> Métodos</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="30-sam.html"><a href="30-sam.html#regresión-segmentada"><i class="fa fa-check"></i><b>5.2.1</b> Regresión segmentada</a></li>
+<li class="chapter" data-level="5.2.2" data-path="30-sam.html"><a href="30-sam.html#definition-of-indices"><i class="fa fa-check"></i><b>5.2.2</b> Definición de los índices</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="30-sam.html"><a href="30-sam.html#resultados-2"><i class="fa fa-check"></i><b>5.3</b> Resultados</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="30-sam.html"><a href="30-sam.html#temporal"><i class="fa fa-check"></i><b>5.3.1</b> Evolución temporal</a></li>
+<li class="chapter" data-level="5.3.2" data-path="30-sam.html"><a href="30-sam.html#spatial"><i class="fa fa-check"></i><b>5.3.2</b> Patrones espaciales</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="30-sam.html"><a href="30-sam.html#impacts"><i class="fa fa-check"></i><b>5.4</b> Impactos</a></li>
+<li class="chapter" data-level="5.5" data-path="30-sam.html"><a href="30-sam.html#conclusiones-1"><i class="fa fa-check"></i><b>5.5</b> Conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="40-sam-ceof.html"><a href="40-sam-ceof.html"><i class="fa fa-check"></i><b>6</b> Relación entre los modos de variabilidad del hemisferio sur</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="40-sam-ceof.html"><a href="40-sam-ceof.html#sam"><i class="fa fa-check"></i><b>6.1</b> SAM</a></li>
+<li class="chapter" data-level="6.2" data-path="40-sam-ceof.html"><a href="40-sam-ceof.html#psa"><i class="fa fa-check"></i><b>6.2</b> PSA</a></li>
+<li class="chapter" data-level="6.3" data-path="40-sam-ceof.html"><a href="40-sam-ceof.html#conclusión-1"><i class="fa fa-check"></i><b>6.3</b> Conclusión</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="50-cmip6.html"><a href="50-cmip6.html"><i class="fa fa-check"></i><b>7</b> Análisis de estos modos en los modelos de CMIP6</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="50-cmip6.html"><a href="50-cmip6.html#datos-1"><i class="fa fa-check"></i><b>7.0.1</b> Datos</a></li>
+<li class="chapter" data-level="7.1" data-path="50-cmip6.html"><a href="50-cmip6.html#comparación-con-los-modos-observados"><i class="fa fa-check"></i><b>7.1</b> Comparación con los modos observados</a></li>
+<li class="chapter" data-level="7.2" data-path="50-cmip6.html"><a href="50-cmip6.html#parte-temporal"><i class="fa fa-check"></i><b>7.2</b> Parte temporal</a></li>
+<li class="chapter" data-level="7.3" data-path="50-cmip6.html"><a href="50-cmip6.html#sst"><i class="fa fa-check"></i><b>7.3</b> SST</a></li>
+<li class="chapter" data-level="7.4" data-path="50-cmip6.html"><a href="50-cmip6.html#relación-con-el-sam"><i class="fa fa-check"></i><b>7.4</b> Relación con el SAM</a></li>
+<li class="chapter" data-level="7.5" data-path="50-cmip6.html"><a href="50-cmip6.html#tendencias"><i class="fa fa-check"></i><b>7.5</b> Tendencias</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="60-conclusiones.html"><a href="60-conclusiones.html"><i class="fa fa-check"></i><b>8</b> Conclusiones</a></li>
+<li class="chapter" data-level="" data-path="99-references.html"><a href="99-references.html"><i class="fa fa-check"></i>Referencias</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Dinámica de la circulación zonalmente asimétrica del hemisferio sur</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="métodos" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Métodos<a href="11-metodos.html#métodos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Acá van a ir los métodos.</p>
+<div id="datos" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Datos<a href="11-metodos.html#datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Utilizamos datos mensuales de altura geopotencial, temperatura del aire, relación de mezcla de ozono y columna total de ozono (CTO) del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) <span class="citation">(<strong>era5?</strong>)</span>. Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud y 37 niveles verticales de presión entre 1000 hPa y 1 hPa. La mayor parte del análisis utiliza datos del período post-satelital (1979 a 2019) para minimizar posibles problemas causados por cambios en la cobertura de datos, pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.</p>
+<p>La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK <span class="citation">(Adams et al., 1999)</span>, y los flujos de actividad de ondas horizontales se calcularon siguiendo el método descrito por <span class="citation">(Plumb, 1985)</span>.</p>
+<p>Utilizamos datos mensuales de Temperatura de la Superficie del Mar (TSM) de Extended Reconstructed Sea Surface Temperature (ERSST) v5 <span class="citation">(Huang et al., 2017)</span> y precipitación mensual del CPC Merged Analysis of Precipitation <span class="citation">(CMAP, <strong>cmap?</strong>)</span>, con una resolución de 2º y 2,5º, respectivamente. Este conjunto de datos de lluvia integra información de diversas fuentes, incluyendo observaciones de pluviómetros, estimaciones inferidas por satélite y el reanálisis NCEP-NCAR. Cubre el período desde 1979 hasta la actualidad.</p>
+<p>Además, incorporamos índices climáticos en nuestro análisis. El Índice del ENSO Oceánico <span class="citation">(ONI, Bamston et al., 1997)</span> del Climate Prediction Center de la NOAA y el Índice del Dipolo del Índico <span class="citation">(DMI, Saji and Yamagata, 2003)</span> del Global Climate Observing System Working Group on Surface Pressure.</p>
+<div id="regresiones" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Regresiones<a href="11-metodos.html#regresiones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tanto en el Capítulo [ceofs] como en el Capítulo [asymsam] se derivaron índices multivariados. Para cuantificar la asociación entre éstos y otras variables meteorológicas usamos regresión lineal múltiple. Para obtener los coeficientes lineales de una variable <span class="math inline">\(Z\)</span> (altura geopotencial, temperatura, precipitación, etc.) con un índice de variables X e Y ajustamos la ecuación</p>
+<span class="math display" id="eq:multiple-regression-sam">\[\begin{equation}
+Z(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{X} + \beta(\lambda, \phi) \operatorname{Y} + X_0(\lambda, \phi) + \epsilon(\lambda, \phi, t)
+\tag{2.1}
+\end{equation}\]</span>
+<p>donde <span class="math inline">\(\lambda\)</span> y <span class="math inline">\(\phi\)</span> son la longitud y la latitud, <span class="math inline">\(t\)</span> es el tiempo, <span class="math inline">\(\alpha\)</span> y <span class="math inline">\(\beta\)</span> son los coeficientes de regresión lineal, <span class="math inline">\(X_0\)</span> y <span class="math inline">\(\epsilon\)</span> son la constante y los términos de error. A partir de esta ecuación, <span class="math inline">\(\alpha\)</span> representa la asociación (lineal) de <span class="math inline">\(Z\)</span> con la variabilidad de <span class="math inline">\(X\)</span> que no se explica por la variabilidad de <span class="math inline">\(Y\)</span>; es decir, es proporcional a la correlación parcial de <span class="math inline">\(Z\)</span> y <span class="math inline">\(X\)</span>, controlando el efecto de <span class="math inline">\(Y\)</span>, y viceversa para <span class="math inline">\(\beta\)</span>.</p>
+<p>Para las regresiones estacionales, promediamos la variables para cada año y trimestre (DJF, MAM, JJA, SON) antes de calcular la regresión.</p>
+<p>La significancia estadística de los campos de regresión se evaluó ajustando los p-valores mediante el control de la Tasa de Falso Descubrimiento <span class="citation">(Benjamini and Hochberg, 1995; Wilks, 2016)</span> para evitar resultados engañosos derivados del elevado número de regresiones <span class="citation">(Walker, 1914; Katz and Brown, 1991)</span>.</p>
+<p>Calculamos las tendencias lineales mediante mínimos cuadrados ordinarios y el intervalo de confianza del 95% se calculó asumiendo una distribución t con los grados de libertad de los residuos apropiados.</p>
+<p>Calculamos las estimaciones de probabilidad de densidad utilizando un kernel gaussiano de anchura óptima según <span class="citation">Sheather and Jones (1991)</span>.</p>
+</div>
+</div>
+<div id="eof" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> EOF<a href="11-metodos.html#eof" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Calculamos los EOFs haciendo la descomposición en valores singulares de la matriz de datos. Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener en cuenta que el área representada por cada punto de grilla <span class="citation">(Chung and Nigam, 1999)</span>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="10-introduccion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="15-onda3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/eliocamp/phd-thesis/blob/main/11-metodos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -8,17 +8,19 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 
 
 
-# Relación con otros patrones
+# Relación entre los modos de variabilidad del hemisferio sur
 
+En los capítulos anteriores se describieron los modos de circulación del hemisferio sur a través de Funciones Empíricas Complejas (cEOF) y las componentes simétricas y asimétricas del Modo Anular del Sur (SAM). 
+En este capítulo se explora la relación entre estos modos de variabilidad, así como con el Modo del Pacífico-Sudamérica (PSA). 
+Éste último se calcula según @mo2001 como el segundo y tercer EOF de las anomalías trimestrales de altura geopotencial en 500 hPa. 
 
 ## SAM
 
-(ref:sam-eof-vertical-cap) Coefficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979 -- 2022. 
+(ref:sam-eof-vertical-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979 -- 2022. 
 Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.
 
 ![(\#fig:sam-eof-vertical)(ref:sam-eof-vertical-cap)](figures/40-sam-ceof/sam-eof-vertical-1.png)
 
-Ahora exploramos la relación entre SAM y los cEOFs, motivados por el parecido entre los mapas de regresión de los cEOFs y los patrones asociados al SAM.
 Calculamos el coeficiente de determinación entre las series temporales de los cEOFs y los tres índices SAM (SAM, A-SAM y S-SAM) definidos en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
 El índice SAM está correlacionado de forma estadísticamente significativa con la fase de 0º del cEOF1 en todos los niveles, y con la fase de 90º del cEOF1 y la fase de 90º del cEOF2 en la tropósfera.
 Por otro lado, las correlaciones entre SAM y la fase de  0º del cEOF2 son prácticamente nulas. 
@@ -35,7 +37,6 @@ Esto se debe principalmente a dos razones.
 En primer lugar, la correlación entre cEOF1 y la SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \@ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
 En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM y las SST del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de la SAM.
 Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
-
 
 El cEOF2 sólo tiene relación con el SAM en su fase de 90º y asociada a la parte asimétrica y únicamente en la tropósfera.
 La correlación entre ambos índices es muy alta, con valores superiores al 75% de la varianza compartida en toda la tropósfera y un máximo de 94% en 225 hPa. 
@@ -75,4 +76,5 @@ La Figura \@ref(fig:phase-histogram) muestra un histograma para cada trimestre c
 En SON (panel 4), el cEOF2 tiene una fase similar a $\pm$ 90º un 61% de los años, indicando que es la fase más común. 
 Esta preferencia de fase está de acuerdo con @irving2016, que encontró una distribución bimodal a la variabilidad tipo PSA (compare nuestra Figura \@ref(fig:phase-histogram) con su Figura 6).
 
-## ENSO
+
+## Conclusión

@@ -112,3 +112,17 @@ pval_contours <- function(pval = 0.01, de = NULL, adjust = TRUE) {
 }
 
 ZeroBreaks <- metR::AnchorBreaks(0, NULL, 0)
+
+
+
+color_real <- "#998EC3"
+color_imaginario <- "#E66101"
+scale_color_fase <- function(name = NULL, ...) {
+  scale_color_manual(name = name, ..., values = c(Real = color_real, Imaginario = color_imaginario),
+                     labels = lab_cplx)
+}
+
+scale_fill_fase <- function(name = NULL, ...) {
+  scale_fill_manual(name = name, ..., values = c(Real = color_real, Imaginario = color_imaginario),
+                    labels = lab_cplx)
+}

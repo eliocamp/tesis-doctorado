@@ -1,6 +1,5 @@
 ---
 knit: purrr::partial(bookdown::render_book, output_format = 'bookdown::gitbook', preview = TRUE)
-
 always_allow_html: true
 ---
 
@@ -76,19 +75,19 @@ Esto no demuestra que éste sea un patrón físicamente coherente.
   <tr>
    <td style="text-align:center;"> 50°E </td>
    <td style="text-align:center;"> 1.00 </td>
-   <td style="text-align:center;"> 0.16 </td>
+   <td style="text-align:center;"> 0.15 </td>
    <td style="text-align:center;"> -0.13 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> 165°E </td>
-   <td style="text-align:center;"> 0.16 </td>
+   <td style="text-align:center;"> 0.15 </td>
    <td style="text-align:center;"> 1.00 </td>
-   <td style="text-align:center;"> 0.03 </td>
+   <td style="text-align:center;"> 0.04 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> 75°O </td>
    <td style="text-align:center;"> -0.13 </td>
-   <td style="text-align:center;"> 0.03 </td>
+   <td style="text-align:center;"> 0.04 </td>
    <td style="text-align:center;"> 1.00 </td>
   </tr>
 </tbody>

@@ -19,11 +19,6 @@ library(patchwork)
 
 
 source(here::here("tesis/scripts/globals.R"))
-
-knitr::opts_chunk$set(
-  cache.extra = 231234524
-)
-
 ```
 
 # Modos de variabilidad de la circulación zonalmente asimétrica en primavera {#ceofs}
@@ -79,21 +74,6 @@ era5 <- ERA5_geopotential() %>%
   # .[is.full_season(time)] %>% 
   .[, w := season_weights(time)] %>% 
   .[, .(hgt = mean(hgt*w)), by = .(lev, lon, lat, time = seasonally(time))]
-```
-
-
-
-```{r}
-era5shceof <- readRDS("~/Downloads/era5.Rds") 
-```
-
-```{r}
-rbind(shceof = era5shceof, 
-      tesis = era5, idcol = "type") %>% 
-  .[lon == 60 & lat == -20] %>% 
-  .[lev == 200] %>% 
-  ggplot(aes(time, hgt)) +
-  geom_line(aes(color = type))
 ```
 
 
@@ -380,11 +360,6 @@ data.table(ceof = list(copy(ceof) %>%
 
 ```
 
-```{r}
-with_o3_shceof <- readRDS("~/Downloads/with_o3.Rds")
-```
-
-
 ```{r check-rotation}
 # Check that rotated and unrotated eofs
 # predict the same fields (up to floating point errors)
@@ -498,7 +473,6 @@ trends <- era_more %>%
 # era_less <-   ceof %>%
 #   .[, eof[[1]]$left, by = season] %>%
 #   sep_ReIm(hgt) %>%
-#   .[season == "SON"] %>% 
 #   .[, hgt := as.numeric(scale(hgt)), by = .(part, cEOF)] 
 
 era_more %>%
@@ -540,7 +514,7 @@ era_more %>%
 ```
 
 Las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) muestran las partes espacial y temporal de los dos primeros modos cEOF de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
-El primer modo (cEOF1) explica el `r scales::percent(ceof[season == "SON", eof[[1]]$sdev, by = .(season)][cEOF == "cEOF1"]$r2, 1)` de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (`r scales::percent(ceof[season == "SON", eof[[1]]$sdev, by = .(season)][cEOF == "cEOF2"]$r2, 1)`).
+El primer modo (cEOF1) explica el `r scales::percent(ceof$sdev[cEOF == "cEOF1"]$r2, 1)` de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (`r scales::percent(ceof$sdev[cEOF == "cEOF2"]$r2, 1)`).
 En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y fase está controlada por la magnitud y fase de su serie temporal.
 
 El cEOF1 (Fig. \@ref(fig:ceofs-1) columna 1) es un patrón de onda 1 con amplitud máxima en latitudes altas.
@@ -936,8 +910,8 @@ temp %>%
 Los mapas de regresión de las anomalías de CTO con el cEOF1 (Fig. \@ref(fig:o3-regr)) muestran patrones de onda zonal 1 asociados a ambas fases del cEOF1.
 La posición climatológica del mínimo de ozono durante la primavera (agujero de la capa de ozono) no está centrada sobre el Polo Sur, sino que está desplazada hacia el mar de Weddell [ej, @grytsai2011]; este desplazamiento se traduce en una onda 1 de la CTO.
 Así, el campo de regresión de la fase 0º del cEOF1 (Fig. \@ref(fig:o3-regr)a) coincide con la posición climatológica de esta onda 1 del agujero de ozono, mientras que el campo para la fase 90º está defasado en 90º cEOF1.
-La correlación temporal entre la amplitud de la onda 1 de CTO y la amplitud del cEOF1 es `r wave1_cor[with == "amplitude" & season == "SON"]$text`, mientras que la correlación entre sus fases es `r wave1_cor[with == "phase" & season == "SON"]$text`.
-La correlación entre las dos ondas es `r wave_correlation[season == "SON"]$text`.
+La correlación temporal entre la amplitud de la onda 1 de CTO y la amplitud del cEOF1 es `r wave1_cor[with == "amplitude"]$text`, mientras que la correlación entre sus fases es `r wave1_cor[with == "phase"]$text`.
+La correlación entre las dos ondas es `r wave_correlation$text`.
 En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del ozono del HS.
 
 ### Fuentes de variabilidad tropicales {#fuentes-ceof}

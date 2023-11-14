@@ -711,7 +711,6 @@ lapply(years, function(y) {
     by = .(season, lev, sam)] %>% 
   .[sam == "asym"] %>%
   na.omit() %>% 
-  # .[season == "DJF"] %>% 
   # .[lev == 700] %>% 
   ggplot(aes(year_end, year_start)) + 
   geom_contour_fill(aes(z = estimate), bins = 20) +

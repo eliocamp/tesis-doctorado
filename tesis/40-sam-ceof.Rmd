@@ -39,9 +39,9 @@ En este capítulo se explora la relación entre estos modos de variabilidad, as�
 Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.
 
 ```{r sam-eof-vertical, fig.height=4, fig.width=width_column}
-time <- ceof[, eof[[1]]$left, by = .(season)] %>%
+time <- ceof$left %>%
   sep_ReIm() %>%
-  .[, hgt := scale(hgt), by = .(cEOF, part, season)]
+  .[, hgt := scale(hgt), by = .(cEOF, part)]
 
 sam_r2 <- sams %>%
   .[, .(estimate = mean(estimate)), by = .(lev, term, time = seasonally(time))] %>% 
@@ -53,7 +53,6 @@ max_r2 <- sam_r2[part == "Imaginario"] %>%
   .[, .SD[which.max(estimate^2)], by = .(cEOF, term, season)]
 
 sam_r2 %>%
-  .[season == "SON"] %>% 
   .[, p.value_a := p.adjust(p.value, "fdr")] %>% 
   ggplot(aes(lev, estimate^2)) +
   geom_vline(xintercept = c(50, 200),  size = 0.2, color = "gray50") +
@@ -96,7 +95,7 @@ En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM
 Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
 
 El cEOF2 sólo tiene relación con el SAM en su fase de 90º y asociada a la parte asimétrica y únicamente en la tropósfera.
-La correlación entre ambos índices es muy alta, con valores superiores al 75% de la varianza compartida en toda la tropósfera y un máximo de `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym" & season == "SON"]$estimate^2, 2)` en `r max_r2[cEOF == "cEOF2" & term == "asym" & season == "SON"]$lev` hPa. 
+La correlación entre ambos índices es muy alta, con valores superiores al 75% de la varianza compartida en toda la tropósfera y un máximo de `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym"]$estimate^2, 2)` en `r max_r2[cEOF == "cEOF2" & term == "asym"]$lev` hPa. 
 Esta altísima correlación es comparable a la correlación observada entre distintos índices del SAM (@ho2012) y sugiere que esta fase es capaz de caracterizar la componente zonalmente asimétrica de la SAM prácticamente en su totalidad. 
 
 ## PSA {#psa}
@@ -110,7 +109,7 @@ psa <- PSA() %>%
   readRDS()
 
 psa_time <- psa$left[PC != "SAM"]
-cEOF2 <- ceof[, eof[[1]]$left, by = season] %>% 
+cEOF2 <- ceof$left %>% 
   .[cEOF == "cEOF2"] %>% 
   copy() %>% 
   .[, cEOF := NULL] %>% 
@@ -142,24 +141,21 @@ table <- psa_time[cEOF2, on = .NATURAL] %>%
   .[PC != "SAM"] %>% 
   copy() %>% 
   sep_ReIm() %>% 
-  .[, correlate(value, hgt), by = .(PC, part, season)] 
+  .[, correlate(value, hgt), by = .(PC, part)] 
 
 p.val <- table %>% 
-  dcast(PC + season~ part, value.var = "p.value") %>% 
-  .[order(season)] 
+  dcast(PC ~ part, value.var = "p.value") 
 
 if (is_word()) {
   table %>% 
-    dcast(PC + season ~ part, value.var = "text") %>% 
-    .[order(season)] %>% 
+    dcast(PC  ~ part, value.var = "text") %>% 
     flextable::flextable() %>% 
     flextable::set_caption("(ref:psa-eof2-cap)")
 } else {
   table %>% 
-    dcast(PC + season ~ part, value.var = "text") %>% 
-    .[order(season)] %>% 
+    dcast(PC  ~ part, value.var = "text") %>% 
     kbl2(booktabs = TRUE, caption = "(ref:psa-eof2-cap)") %>%
-    column_spec2(3:4, bold = p.val[[.col]] < 0.01) %>%
+    column_spec2(2:3, bold = p.val[[.col]] < 0.01) %>%
     # add_header_above(c("", "cEOF2" = 2)) %>%
     collapse_rows(columns = 2, valign = "top") %>% 
     kable_classic() 
@@ -181,13 +177,12 @@ Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho del int
 Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
 
 ```{r phase-histogram, fig.width=width_column*.8, fig.height=2.5}
-N <- ceof[, cut(eof[[1]], 2)$left, by = season] %>% 
-  .[, .N, by = season] %>% 
-  .[1, N]
+N <- ceof$left %>% 
+  .[, .N]
 
-plot <- ceof[, cut(eof[[1]], 2)$left, by = season] %>% 
+plot <- cut(ceof, 2)$left %>% 
   .[, arg := Arg(hgt)] %>% 
-  .[, w := Mod(hgt)/mean(Mod(hgt)), by = season] %>% 
+  .[, w := Mod(hgt)/mean(Mod(hgt))] %>% 
   qwrap(arg = c(-pi, pi) ~  c(-pi - 1/4*pi, pi - 1/4*pi)) %>% 
   ggplot(aes(arg)) +
   geom_histogram(binwidth = 90*pi/180, center = 0, size = 0.2,
@@ -205,8 +200,7 @@ plot <- ceof[, cut(eof[[1]], 2)$left, by = season] %>%
                      breaks = seq(-pi - 1/4*pi, pi - 1/4*pi, by = 45*pi/180),
                      labels = function(x) paste0(round(x*180/pi, 5), "º")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  theme(panel.grid = element_blank()) +
-  facet_wrap(~season)
+  theme(panel.grid = element_blank()) 
 
 imaginary <- ggplot_build(plot)$data[[1]] %>% 
   as.data.table() %>% 
@@ -220,7 +214,7 @@ plot
 ```
 
 La Figura \@ref(fig:phase-histogram) muestra un histograma para cada trimestre con la distribución de la fase del cEOF2 con las observaciones marcadas con líneas verticales en el eje horizontal.
-En SON (panel 4), el cEOF2 tiene una fase similar a $\pm$ 90º un `r scales::percent(imaginary[panel == 4]$percent)` de los años, indicando que es la fase más común. 
+En SON (panel 4), el cEOF2 tiene una fase similar a $\pm$ 90º un `r scales::percent(imaginary$percent)` de los años, indicando que es la fase más común. 
 Esta preferencia de fase está de acuerdo con @irving2016, que encontró una distribución bimodal a la variabilidad tipo PSA (compare nuestra Figura \@ref(fig:phase-histogram) con su Figura 6).
 
 

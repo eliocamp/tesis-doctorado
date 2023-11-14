@@ -176,7 +176,7 @@ season_weights <- function(time, groups = metR::seasonally(time)) {
 #'
 #'
 #' @export
-correlate_complex <- function(z, x, angles = seq(0, pi, by = .5*pi/180), ...) {
+correlate_complex <- function(z, x, angles = seq(0, 2*pi, by = .5*pi/180), ...) {
   cov_real <- stats::cov(Re(z), x)
   cov_im <- stats::cov(Im(z), x)
   cov_z <- stats::cov(Re(z), Im(z))

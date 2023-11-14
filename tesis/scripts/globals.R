@@ -75,7 +75,7 @@ r2 <- expression(`$r^2$` = paste("", "r", phantom()^{
 width_column <- 3.3
 
 
-main_period <- c("1979-01-01", "2019-12-01")
+main_period <- c("1979-01-01", "2020-12-01")
 
 combine_words <- purrr::partial(knitr::combine_words, and = " y ")
 

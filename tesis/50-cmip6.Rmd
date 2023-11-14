@@ -30,14 +30,14 @@ experiments <- c("historical", "hist-GHG", "hist-stratO3", "hist-nat", "hist-aer
 
 scale_color_experiments <- function(...) {
   scale_color_manual(..., name = NULL, 
-                     values = RColorBrewer::brewer.pal(5, "Dark2") %>% 
+                     values = RColorBrewer::brewer.pal(length(experiments), "Dark2") %>% 
                        setNames(experiments))   
 }
 
 
 scale_fill_experiments <- function(...) {
   scale_fill_manual(..., name = NULL, 
-                    values = RColorBrewer::brewer.pal(4, "Dark2") %>% 
+                    values = RColorBrewer::brewer.pal(length(experiments), "Dark2") %>% 
                       setNames(experiments))   
 }
 
@@ -119,10 +119,10 @@ Para los modelos de CMIP, rotamos los cEOFs para maximizar la correlación espac
 Esto busca que la localización del patrón sea parecido al observado.
 
 ```{r read-data}
-ceof_era5 <- readRDS(data_path("derived", "ceof.Rds")) %>% 
-  .[season == "SON"] %>% 
-  .[, `:=`(model = "ERA5", experiment = "reanalysis", season = NULL)] %>% 
-  .[]
+
+ceof_era5 <- data.table(model = "ERA5",
+                        experiment = "reanalysis",
+                        eof = list(readRDS(cEOF())))
 
 ceof_era5$eof[[1]]$sdev <- ceof_era5[, eof[[1]]]$sdev[, `:=`(correlation = 1,  angle = 0)]
 ceof_era5$eof[[1]]$left <- ceof_era5$eof[[1]]$left[, ensemble := factor("1.1.1.1")]
@@ -443,7 +443,7 @@ fft %>%
 ```{r ensofft, fig.height=8, fig.width=9, eval = FALSE}
 enso_fft %>% 
   .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
-  .[, model := reorder(model, -(correlacion^2)*(part == "Imaginario"))] %>% 
+  .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
   .[, ensembleN := uniqueN(member), by = model] %>% 
   ggplot(aes(1/freq, spec)) +
   geom_line(aes(group = member, alpha = alpha_from_n(ensembleN, 0.9))) +
@@ -927,7 +927,7 @@ ceof_largo_p %>%
   ggplot(aes(time, value)) +
   geom_line(aes(color = name), alpha = 0.4) +
   geom_smooth(aes(color = name)) +
-  facet_grid(part ~ cEOF)
+  facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx))
 ```
 
 Como una aproximación, la Figura \@ref(fig:suma) muestra la media multimodelo de la corrida histórica junto con la suma de las medias multimodelo de las corridas hist-GHG, hist-stratO3 e hist-aer.

@@ -300,9 +300,7 @@ Sin embargo, la mayoría de los modelos exageran la relación entre los modos y 
 \hypertarget{introducciuxf3n}{%
 \chapter{Introducción}\label{introducciuxf3n}}
 
-La circulación extratropical de gran escala en el hemisferio sur es mucho más zonalmente simétrica que la del hemisferio norte\ldots.
-
-El principal patrón de circulación en latitudes medias es el Modo Anular del Sur (SAM, por sus siglas en inglés), el cual se describe como un patrón zonalmente simétrico con anomalías negativas de presión sobre la Antártida rodeadas de un anillo de anomalías positivas de presión en latitudes medias (en su fase positiva) (Fogt and Marshall, 2020).
+El principal patrón de circulación en latitudes medias es el Modo Anular del Sur (SAM, por sus siglas en inglés), el cual se describe, en su fase positiva, como un patrón zonalmente simétrico con anomalías negativas de presión sobre la Antártida rodeadas de un anillo de anomalías positivas de presión en latitudes medias (Fogt and Marshall, 2020).
 
 Gran parte de los índices presentados en la literatura para describir el SAM se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial (Ho et al., 2012).
 Gong and Wang (1999) define el índice SAM como la diferencia de la media zonal de la presión a nivel del mar entre 40ºS y 65ºS, que es también la definición utilizada por el índice basado en estaciones de Marshall (2003).
@@ -345,9 +343,9 @@ Trenberth and Mo (1985) concluyó que la onda 3 tiene un rol importante en el de
 Además, trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos.
 Raphael (2007) demostró que la variabilidad de la altura geopotencial en 500 hPa proyectada sobre la onda planetaria 3 climatológica está asociada a anomalías en la concentración de hielo marino antártico.
 
-(\textbf{Quintanar1995a?}) realizaron experimentos de sensibilidad tratando de identificar los factores importantes en el mantenimiento de la QS1.
+Quintanar and Mechoso (1995) realizaron experimentos de sensibilidad tratando de identificar los factores importantes en el mantenimiento de la QS1.
 Encontraron que las condiciones térmico-orográficas sobre la Antártida no eran suficientes para explicar la QS1 de latitudes subpolares, por lo que concluyeron que los forzantes remotos debían jugar un papel importante.
-(\textbf{Wang2013?}) encontraron que la destrucción y recuperación de la capa de ozono está asociada a un aumento y disminución de la actividad de onda planetaria respectivamente, pero su análisis no distingue en la actividad de distintos números de onda.
+Wang et al. (2013) encontraron que la destrucción y recuperación de la capa de ozono está asociada a un aumento y disminución de la actividad de onda planetaria respectivamente, pero su análisis no distingue en la actividad de distintos números de onda.
 
 En mi tesis de licenciatura (Campitelli, n.d.) estudié las características climatológicas de la onda 3, mostrando que si bien su fase suele estar cercana a la fase de la onda 3 climatológica, tiene una gran variabilidad.
 La fase media mensual tiene un ciclo anual con una diferencia de aproximadamente 30º de longitud entre enero y junio y la variabilidad interanual es aún mayor.
@@ -358,8 +356,8 @@ También mostré que la amplitud de la onda 3 estaría asociada a un de onda con
 
 Resultados preliminares utilizando el modelo SPEEDY además indicaron que la onda 3 está activa aún si se suprime la variabilidad de la temperatura de la superficie del mar (TSM) tropical, pero que su fase es más variable, reduciendo su importancia en la media anual climatológica.
 
-(\textbf{goyal2021a?}) realizó simulaciones en un acuaplanet con masas continentales individuales, confirmando que el forzante tropical hace que la onda 3 se establezca en una fase preferencia y así se refleja en el campo medio.
-Además, (\textbf{goyal2021a?}) sugiere que la distribución de los tres continentes del hemisferio sur no tiene un rol relevante en el establecimiento de la onda 3 y que ésta está compuesta de trenes de onda con propagación meridional.
+Goyal et al. (2021) realizó simulaciones en un acuaplanet con masas continentales individuales, confirmando que el forzante tropical hace que la onda 3 se establezca en una fase preferencia y así se refleja en el campo medio.
+Además, Goyal et al. (2021) sugiere que la distribución de los tres continentes del hemisferio sur no tiene un rol relevante en el establecimiento de la onda 3 y que ésta está compuesta de trenes de onda con propagación meridional.
 
 La descomposición de Fourier se basa en el supuesto de que la circulación puede describirse de forma significativa en términos de ondas zonales de amplitud constante a lo largo de un círculo de latitud.
 Sin embargo, esto no es válido para las ondas con propagación meridional ni para las ondas zonales con amplitudes localizadas.
@@ -401,13 +399,13 @@ Acá van a ir los métodos.
 \hypertarget{datos}{%
 \section{Datos}\label{datos}}
 
-Utilizamos datos mensuales de altura geopotencial, temperatura del aire, relación de mezcla de ozono y columna total de ozono (CTO) del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) (\textbf{era5?}).
+Utilizamos datos mensuales de altura geopotencial, temperatura del aire, relación de mezcla de ozono y columna total de ozono (CTO) del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) (Hersbach et al., 2020).
 Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud y 37 niveles verticales de presión entre 1000 hPa y 1 hPa.
 La mayor parte del análisis utiliza datos del período post-satelital (1979 a 2019) para minimizar posibles problemas causados por cambios en la cobertura de datos, pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
 
 La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK (Adams et al., 1999), y los flujos de actividad de ondas horizontales se calcularon siguiendo el método descrito por (Plumb, 1985).
 
-Utilizamos datos mensuales de Temperatura de la Superficie del Mar (TSM) de Extended Reconstructed Sea Surface Temperature (ERSST) v5 (Huang et al., 2017) y precipitación mensual del CPC Merged Analysis of Precipitation (CMAP, \textbf{cmap?}), con una resolución de 2º y 2,5º, respectivamente.
+Utilizamos datos mensuales de Temperatura de la Superficie del Mar (TSM) de Extended Reconstructed Sea Surface Temperature (ERSST) v5 (Huang et al., 2017) y precipitación mensual del CPC Merged Analysis of Precipitation (CMAP, Xie and Arkin, 1997), con una resolución de 2º y 2,5º, respectivamente.
 Este conjunto de datos de lluvia integra información de diversas fuentes, incluyendo observaciones de pluviómetros, estimaciones inferidas por satélite y el reanálisis NCEP-NCAR.
 Cubre el período desde 1979 hasta la actualidad.
 
@@ -1014,10 +1012,7 @@ En vez de eso, en este capítulo calculamos los campos asociados al SAM positivo
 Ésta consiste en ajustar un modelo lineal a tramos con continuidad en cada segmento como se ilustra en la Figura \ref{fig:segmentada-ejemplo} con datos sintéticos.
 
 \begin{figure}
-\includegraphics{figures/30-sam/segmentada-ejemplo-1} \caption{Ejemplo de regresión segmentada. La relación entre X e Y es lineal pero con distinta pendiente para valores de X positivos y negativos.}\label{fig:segmentada-ejemplo-1}
-\end{figure}
-\begin{figure}
-\includegraphics{figures/30-sam/segmentada-ejemplo-2} \caption{Ejemplo de regresión segmentada. La relación entre X e Y es lineal pero con distinta pendiente para valores de X positivos y negativos.}\label{fig:segmentada-ejemplo-2}
+\includegraphics{figures/30-sam/segmentada-ejemplo-1} \caption{Ejemplo de regresión segmentada. La relación entre X e Y es lineal pero con distinta pendiente para valores de X positivos y negativos.}\label{fig:segmentada-ejemplo}
 \end{figure}
 
 
@@ -1592,13 +1587,13 @@ Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históri
 
 Para calcular los cEOFs y evaluar su desempeño, concatenamos todos los miembros para computar un único set de cEOFs para cada modelo y experimento.
 Este método trata \(k\) simulaciones de \(n\) años como una única simulación de \(k\times n\) años.
-Luego, calculamos los cEOFs siguiendo la metodología de la Sección \ref{sec:ceof-metodo}.
+Luego, calculamos los cEOFs siguiendo la metodología de la Sección \ref{ceof-metodo}.
 El resultado es que cada modelo y experimento tiene un único patrón espacial (complejo) por cEOF pero una serie temporal (compleja) por miembro.
 
 Para que sea comparable al ERA5, computamos los cEOFs para el período moderno, entre 1979 y 2014 (el último año disponible para todos los miembros).
 
 Como se explicó anteriormente, los cEOFs no están definidos unívocamente ya que aceptan cualquier rotación en el plano complejo análogamente a como los EOFs aceptan cambios de signo.
-Los cEOFs computados en ERA5 fueron rotados para maximizar la correlación con el ozono estatosférico o el ENSO como se describe en la Sección \ref{sec:ceof-metodo}.
+Los cEOFs computados en ERA5 fueron rotados para maximizar la correlación con el ozono estatosférico o el ENSO como se describe en la Sección \ref{ceof-metodo}.
 Para los modelos de CMIP, rotamos los cEOFs para maximizar la correlación espacial de los patrones con el correspondiente cEOF de ERA5.
 Esto busca que la localización del patrón sea parecido al observado.
 
@@ -1672,7 +1667,7 @@ Por otro lado, la señal asociada a la parte imaginaria del cEOF1 sí muestra va
 \includegraphics{figures/50-cmip6/cor-sst-regr-1} \caption{R\^{}2 entre los patrones de regresión de TSM cada modelo y el patrón de regresión de TSM en ERA5.}\label{fig:cor-sst-regr}
 \end{figure}
 
-La Figura \ref{fig:cor-sst-regr-cap} muestra el \(r^2\) los campos de regresión de cada modelo y el campo de regresión de ERA5.
+La Figura \ref{fig:cor-sst-regr} muestra el \(r^2\) los campos de regresión de cada modelo y el campo de regresión de ERA5.
 La figura confirma que lo observado para la media multimodelo se cumple para casi todos los modelos individuales.
 La mayoría de los modelos tiene un campo de regresión similar a ERA5 para la fase 90º del cEOF2, y una similitud moderada para la fase de 0º.
 Para ambas fases del cEOF1, las similitudes son muy bajas.
@@ -1689,7 +1684,7 @@ Para ambas fases del cEOF1, las similitudes son muy bajas.
 
 
 
-En la Sección \ref{sec:fuentes-ceof} argumentamos que la relación entre el ENSO y el cEOF2 se explica por una preferencia de fase cuando el forzante tropical está activo.
+En la Sección \ref{fuentes-ceof} argumentamos que la relación entre el ENSO y el cEOF2 se explica por una preferencia de fase cuando el forzante tropical está activo.
 Las Figuras \ref{fig:enso-phase-cmip} muestra la relación entre el ENSO y la fase del cEOF2 para los modelos de CMIP.
 Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal similar a la observada en ERA5 con fases cercanas a +90º están asociadas a ONI positivo y viceversa.
 La Figura \ref{fig:arg-enso-density} muestra la distribución de fases del cEOF2 para primaveras con ONI menor a -0.5, mayor a 0.5 y valores intermedios.
@@ -1875,6 +1870,9 @@ Gillett, N.P., Fyfe, J.C., and Parker, D.E., 2013. \href{https://doi.org/10.1002
 \leavevmode\vadjust pre{\hypertarget{ref-gong1999}{}}%
 Gong, D., and Wang, S., 1999. \href{https://doi.org/10.1029/1999GL900003}{Definition of {Antarctic Oscillation} index}. Geophysical Research Letters, 26, 4, 459--462.
 
+\leavevmode\vadjust pre{\hypertarget{ref-goyal2021a}{}}%
+Goyal, R., Jucker, M., Sen Gupta, A., Hendon, H.H., and England, M.H., 2021. \href{https://doi.org/10.1038/s41561-021-00811-3}{Zonal wave 3 pattern in the {Southern Hemisphere} generated by tropical convection}. Nature Geoscience, 14, 10, 732--738.
+
 \leavevmode\vadjust pre{\hypertarget{ref-goyal2022}{}}%
 Goyal, R., Jucker, M., Gupta, A.S., and England, M.H., 2022. A new zonal wave 3 index for the {Southern Hemisphere}. Journal of Climate, -1, aop, 1--25.
 
@@ -1889,6 +1887,9 @@ Hendon, H.H., Thompson, D.W.J., and Wheeler, M.C., 2007. \href{https://doi.org/1
 
 \leavevmode\vadjust pre{\hypertarget{ref-hendon2014}{}}%
 Hendon, H.H., Lim, E.-P., and Nguyen, H., 2014. \href{https://doi.org/10.1175/JCLI-D-13-00550.1}{Seasonal {Variations} of {Subtropical Precipitation Associated} with the {Southern Annular Mode}}. Journal of Climate, 27, 9, 3446--3460.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hersbach2020}{}}%
+Hersbach, H., Bell, B., Berrisford, P., Hirahara, S., Horányi, A., Muñoz-Sabater, J., Nicolas, J., Peubey, C., Radu, R., Schepers, D., and others, 2020. \href{https://doi.org/10.1002/qj.3803}{The {ERA5} global reanalysis}. Quarterly Journal of the Royal Meteorological Society, 146, 730, 1999--2049.
 
 \leavevmode\vadjust pre{\hypertarget{ref-ho2012}{}}%
 Ho, M., Kiem, A.S., and Verdon-Kidd, D.C., 2012. \href{https://doi.org/10.5194/hess-16-967-2012}{The {Southern Annular Mode}: A comparison of indices}. Hydrology and Earth System Sciences, 16, 3, 967--982.
@@ -1983,6 +1984,9 @@ Ploshay, J., Hurlin, W., John, J.G., Blanton, C., McHugh, C., Radhakrishnan, A.,
 \leavevmode\vadjust pre{\hypertarget{ref-plumb1985}{}}%
 Plumb, R.A., 1985. \href{https://doi.org/10.1175/1520-0469(1985)042\%3C0217:OTTDPO\%3E2.0.CO;2}{On the {Three-Dimensional Propagation} of {Stationary Waves}}. Journal of the Atmospheric Sciences, 42, 3, 217--229.
 
+\leavevmode\vadjust pre{\hypertarget{ref-quintanar1995a}{}}%
+Quintanar, A.I., and Mechoso, C.R., 1995. \href{https://doi.org/10.1175/1520-0442(1995)008\%3C2673:QSWITS\%3E2.0.CO;2}{Quasi-{Stationary Waves} in the {Southern Hemisphere}. {Part II}: {Generation Mechanisms}}. Journal of Climate, 8, 11, 2673--2690.
+
 \leavevmode\vadjust pre{\hypertarget{ref-raphael2003}{}}%
 Raphael, M., 2003. \href{https://doi.org/10.1175/1520-0442(2003)016\%3C2915:RLCITE\%3E2.0.CO;2}{Recent, {Large-Scale Changes} in the {Extratropical Southern Hemisphere Atmospheric Circulation}}. Journal of Climate, 16, 17, 2915--2924.
 
@@ -2076,6 +2080,9 @@ Volodin, E., Mortikov, E., Gritsun, A., Lykossov, V., Galin, V., Diansky, N., Gu
 \leavevmode\vadjust pre{\hypertarget{ref-walker1914}{}}%
 Walker, S.G.T., 1914. Correlation in {Seasonal Variations} of {Weather}, {III}: {On} the {Criterion} for the {Reality} of {Relationships Or Periodicities}, {Meteorological Office},.
 
+\leavevmode\vadjust pre{\hypertarget{ref-wang2013}{}}%
+Wang, L., Kushner, P.J., and Waugh, D.W., 2013. \href{https://doi.org/10.1175/JCLI-D-13-00160.1}{Southern {Hemisphere Stationary Wave Response} to {Changes} of {Ozone} and {Greenhouse Gases}}. Journal of Climate, 26, 24, 10205--10217.
+
 \leavevmode\vadjust pre{\hypertarget{ref-CMIP6.CMIP.MPI-M.MPI-ESM1-2-LR}{}}%
 Wieners, K.-H., Giorgetta, M., Jungclaus, J., Reick, C., Esch, M., Bittner, M., Legutke, S., Schupfner, M., Wachsmann, F., Gayler, V., and others, 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.742}{MPI-m MPIESM1.2-LR model output prepared for CMIP6 CMIP}.
 
@@ -2087,6 +2094,9 @@ Wirth, V., 1993. \href{https://doi.org/10.1029/92JD02820}{Quasi-stationary plane
 
 \leavevmode\vadjust pre{\hypertarget{ref-wolter2011}{}}%
 Wolter, K., and Timlin, M.S., 2011. \href{https://doi.org/10.1002/joc.2336}{El {Niño}/{Southern Oscillation} behaviour since 1871 as diagnosed in an extended multivariate {ENSO} index ({MEI}.ext)}. International Journal of Climatology, 31, 7, 1074--1087.
+
+\leavevmode\vadjust pre{\hypertarget{ref-xie1997}{}}%
+Xie, P., and Arkin, P.A., 1997. \href{https://doi.org/10.1175/1520-0477(1997)078\%3C2539:GPAYMA\%3E2.0.CO;2}{Global {Precipitation}: {A} 17-{Year Monthly Analysis Based} on {Gauge Observations}, {Satellite Estimates}, and {Numerical Model Outputs}}. Bulletin of the American Meteorological Society, 78, 11, 2539--2558.
 
 \leavevmode\vadjust pre{\hypertarget{ref-CMIP6.DAMIP.BCC.BCC-CSM2-MR}{}}%
 Xin, X., Wu, T., Shi, X., Zhang, F., Li, J., Chu, M., Liu, Q., Yan, J., Ma, Q., and Wei, M., 2019. \href{https://doi.org/10.22033/ESGF/CMIP6.1726}{BCC BCC-CSM2MR model output prepared for CMIP6 DAMIP}.

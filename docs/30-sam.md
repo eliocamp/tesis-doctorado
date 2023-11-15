@@ -34,7 +34,7 @@ En vez de eso, en este capítulo calculamos los campos asociados al SAM positivo
 Ésta consiste en ajustar un modelo lineal a tramos con continuidad en cada segmento como se ilustra en la Figura \@ref(fig:segmentada-ejemplo) con datos sintéticos. 
 
 
-![(\#fig:segmentada-ejemplo-1)(ref:segmentada-ejemplo-cap)](figures/30-sam/segmentada-ejemplo-1.png)![(\#fig:segmentada-ejemplo-2)(ref:segmentada-ejemplo-cap)](figures/30-sam/segmentada-ejemplo-2.png)
+![(\#fig:segmentada-ejemplo)(ref:segmentada-ejemplo-cap)](figures/30-sam/segmentada-ejemplo-1.png)
 
 (ref:segmentada-ejemplo-cap) Ejemplo de regresión segmentada. La relación entre X e Y es lineal pero con distinta pendiente para valores de X positivos y negativos.
 

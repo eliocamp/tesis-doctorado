@@ -4,13 +4,13 @@ Acá van a ir los métodos.
 
 ## Datos
 
-Utilizamos datos mensuales de altura geopotencial, temperatura del aire, relación de mezcla de ozono y columna total de ozono (CTO) del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) [@era5].
+Utilizamos datos mensuales de altura geopotencial, temperatura del aire, relación de mezcla de ozono y columna total de ozono (CTO) del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) [@hersbach2020].
 Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud y 37 niveles verticales de presión entre 1000 hPa y 1 hPa.
 La mayor parte del análisis utiliza datos del período post-satelital (1979 a 2019) para minimizar posibles problemas causados por cambios en la cobertura de datos, pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
 
 La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK [@fishpack], y los flujos de actividad de ondas horizontales se calcularon siguiendo el método descrito por [@plumb1985].
 
-Utilizamos datos mensuales de Temperatura de la Superficie del Mar (TSM) de Extended Reconstructed Sea Surface Temperature (ERSST) v5 [@huang2017] y precipitación mensual del CPC Merged Analysis of Precipitation [CMAP, @cmap], con una resolución de 2º y 2,5º, respectivamente.
+Utilizamos datos mensuales de Temperatura de la Superficie del Mar (TSM) de Extended Reconstructed Sea Surface Temperature (ERSST) v5 [@huang2017] y precipitación mensual del CPC Merged Analysis of Precipitation [CMAP, @xie1997], con una resolución de 2º y 2,5º, respectivamente.
 Este conjunto de datos de lluvia integra información de diversas fuentes, incluyendo observaciones de pluviómetros, estimaciones inferidas por satélite y el reanálisis NCEP-NCAR.
 Cubre el período desde 1979 hasta la actualidad.
 

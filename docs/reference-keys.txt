@@ -26,8 +26,7 @@ fig:fft-ceof-era5
 fig:sst-psi-1
 fig:pp-t2m-r2
 fig:pp-temp-2
-fig:segmentada-ejemplo-1
-fig:segmentada-ejemplo-2
+fig:segmentada-ejemplo
 fig:method
 fig:sign-regression-50
 fig:sign-regression-700

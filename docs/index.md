@@ -37,19 +37,24 @@ output:
       template: "template.tex"
       keep_tex: TRUE
       toc: TRUE
-      toc_depth: 3
+      toc_depth: 2
+      citation_package: "default"
       pandoc_args:
         - "--lua-filter=resumen-to-meta.lua"
         - "--lua-filter=abstract-to-meta.lua"
         - "--top-level-division=chapter"
   bookdown::gitbook:
       split_by: "rmd"
+      toc_depth: 2
+      citation_package: "default"
       pandoc_args:
         - --wrap=none
   bookdown::epub_book: 
+      toc_depth: 2
       pandoc_args:
         - --wrap=none  
   bookdown::word_document2: 
+      toc_depth: 2
       pandoc_args:
         - --wrap=none  
 

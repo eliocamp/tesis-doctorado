@@ -62,11 +62,12 @@ fig:cor-sam-cmip6
 fig:series-largas
 fig:ceof-damip
 fig:suma
-introducción
+intro
 métodos
 datos
 regresiones
 eof
+software
 exploración-de-índice-de-onda-3
 métodos-1
 índice-r04
@@ -74,7 +75,7 @@ envolvente
 resultados
 conclusiones
 ceofs
-introducción-1
+introducción
 métodos-2
 ceof-metodo
 resultados-1
@@ -86,7 +87,7 @@ fuentes-ceof
 impactos-en-superficie
 conclusión
 asymsam
-introducción-2
+introducción-1
 métodos-3
 regresión-segmentada
 definition-of-indices

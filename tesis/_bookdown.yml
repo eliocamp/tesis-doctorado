@@ -8,4 +8,10 @@ download: [
   ]
 delete_merged_file: true
 output_dir: "../docs"
-edit: "https://github.com/eliocamp/phd-thesis/blob/main/%s"
+edit: "https://github.com/eliocamp/tesis-doctorado/blob/main/tesis/%s"
+
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Ecuación '

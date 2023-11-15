@@ -1,4 +1,4 @@
-# Introducción
+# Introducción {#intro}
 
 El principal patrón de circulación en latitudes medias es el Modo Anular del Sur (SAM, por sus siglas en inglés), el cual se describe, en su fase positiva, como un patrón zonalmente simétrico con anomalías negativas de presión sobre la Antártida rodeadas de un anillo de anomalías positivas de presión en latitudes medias [@fogt2020].
 

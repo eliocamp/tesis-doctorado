@@ -1,14 +1,12 @@
 # Métodos
 
-Acá van a ir los métodos.
-
 ## Datos
 
 Utilizamos datos mensuales de altura geopotencial, temperatura del aire, relación de mezcla de ozono y columna total de ozono (CTO) del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) [@hersbach2020].
 Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud y 37 niveles verticales de presión entre 1000 hPa y 1 hPa.
 La mayor parte del análisis utiliza datos del período post-satelital (1979 a 2019) para minimizar posibles problemas causados por cambios en la cobertura de datos, pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
 
-La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK [@fishpack], y los flujos de actividad de ondas horizontales se calcularon siguiendo el método descrito por [@plumb1985].
+La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK [@fishpack], y los flujos horizontales de actividad de onda se calcularon siguiendo el método descrito por [@plumb1985].
 
 Utilizamos datos mensuales de Temperatura de la Superficie del Mar (TSM) de Extended Reconstructed Sea Surface Temperature (ERSST) v5 [@huang2017] y precipitación mensual del CPC Merged Analysis of Precipitation [CMAP, @xie1997], con una resolución de 2º y 2,5º, respectivamente.
 Este conjunto de datos de lluvia integra información de diversas fuentes, incluyendo observaciones de pluviómetros, estimaciones inferidas por satélite y el reanálisis NCEP-NCAR.
@@ -19,7 +17,7 @@ El Índice del ENSO Oceánico [ONI, @bamston1997] del Climate Prediction Center 
 
 ### Regresiones
 
-Tanto en el Capítulo [ceofs] como en el Capítulo [asymsam] se derivaron índices multivariados.
+Tanto en el Capítulo \@ref(ceofs) como en el Capítulo \@ref(asymsam) se derivaron índices multivariados.
 Para cuantificar la asociación entre éstos y otras variables meteorológicas usamos regresión lineal múltiple.
 Para obtener los coeficientes lineales de una variable $Z$ (altura geopotencial, temperatura, precipitación, etc.) con un índice de variables X e Y ajustamos la ecuación
 
@@ -29,7 +27,6 @@ Z(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{X} + \beta(\lambda, \p
 (\#eq:multiple-regression-sam)
 \end{equation}
 ```
-
 donde $\lambda$ y $\phi$ son la longitud y la latitud, $t$ es el tiempo, $\alpha$ y $\beta$ son los coeficientes de regresión lineal, $X_0$ y $\epsilon$ son la constante y los términos de error.
 A partir de esta ecuación, $\alpha$ representa la asociación (lineal) de $Z$ con la variabilidad de $X$ que no se explica por la variabilidad de $Y$; es decir, es proporcional a la correlación parcial de $Z$ y $X$, controlando el efecto de $Y$, y viceversa para $\beta$.
 
@@ -41,8 +38,16 @@ Calculamos las tendencias lineales mediante mínimos cuadrados ordinarios y el i
 
 Calculamos las estimaciones de probabilidad de densidad utilizando un kernel gaussiano de anchura óptima según @sheather1991.
 
-
 ## EOF
 
 Calculamos los EOFs haciendo la descomposición en valores singulares de la matriz de datos.
 Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener en cuenta que el área representada por cada punto de grilla [@chung1999].
+
+## Software
+
+El análisis de datos se realizó utilizando el lenguaje de programación R [@rcoreteam2020], con los paquetes data.table [@dowle2020] y metR [@campitelli2020].
+Los gráficos se hicieron con ggplot2 [@wickham2009].
+
+Los datos de reanálisis fueron descargados con el paquete ecmwfr [@hufkens2020], los datos de CMIP y DAMIP se descargaron con el paquete rcmip6 [@rcmip6] y los índices del ENSO y el dipolo del Índico, con el paquete rsoi [@albers2020].
+
+La tesis se compiló utilizando knitr y rmarkdown [@xie2015; @allaire2020].

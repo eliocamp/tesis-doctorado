@@ -107,13 +107,13 @@ Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históri
 
 Para calcular los cEOFs y evaluar su desempeño, concatenamos todos los miembros para computar un único set de cEOFs para cada modelo y experimento.
 Este método trata $k$ simulaciones de $n$ años como una única simulación de $k\times n$ años.
-Luego, calculamos los cEOFs siguiendo la metodología de la Sección \@ref(sec:ceof-metodo).
+Luego, calculamos los cEOFs siguiendo la metodología de la Sección \@ref(ceof-metodo).
 El resultado es que cada modelo y experimento tiene un único patrón espacial (complejo) por cEOF pero una serie temporal (compleja) por miembro.
 
 Para que sea comparable al ERA5, computamos los cEOFs para el período moderno, entre 1979 y 2014 (el último año disponible para todos los miembros).
 
 Como se explicó anteriormente, los cEOFs no están definidos unívocamente ya que aceptan cualquier rotación en el plano complejo análogamente a como los EOFs aceptan cambios de signo.
-Los cEOFs computados en ERA5 fueron rotados para maximizar la correlación con el ozono estatosférico o el ENSO como se describe en la Sección \@ref(sec:ceof-metodo).
+Los cEOFs computados en ERA5 fueron rotados para maximizar la correlación con el ozono estatosférico o el ENSO como se describe en la Sección \@ref(ceof-metodo).
 Para los modelos de CMIP, rotamos los cEOFs para maximizar la correlación espacial de los patrones con el correspondiente cEOF de ERA5.
 Esto busca que la localización del patrón sea parecido al observado.
 
@@ -629,7 +629,7 @@ sst_cors %>%
 
 ```
 
-La Figura \@ref(fig:cor-sst-regr-cap) muestra el $r^2$ los campos de regresión de cada modelo y el campo de regresión de ERA5.
+La Figura \@ref(fig:cor-sst-regr) muestra el $r^2$ los campos de regresión de cada modelo y el campo de regresión de ERA5.
 La figura confirma que lo observado para la media multimodelo se cumple para casi todos los modelos individuales.
 La mayoría de los modelos tiene un campo de regresión similar a ERA5 para la fase 90º del cEOF2, y una similitud moderada para la fase de 0º.
 Para ambas fases del cEOF1, las similitudes son muy bajas.
@@ -707,7 +707,7 @@ ceofs[, eof[[1]]$left, by = .(model, experiment)] %>%
 
 (ref:arg-enso-density-cap) Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0.5, entre -0.5 y 0.5, y mayor a 0.5. 
 
-En la Sección \@ref(sec:fuentes-ceof) argumentamos que la relación entre el ENSO y el cEOF2 se explica por una preferencia de fase cuando el forzante tropical está activo. 
+En la Sección \@ref(fuentes-ceof) argumentamos que la relación entre el ENSO y el cEOF2 se explica por una preferencia de fase cuando el forzante tropical está activo. 
 Las Figuras \@ref(fig:enso-phase-cmip) muestra la relación entre el ENSO y la fase del cEOF2 para los modelos de CMIP. 
 Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal similar a la observada en ERA5 con fases cercanas a +90º están asociadas a ONI positivo y viceversa. 
 La Figura \@ref(fig:arg-enso-density) muestra la distribución de fases del cEOF2 para primaveras con ONI menor a -0.5, mayor a 0.5 y valores intermedios. 

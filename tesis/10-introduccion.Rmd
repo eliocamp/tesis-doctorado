@@ -1,8 +1,7 @@
 # Introducción
 
-La circulación extratropical de gran escala en el hemisferio sur es mucho más zonalmente simétrica que la del hemisferio norte....
 
-El principal patrón de circulación en latitudes medias es el Modo Anular del Sur (SAM, por sus siglas en inglés), el cual se describe como un patrón zonalmente simétrico con anomalías negativas de presión sobre la Antártida rodeadas de un anillo de anomalías positivas de presión en latitudes medias (en su fase positiva) [@fogt2020].
+El principal patrón de circulación en latitudes medias es el Modo Anular del Sur (SAM, por sus siglas en inglés), el cual se describe, en su fase positiva, como un patrón zonalmente simétrico con anomalías negativas de presión sobre la Antártida rodeadas de un anillo de anomalías positivas de presión en latitudes medias [@fogt2020].
 
 Gran parte de los índices presentados en la literatura para describir el SAM se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial [@ho2012].
 @gong1999 define el índice SAM como la diferencia de la media zonal de la presión a nivel del mar entre 40ºS y 65ºS, que es también la definición utilizada por el índice basado en estaciones de @marshall2003.
@@ -45,9 +44,9 @@ Bajo este enfoque, las ondas zonales 1 y 3 explican casi el 99% de la varianza t
 Además, trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos.
 @raphael2007 demostró que la variabilidad de la altura geopotencial en 500 hPa proyectada sobre la onda planetaria 3 climatológica está asociada a anomalías en la concentración de hielo marino antártico.
 
-@Quintanar1995a realizaron experimentos de sensibilidad tratando de identificar los factores importantes en el mantenimiento de la QS1.
+@quintanar1995a realizaron experimentos de sensibilidad tratando de identificar los factores importantes en el mantenimiento de la QS1.
 Encontraron que las condiciones térmico-orográficas sobre la Antártida no eran suficientes para explicar la QS1 de latitudes subpolares, por lo que concluyeron que los forzantes remotos debían jugar un papel importante.
-@Wang2013 encontraron que la destrucción y recuperación de la capa de ozono está asociada a un aumento y disminución de la actividad de onda planetaria respectivamente, pero su análisis no distingue en la actividad de distintos números de onda.
+@wang2013 encontraron que la destrucción y recuperación de la capa de ozono está asociada a un aumento y disminución de la actividad de onda planetaria respectivamente, pero su análisis no distingue en la actividad de distintos números de onda.
 
 En mi tesis de licenciatura [@campitelli] estudié las características climatológicas de la onda 3, mostrando que si bien su fase suele estar cercana a la fase de la onda 3 climatológica, tiene una gran variabilidad.
 La fase media mensual tiene un ciclo anual con una diferencia de aproximadamente 30º de longitud entre enero y junio y la variabilidad interanual es aún mayor.

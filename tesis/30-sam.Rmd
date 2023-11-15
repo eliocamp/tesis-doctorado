@@ -105,7 +105,6 @@ En vez de eso, en este capítulo calculamos los campos asociados al SAM positivo
 N <- 100
 x <- rnorm(N)
 y <- ifelse(x < 0, 2*x, .5*x) + rnorm(N, sd = 0.5)
-plot(x, y)
 
 data.frame(x = x,
            y = y) %>% 

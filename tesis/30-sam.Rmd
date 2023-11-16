@@ -57,7 +57,7 @@ hgt <- ERA5_geopotential() %>%
 set.seed(42)
 SAM <- hgt[lat <= -20] %>% 
   .[lev == 700] %>%
-  .[year(time) %between% c(1979, 2019)] %>% 
+  .[year(time) %between% year(main_period)] %>% 
   .[, hgt := hgt_a*sqrt(cos(lat*pi/180))] %>% 
   .[, .(eof = list(EOF(hgt ~ time | lon + lat, n = 1, data = .SD))), 
     by = .(lev)]
@@ -144,7 +144,7 @@ Sin embargo, sólo el índice SAM tiene desviación estándar unitaria por defin
 La varianza explicada por cada patrón se utiliza como indicador del grado de simetría o asimetría zonal de cada campo mensual.
 Para cuantificar la coherencia entre las series temporales correspondientes a distintos índices o al mismo índice en distintos niveles, calculamos la correlación temporal entre ellas.
 
-(ref:method-cap) Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período 1979 -- 2019. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y negativos en azul.
+(ref:method-cap) Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período `r periodo`. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y negativos en azul.
 
 ```{r method, fig.width=7, fig.height=3}
 sam_sep <- SAM[, eof[[1]]$right, by = .(lev)] %>% 
@@ -282,7 +282,7 @@ Se puede observar que en casi todas las estaciones y ambos niveles, los campos d
 Este análisis cualitativo se confirma por el análisis cuantitativo de al observar que el $r^2$ (representando la correlación espacial al cuadrado) tienen valores entre 0.7 y 0.9, indicando alta similaridad.
 A su vez, también es similar la intensidad de los coeficientes de correlación, indicando un buen cumplimiento de la hipótesis de linealidad.
 
-(ref:sign-regression-50-cap) Regresión segmentada de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada signo para el período 1979 -- 2019. La correlación espacial al cuadrado entre cada campo en cada estación se detalla debajo de la estación. `r pval_contours(de = " de la diferencia entre el signo positivo y el negativo ")` (no hay áreas).
+(ref:sign-regression-50-cap) Regresión segmentada de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada signo para el período `r periodo`. La correlación espacial al cuadrado entre cada campo en cada estación se detalla debajo de la estación. `r pval_contours(de = " de la diferencia entre el signo positivo y el negativo ")` (no hay áreas).
 
 ```{r sign-regression-50}
 plot_sign_regression(sign_regression[lev == 50])
@@ -379,15 +379,15 @@ ggplot(season_regression[lev == 50], aes(lon, lat)) +
 
 El método también asume que el patrón zonalmente asimétrico del SAM permanece estacionario a lo largo del periodo considerado.
 @silvestri2009 sugiere que este podría no ser el caso entre 1958 y 2004.
-Para probar esta suposición, calculamos el SAM para las dos mitades del periodo (1979 a 1998 y 1999 a 2019), que se muestran en la Figura \@ref(fig:sam-period).
+Para probar esta suposición, calculamos el SAM para las dos mitades del periodo (1979 a 1998 y 1999 a 2020), que se muestran en la Figura \@ref(fig:sam-period).
 Las diferencias entre los dos periodos parecen ser relativamente pequeñas, tanto en la troposfera como en la estratosfera.
 
-(ref:sam-period-cap) Patrón espacial del primer EOF computado para el período 1979 -- 1998 (columna 1) y 1999 -- 2019 (columna 2) para 50 hPa (fila a) y 700 hPa (fila b). Unidades arbitrarias con valores negativos en azul y negativos en azul.
+(ref:sam-period-cap) Patrón espacial del primer EOF computado para el período 1979 -- 1998 (columna 1) y 1999 -- 2020 (columna 2) para 50 hPa (fila a) y 700 hPa (fila b). Unidades arbitrarias con valores negativos en azul y negativos en azul.
 
 ```{r sam-period, warning = FALSE}
 SAM_period <- hgt[lat <= -20] %>% 
   .[lev %in% c(50, 700)] %>% 
-  .[year(time) %between% c(1979, 2019)] %>% 
+  .[year(time) %between% year(main_period)] %>% 
   .[, hgt := hgt_a*sqrt(cos(lat*pi/180))] %>%
   .[, period := factor(fifelse(year(time) < 1999, "old", "new"), levels = c("old", "new"))] %>% 
   .[, list(eof = list(EOF(hgt ~ time | lon + lat, n = 1, data = .SD))), 
@@ -420,7 +420,7 @@ SAM_period %>%
   coord_polar2() +
   axis_labs_smol() +
   facet_grid(lev ~ period, labeller = labeller(lev = AddSuffix(" hPa"),
-                                               period = c(new = "1999 -- 2019",
+                                               period = c(new = "1999 -- 2020",
                                                           old = "1979 -- 1998"))) +
   tag_facets("rc")
 ```
@@ -487,7 +487,7 @@ Como se muestra a continuación, las variabilidades de ambos índices son muy co
 
 La variabilidad mes a mes es evidente para ambos índices, con variaciones ruidosas en las frecuencias bajas.
 
-(ref:spectrum-cap) Espectro de cada serie temporal suavizada. El sombreado indica el intervalo de confianza del 95% del espectro nulo calculado usando bootstrap tomando 5000 simulaciones de un modelo autoregresivo ajustado a los datos. La línea gris indica la amplitud promedio teórica del modelo autoregresivo. Para el período 1979 -- 2019.
+(ref:spectrum-cap) Espectro de cada serie temporal suavizada. El sombreado indica el intervalo de confianza del 95% del espectro nulo calculado usando bootstrap tomando 5000 simulaciones de un modelo autoregresivo ajustado a los datos. La línea gris indica la amplitud promedio teórica del modelo autoregresivo. Para el período `r periodo`.
 
 ```{r spectrum, fig.height=4, fig.width=6}
 spec %>%
@@ -535,7 +535,7 @@ En la estratosfera, las correlaciones instantáneas caen a un mínimo de `r sign
 Al mismo tiempo, las correlaciones con un mes de defasaje aumentan con la altura.
 Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SAM.
 
-(ref:cor-lev-cap) Correlación entre S-SAM y A-SAM en cada nivel instantáneas y con un mes de defasaje para el período 1979 -- 2019.
+(ref:cor-lev-cap) Correlación entre S-SAM y A-SAM en cada nivel instantáneas y con un mes de defasaje para el período `r periodo`.
 
 ```{r cor-lev, fig.width=3, fig.height=3}
 cors %>% 
@@ -555,7 +555,7 @@ cors %>%
   panel_background()
 ```
 
-(ref:cross-correlation-cap) Correlación cruzada entre niveles para el índice SAM (a), A-SAM (b) y S-SAM (c) para el período 1979 -- 2019.
+(ref:cross-correlation-cap) Correlación cruzada entre niveles para el índice SAM (a), A-SAM (b) y S-SAM (c) para el período `r periodo`.
 
 ```{r cross-correlation, fig.width = 6, fig.height=3}
 tri <- matrix(c(1000, 1000, 1000, 1, 1, 1, 1000, 1000), ncol = 2, byrow = TRUE) %>% 
@@ -612,7 +612,7 @@ A-SAM y S-SAM (Fig. \@ref(fig:cross-correlation)b y c, respectivamente) comparte
 La coherencia estratosférica es mayor para el A-SAM que para el S-SAM.
 El S-SAM estratosférico tiene una conexión con el S-SAM troposférico algo más intensa que el A-SAM estratosférico con el A-SAM troposférico.
 
-(ref:trends-cap) Tendencias lineales (en desvio estandard por década) del SAM (columna a), A-SAM (columna b) y S-SAM (columna c) para cada nivel usando datos del todo el año (fila 1) y promedios estacionales (filas 2 a 5) para el período 1979 -- 2019. El sombreado indica el intervalo de confianza de 95%.
+(ref:trends-cap) Tendencias lineales (en desvio estandard por década) del SAM (columna a), A-SAM (columna b) y S-SAM (columna c) para cada nivel usando datos del todo el año (fila 1) y promedios estacionales (filas 2 a 5) para el período `r periodo`. El sombreado indica el intervalo de confianza de 95%.
 
 ```{r trends, fig.width = 6, fig.height=4, cache = FALSE}
 indices %>% 
@@ -649,7 +649,7 @@ indices %>%
 
 `r todo("Acá hay algunos cambios al extender los índices hasta 2019. Hay que cambiar un poco el texto.")`
 
-Evaluamos las tendencias lineales para cada uno de los índices para el periodo 1979 -- 2019 en cada nivel para el año completo y separado por trimestres (Fig. \@ref(fig:trends)).
+Evaluamos las tendencias lineales para cada uno de los índices para el periodo `r periodo` en cada nivel para el año completo y separado por trimestres (Fig. \@ref(fig:trends)).
 El índice SAM presenta una tendencia positiva estadísticamente significativa (Fig. \@ref(fig:trends)`r get_tag(term == "full" & season == "Annual")`) en todos los niveles entre 1000 hPa y aproximadamente 50 hPa, con un máximo en 100 hPa.
 Las tendencias estacionales (Fig. \@ref(fig:trends) columna a) indican que las tendencias son significativas sólo en verano y marginalmente en otoño.
 Esto es consistente con los resultados de estudios previos, los cuales documentaron tendencias positivas en verano, menores en otoño y ninguna tendencia en las demás estaciones (por ejemplo, @fogt2020 y sus referencias) utilizando índices del SAM basados en la circulación en o cerca de superficie.
@@ -719,7 +719,7 @@ lapply(years, function(y) {
   coord_equal()
 ```
 
-(ref:r-squared-trend-cap) Tendencias lineales (en ) Linear trends (in percent per decade) of the variance explained by A-SAM and S-SAM at each level and for each trimester for the period 1979 -- 2019. Shading indicates the 95 confidence interval.
+(ref:r-squared-trend-cap) Tendencias lineales (en ) Linear trends (in percent per decade) of the variance explained by A-SAM and S-SAM at each level and for each trimester for the period `r periodo`. Shading indicates the 95 confidence interval.
 
 ```{r r-squared-trend, fig.height=4, fig.width=4, warning = FALSE}
 indices %>% 
@@ -745,8 +745,8 @@ indices %>%
 ```
 
 Para estudiar la cuestión de si el SAM se está volviendo más o menos asimétrica, mostramos las tendencias de la varianza explicada de cada índice para cada trimestre en la Figura \@ref(fig:r-squared-trend).
-En la troposfera, la única tendencia significativa es la de DJF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2% por década, lo que sugiere que el DJF SAM se ha vuelto más asimétrico en el período de 1979 a 2019.
-@fogt2012 observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (1979 -- 2019) nos impide detectar ese cambio.
+En la troposfera, la única tendencia significativa es la de DJF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2% por década, lo que sugiere que el DJF SAM se ha vuelto más asimétrico en el período de `r min(year(main_period))` a `r max(year(main_period))`
+@fogt2012 observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (`r periodo`) nos impide detectar ese cambio.
 Sin embargo, debido a la naturaleza atípica de la componente asimétrico del SAM durante la DJF (Sección \@ref(definition-of-indices)), esto debe tomarse sólo como una evidencia preliminar.
 La otra tendencia significativa se da en la estratosfera durante SON, donde hay una tendencia positiva en la varianza explicada por la S-SAM de aproximadamente un 4% por década.
 Este cambio podría ser el resultado del forzamiento provocado por el agotamiento del ozono.
@@ -795,7 +795,7 @@ indices_2d_yearly <- hgt[lev %in% c(main_levs)] %>%
   .[, season := "Annual"]
 ```
 
-(ref:2d-regr-cap) Regresión de altura geopotencial (metros) en 50 hPa (fila a) y 700 hPa (fila b) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1979 -- 2019. Los puntos en panel b.2 indican la posición de los puntos de referencia usados por @raphael2004 para calcular su índice de la onda zonal 3.
+(ref:2d-regr-cap) Regresión de altura geopotencial (metros) en 50 hPa (fila a) y 700 hPa (fila b) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período `r periodo`. Los puntos en panel b.2 indican la posición de los puntos de referencia usados por @raphael2004 para calcular su índice de la onda zonal 3.
 
 ```{r 2d-regr, fig.width=6, fig.height=5, warning=FALSE}
 gdata <- indices_2d_yearly %>% 
@@ -944,7 +944,7 @@ vertical_regr <- ReadNetCDF(ERA5_geopotential(),
   .[, term := factor_sam(term)] 
 ```
 
-(ref:vertical-regression-cap) Regresión de las anomalías mensuales de altura geopotencial promediada entre 65ºS y 45ºS (metros) y el índice A-SAM de 50 hPa (a) y 700 hPa (b) (niveles indicados en línea punteada) para el período 1979 -- 2019.
+(ref:vertical-regression-cap) Regresión de las anomalías mensuales de altura geopotencial promediada entre 65ºS y 45ºS (metros) y el índice A-SAM de 50 hPa (a) y 700 hPa (b) (niveles indicados en línea punteada) para el período `r periodo`.
 
 ```{r vertical-regression, fig.width = 4, fig.height=3}
 vertical_regr %>% 
@@ -1117,7 +1117,7 @@ air_regr <- air %>%
   .[, term := factor_sam(term)]
 ```
 
-(ref:regr-air-season-cap) Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período 1979 -- 2019. `r pval_contours()`. La escala de colores se corta en $\pm0.6 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
+(ref:regr-air-season-cap) Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período `r periodo`. `r pval_contours()`. La escala de colores se corta en $\pm0.6 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
 
 ```{r regr-air-season, fig.width = 6, fig.height = 8, cache = FALSE}
 anchor_limits <- function(anchor = 0, binwidth = NULL, exclude = NULL,  bins = 10,
@@ -1341,7 +1341,7 @@ pp_enso_index %>%
 
 ```
 
-(ref:global-pp-cap) Regresión de anomalías de precipitación (mm por día) con el SAM (a), A-SAM (b) y S-SAM (c) para el período 1979 -- 2019. En gris, las zonas con valores faltantes. `r pval_contours()`. La escala de colores se corta en $\pm0.25 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
+(ref:global-pp-cap) Regresión de anomalías de precipitación (mm por día) con el SAM (a), A-SAM (b) y S-SAM (c) para el período `r periodo`. En gris, las zonas con valores faltantes. `r pval_contours()`. La escala de colores se corta en $\pm0.25 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
 
 ```{r global-pp}
 discrete_div_pp <- colorRampPalette(c("#8E521C", "white", "#00665E"))
@@ -1455,7 +1455,7 @@ plot_pp <- function(this_continent, data = pp_regr) {
 }
 ```
 
-(ref:pp-regr-oceania-cap) Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1979 --2019. Nueva Zelanda e islas aledañas. `r pval_contours()`.
+(ref:pp-regr-oceania-cap) Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período `r periodo`. Nueva Zelanda e islas aledañas. `r pval_contours()`.
 
 ```{r pp-regr-oceania, fig.width = 6, fig.height = 6.5}
 plot_pp("oceania") 

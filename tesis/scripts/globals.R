@@ -76,6 +76,7 @@ width_column <- 3.3
 
 
 main_period <- c("1979-01-01", "2020-12-01")
+periodo <- paste0(data.table::year(main_period), collapse = "--")
 
 combine_words <- purrr::partial(knitr::combine_words, and = " y ")
 

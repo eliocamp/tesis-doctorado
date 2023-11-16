@@ -38,7 +38,6 @@ fig:cor-lev
 fig:cross-correlation
 fig:trends
 fig:r-squared-trend
-fig:r-squared-timeseries2
 fig:2d-regr
 fig:wave-amplitude
 fig:vertical-regression
@@ -84,7 +83,7 @@ mapas-de-regresión-con-los-modos-ceof
 geopotencial
 temperatura-y-ozono
 fuentes-ceof
-impactos-en-superficie
+impactos
 conclusión
 asymsam
 introducción-1
@@ -97,7 +96,7 @@ temporal
 spatial
 impacts
 conclusiones-1
-relación-entre-los-modos-de-variabilidad-del-hemisferio-sur
+sam-ceof
 sam
 psa
 conclusión-1

@@ -46,12 +46,12 @@ Además, trabajos previos identificaron patrones de onda con números de onda do
 Encontraron que ni la temperatura ni la orografía de la Antártida eran suficientes para explicar la amplitud de esta onda en latitudes subpolares, por lo que concluyeron que los forzantes remotos debían jugar un papel importante.
 @wang2013 encontraron que la destrucción y recuperación de la capa de ozono está asociada a un aumento y disminución de la actividad de las ondas planetarias, respectivamente, pero su análisis no distingue en la actividad de distintos números de onda.
 
-@campitelli estudió las características climatológicas de la onda 3, mostrando que si bien su fase suele estar cercana a la fase de la onda 3 climatológica, tiene una gran variabilidad.
+@campitelli2018b estudió las características climatológicas de la onda 3, mostrando que si bien su fase suele estar cercana a la fase de la onda 3 climatológica, tiene una gran variabilidad.
 La fase media mensual tiene un ciclo anual con una diferencia de aproximadamente 30º de longitud entre enero y junio y la variabilidad interanual es aún mayor.
 La variabilidad en la fase en noviembre y diciembre es tan grande que virtualmente no puede decirse que en esos meses la onda 3 tenga una fase climatológica preferencial.
 Esta gran variabilidad indica que para entender los impactos de la onda 3 es imprescindible caracterizar su fase además de su amplitud.
 
-@campitelli también mostró que la amplitud de la onda 3 estaría asociada a un tren de onda con propagación meridional, especialmente en enero y febrero.
+@campitelli2018b también mostró que la amplitud de la onda 3 estaría asociada a un tren de onda con propagación meridional, especialmente en enero y febrero.
 
 Resultados preliminares utilizando el modelo SPEEDY además indicaron que la onda 3 está activa aún si se suprime la variabilidad de la temperatura de la superficie del mar (TSM) tropical, pero que su fase es más variable, reduciendo su importancia en la media anual climatológica.
 

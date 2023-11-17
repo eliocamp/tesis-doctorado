@@ -88,15 +88,15 @@ Estas correlaciones son consistentes con los mapas de regresión de la altura ge
 
 <!-- Viene del cEOF pero hay que moverlo y adaptarlo a esta parte
 -->
-Esta falta de relación fuerte entre el cEOF1 y la SST, la temperatura y la precipitación podría ser sorprendente teniendo en cuenta la correlación entre el cEOF1 y la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1) y la correlación entre la SAM y la SST del Pacífico Central, la temperatura al este y oeste de la Península Antártica, y con la precipitación en el oeste de Australia [@fogt2020].
+La falta de relación fuerte entre el cEOF1 y la TSM, la temperatura y la precipitación observada en la Sección \@ref(fuentes-ceof) podría ser sorprendente teniendo en cuenta la correlación entre el cEOF1 y el SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1) y la correlación entre el SAM y la TSM del Pacífico Central, la temperatura al este y oeste de la Península Antártica, y con la precipitación en el oeste de Australia [@fogt2020].
 Esto se debe principalmente a dos razones.
-En primer lugar, la correlación entre cEOF1 y la SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \@ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
-En segundo lugar, @campitelli2022 demostró que la fuerte relación entre la SAM y las SST del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de la SAM.
-Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de la SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
+En primer lugar, la correlación entre cEOF1 y el SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \@ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
+En segundo lugar, como se demostró en la Sección \@ref(impacts), la fuerte relación entre el SAM y las TSM del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de el SAM.
+Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de el SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
 
-El cEOF2 sólo tiene relación con el SAM en su fase de 90º y asociada a la parte asimétrica y únicamente en la tropósfera.
+El cEOF2 sólo tiene relación con el SAM en su fase de 90º, asociada a la parte asimétrica y únicamente en la tropósfera.
 La correlación entre ambos índices es muy alta, con valores superiores al 75% de la varianza compartida en toda la tropósfera y un máximo de `r scales::percent(max_r2[cEOF == "cEOF2" & term == "asym"]$estimate^2, 2)` en `r max_r2[cEOF == "cEOF2" & term == "asym"]$lev` hPa. 
-Esta altísima correlación es comparable a la correlación observada entre distintos índices del SAM (@ho2012) y sugiere que esta fase es capaz de caracterizar la componente zonalmente asimétrica de la SAM prácticamente en su totalidad. 
+Esta altísima correlación es comparable a la correlación observada entre distintos índices del SAM (@ho2012) y sugiere que esta fase es capaz de caracterizar la componente zonalmente asimétrica de el SAM en su totalidad. 
 
 ## PSA {#psa}
 
@@ -141,7 +141,8 @@ table <- psa_time[cEOF2, on = .NATURAL] %>%
   .[PC != "SAM"] %>% 
   copy() %>% 
   sep_ReIm() %>% 
-  .[, correlate(value, hgt), by = .(PC, part)] 
+  .[, correlate(value, hgt), by = .(PC, part)] %>% 
+  .[, part := lab_cplx[part]]
 
 p.val <- table %>% 
   dcast(PC ~ part, value.var = "p.value") 
@@ -166,9 +167,8 @@ if (is_word()) {
 
 Dada la similitud entre las estructuras asociadas al cEOF2 (Fig. \@ref(fig:eof2-regr-gh)) y los patrones del PSA, estudiamos la relación entre ellos.
 La tabla \@ref(tab:psa-eof2) muestra las correlaciones entre los dos índices del PSA y las series temporales para las fases de 0º y 90º del cEOF2.
-Como se anticipaba visualmente la figura \@ref(fig:eof2-regr-gh), en SON existe una gran correlación positiva entre el PSA1 y la fase de 90º y  entre el PSA2 y la fase de 0º cEOF2.
+Como se anticipaba visualmente la figura \@ref(fig:eof2-regr-gh), existe una gran correlación positiva entre el PSA1 y la fase de 90º y  entre el PSA2 y la fase de 0º cEOF2.
 Por otro lado, no existe una relación significativa entre el PSA1 y la fase de 0º ni entre el PSA2 y la fase de 90º cEOF2.
-Estas relaciones también se mantienen en DJF, aunque no en los otros trimestres. 
 En consecuencia, cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos del PSA.
 Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y la fase de 90º del cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no mostrado).
 
@@ -219,3 +219,13 @@ Esta preferencia de fase está de acuerdo con @irving2016, que encontró una dis
 
 
 ## Conclusión
+
+El cEOF2 está íntimamente relacionado con el SAM y el PSA. 
+
+En particular, el cEOF2 podría considerarse como una descripción alternativa del PSA, la cual permite caracterizar la amplitud y la fase naturalmente. 
+En vez de caracterizar al PSA como dos modos estacionarios separados, permite estudiar el continuo de ubicaciones de este modo de variabilidad. 
+
+A su vez, la relación entre el cEOF2 y el SAM se explica por que la fase de 90º del cEOF2 describe la variabilidad de la parte asimétrica del SAM en la tropósfera. 
+
+Esto sugiere una partición alternativa de la variabilidad de la circulación del hemisferio sur. 
+En vez de separar al SAM por un lado y al PSA1 y al PSA2 por el otro, se puede separar la variabilidad entre el S-SAM, representando la variabilidad zonalmente simétrica, y el cEOF2, representando variabilidad asimétrica y dónde el A-SAM sería entendido como una fase del cEOF2. 

@@ -6,7 +6,6 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 
 
 
-**TODO: Cambiar la nomenclatura de real e imaginaria a fase de 0º y 90º.**
 
 # Análisis de estos modos en los modelos de CMIP6
 
@@ -61,7 +60,7 @@ Table: (\#tab:modelos)Modelos analizados y la cantidad de miembros para cada exp
 |GFDL-ESM4 [@CMIP6.DAMIP.NOAA-GFDL.GFDL-ESM4]                                           |          0|        1|        3|        0|            0|
 
 Los modelos usados se listan en la Tabla \@ref(tab:modelos) se listan todos los modelos y la cantidad de miembros de cada uno.
-Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat") y sólo el efecto de el ozono estratosférico ("hist-stratO3").
+Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat"), forznates de aerosoles antropogénicos ("hist-aer") o sólo el efecto de el ozono estratosférico ("hist-stratO3").
 
 Para calcular los cEOFs y evaluar su desempeño, concatenamos todos los miembros para computar un único set de cEOFs para cada modelo y experimento.
 Este método trata $k$ simulaciones de $n$ años como una única simulación de $k\times n$ años.
@@ -100,16 +99,16 @@ La Figura \@ref(fig:comparacion-r2) muestra el $r^2$ de los modelos para los do
 Casi todos los modelos tienen una $r^2$ mayor a 0,75, indicando que los modelos logran capturar la estructura espacial de los cEOFs correctamente.
 Todos los modelos capturan ligeramente mejor el cEOF1 que el cEOF2.
 
-**TODO: ¿Debería agregar la figura gigante con los cEOFs de cada modelo? Creo que es mucho**
-
 ![(\#fig:mmm)(ref:mmm-cap)](figures/50-cmip6/mmm-1.png)
 
-(ref:mmm-cap) Media multimodelo (sombreado) de los campos espaciales de cada cEOF, parte y nivel. Los contornos marcan los patrones de ERA5. El $r^2$ entre ERA5 y la media multimodelo está entre paréntesis.
+(ref:mmm-cap) Media multimodelo (sombreado) de los campos espaciales de cada cEOF, fase y nivel. Los contornos marcan los patrones de ERA5. El $r^2$ entre ERA5 y la media multimodelo está entre paréntesis.
 
-La Figura \@ref(fig:mmm) muestra los patrones promedio multimodelo para cada cEOF y cada parte (es decir, el promedio de los patrones espaciales de cada modelo).
+La Figura \@ref(fig:mmm) muestra los patrones promedio multimodelo para cada cEOF y cada fase (es decir, el promedio de los patrones espaciales de cada modelo).
 El patrón medio multimodelo es muy similar similar al patrón de ERA5, con niveles de $r^2$ del orden del 90%, lo cual lo demuestra que la media multimodelo es más similar a las observaciones que los modelos individuales.
 
 
+
+### Relación con la variabilidad tropical
 
 
 
@@ -127,12 +126,12 @@ El patrón medio multimodelo es muy similar similar al patrón de ERA5, con nive
 
 
 
-### Relación con la variabilidad tropical
+
 
 La Figura \@ref(fig:fft-ceof2) muestra el periodograma para el cEOF2 con una línea por miembro y una línea gruesa marcando el periodograma promedio, así como el peridiograma promedio del ONI de cada modelo.
 La mayoría de los modelos tiene una periodicidad del ONI de \~3 años similar a la observada en ERA5, aunque la intensidad y período máximo varía significativamente.
 
-Todos los los modelos que tienen una periodicidad clara en \~3 años en la parte imaginaria del cEOF2 también tienen una periodicidad del ENSO muy clara y además tienden a tener una correlación entre la parte imaginaria del cEOF2 y el ENSO más alta.
+Todos los los modelos que tienen una periodicidad clara en \~3 años en la fase de 90º del cEOF2 también tienen una periodicidad del ENSO muy clara y además tienden a tener una correlación entre la fase de 90º del cEOF2 y el ENSO más alta.
 Por otro lado, ninguno de los modelos con muy baja correlación con el ENSO pero periodicidad del ENSO clara presenta periocididad clara en el cEOF2.
 
 Sin embargo existen modelos con periodicidad del ENSO clara y correlación relativamente alta que no tienen periodicidad del cEOF2 clara.
@@ -159,7 +158,7 @@ Para estudiar más en detalle esa relación, evaluamos la relación entre los cE
 La Figura \@ref(fig:sst-mmm) muestra la media multimodelo de la regresión entre TSM y las dos fases de cada cEOF, marcando las zonas donde más de la mitad de los modelos tienen p-valores menores a 0.01.
 Los modelos de CMIP6 reproducen los patrones de regresión de la fase de 90º del cEOF2 relativamente bien.
 Se observa un exceso de señal en el Pacífico ecuatorial en la fase de 0º del cEOF2 que probablemente se deba a que estos modos no están alineados para minimizar esta relación.
-Por otro lado, la señal asociada a la parte imaginaria del cEOF1 sí muestra valores excesivamente altos no observados en ERA5.
+Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valores excesivamente altos no observados en ERA5.
 
 (ref:cor-sst-regr-cap) R\^2 entre los patrones de regresión de TSM cada modelo y el patrón de regresión de TSM en ERA5.
 
@@ -232,7 +231,7 @@ Una compensación parcial similar también se observa en la fase de 90º del cEO
 
 
 
-(ref:suma-cap)
+(ref:suma-cap) Media multimodelo de las dos fases del cEOF1 para las corridas históricas y para la suma de las corridas hist-GHG, hist-stratO3 e hist-aer.
 
 ![(\#fig:suma)(ref:suma-cap)](figures/50-cmip6/suma-1.png)
 
@@ -248,3 +247,10 @@ Sorpendentemente ambas series presentan una variabilidad a largo plazo virtualme
 
 
 ## Conclusiones
+
+Los modelos de CMIP6 consiguen caracterizar la estructura espacial de los cEOFs satisfactoriamente, con una buena correlación entre los patrones espaciales, particularmente la media multimodelo. 
+La habilidad de los modelos de capturar sus características de segundo orden, como la relación con el ENSO y el SAM no es tan buena ni homogénea entre modelos. 
+Sólo algunos modelos, como MIROC6 y CESM2 consiguen capturar la influencia del ENSO en la fase del cEOF2 y la relación de la mayoría de los modelos con el SAM es menor a la observada. 
+
+La tendencia positiva de la fase de 0º del cEOF1 es capturada por la media multimodelo y el análisis de las corridas de DAMIP indican que ésta es forzada principalmente por el forzarte del ozono estratosférico parcialmente compensado por el forzante de los gases de efecto invernadero. 
+Los modelos de CMIP6 también presentan una tendencia negativa en la fase de 90º del cEOF1 no presente en las observaciones que también es ifluenciada por el forznate antropogénico. 

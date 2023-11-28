@@ -715,7 +715,7 @@ En los modelos con baja correlación, como IPSL-CM6A-LR o INM-CM5-0 la fase del 
 
 ### Relación con el SAM
 
-```{r cmip_sam_series, cache = FALSE}
+```{r sam_cors}
 sam_rename <- c(sam = "full",
                 asam = "asym",
                 ssam = "sym")
@@ -740,10 +740,7 @@ indices <- SAM() %>%
            adj.r.squared = NULL)] 
 
 sam_series <- rbind(indices, cmip_sam_series)
-rm(indices, cmip_sam_series, cmip_sam)
-```
 
-```{r cor-sam-cmip6}
 levs <- sam_series[model == "ERA5", unique(lev)]
 
 sam_cors <- sam_series %>% 
@@ -761,6 +758,10 @@ sam_cors <- sam_series %>%
     by = .(model, ensemble, experiment, cEOF, term, part, lev)]
 
 
+rm(indices, cmip_sam_series, cmip_sam, sam_series)
+```
+
+```{r cor-sam-cmip6}
 gdata <- sam_cors %>% 
   .[, .(correlation = mean(correlation)), by = .(cEOF, term, model, experiment, part, lev)] %>% 
   .[, approx(lev, correlation, xout = levs), by = .(cEOF, term, model, experiment, part)] %>% 

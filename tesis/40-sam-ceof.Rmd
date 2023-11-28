@@ -38,7 +38,7 @@ En este capítulo se explora la relación entre estos modos de variabilidad, as�
 (ref:sam-eof-vertical-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período `r periodo`. 
 Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.
 
-```{r sam-eof-vertical, fig.height=4, fig.width=width_column}
+```{r sam-eof-vertical, fig.height=4, fig.width=4}
 time <- ceof$left %>%
   sep_ReIm() %>%
   .[, hgt := scale(hgt), by = .(cEOF, part)]
@@ -73,7 +73,7 @@ sam_r2 %>%
                                                          sym = "S-SAM")) +
   facet_grid(part ~ cEOF, labeller = labeller(part = lab_cplx)) +
   coord_flip() +
-  tag_facets("rc") +
+  tag_facets("rc", position = "tr") +
   panel_background() 
 ```
 
@@ -176,7 +176,7 @@ Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y
 Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho del intervalo de 90º.
 Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
 
-```{r phase-histogram, fig.width=width_column*.8, fig.height=2.5}
+```{r phase-histogram, fig.width=4, fig.height=2.5}
 N <- ceof$left %>% 
   .[, .N]
 

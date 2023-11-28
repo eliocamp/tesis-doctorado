@@ -1,5 +1,5 @@
 ---
-knit: purrr::partial(bookdown::render_book, output_format = 'bookdown::gitbook', preview = TRUE)
+knit: purrr::partial(bookdown::render_book, output_format = 'bookdown::pdf_book', preview = FALSE)
 always_allow_html: true
 ---
 
@@ -40,7 +40,7 @@ El promedio móvil de tres meses se aplica para evitar que el índice sea sensib
 Para cuantificar la actividad de las ondas zonales, calculamos la envolvente de las ondas siguiendo a @irving2015.
 Primero se calcula la transformada de Fourier de las anomalías de geopotencial en un círculo de latitud determinado, luego se le aplica la transformada inversa sólo al espectro positivo y finalmente se toma el doble de la amplitud de este resultado complejo.
 
-```{r envolvente-ejemplo, fig.height=6, fig.width=5}
+```{r envolvente-ejemplo, fig.height=3, fig.width=3}
 fecha_ejemplo <- "1989-09-01"
 ejemplo_datos <- ERA5_geopotential() %>%
   ReadNetCDF(vars = c(hgt = "z"),
@@ -125,7 +125,7 @@ raphael <- puntos %>%
   .[, .(r04 = mean(hgt_z)), by = .(time, lev)]
 ```
 
-```{r raphael-regr, fig.height=6, fig.width=5}
+```{r raphael-regr, fig.height=3, fig.width=3}
 hgt %>% 
   .[raphael, on = "time"] %>% 
   .[, FitLm(hgt_z, r04), by = .(lon, lat)] %>% 
@@ -161,7 +161,7 @@ Sin embargo, se puede notar que los máximos al sur de Nueva Zelanda y sobre el 
 La onda 3 descrita por R04 coincide bien con la onda 3 climatológica (contornos negros en la Fig \@ref(fig:raphael-regr)).
 Esto es por construcción, ya que al usar puntos fijos cercanos a estos máximos climatológicos, R04 busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
 
-```{r pseudo-raphael, fig.height=5, fig.width=6}
+```{r pseudo-raphael, fig.height=3, fig.width=4}
 qs3 <- hgt %>% 
   .[lat == -50] %>% 
   .[, .(qs3 = mean(hgt_z)), by = .(lon)] %>% 
@@ -267,7 +267,7 @@ cor_dobles <- hgt %>%
   rm_intercept() 
 ```
 
-```{r cor-puntos, fig.height=6, fig.width=7}
+```{r cor-puntos, fig.height=5, fig.width=6}
 gdata <- rbind(cor_singles, 
                cor_dobles) %>% 
   .[, index := forcats::fct_inorder(index)] 
@@ -307,7 +307,7 @@ La Figura \@ref(fig:cor-puntos) muestra los campos de regresión de anomalía zo
 No hay un patrón coherente asociado a los puntos individuales.
 Las combinaciones de dos puntos se asocian a anomalías positivas en los dos puntos relevantes y negativas entre los mismos --esperable ya que se trata de anomalías zonales-- pero, crucialmente, no hay una asociación positiva con el tercer punto no incluido en el índice.
 
-```{r raphael-top8, fig.height=8, fig.width=7}
+```{r raphael-top8, fig.height=4, fig.width=6, fig.ncol = 1}
 #| fig.subcap = c("Meses con mayor valor de R04", "Meses con menor valor de R04")
 gplot <- function(data, breaks =  AnchorBreaks(0, binwidth = 400, exclude = 0)(c(-3200, 3200))) {
   
@@ -382,7 +382,7 @@ zw <- hgt %>%
 zw3 <- zw[k == 3]
 ```
 
-```{r fase-histogram, fig.height=4, fig.width=6}
+```{r fase-histogram, fig.height=3, fig.width=6}
 zw %>%
   .[k == 3] %>% 
   .[type == "zonal"] %>% 
@@ -403,7 +403,7 @@ zw <- zw[type == "time"][, type := NULL]
 zw3 <- zw[k == 3]
 ```
 
-```{r zw3-top8, fig.height=6, fig.width=7}
+```{r zw3-top8, fig.height=4, fig.width=6}
 zw3 <- zw3 %>% 
   .[order(-amplitude)] %>% 
   .[, time_factor := forcats::fct_inorder(format(time))]

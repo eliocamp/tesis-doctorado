@@ -118,11 +118,13 @@ psa_time <- psa$left[season(time) == "SON"]
 ```
 
 ```{r compute-eof-naive}
-eof_naive <- era5[lev %in% c(50, 200) & lat %between% c(-90, -20)] %>% 
-  # .[, hgt := Anomaly(hgt), by = .(season(time), lon, lat, lev)] %>%
-  .[, hgt  := Anomaly(hgt)*sqrt(cos(lat*pi/180)), by = .(time, lev, lat)] %>% 
-  .[, .(eof = list(EOF(hgt ~ time | lon + lat, n = 1:4, data = .SD, suffix = "EOF"))), 
-    by = lev]
+eof_naive <- withr::with_seed(42, {
+  era5[lev %in% c(50, 200) & lat %between% c(-90, -20)] %>% 
+    # .[, hgt := Anomaly(hgt), by = .(season(time), lon, lat, lev)] %>%
+    .[, hgt  := Anomaly(hgt)*sqrt(cos(lat*pi/180)), by = .(time, lev, lat)] %>% 
+    .[, .(eof = list(EOF(hgt ~ time | lon + lat, n = 1:4, data = .SD, suffix = "EOF"))), 
+      by = lev]
+})
 
 explained <- eof_naive[, eof[[1]]$sdev, by = lev] %>% 
   .[order(lev, EOF)] %>% 
@@ -132,7 +134,7 @@ explained <- eof_naive[, eof[[1]]$sdev, by = lev] %>%
 
 (ref:eof-naive-cap) Patrones espaciales de los primeros EOFs de las anomalías zonales de altura geopotencial en 50 hPa al sur de 20ºS. Para el período `r periodo` (unidades arbitrarias).
 
-```{r eof-naive, fig.width=width_column, fig.height=width_column*1.2}
+```{r eof-naive, fig.width=6, fig.height=6*1.2}
 eof_naive[, eof[[1]]$right, by = lev] %>%
   .[lev == 50] %>% 
   .[ , hgt := hgt/sd(hgt)] %>% 
@@ -189,7 +191,7 @@ Dado que cada círculo de latitud es un dominio periódico, este procedimiento n
 
 (ref:hilbert-ejemplo-cap) Ejemplo de cálculo de la función analítica de la señal de anomalías zonales de altura geopotencial. Los primeros cuatro paneles muestran las cuatro primeras ondas zonales y el último la señal completa. En verde se muestra la señal original y en naranja la transformada de Hilbert.
 
-```{r hilbert-ejemplo}
+```{r hilbert-ejemplo, fig.width=6, fig.height=6/1.6}
 gdata <- era5[lev == 50] %>% 
   .[lat %~% -50] %>% 
   .[year(time) == 1982] %>% 
@@ -445,7 +447,7 @@ era_more <- ERA5_geopotential() %>%
 
 (ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período `r periodo`. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
 
-```{r extended-series, fig.height=3, fig.width = 5}
+```{r extended-series, fig.height=3, fig.width = 6}
 # Check that the extended index coincides with the
 # original index.
 cors <- era_more %>%
@@ -647,7 +649,7 @@ mpg <- expression('Altura geopotencial ('*m^{2}*s^{phantom() - 1}*')')
 
 (ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período `r periodo`. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. `r pval_contours()`.
 
-```{r eof1-regr-gh, fig.height=1.2*width_column, fig.width=width_column, dependson="plot_regr"}
+```{r eof1-regr-gh, fig.height=1.2*6, fig.width=6, dependson="plot_regr"}
 plot_regr(regr , "cEOF1", c(200, 50), "hgt") +
   scale_fill_divergent(mpg,
                        breaks = AnchorBreaksSym(0, exclude = 0),
@@ -667,7 +669,7 @@ Por lo tanto, la magnitud y la fase del cEOF1 están asociadas a la magnitud y l
 
 (ref:eof2-regr-gh-cap) Igual que la Figura \@ref(fig:eof1-regr-gh) pero para el cEOF2.
 
-```{r eof2-regr-gh, fig.height=1.3*width_column, fig.width=width_column, dependson="plot_regr"}
+```{r eof2-regr-gh, fig.height=1.2*6, fig.width=6, dependson="plot_regr"}
 plot_regr(regr, "cEOF2", c(200, 50), "hgt") +
   scale_fill_divergent(mpg, 
                        breaks = AnchorBreaksSym(0, 200, exclude = 0),
@@ -696,7 +698,7 @@ Estudiaremos la relación entre los cEOF y el PSA y con más detalle en el Capí
 
 (ref:eof1-regr-t-cap) Igual que la Figura \@ref(fig:eof1-regr-gh) pero para la temperatura del aire (K).
 
-```{r eof1-regr-t, dependson="plot_regr", fig.height=1.3*width_column, fig.width=width_column}
+```{r eof1-regr-t, dependson="plot_regr", fig.height=1.2*6, fig.width=6}
 plot_regr(regr, "cEOF1", c(200, 50), "t") +
   scale_fill_divergent("Temperatura del aire (K)", breaks = AnchorBreaksSym(0, exclude = 0),
                        guide = guide_colorsteps_bottom(15, even.steps = TRUE), 
@@ -737,7 +739,7 @@ t <- t %>%
 
 (ref:t-vertical-cap) Regresión de anomalías zonales de temperatura (sombrado, Kelvin) y razón de mezcla de ozono (contornos, valores negativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre `r combine_words(LatLabel(o3wave_lats))` en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período `r periodo`.
 
-```{r t-vertical, fig.height=2.5, fig.width=width_column}
+```{r t-vertical, fig.height=3, fig.width=6}
 t %>% 
   melt(id.vars = c("lev", "time", "lon")) %>% 
   .[, value := Anomaly(value), by = .(time, lev, variable)] %>%
@@ -763,7 +765,7 @@ t %>%
                     skip = 1, stroke = 0.15, stroke.colour = "white",
                     breaks = AnchorBreaksSym(0, exclude = 0)) +
   
-  scale_fill_divergent_discretised("Temperatura del Aire (K)",
+  scale_fill_divergent_discretised("Temperatura del aire (K)",
                                    # limits = c(-2.25, 2.25),
                                    labels = label_one_less,
                                    guide = guide_colorsteps_bottom(15, show.limits = TRUE)) +
@@ -813,7 +815,7 @@ o3_regr <- temp %>%
 
 (ref:o3-regr-cap) Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase de 0º (a) y de 90º (b) del cEOF1 para el período `r periodo`. En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). `r pval_contours()`.
 
-```{r o3-regr, fig.height=3, fig.width = width_column}
+```{r o3-regr, fig.height=4, fig.width = 6}
 o3_regr %>% 
   periodic(lon = c(0, 360)) %>% 
   .[, p.value := Pvaluate(estimate, std.error, df, "fdr"), by = .(cEOF, term)] %>% 
@@ -852,7 +854,7 @@ o3_regr %>%
 
 (ref:wave1-o3-cap) Relación entre la amplitud y la fase de la onda zonal 1 de la Columna Total de Ozono promediada entre `r combine_words(LatLabel(o3wave_lats))` y la amplitud y la fase del cEOF1 para SON en el período `r periodo`.
 
-```{r wave1-o3, fig.width=width_column, fig.height=width_column*.7, include = FALSE}
+```{r wave1-o3, fig.width=6, fig.height=6*.7, include = FALSE}
 wave1_o3 <- o3 %>% 
   .[lat %between% o3wave_lats] %>% 
   .[, .(toc = mean(toc, na.rm = TRUE)), by = .(time, lon)] %>% 
@@ -1119,7 +1121,7 @@ oni_dmi_parciales <- gdata %>%
 
 (ref:psi-sst-explained-variance-cap) Varianza de las anomalías de TSM (fila a) y de las anomalías zonales de función corriente (fila b) explicada por el cEOF1 (columna 1) el cEOF2 (columna 2).
 
-```{r psi-sst-explained-variance, fig.width = width_column, fig.height = .7*width_column}
+```{r psi-sst-explained-variance, fig.width = 6, fig.height = 3}
 breaks <- seq(.1, 1, by = .1)
 rbind(sst = sst_regr,
       psi = psi_regr[, -c("psi.z", "fx", "fy", "lev")], idcol = "variable") %>% 
@@ -1257,7 +1259,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
 
 (ref:sst-psi-2-cap) Regresión de (columna 1) TSM (K) y (columna 2) anomalías zonales de función corriente ($m^2/s\times10^-7$) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período `r periodo`. `r pval_contours()`.
 
-```{r sst-psi-2, fig.width = 5, fig.height=6, dependson="plot_sst_psi"}
+```{r sst-psi-2, fig.width = 6, fig.height=6, dependson="plot_sst_psi"}
 plot_sst_psi(sst_regr[cEOF == "cEOF2"], psi_regr[cEOF == "cEOF2"]) 
 ```
 
@@ -1273,7 +1275,7 @@ Sin embargo, la correlación parcial es de `r oni_dmi_parciales[cEOF == "cEOF2" 
 Esto puede observarse en la Figura \@ref(fig:euler), donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI.
 El DMI aporta, independientemente, sólo un 4.3% de la varianza mientras que el ONI aporta un 23.9% por sí mismo.
 
-```{r euler, fig.width=width_column, fig.height=width_column}
+```{r euler, fig.width=4, fig.height=4}
 with(gdata[cEOF == "cEOF2" & part == "Imaginario"],
      euler_correlation(hgt, oni, dmi, c("90º cEOF2", "ONI", "DMI")))
 ```
@@ -1292,7 +1294,7 @@ Ambas fases también están asociadas a trenes de onda que se generan cerca de A
 
 (ref:enso-phase-cap) Valores del ONI en SON y la fase del cEOF2 en el período `r periodo`. Los años en los cuales la magnitud del cEOF2 es mayor o menor que la mediana se muestran como diamantes naranja o círculos verdes respectivamente. La línea negra representa el ajuste ONI \~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2.
 
-```{r enso-phase, fig.width = width_column, fig.height=3}
+```{r enso-phase, fig.width = 4, fig.height=3}
 gdata <- ceof$left %>%
   .[cEOF == "cEOF2"] %>% 
   # .[, hgt := Anomaly(hgt)] %>% 
@@ -1371,7 +1373,7 @@ enso_fft <- enso %>%
 
 ```
 
-```{r fft-ceof-era5}
+```{r fft-ceof-era5, fig.width=4, fig.height=2.5}
 fft %>% 
   .[cEOF == "cEOF2"] %>%
   ggplot(aes(1/freq, spec)) +
@@ -1411,7 +1413,7 @@ Sin embargo, cuando el cEOF2 es excitado por la variabilidad de la TSM tropical,
 
 (ref:sst-psi-1-cap) Igual que la Figura \@ref(fig:sst-psi-2) pero para el cEOF1.
 
-```{r sst-psi-1, fig.width = 5, fig.height=6, dependson="plot_sst_psi"}
+```{r sst-psi-1, fig.width = 6, fig.height=6, dependson="plot_sst_psi"}
 plot_sst_psi(sst_regr[cEOF == "cEOF1"], psi_regr[cEOF == "cEOF1"], min.mag = 0.0005)
 ```
 
@@ -1422,7 +1424,7 @@ Esto sugiere que la variabilidad de cEOF1 está impulsada principalmente por la 
 
 ### Impactos en superficie {#impactos}
 
-```{r pp-t2m-r2, fig.width=5, fig.height=3}
+```{r pp-t2m-r2, fig.width=6, fig.height=3}
 breaks <- seq(.1, 1, by = .1)
 
 rbind(`Precipitación` = pp_regr,
@@ -1605,7 +1607,7 @@ En la Figura \@ref(fig:pp-temp-2) se muestran mapas de regresión de las anomal�
 
 (ref:pp-temp-2-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el trimestre SON del periodo `r periodo`. `r pval_contours()`.
 
-```{r pp-temp-2, fig.width=5, fig.height=6}
+```{r pp-temp-2, fig.width=6, fig.height=6}
 plot_pp(pp_regr[cEOF == "cEOF2"], 
         t2m_regr[cEOF == "cEOF2"],
         hgt850_regr[cEOF == "cEOF2"])

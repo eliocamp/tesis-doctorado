@@ -222,7 +222,7 @@ Para esto estudiamos los modelos de las corridas históricas.
 
 (ref:comparacion-r2-cap) $r^2$ de los patrones espaciales de cada modelo con ERA5 para cada cEOF.
 
-```{r comparacion-r2, one_figure = TRUE, cache = FALSE}
+```{r comparacion-r2, fig.width=5, fig.height=6}
 cors %>% 
   .[experiment == "historical"] %>%
   .[, model := reorder(model, r2, fun = mean)] %>% 
@@ -239,7 +239,7 @@ La Figura \@ref(fig:comparacion-r2) muestra el $r^2$ de los modelos para los do
 Casi todos los modelos tienen una $r^2$ mayor a 0,75, indicando que los modelos logran capturar la estructura espacial de los cEOFs correctamente.
 Todos los modelos capturan ligeramente mejor el cEOF1 que el cEOF2.
 
-```{r mmm}
+```{r mmm, fig.width=6, fig.height=4}
 interpolated <- ceofs[, eof[[1]]$right, by = .(experiment, model)] %>% 
   copy() %>% 
   .[model != "ERA5"] %>% 
@@ -288,7 +288,7 @@ interpolated %>%
   scale_x_longitude() +
   scale_y_latitude(limits = c(-90, NA)) +
   coord_polar2() +
-  ggh4x::facet_nested(lev ~ experiment + cEOF + part, 
+  ggh4x::facet_nested(lev ~ cEOF + part, 
                       labeller = labeller(lev = AddSuffix(" hPa"),
                                           cEOF = ceof_labs,
                                           part = lab_cplx)) 
@@ -397,7 +397,7 @@ rect <- geom_rect(data = ~.x[con_picos, on = "model"] %>%
                   fill = NA, color = "#7e8087") 
 ```
 
-```{r fft-ceof2, fig.height=8, fig.width=9}
+```{r fft-ceof2, fig.height=6, fig.width=6}
 enso_gdata <- enso_fft %>% 
   .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
   .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
@@ -436,7 +436,7 @@ fft %>%
 
 (ref:ensofft-cap) Espectros de Fourier para los índices ENSO34 de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. En recuadro negro, los mismos modelos recuadrados en la Figura \@ref(fig:fft-2).
 
-```{r ensofft, fig.height=8, fig.width=9, eval = FALSE}
+```{r ensofft, fig.height=4, fig.width=6, eval = FALSE}
 enso_fft %>% 
   .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
   .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
@@ -557,7 +557,7 @@ sst_regression_ERA5 <- readRDS(data_path("derived", "sst_regr_ERA5.Rds")) %>%
 
 (ref:sst-mmm-cap) Media multimodelo de regresión de TSM con los cEOFs. El área sombreada muestra las zonas donde más de la mitad de los modelos tienen p-valor menor a 0.01. Los contornos negros muestran la regresión de TSM observada en ERA5.
 
-```{r sst-mmm}
+```{r sst-mmm, fig.width=6, fig.height=3.3}
 sst_regression %>% 
   .[, pval := Pvaluate(estimate, std.error, df)] %>% 
   .[, .(estimate = mean(estimate), 
@@ -592,7 +592,7 @@ Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valore
 
 (ref:cor-sst-regr-cap) R\^2 entre los patrones de regresión de TSM cada modelo y el patrón de regresión de TSM en ERA5.
 
-```{r cor-sst-regr}
+```{r cor-sst-regr, fig.width=6, fig.height=4}
 sst_cors <- sst_regression %>% 
   .[, Interpolate(estimate ~ lon + lat,
                   x.out = unique(sst_regression_ERA5$lon),
@@ -631,7 +631,7 @@ La figura confirma que lo observado para la media multimodelo se cumple para cas
 La mayoría de los modelos tiene un campo de regresión similar a ERA5 para la fase 90º del cEOF2, y una similitud moderada para la fase de 0º.
 Para ambas fases del cEOF1, las similitudes son muy bajas.
 
-```{r enso-phase-cmip}
+```{r enso-phase-cmip, fig.width=6, fig.height=5}
 ceofs[, eof[[1]]$left, by = .(model, experiment)] %>% 
   .[cEOF == "cEOF2"] %>% 
   # .[, hgt := Anomaly(hgt)] %>% 
@@ -673,7 +673,7 @@ ceofs[, eof[[1]]$left, by = .(model, experiment)] %>%
 (ref:enso-phase-cmip-cap) Igual que la Figura \@ref(fig:enso-phase) pero para los modelos del CMIP6. El ajuste sinusoidal para cada modelo se realiza utilizando todos los miembros. 
 
 
-```{r arg-enso-density}
+```{r arg-enso-density, fig.width=6, fig.height=5}
 ceofs[, eof[[1]]$left, by = .(model, experiment)] %>% 
   .[cEOF == "cEOF2"] %>% 
   # .[, hgt := Anomaly(hgt)] %>% 
@@ -761,7 +761,7 @@ sam_cors <- sam_series %>%
 rm(indices, cmip_sam_series, cmip_sam, sam_series)
 ```
 
-```{r cor-sam-cmip6}
+```{r cor-sam-cmip6, fig.height=4, fig.width=4}
 gdata <- sam_cors %>% 
   .[, .(correlation = mean(correlation)), by = .(cEOF, term, model, experiment, part, lev)] %>% 
   .[, approx(lev, correlation, xout = levs), by = .(cEOF, term, model, experiment, part)] %>% 
@@ -803,7 +803,7 @@ ggplot(mapping = aes(lev, correlation^2)) +
                                                          asym = "A-SAM",
                                                          sym = "S-SAM"), 
                      aesthetics = c("colour", "fill")) +
-  tag_facets("rc") +
+  tag_facets("rc", position = "tr") +
   panel_background() 
 
 ```
@@ -865,7 +865,7 @@ También se observa una tendencia negativa para la fase de 90º del cEOF1.
 Ésta no es detectable en ERA5. 
 El cEOF2 no presenta tendencias. 
 
-```{r ceof-damip}
+```{r ceof-damip, fig.width=6, fig.height=4}
 ceof_largo_p %>% 
   sep_ReIm() %>% 
   
@@ -906,7 +906,7 @@ Una compensación parcial similar también se observa en la fase de 90º del cEO
 
 (ref:suma-cap) Media multimodelo de las dos fases del cEOF1 para las corridas históricas y para la suma de las corridas hist-GHG, hist-stratO3 e hist-aer.
 
-```{r suma}
+```{r suma, fig.width=6, fig.height=3}
 ceof_largo_p %>%
   sep_ReIm() %>%
   # .[experiment == "historical"] %>%

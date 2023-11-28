@@ -10,11 +10,16 @@ chapter <- tools::file_path_sans_ext(knitr::current_input())
 verbose <- interactive()
 knitr::opts_chunk$set(
   echo = FALSE,
+  dev = "png",
+  dpi = 150,
   message = verbose,
   warning = verbose,
   cache = TRUE,
-  cache.extra = 46576587,
+  cache.extra = 3463457,
   out.extra = "",
+  fig.width = 6,
+  fig.height = 6/1.6,   # Golden ratio?
+  fig.align = "center",
   fig.path = file.path("figures", chapter, ""),
   cache.path = file.path("cache", chapter, format, "")
 )
@@ -71,9 +76,6 @@ axis_labs_smol <- function() ggplot2::theme(axis.text = ggplot2::element_text(si
 r2 <- expression(`$r^2$` = paste("", "r", phantom()^{
   paste("2")
 }, "", ""))
-
-width_column <- 3.3
-
 
 main_period <- c("1979-01-01", "2020-12-01")
 periodo <- paste0(data.table::year(main_period), collapse = "--")

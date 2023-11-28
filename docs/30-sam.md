@@ -310,7 +310,7 @@ Sobre la Antártida, los valores positivos del índice SAM están asociados a an
 Estas anomalías están asociadas únicamente con el S-SAM.
 Por otro lado, las anomalías de temperatura en el océano Índico, el sur de África y Australia están fuertemente relacionadas con A-SAM y no están presentes en el patrón de regresión con el SAM.
 
-En otoño, invierno y primavera (filas b, c, y d en la Figura \@ref(fig:regr-air-season)) el SAM está asociado a un patrón de anomalías de temperatura zonalmente asimétrico en latitudes altas, con valores negativos sobre la Antártida y el Mar de Amundsen y positivas al sur de Nueva Zelanda y centradas en el pasaje de Drake que se extienden hasta la Patagonia.
+En otoño, invierno y primavera (filas b, c y d en la Figura \@ref(fig:regr-air-season)) el SAM está asociado a un patrón de anomalías de temperatura zonalmente asimétrico en latitudes altas, con valores negativos sobre la Antártida y el Mar de Amundsen y positivas al sur de Nueva Zelanda y centradas en el pasaje de Drake que se extienden hasta la Patagonia.
 Esto refleja la naturaleza más asimétrica del SAM durante estas estaciones en comparación al verano.
 @jones2019 observó características similares en las mediciones de estaciones, aunque utilizando datos de 1957 a 2016.
 En general se observa que la señal sobre la Antártida está asociada al S-SAM (aunque estadísticamente significativa sólo en invierno), mientras que las anomalías sobre el Océano Antártico y latitudes más bajas se asocian al A-SAM.

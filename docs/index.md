@@ -74,7 +74,7 @@ bibliography:
 #   - bib/era.bib
 #   - bib/packages.bib
 # Download your specific csl file and refer to it in the line below.
-csl: csl/meteorologica.csl
+csl: "csl/iso690-author-date-es.csl"
 link-citation: yes
 lot: true
 lof: true

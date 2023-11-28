@@ -1,5 +1,5 @@
 ---
-knit: purrr::partial(bookdown::render_book, output_format = 'bookdown::gitbook', preview = TRUE)
+knit: purrr::partial(bookdown::render_book, output_format = 'bookdown::pdf_book', preview = FALSE)
 always_allow_html: true
 ---
 

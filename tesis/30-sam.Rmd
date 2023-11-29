@@ -368,7 +368,7 @@ ggplot(season_regression[lev == 50], aes(lon, lat)) +
                     linetype = after_stat(factor(sign(-level)))), 
                 breaks = AnchorBreaks(0, exclude = 0), linewidth = 0.5, 
                 color = "gray40", label_colour = "gray20", label_size = 3) &
-  geom_contour_pval(aes(z = pval)) &
+  geom_contour_pval(aes(z = pval), pattern_spacing = 0.05) &
   geom_qmap(~.x[lat <= 0]) &
   annotate_grid() &
   scale_x_longitude(labels = NULL) &
@@ -1343,7 +1343,7 @@ pp_regr %>%
   geom_contour_fill(aes(z = estimate, fill = ..level..), 
                     breaks = anchor_limits(0, 0.05, 0, range = c(-0.25, 0.25))) +
   # stat_subset(aes(subset = is.na(estimate)), geom = "tile", color = "gray50") +
-  geom_contour_pval(aes(z = p.value), p.value = 0.05) +
+  geom_contour_pval(aes(z = p.value), p.value = 0.05, pattern_spacing = 0.05) +
   geom_contour_filled(aes(z = n_na, fill = NA), 
                       data = nas_cmap %>% 
                         periodic(lon = c(1.25, 360 + 1.25)) %>%
@@ -1383,7 +1383,7 @@ En particular, los valores positivos de S-SAM se asocian con el aumento de las p
 Para estudiar con más detalle los impactos locales, las Figuras \@ref(fig:pp-regr-oceania) y \@ref(fig:pp-regr-america) muestran la regresión de los índices SAM con la precipitación media estacional y la altura geopotencial de 700 hPa para Nueva Zelanda e islas aledañas, y Sudamérica respectivamente.
 No se muestra Sudáfrica porque allí no se detectó ninguna señal significativa.
 
-```{r def-plot_pp}
+```{r plot_pp}
 plot_pp <- function(this_continent, data = pp_regr) {
   gh <- indices_2d %>% 
     copy() %>%
@@ -1405,7 +1405,7 @@ plot_pp <- function(this_continent, data = pp_regr) {
                       breaks = anchor_limits(0, 0.1, 0, range = c(-.8, 0.8))) +
     stat_subset(aes(subset = is.na(estimate)), geom = "tile", color = "gray50") +
     # geom_raster(aes(fill = estimate/30)) +
-    geom_contour_pval(aes(z = p.value)) +
+    geom_contour_pval(aes(z = p.value), pattern_spacing = 0.05) +
     # geom_contour_fill(aes(z = as.numeric(is.na(estimate))), breaks = 1) +
     # stat_subset(aes(subset = p.value <= 0.05 & is.cross(lon, lat, 2)), size = 0.4, alpha = 0.8) +
     geom_contour2(data = gh, breaks = MakeBreaks(bins = 15, exclude = 0),
@@ -1441,8 +1441,9 @@ plot_pp <- function(this_continent, data = pp_regr) {
 
 (ref:pp-regr-oceania-cap) Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período `r periodo`. Nueva Zelanda e islas aledañas. `r pval_contours()`.
 
-```{r pp-regr-oceania, fig.width = 6, fig.height = 6.5}
+```{r pp-regr-oceania, fig.width = 6, fig.height = 6.5, dependson="plot_pp"}
 plot_pp("oceania") 
+
 ```
 
 En Australia, la regresión anual muestra que el índice SAM está asociado con anomalías positivas de precipitación en la región sudeste (Fig. \@ref(fig:pp-regr-oceania)a.1), en acuerdo con @gillett2006.
@@ -1462,8 +1463,9 @@ La señal de la primavera coincide en líneas generales con @hendon2007, pero mi
 
 (ref:pp-regr-america-cap) Igual que la Figura \@ref(fig:pp-regr-oceania) pero para Sudamérica.
 
-```{r pp-regr-america, fig.width = 6, fig.height = 8.5}
+```{r pp-regr-america, fig.width = 6, fig.height = 8.5, dependson="plot_pp"}
 plot_pp("america")
+
 ```
 
 En Sudamérica (Fig. \@ref(fig:pp-regr-america)), la regresión anual muestra que el SAM positivo está asociado a anomalías de precipitación negativas en el Sudeste de Sudamérica (SESA) y el sur de Chile, y anomalías positivas en el sur de Brasil, cerca de la Zona de Convergencia del Atlántico Sur (SACZ) (Fig. \@ref(fig:pp-regr-america)a.1).

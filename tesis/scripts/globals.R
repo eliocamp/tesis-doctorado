@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   message = verbose,
   warning = verbose,
   cache = TRUE,
-  cache.extra = 3463457,
+  cache.extra = 346347,
   out.extra = "",
   fig.width = 6,
   fig.height = 6/1.6,   # Golden ratio?

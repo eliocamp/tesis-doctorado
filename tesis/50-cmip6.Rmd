@@ -565,7 +565,7 @@ sst_regression %>%
   ggplot(aes(lon, lat)) +
   geom_contour_fill(aes(z = estimate, fill = after_stat(level)), 
                     breaks = AnchorBreaks(exclude = 0)) +
-  geom_contour_pval(aes(z = prop), p.value = 0.5, hatch = 9) +
+  geom_contour_pval(aes(z = prop), p.value = 0.5, hatch = 9, pattern_spacing = 0.05) +
   
   geom_contour2(aes(z = era5, linetype = factor(-sign(..level..))),
                 data = sst_regression_ERA5,

@@ -643,11 +643,14 @@ plot_regr <- function(data, which_cEOF, which_levs, which_var) {
     theme(plot.title = element_text(hjust = 0.5, size = theme_get()$strip.text$size))
 }
 
+
 # From latex2exp::TeX('Geopotential height ($m^2s^{-1}$)')
 mpg <- expression('Altura geopotencial ('*m^{2}*s^{phantom() - 1}*')')
 ```
 
 (ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período `r periodo`. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. `r pval_contours()`.
+
+
 
 ```{r eof1-regr-gh, fig.height=1.2*6, fig.width=6, dependson="plot_regr"}
 plot_regr(regr , "cEOF1", c(200, 50), "hgt") +
@@ -849,6 +852,8 @@ o3_regr %>%
   coord_polar2() +
   facet_grid(cEOF~term, labeller = labeller(term = lab_cplx)) +
   tag_facets("panel")
+
+
 
 ```
 
@@ -1190,7 +1195,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
   rsst <- max(range(abs(sst_gdata[!is.na(cEOF), ]$estimate), na.rm = TRUE))
   breaks_sst <- AnchorBreaks(0, bins = 20, exclude = 0)(c(-rsst, rsst))
   
-  
+  pattern_spacing <- 0.06
   stream_gdata <- psi_regr %>%
     # .[cEOF == "cEOF2"] %>% 
     # .[abs(estimate) > 1, estimate := NA] %>%
@@ -1213,7 +1218,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
     geom_contour_fill(data = sst_gdata,
                       aes(z = estimate, fill = ..level..),
                       breaks = breaks_sst) +
-    geom_contour_pval(data = sst_gdata, aes(z = p_val)) +
+    geom_contour_pval(data = sst_gdata, aes(z = p_val), pattern_spacing = pattern_spacing) +
     
     scale_fill_divergent_discretised("TSM (K)",
                                      labels = label_one_less,
@@ -1223,7 +1228,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
     new_scale_fill() +
     geom_contour_fill(aes(z = estimate*1e-7, fill = ..level..),
                       breaks = breaks_stream) +
-    geom_contour_pval(aes(z = p_val)) +
+    geom_contour_pval(aes(z = p_val), pattern_spacing = pattern_spacing) +
     # geom_streamline(aes(dx = fx, dy = fy), min.L = 3, L = 10,
     #                 size = 0.1, res = 2, nx = 22, ny = 12, 
     #                 arrow.angle = 14, arrow.length = 0.2) +
@@ -1414,7 +1419,8 @@ Sin embargo, cuando el cEOF2 es excitado por la variabilidad de la TSM tropical,
 (ref:sst-psi-1-cap) Igual que la Figura \@ref(fig:sst-psi-2) pero para el cEOF1.
 
 ```{r sst-psi-1, fig.width = 6, fig.height=6, dependson="plot_sst_psi"}
-plot_sst_psi(sst_regr[cEOF == "cEOF1"], psi_regr[cEOF == "cEOF1"], min.mag = 0.0005)
+plot_sst_psi(sst_regr[cEOF == "cEOF1"], psi_regr[cEOF == "cEOF1"], 
+             min.mag = 0.0005)
 ```
 
 La Figura \@ref(fig:sst-psi-1) muestra las mismas regresiones que la Figura \@ref(fig:sst-psi-2) pero para el cEOF1.
@@ -1513,6 +1519,8 @@ plot_pp <- function(pp_regr, t2m_regr, hgt850_regr) {
   lats <- c(-55, 10)
   breaks_pp <- AnchorBreaksSym(exclude = 0)(c(-.9, .9))
   
+  pattern_spacing <- 0.05
+  
   variables <- c("Precipitación", "Temperatura a 2 metros")
   pp_regr <- pp_regr %>% 
     copy() %>% 
@@ -1549,7 +1557,7 @@ plot_pp <- function(pp_regr, t2m_regr, hgt850_regr) {
                                      low = "#8E521C",
                                      high = "#00665E",
                                      guide = guide_colorsteps_bottom(15, order = 99)) +
-    geom_contour_pval(aes(z = p.value)) +
+    geom_contour_pval(aes(z = p.value), pattern_spacing = pattern_spacing) +
     
     new_scale_fill() +
     
@@ -1564,7 +1572,7 @@ plot_pp <- function(pp_regr, t2m_regr, hgt850_regr) {
     scale_fill_divergent_discretised("Temperatura",
                                      # limits = c(-1, 1),
                                      guide = guide_colorsteps_bottom(15, order = 1)) +
-    geom_contour_pval(data = t2m_regr, aes(z = p.value)) +
+    geom_contour_pval(data = t2m_regr, aes(z = p.value), pattern_spacing = pattern_spacing) +
     
     geom_contour2(data = copy(hgt850_regr)[, var := factor(variables[2], levels = variables)], 
                   aes(z = estimate, linetype = factor(-sign(..level..))), 

@@ -7,7 +7,7 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 
 
 
-# Análisis de estos modos en los modelos de CMIP6
+# Análisis de los modos de variabilidad de la circulación zonalmente asimétrica en los modelos de CMIP6
 
 El análisis previo estudió la circulación zonalmente asimétrica en los datos de reanálisis.
 Sin embargo, el estudio de tendencias y variabilidad de estos modelos se ve limitada por la corta longitud de los datos observacionales y la posible inhomogeneidad del reanálisis al cambiar la densidad y tipo de observaciones; un problema que afecta particularmente al hemisferio sur.

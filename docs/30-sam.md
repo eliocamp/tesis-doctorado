@@ -9,9 +9,39 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 ## Introducción
 
 Como se explicó en la introducción, el patrón espacial del Modo Anular del Sur (SAM) suele describirse en términos de la circulación zonalmente simétrica, sin embargo este patrón tiene asimetrías zonales significativas.
-Por otro lado, en el capítulo anterior se observó que algunas fases de los cEOFs están asociadas con patrones tipo SAM en algunos niveles.
 
-El objetivo de este capítulo es, por tanto, describir los componentes zonalmente asimétricos y simétricos de la variabilidad del SAM.
+Gran parte de los índices presentados en la literatura para describir el SAM se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial [@ho2012].
+Tanto @gong1999 como @marshall2003 definen el índice SAM como la diferencia de la media zonal de la presión a nivel del mar entre 40ºS y 65ºS.
+@baldwin2009 propuso definir modos anulares del norte y el sur como el primer EOF de la altura geopotencial promediada zonalmente en cada nivel en cada hemisferio.
+Sin emabrgo, las asimetrías zonales del SAM son significativas y poco estudiadas.
+
+La fase positiva del SAM está asociada a temperaturas más frías de lo normal sobre la Antártida y más cálidas de lo normal en latitudes más bajas y viceversa para la fase negativa [@jones2019].
+Pero hay desviaciones significativas de esta respuesta media zonal, especialmente en la Península Antártica y el Atlántico sur [@fogt2012].
+La señal relacionada con el SAM en las anomalías de precipitación sigue un comportamiento similar, aunque con aún mayores desviaciones respecto de la simetría zonal [@lim2016].
+La relación entre el SAM y la precipitación en el Sudeste de Sudamérica (SESA) puede explicarse por la circulación zonalmente asimétrica asociada al SAM, que es similar al Patrón del Pacífico-Sudamérica (PSA) [@silvestri2009; @rosso2018].
+@fan2007 también mostró que las precipitaciones en Asia oriental se veían afectadas por la variabilidad de la parte occidental del SAM.
+Estos impactos de la componente asimétrica del SAM a escala regional no se han estudiado en detalle.
+
+La variabilidad del SAM está asociada a la variabilidad tropical [@fan2007; @fogt2011a; @clem2013].
+El Niño-Oscilación del Sur (ENSO, por sus siglas en inglés) o la variabilidad de la temperatura de la superficie del mar (TSM) similar afecta a los extratrópicos del hemisferio sur a través de trenes de ondas de Rossby [@mo1987; @kidson1988; @karoly1989] que se proyectan fuertemente sobre las anomalías zonales asociadas al SAM en el sector del Pacífico.
+@fan2007 calculó los índices de SAM de los hemisferios occidental y oriental por separado y encontró que la correlación entre ellos aumentaba si se eliminaba la señal (lineal) del ENSO, sugiriendo que la influencia del ENSO en el SAM no es zonalmente homogéneo.
+
+Investigaciones previas han documentado tendencias positivas en el SAM utilizando diferentes índices, sobre todo en verano y otoño austral [p.e., @fogt2020 y sus referencias].
+Se cree que estas tendencias están impulsadas principalmente por la reducción del ozono estratosférico y el aumento de los gases de efecto invernadero, y son analizadas en el contexto de las variables medias zonales [@marshall2004; @gillett2005; @arblaster2006; @gillett2013].
+Sin embargo, aún no está claro si la componente asimétrica del SAM responde a estos forzantes de la misma forma o cómo su variabilidad altera las tendencias observadas.
+
+Finalmente, el hecho de que el SAM no sea totalmente zonalmente simétrico reduce nuestra capacidad para reconstruir su variabilidad histórica antes de la disponibilidad de observaciones densas en el hemisferio sur [@jones2009].
+
+Uno de los pocos trabajos que estudiaron la variabilidad temporal de la componente asimétrica del SAM es @fogt2012.
+Sin embargo, sus conclusiones se basan en composiciones de eventos SAM positivos y negativos basados en un número de casos reducido y distribuidos inhomogéneamente entre años con y sin información satelital.
+Esto es especialmente relevante debido a las inhomogeneidades en los productos de reanálisis anteriores a la era satelital y al posible cambio en la estructura asimétrica del SAM [@silvestri2009].
+Además, @fogt2012 estudió la componente asimétrica zonal del SAM sólo en la presión a nivel del mar.
+Si bien las asimetrías zonales en el patrón espacial del SAM son barotrópicas equivalentes en toda la troposfera, su estructura cambia drásticamente en la estratosfera [@baldwin2009].
+
+En resumen, las investigaciones previas sugieren fuertemente que la componente zonalmente asimétrica del SAM puede tener un comportamiento potencialmente muy distinto al de la componente zonalmente simétrica, por ejemplo, podría tener diferentes fuentes de variabilidad, impactos y respuesta a largo plazo al forzamiento radiativo.
+
+En el capítulo anterior se observó que algunas fases de los cEOFs están asociadas con patrones tipo SAM en distintos niveles.
+El objetivo de este capítulo es, por tanto, describir los componentes zonalmente asimétricos y simétricos de la variabilidad del SAM y su relación con los cEOFs.
 En primer lugar, se propone una metodología que proporciona, para cada nivel, sendos índices que pretenden captar de forma independiente la variabilidad de la componente del SAM simétrica y asimétrica, respectivamente.
 Luego se evaluó su estructura vertical y su coherencia, así como su variabilidad temporal y sus tendencias.
 A continuación se estudiaron los patrones espaciales asociados a la variabilidad exclusiva de cada índice centrándose en 50 hPa como nivel estratosférico y 700 hPa como nivel troposférico.
@@ -24,6 +54,11 @@ Por último, se investigaron las relaciones del SAM a 700 hPa con las anomalías
 
 
 ## Métodos
+
+### Datos
+
+Utilizamos las mismas fuentes de datos que en capítulos anteriores.
+En este capítulo usamos datos de altura geopotencial, temperatura a 2 metros y precipitación.
 
 ### Regresión segmentada
 
@@ -379,8 +414,38 @@ Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo de
 Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ [@rosso2018].
 Hay una pequeña área de anomalías positivas significativas de precipitación con el SAM cerca del centro de Argentina, también observado en el análisis basado en estaciones de @gillett2006, que se explica por el A-SAM.
 
+## Relación con el cEOF
+
+
+
+(ref:sam-eof-vertical-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979--2020. Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.
+
+![(\#fig:sam-eof-vertical)(ref:sam-eof-vertical-cap)](figures/30-sam/sam-eof-vertical-1.png)
+
+Calculamos el coeficiente de determinación entre las series temporales de los cEOFs y los tres índices SAM (SAM, A-SAM y S-SAM) definidos en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
+El índice SAM está correlacionado de forma estadísticamente significativa con la fase de 0º del cEOF1 en todos los niveles, y con la fase de 90º del cEOF1 y la fase de 90º del cEOF2 en la tropósfera.
+Por otro lado, las correlaciones entre SAM y la fase de 0º del cEOF2 son prácticamente nulas.
+
+En la tropósfera la correlación de ambas fases del cEOF1 y el SAM es igual a su correlación con el S-SAM, y su correlación con el A-SAM es mucho más baja y no significativa.
+Esto indica que la relación entre el SAM y el cEOF1 en la tropósfera se explica en su totalidad por la componente zonalmente simétrica del SAM.
+En la estratosfera, la fase de 0º del cEOF1 está correlacionada tanto con la A-SAM como con la S-SAM, mientras que la fase de 90º está altamente correlacionada sólo con la A-SAM.
+Estas correlaciones son consistentes con los mapas de regresión de la altura geopotencial en la Figura \@ref(fig:eof1-regr-gh) y su comparación con los obtenidos para SAM, A-SAM y S-SAM (Fig. \@ref(fig:2d-regr)).
+
+La falta de relación fuerte entre el cEOF1 y la TSM, la temperatura y la precipitación observada en la Sección \@ref(fuentes-ceof) podría ser sorprendente teniendo en cuenta la correlación entre el cEOF1 y el SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1) y la correlación entre el SAM y la TSM del Pacífico Central, la temperatura al este y oeste de la Península Antártica, y con la precipitación en el oeste de Australia [@fogt2020].
+Esto se debe principalmente a dos razones.
+En primer lugar, la correlación entre cEOF1 y el SAM en la troposfera es modesta, con menos del 50% de varianza compartida (Fig. \@ref(fig:sam-eof-vertical) columna 1), por lo que no se espera que estos índices sean equivalentes.
+En segundo lugar, como se demostró en la Sección \@ref(impacts), la fuerte relación entre el SAM y las TSM del Pacífico y las anomalías de temperatura alrededor de la Península Antártica se debe principalmente a la parte asimétrica de el SAM.
+Mientras tanto, el cEOF1 está significativamente correlacionado sólo con la parte simétrica de el SAM (Fig. \@ref(fig:sam-eof-vertical) columna 1), que por sí misma no está significativamente correlacionada con las temperaturas superficiales en esa zona.
+
+El cEOF2 sólo tiene relación con el SAM en su fase de 90º, asociada a la parte asimétrica y únicamente en la tropósfera.
+La correlación entre ambos índices es muy alta, con valores superiores al 75% de la varianza compartida en toda la tropósfera y un máximo de 92% en 225 hPa.
+Esta altísima correlación es comparable a la correlación observada entre distintos índices del SAM (@ho2012) y sugiere que esta fase es capaz de caracterizar la componente zonalmente asimétrica de el SAM en su totalidad.
+
 ## Conclusiones
 
-La división del SAM entre su parte zonalmente asimétrica y simétrica muestra que estos dos aspectos del SAM tienen variabilidad, tendencias e impactos distintivos.
+La división del SAM entre su parte zonalmente asimétrica y simétrica muestra que estos dos aspectos del SAM tienen variabilidad, tendencias e impactos distintivos
 
-En el capítulo siguiente estudiará la relación entre los cEOFs y las distintas componentes del SAM.
+A su vez, la relación entre el cEOF2 y el SAM se explica por que la fase de 90º del cEOF2 describe la variabilidad de la parte asimétrica del SAM en la tropósfera.
+
+Esto sugiere una partición alternativa de la variabilidad de la circulación del hemisferio sur.
+En vez de separar al SAM por un lado y al PSA1 y al PSA2 por el otro, se puede separar la variabilidad entre el S-SAM, representando la variabilidad zonalmente simétrica, y el cEOF2, representando variabilidad asimétrica y dónde el A-SAM sería entendido como una fase del cEOF2.

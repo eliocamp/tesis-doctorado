@@ -12,6 +12,11 @@ Este capítulo analiza empíricamente en más detalle el índice propuesto por @
 
 ## Métodos
 
+### Datos
+
+Utilizamos datos mensuales de altura geopotencial, del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) [@hersbach2020]. Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud. 
+Utilizamos datos del período post-satelital (1979--2020) para minimizar posibles problemas causados por cambios en la cobertura de datos.
+
 ### Índice R04
 
 El índice R04 era, hasta hace poco, el único índice establecido en la literatura para cuantificar la actividad de la onda zonal 3 del hemisferio sur.
@@ -30,6 +35,15 @@ Primero se calcula la transformada de Fourier de las anomalías de geopotencial 
 La Figura \@ref(fig:envolvente-ejemplo) muestra un ejemplo de la envolvente de la altura geopotencial en 500 hPa en septiembre de 1989
 Las anomalías zonales de altura geopotencial son intensas al sur de Australia y Nueva Zelanda. 
 La envolvente captura esa región.
+
+## Software
+
+El análisis de datos se realizó utilizando el lenguaje de programación R [@rcoreteam2020], con los paquetes data.table [@dowle2020] y metR [@campitelli2020].
+Los gráficos se hicieron con ggplot2 [@wickham2009].
+
+Los datos de reanálisis fueron descargados con el paquete ecmwfr [@hufkens2020], los datos de CMIP y DAMIP se descargaron con el paquete rcmip6 [@rcmip6] y los índices del ENSO y el dipolo del Índico, con el paquete rsoi [@albers2020].
+
+La tesis se compiló utilizando knitr y rmarkdown [@xie2015; @allaire2020].
 
 ## Resultados
 

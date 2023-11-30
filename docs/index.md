@@ -49,14 +49,14 @@ output:
       citation_package: "default"
       pandoc_args:
         - --wrap=none
-  bookdown::epub_book: 
+  bookdown::epub_book:
       toc_depth: 2
       pandoc_args:
-        - --wrap=none  
-  bookdown::word_document2: 
+        - --wrap=none
+  bookdown::word_document2:
       toc_depth: 2
       pandoc_args:
-        - --wrap=none  
+        - --wrap=none
 
 always_allow_html: true
 

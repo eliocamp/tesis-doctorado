@@ -168,6 +168,8 @@ En esta sección calculamos campos de regresión de las series temporales de los
 
 (ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1979--2020. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
 
+
+
 ![(\#fig:eof1-regr-gh)(ref:eof1-regr-gh-cap)](figures/20-ceofs/eof1-regr-gh-1.png)
 
 La Figura \@ref(fig:eof1-regr-gh) muestra los mapas de regresión de anomalías de altura geopotencial en SON con respecto al cEOF1.

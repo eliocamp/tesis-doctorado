@@ -332,7 +332,7 @@ if (is_word()) {
     flextable::set_caption("(ref:corr-ceof-splitted-cap)")
 } else {
   table2 %>%
-    kbl2(booktabs = TRUE, caption = "(ref:cor r-ceof-splitted-cap)") %>%
+    kbl2(booktabs = TRUE, caption = "(ref:corr-ceof-splitted-cap)") %>%
     column_spec2(2:4, bold = pval[[.col]] < 0.01) %>%
     add_header_above(c("", "50 hPa" = 3)) %>%
     kable_classic()

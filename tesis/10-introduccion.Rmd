@@ -1,42 +1,14 @@
 # Introducción {#intro}
 
-El principal patrón de circulación en latitudes medias es el Modo Anular del Sur (SAM, por sus siglas en inglés), el cual se describe, en su fase positiva, como un patrón zonalmente simétrico con anomalías negativas de presión sobre la Antártida rodeadas de un anillo de anomalías positivas de presión en latitudes medias [@fogt2020].
-
-Gran parte de los índices presentados en la literatura para describir el SAM se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial [@ho2012].
-Tanto @gong1999 como @marshall2003 definen el índice SAM como la diferencia de la media zonal de la presión a nivel del mar entre 40ºS y 65ºS.
-@baldwin2009 propuso definir modos anulares del norte y el sur como el primer EOF de la altura geopotencial promediada zonalmente en cada nivel en cada hemisferio.
-
-Aunque estos índices se basan en promedios zonales, están asociados a anomalías espaciales de altura geopotencial con notables desviaciones respecto a la simetría zonal, particularmente en la región del Océano Pacífico, con un número de onda 3-4.
-Estas asimetrías zonales no han sido ampliamente estudiadas, pero trabajos previos sugieren que tienen un rol importante en modular los impactos regionales del SAM [@fan2007; @silvestri2009; @fogt2012; @rosso2018].
-El hecho de que el SAM no sea totalmente zonalmente simétrico reduce nuestra capacidad para reconstruir su variabilidad histórica antes de la disponibilidad de observaciones densas en el hemisferio sur [@jones2009].
-
-La variabilidad del SAM está asociada a la variabilidad tropical [@fan2007; @fogt2011a; @clem2013].
-El Niño-Oscilación del Sur (ENSO, por sus siglas en inglés) o la variabilidad de la temperatura de la superficie del mar (TSM) similar afecta a los extratrópicos del hemisferio sur a través de trenes de ondas de Rossby [@mo1987; @kidson1988; @karoly1989] que se proyectan fuertemente sobre las anomalías zonales asociadas al SAM en el sector del Pacífico.
-@fan2007 calculó los índices de SAM de los hemisferios occidental y oriental por separado y encontró que la correlación entre ellos aumentaba si se eliminaba la señal (lineal) del ENSO, sugiriendo que la influencia del ENSO en el SAM no es zonalmente homogéneo.
-
-Investigaciones previas han documentado tendencias positivas en el SAM utilizando diferentes índices, sobre todo en verano y otoño austral [p.e., @fogt2020 y sus referencias].
-Se cree que estas tendencias están impulsadas principalmente por la reducción del ozono estratosférico y el aumento de los gases de efecto invernadero, y son analizadas en el contexto de las variables medias zonales [@marshall2004; @gillett2005; @arblaster2006; @gillett2013].
-Sin embargo, aún no está claro si la componente asimétrica del SAM responde a estos forzantes de la misma forma o cómo su variabilidad altera las tendencias observadas.
-
-El impacto de la componente asimétrica del SAM a escala regional tampoco se ha estudiado en detalle.
-La fase positiva del SAM está asociada a temperaturas más frías de lo normal sobre la Antártida y más cálidas de lo normal en latitudes más bajas y viceversa para la fase negativa [@jones2019].
-Pero hay desviaciones significativas de esta respuesta media zonal, especialmente en la Península Antártica y el Atlántico sur [@fogt2012].
-La señal relacionada con el SAM en las anomalías de precipitación sigue un comportamiento similar, aunque con aún mayores desviaciones respecto de la simetría zonal [@lim2016].
-La relación entre el SAM y la precipitación en el Sudeste de Sudamérica (SESA) puede explicarse por la circulación zonalmente asimétrica asociada al SAM, que es similar al Patrón del Pacífico-Sudamérica (PSA) [@silvestri2009; @rosso2018].
-@fan2007 también mostró que las precipitaciones en Asia oriental se veían afectadas por la variabilidad de la parte occidental del SAM.
-
-Uno de los pocos trabajos que estudiaron la variabilidad temporal de la componente asimétrica del SAM es @fogt2012.
-Sin embargo, sus conclusiones se basan en composiciones de eventos SAM positivos y negativos basados en un número de casos reducido y distribuidos inhomogéneamente entre años con y sin información satelital.
-Esto es especialmente relevante debido a las inhomogeneidades en los productos de reanálisis anteriores a la era satelital y al posible cambio en la estructura asimétrica del SAM [@silvestri2009].
-Además, @fogt2012 estudió la componente asimétrica zonal del SAM sólo en la presión a nivel del mar.
-Si bien las asimetrías zonales en el patrón espacial del SAM son barotrópicas equivalentes en toda la troposfera, su estructura cambia drásticamente en la estratosfera [@baldwin2009].
-
-En resumen, las investigaciones previas sugieren fuertemente que la componente zonalmente asimétrica del SAM puede tener un comportamiento potencialmente muy distinto al de la componente zonalmente simétrica, por ejemplo, podría tener diferentes fuentes de variabilidad, impactos y respuesta a largo plazo al forzamiento radiativo.
-
-Las anomalías zonales de la circulación más allá del SAM también están asociadas a impactos regionales [p.e. @hoskins2005].
+La circulación general del hemisferio sur es más zonalmente simétrica que la del hemisferio norte, pero las anomalías zonales de la circulación tienen impactos regionales importantes [p.e. @hoskins2005].
 Modulan fuertemente los sistemas meteorológicos y el clima regional al influenciar el transporte meridional de calor, humedad y momento [@trenberth1980a; @raphael2007] e incluso podrían estar relacionados con la ocurrencia de extremos climáticos de alto impacto [@pezza2012].
 
-Generalmente la circulación zonalmente asimétrica se describe a partir de la amplitud y la fase de las ondas zonales obtenidas por descomposición de Fourier de la altura geopotencial o la presión a nivel del mar en cada latitud [p.e., @vanloon1972; @trenberth1980a; @turner2017].
+A pesar de estos impactos, las anomalías zonales de circulación están poco estudiadas en el hemisferio sur. 
+Por ejemplo, el principal patrón de circulación en latitudes medias es el Modo Anular del Sur (SAM, por sus siglas en inglés) el cual se describe, en su fase positiva, como un patrón zonalmente simétrico con anomalías negativas de presión sobre la Antártida rodeadas de un anillo de anomalías positivas de presión en latitudes medias [@fogt2020].
+Sin embargo, el SAM también está asociado a están asociados a anomalías espaciales de altura geopotencial con notables desviaciones respecto a la simetría zonal, particularmente en la región del Océano Pacífico, con un número de onda 3-4.
+Estas asimetrías zonales no han sido ampliamente estudiadas, pero trabajos previos sugieren que tienen un rol importante en modular los impactos regionales del SAM [@fan2007; @silvestri2009; @fogt2012; @rosso2018].
+
+De forma más general, la circulación zonalmente asimétrica se describe a partir de la amplitud y la fase de las ondas zonales obtenidas por descomposición de Fourier de la altura geopotencial o la presión a nivel del mar en cada latitud [p.e., @vanloon1972; @trenberth1980a; @turner2017].
 Bajo este enfoque, las ondas zonales 1 y 3 explican casi el 99% de la varianza total del campo medio anual de las anomalías zonales de altura geopotencial de 500 hPa en 50ºS [@vanloon1972].
 @trenberth1985 concluyó que la onda 3 tiene un rol importante en el desarrollo de los fenómenos de bloqueo.
 Además, trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos.
@@ -89,3 +61,4 @@ Hasta donde sabemos, el análisis cEOF no se ha aplicado en el dominio espacial 
 
 El objetivo de esta tesis es mejorar la descripción y comprensión de la circulación extratropical hemisferio sur zonalmente asimétrica utilizando cEOF, que puede describir ondas planetarias de fase variable con amplitud variable a lo largo de un círculo de latitud.
 Además, intentamos ampliar el conocimiento del comportamiento simultáneo de la circulación asimétrica hemisferio sur en la troposfera y la estratosfera.
+

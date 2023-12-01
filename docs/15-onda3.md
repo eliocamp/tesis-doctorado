@@ -15,7 +15,7 @@ Este capítulo analiza empíricamente en más detalle el índice propuesto por @
 ### Datos
 
 Utilizamos datos mensuales de altura geopotencial, del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) [@hersbach2020]. Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud. 
-Utilizamos datos del período post-satelital (1979--2020) para minimizar posibles problemas causados por cambios en la cobertura de datos.
+Utilizamos datos del período post-satelital (1 979--2 020) para minimizar posibles problemas causados por cambios en la cobertura de datos.
 
 ### Índice R04
 
@@ -36,7 +36,7 @@ La Figura \@ref(fig:envolvente-ejemplo) muestra un ejemplo de la envolvente de l
 Las anomalías zonales de altura geopotencial son intensas al sur de Australia y Nueva Zelanda. 
 La envolvente captura esa región.
 
-## Software
+### Software
 
 El análisis de datos se realizó utilizando el lenguaje de programación R [@rcoreteam2020], con los paquetes data.table [@dowle2020] y metR [@campitelli2020].
 Los gráficos se hicieron con ggplot2 [@wickham2009].

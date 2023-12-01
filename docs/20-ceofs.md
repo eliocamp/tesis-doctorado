@@ -23,7 +23,7 @@ Dada la importancia de la variabilidad estratosférica en modular la propagació
 
 Utilizamos datos mensuales de ERA5 al igual que en el capítulo anterior.
 Además de altura geopotencial, utilizamos datos de temperatura del aire, temperatura a 2 metros, relación de mezcla de ozono y columna total de ozono (CTO).
-La mayor parte del análisis utiliza datos del período post-satelital (1979--2020), pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
+La mayor parte del análisis utiliza datos del período post-satelital (1 979--2 020), pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
 
 La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK [@fishpack], y los flujos horizontales de actividad de onda se calcularon siguiendo el método descrito por [@plumb1985].
 
@@ -78,7 +78,7 @@ Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener
 
 
 
-(ref:eof-naive-cap) Patrones espaciales de los primeros EOFs de las anomalías zonales de altura geopotencial en 50 hPa al sur de 20ºS. Para el período 1979--2020 (unidades arbitrarias).
+(ref:eof-naive-cap) Patrones espaciales de los primeros EOFs de las anomalías zonales de altura geopotencial en 50 hPa al sur de 20ºS. Para el período 1 979--2 020 (unidades arbitrarias).
 
 ![(\#fig:eof-naive)(ref:eof-naive-cap)](figures/20-ceofs/eof-naive-1.png)
 
@@ -159,19 +159,19 @@ Del mismo modo, elegimos el argumento del cEOF2 de modo que el coeficiente de de
 En la Sección \@ref(impactos) mostramos regresiones de precipitación y temperatura asociadas a fases intermedias entre 0º y 90º.
 Para esos gráficos, giramos los cEOF en 1/4 de longitud de onda multiplicando las series temporales complejas por $\cos(\pi/4) + i\sin(\pi/4)$ y calculando la regresión sobre esas series temporales rotadas.
 
-Si bien los cEOFs se calcularon para el período 1979--2020, extendimos las series temporales complejas hasta el periodo 1950--1978 proyectando las anomalías zonales mensuales de altura geopotencial normalizadas por nivel al sur de 20ºS sobre los patrones espaciales correspondientes.
+Si bien los cEOFs se calcularon para el período 1 979--2 020, extendimos las series temporales complejas hasta el periodo 1950--1978 proyectando las anomalías zonales mensuales de altura geopotencial normalizadas por nivel al sur de 20ºS sobre los patrones espaciales correspondientes.
 
 ## Resultados
 
 ### Caracterización espacio-temporal de los modos
 
-(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2020. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
+(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 979--2 020. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
 
 ![(\#fig:ceofs-1)(ref:ceofs-1-cap)](figures/20-ceofs/ceofs-1-1.png)
 
 
 
-(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
+(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 979--2 020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
 
 ![(\#fig:extended-series)(ref:extended-series-cap)](figures/20-ceofs/extended-series-1.png)
 
@@ -211,7 +211,7 @@ En esta sección calculamos campos de regresión de las series temporales de los
 
 
 
-(ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1979--2020. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
+(ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1 979--2 020. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.
 
 
 
@@ -256,7 +256,7 @@ Estudiaremos la relación entre los cEOF y el PSA y con más detalle en el Capí
 
 
 
-(ref:t-vertical-cap) Regresión de anomalías zonales de temperatura (sombrado, Kelvin) y razón de mezcla de ozono (contornos, valores negativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre 75°S y 45°S en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1979--2020.
+(ref:t-vertical-cap) Regresión de anomalías zonales de temperatura (sombrado, Kelvin) y razón de mezcla de ozono (contornos, valores negativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre 75°S y 45°S en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1 979--2 020.
 
 ![(\#fig:t-vertical)(ref:t-vertical-cap)](figures/20-ceofs/t-vertical-1.png)
 
@@ -278,11 +278,11 @@ Por otro lado, en la estratosfera baja, dominada por la advección, las anomalí
 
 
 
-(ref:o3-regr-cap) Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1979--2020. En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
+(ref:o3-regr-cap) Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1 979--2 020. En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.
 
 ![(\#fig:o3-regr)(ref:o3-regr-cap)](figures/20-ceofs/o3-regr-1.png)
 
-(ref:wave1-o3-cap) Relación entre la amplitud y la fase de la onda zonal 1 de la Columna Total de Ozono promediada entre 75°S y 45°S y la amplitud y la fase del cEOF1 para SON en el período 1979--2020.
+(ref:wave1-o3-cap) Relación entre la amplitud y la fase de la onda zonal 1 de la Columna Total de Ozono promediada entre 75°S y 45°S y la amplitud y la fase del cEOF1 para SON en el período 1 979--2 020.
 
 
 
@@ -297,7 +297,7 @@ En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del 
 
 ### PSA {#psa}
 
-(ref:psa-eof2-cap) Coeficiente de correlación entre las fases del cEOF2 y los modos PSA1 y PSA2 para el período 1979--2020. 
+(ref:psa-eof2-cap) Coeficiente de correlación entre las fases del cEOF2 y los modos PSA1 y PSA2 para el período 1 979--2 020. 
 Los intervalos de confianza de 95% se muestran en paréntesis. 
 Estimaciones con p-valor menor a 0.01 en negrita. 
 
@@ -318,7 +318,7 @@ Por otro lado, no existe una relación significativa entre el PSA1 y la fase de 
 En consecuencia, cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos del PSA.
 Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y la fase de 90º del cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no mostrado).
 
-(ref:phase-histogram-cap) Histograma de la distribución de fases del cEOF2 para el periodo 1979--2020. 
+(ref:phase-histogram-cap) Histograma de la distribución de fases del cEOF2 para el periodo 1 979--2 020. 
 Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho del intervalo de 90º.
 Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.
 
@@ -363,7 +363,7 @@ También explica gran parte de la varianza en al oeste y al este de la Penínsul
 
 
 
-(ref:sst-psi-2-cap) Regresión de (columna 1) TSM (K) y (columna 2) anomalías zonales de función corriente ($m^2/s\times10^-7$) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período 1979--2020. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
+(ref:sst-psi-2-cap) Regresión de (columna 1) TSM (K) y (columna 2) anomalías zonales de función corriente ($m^2/s\times10^-7$) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período 1 979--2 020. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.
 
 ![(\#fig:sst-psi-2)(ref:sst-psi-2-cap)](figures/20-ceofs/sst-psi-2-1.png)
 
@@ -393,15 +393,15 @@ Las filas a y c de la Fig.\@ref(fig:sst-psi-2) muestran que las fases intermedia
 La fase de 135º está asociada a anomalías de la TSM en el Pacífico central (Fig.\@ref(fig:sst-psi-2)a.1), mientras que la fase de 45º está asociada a anomalías de la TSM que corresponden aproximadamente a los "sabores" de ENSO del Pacífico central y del Pacífico oriental, respectivamente (Fig.\@ref(fig:sst-psi-2)c.1) [@kao2009].
 Ambas fases también están asociadas a trenes de onda que se generan cerca de Australia y se propagan hacia los extratrópicos, aunque menos intensos que los asociados a la fase de 90º.
 
-(ref:enso-phase-cap) Valores del ONI en SON y la fase del cEOF2 en el período 1979--2020. Los años en los cuales la magnitud del cEOF2 es mayor o menor que la mediana se muestran como diamantes naranja o círculos verdes respectivamente. La línea negra representa el ajuste ONI \~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2.
+(ref:enso-phase-cap) Valores del ONI en SON y la fase del cEOF2 en el período 1 979--2 020. Los años en los cuales la magnitud del cEOF2 es mayor o menor que la mediana se muestran como diamantes naranja o círculos verdes respectivamente. La línea negra representa el ajuste ONI \~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2.
 
 ![(\#fig:enso-phase)(ref:enso-phase-cap)](figures/20-ceofs/enso-phase-1.png)
 
-Para explorar la relación entre el forzante tropical y las fases del cEOF2 con más profundidad, la Figura \@ref(fig:enso-phase) muestra la relación entre el ONI y la fase del cEOF2 para cada SON entre 1979 y 2020, destacando los años en los que la magnitud del cEOF2 está por encima de la mediana.
+Para explorar la relación entre el forzante tropical y las fases del cEOF2 con más profundidad, la Figura \@ref(fig:enso-phase) muestra la relación entre el ONI y la fase del cEOF2 para cada SON entre 1 979 y 2 020, destacando los años en los que la magnitud del cEOF2 está por encima de la mediana.
 En los años con ONI positivo, la fase cEOF2 se sitúa mayoritariamente en torno a la fase de 90º; en los años con ONI negativo, en torno a la fase de -90º.
 En las estaciones con ENSO neutro, la fase del cEOF2 es mucho más variable.
 La línea negra de la Figura \@ref(fig:enso-phase) es un ajuste sinusoidal de la relación entre el ONI y la fase del cEOF2.
-El $r^2$ correspondiente al ajuste es 0.57, estadísticamente significativo con p-valor < 0.001, lo que indica una relación aproximadamente sinusoidal entre estas dos variables.
+El $r^2$ correspondiente al ajuste es 0,57, estadísticamente significativo con p-valor < 0.001, lo que indica una relación aproximadamente sinusoidal entre estas dos variables.
 
 
 
@@ -413,9 +413,9 @@ Otra evidencia de la relación entre el ENSO y la fase del cEOF2 es que tanto el
 Esto muestra que la principal escala de variabilidad de esta fase está íntimamente relacionada con el ENSO.
 
 La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es 0.45 (CI: 0.17 -- 0.66).
-Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (2015, 1997, y 1982), los cuales coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
+Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (2 015, 1 997, y 1982), los cuales coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
 Si se eliminan esos años, la correlación deja de ser significativa (0.04 (CI: -0.28 -- 0.35)).
-Además, incluso cuando utilizando todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (0.2, p-valor = 0.21).
+Además, incluso cuando utilizando todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (0,2, p-valor = 0,21).
 Por lo tanto, aunque la localización de las anomalías tropicales de la TSM parece tener un efecto en la definición de la fase del cEOF2, la relación entre la magnitud del cEOF2 y el ONI sigue siendo incierta y podría ser sólo evidente en eventos ENSO muy fuertes, que son escasos en el registro observacional histórico.
 
 Concluimos que el tren de ondas representado por el cEOF2 es tanto parte de la variabilidad interna de la atmósfera extratropical como forzado por las TSM tropicales.
@@ -456,7 +456,7 @@ En latitudes más altas, se observan valores moderados sobre el este de Australi
 Dado que el cEOF1 tiene una señal relativamente débil en las variables de superficie exploradas, sólo nos centraremos en la influencia del cEOF2.
 En la Figura \@ref(fig:pp-temp-2) se muestran mapas de regresión de las anomalías de temperatura a 2 metros (columna 1) y precipitación (columna 2) sobre diferentes fases del cEOF2 normalizado.
 
-(ref:pp-temp-2-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el trimestre SON del periodo 1979--2020. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.
+(ref:pp-temp-2-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el trimestre SON del periodo 1 979--2 020. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.
 
 ![(\#fig:pp-temp-2)(ref:pp-temp-2-cap)](figures/20-ceofs/pp-temp-2-1.png)
 

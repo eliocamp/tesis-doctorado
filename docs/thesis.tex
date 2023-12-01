@@ -79,46 +79,6 @@
 % \usepackage{times} % other fonts are available like times, bookman, charter, palatino
 
 % Syntax highlighting #22
-  \usepackage{color}
-  \usepackage{fancyvrb}
-  \newcommand{\VerbBar}{|}
-  \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-  % Add ',fontsize=\small' for more characters per line
-  \usepackage{framed}
-  \definecolor{shadecolor}{RGB}{248,248,248}
-  \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-  \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-  \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-  \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-  \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-  \newcommand{\BuiltInTok}[1]{#1}
-  \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-  \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-  \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-  \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-  \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-  \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-  \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-  \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-  \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-  \newcommand{\ExtensionTok}[1]{#1}
-  \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-  \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-  \newcommand{\ImportTok}[1]{#1}
-  \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-  \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-  \newcommand{\NormalTok}[1]{#1}
-  \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-  \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-  \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-  \newcommand{\RegionMarkerTok}[1]{#1}
-  \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-  \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-  \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-  \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-  \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-  \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
 % To pass between YAML and LaTeX the dollar signs are added by CII
 \title{Dinámica de la circulación zonalmente asimétrica del hemisferio sur}
@@ -322,8 +282,8 @@ Sin embargo, la mayoría de los modelos exageran la relación entre los modos y 
 
 
   \hypersetup{linkcolor=black}
-  \setcounter{secnumdepth}{1}
-  \setcounter{tocdepth}{1}
+  \setcounter{secnumdepth}{2}
+  \setcounter{tocdepth}{2}
   \tableofcontents
 
   \listoftables
@@ -395,84 +355,20 @@ El objetivo de esta tesis es mejorar la descripción y comprensión de la circul
 Dada la falta de estudios sobre las asimetrías zonales del SAM, también proponemos desarrollar una metodología para caracterizar la variabilidad de las componentes simétricas y asimétricas del SAM, sus impactos y sus forzantes.
 Además, intentamos ampliar el conocimiento del comportamiento simultáneo de la circulación asimétrica hemisferio sur en la troposfera y la estratosfera.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{source}\NormalTok{(}\StringTok{"scripts/globals.R"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{muxe9todos}{%
-\chapter{Métodos}\label{muxe9todos}}
-
-\hypertarget{datos}{%
-\section{Datos}\label{datos}}
-
-Utilizamos datos mensuales de altura geopotencial, temperatura del aire, relación de mezcla de ozono y columna total de ozono (CTO) del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) (Hersbach et~al. 2020).
-Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud y 37 niveles verticales de presión entre 1000 hPa y 1 hPa.
-La mayor parte del análisis utiliza datos del período post-satelital (1979--2020) para minimizar posibles problemas causados por cambios en la cobertura de datos, pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
-
-La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK (Adams, Swartztrauber y Sweet 1999), y los flujos horizontales de actividad de onda se calcularon siguiendo el método descrito por (Plumb 1985).
-
-Utilizamos datos mensuales de Temperatura de la Superficie del Mar (TSM) de Extended Reconstructed Sea Surface Temperature (ERSST) v5 (Huang et~al. 2017) y precipitación mensual del CPC Merged Analysis of Precipitation (CMAP, Xie y Arkin 1997), con una resolución de 2º y 2,5º, respectivamente.
-Este conjunto de datos de lluvia integra información de diversas fuentes, incluyendo observaciones de pluviómetros, estimaciones inferidas por satélite y el reanálisis NCEP-NCAR.
-Cubre el período desde 1979 hasta la actualidad.
-
-Además, incorporamos índices climáticos en nuestro análisis.
-El Índice del ENSO Oceánico (ONI, Bamston, Chelliah y Goldenberg 1997) del Climate Prediction Center de la NOAA y el Índice del Dipolo del Índico (DMI, Saji y Yamagata 2003) del Global Climate Observing System Working Group on Surface Pressure.
-
-\hypertarget{regresiones}{%
-\subsection{Regresiones}\label{regresiones}}
-
-Tanto en el Capítulo \ref{ceofs} como en el Capítulo \ref{asymsam} se derivaron índices multivariados.
-Para cuantificar la asociación entre éstos y otras variables meteorológicas usamos regresión lineal múltiple.
-Para obtener los coeficientes lineales de una variable \(Z\) (altura geopotencial, temperatura, precipitación, etc.) con un índice de variables X e Y ajustamos la ecuación
-
-\begin{equation}
-Z(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{X} + \beta(\lambda, \phi) \operatorname{Y} + X_0(\lambda, \phi) + \epsilon(\lambda, \phi, t)
-\label{eq:multiple-regression-sam}
-\end{equation}
-
-donde \(\lambda\) y \(\phi\) son la longitud y la latitud, \(t\) es el tiempo, \(\alpha\) y \(\beta\) son los coeficientes de regresión lineal, \(X_0\) y \(\epsilon\) son la constante y los términos de error.
-A partir de esta ecuación, \(\alpha\) representa la asociación (lineal) de \(Z\) con la variabilidad de \(X\) que no se explica por la variabilidad de \(Y\); es decir, es proporcional a la correlación parcial de \(Z\) y \(X\), controlando el efecto de \(Y\), y viceversa para \(\beta\).
-
-Para las regresiones estacionales, promediamos la variables para cada año y trimestre (DJF, MAM, JJA, SON) antes de calcular la regresión.
-
-La significancia estadística de los campos de regresión se evaluó ajustando los p-valores mediante el control de la Tasa de Falso Descubrimiento (Benjamini y Hochberg 1995; Wilks 2016) para evitar resultados engañosos derivados del elevado número de regresiones (Walker 1914; Katz y Brown 1991).
-
-Calculamos las tendencias lineales mediante mínimos cuadrados ordinarios y el intervalo de confianza del 95\% se calculó asumiendo una distribución t con los grados de libertad de los residuos apropiados.
-
-Calculamos las estimaciones de probabilidad de densidad utilizando un kernel gaussiano de anchura óptima según Sheather y Jones (1991).
-
-\hypertarget{eof}{%
-\section{EOF}\label{eof}}
-
-Calculamos los EOFs haciendo la descomposición en valores singulares de la matriz de datos.
-Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener en cuenta que el área representada por cada punto de grilla (Chung y Nigam 1999).
-
-\hypertarget{software}{%
-\section{Software}\label{software}}
-
-El análisis de datos se realizó utilizando el lenguaje de programación R (R Core Team 2020), con los paquetes data.table (Dowle y Srinivasan 2020) y metR (Campitelli 2020).
-Los gráficos se hicieron con ggplot2 (Wickham 2009).
-
-Los datos de reanálisis fueron descargados con el paquete ecmwfr (Hufkens 2020), los datos de CMIP y DAMIP se descargaron con el paquete rcmip6 (Campitelli 2023) y los índices del ENSO y el dipolo del Índico, con el paquete rsoi (Albers y Campitelli 2020).
-
-La tesis se compiló utilizando knitr y rmarkdown (Xie 2015; Allaire et~al. 2020).
-
 \hypertarget{exploraciuxf3n-de-uxedndice-de-onda-3}{%
 \chapter{Exploración de índice de onda 3}\label{exploraciuxf3n-de-uxedndice-de-onda-3}}
 
 La \protect\hyperlink{intro}{Introducción} introdujo conceptualmente algunos aspectos problemáticos de las metodologías e índices normalmente utilizados en la literatura para estudiar la circulación zonalmente asimétrica el hemisferio sur.
 Este capítulo analiza empíricamente en más detalle el índice propuesto por Raphael (2004) (R04, desde ahora) y la amplitud de la onda calculada a partir de Fourier.
 
-\hypertarget{muxe9todos-1}{%
-\section{Métodos}\label{muxe9todos-1}}
+\hypertarget{muxe9todos}{%
+\section{Métodos}\label{muxe9todos}}
 
-\hypertarget{datos-1}{%
-\subsection{Datos}\label{datos-1}}
+\hypertarget{datos}{%
+\subsection{Datos}\label{datos}}
 
 Utilizamos datos mensuales de altura geopotencial, del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) (Hersbach et~al. 2020). Estos datos se utilizaron a una resolución espacial de 2,5° de longitud por 2,5° de latitud.
-Utilizamos datos del período post-satelital (1979--2020) para minimizar posibles problemas causados por cambios en la cobertura de datos.
+Utilizamos datos del período post-satelital (1 979--2 020) para minimizar posibles problemas causados por cambios en la cobertura de datos.
 
 \hypertarget{uxedndice-r04}{%
 \subsection{Índice R04}\label{uxedndice-r04}}
@@ -502,8 +398,8 @@ La Figura \ref{fig:envolvente-ejemplo} muestra un ejemplo de la envolvente de la
 Las anomalías zonales de altura geopotencial son intensas al sur de Australia y Nueva Zelanda.
 La envolvente captura esa región.
 
-\hypertarget{software-1}{%
-\section{Software}\label{software-1}}
+\hypertarget{software}{%
+\subsection{Software}\label{software}}
 
 El análisis de datos se realizó utilizando el lenguaje de programación R (R Core Team 2020), con los paquetes data.table (Dowle y Srinivasan 2020) y metR (Campitelli 2020).
 Los gráficos se hicieron con ggplot2 (Wickham 2009).
@@ -680,15 +576,15 @@ Muchas de las características de los cEOF son similares en los otros trimestres
 Analizamos el nivel de 200 hPa dado que es un nivel cercano al máximo de la amplitud de la onda 3 (Campitelli 2018).
 Dada la importancia de la variabilidad estratosférica en modular la propagación de las ondas, también incluimos el nivel de 50 hPa.
 
-\hypertarget{muxe9todos-2}{%
-\section{Métodos}\label{muxe9todos-2}}
+\hypertarget{muxe9todos-1}{%
+\section{Métodos}\label{muxe9todos-1}}
 
-\hypertarget{datos-2}{%
-\subsection{Datos}\label{datos-2}}
+\hypertarget{datos-1}{%
+\subsection{Datos}\label{datos-1}}
 
 Utilizamos datos mensuales de ERA5 al igual que en el capítulo anterior.
 Además de altura geopotencial, utilizamos datos de temperatura del aire, temperatura a 2 metros, relación de mezcla de ozono y columna total de ozono (CTO).
-La mayor parte del análisis utiliza datos del período post-satelital (1979--2020), pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
+La mayor parte del análisis utiliza datos del período post-satelital (1 979--2 020), pero nos extendemos hacia 1940 para examinar las tendencias a largo plazo.
 
 La función de corriente a 200 hPa se derivó a partir de la vorticidad de ERA5 utilizando la subrutina de FORTRAN FISHPACK (Adams, Swartztrauber y Sweet 1999), y los flujos horizontales de actividad de onda se calcularon siguiendo el método descrito por (Plumb 1985).
 
@@ -699,8 +595,8 @@ Cubre el período desde 1979 hasta la actualidad.
 Además, incorporamos índices climáticos en nuestro análisis.
 El Índice del ENSO Oceánico (ONI, Bamston, Chelliah y Goldenberg 1997) del Climate Prediction Center de la NOAA y el Índice del Dipolo del Índico (DMI, Saji y Yamagata 2003) del Global Climate Observing System Working Group on Surface Pressure.
 
-\hypertarget{regresiones-1}{%
-\subsection{Regresiones}\label{regresiones-1}}
+\hypertarget{regresiones}{%
+\subsection{Regresiones}\label{regresiones}}
 
 Para cuantificar la asociación entre múltiples índices o índices multivariados y otras variables meteorológicas usamos regresión lineal múltiple.
 Para obtener los coeficientes lineales de una variable \(Z\) (altura geopotencial, temperatura, precipitación, etc.) con un índice de variables X e Y ajustamos la ecuación
@@ -721,8 +617,8 @@ Calculamos las tendencias lineales mediante mínimos cuadrados ordinarios y el i
 
 Calculamos las estimaciones de probabilidad de densidad utilizando un kernel gaussiano de anchura óptima según Sheather y Jones (1991).
 
-\hypertarget{eof-1}{%
-\section{EOF}\label{eof-1}}
+\hypertarget{eof}{%
+\section{EOF}\label{eof}}
 
 Calculamos los EOFs haciendo la descomposición en valores singulares de la matriz de datos.
 Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener en cuenta que el área representada por cada punto de grilla (Chung y Nigam 1999).
@@ -738,7 +634,7 @@ Ponderamos los valores por la raíz cuadrada del coseno de la latitud para tener
 
 }
 
-\caption{Patrones espaciales de los primeros EOFs de las anomalías zonales de altura geopotencial en 50 hPa al sur de 20ºS. Para el período 1979--2020 (unidades arbitrarias).}\label{fig:eof-naive}
+\caption{Patrones espaciales de los primeros EOFs de las anomalías zonales de altura geopotencial en 50 hPa al sur de 20ºS. Para el período 1 979--2 020 (unidades arbitrarias).}\label{fig:eof-naive}
 \end{figure}
 
 Una de las metodologías más extendidas para analizar la variabilidad espacio-temporal de una variable es la de Funciones Ortogonales Empíricas (EOF) o componentes principales.
@@ -824,7 +720,7 @@ Del mismo modo, elegimos el argumento del cEOF2 de modo que el coeficiente de de
 En la Sección \ref{impactos} mostramos regresiones de precipitación y temperatura asociadas a fases intermedias entre 0º y 90º.
 Para esos gráficos, giramos los cEOF en 1/4 de longitud de onda multiplicando las series temporales complejas por \(\cos(\pi/4) + i\sin(\pi/4)\) y calculando la regresión sobre esas series temporales rotadas.
 
-Si bien los cEOFs se calcularon para el período 1979--2020, extendimos las series temporales complejas hasta el periodo 1950--1978 proyectando las anomalías zonales mensuales de altura geopotencial normalizadas por nivel al sur de 20ºS sobre los patrones espaciales correspondientes.
+Si bien los cEOFs se calcularon para el período 1 979--2 020, extendimos las series temporales complejas hasta el periodo 1950--1978 proyectando las anomalías zonales mensuales de altura geopotencial normalizadas por nivel al sur de 20ºS sobre los patrones espaciales correspondientes.
 
 \hypertarget{resultados-1}{%
 \section{Resultados}\label{resultados-1}}
@@ -840,7 +736,7 @@ Si bien los cEOFs se calcularon para el período 1979--2020, extendimos las seri
 
 }
 
-\caption{Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2020. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.}\label{fig:ceofs-1}
+\caption{Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 979--2 020. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.}\label{fig:ceofs-1}
 \end{figure}
 
 
@@ -851,7 +747,7 @@ Si bien los cEOFs se calcularon para el período 1979--2020, extendimos las seri
 
 }
 
-\caption{Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.}\label{fig:extended-series}
+\caption{Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 979--2 020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.}\label{fig:extended-series}
 \end{figure}
 
 Las Figuras \ref{fig:ceofs-1} y \ref{fig:extended-series} muestran las partes espacial y temporal de los dos primeros cEOFs de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
@@ -892,7 +788,7 @@ En esta sección calculamos campos de regresión de las series temporales de los
 
 }
 
-\caption{Regresión de anomalías de temperatura geopotencial en SON (\(m^2s^{-1}\)) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1979--2020. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.}\label{fig:eof1-regr-gh}
+\caption{Regresión de anomalías de temperatura geopotencial en SON (\(m^2s^{-1}\)) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período 1 979--2 020. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.}\label{fig:eof1-regr-gh}
 \end{figure}
 
 La Figura \ref{fig:eof1-regr-gh} muestra los mapas de regresión de anomalías de altura geopotencial en SON con respecto al cEOF1.
@@ -955,7 +851,7 @@ Estudiaremos la relación entre los cEOF y el PSA y con más detalle en el Capí
 
 }
 
-\caption{Regresión de anomalías zonales de temperatura (sombrado, Kelvin) y razón de mezcla de ozono (contornos, valores negativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre 75°S y 45°S en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1979--2020.}\label{fig:t-vertical}
+\caption{Regresión de anomalías zonales de temperatura (sombrado, Kelvin) y razón de mezcla de ozono (contornos, valores negativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre 75°S y 45°S en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1 979--2 020.}\label{fig:t-vertical}
 \end{figure}
 
 También evaluamos la señal de la variabilidad de los cEOF en la temperatura del aire.
@@ -982,7 +878,7 @@ Por otro lado, en la estratosfera baja, dominada por la advección, las anomalí
 
 }
 
-\caption{Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1979--2020. En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.}\label{fig:o3-regr}
+\caption{Regresión de las anomalías de Columna Total de Ozono (CTO, sombreado, unidades Dobson) con la fase de 0º (a) y de 90º (b) del cEOF1 para el período 1 979--2 020. En contornos, la anomalía zonal media de de CTO (contornos negativos en líneas punteadas, unidades Dobson). Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.}\label{fig:o3-regr}
 \end{figure}
 
 
@@ -1003,7 +899,7 @@ En consecuencia, el cEOF1 está fuertemente relacionado con la variabilidad del 
 
 \begin{table}
 
-\caption{\label{tab:psa-eof2}Coeficiente de correlación entre las fases del cEOF2 y los modos PSA1 y PSA2 para el período 1979--2020.
+\caption{\label{tab:psa-eof2}Coeficiente de correlación entre las fases del cEOF2 y los modos PSA1 y PSA2 para el período 1 979--2 020.
 Los intervalos de confianza de 95\% se muestran en paréntesis.
 Estimaciones con p-valor menor a 0.01 en negrita.}
 \centering
@@ -1035,7 +931,7 @@ Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y
 
 }
 
-\caption{Histograma de la distribución de fases del cEOF2 para el periodo 1979--2020.
+\caption{Histograma de la distribución de fases del cEOF2 para el periodo 1 979--2 020.
 Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho del intervalo de 90º.
 Las pequeñas líneas verticales cerca del eje horizontal marcan las observaciones.}\label{fig:phase-histogram}
 \end{figure}
@@ -1079,7 +975,7 @@ También explica gran parte de la varianza en al oeste y al este de la Penínsul
 
 }
 
-\caption{Regresión de (columna 1) TSM (K) y (columna 2) anomalías zonales de función corriente (\(m^2/s\times10^-7\)) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período 1979--2020. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.}\label{fig:sst-psi-2}
+\caption{Regresión de (columna 1) TSM (K) y (columna 2) anomalías zonales de función corriente (\(m^2/s\times10^-7\)) y sus vectores de acción de onda con diferentes fases del cEOF2 (indicado con la flecha) en el período 1 979--2 020. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.}\label{fig:sst-psi-2}
 \end{figure}
 
 La Figura \ref{fig:sst-psi-2} muestra los mapas de regresión de las anomalías de la temperatura de la superficie del mar (TSM) y de la función de corriente a 200 hPa sobre los cEOF2 normalizados.
@@ -1123,14 +1019,14 @@ Ambas fases también están asociadas a trenes de onda que se generan cerca de A
 
 }
 
-\caption{Valores del ONI en SON y la fase del cEOF2 en el período 1979--2020. Los años en los cuales la magnitud del cEOF2 es mayor o menor que la mediana se muestran como diamantes naranja o círculos verdes respectivamente. La línea negra representa el ajuste ONI \textasciitilde{} sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2.}\label{fig:enso-phase}
+\caption{Valores del ONI en SON y la fase del cEOF2 en el período 1 979--2 020. Los años en los cuales la magnitud del cEOF2 es mayor o menor que la mediana se muestran como diamantes naranja o círculos verdes respectivamente. La línea negra representa el ajuste ONI \textasciitilde{} sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2.}\label{fig:enso-phase}
 \end{figure}
 
-Para explorar la relación entre el forzante tropical y las fases del cEOF2 con más profundidad, la Figura \ref{fig:enso-phase} muestra la relación entre el ONI y la fase del cEOF2 para cada SON entre 1979 y 2020, destacando los años en los que la magnitud del cEOF2 está por encima de la mediana.
+Para explorar la relación entre el forzante tropical y las fases del cEOF2 con más profundidad, la Figura \ref{fig:enso-phase} muestra la relación entre el ONI y la fase del cEOF2 para cada SON entre 1 979 y 2 020, destacando los años en los que la magnitud del cEOF2 está por encima de la mediana.
 En los años con ONI positivo, la fase cEOF2 se sitúa mayoritariamente en torno a la fase de 90º; en los años con ONI negativo, en torno a la fase de -90º.
 En las estaciones con ENSO neutro, la fase del cEOF2 es mucho más variable.
 La línea negra de la Figura \ref{fig:enso-phase} es un ajuste sinusoidal de la relación entre el ONI y la fase del cEOF2.
-El \(r^2\) correspondiente al ajuste es 0.57, estadísticamente significativo con p-valor \textless{} 0.001, lo que indica una relación aproximadamente sinusoidal entre estas dos variables.
+El \(r^2\) correspondiente al ajuste es 0,57, estadísticamente significativo con p-valor \textless{} 0.001, lo que indica una relación aproximadamente sinusoidal entre estas dos variables.
 
 \begin{figure}
 
@@ -1147,9 +1043,9 @@ Otra evidencia de la relación entre el ENSO y la fase del cEOF2 es que tanto el
 Esto muestra que la principal escala de variabilidad de esta fase está íntimamente relacionada con el ENSO.
 
 La correlación entre la magnitud absoluta del ONI y la amplitud del cEOF2 es 0.45 (CI: 0.17 -- 0.66).
-Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (2015, 1997, y 1982), los cuales coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
+Sin embargo, esta relación está determinada principalmente por los tres años con los eventos ENSO más intensos del periodo (2 015, 1 997, y 1982), los cuales coinciden con los tres años con la magnitud CEOF2 más intensa (no se muestra).
 Si se eliminan esos años, la correlación deja de ser significativa (0.04 (CI: -0.28 -- 0.35)).
-Además, incluso cuando utilizando todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (0.2, p-valor = 0.21).
+Además, incluso cuando utilizando todos los años, la correlación de Spearman -que es robusta frente a los valores atípicos- tampoco es significativa (0,2, p-valor = 0,21).
 Por lo tanto, aunque la localización de las anomalías tropicales de la TSM parece tener un efecto en la definición de la fase del cEOF2, la relación entre la magnitud del cEOF2 y el ONI sigue siendo incierta y podría ser sólo evidente en eventos ENSO muy fuertes, que son escasos en el registro observacional histórico.
 
 Concluimos que el tren de ondas representado por el cEOF2 es tanto parte de la variabilidad interna de la atmósfera extratropical como forzado por las TSM tropicales.
@@ -1207,7 +1103,7 @@ En la Figura \ref{fig:pp-temp-2} se muestran mapas de regresión de las anomalí
 
 }
 
-\caption{Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el trimestre SON del periodo 1979--2020. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.}\label{fig:pp-temp-2}
+\caption{Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2. Para el trimestre SON del periodo 1 979--2 020. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.}\label{fig:pp-temp-2}
 \end{figure}
 
 Las anomalías de temperatura asociadas a la fase de 90º del cEOF2 (Fig.~\ref{fig:pp-temp-2}.b1) muestran valores positivos en el Pacífico tropical, coherentes con las anomalías de TSM asociadas a esta misma fase (Fig.~\ref{fig:sst-psi-2}.b1).
@@ -1286,11 +1182,11 @@ Luego se evaluó su estructura vertical y su coherencia, así como su variabilid
 A continuación se estudiaron los patrones espaciales asociados a la variabilidad exclusiva de cada índice centrándose en 50 hPa como nivel estratosférico y 700 hPa como nivel troposférico.
 Por último, se investigaron las relaciones del SAM a 700 hPa con las anomalías de temperatura y precipitación.
 
-\hypertarget{muxe9todos-3}{%
-\section{Métodos}\label{muxe9todos-3}}
+\hypertarget{muxe9todos-2}{%
+\section{Métodos}\label{muxe9todos-2}}
 
-\hypertarget{datos-3}{%
-\subsection{Datos}\label{datos-3}}
+\hypertarget{datos-2}{%
+\subsection{Datos}\label{datos-2}}
 
 Utilizamos las mismas fuentes de datos que en capítulos anteriores.
 En este capítulo usamos datos de altura geopotencial, temperatura a 2 metros y precipitación.
@@ -1349,7 +1245,7 @@ Para cuantificar la coherencia entre las series temporales correspondientes a di
 
 }
 
-\caption{Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período 1979--2020. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y negativos en azul.}\label{fig:method}
+\caption{Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período 1 979--2 020. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y negativos en azul.}\label{fig:method}
 \end{figure}
 
 \hypertarget{limitaciones}{%
@@ -1373,7 +1269,7 @@ A su vez, también es similar la intensidad de los coeficientes de correlación,
 
 }
 
-\caption{Regresión segmentada de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada signo para el período 1979--2020. La correlación espacial al cuadrado entre cada campo en cada estación se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0.01 ajustado por FDR (no hay áreas).}\label{fig:sign-regression-50}
+\caption{Regresión segmentada de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada signo para el período 1 979--2 020. La correlación espacial al cuadrado entre cada campo en cada estación se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor de la diferencia entre el signo positivo y el negativo es menor que 0,01 ajustado por FDR (no hay áreas).}\label{fig:sign-regression-50}
 \end{figure}
 
 
@@ -1411,7 +1307,7 @@ Esto indica que hay que tener cuidado en la interpretación del SAM asimétrico 
 
 }
 
-\caption{Regresión múltiple de las anomalías zonales de altura geopotencial para cada estación. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON.}\label{fig:season-regression}
+\caption{Regresión múltiple de las anomalías zonales de altura geopotencial para cada estación. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON.}\label{fig:season-regression}
 \end{figure}
 
 El método también asume que el patrón zonalmente asimétrico del SAM permanece estacionario a lo largo del periodo considerado.
@@ -1462,7 +1358,7 @@ La variabilidad mes a mes es evidente para ambos índices, con variaciones ruido
 
 }
 
-\caption{Espectro de cada serie temporal suavizada. El sombreado indica el intervalo de confianza del 95\% del espectro nulo calculado usando bootstrap tomando 5000 simulaciones de un modelo autoregresivo ajustado a los datos. La línea gris indica la amplitud promedio teórica del modelo autoregresivo. Para el período 1979--2020.}\label{fig:spectrum}
+\caption{Espectro de cada serie temporal suavizada. El sombreado indica el intervalo de confianza del 95\% del espectro nulo calculado usando bootstrap tomando 5000 simulaciones de un modelo autoregresivo ajustado a los datos. La línea gris indica la amplitud promedio teórica del modelo autoregresivo. Para el período 1 979--2 020.}\label{fig:spectrum}
 \end{figure}
 
 Los espectros de estas series temporales se muestran en la Figura \ref{fig:spectrum}.
@@ -1475,9 +1371,9 @@ En la troposfera, el pico de variabilidad más significativo se encuentra en A-S
 Las series temporales A-SAM y S-SAM parecen estar correlacionadas.
 Además, observando los extremos en la estratosfera, la serie S-SAM parece ir por detrás de la serie A-SAM (véanse, por ejemplo, los eventos positivos de finales de 1987).
 La Figura \ref{fig:cor-lev} muestra la correlación entre A-SAM y S-SAM en cada nivel para los retrasos cero y -1.
-Los valores de las correlaciones instantáneas entre A-SAM y S-SAM son relativamente constantes en toda la troposfera, fluctuando entre 0.38 y 0.44.
+Los valores de las correlaciones instantáneas entre A-SAM y S-SAM son relativamente constantes en toda la troposfera, fluctuando entre 0,38 y 0,44.
 Las correlaciones con desfase de un mes son igualmente constantes pero muy reducidas.
-En la estratosfera, las correlaciones instantáneas caen a un mínimo de 0.28 en 20 hPa y luego aumentan nuevamente monotónicamente con la altura hasta el nivel más alto del reanálisis (aunque los resultados cerca de la parte superior de los modelos deben interpretarse con cuidado).
+En la estratosfera, las correlaciones instantáneas caen a un mínimo de 0,28 en 20 hPa y luego aumentan nuevamente monotónicamente con la altura hasta el nivel más alto del reanálisis (aunque los resultados cerca de la parte superior de los modelos deben interpretarse con cuidado).
 Al mismo tiempo, las correlaciones con un mes de defasaje aumentan con la altura.
 Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SAM.
 
@@ -1489,7 +1385,7 @@ Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SA
 
 }
 
-\caption{Correlación instantánea y con un defasaje de 1 mes entre S-SAM y A-SAM para el período 1979--2020.}\label{fig:cor-lev}
+\caption{Correlación instantánea y con un defasaje de 1 mes entre S-SAM y A-SAM para el período 1 979--2 020.}\label{fig:cor-lev}
 \end{figure}
 
 
@@ -1500,7 +1396,7 @@ Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SA
 
 }
 
-\caption{Correlación cruzada entre niveles para el índice SAM (a), A-SAM (b) y S-SAM (c) para el período 1979--2020.}\label{fig:cross-correlation}
+\caption{Correlación cruzada entre niveles para el índice SAM (a), A-SAM (b) y S-SAM (c) para el período 1 979--2 020.}\label{fig:cross-correlation}
 \end{figure}
 
 La Figura \ref{fig:cross-correlation} muestra la correlación cruzada (lag cero) entre niveles para los índices SAM, A-SAM y S-SAM.
@@ -1519,10 +1415,10 @@ El S-SAM estratosférico tiene una conexión con el S-SAM troposférico algo má
 
 }
 
-\caption{Tendencias lineales (en desvio estandard por década) del SAM (columna a), A-SAM (columna b) y S-SAM (columna c) para cada nivel usando datos del todo el año (fila 1) y promedios estacionales (filas 2 a 5) para el período 1979--2020. El sombreado indica el intervalo de confianza de 95\%.}\label{fig:trends}
+\caption{Tendencias lineales (en desvio estandard por década) del SAM (columna a), A-SAM (columna b) y S-SAM (columna c) para cada nivel usando datos del todo el año (fila 1) y promedios estacionales (filas 2 a 5) para el período 1 979--2 020. El sombreado indica el intervalo de confianza de 95\%.}\label{fig:trends}
 \end{figure}
 
-Evaluamos las tendencias lineales para cada uno de los índices para el periodo 1979--2020 en cada nivel para el año completo y separado por trimestres (Fig. \ref{fig:trends}).
+Evaluamos las tendencias lineales para cada uno de los índices para el periodo 1 979--2 020 en cada nivel para el año completo y separado por trimestres (Fig. \ref{fig:trends}).
 El índice SAM presenta una tendencia positiva estadísticamente significativa (Fig. \ref{fig:trends}a.1) en todos los niveles entre 1000 hPa y aproximadamente 50 hPa, con un máximo en 100 hPa.
 Las tendencias estacionales (Fig. \ref{fig:trends} columna a) indican que las tendencias son significativas sólo en verano y marginalmente en otoño.
 Esto es consistente con los resultados de estudios previos, los cuales documentaron tendencias positivas en verano, menores en otoño y ninguna tendencia en las demás estaciones (por ejemplo, Fogt y Marshall (2020) y sus referencias) utilizando índices del SAM basados en la circulación en o cerca de superficie.
@@ -1542,11 +1438,11 @@ Sin embargo, un S-SAM muy negativo con tendencia a un S-SAM menos negativo se tr
 
 }
 
-\caption{Tendencias lineales (en porcentaje por década) de la varianza explicada por el A-SAM y el S-SAM en cada nivel para cada trimestre en el período 1979--2020. El sombreado indica el intervalo de confianza del 95\%.}\label{fig:r-squared-trend}
+\caption{Tendencias lineales (en porcentaje por década) de la varianza explicada por el A-SAM y el S-SAM en cada nivel para cada trimestre en el período 1 979--2 020. El sombreado indica el intervalo de confianza del 95\%.}\label{fig:r-squared-trend}
 \end{figure}
 
 Para estudiar la cuestión de si el SAM se está volviendo más o menos asimétrica, mostramos las tendencias de la varianza explicada de cada índice para cada trimestre en la Figura \ref{fig:r-squared-trend}.
-En la troposfera, la única tendencia significativa es la de DJF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2\% por década, lo que sugiere que el DJF SAM se ha vuelto más asimétrico en el período de 1979 a 2020 Fogt, Jones y Renwick (2012) observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (1979--2020) nos impide detectar ese cambio.
+En la troposfera, la única tendencia significativa es la de DJF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2\% por década, lo que sugiere que el DJF SAM se ha vuelto más asimétrico en el período de 1 979 a 2 020 Fogt, Jones y Renwick (2012) observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (1 979--2 020) nos impide detectar ese cambio.
 Sin embargo, debido a la naturaleza atípica de la componente asimétrico del SAM durante la DJF (Sección \ref{definition-of-indices}), esto debe tomarse sólo como una evidencia preliminar.
 La otra tendencia significativa se da en la estratosfera durante SON, donde hay una tendencia positiva en la varianza explicada por la S-SAM de aproximadamente un 4\% por década.
 Este cambio podría ser el resultado del forzamiento provocado por el agotamiento del ozono.
@@ -1562,7 +1458,7 @@ Este cambio podría ser el resultado del forzamiento provocado por el agotamient
 
 }
 
-\caption{Regresión de altura geopotencial (metros) en 50 hPa (fila a) y 700 hPa (fila b) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1979--2020. Los puntos en panel b.2 indican la posición de los puntos de referencia usados por Raphael (2004) para calcular su índice de la onda zonal 3.}\label{fig:2d-regr}
+\caption{Regresión de altura geopotencial (metros) en 50 hPa (fila a) y 700 hPa (fila b) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1 979--2 020. Los puntos en panel b.2 indican la posición de los puntos de referencia usados por Raphael (2004) para calcular su índice de la onda zonal 3.}\label{fig:2d-regr}
 \end{figure}
 
 A continuación calculamos la regresión espacial de las anomalías de altura geopotencial sobre los índices SAM, A-SAM y S-SAM en los niveles de 50 hPa y 700 hPa (Fig. \ref{fig:2d-regr}).
@@ -1607,7 +1503,7 @@ Por otra parte, el S-SAM se explica casi en su totalidad por la media zonal en a
 
 }
 
-\caption{Regresión de las anomalías mensuales de altura geopotencial promediada entre 65ºS y 45ºS (metros) y el índice A-SAM de 50 hPa (a) y 700 hPa (b) (niveles indicados en línea punteada) para el período 1979--2020.}\label{fig:vertical-regression}
+\caption{Regresión de las anomalías mensuales de altura geopotencial promediada entre 65ºS y 45ºS (metros) y el índice A-SAM de 50 hPa (a) y 700 hPa (b) (niveles indicados en línea punteada) para el período 1 979--2 020.}\label{fig:vertical-regression}
 \end{figure}
 
 Para analizar la estructura vertical de las anomalías de altura geopotencial asociadas al índice A-SAM, mostramos una sección transversal vertical de regresiones de anomalías de altura geopotencial promediadas entre 65ºS y 40ºS con el índice A-SAM de 50 hPa (Fig. \ref{fig:vertical-regression}a) y con el índice A-SAM de 700 hPa (Fig. \ref{fig:vertical-regression}b).
@@ -1680,7 +1576,7 @@ Esto último nos permite concluir que estos resultados no dependen del índice E
 
 }
 
-\caption{Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período 1979--2020. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR. La escala de colores se corta en \(\pm0.6 \mathrm{K}\) para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.}\label{fig:regr-air-season}
+\caption{Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período 1 979--2 020. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR. La escala de colores se corta en \(\pm0.6 \mathrm{K}\) para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.}\label{fig:regr-air-season}
 \end{figure}
 
 Para evaluar las diferencias en los impactos asociados a los índices SAM, A-SAM y S-SAM, realizamos una regresión de la temperatura del aire y la precipitación a 2 metros sobre cada uno de los tres índices del SAM de 700 hPa.
@@ -1715,7 +1611,7 @@ Dado que el índice S-SAM está negativamente correlacionado con la temperatura 
 
 }
 
-\caption{Regresión de anomalías de precipitación (mm por día) con el SAM (a), A-SAM (b) y S-SAM (c) para el período 1979--2020. En gris, las zonas con valores faltantes. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR. La escala de colores se corta en \(\pm0.25 \mathrm{K}\) para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.}\label{fig:global-pp}
+\caption{Regresión de anomalías de precipitación (mm por día) con el SAM (a), A-SAM (b) y S-SAM (c) para el período 1 979--2 020. En gris, las zonas con valores faltantes. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR. La escala de colores se corta en \(\pm0.25 \mathrm{K}\) para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.}\label{fig:global-pp}
 \end{figure}
 
 La Figura \ref{fig:global-pp} muestra la regresión de los índices SAM con la precipitación para el hemisferio sur.
@@ -1735,7 +1631,7 @@ No se muestra Sudáfrica porque allí no se detectó ninguna señal significativ
 
 }
 
-\caption{Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1979--2020. Nueva Zelanda e islas aledañas. Áreas con puntos marcan regiones donde el p-valor es menor que 0.01 ajustado por FDR.}\label{fig:pp-regr-oceania}
+\caption{Regresión de anomalías de precipitación (mm por día, sombrado) y anomalías de altura geopotencial (líneas finas, valores positivos en líneas llenas y negativos en líneas punteadas) para todo el año (fila a) y medias estacionales (filas b a e) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período 1 979--2 020. Nueva Zelanda e islas aledañas. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.}\label{fig:pp-regr-oceania}
 \end{figure}
 
 En Australia, la regresión anual muestra que el índice SAM está asociado con anomalías positivas de precipitación en la región sudeste (Fig. \ref{fig:pp-regr-oceania}a.1), en acuerdo con Gillett, Kell y Jones (2006).
@@ -1778,8 +1674,8 @@ Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo de
 Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ (Rosso et~al. 2018).
 Hay una pequeña área de anomalías positivas significativas de precipitación con el SAM cerca del centro de Argentina, también observado en el análisis basado en estaciones de Gillett, Kell y Jones (2006), que se explica por el A-SAM.
 
-\hypertarget{relaciuxf3n-con-el-ceof}{%
-\section{Relación con el cEOF}\label{relaciuxf3n-con-el-ceof}}
+\hypertarget{sam-ceof}{%
+\section{Relación con el cEOF}\label{sam-ceof}}
 
 
 
@@ -1789,7 +1685,7 @@ Hay una pequeña área de anomalías positivas significativas de precipitación 
 
 }
 
-\caption{Coeficiente de determinación (\(r^2\)) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979--2020. Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.}\label{fig:sam-eof-vertical}
+\caption{Coeficiente de determinación (\(r^2\)) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1 979--2 020. Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.}\label{fig:sam-eof-vertical}
 \end{figure}
 
 Calculamos el coeficiente de determinación entre las series temporales de los cEOFs y los tres índices SAM (SAM, A-SAM y S-SAM) definidos en cada nivel vertical (Fig.~\ref{fig:sam-eof-vertical}).
@@ -1821,26 +1717,26 @@ A su vez, la relación entre el cEOF2 y el SAM se explica por que la fase de 90�
 Esto sugiere una partición alternativa de la variabilidad de la circulación del hemisferio sur.
 En vez de separar al SAM por un lado y al PSA1 y al PSA2 por el otro, se puede separar la variabilidad entre el S-SAM, representando la variabilidad zonalmente simétrica, y el cEOF2, representando variabilidad asimétrica y dónde el A-SAM sería entendido como una fase del cEOF2.
 
-\hypertarget{anuxe1lisis-de-los-modos-de-variabilidad-de-la-circulaciuxf3n-zonalmente-asimuxe9trica-en-los-modelos-de-cmip6}{%
-\chapter{Análisis de los modos de variabilidad de la circulación zonalmente asimétrica en los modelos de CMIP6}\label{anuxe1lisis-de-los-modos-de-variabilidad-de-la-circulaciuxf3n-zonalmente-asimuxe9trica-en-los-modelos-de-cmip6}}
+\hypertarget{anuxe1lisis-de-los-modos-de-variabilidad-de-la-circulaciuxf3n-zonalmente-asimuxe9trica-en-los-modelos-del-cmip6}{%
+\chapter{Análisis de los modos de variabilidad de la circulación zonalmente asimétrica en los modelos del CMIP6}\label{anuxe1lisis-de-los-modos-de-variabilidad-de-la-circulaciuxf3n-zonalmente-asimuxe9trica-en-los-modelos-del-cmip6}}
 
 El análisis previo estudió la circulación zonalmente asimétrica en los datos de reanálisis.
 Sin embargo, el estudio de tendencias y variabilidad de estos modelos se ve limitada por la corta longitud de los datos observacionales y la posible inhomogeneidad del reanálisis al cambiar la densidad y tipo de observaciones; un problema que afecta particularmente al hemisferio sur.
 Además, es imposible abordar la atribución de las tendencias observadas utilizando únicamente observaciones.
 
 Estas limitaciones motivan la inclusión de datos de modelos climáticos.
-En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparacion de Modelos Acoplados (CMIP6) y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) de capturar estos modos y sus principales características.
+En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparación de Modelos Acoplados (CMIP6) y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) de capturar estos modos y sus principales características.
 Al contar con corridas mucho más largas y múltiples miembros por modelo, es posible evaluar las tendencias a largo plazo con mayor robustez.
 Utilizando los modelos incluidos en DAMPI, además podemos avanzar en la atribución de las tendencias observadas.
 
-\hypertarget{muxe9todos-4}{%
-\section{Métodos}\label{muxe9todos-4}}
+\hypertarget{muxe9todos-3}{%
+\section{Métodos}\label{muxe9todos-3}}
 
-\hypertarget{datos-4}{%
-\subsection{Datos}\label{datos-4}}
+\hypertarget{datos-3}{%
+\subsection{Datos}\label{datos-3}}
 
 El CMIP6 es un proyecto que organiza numerosos centros de modelado climático para establecer protocolos comunes para realizar experimentos de modelado.
-DAMIP es una componente de CMIP6 que cuenta con experimentos particularmente diseñados para realizar estudios de atribución.
+DAMIP es una componente del CMIP6 que cuenta con experimentos particularmente diseñados para realizar estudios de atribución.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.6304}}
@@ -1910,7 +1806,7 @@ GFDL-ESM4 (Horowitz et~al. 2018) & 0 & 1 & 3 & 0 & 0 \\
 \end{longtable}
 
 Los modelos usados se listan en la Tabla \ref{tab:modelos} se listan todos los modelos y la cantidad de miembros de cada uno.
-Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas (``historical'') y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero (``hist-GHG''), variabilidad natural sin forzantes antropogénicos (``hist-nat''), forznates de aerosoles antropogénicos (``hist-aer'') o sólo el efecto de el ozono estratosférico (``hist-stratO3'').
+Usamos todos los modelos del CMIP6 con 5 o más miembros en las corridas históricas (``historical'') y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero (``hist-GHG''), variabilidad natural sin forzantes antropogénicos (``hist-nat''), forznates de aerosoles antropogénicos (``hist-aer'') o sólo el efecto de el ozono estratosférico (``hist-stratO3'').
 
 Para calcular los cEOFs y evaluar su desempeño, concatenamos todos los miembros para computar un único set de cEOFs para cada modelo y experimento.
 Este método trata \(k\) simulaciones de \(n\) años como una única simulación de \(k\times n\) años.
@@ -1941,9 +1837,12 @@ Para esto estudiamos los modelos de las corridas históricas.
 \caption{\(r^2\) de los patrones espaciales de cada modelo con ERA5 para cada cEOF.}\label{fig:comparacion-r2}
 \end{figure}
 
-La Figura~\ref{fig:comparacion-r2} muestra el \(r^2\) de los modelos para los dos cEOFs.
-Casi todos los modelos tienen una \(r^2\) mayor a 0,75, indicando que los modelos logran capturar la estructura espacial de los cEOFs correctamente.
-Todos los modelos capturan ligeramente mejor el cEOF1 que el cEOF2.
+La Figura \ref{fig:comparacion-r2} muestra el \(r^2\) de los modelos para los dos cEOFs.
+Los modelos individuales tienen un \(r^2\) entre 57\% y 92\%.
+En todos los casos, la correlación con el cEOF1 observado es mayor que con el cEOF2 observado.
+Aunque se pueden identificar modelos con menor correlación con los modos observados, como CNRM-ESM2-1 y MIROC-ES2L, aún éstos tienen similitudes mayores al 50\%.
+El patrón medio multimodelo de cada cEOF se muestra en la Figura \ref{fig:mmm}, junto con el \(r^2\) de estos patrones con los observados.
+Los \(r^2\) de 94\% y 89\% para el cEOF1 y el cEOF2 respectivamente son mayores que cualquier \(r^2\) de modelos individuales.
 
 \begin{figure}
 
@@ -1951,76 +1850,35 @@ Todos los modelos capturan ligeramente mejor el cEOF1 que el cEOF2.
 
 }
 
-\caption{Media multimodelo (sombreado) de los campos espaciales de cada cEOF, fase y nivel. Los contornos marcan los patrones de ERA5. El \(r^2\) entre ERA5 y la media multimodelo está entre paréntesis.}\label{fig:mmm}
+\caption{Media multimodelo (sombreado, valores positivos en rojo, negativos en azul) de los campos espaciales de cada cEOF, fase y nivel. Los contornos marcan los patrones de ERA5 (valores positivos en líneas llenas, valores negativos en línea punteada). El \(r^2\) entre ERA5 y la media multimodelo está entre paréntesis.
+Los modelos del CMIP6 capturan satisfactoriamente los patrones espaciales de los cEOFs, tanto en la media multimodelo como los modelos individuales.
+Lo siguiente es explorar si los modelos logran capturar características de segundo órden, como su variabilidad y relación con otras partes del sistema climático.}\label{fig:mmm}
 \end{figure}
 
 
 
-La Figura \ref{fig:mmm} muestra los patrones promedio multimodelo para cada cEOF y cada fase (es decir, el promedio de los patrones espaciales de cada modelo).
-El patrón medio multimodelo es muy similar similar al patrón de ERA5, con niveles de \(r^2\) del orden del 90\%, lo cual lo demuestra que la media multimodelo es más similar a las observaciones que los modelos individuales.
+
 
 \hypertarget{relaciuxf3n-con-la-variabilidad-tropical}{%
 \subsection{Relación con la variabilidad tropical}\label{relaciuxf3n-con-la-variabilidad-tropical}}
 
-\begin{figure}
-
-{\centering \includegraphics{figures/50-cmip6/fft-ceof2-1} 
-
-}
-
-\caption{Espectros de Fourier para las fases del cEOF2 y del ONI de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el \(r^2\) entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.}\label{fig:fft-ceof2}
-\end{figure}
-
-
-
-
-
-La Figura \ref{fig:fft-ceof2} muestra el periodograma para el cEOF2 con una línea por miembro y una línea gruesa marcando el periodograma promedio, así como el peridiograma promedio del ONI de cada modelo.
-La mayoría de los modelos tiene una periodicidad del ONI de \textasciitilde3 años similar a la observada en ERA5, aunque la intensidad y período máximo varía significativamente.
-
-Todos los los modelos que tienen una periodicidad clara en \textasciitilde3 años en la fase de 90º del cEOF2 también tienen una periodicidad del ENSO muy clara y además tienden a tener una correlación entre la fase de 90º del cEOF2 y el ENSO más alta.
-Por otro lado, ninguno de los modelos con muy baja correlación con el ENSO pero periodicidad del ENSO clara presenta periocididad clara en el cEOF2.
-
-Sin embargo existen modelos con periodicidad del ENSO clara y correlación relativamente alta que no tienen periodicidad del cEOF2 clara.
-MRI-ENSM2-0, UKESM1-0-LL, MPI-ESM1-2-LR son algunos ejemplos.
-
-Estas observaciones sugieren que el ENSO es la fuente de periodicidad del cEOF2 en los modelos de CMIP6 pero que su capacidad para representar la periodicidad observada no sólo depende de la periodicidad del ENSO y del grado de correlación entre los índices.
-
-De todas formas, todos los modelos tienen una correlación entre el ENSO y la fase de 90º del cEOF2 menor a la observada y en muchos de ellos la correlación es prácticamente nula.
-Esto indica que si bien los modelos de CMIP6 logran capturar los cEOF, su habilidad para simular la conexión entre éste y el forzante tropical es limitada.
+Como se mostró en la Sección \ref{fuentes-ceof}, el cEOF2 está relacionado con la variabilidad tropical.
+Una primera aproximación para explorar esta relación en los modelos del CMIP6 es calcular la correlación el cEOF2 y el ONI de cada modelo (Figura \ref{fig:cor-enso-plot}).
+Casi todos los modelos tienen una correlación alta entre el ONI y la fase de 90º del cEOF2 y casi nula correlación entre el ONI y la fase de 0º del cEOF2, lo cual es consistente con las observaciones.
+Sin embargo, existe una gran variabilidad en la capacidad de los modelos de capturar esta relación.
+Algunos, como MIROC6 y CESM2 tienen una correlación cercana a la observada, pero en la mayoría es mucho menor.
+IPSL-CM6A-LR y INM-CM5-0 virtualmente no muestran relación entre el cEOF2 y el ONI.
 
 
 
 \begin{figure}
 
-{\centering \includegraphics{figures/50-cmip6/sst-mmm-1} 
+{\centering \includegraphics{figures/50-cmip6/cor-enso-plot-1} 
 
 }
 
-\caption{Media multimodelo de regresión de TSM con los cEOFs. El área sombreada muestra las zonas donde más de la mitad de los modelos tienen p-valor menor a 0.01. Los contornos negros muestran la regresión de TSM observada en ERA5.}\label{fig:sst-mmm}
+\caption{\(r^2\) entre el índice ONI y el cEOF2 para cada modelo del CMIP6 y ERA5.}\label{fig:cor-enso-plot}
 \end{figure}
-
-Para estudiar más en detalle esa relación, evaluamos la relación entre los cEOF y las anomalías de TSM.
-La Figura \ref{fig:sst-mmm} muestra la media multimodelo de la regresión entre TSM y las dos fases de cada cEOF, marcando las zonas donde más de la mitad de los modelos tienen p-valores menores a 0.01.
-Los modelos de CMIP6 reproducen los patrones de regresión de la fase de 90º del cEOF2 relativamente bien.
-Se observa un exceso de señal en el Pacífico ecuatorial en la fase de 0º del cEOF2 que probablemente se deba a que estos modos no están alineados para minimizar esta relación.
-Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valores excesivamente altos no observados en ERA5.
-
-
-
-\begin{figure}
-
-{\centering \includegraphics{figures/50-cmip6/cor-sst-regr-1} 
-
-}
-
-\caption{R\^{}2 entre los patrones de regresión de TSM cada modelo y el patrón de regresión de TSM en ERA5.}\label{fig:cor-sst-regr}
-\end{figure}
-
-La Figura \ref{fig:cor-sst-regr} muestra el \(r^2\) los campos de regresión de cada modelo y el campo de regresión de ERA5.
-La figura confirma que lo observado para la media multimodelo se cumple para casi todos los modelos individuales.
-La mayoría de los modelos tiene un campo de regresión similar a ERA5 para la fase 90º del cEOF2, y una similitud moderada para la fase de 0º.
-Para ambas fases del cEOF1, las similitudes son muy bajas.
 
 \begin{figure}
 
@@ -2044,13 +1902,70 @@ Para ambas fases del cEOF1, las similitudes son muy bajas.
 
 
 
-En la Sección \ref{fuentes-ceof} argumentamos que la relación entre el ENSO y el cEOF2 se explica por una preferencia de fase cuando el forzante tropical está activo.
-Las Figuras \ref{fig:enso-phase-cmip} muestra la relación entre el ENSO y la fase del cEOF2 para los modelos de CMIP.
-Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal similar a la observada en ERA5 con fases cercanas a +90º están asociadas a ONI positivo y viceversa.
-La Figura \ref{fig:arg-enso-density} muestra la distribución de fases del cEOF2 para primaveras con ONI menor a -0.5, mayor a 0.5 y valores intermedios.
-Cuando el ONI está más activo, el cEOF2 tiene una preferencia de fase de \(\pm90º\), mientras que cuando se encuentra más neutral, la distribución de la fase del cEOF2 es más uniforme.
-Esta relación sólo existe en los modelos con mayor relación entre el cEOF2 y el ENSO.
-En los modelos con baja correlación, como IPSL-CM6A-LR o INM-CM5-0 la fase del cEOFs es aproximadamente uniforme independientemente del valor del ONI.
+La relación entre el cEOF2 y el ENSO se explica por una preferencia de fase cuando el forzante tropical está activo.
+Para evaluar esto en los modelos del CMIP6, las Figuras \ref{fig:enso-phase-cmip} muestra la relación entre el ENSO y la fase del cEOF2 para los modelos del CMIP6 y la Figura \ref{fig:arg-enso-density} la distribución de fases del cEOF2 para primaveras con ONI menor a -0.5, mayor a 0.5 y valores intermedios.
+Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal fuerte, mientras que en los modelos con baja correlación la relación es más chata.
+La distribución de las fases según categorías de índice ONI (Fig. \ref{fig:arg-enso-density}) se ven bien separadas en las observaciones y en los modelos con alta correlación entre el cEOF2 y el ONI.
+En estos modelos (p.e. MIROC6, CESM2), cuando el ENSO está activo (definido como ONI \textgreater{} 0.5 o ONI \textless{} -0.5), la fase del cEOF2 se concentra cerca de \(\pm\) 90º (dependiendo del signo del ONI) mientras que cuando el ENSO no está tan activo (definido como ONI entre -0.5 y 0.5), la distribución de la fase es más uniforme.
+En los modelos con baja correlación entre cEOF2 y ONI (p.e. IPSL-CM6A-LR, INM-CM5-0) la distribución de fase es uniforme independientemente de la actividad del ENSO.
+
+\begin{figure}
+
+{\centering \includegraphics{figures/50-cmip6/fft-ceof2-1} 
+
+}
+
+\caption{Espectros de Fourier para las fases del cEOF2 y del ONI de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el \(r^2\) entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.}\label{fig:fft-ceof2}
+\end{figure}
+
+
+
+La relación entre el cEOF2 y el ENSO también se evidencia en la similitud del periodograma de las series.
+La Figura \ref{fig:fft-ceof2} muestra el periodograma para el cEOF2 con una línea por miembro y una línea gruesa marcando el periodograma promedio, así como el peridiograma promedio del ONI de cada modelo.
+La mayoría de los modelos tiene una periodicidad del ONI de \textasciitilde3 años similar a la observada en ERA5, aunque la intensidad y período máximo varía significativamente.
+
+Todos los los modelos que tienen una periodicidad clara en \textasciitilde3 años en la fase de 90º del cEOF2 también tienen una periodicidad del ENSO muy clara y además tienden a tener una correlación entre la fase de 90º del cEOF2 y el ENSO más alta.
+Por otro lado, ninguno de los modelos con muy baja correlación con el ENSO pero periodicidad del ENSO clara presenta periodicidad clara en el cEOF2.
+
+Sin embargo existen modelos con periodicidad del ENSO clara y correlación relativamente alta que no tienen periodicidad del cEOF2 clara.
+MRI-ENSM2-0, UKESM1-0-LL, MPI-ESM1-2-LR son algunos ejemplos.
+
+Estas observaciones sugieren que el ENSO es la fuente de periodicidad del cEOF2 en los modelos del CMIP6 pero que su capacidad para representar la periodicidad observada no sólo depende de la periodicidad del ENSO y del grado de correlación entre los índices.
+
+
+
+\begin{figure}
+
+{\centering \includegraphics{figures/50-cmip6/sst-mmm-1} 
+
+}
+
+\caption{Media multimodelo de regresión de TSM con los cEOFs. El área sombreada muestra las zonas donde más de la mitad de los modelos tienen p-valor menor a 0.01. Los contornos negros muestran la regresión de TSM observada en ERA5.}\label{fig:sst-mmm}
+\end{figure}
+
+Para estudiar más en detalle esa relación, evaluamos la relación entre los cEOF y las anomalías de TSM.
+La Figura \ref{fig:sst-mmm} muestra la media multimodelo de la regresión entre TSM y las dos fases de cada cEOF, marcando las zonas donde más de la mitad de los modelos tienen p-valores menores a 0.01.
+La señal Los modelos del CMIP6 reproducen los patrones de regresión de la fase de 90º del cEOF2 relativamente bien.
+Se observa un exceso de señal en el Pacífico ecuatorial en la fase de 0º del cEOF2 que probablemente se deba a que estos modos no están alineados para minimizar esta relación.
+Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valores excesivamente altos no observados en ERA5.
+
+
+
+\begin{figure}
+
+{\centering \includegraphics{figures/50-cmip6/cor-sst-regr-1} 
+
+}
+
+\caption{R\^{}2 entre los patrones de regresión de TSM cada modelo y el patrón de regresión de TSM en ERA5.}\label{fig:cor-sst-regr}
+\end{figure}
+
+Para una visión global y quantitativa de esta comparación, la Figura \ref{fig:cor-sst-regr} muestra el \(r^2\) los campos de regresión de cada modelo y el campo de regresión de ERA5.
+En la mayoría de los modelos el patrón de regresión de la fase de 90º del cEOF2 es similar al observado, excepto por INM-CM5-0.
+El patrón de regresión de la fase de 0º, en cambio, tiene baja similitud con el observado en casi todos los modelos.
+Posiblemente esto se deba a el exceso de señal presente en la región del ENSO.
+Para ambas fases del cEOF1, las similitudes con el patrón de regresión observado son muy bajas.
+Esto es esperable dado la falta de señal en las observaciones y el exceso de señal en los modelos.
 
 \hypertarget{relaciuxf3n-con-el-sam}{%
 \subsection{Relación con el SAM}\label{relaciuxf3n-con-el-sam}}
@@ -2066,16 +1981,22 @@ En los modelos con baja correlación, como IPSL-CM6A-LR o INM-CM5-0 la fase del 
 
 
 
-En la Figura \ref{fig:cor-sam-cmip6} se muestra el \(r^2\) entre las componentes del SAM y las fases de los cEOFs.
+En la Sección \ref{sam-ceof} se mostró que existía una relación importante entre las distintas fase de los cEOFs y las distintas componentes del SAM.
+La Figura \ref{fig:cor-sam-cmip6} muestra el \(r^2\) entre las componentes del SAM y las fases de los cEOFs para los modelos del CMIP6.
 Las líneas translúcidas son los valores promedio de cada modelo y las áreas llenas representan el promedio multimodelo y su intervalo de confianza del 95\%; la línea gruesa es el valor de ERA5.
 
-Se observa que la relación entre el SAM y el cEOF2 en los modelos del CMIP6 es prácticamente nula en todos los niveles de la atmósfera, sugiriendo que éstos no capturan esta interacción entre el PSA2 y el SAM.
-Sin embargo, sí logran capturar su relación con el A-SAM en la tropósfera; y aunque esta relación tiene menor magnitud en promedio, se observa que ciertos modelos sí consiguen correlaciones comparables con las observadas.
+La relación entre el cEOF1 y el SAM en los modelos del CMIP6 es similar a la observada, aunque con diferencias en la magnitud.
+
+En cuanto al cEOF2, los modelos del CMIP6 capturan correctamente la falta de correlación entre fase de 0º del cEOF2 y el SAM y el S-SAM (paneles XX y XX), pero tienen un nivel de correlación más alto de lo esperado con el A-SAM en la tropósfera (panel XX).
+La fase de 90º, en cambio, no muestra la relación observada con el SAM en la tropósfera (panel XX).
+A pesar de esto, sí tiene una relación alta con el A-SAM (panel XX).
+Esto sugiere que los modelos CMIP6 no capturan correctamente la relación entre el PSA2 el SAM, pero esta relación sí aparece si se filtra sólo la variabilidad de la parte asimétrica del SAM.
 
 \hypertarget{tendencias}{%
 \section{Tendencias}\label{tendencias}}
 
-De la sección anterior surge que los modelos de CMIP6 logran capturar la estructura espacial de los cEOFs así como su variabilidad y relación con otras componentes del sistema climático.
+De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
+
 En esta sección, aprovechamos las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes.
 Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, proyectamos los campos espaciales del período moderno en los campos desde 1850 hasta 2014.
 
@@ -2092,8 +2013,7 @@ Para extender las series temporales para todo el período disponible en CMIP6 y 
 
 La Figura \ref{fig:series-largas} muestra las series temporales durante todo el período.
 Se observa que la fase de 0º del cEOF1 tiene una tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \ref{fig:extended-series}).
-También se observa una tendencia negativa para la fase de 90º del cEOF1.
-Ésta no es detectable en ERA5.
+También se observa una tendencia negativa para la fase de 90º del cEOF1 la cual no es detectable en ERA5.
 El cEOF2 no presenta tendencias.
 
 \begin{figure}
@@ -2131,12 +2051,12 @@ Sorpendentemente ambas series presentan una variabilidad a largo plazo virtualme
 \hypertarget{conclusiones-2}{%
 \section{Conclusiones}\label{conclusiones-2}}
 
-Los modelos de CMIP6 consiguen caracterizar la estructura espacial de los cEOFs satisfactoriamente, con una buena correlación entre los patrones espaciales, particularmente la media multimodelo.
+Los modelos del CMIP6 consiguen caracterizar la estructura espacial de los cEOFs satisfactoriamente, con una buena correlación entre los patrones espaciales, particularmente la media multimodelo.
 La habilidad de los modelos de capturar sus características de segundo orden, como la relación con el ENSO y el SAM no es tan buena ni homogénea entre modelos.
 Sólo algunos modelos, como MIROC6 y CESM2 consiguen capturar la influencia del ENSO en la fase del cEOF2 y la relación de la mayoría de los modelos con el SAM es menor a la observada.
 
 La tendencia positiva de la fase de 0º del cEOF1 es capturada por la media multimodelo y el análisis de las corridas de DAMIP indican que ésta es forzada principalmente por el forzarte del ozono estratosférico parcialmente compensado por el forzante de los gases de efecto invernadero.
-Los modelos de CMIP6 también presentan una tendencia negativa en la fase de 90º del cEOF1 no presente en las observaciones que también es ifluenciada por el forznate antropogénico.
+Los modelos del CMIP6 también presentan una tendencia negativa en la fase de 90º del cEOF1 no presente en las observaciones que también es ifluenciada por el forznate antropogénico.
 
 \hypertarget{conclusiones-3}{%
 \chapter{Conclusiones}\label{conclusiones-3}}

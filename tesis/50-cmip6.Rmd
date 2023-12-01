@@ -23,6 +23,9 @@ library(tidyfast)
 
 Sys.setenv(HDF5_USE_FILE_LOCKING = FALSE)
 
+alpha_from_n <- function(n, max_alpha = 0.99) {
+  1 - (1 - max_alpha)^(1/n)
+}
 ```
 
 ```{r scales}
@@ -43,14 +46,14 @@ scale_fill_experiments <- function(...) {
 ```
 
 
-# Análisis de los modos de variabilidad de la circulación zonalmente asimétrica en los modelos de CMIP6
+# Análisis de los modos de variabilidad de la circulación zonalmente asimétrica en los modelos del CMIP6
 
 El análisis previo estudió la circulación zonalmente asimétrica en los datos de reanálisis.
 Sin embargo, el estudio de tendencias y variabilidad de estos modelos se ve limitada por la corta longitud de los datos observacionales y la posible inhomogeneidad del reanálisis al cambiar la densidad y tipo de observaciones; un problema que afecta particularmente al hemisferio sur.
 Además, es imposible abordar la atribución de las tendencias observadas utilizando únicamente observaciones.
 
 Estas limitaciones motivan la inclusión de datos de modelos climáticos.
-En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparacion de Modelos Acoplados (CMIP6) y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) de capturar estos modos y sus principales características.
+En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparación de Modelos Acoplados (CMIP6) y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) de capturar estos modos y sus principales características.
 Al contar con corridas mucho más largas y múltiples miembros por modelo, es posible evaluar las tendencias a largo plazo con mayor robustez.
 Utilizando los modelos incluidos en DAMPI, además podemos avanzar en la atribución de las tendencias observadas.
 
@@ -59,7 +62,7 @@ Utilizando los modelos incluidos en DAMPI, además podemos avanzar en la atribuc
 ### Datos
 
 El CMIP6 es un proyecto que organiza numerosos centros de modelado climático para establecer protocolos comunes para realizar experimentos de modelado.
-DAMIP es una componente de CMIP6 que cuenta con experimentos particularmente diseñados para realizar estudios de atribución.
+DAMIP es una componente del CMIP6 que cuenta con experimentos particularmente diseñados para realizar estudios de atribución.
 
 ```{r references}
 sims <- readRDS(data_path("derived", "sims.Rds")) %>% 
@@ -102,7 +105,7 @@ simulaciones %>%
 ```
 
 Los modelos usados se listan en la Tabla \@ref(tab:modelos) se listan todos los modelos y la cantidad de miembros de cada uno.
-Usamos todos los modelos de CMIP6 con 5 o más miembros en las corridas históricas ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat"), forznates de aerosoles antropogénicos ("hist-aer") o sólo el efecto de el ozono estratosférico ("hist-stratO3").
+Usamos todos los modelos del CMIP6 con 5 o más miembros en las corridas históricas ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat"), forznates de aerosoles antropogénicos ("hist-aer") o sólo el efecto de el ozono estratosférico ("hist-stratO3").
 
 Para calcular los cEOFs y evaluar su desempeño, concatenamos todos los miembros para computar un único set de cEOFs para cada modelo y experimento.
 Este método trata $k$ simulaciones de $n$ años como una única simulación de $k\times n$ años.
@@ -231,13 +234,17 @@ cors %>%
   geom_col(aes(fill = cEOF), 
            position = position_dodge2(reverse = TRUE, padding = 0)) +
   scale_fill_brewer(palette = "Set1") +
-  scale_x_continuous("R^2 espacial", limits = c(0, 1)) +
+  scale_x_continuous("R^2 espacial", limits = c(0, 1), labels = scales::percent_format()) +
   scale_y_discrete(NULL)
 ```
 
-La Figura \@ref(fig:comparacion-r2) muestra el $r^2$ de los modelos para los dos cEOFs.
-Casi todos los modelos tienen una $r^2$ mayor a 0,75, indicando que los modelos logran capturar la estructura espacial de los cEOFs correctamente.
-Todos los modelos capturan ligeramente mejor el cEOF1 que el cEOF2.
+La Figura \@ref(fig:comparacion-r2) muestra el $r^2$ de los modelos para los dos cEOFs.
+Los modelos individuales tienen un $r^2$ entre `r combine_words(scales::percent(range(cors[experiment == "historical"]$r2), decimal.mark = ","))`. 
+En todos los casos, la correlación con el cEOF1 observado es mayor que con el cEOF2 observado.
+Aunque se pueden identificar modelos con menor correlación con los modos observados, como `r cors[experiment == "historical"][, model := reorder(model, r2, fun = mean)][, levels(model)[1:2]] %>% combine_words()`, aún éstos tienen similitudes mayores al 50%. 
+El patrón medio multimodelo de cada cEOF se muestra en la Figura \@ref(fig:mmm), junto con el $r^2$ de estos patrones con los observados. 
+Los $r^2$ de 94% y 89% para el cEOF1 y el cEOF2 respectivamente son mayores que cualquier $r^2$ de modelos individuales. 
+
 
 ```{r mmm, fig.width=6, fig.height=4}
 interpolated <- ceofs[, eof[[1]]$right, by = .(experiment, model)] %>% 
@@ -264,7 +271,7 @@ cor_mmm <- interpolated %>%
   .[, experiment := factor(experiment, levels = experiments)]
 
 ceof_labs <- cor_mmm %>% 
-  .[, paste0(cEOF, "\n(", scales::percent(V1^2, 0.1), ")") %>% 
+  .[, paste0(cEOF, "\n(", scales::percent(V1^2, 1), ")") %>% 
       setNames(cEOF)
   ]
 sf::sf_use_s2(FALSE)
@@ -279,7 +286,6 @@ interpolated %>%
   geom_contour_fill(aes(z = V1), breaks = AnchorBreaks(exclude = 0)) +
   geom_contour2(aes(z = base, linetype = factor(-sign(..level..))),
                 data = sep_ReIm(base) %>% 
-                  # .[(cEOF == "cEOF1" & lev == 50) | (cEOF == "cEOF2" & lev == 200)] %>% 
                   periodic(lon = c(0, 360)),
                 breaks = AnchorBreaks(exclude = 0)) +
   scale_linetype(guide = "none") +
@@ -294,10 +300,11 @@ interpolated %>%
                                           part = lab_cplx)) 
 ```
 
-(ref:mmm-cap) Media multimodelo (sombreado) de los campos espaciales de cada cEOF, fase y nivel. Los contornos marcan los patrones de ERA5. El $r^2$ entre ERA5 y la media multimodelo está entre paréntesis.
+(ref:mmm-cap) Media multimodelo (sombreado, valores positivos en rojo, negativos en azul) de los campos espaciales de cada cEOF, fase y nivel. Los contornos marcan los patrones de ERA5 (valores positivos en líneas llenas, valores negativos en línea punteada). El $r^2$ entre ERA5 y la media multimodelo está entre paréntesis. 
+Los modelos del CMIP6 capturan satisfactoriamente los patrones espaciales de los cEOFs, tanto en la media multimodelo como los modelos individuales. 
+Lo siguiente es explorar si los modelos logran capturar características de segundo órden, como su variabilidad y relación con otras partes del sistema climático.
 
-La Figura \@ref(fig:mmm) muestra los patrones promedio multimodelo para cada cEOF y cada fase (es decir, el promedio de los patrones espaciales de cada modelo).
-El patrón medio multimodelo es muy similar similar al patrón de ERA5, con niveles de $r^2$ del orden del 90%, lo cual lo demuestra que la media multimodelo es más similar a las observaciones que los modelos individuales.
+
 
 ```{r ceof_largo_p}
 campos <- ceofs[, denormalise(eof[[1]], "right"), by = .(experiment, model)] %>% 
@@ -320,15 +327,6 @@ if (file.exists(ceof_largo_file)) {
 
 ### Relación con la variabilidad tropical
 
-```{r fft}
-fft <- ceofs %>% 
-  .[, eof[[1]]$left, by = .(experiment, model)] %>% 
-  .[, hgt := hgt/sd(Mod(hgt)), by = .(model, experiment, cEOF)] %>%
-  sep_ReIm() %>% 
-  copy() %>% 
-  .[order(time)] %>% 
-  .[, fftspectrum(hgt, c(3, 5), B = 0, probs = c(0, 0.95)), by = .(model, experiment, ensemble, cEOF, part)]
-```
 
 ```{r enso_cmip}
 compute_enso <- function(file) {
@@ -361,12 +359,12 @@ enso_fft <- enso_cmip %>%
   .[, fftspectrum(oni, c(3, 5), B = 0, probs = c(0, 0.95)), by = .(model, member, experiment)] 
 
 cors_enso_all <- ceofs[, eof[[1]]$left, by = .(experiment, model)] %>% 
-  .[cEOF == "cEOF2"] %>% 
+  .[cEOF == "cEOF2"] %>%
   .[experiment %in% c("historical", "reanalysis")] %>% 
   setnames("ensemble", "member") %>% 
   enso_cmip[., on = .NATURAL, allow.cartesian = TRUE] %>% 
   na.omit() %>% 
-  .[, correlate_complex(hgt, oni), by = .(model, experiment)]  
+  .[, c(correlate_complex(hgt, oni), list(n = .N)), by = .(model, experiment)]
 
 
 cors_enso <- cors_enso_all %>%
@@ -378,10 +376,119 @@ labs_cor_enso <- cors_enso %>%
   .[, setNames(label, model)]
 ```
 
-```{r alpha_from_n}
-alpha_from_n <- function(n, max_alpha = 0.99) {
-  1 - (1 - max_alpha)^(1/n)
-}
+
+Como se mostró en la Sección \@ref(fuentes-ceof), el cEOF2 está relacionado con la variabilidad tropical.
+Una primera aproximación para explorar esta relación en los modelos del CMIP6 es calcular la correlación el cEOF2 y el ONI de cada modelo (Figura \@ref(fig:cor-enso-plot)).
+Casi todos los modelos tienen una correlación alta entre el ONI y la fase de 90º del cEOF2 y casi nula correlación entre el ONI y la fase de 0º del cEOF2, lo cual es consistente con las observaciones. 
+Sin embargo, existe una gran variabilidad en la capacidad de los modelos de capturar esta relación. 
+Algunos, como MIROC6 y CESM2 tienen una correlación cercana a la observada, pero en la mayoría es mucho menor. 
+IPSL-CM6A-LR y INM-CM5-0 virtualmente no muestran relación entre el cEOF2 y el ONI. 
+
+(ref:cor-enso-plot-cap) $r^2$ entre el índice ONI y el cEOF2 para cada modelo del CMIP6 y ERA5.  
+
+```{r cor-enso-plot, fig.width=4, fig.height=6}
+cors_enso_all %>% 
+  .[angle == 0] %>% 
+  copy() %>% 
+  .[, model := reorder(model, ifelse(part == "Real", 0, correlation^2))] %>% 
+  ggplot(aes(correlation^2, model)) +
+  geom_col(aes(fill = part), position = "dodge2") +
+  scale_x_continuous(name = r2, labels = scales::percent_format()) +
+  scale_y_discrete(name = NULL) +
+  scale_fill_fase()
+
+```
+
+
+
+```{r enso-phase-cmip, fig.width=6, fig.height=5}
+ceofs[, eof[[1]]$left, by = .(model, experiment)] %>% 
+  .[cEOF == "cEOF2"] %>% 
+  # .[, hgt := Anomaly(hgt)] %>% 
+  .[, arg := Arg(hgt)] %>%
+  .[, mag := Mod(hgt)] %>%
+  .[enso_cmip, on = c("time", "model", "experiment", "ensemble" = "member")] %>% 
+  .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
+  .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
+  .[, ensembleN := uniqueN(ensemble), by = model] %>% 
+  na.omit() %>% 
+  ggplot(aes(arg, oni)) +
+  geom_hline(yintercept = c(-0.5, 0, 0.5), size = 0.2, color = "gray50") +
+  geom_vline(xintercept = 0, size = 0.2, color = "gray50") +
+  # annotate(shadowtext:::GeomShadowText,
+  #          label = c("- Real", "- Imaginario", "+ Real", "+ Imaginario", "- Real"),
+  #          color = "gray60", bg.colour = "white", bg.r = 0.2,
+  #          size = 3,
+  #          y = -Inf, x = c(-pi, -pi/2, 0, pi/2, pi), angle = 90, hjust = 0) +
+  
+  geom_smooth(data = ~qwrap(.x, arg = c(-pi, pi) ~ c(-2*pi, 2*pi)),
+              method = "lm", aes(weight = mag),
+              formula = y ~ I(sin(x)) -1,
+              se = FALSE,
+              color = "black", linewidth = 0.5) +
+  geom_point(size = 0.2, aes(alpha = I(alpha_from_n(ensembleN)))) +
+  
+  scale_color_brewer(NULL, palette = "Dark2") +
+  scale_shape_manual(NULL, values = c(20, 18)) +
+  scale_y_continuous("ONI") +
+  scale_x_continuous("Fase de cEOF2",
+                     breaks = seq(-pi, pi, by = 45*pi/180),
+                     labels = function(x) paste0(round(x*180/pi, 5), "º")) +
+  coord_cartesian(xlim = c(-pi, pi)) +
+  # labs(subtitle = equation) +
+  panel_background()+
+  facet_wrap(~model, labeller = labeller(model = labs_cor_enso))
+```
+
+(ref:enso-phase-cmip-cap) Igual que la Figura \@ref(fig:enso-phase) pero para los modelos del CMIP6. El ajuste sinusoidal para cada modelo se realiza utilizando todos los miembros. 
+
+
+```{r arg-enso-density, fig.width=6, fig.height=5}
+ceofs[, eof[[1]]$left, by = .(model, experiment)] %>% 
+  .[cEOF == "cEOF2"] %>% 
+  # .[, hgt := Anomaly(hgt)] %>% 
+  .[, arg := Arg(hgt)] %>%
+  .[, mag := Mod(hgt)] %>%
+  .[enso_cmip, on = c("time", "model", "experiment", "ensemble" = "member")] %>% 
+  .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
+  .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
+  na.omit() %>% 
+  .[, ninio := cut(oni, c(-Inf, -0.5, 0.5, Inf), label = c("ONI < -0.5", "-0.5 < ONI < 0.5", "ONI > 0.5"))] %>% 
+  qwrap(arg = c(-pi, pi) ~ c(-2*pi, 2*pi)) %>% 
+  
+  ggplot(aes(arg)) +
+  # geom_density(aes(group = model)) +
+  geom_density(aes(color = ninio),
+               adjust = 0.5) +
+  stat_density(aes(fill = ninio),
+               adjust = 0.5, geom = "area",
+               alpha = 0.4, position = "identity") +
+  scale_color_brewer(NULL, palette = "Dark2", aesthetics = c("color", "fill")) +
+  scale_y_continuous(NULL) +
+  scale_x_continuous("Fase de cEOF2",
+                     breaks = seq(-pi, pi, by = 90*pi/180),
+                     labels = function(x) paste0(round(x*180/pi, 5), "º")) +
+  facet_wrap(~model, labeller = labeller(model = labs_cor_enso)) +
+  coord_cartesian(xlim = c(-pi, pi)) 
+```
+
+(ref:arg-enso-density-cap) Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0.5, entre -0.5 y 0.5, y mayor a 0.5. 
+
+La relación entre el cEOF2 y el ENSO se explica por una preferencia de fase cuando el forzante tropical está activo. 
+Para evaluar esto en los modelos del CMIP6, las Figuras \@ref(fig:enso-phase-cmip) muestra la relación entre el ENSO y la fase del cEOF2 para los modelos del CMIP6 y la Figura \@ref(fig:arg-enso-density) la distribución de fases del cEOF2 para primaveras con ONI menor a -0.5, mayor a 0.5 y valores intermedios. 
+Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal fuerte, mientras que en los modelos con baja correlación la relación es más chata. 
+La distribución de las fases según categorías de índice ONI (Fig. \@ref(fig:arg-enso-density)) se ven bien separadas en las observaciones y en los modelos con alta correlación entre el cEOF2 y el ONI.
+En estos modelos (p.e. MIROC6, CESM2), cuando el ENSO está activo (definido como ONI > 0.5 o ONI < -0.5), la fase del cEOF2 se concentra cerca de $\pm$ 90º (dependiendo del signo del ONI) mientras que cuando el ENSO no está tan activo (definido como ONI entre -0.5 y 0.5), la distribución de la fase es más uniforme. 
+En los modelos con baja correlación entre cEOF2 y ONI (p.e. IPSL-CM6A-LR, INM-CM5-0) la distribución de fase es uniforme independientemente de la actividad del ENSO. 
+
+```{r fft}
+fft <- ceofs %>% 
+  .[, eof[[1]]$left, by = .(experiment, model)] %>% 
+  .[, hgt := hgt/sd(Mod(hgt)), by = .(model, experiment, cEOF)] %>%
+  sep_ReIm() %>% 
+  copy() %>% 
+  .[order(time)] %>% 
+  .[, fftspectrum(hgt, c(3, 5), B = 0, probs = c(0, 0.95)), by = .(model, experiment, ensemble, cEOF, part)]
 ```
 
 ```{r con_picos}
@@ -434,39 +541,17 @@ fft %>%
 
 (ref:fft-ceof2-cap) Espectros de Fourier para las fases del cEOF2 y del ONI de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el $r^2$ entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.
 
-(ref:ensofft-cap) Espectros de Fourier para los índices ENSO34 de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. En recuadro negro, los mismos modelos recuadrados en la Figura \@ref(fig:fft-2).
-
-```{r ensofft, fig.height=4, fig.width=6, eval = FALSE}
-enso_fft %>% 
-  .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
-  .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
-  .[, ensembleN := uniqueN(member), by = model] %>% 
-  ggplot(aes(1/freq, spec)) +
-  geom_line(aes(group = member, alpha = alpha_from_n(ensembleN, 0.9))) +
-  geom_line(data = ~.x[, .(spec = mean(spec)), by = .(freq, model)]) +
-  # annotation_logticks(sides = "b") +
-  scale_x_log10("Period (years)") +
-  scale_y_continuous("Spectrum")  +
-  scale_alpha_identity() +
-  facet_wrap(model ~ ., labeller = labeller(model = labs_cor_enso)) +
-  rect 
-```
-
-
-
+La relación entre el cEOF2 y el ENSO también se evidencia en la similitud del periodograma de las series. 
 La Figura \@ref(fig:fft-ceof2) muestra el periodograma para el cEOF2 con una línea por miembro y una línea gruesa marcando el periodograma promedio, así como el peridiograma promedio del ONI de cada modelo.
 La mayoría de los modelos tiene una periodicidad del ONI de \~3 años similar a la observada en ERA5, aunque la intensidad y período máximo varía significativamente.
 
 Todos los los modelos que tienen una periodicidad clara en \~3 años en la fase de 90º del cEOF2 también tienen una periodicidad del ENSO muy clara y además tienden a tener una correlación entre la fase de 90º del cEOF2 y el ENSO más alta.
-Por otro lado, ninguno de los modelos con muy baja correlación con el ENSO pero periodicidad del ENSO clara presenta periocididad clara en el cEOF2.
+Por otro lado, ninguno de los modelos con muy baja correlación con el ENSO pero periodicidad del ENSO clara presenta periodicidad clara en el cEOF2.
 
 Sin embargo existen modelos con periodicidad del ENSO clara y correlación relativamente alta que no tienen periodicidad del cEOF2 clara.
 MRI-ENSM2-0, UKESM1-0-LL, MPI-ESM1-2-LR son algunos ejemplos.
 
-Estas observaciones sugieren que el ENSO es la fuente de periodicidad del cEOF2 en los modelos de CMIP6 pero que su capacidad para representar la periodicidad observada no sólo depende de la periodicidad del ENSO y del grado de correlación entre los índices.
-
-De todas formas, todos los modelos tienen una correlación entre el ENSO y la fase de 90º del cEOF2 menor a la observada y en muchos de ellos la correlación es prácticamente nula.
-Esto indica que si bien los modelos de CMIP6 logran capturar los cEOF, su habilidad para simular la conexión entre éste y el forzante tropical es limitada.
+Estas observaciones sugieren que el ENSO es la fuente de periodicidad del cEOF2 en los modelos del CMIP6 pero que su capacidad para representar la periodicidad observada no sólo depende de la periodicidad del ENSO y del grado de correlación entre los índices.
 
 ```{r regress_sst}
 standardised <- ceofs[, eof[[1]]$left, by = .(experiment, model)] %>% 
@@ -586,9 +671,10 @@ sst_regression %>%
 
 Para estudiar más en detalle esa relación, evaluamos la relación entre los cEOF y las anomalías de TSM.
 La Figura \@ref(fig:sst-mmm) muestra la media multimodelo de la regresión entre TSM y las dos fases de cada cEOF, marcando las zonas donde más de la mitad de los modelos tienen p-valores menores a 0.01.
-Los modelos de CMIP6 reproducen los patrones de regresión de la fase de 90º del cEOF2 relativamente bien.
+La señal Los modelos del CMIP6 reproducen los patrones de regresión de la fase de 90º del cEOF2 relativamente bien.
 Se observa un exceso de señal en el Pacífico ecuatorial en la fase de 0º del cEOF2 que probablemente se deba a que estos modos no están alineados para minimizar esta relación.
 Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valores excesivamente altos no observados en ERA5.
+
 
 (ref:cor-sst-regr-cap) R\^2 entre los patrones de regresión de TSM cada modelo y el patrón de regresión de TSM en ERA5.
 
@@ -618,100 +704,19 @@ sst_cors %>%
   #               y = ifelse(picos, model, NA)), alpha = 0.2, fill = "gray50") +
   geom_col(aes(fill = term), 
            position = position_dodge2(reverse = TRUE, padding = 0)) +
-  scale_color_fase() +
-  scale_fill_brewer(palette = "Set1") +
-  scale_x_continuous("R^2 espacial", limits = c(0, 1)) +
+  scale_fill_fase() +
+  scale_x_continuous("R^2 espacial", limits = c(0, 1), labels = scales::percent_format()) +
   scale_y_discrete(NULL) +
   facet_wrap(~cEOF)
 
 ```
 
-La Figura \@ref(fig:cor-sst-regr) muestra el $r^2$ los campos de regresión de cada modelo y el campo de regresión de ERA5.
-La figura confirma que lo observado para la media multimodelo se cumple para casi todos los modelos individuales.
-La mayoría de los modelos tiene un campo de regresión similar a ERA5 para la fase 90º del cEOF2, y una similitud moderada para la fase de 0º.
-Para ambas fases del cEOF1, las similitudes son muy bajas.
-
-```{r enso-phase-cmip, fig.width=6, fig.height=5}
-ceofs[, eof[[1]]$left, by = .(model, experiment)] %>% 
-  .[cEOF == "cEOF2"] %>% 
-  # .[, hgt := Anomaly(hgt)] %>% 
-  .[, arg := Arg(hgt)] %>%
-  .[, mag := Mod(hgt)] %>%
-  .[enso_cmip, on = c("time", "model", "experiment", "ensemble" = "member")] %>% 
-  .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
-  .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
-  .[, ensembleN := uniqueN(ensemble), by = model] %>% 
-  na.omit() %>% 
-  ggplot(aes(arg, oni)) +
-  geom_hline(yintercept = c(-0.5, 0, 0.5), size = 0.2, color = "gray50") +
-  geom_vline(xintercept = 0, size = 0.2, color = "gray50") +
-  # annotate(shadowtext:::GeomShadowText,
-  #          label = c("- Real", "- Imaginario", "+ Real", "+ Imaginario", "- Real"),
-  #          color = "gray60", bg.colour = "white", bg.r = 0.2,
-  #          size = 3,
-  #          y = -Inf, x = c(-pi, -pi/2, 0, pi/2, pi), angle = 90, hjust = 0) +
-  
-  geom_smooth(data = ~qwrap(.x, arg = c(-pi, pi) ~ c(-2*pi, 2*pi)),
-              method = "lm", aes(weight = mag),
-              formula = y ~ I(sin(x)) -1,
-              se = FALSE,
-              color = "black", linewidth = 0.5) +
-  geom_point(size = 0.2, aes(alpha = I(alpha_from_n(ensembleN)))) +
-  
-  scale_color_brewer(NULL, palette = "Dark2") +
-  scale_shape_manual(NULL, values = c(20, 18)) +
-  scale_y_continuous("ONI") +
-  scale_x_continuous("Fase de cEOF2",
-                     breaks = seq(-pi, pi, by = 45*pi/180),
-                     labels = function(x) paste0(round(x*180/pi, 5), "º")) +
-  coord_cartesian(xlim = c(-pi, pi)) +
-  # labs(subtitle = equation) +
-  panel_background()+
-  facet_wrap(~model, labeller = labeller(model = labs_cor_enso))
-```
-
-(ref:enso-phase-cmip-cap) Igual que la Figura \@ref(fig:enso-phase) pero para los modelos del CMIP6. El ajuste sinusoidal para cada modelo se realiza utilizando todos los miembros. 
-
-
-```{r arg-enso-density, fig.width=6, fig.height=5}
-ceofs[, eof[[1]]$left, by = .(model, experiment)] %>% 
-  .[cEOF == "cEOF2"] %>% 
-  # .[, hgt := Anomaly(hgt)] %>% 
-  .[, arg := Arg(hgt)] %>%
-  .[, mag := Mod(hgt)] %>%
-  .[enso_cmip, on = c("time", "model", "experiment", "ensemble" = "member")] %>% 
-  .[cors_enso[part == "Imaginario"], on = .NATURAL] %>% 
-  .[, model := reorder(model, -(correlation^2)*(part == "Imaginario"))] %>% 
-  na.omit() %>% 
-  .[, ninio := cut(oni, c(-Inf, -0.5, 0.5, Inf), label = c("ONI < -0.5", "-0.5 < ONI < 0.5", "ONI > 0.5"))] %>% 
-  qwrap(arg = c(-pi, pi) ~ c(-2*pi, 2*pi)) %>% 
-  
-  ggplot(aes(arg)) +
-  # geom_density(aes(group = model)) +
-  geom_density(aes(color = ninio),
-               adjust = 0.5) +
-  stat_density(aes(fill = ninio),
-               adjust = 0.5, geom = "area",
-               alpha = 0.4, position = "identity") +
-  scale_color_brewer(NULL, palette = "Dark2", aesthetics = c("color", "fill")) +
-  scale_y_continuous(NULL) +
-  scale_x_continuous("Fase de cEOF2",
-                     breaks = seq(-pi, pi, by = 90*pi/180),
-                     labels = function(x) paste0(round(x*180/pi, 5), "º")) +
-  facet_wrap(~model, labeller = labeller(model = labs_cor_enso)) +
-  coord_cartesian(xlim = c(-pi, pi)) 
-```
-
-(ref:arg-enso-density-cap) Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0.5, entre -0.5 y 0.5, y mayor a 0.5. 
-
-En la Sección \@ref(fuentes-ceof) argumentamos que la relación entre el ENSO y el cEOF2 se explica por una preferencia de fase cuando el forzante tropical está activo. 
-Las Figuras \@ref(fig:enso-phase-cmip) muestra la relación entre el ENSO y la fase del cEOF2 para los modelos de CMIP. 
-Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal similar a la observada en ERA5 con fases cercanas a +90º están asociadas a ONI positivo y viceversa. 
-La Figura \@ref(fig:arg-enso-density) muestra la distribución de fases del cEOF2 para primaveras con ONI menor a -0.5, mayor a 0.5 y valores intermedios. 
-Cuando el ONI está más activo, el cEOF2 tiene una preferencia de fase de $\pm90º$, mientras que cuando se encuentra más neutral, la distribución de la fase del cEOF2 es más uniforme. 
-Esta relación sólo existe en los modelos con mayor relación entre el cEOF2 y el ENSO. 
-En los modelos con baja correlación, como IPSL-CM6A-LR o INM-CM5-0 la fase del cEOFs es aproximadamente uniforme independientemente del valor del ONI.
-
+Para una visión global y quantitativa de esta comparación, la Figura \@ref(fig:cor-sst-regr) muestra el $r^2$ los campos de regresión de cada modelo y el campo de regresión de ERA5.
+En la mayoría de los modelos el patrón de regresión de la fase de 90º del cEOF2 es similar al observado, excepto por INM-CM5-0. 
+El patrón de regresión de la fase de 0º, en cambio, tiene baja similitud con el observado en casi todos los modelos. 
+Posiblemente esto se deba a el exceso de señal presente en la región del ENSO. 
+Para ambas fases del cEOF1, las similitudes con el patrón de regresión observado son muy bajas.
+Esto es esperable dado la falta de señal en las observaciones y el exceso de señal en los modelos. 
 
 ### Relación con el SAM
 
@@ -761,19 +766,24 @@ sam_cors <- sam_series %>%
 rm(indices, cmip_sam_series, cmip_sam, sam_series)
 ```
 
-```{r cor-sam-cmip6, fig.height=4, fig.width=4}
+```{r cor-sam-cmip6, fig.height=5, fig.width=6}
 gdata <- sam_cors %>% 
   .[, .(correlation = mean(correlation)), by = .(cEOF, term, model, experiment, part, lev)] %>% 
   .[, approx(lev, correlation, xout = levs), by = .(cEOF, term, model, experiment, part)] %>% 
-  setnames(c("x", "y"), c("lev", "correlation")) 
+  setnames(c("x", "y"), c("lev", "correlation")) %>% 
+  .[, term := factor_sam(term)]
 
 
 # gdata <- gdata %>% 
 #   .[, ggplot2::mean_se(correlation^2), by = .(lev, experiment, cEOF, part, term)]
 
 ggplot(mapping = aes(lev, correlation^2)) +
-  
-  stat_summary(data = gdata[experiment != "reanalysis"][experiment == "historical"],
+  geom_line(data = gdata[experiment == "reanalysis"] %>% 
+              .[, experiment := NULL],
+            aes(color = term), 
+            linewidth = 2) +
+  stat_summary(data = gdata[experiment != "reanalysis"] %>% 
+                 .[experiment == "historical"],
                fun.data = \(x) mean_se(x,
                                        mult = qt(.025, length(x), 
                                                  lower.tail = FALSE)), 
@@ -781,7 +791,8 @@ ggplot(mapping = aes(lev, correlation^2)) +
                geom = "ribbon", alpha = 0.4, aes(fill = term)) +
   
   
-  stat_summary(data = gdata[experiment != "reanalysis"][experiment == "historical"],
+  stat_summary(data = gdata[experiment != "reanalysis"] %>% 
+                 .[experiment == "historical"],
                fun = mean, 
                geom = "line", alpha = 1, aes(color = term)) +
   
@@ -792,34 +803,42 @@ ggplot(mapping = aes(lev, correlation^2)) +
   #             .[model == "NorCPM1"],
   #           aes(group = interaction(term, model))) +
   
-  geom_line(data = gdata[experiment == "reanalysis"][, experiment := NULL],
-            aes(color = term), 
-            linewidth = 2) +
-  facet_grid(part ~ cEOF, labeller = labeller(part = lab_cplx)) +
-  # facet_grid(experiment + part ~ cEOF) +
+  
+  ggh4x::facet_grid2(term ~ cEOF + part, 
+                     labeller = labeller(part = lab_cplx, 
+                                         term = c(full = "SAM",
+                                                  asym = "A-SAM",
+                                                  sym = "S-SAM")), 
+                     strip = ggh4x::strip_nested()) +
   coord_flip() +
   scale_x_level() +
+  scale_y_continuous(name = r2,  limits = c(0, 1), 
+                     labels = scales::percent_format()) +
   scale_color_brewer(NULL, palette = "Dark2", labels = c(full = "SAM",
                                                          asym = "A-SAM",
                                                          sym = "S-SAM"), 
                      aesthetics = c("colour", "fill")) +
-  tag_facets("rc", position = "tr") +
+  tag_facets("cr", position = "tr") +
   panel_background() 
-
 ```
 
 (ref:cor-sam-cmip6-cap) Igual que la Figura \@ref(fig:sam-eof-vertical) pero para los modelos del CMIP6.
 
-En la Figura \@ref(fig:cor-sam-cmip6) se muestra el $r^2$ entre las componentes del SAM y las fases de los cEOFs.
+En la Sección \@ref(sam-ceof) se mostró que existía una relación importante entre las distintas fase de los cEOFs y las distintas componentes del SAM. 
+La Figura \@ref(fig:cor-sam-cmip6) muestra el $r^2$ entre las componentes del SAM y las fases de los cEOFs para los modelos del CMIP6. 
 Las líneas translúcidas son los valores promedio de cada modelo y las áreas llenas representan el promedio multimodelo y su intervalo de confianza del 95%; la línea gruesa es el valor de ERA5.
 
-Se observa que la relación entre el SAM y el cEOF2 en los modelos del CMIP6 es prácticamente nula en todos los niveles de la atmósfera, sugiriendo que éstos no capturan esta interacción entre el PSA2 y el SAM.
-Sin embargo, sí logran capturar su relación con el A-SAM en la tropósfera; y aunque esta relación tiene menor magnitud en promedio, se observa que ciertos modelos sí consiguen correlaciones comparables con las observadas.
+La relación entre el cEOF1 y el SAM en los modelos del CMIP6 es similar a la observada, aunque con diferencias en la magnitud. 
 
+En cuanto al cEOF2, los modelos del CMIP6 capturan correctamente la falta de correlación entre fase de 0º del cEOF2 y el SAM y el S-SAM (paneles XX y XX), pero tienen un nivel de correlación más alto de lo esperado con el A-SAM en la tropósfera (panel XX).
+La fase de 90º, en cambio, no muestra la relación observada con el SAM en la tropósfera (panel XX). 
+A pesar de esto, sí tiene una relación alta con el A-SAM (panel XX). 
+Esto sugiere que los modelos CMIP6 no capturan correctamente la relación entre el PSA2 el SAM, pero esta relación sí aparece si se filtra sólo la variabilidad de la parte asimétrica del SAM. 
 
 ## Tendencias
 
-De la sección anterior surge que los modelos de CMIP6 logran capturar la estructura espacial de los cEOFs así como su variabilidad y relación con otras componentes del sistema climático.
+De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
+
 En esta sección, aprovechamos las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes. 
 Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, proyectamos los campos espaciales del período moderno en los campos desde 1850 hasta 2014.
 
@@ -850,10 +869,10 @@ ceof_largo_p %>%
   # 
   #           
   #           ) + 
-  scale_x_continuous(NULL) +
+scale_x_continuous(NULL) +
   scale_y_continuous(NULL) +
   scale_color_fase(name = NULL, guide = "none") +
-  # coord_cartesian(ylim = c(-1.5, 1.5)) +
+  coord_cartesian(ylim = c(-1, 1)) +
   facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx))
 ```
 
@@ -861,8 +880,7 @@ ceof_largo_p %>%
 
 La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período.
 Se observa que la fase de 0º del cEOF1 tiene una tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
-También se observa una tendencia negativa para la fase de 90º del cEOF1. 
-Ésta no es detectable en ERA5. 
+También se observa una tendencia negativa para la fase de 90º del cEOF1 la cual no es detectable en ERA5. 
 El cEOF2 no presenta tendencias. 
 
 ```{r ceof-damip, fig.width=6, fig.height=4}
@@ -1017,9 +1035,9 @@ trends_cmip %>%
 
 ## Conclusiones
 
-Los modelos de CMIP6 consiguen caracterizar la estructura espacial de los cEOFs satisfactoriamente, con una buena correlación entre los patrones espaciales, particularmente la media multimodelo. 
+Los modelos del CMIP6 consiguen caracterizar la estructura espacial de los cEOFs satisfactoriamente, con una buena correlación entre los patrones espaciales, particularmente la media multimodelo. 
 La habilidad de los modelos de capturar sus características de segundo orden, como la relación con el ENSO y el SAM no es tan buena ni homogénea entre modelos. 
 Sólo algunos modelos, como MIROC6 y CESM2 consiguen capturar la influencia del ENSO en la fase del cEOF2 y la relación de la mayoría de los modelos con el SAM es menor a la observada. 
 
 La tendencia positiva de la fase de 0º del cEOF1 es capturada por la media multimodelo y el análisis de las corridas de DAMIP indican que ésta es forzada principalmente por el forzarte del ozono estratosférico parcialmente compensado por el forzante de los gases de efecto invernadero. 
-Los modelos de CMIP6 también presentan una tendencia negativa en la fase de 90º del cEOF1 no presente en las observaciones que también es ifluenciada por el forznate antropogénico. 
+Los modelos del CMIP6 también presentan una tendencia negativa en la fase de 90º del cEOF1 no presente en las observaciones que también es ifluenciada por el forznate antropogénico. 

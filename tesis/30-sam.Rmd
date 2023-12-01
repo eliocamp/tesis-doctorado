@@ -1517,7 +1517,7 @@ Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo de
 Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ [@rosso2018].
 Hay una pequeña área de anomalías positivas significativas de precipitación con el SAM cerca del centro de Argentina, también observado en el análisis basado en estaciones de @gillett2006, que se explica por el A-SAM.
 
-## Relación con el cEOF
+## Relación con el cEOF {#sam-ceof}
 
 ```{r ceof}
 ceof <- readRDS(data_path("derived", "ceof.Rds"))
@@ -1550,7 +1550,7 @@ sam_r2 %>%
   geom_line(aes(color = term, group = term)) +
   
   scale_x_level("Level (hPa)", minor_breaks = NULL) +
-  scale_y_continuous(r2, limits = c(0, 1), 
+  scale_y_continuous(r2, limits = c(0, 1), labels = scales::percent_format(),
                      guide = guide_axis(check.overlap = TRUE)) +
   scale_size_manual("p-value", values = c("TRUE" = 1, 
                                           "FALSE" = 0.5), 

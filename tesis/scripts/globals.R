@@ -24,6 +24,11 @@ knitr::opts_chunk$set(
   cache.path = file.path("cache", chapter, format, "")
 )
 
+knitr::knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=" ", decimal.mark = ",")
+})
+
+options(OutDec= ",")
 
 knitr::opts_hooks$set(label = function(options) {
   # Tira un error si el chunk no tiene label

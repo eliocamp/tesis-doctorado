@@ -79,7 +79,7 @@ La Figura \@ref(fig:envolvente-ejemplo) muestra un ejemplo de la envolvente de l
 Las anomalías zonales de altura geopotencial son intensas al sur de Australia y Nueva Zelanda. 
 La envolvente captura esa región.
 
-## Software
+### Software
 
 El análisis de datos se realizó utilizando el lenguaje de programación R [@rcoreteam2020], con los paquetes data.table [@dowle2020] y metR [@campitelli2020].
 Los gráficos se hicieron con ggplot2 [@wickham2009].

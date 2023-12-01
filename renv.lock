@@ -1498,14 +1498,14 @@
     },
     "metR": {
       "Package": "metR",
-      "Version": "0.14.0.9000",
+      "Version": "0.14.1.9000",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "metR",
       "RemoteUsername": "eliocamp",
-      "RemoteRef": "dev",
-      "RemoteSha": "d146a22431c41983a3bba30b672cd260985d39b6",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "68972e71a8a28a4d5fd23dccfd6ae4b7249a6a4f",
       "Requirements": [
         "Formula",
         "R",
@@ -1525,7 +1525,7 @@
         "sf",
         "stringr"
       ],
-      "Hash": "098399ee4006ca488aaa23c62a665c92"
+      "Hash": "91a1045477fd8b9c74dedfe290b30844"
     },
     "mgcv": {
       "Package": "mgcv",

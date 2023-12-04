@@ -219,7 +219,7 @@ Esto sugiere que los modelos CMIP6 no capturan correctamente la relación entre 
 
 ## Tendencias
 
-De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
+De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y que algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
 
 En esta sección, aprovechamos las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes. 
 Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, proyectamos los campos espaciales del período moderno en los campos desde 1850 hasta 2014.
@@ -228,10 +228,40 @@ Para extender las series temporales para todo el período disponible en CMIP6 y 
 
 (ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 -- 2014. Las anomalías están computadas sobre el período 1850 -- 1900. En líneas translúcidas, las series promedio de cada modelo. En línea oscura, la media multimodelo. 
 
-La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período.
-Se observa que la fase de 0º del cEOF1 tiene una tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
-También se observa una tendencia negativa para la fase de 90º del cEOF1 la cual no es detectable en ERA5. 
-El cEOF2 no presenta tendencias. 
+La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período. 
+La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)). 
+Sin embargo, la fase de 90º del cEOF1 tiene una tendencia negativa mucho mayor, la cual no está está presente en ERA5. 
+
+
+
+
+![(\#fig:trends-ceof1)(ref:trends-ceof1-cap)](figures/50-cmip6/trends-ceof1-1.png)
+
+(ref:trends-ceof1-cap) Tendencias lineales de cada fase del cEOF1 desde 1950. Cada punto representa un miembro, donde los miembros con tendencias significativas (p-valor < 0.01) se marcan con una cruz. La línea vertical punteada representa la tendencia media de todos los modelos. 
+
+Las tendencias de cada fase del cEOF1 para cada modelo desde 1950 se muestra en la Figura \@ref(fig:tendencias-ceof1) junto con la tendencia promedio de todos los modelos. 
+La tendencia media de la fase de 0º es positiva pero muy pequeña.
+Además, los modelos no son consistentes en sus tendencias y sólo algunos modelos tienen una tendencia promedio positiva.
+Por otro lado, las tendencias de la fase de 90º son más consistentes. 
+
+Estas tendencias son incompatibles con la variabilidad del cEOF1 observado, el cual tiene una tendencia positiva de su fase de 0º y ninguna tendencia en su fase de 90º. 
+Es posible que esto se deba a un problema fundamental de los modelos de CMIP6, a las limitaciones de 
+
+
+
+sugieren que los modelos de CMIP6 no capturan una tendencia positiva robusta en la fase de 0º del cEOF1 pero parecen simular una tendencia negativa en la fase de 90º del cEOF2
+
+
+
+
+![(\#fig:series-largas-mod)(ref:series-largas-mod-cap)](figures/50-cmip6/series-largas-mod-1.png)
+
+(ref:series-largas-mod-cap) Igual que \@ref(fig:series-largas) pero para la magnitud de los cEOFs. 
+
+
+
+
+
 
 ![(\#fig:ceof-damip)(ref:ceof-damip-cap)](figures/50-cmip6/ceof-damip-1.png)
 
@@ -244,6 +274,7 @@ Esto sugiere que el ozono estatosférico y los gases de efecto invernadero tiene
 
 Una compensación parcial similar también se observa en la fase de 90º del cEOF1, la cual presenta una tendencia negativa en hist-GHG y positiva en hist-aer. 
 
+![(\#fig:ceof-damip-mod)(ref:ceof-damip-mod-cap)](figures/50-cmip6/ceof-damip-mod-1.png)
 
 
 (ref:suma-cap) Media multimodelo de las dos fases del cEOF1 para las corridas históricas y para la suma de las corridas hist-GHG, hist-stratO3 e hist-aer.

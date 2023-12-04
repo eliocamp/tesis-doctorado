@@ -240,7 +240,7 @@ ERA5_geopotential <- new_dataset(
                          '850', '875', '900',
                          '925', '950', '975',
                          '1000'),
-      year = as.character(1959:last_year),
+      year = as.character(1940:last_year),
       month = formatC(1:12, width = 2, flag = 0),   # Need all months to compute PSA
       time = "00:00",
       grid = c("2.5", "2.5"),

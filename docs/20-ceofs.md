@@ -171,13 +171,16 @@ Si bien los cEOFs se calcularon para el período 1 979--2 020, extendimos las se
 
 
 
-(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 979--2 020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
+(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 959--2 020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal meidante un suavizado de regresión local. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
 
 ![(\#fig:extended-series)(ref:extended-series-cap)](figures/20-ceofs/extended-series-1.png)
 
 Las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) muestran las partes espacial y temporal de los dos primeros cEOFs de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
 El primer modo (cEOF1) explica el 82% de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (7%).
 En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y fase está controlada por la magnitud y fase de su serie temporal.
+
+
+
 
 El cEOF1 (Fig. \@ref(fig:ceofs-1) columna 1) es un patrón de onda 1 con amplitud máxima en latitudes altas.
 En 50 hPa la fase de 0º del cEOF1tiene el máximo de la onda 1 en 150ºE y en 200 hPal máximo se sitúa en torno a 175ºE indicando un desplazamiento hacia el oeste con la altura.
@@ -196,9 +199,11 @@ Debido a que los campos que entran en el algoritmo de cEOF son anomalías con re
 Sin embargo, la media temporal de cEOF2 es casi cero, lo que indica que sólo cEOF1 incluye variabilidad que se proyecta significativamente sobre el campo anómalo zonal medio.
 Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 ($r^2$ = 98%) y no similar al cEOF2 ($r^2$ = 0%).
 
-Es evidente una tendencia positiva significativa en la fase de 0º del cEOF1 (Fig. \@ref(fig:extended-series)a.1, p-valor = 0.023), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
+La fase de 0º del cEOF1 evidencia una variación a largo plazo, con valores generalmente negativos al comienzo del período y positivos al final (Fig. \@ref(fig:extended-series)a.1, p-valor de la tendencia lineal = 0,023). 
+Esta tendencia positiva parece haber desparecido luego de 2000. 
 La tendencia positiva de la fase de 0º del cEOF1 se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
 Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de latitudes altas.
+No se observan tendencias significativas en ninguna de las fases de cEOF2.
 
 ### Mapas de regresión con los modos cEOF
 

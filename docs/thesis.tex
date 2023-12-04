@@ -747,7 +747,7 @@ Si bien los cEOFs se calcularon para el período 1 979--2 020, extendimos las se
 
 }
 
-\caption{Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 979--2 020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal de todo el período. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.}\label{fig:extended-series}
+\caption{Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1 959--2 020. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal meidante un suavizado de regresión local. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.}\label{fig:extended-series}
 \end{figure}
 
 Las Figuras \ref{fig:ceofs-1} y \ref{fig:extended-series} muestran las partes espacial y temporal de los dos primeros cEOFs de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
@@ -767,9 +767,11 @@ Debido a que los campos que entran en el algoritmo de cEOF son anomalías con re
 Sin embargo, la media temporal de cEOF2 es casi cero, lo que indica que sólo cEOF1 incluye variabilidad que se proyecta significativamente sobre el campo anómalo zonal medio.
 Esto es coherente con el hecho de que el campo medio zonalmente anómalo de la altura geopotencial es muy similar al cEOF1 (\(r^2\) = 98\%) y no similar al cEOF2 (\(r^2\) = 0\%).
 
-Es evidente una tendencia positiva significativa en la fase de 0º del cEOF1 (Fig. \ref{fig:extended-series}a.1, p-valor = 0.023), mientras que no hay tendencia significativa en ninguna de las fases de cEOF2.
+La fase de 0º del cEOF1 evidencia una variación a largo plazo, con valores generalmente negativos al comienzo del período y positivos al final (Fig. \ref{fig:extended-series}a.1, p-valor de la tendencia lineal = 0,023).
+Esta tendencia positiva parece haber desparecido luego de 2000.
 La tendencia positiva de la fase de 0º del cEOF1 se traduce en una tendencia positiva en la magnitud del cEOF1, pero no en un cambio sistemático en la fase (no se muestra).
 Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de latitudes altas.
+No se observan tendencias significativas en ninguna de las fases de cEOF2.
 
 \hypertarget{mapas-de-regresiuxf3n-con-los-modos-ceof}{%
 \subsection{Mapas de regresión con los modos cEOF}\label{mapas-de-regresiuxf3n-con-los-modos-ceof}}
@@ -1995,7 +1997,7 @@ Esto sugiere que los modelos CMIP6 no capturan correctamente la relación entre 
 \hypertarget{tendencias}{%
 \section{Tendencias}\label{tendencias}}
 
-De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
+De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y que algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
 
 En esta sección, aprovechamos las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes.
 Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, proyectamos los campos espaciales del período moderno en los campos desde 1850 hasta 2014.
@@ -2012,9 +2014,40 @@ Para extender las series temporales para todo el período disponible en CMIP6 y 
 
 
 La Figura \ref{fig:series-largas} muestra las series temporales durante todo el período.
-Se observa que la fase de 0º del cEOF1 tiene una tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \ref{fig:extended-series}).
-También se observa una tendencia negativa para la fase de 90º del cEOF1 la cual no es detectable en ERA5.
-El cEOF2 no presenta tendencias.
+La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \ref{fig:extended-series}).
+Sin embargo, la fase de 90º del cEOF1 tiene una tendencia negativa mucho mayor, la cual no está está presente en ERA5.
+
+\begin{figure}
+
+{\centering \includegraphics{figures/50-cmip6/trends-ceof1-1} 
+
+}
+
+\caption{Tendencias lineales de cada fase del cEOF1 desde 1950. Cada punto representa un miembro, donde los miembros con tendencias significativas (p-valor \textless{} 0.01) se marcan con una cruz. La línea vertical punteada representa la tendencia media de todos los modelos.}\label{fig:trends-ceof1}
+\end{figure}
+
+
+
+Las tendencias de cada fase del cEOF1 para cada modelo desde 1950 se muestra en la Figura \ref{fig:tendencias-ceof1} junto con la tendencia promedio de todos los modelos.
+La tendencia media de la fase de 0º es positiva pero muy pequeña.
+Además, los modelos no son consistentes en sus tendencias y sólo algunos modelos tienen una tendencia promedio positiva.
+Por otro lado, las tendencias de la fase de 90º son más consistentes.
+
+Estas tendencias son incompatibles con la variabilidad del cEOF1 observado, el cual tiene una tendencia positiva de su fase de 0º y ninguna tendencia en su fase de 90º.
+Es posible que esto se deba a un problema fundamental de los modelos de CMIP6, a las limitaciones de
+
+sugieren que los modelos de CMIP6 no capturan una tendencia positiva robusta en la fase de 0º del cEOF1 pero parecen simular una tendencia negativa en la fase de 90º del cEOF2
+
+\begin{figure}
+
+{\centering \includegraphics{figures/50-cmip6/series-largas-mod-1} 
+
+}
+
+\caption{Igual que \ref{fig:series-largas} pero para la magnitud de los cEOFs.}\label{fig:series-largas-mod}
+\end{figure}
+
+
 
 \begin{figure}
 
@@ -2033,6 +2066,15 @@ Por otro lado, hist-stratO3 muestra una tendencia mucho mayor a la observada e h
 Esto sugiere que el ozono estatosférico y los gases de efecto invernadero tienen efectos contrarios sobre esta fase del cEOF1.
 
 Una compensación parcial similar también se observa en la fase de 90º del cEOF1, la cual presenta una tendencia negativa en hist-GHG y positiva en hist-aer.
+
+\begin{figure}
+
+{\centering \includegraphics{figures/50-cmip6/ceof-damip-mod-1} 
+
+}
+
+\caption{(ref:ceof-damip-mod-cap)}\label{fig:ceof-damip-mod}
+\end{figure}
 
 
 

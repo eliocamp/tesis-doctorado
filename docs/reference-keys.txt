@@ -60,7 +60,10 @@ fig:sst-mmm
 fig:cor-sst-regr
 fig:cor-sam-cmip6
 fig:series-largas
+fig:trends-ceof1
+fig:series-largas-mod
 fig:ceof-damip
+fig:ceof-damip-mod
 fig:suma
 intro
 exploración-de-índice-de-onda-3

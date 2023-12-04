@@ -263,7 +263,8 @@ base <- ceof_era5[, eof[[1]]$right] %>%
 
 cor_mmm <- interpolated %>% 
   na.omit() %>% 
-  .[, mean(hgt_norm), by = .(cEOF, experiment, lon, lat, lev)] %>% 
+  .[, mean(hgt_norm), by = .(cEOF, model, experiment, lon, lat, lev)] %>% 
+  .[, mean(V1), by = .(cEOF, experiment, lon, lat, lev)] %>% 
   .[base, on = .NATURAL] %>% 
   na.omit() %>% 
   .[, weighted_correlation(Re(V1), Re(base), cos(lat*pi/180)), 
@@ -277,7 +278,8 @@ ceof_labs <- cor_mmm %>%
 sf::sf_use_s2(FALSE)
 interpolated %>% 
   .[experiment == "historical"] %>% 
-  .[, mean(hgt_norm), by = .(cEOF, experiment, lon, lat, lev)] %>% 
+  .[, mean(hgt_norm), by = .(cEOF, model, experiment, lon, lat, lev)] %>% 
+  .[, mean(V1), by = .(cEOF, experiment, lon, lat, lev)] %>% 
   # .[(cEOF == "cEOF1" & lev == 50) | (cEOF == "cEOF2" & lev == 200)] %>% 
   
   sep_ReIm() %>% 
@@ -837,7 +839,7 @@ Esto sugiere que los modelos CMIP6 no capturan correctamente la relación entre 
 
 ## Tendencias
 
-De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
+De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y que algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
 
 En esta sección, aprovechamos las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes. 
 Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, proyectamos los campos espaciales del período moderno en los campos desde 1850 hasta 2014.
@@ -845,31 +847,15 @@ Para extender las series temporales para todo el período disponible en CMIP6 y 
 ```{r series-largas, fig.width=6, fig.height=4}
 ceof_largo_p %>% 
   sep_ReIm() %>% 
-  .[experiment %in% c("historical", "reanalysis")] %>%
-  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[experiment == "historical"] %>% 
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
   .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
-  # .[, eof := scale_eof(eof, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
-  # .[, eof := scale(eof, center = mean(eof[time <= 1900]), 
-  #                  scale = sd(eof[time <= 1900])),
-  #   by = .(model, part, cEOF)] %>% 
   .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>% 
-  
   ggplot(aes(time, hgt)) +
   geom_line(aes(group = model), 
             alpha = 0.1) +
   geom_line(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, cEOF, part)]) +
-  # geom_smooth(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, part, cEOF)]) +
-  
-  # geom_line(color = "black", 
-  #             # method = "lm", 
-  #           data = ceof_era5[, eof[[1]]$left] %>%
-  #             sep_ReIm() %>%
-  #             .[, hgt := Anomaly(hgt, time >= 1979), by = .(part, cEOF)] %>% 
-  #             .[, hgt := hgt/sd(hgt[time >= 1979]), by = .(part, cEOF)] 
-  # 
-  #           
-  #           ) + 
-scale_x_continuous(NULL) +
+  scale_x_continuous(NULL) +
   scale_y_continuous(NULL) +
   scale_color_fase(name = NULL, guide = "none") +
   coord_cartesian(ylim = c(-1, 1)) +
@@ -878,10 +864,111 @@ scale_x_continuous(NULL) +
 
 (ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 -- 2014. Las anomalías están computadas sobre el período 1850 -- 1900. En líneas translúcidas, las series promedio de cada modelo. En línea oscura, la media multimodelo. 
 
-La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período.
-Se observa que la fase de 0º del cEOF1 tiene una tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
-También se observa una tendencia negativa para la fase de 90º del cEOF1 la cual no es detectable en ERA5. 
-El cEOF2 no presenta tendencias. 
+La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período. 
+La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando al rededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)). 
+Sin embargo, la fase de 90º del cEOF1 tiene una tendencia negativa mucho mayor, la cual no está está presente en ERA5. 
+
+
+```{r trends}
+trends <- ceof_largo_p %>% 
+  sep_ReIm() %>% 
+  .[experiment %in% c("historical", "reanalysis")] %>%
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>%
+  .[time >= 1950] %>% 
+  # .[, .(hgt = mean(hgt)), by = .(model, experiment, ensemble, time, part, cEOF)] %>% 
+  .[, FitLm(hgt, time = time/10, se = TRUE), 
+    by = .(model, cEOF, ensemble, part, experiment)] %>% 
+  .[term == "time"] %>%
+  .[, p.value := Pvaluate(estimate, std.error, df, "fdr"), 
+    by = .(model, experiment, cEOF)] %>% 
+  cors[., on = c("model", "experiment", "cEOF")] 
+
+plot_trend <- function(data) {
+  data %>% 
+    .[, model := paste0(model, "\n(", scales::number(correlation^2, 0.01), ")")] %>% 
+    .[, model := reorder(model, correlation^2)] %>% 
+    ggplot(aes(model, estimate)) +
+    geom_hline(yintercept = 0, color = "gray50") +
+    geom_point(alpha = 0) +
+    geom_boxplot(width = 0.5,
+                 outlier.shape = NA,
+                 fill = NA,
+                 data = ~.x[!startsWith(as.character(model), "ERA5")]) +
+    ggforce::geom_sina(aes(shape = p.value < 0.05,
+                           size = p.value < 0.05,
+                           group = interaction(part, model)),
+                       alpha = 1
+                       # size = 1,
+    ) +
+    geom_hline(data = \(x) x %>% 
+                 .[, .(estimate = mean(estimate)), by = .(part, model)] %>% 
+                 .[, .(estimate = mean(estimate)), by = .(part)], 
+               aes(yintercept = estimate), linetype = 2) +
+    scale_color_brewer(NULL, palette = "Set1") +
+    scale_x_discrete(NULL) +
+    scale_y_continuous("Tendencia (desvío estándard por década)") +
+    coord_flip()  +
+    scale_shape_manual(values = c("FALSE" = 19,
+                                  "TRUE" = 4), 
+                       guide = "none") +
+    scale_size_manual(values = c("TRUE" = 2.5,
+                                 "FALSE" = 0.5),
+                      guide = "none") +
+    facet_wrap(~part, labeller = labeller(part = lab_cplx)) +
+    NULL
+}
+```
+
+```{r trends-ceof1,fig.width=6, fig.height=6}
+trends %>% 
+  .[cEOF == "cEOF1"] %>% 
+  plot_trend()  
+```
+
+(ref:trends-ceof1-cap) Tendencias lineales de cada fase del cEOF1 desde 1950. Cada punto representa un miembro, donde los miembros con tendencias significativas (p-valor < 0.01) se marcan con una cruz. La línea vertical punteada representa la tendencia media de todos los modelos. 
+
+Las tendencias de cada fase del cEOF1 para cada modelo desde 1950 se muestra en la Figura \@ref(fig:tendencias-ceof1) junto con la tendencia promedio de todos los modelos. 
+La tendencia media de la fase de 0º es positiva pero muy pequeña.
+Además, los modelos no son consistentes en sus tendencias y sólo algunos modelos tienen una tendencia promedio positiva.
+Por otro lado, las tendencias de la fase de 90º son más consistentes. 
+
+Estas tendencias son incompatibles con la variabilidad del cEOF1 observado, el cual tiene una tendencia positiva de su fase de 0º y ninguna tendencia en su fase de 90º. 
+Es posible que esto se deba a un problema fundamental de los modelos de CMIP6, a las limitaciones de 
+
+
+
+sugieren que los modelos de CMIP6 no capturan una tendencia positiva robusta en la fase de 0º del cEOF1 pero parecen simular una tendencia negativa en la fase de 90º del cEOF2
+
+
+
+
+```{r series-largas-mod, fig.width=6, fig.height=4}
+ceof_largo_p %>% 
+  copy() %>% 
+  .[, hgt := Mod(hgt)] %>% 
+  .[, part := "Mod"] %>% 
+  .[experiment == "historical"] %>% 
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>% 
+  ggplot(aes(time, hgt)) +
+  geom_line(aes(group = model), 
+            alpha = 0.1) +
+  geom_line(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, cEOF, part)]) +
+  scale_x_continuous(NULL) +
+  scale_y_continuous(NULL) +
+  scale_color_fase(name = NULL, guide = "none") +
+  coord_cartesian(ylim = c(-1, 1)) +
+  facet_grid(cEOF ~ .)
+```
+
+(ref:series-largas-mod-cap) Igual que \@ref(fig:series-largas) pero para la magnitud de los cEOFs. 
+
+
+
+
+
 
 ```{r ceof-damip, fig.width=6, fig.height=4}
 ceof_largo_p %>% 
@@ -920,6 +1007,34 @@ Esto sugiere que el ozono estatosférico y los gases de efecto invernadero tiene
 
 Una compensación parcial similar también se observa en la fase de 90º del cEOF1, la cual presenta una tendencia negativa en hist-GHG y positiva en hist-aer. 
 
+```{r ceof-damip-mod, fig.width=6, fig.height=4}
+ceof_largo_p %>% 
+  copy() %>% 
+  .[, hgt := Mod(hgt)] %>% 
+  .[, part := "Mod"] %>%
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  # .[, eof := scale_eof(eof, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
+  # .[, eof := scale(eof, center = mean(eof[time <= 1900]), 
+  #                  scale = sd(eof[time <= 1900])),
+  #   by = .(model, part, cEOF)] %>% 
+  .[, .(hgt = mean(hgt)), by = .(model, experiment, time, part, cEOF)] %>% 
+  # .[experiment != "historical"] %>% 
+  
+  ggplot(aes(time, hgt, color = experiment)) +
+  # geom_line(aes(group = model), alpha = 0.1) +
+  geom_line(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, cEOF, part)], 
+            alpha = 0.3) +
+  geom_smooth(data = ~.x[, .(hgt = mean(hgt)), by = .(time, experiment, part, cEOF)],
+              show.legend = FALSE) +
+  
+  # geom_line(data = ceof_era5[, eof[[1]]$left] %>% sep_ReIm() %>% .[, eof := scale_eof(eof), by = .(cEOF, part)]) +
+  scale_x_continuous(NULL) +
+  scale_y_continuous(NULL) +
+  scale_color_experiments(guide = guide_legend(override.aes = list(linewidth = 2, alpha = 1))) +
+  # coord_cartesian(ylim = c(-1.5, 1.5)) +
+  facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx))
+```
 
 
 (ref:suma-cap) Media multimodelo de las dos fases del cEOF1 para las corridas históricas y para la suma de las corridas hist-GHG, hist-stratO3 e hist-aer.

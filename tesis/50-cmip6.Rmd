@@ -244,7 +244,24 @@ En todos los casos, la correlación con el cEOF1 observado es mayor que con el c
 Aunque se pueden identificar modelos con menor correlación con los modos observados, como `r cors[experiment == "historical"][, model := reorder(model, r2, fun = mean)][, levels(model)[1:2]] %>% combine_words()`, aún éstos tienen similitudes mayores al 50%. 
 
 
+```{r interpolated}
+interpolated <- ceofs[, eof[[1]]$right, by = .(experiment, model)] %>% 
+  copy() %>% 
+  .[model != "ERA5"] %>% 
+  .[, interpolate_to_era(.SD),
+    by = .(model, experiment, lev, cEOF)] %>% 
+  .[, hgt_norm := hgt/max(Mod(hgt), na.rm = TRUE), by = .(cEOF, lev, model, experiment)]
+
+
+base <- ceof_era5[, eof[[1]]$right] %>% 
+  copy() %>% 
+  setnames("hgt", "base") %>%
+  .[, base := base/max(Mod(base)), by = .(cEOF, lev)] %>% 
+  .[, experiment := "historical"]
+```
+
 ```{r plot_top_bottom}
+sf::sf_use_s2(FALSE)
 plot_modelos <- function(which_cEOF, n = 4) {
   which_lev = ifelse(which_cEOF == "cEOF1", 50, 200)
   top_bottom <- cors %>% 
@@ -281,13 +298,15 @@ plot_modelos <- function(which_cEOF, n = 4) {
 ```
 
 ```{r todos-ceof1, fig.width=6, fig.height=8}
+
 plot_modelos("cEOF1", 5)
 ```
 
 (ref:todos-ceof1-cap) Fase de 0º del cEOF1 en 50 hPa (sombreado, valores positivos en rojo, negativos en azul) de las corridas históricas de los modelos de CMIP6 analizados. Los contornos marcan el patrón de ERA5 (valores positivos en líneas llenas, valores negativos en línea punteada)
 
-```{r todos-ceof1, fig.width=6, fig.height=8}
+```{r todos-ceof2, fig.width=6, fig.height=8}
 plot_modelos("cEOF2", 5)
+
 ```
 
 (ref:todos-ceof2-cap) Igual que la Figura \@ref(fig:todos-ceof1) pero para el cEOF2 en 200 hPa.
@@ -304,19 +323,6 @@ Los patrones son extremadamente similares a los observados en ERA5 y tienen $r^2
 La media multimodelo es más similar a los patrones observados que cualquier modelo individual, indicando que las deficiencias de cada modelo se compensan al promediar.
 
 ```{r mmm, fig.width=6, fig.height=4}
-interpolated <- ceofs[, eof[[1]]$right, by = .(experiment, model)] %>% 
-  copy() %>% 
-  .[model != "ERA5"] %>% 
-  .[, interpolate_to_era(.SD),
-    by = .(model, experiment, lev, cEOF)] %>% 
-  .[, hgt_norm := hgt/max(Mod(hgt), na.rm = TRUE), by = .(cEOF, lev, model, experiment)]
-
-
-base <- ceof_era5[, eof[[1]]$right] %>% 
-  copy() %>% 
-  setnames("hgt", "base") %>%
-  .[, base := base/max(Mod(base)), by = .(cEOF, lev)] %>% 
-  .[, experiment := "historical"]
 
 cor_mmm <- interpolated %>% 
   na.omit() %>% 
@@ -332,7 +338,7 @@ ceof_labs <- cor_mmm %>%
   .[, paste0(cEOF, "\n(", scales::percent(V1^2, 1), ")") %>% 
       setNames(cEOF)
   ]
-sf::sf_use_s2(FALSE)
+
 interpolated %>% 
   .[experiment == "historical"] %>% 
   .[, mean(hgt_norm), by = .(cEOF, model, experiment, lon, lat, lev)] %>% 

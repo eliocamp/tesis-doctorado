@@ -5,6 +5,14 @@
   else x
 }
 
+
+
+is_word <- function() {
+  format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
+  format == "docx"
+}
+
+
 format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
 chapter <- tools::file_path_sans_ext(knitr::current_input())
 verbose <- interactive()
@@ -15,6 +23,7 @@ knitr::opts_chunk$set(
   message = verbose,
   warning = verbose,
   cache = TRUE,
+  fig.show = ifelse(is_word(), "hide", "asis"),
   cache.extra = 346347,
   out.extra = "",
   fig.width = 6,
@@ -45,12 +54,6 @@ knitr::opts_hooks$set(label = function(options) {
   options
 })
 
-
-
-is_word <- function() {
-  format <- knitr::opts_knit$get("rmarkdown.pandoc.to") %||% "r"
-  format == "docx"
-}
 
 get_caption <- function() {
   knitr::opts_current$get("fig.cap")

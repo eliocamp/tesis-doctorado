@@ -553,6 +553,10 @@ era_more %>%
   panel_background() 
 ```
 
+```{r save-era-more}
+saveRDS(era_more, data_path("derived", "era_more.Rds"))
+```
+
 Las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) muestran las partes espacial y temporal de los dos primeros cEOFs de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
 El primer modo (cEOF1) explica el `r scales::percent(ceof$sdev[cEOF == "cEOF1"]$r2, 1)` de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (`r scales::percent(ceof$sdev[cEOF == "cEOF2"]$r2, 1)`).
 En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y fase está controlada por la magnitud y fase de su serie temporal.

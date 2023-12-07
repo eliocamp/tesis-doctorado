@@ -75,7 +75,7 @@ bibliography:
 #   - bib/packages.bib
 # Download your specific csl file and refer to it in the line below.
 csl: "csl/iso690-author-date-es.csl"
-link-citation: yes
+link-citations: yes
 lot: true
 lof: true
 ---

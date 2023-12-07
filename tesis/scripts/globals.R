@@ -34,7 +34,7 @@ knitr::opts_chunk$set(
 )
 
 knitr::knit_hooks$set(inline = function(x) {
-  prettyNum(x, big.mark=" ", decimal.mark = ",")
+  prettyNum(x, decimal.mark = ",")
 })
 
 options(OutDec= ",")

@@ -41,7 +41,7 @@ Sin emabrgo, las asimetrías zonales del SAM son significativas y poco estudiada
 La fase positiva del SAM está asociada a temperaturas más frías de lo normal sobre la Antártida y más cálidas de lo normal en latitudes más bajas y viceversa para la fase negativa [@jones2019].
 Pero hay desviaciones significativas de esta respuesta media zonal, especialmente en la Península Antártica y el Atlántico sur [@fogt2012].
 La señal relacionada con el SAM en las anomalías de precipitación sigue un comportamiento similar, aunque con aún mayores desviaciones respecto de la simetría zonal [@lim2016].
-La relación entre el SAM y la precipitación en el Sudeste de Sudamérica (SESA) puede explicarse por la circulación zonalmente asimétrica asociada al SAM, que es similar al Patrón del Pacífico-Sudamérica (PSA) [@silvestri2009; @rosso2018].
+La relación entre el SAM y la precipitación en el Sudeste de Sudamérica (SESA) puede explicarse por la circulación zonalmente asimétrica asociada al SAM, que es similar al PSA [@silvestri2009; @rosso2018].
 @fan2007 también mostró que las precipitaciones en Asia oriental se veían afectadas por la variabilidad de la parte occidental del SAM.
 Estos impactos de la componente asimétrica del SAM a escala regional no se han estudiado en detalle.
 

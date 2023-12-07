@@ -1078,8 +1078,8 @@ if (is_word()) {
 ```
 
 Dada la similitud entre las estructuras asociadas al cEOF2 (Fig. \@ref(fig:eof2-regr-gh)) y los patrones del PSA, estudiamos la relación entre ellos.
-La tabla \@ref(tab:psa-eof2) muestra las correlaciones entre los dos índices del PSA y las series temporales para las fases de 0º y 90º del cEOF2.
-Como se anticipaba visualmente la figura \@ref(fig:eof2-regr-gh), existe una gran correlación positiva entre el PSA1 y la fase de 90º y  entre el PSA2 y la fase de 0º cEOF2.
+La Tabla \@ref(tab:psa-eof2) muestra las correlaciones entre los dos índices del PSA y las series temporales para las fases de 0º y 90º del cEOF2.
+Como se anticipaba visualmente la Figura \@ref(fig:eof2-regr-gh), existe una gran correlación positiva entre el PSA1 y la fase de 90º y  entre el PSA2 y la fase de 0º cEOF2.
 Por otro lado, no existe una relación significativa entre el PSA1 y la fase de 0º ni entre el PSA2 y la fase de 90º cEOF2.
 En consecuencia, cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos del PSA.
 Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y la fase de 90º del cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no mostrado).

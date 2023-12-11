@@ -1014,9 +1014,9 @@
     },
     "ggplot2": {
       "Package": "ggplot2",
-      "Version": "3.4.2",
+      "Version": "3.4.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "MASS",
         "R",
@@ -1035,7 +1035,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "3a147ee02e85a8941aad9909f1b43b7b"
+      "Hash": "313d31eff2274ecf4c1d3581db7241f9"
     },
     "ggrepel": {
       "Package": "ggrepel",
@@ -2121,21 +2121,23 @@
     },
     "scales": {
       "Package": "scales",
-      "Version": "1.2.1",
+      "Version": "1.3.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "R6",
         "RColorBrewer",
+        "cli",
         "farver",
+        "glue",
         "labeling",
         "lifecycle",
         "munsell",
         "rlang",
         "viridisLite"
       ],
-      "Hash": "906cb23d2f1c5680b8ce439b44c6fa63"
+      "Hash": "c19df082ba346b0ffa6f833e92de34d1"
     },
     "selectr": {
       "Package": "selectr",
@@ -2359,8 +2361,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "tagger",
       "RemoteUsername": "eliocamp",
+      "RemotePkgRef": "eliocamp/tagger",
       "RemoteRef": "HEAD",
-      "RemoteSha": "4ba95734ec7b83d04a9df5e902dd6f3ea0576197",
+      "RemoteSha": "baefbd7fa2bd23c2b11a099e1714aad9d0d25015",
       "Requirements": [
         "checkmate",
         "ggplot2",
@@ -2369,7 +2372,7 @@
         "gridtext",
         "gtable"
       ],
-      "Hash": "3639392f599506881b1dc8d93dcd8afe"
+      "Hash": "fc4f9e68dd2b26147871b9e28109b01c"
     },
     "textshaping": {
       "Package": "textshaping",

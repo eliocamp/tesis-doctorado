@@ -23,7 +23,7 @@ header-includes:
     - \usepackage{setspace}\onehalfspacing
     - \usepackage[spanish,es-tabla]{babel}
     - \usepackage[colorinlistoftodos]{todonotes}
-    - \usepackage[inline]{showlabels}
+    # - \usepackage[inline]{showlabels}
     - \usepackage{subfig}
 
 language:
@@ -47,10 +47,6 @@ output:
       split_by: "rmd"
       toc_depth: 3
       citation_package: "default"
-      pandoc_args:
-        - --wrap=none
-  bookdown::epub_book:
-      toc_depth: 3
       pandoc_args:
         - --wrap=none
   bookdown::word_document2:

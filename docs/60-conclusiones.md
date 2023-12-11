@@ -79,9 +79,17 @@ Sin embargo, la correlación entre el A-SAM y esta fase del cEOF2 es extremadame
 Esto sugiere que la correlación entre el ENSO y el SAM se debe a la correlación entre el ENSO y el PSA1 (al menos en primavera).
 
 Es necesario más investigación sobre la conexión entre el SAM y el PSA.
-Es posible que la variabilidad zonalmente asimétrica del PSA fuerze una respuesta zonalmente simétrica (y viceversa) a través de interacciones entre el flujo zonal medio y las ondas [@kim2004].
+Es posible que la variabilidad zonalmente asimétrica del PSA fuerce una respuesta zonalmente simétrica (y viceversa) a través de interacciones entre el flujo zonal medio y las ondas [@kim2004].
 También es posible que la correlación sea simplemente un artefacto estadístico resultante de la metodología utilizada para definir el SAM dado que la estructura espacial del PSA se proyecta sobre la estructura espacial de la parte simétrica del SAM.
 
-CMIP6
+Todos los modelos de CMIP6 analizados capturan correctamente la estructura espacial de los cEOFs, pero no todos consiguen capturar su variabilidad y relaciones con otras variables climáticas.
 
-Estudiar mejor los modelos CMIP6.
+En cuando a la relación entre el cEOF2 y el ENSO, algunos modelos simulan correctamente su nivel y naturaleza.
+MIROC6 y CESM2, por ejemplo, presentan las mayores correlaciones entre la fase de 90º del cEOF2 y el ONI, muestran una distribución similar de las fases del cEOF2 según el signo del ONI y periodogramas con un pico alrededor de 3 años.
+En otros modelos, la correlación es casi nula (INM-CM5-09 y IPSL-CM6A-LR, por ejemplo), la fase del cEOF2 no responde a la actividad del ENSO y no presentan períodos similares.
+La relación entre la fase de 90º del cEOF2 y el SAM no está presente en la mayoría de los modelos, pero sí la relación con el A-SAM, aunque en menor medida.
+
+La tendencia positiva de la fase de 0º del cEOF1 es detectada por algunos modelos y se observa en la media multimodelo, pero también aparece una tendencia negativa mucho más intensa en la fase de 90º que no está presente en las observaciones.
+Los experimentos de DAMIP sugieren que los gases de efecto invernadero tienen un forzante negativo en ambas fases, que es parcialmente compensado en la fase de 0º por la variación del ozono estratosférico y en la fase de 90º por los aerosoles.
+
+Las diferencias entre las tendencias observadas y simuladas podrían deberse a una incorrecta sensibilidad a los forzantes en los modelos, a problemas con su capacidad para resolver procesos clave como la variabilidad del vórtice polar, el agujero en la capa de ozono, o a diferencias en los campos medios de anomalías zonales de geopotencial.

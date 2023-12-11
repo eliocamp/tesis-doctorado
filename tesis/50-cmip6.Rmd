@@ -101,7 +101,7 @@ simulaciones %>%
   .[, ref := NULL] %>% 
   setnames("model", "Modelo") %>% 
   knitr::kable(caption = "Modelos analizados y la cantidad de miembros para cada experimento.",
-               format = "markdown")
+               format = "markdown", format.args = list(zero.print = "-"))
 ```
 
 Los modelos usados se listan en la Tabla \@ref(tab:modelos) se listan todos los modelos y la cantidad de miembros de cada uno.

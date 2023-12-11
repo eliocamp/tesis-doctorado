@@ -261,8 +261,11 @@ base <- ceof_era5[, eof[[1]]$right] %>%
 ```
 
 ```{r plot_top_bottom}
-sf::sf_use_s2(FALSE)
 plot_modelos <- function(which_cEOF, n = 4) {
+  
+  old <- sf::sf_use_s2(FALSE)
+  on.exit(sf::sf_use_s2(old))
+  
   which_lev = ifelse(which_cEOF == "cEOF1", 50, 200)
   top_bottom <- cors %>% 
     .[experiment == "historical"] %>%
@@ -298,8 +301,8 @@ plot_modelos <- function(which_cEOF, n = 4) {
 ```
 
 ```{r todos-ceof1, fig.width=6, fig.height=8}
-
 plot_modelos("cEOF1", 5)
+
 ```
 
 (ref:todos-ceof1-cap) Fase de 0º del cEOF1 en 50 hPa (sombreado, valores positivos en rojo, negativos en azul) de las corridas históricas de los modelos de CMIP6 analizados. Los contornos marcan el patrón de ERA5 (valores positivos en líneas llenas, valores negativos en línea punteada)
@@ -503,6 +506,7 @@ ceofs[, eof[[1]]$left, by = .(model, experiment)] %>%
   # labs(subtitle = equation) +
   panel_background()+
   facet_wrap(~model, labeller = labeller(model = labs_cor_enso))
+
 ```
 
 (ref:enso-phase-cmip-cap) Igual que la Figura \@ref(fig:enso-phase) pero para los modelos del CMIP6. El ajuste sinusoidal para cada modelo se realiza utilizando todos los miembros. 
@@ -535,6 +539,7 @@ ceofs[, eof[[1]]$left, by = .(model, experiment)] %>%
                      labels = function(x) paste0(round(x*180/pi, 5), "º")) +
   facet_wrap(~model, labeller = labeller(model = labs_cor_enso)) +
   coord_cartesian(xlim = c(-pi, pi)) 
+
 ```
 
 (ref:arg-enso-density-cap) Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0.5, entre -0.5 y 0.5, y mayor a 0.5. 
@@ -602,6 +607,7 @@ fft %>%
   scale_alpha_identity() +
   facet_wrap(model ~ ., labeller = labeller(model = labs_cor_enso)) +
   rect
+
 ```
 
 (ref:fft-ceof2-cap) Espectros de Fourier para las fases del cEOF2 y del ONI de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el $r^2$ entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.
@@ -838,6 +844,10 @@ gdata <- sam_cors %>%
   setnames(c("x", "y"), c("lev", "correlation")) %>% 
   .[, term := factor_sam(term)]
 
+# facet_grid2 shenanigans
+panels <- paste(rep(letters[1:4], 3), rep(1:3, each = 4), sep = ".")
+order <- order(c(1, 5, 9, 2, 6, 10, 3, 7, 11, 4, 8, 12))
+panels <- panels[order]
 
 # gdata <- gdata %>% 
 #   .[, ggplot2::mean_se(correlation^2), by = .(lev, experiment, cEOF, part, term)]
@@ -883,7 +893,7 @@ ggplot(mapping = aes(lev, correlation^2)) +
                                                          asym = "A-SAM",
                                                          sym = "S-SAM"), 
                      aesthetics = c("colour", "fill")) +
-  tag_facets("cr", position = "tr") +
+  tag_facets(position = "tr", tag_pool = panels) +
   panel_background() 
 ```
 
@@ -895,9 +905,9 @@ Las líneas translúcidas son los valores promedio de cada modelo y las áreas l
 
 La relación entre el cEOF1 y el SAM en los modelos del CMIP6 es similar a la observada, aunque con diferencias en la magnitud. 
 
-En cuanto al cEOF2, los modelos del CMIP6 capturan correctamente la falta de correlación entre fase de 0º del cEOF2 y el SAM y el S-SAM (paneles XX y XX), pero tienen un nivel de correlación más alto de lo esperado con el A-SAM en la tropósfera (panel XX).
-La fase de 90º, en cambio, no muestra la relación observada con el SAM en la tropósfera (panel XX). 
-A pesar de esto, sí tiene una relación alta con el A-SAM (panel XX). 
+En cuanto al cEOF2, los modelos del CMIP6 capturan correctamente la falta de correlación entre fase de 0º del cEOF2 y el SAM y el S-SAM (paneles c.1 y c.3), pero tienen un nivel de correlación más alto de lo esperado con el A-SAM en la tropósfera (panel c.2).
+La fase de 90º, en cambio, no muestra la relación observada con el SAM en la tropósfera (panel d.1). 
+A pesar de esto, sí tiene una relación alta con el A-SAM (panel d.2). 
 Esto sugiere que los modelos CMIP6 no capturan correctamente la relación entre el PSA2 el SAM, pero esta relación sí aparece si se filtra sólo la variabilidad de la parte asimétrica del SAM. 
 
 ## Tendencias

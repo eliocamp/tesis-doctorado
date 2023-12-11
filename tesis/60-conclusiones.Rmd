@@ -4,10 +4,7 @@ knit: purrr::partial(bookdown::render_book, output_format = 'all', preview = TRU
 
 # Conclusiones
 
-Esta tesis trató de mejorar el entendimiento de la circulación extratropical del hemisferio sur....
-
-## Resumen
-
+Esta tesis trató de mejorar el entendimiento de las asimetrías zonales de la circulación extratropical del hemisferio sur.
 Al analizar los índices utilizados en la literatura para caracterizar la onda 3 se observó que éstos no eran capaces de caracterizar propiedades importantes de la misma, como su propagación meridional, amplitud variable a lo largo de cada círculo de latitud y variación de la fase a lo largo del año.
 Ni el índice propuesto por @raphael2004 ni la amplitud de la onda 3 computada por Fourier permiten describir estas características.
 

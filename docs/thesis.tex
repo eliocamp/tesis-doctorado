@@ -79,6 +79,46 @@
 % \usepackage{times} % other fonts are available like times, bookman, charter, palatino
 
 % Syntax highlighting #22
+  \usepackage{color}
+  \usepackage{fancyvrb}
+  \newcommand{\VerbBar}{|}
+  \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+  % Add ',fontsize=\small' for more characters per line
+  \usepackage{framed}
+  \definecolor{shadecolor}{RGB}{248,248,248}
+  \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+  \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+  \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+  \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+  \newcommand{\BuiltInTok}[1]{#1}
+  \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+  \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+  \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+  \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+  \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+  \newcommand{\ExtensionTok}[1]{#1}
+  \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+  \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\ImportTok}[1]{#1}
+  \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+  \newcommand{\NormalTok}[1]{#1}
+  \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+  \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+  \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+  \newcommand{\RegionMarkerTok}[1]{#1}
+  \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
 % To pass between YAML and LaTeX the dollar signs are added by CII
 \title{Dinámica de la circulación zonalmente asimétrica del hemisferio sur}
@@ -2118,92 +2158,88 @@ Los modelos del CMIP6 también presentan una tendencia negativa en la fase de 90
 \hypertarget{conclusiones-3}{%
 \chapter{Conclusiones}\label{conclusiones-3}}
 
-Esta tesis trató de mejorar el entendimiento de las asimetrías zonales de la circulación extratropical del hemisferio sur.
-Al analizar los índices utilizados en la literatura para caracterizar la onda 3 se observó que éstos no eran capaces de caracterizar propiedades importantes de la misma, como su propagación meridional, amplitud variable a lo largo de cada círculo de latitud y variación de la fase a lo largo del año.
-Ni el índice propuesto por Raphael (\protect\hyperlink{ref-raphael2004}{2004}) ni la amplitud de la onda 3 computada por Fourier permiten describir estas características.
+Esta tesis se propuso mejorar el entendimiento de las asimetrías zonales de la circulación extratropical del hemisferio sur.
 
-Se propuso usar Funciones Empíricas Ortogonales Complejas (cEOF) para caracterizar la circulación zonalmente asimétrica del hemisferio sur.
-Dada la alta correlación entre los modos observados en la tropósfera y estratósfera y la similitud de sus patrones espaciales, consideramos que pueden tratarse como modos de variabilidad conjunta.
-Por lo tanto, éstos se calcularon utilizando los niveles de 200 hPa y 50 hPa en conjunto.
-También nos restringimos al trimestre SON dado que este trimestre es el que maximiza las teleconexiones entre trópicos y extratrópicos.
+La forma más clásica de estudiar estas asimetrías es a través del patrón de onda 3, que explican gran parte de la varianza total del campo medio anual de las anomalías zonales de altura geopotencial en la troposfera.
+Sin embargo, al analizar los índices típicamente utilizados en la literatura para caracterizar la onda 3, como el propuesto por Raphael (\protect\hyperlink{ref-raphael2004}{2004}) o el computado por análisis de Fourier, se observó que éstos no son capaces de caracterizar propiedades importantes de la misma, como su propagación meridional, su amplitud variable a lo largo de cada círculo de latitud y la variación de su fase fase a lo largo del año.
 
-El cEOF1 representa un patrón de onda 1 y es principalmente un modo estratosférico asociado a las anomalías de Columna Total de Ozono y el vórtice polar.
-Además, su fase de 0º presenta una tendencia positiva estadísticamente significativa en el período 1940-\/-2020, aunque dicha tendencia parece haber desaparecido luego de 2000, lo cual sería consistente con la dinámica del agujero en la capa de ozono.
-Este modo no presenta asociación significativa con la Temperatura de la Superficie del Mar (TSM), la temperatura a 2 metros o la precipitación y no presenta asociación con fuentes de variabilidad tropical.
-Se trata de un modo interno de la atmósfera extratropical y de limitado interés en cuanto a impactos directos.
+Considerando esas limitaciones, se caracterizó la circulación zonalmente asimétrica del hemisferio sur a partir del uso de Funciones Empíricas Ortogonales Complejas (cEOF), metodología que permite capturar oscilaciones con amplitud y fase variables.
+Dada la alta correlación temporal entre los modos observados en la tropósfera y estratósfera y la similitud de sus patrones espaciales al aplicar la metodología cEOF en distintos niveles atmosféricos, se consideró que pueden tratarse como modos de variabilidad conjunta.
+Por lo tanto, los cEOF se calcularon utilizando los niveles de 200 hPa y 50 hPa en conjunto.
+Se hizo foco en la estación de primavera, ya que durante esta se maximizan las teleconexiones entre los trópicos y extratrópicos.
 
-El cEOF2 representa un patrón de onda 3 con propagación meridional y localizado principalmente en el sector del océano Pacífico.
-Es una forma alternativa de representar a los modos PSA1 y PSA2 (Patrón del Pacífico-Sudamérica) que los considera como un único modo conjunto con una amplitud y una fase continua.
-Éste está asociado a anomalías significativas de TSM tropicales y a flujos de actividad de onda, indicando que está influenciado por la variabilidad tropical.
+El primer modo obtenido a partir del análisis cEOF (cEOF1) representa un patrón de onda 1 y es principalmente un modo estratosférico asociado a las anomalías de Columna Total de Ozono y el vórtice polar.
+Además, su fase de 0º presenta una tendencia positiva estadísticamente significativa en el período 1940--2020, aunque dicha tendencia parece haber desaparecido luego de 2000, lo cual sería consistente con la dinámica del agujero en la capa de ozono.
+Este modo no presenta asociación significativa con fuentes de variabilidad tropical, ni se evidenciaron impactos en la temperatura o precipitación de superficie.
+Por lo tanto, se trata de un modo interno de la atmósfera extratropical y de limitado interés en cuanto a impactos directos.
 
-Al considerar la fase continua, este método permite mostrar no sólo que el cEOF2 tiende a estar en la fase de \(\pm\) 90º cuando hay anomalías positivas o negativas en la región del ENSO, respectivamente, sino que la localización de las anomalías influyen en la fase.
-Anomalías de TSM en el Pacífico central tienden a mover el cEOF2 hacia la fase de 180º y anomalías de TSM en el Pacífico oriental tienen a moverlo hacia la fase de 0º.
-Cuando no hay anomalías significativas de TSM en el Pacífico tropical, el cEOF2 no tiene una fase preferencial pero su actividad no disminuye.
-
-El cEOF2 surge como un modo de variabilidad interno de la atmósfera extratropical que en ausencia de forzante tropical carece de una fase preferencial.
+Por otra parte, el segundo modo obtenido a partir del análisis cEOF (cEOF2) representa un patrón de onda 3 con propagación meridional y localizado principalmente en el sector del océano Pacífico.
+Se encontró que es una forma alternativa de representar a los modos PSA1 y PSA2 (Patrón del Pacífico-Sudamérica) como un único modo conjunto con una amplitud y una fase continua.
+A diferencia del cEOF1, la variabilidad del cEOF2 está influenciado por la variabilidad tropical.
+Se pudo mostrar así que el cEOF2 surge como un modo de variabilidad interno de la atmósfera extratropical que en ausencia de forzante tropical carece de una fase preferencial.
 El forzante tropical no influye significativamente en su intensidad pero sí tiende a determinar una fase estacionaria.
-Esto es consistente con resultados de Cai y Watterson (\protect\hyperlink{ref-cai2002}{2002}), quien encontró que el modelo CSIRO desarrolla actividad tipo PSA aún removiendo la variabilidad de tipo ENSO, pero que la actividad de uno de los modos PSA se incrementa al agregar variabilidad del ENSO.
-La intransitividad de la fase a la ubicación de las anomalías tropicales de TSM también fue detectada por Ciasto, Simpkins y England (\protect\hyperlink{ref-ciasto2015}{2015}) al observar ondas de Rossby similares asociadas a anomalías de TSM en el Pacífico tanto central como oriental pero con variación en la fase.
+Esto es consistente con los resultados de Cai y Watterson (2002), quienes encontraron a partir de un modelo de circulación general acoplado que se puede desarrollar actividad tipo PSA aún removiendo la variabilidad de tipo ENSO, pero que la actividad de uno de los modos PSA se incrementa al agregar variabilidad del ENSO.
 
 Consistente con su relación con el ENSO, los impactos del cEOF2 en la superficie son significativos y dependientes de su fase.
 En los extratrópicos, la fase de 90º se asocia a anomalías positivas de precipitación en el SESA y negativas en Australia en patrones consistentes con la señal del ENSO en la precipitación.
-También se observaron anomalías significativas de temperatura en estos continentes y en Antártida Occidental.
+También se observaron anomalías significativas de temperatura en estos continentes y en la Antártida Occidental.
 
-Recientemente, Goyal et~al. (\protect\hyperlink{ref-goyal2022}{2022}) propuso un índice alternativo basado en los primeros dos EOF del viento meridional en 500 hPa y combinándolos en una medida de la amplitud y la fase de la onda 3.
-Este método tiene similitudes con el cEOF2 pero creemos que el cEOF2 es superior dado que construye un patrón de ondas donde las fases ortogonales son ortogonales por construcción.
-El método de Goyal et~al. (\protect\hyperlink{ref-goyal2022}{2022}) depende de la inspección visual por lo tanto no garantiza que la construcción de la fase y la amplitud sea realmente válida.
-De todas formas, futuros trabajos deberán explorar las ventajas y limitaciones de cada uno.
+Recientemente, Goyal et~al. (\protect\hyperlink{ref-goyal2022}{2022}) propuso un índice alternativo para la onda 3 basado en los primeros dos EOF del viento meridional en 500 hPa .
+Aunque este método tiene similitudes con el cEOF2, depende de la inspección visual por lo tanto no garantiza que la construcción de la fase y la amplitud sea realmente válida.
+En cambio, el cEOF2 tiene la ventaja de construirse como un patrón de ondas con amplitud y fase por construcción.
+Futuros trabajos deberán explorar las ventajas y limitaciones de cada uno.
 
-También estudiamos la componente zonalmente asimétrica del SAM.
+Se estudiaron también las características simétricas y asimétricas del SAM, primer patrón de variabilidad temporal de la circulación extratropical del HS.
 Para lo cual desarrollamos un índice del SAM simétrico (S-SAM) y del SAM asimétrico (A-SAM) proyectando los patrones simétricos y asimétricos del SAM, respectivamente.
 
 En la tropósfera, los patrones espaciales de altura geopotencial asociados al S-SAM son mucho más anulares que los patrones asociados al índice SAM.
 Por otro lado, el índice A-SAM está asociado a un patrón de onda 3 con amplitud máxima en el pacífico muy similar a la fase de 90º del cEOF2 (y, por lo tanto, al PSA1).
-Este patrón tiene su amplitud máxima en 250 hPa, sugiriendo que los índices del SAM basados en variables de superficie no son óptimos para capturar esta variabilidad.
-
-Observamos las mismas tendencias positivas del SAM en verano y otoño documentadas por estudios previos (p.e. \protect\hyperlink{ref-fogt2020}{Fogt y Marshall 2020} y sus referencias) en niveles bajos.
-Estas tendencias son máximas en 100 hPa, y son únicamente explicadas por el S-SAM.
-También detectamos una tendencia positiva estadísticamente significativa en en el S-SAM en la estratósfera en otoño que no es evidente en el índice SAM.
-Hay evidencia de que el SAM está evolucionando hacia ser más asimétrico en verano, conrario a lo observado por Fogt, Jones y Renwick (\protect\hyperlink{ref-fogt2012}{2012}).
-Esta discrepancia puede deberse a las diferencias metodológicas o al período analizado.
-
-El SAM está asociado, a grandes rasgos, con muestran anomalías de temperatura negativas en latitudes polares rodeadas de anomalías de temperatura positivas en latitudes más bajas.
-Las desviaciones de este patrón zonalmente simétrico son explicadas en gran medida por el A-SAM.
-Por ejemplo, el A-SAM está asociado a temperaturas más frías en el sur de Brasil, sur de África y sur de Australia y en el Pacífico ecuatorial (consistente con la correlación negativa entre el A-SAM y el ENSO).
-Estas anomalías son particularmente fuertes en verano y primavera, lo cual incluye los meses con mayor actividad de teleconexiones del ENSO (e.g. \protect\hyperlink{ref-cai2020a}{Cai et~al. 2020}).
-
-Tanto en Sudamérica como en Australia, las anomalías de precipitación asociadas al SAM pueden separarse casi linealmente entre contribuciones del S-SAM y del A-SAM.
-Futuros trabajos deberán estudiar el impacto de estos índices a otra variables, como la concentración del hielo marino Antártico.
-
-Silvestri y Vera (\protect\hyperlink{ref-silvestri2009}{2009}) sugiere que los impactos de la precipitación asociados al SAM sufrieron un cambio importante antes y después de 1980.
-En particular, la relación negativa con la precipitación en Sudamérica no existía en algunas zonas y cambió de signo en otras.
-La correlación entre ENSO y SAM tampoco es estacionaria, y también cambió de signo antes de la década de 1980 (\protect\hyperlink{ref-fogt2006}{Fogt y Bromwich 2006}; \protect\hyperlink{ref-clem2013}{Clem y Fogt 2013}).
-Dado que tanto la relación ENSO-SAM como la mayoría de los impactos de la precipitación en América del Sur son capturados por el A-SAM, la magnitud y el signo de estos impactos son muy probablemente dependientes del período y representan la señal media entre 1979 y 2018.
-Las variaciones decenales del A-SAM deberían ser el foco de futuros estudios.
-Esto es particularmente importante en el contexto del cambio climático, ya que el impacto del recuperación del ozono sobre el SAM se piensa como altamente zonalmente simétrico, mientras que el impacto del aumento de la concentración de gases de efecto invernadero tiene también un componente asimétrico zonal (\protect\hyperlink{ref-arblaster2006}{Arblaster y Meehl 2006}).
+Este patrón tiene su amplitud máxima en 250 hPa, sugiriendo que los índices del SAM basados en variables de superficie no son óptimos para capturar la variabilidad asimétrica.
 
 La correlación significativa entre el índice SAM y el ENSO es capturada en su totalidad por el A-SAM, lo que sugiere que el ENSO y el SAM están conectados únicamente por la variabilidad zonalmente asimétrica.
 El A-SAM es, por lo tanto, una medida muy útil para estudiar la relación entre estos dos modos de variabilidad.
 
+Las tendencias positivas del SAM de verano y otoño en la troposfera documentadas por estudios previos (p.e. . \protect\hyperlink{ref-fogt2020}{Fogt y Marshall 2020} y sus referencias) son únicamente explicadas por el S-SAM.
+También detectamos una tendencia positiva estadísticamente significativa en el S-SAM en la estratósfera en otoño que no es evidente en el índice SAM.
+Hay evidencia de que el SAM está evolucionando hacia ser más asimétrico en verano, contrario a lo observado por Fogt, Jones y Renwick (\protect\hyperlink{ref-fogt2012}{2012}), aunque la discrepancia puede deberse a las diferencias metodológicas o al período analizado.
+
+El SAM está asociado, a grandes rasgos, con muestran anomalías de temperatura negativas en latitudes polares rodeadas de anomalías de temperatura positivas en latitudes más bajas.
+El índice A-SAM explica en gran medidda las desviaciones con respecto a un patrón zonalmente simétrico en latitudes medias y altas de las regresiones de temperatura del aire en superficie con el índice SAM.
+Por ejemplo, la fase positiva del A-SAM está asociada a temperaturas más frías en el sur de Brasil, sur de África y sur de Australia y en el Pacífico ecuatorial .
+
+Asimismo, tanto en Sudamérica como en Australia, las anomalías de precipitación asociadas al SAM pueden separarse casi linealmente entre contribuciones del S-SAM y del A-SAM.
+
 La relación entre el SAM y la fase de 90º del cEOF2 es significativa pero modesta en la tropósfera, lo cual es consistente con los patrones tipo SAM asociados a éste último.
 Sin embargo, la correlación entre el A-SAM y esta fase del cEOF2 es extremadamente alta, sugiriendo que ambos índices están representando el mismo modo y permitiendo una identificación entre la parte asimétrica del SAM y la fase de 90º del cEOF2 (que es el PSA1).
-Esto sugiere que la correlación entre el ENSO y el SAM se debe a la correlación entre el ENSO y el PSA1 (al menos en primavera).
+Esto sugiere que, al menos en primavera, la correlación entre el ENSO y el SAM se debe a la correlación entre el ENSO y el PSA1.
 
-Es necesario más investigación sobre la conexión entre el SAM y el PSA.
-Es posible que la variabilidad zonalmente asimétrica del PSA fuerce una respuesta zonalmente simétrica (y viceversa) a través de interacciones entre el flujo zonal medio y las ondas (\protect\hyperlink{ref-kim2004}{Kim y Lee 2004}).
-También es posible que la correlación sea simplemente un artefacto estadístico resultante de la metodología utilizada para definir el SAM dado que la estructura espacial del PSA se proyecta sobre la estructura espacial de la parte simétrica del SAM.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n\_cmip }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(}\FunctionTok{readRDS}\NormalTok{(eliotesis}\SpecialCharTok{::}\FunctionTok{data\_path}\NormalTok{(}\StringTok{"derived"}\NormalTok{, }\StringTok{"sims.Rds"}\NormalTok{)), experiment\_id }\SpecialCharTok{==} \StringTok{"historical"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{source\_id}
+\NormalTok{n\_cmip }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(n\_cmip))}
+\end{Highlighting}
+\end{Shaded}
 
-Todos los modelos de CMIP6 analizados capturan correctamente la estructura espacial de los cEOFs, pero no todos consiguen capturar su variabilidad y relaciones con otras variables climáticas.
+Al evaluar la capacidad de los modelos del CMIP6 para describir los patrones cEOF, se encontró que todos los 19 modelos analizados capturan correctamente la estructura espacial de los cEOFs, pero no todos consiguen capturar su variabilidad temporal y relaciones con otras variables climáticas.
+Por ejemplo, existen modelos como MIROC6 y CESM2 que simulan correctamente la relación entre el cEOF2 y el ENSO, y que muestran una distribución similar de las fases del cEOF2 según el signo del ONI y periodogramas con un pico alrededor de 3 años.
+En cambio, para otros modelos, como INM-CM5-09 y IPSL-CM6A-LR, la fase del cEOF2 no responde a la actividad del ENSO y no presentan períodos similares.
+Por otra parte, la relación entre la fase de 90º del cEOF2 y el SAM no está presente en la mayoría de los modelos, pero sí la relación con el A-SAM, aunque en menor medida.
 
-En cuando a la relación entre el cEOF2 y el ENSO, algunos modelos simulan correctamente su nivel y naturaleza.
-MIROC6 y CESM2, por ejemplo, presentan las mayores correlaciones entre la fase de 90º del cEOF2 y el ONI, muestran una distribución similar de las fases del cEOF2 según el signo del ONI y periodogramas con un pico alrededor de 3 años.
-En otros modelos, la correlación es casi nula (INM-CM5-09 y IPSL-CM6A-LR, por ejemplo), la fase del cEOF2 no responde a la actividad del ENSO y no presentan períodos similares.
-La relación entre la fase de 90º del cEOF2 y el SAM no está presente en la mayoría de los modelos, pero sí la relación con el A-SAM, aunque en menor medida.
+La tendencia positiva observada de la fase de 0º del cEOF1 es detectada por algunos modelos y se observa, aunque con baja magnitud, en la media multimodelo.
+Por otro lado, aparece una tendencia negativa mucho más intensa en la fase de 90º que no está presente en las observaciones.
+Los experimentos que consideran por separado los forzantes naturales y los distintos fozantes antropogénicos (gases de efecto invernadeor, ozono estratosférico, aerosoles) , sugieren que los gases de efecto invernadero contribuyen a una disminución en ambas fases, mientras que la variación del ozono estratosférico aporta a un aumento en la fase de 0º de modo que compensando el efecto de los gases de efecto invernadero y generan una tendencia neta positiva.
 
-La tendencia positiva de la fase de 0º del cEOF1 es detectada por algunos modelos y se observa en la media multimodelo, pero también aparece una tendencia negativa mucho más intensa en la fase de 90º que no está presente en las observaciones.
-Los experimentos de DAMIP sugieren que los gases de efecto invernadero tienen un forzante negativo en ambas fases, que es parcialmente compensado en la fase de 0º por la variación del ozono estratosférico y en la fase de 90º por los aerosoles.
+Entre las causas que se pueden mencionar para explicar las diferencias entre las tendencias observadas y simuladas se puede mencionar una incorrecta sensibilidad a los forzantes en los modelos, problemas de la capacidad de los modelos para resolver procesos clave en la dinámica de la circulación asimétrica zonal del hemisferio sur como la variabilidad del vórtice polar, el agujero en la capa de ozono, o a diferencias en los campos medios de anomalías zonales de geopotencial.
 
-Las diferencias entre las tendencias observadas y simuladas podrían deberse a una incorrecta sensibilidad a los forzantes en los modelos, a problemas con su capacidad para resolver procesos clave como la variabilidad del vórtice polar, el agujero en la capa de ozono, o a diferencias en los campos medios de anomalías zonales de geopotencial.
+En resumen, este trabajo de tesis aporta herramientas para mejorar el entendimiento de la circulación zonalmente asimétrica del hemisferio sur.
+Al aplicar analizar los principales patrones de circulación mediante cEOFs, conseguimos un índice del PSA que permite estudiar su fase en forma continua más allá del PSA1 y el PSA2 y su relación con el ENSO.
+Al separar el índice del SAM en su parte simétrica y asimétrica, pudimos explorar la variabilidad, tendencias e impactos de cada componente y mostrar que la parte asimétrica es equivalente al PSA1 en primavera.
+Los modelos de CMIP6 se mostraron adecuados para representar estos modos pero no todos consiguen simular su relación con el ENSO o el SAM ni sus tendencias correctamente.
+
+Estos resultados abren la puerta a muchas investigaciones futuras.
+Es necesario extender el estudio a otros trimestres además de SON, así como adentrar en el impacto de estos modos en otras variables del sistema climático.
+A su vez, quedan sin dilucidar los mecanismos que establecen la relación entre el S-SAM y el A-SAM/PSA1, los cuales pueden ser estudiados mediante simulaciones de sensibilidad.
+En cuando a los modelos de CMIP6, un estudio más detallado de las propiedades de cada modelo podría permitir entender qué procesos son importantes para una correcta caracterización de la circulación asimétrica y sus tendencias.
 
 \backmatter
 
@@ -2264,9 +2300,6 @@ CAI, W., MCPHADEN, M.J., GRIMM, A.M., RODRIGUES, R.R., TASCHETTO, A.S., GARREAUD
 \leavevmode\vadjust pre{\hypertarget{ref-cai2011}{}}%
 CAI, W., RENSCH, P. van, COWAN, T. y HENDON, H.H., 2011. Teleconnection {Pathways} of {ENSO} and the {IOD} and the {Mechanisms} for {Impacts} on {Australian Rainfall}. \emph{Journal of Climate}, vol. 24, no. 15, ISSN 0894-8755, 1520-0442. DOI \href{https://doi.org/10.1175/2011JCLI4129.1}{10.1175/2011JCLI4129.1}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-cai2002}{}}%
-CAI, W. y WATTERSON, I.G., 2002. Modes of {Interannual Variability} of the {Southern Hemisphere Circulation Simulated} by the {CSIRO Climate Model}. \emph{Journal of Climate}, vol. 15, no. 10, ISSN 0894-8755, 1520-0442. DOI \href{https://doi.org/10.1175/1520-0442(2002)015\%3C1159:MOIVOT\%3E2.0.CO;2}{10.1175/1520-0442(2002)015\textless1159:MOIVOT\textgreater2.0.CO;2}.
-
 \leavevmode\vadjust pre{\hypertarget{ref-campitelli2018b}{}}%
 CAMPITELLI, E., 2018. {Estudio de los mecanismos f{í}sicos asociados con el patr{ó}n de onda 3 de la circulaci{ó}n atmosf{é}rica del Hemisferio Sur}.,
 
@@ -2284,9 +2317,6 @@ CAZES-BOEZIO, G., ROBERTSON, A.W. y MECHOSO, C.R., 2003. Seasonal {Dependence} o
 
 \leavevmode\vadjust pre{\hypertarget{ref-chung1999}{}}%
 CHUNG, C. y NIGAM, S., 1999. Weighting of Geophysical Data in {Principal Component Analysis}. \emph{Journal of Geophysical Research: Atmospheres}, vol. 104, no. D14, ISSN 2156-2202. DOI \href{https://doi.org/10.1029/1999JD900234}{10.1029/1999JD900234}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-ciasto2015}{}}%
-CIASTO, L.M., SIMPKINS, G.R. y ENGLAND, M.H., 2015. Teleconnections between {Tropical Pacific SST Anomalies} and {Extratropical Southern Hemisphere Climate}. \emph{Journal of Climate}, vol. 28, no. 1, ISSN 0894-8755, 1520-0442. DOI \href{https://doi.org/10.1175/JCLI-D-14-00438.1}{10.1175/JCLI-D-14-00438.1}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-clem2013}{}}%
 CLEM, K.R. y FOGT, R.L., 2013. Varying Roles of {ENSO} and {SAM} on the {Antarctic Peninsula} Climate in Austral Spring. \emph{Journal of Geophysical Research: Atmospheres}, vol. 118, no. 20, ISSN 2169-8996. DOI \href{https://doi.org/10.1002/jgrd.50860}{10.1002/jgrd.50860}.
@@ -2311,9 +2341,6 @@ DOWLE, M. y SRINIVASAN, A., 2020. \emph{Data.Table: {Extension} of 'Data.Frame'}
 
 \leavevmode\vadjust pre{\hypertarget{ref-fan2007}{}}%
 FAN, K., 2007. Zonal Asymmetry of the {Antarctic Oscillation}. \emph{Geophysical Research Letters}, vol. 34, no. 2, ISSN 0094-8276. DOI \href{https://doi.org/10.1029/2006GL028045}{10.1029/2006GL028045}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-fogt2006}{}}%
-FOGT, R.L. y BROMWICH, D.H., 2006. Decadal {Variability} of the {ENSO Teleconnection} to the {High-Latitude South Pacific Governed} by {Coupling} with the {Southern Annular Mode}. \emph{Journal of Climate}, vol. 19, no. 6, ISSN 0894-8755. DOI \href{https://doi.org/10.1175/JCLI3671.1}{10.1175/JCLI3671.1}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-fogt2011a}{}}%
 FOGT, R.L., BROMWICH, D.H. y HINES, K.M., 2011. Understanding the {SAM} Influence on the {South Pacific ENSO} Teleconnection. \emph{Climate Dynamics}, vol. 36, no. 7, ISSN 1432-0894. DOI \href{https://doi.org/10.1007/s00382-010-0905-0}{10.1007/s00382-010-0905-0}.
@@ -2413,9 +2440,6 @@ KATZ, R.W. y BROWN, B.G., 1991. The Problem of Multiplicity in Research on Telec
 
 \leavevmode\vadjust pre{\hypertarget{ref-kidson1988}{}}%
 KIDSON, J.W., 1988. Interannual {Variations} in the {Southern Hemisphere Circulation}. \emph{Journal of Climate}, vol. 1, no. 12, ISSN 0894-8755. DOI \href{https://doi.org/10.1175/1520-0442(1988)001\%3C1177:IVITSH\%3E2.0.CO;2}{10.1175/1520-0442(1988)001\textless1177:IVITSH\textgreater2.0.CO;2}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-kim2004}{}}%
-KIM, H. y LEE, S., 2004. The {Wave}{\textendash}{Zonal Mean Flow Interaction} in the {Southern Hemisphere}. \emph{Journal of the Atmospheric Sciences}, vol. 61, no. 9, ISSN 0022-4928, 1520-0469. DOI \href{https://doi.org/10.1175/1520-0469(2004)061\%3C1055:TWMFII\%3E2.0.CO;2}{10.1175/1520-0469(2004)061\textless1055:TWMFII\textgreater2.0.CO;2}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-krokhin2007}{}}%
 KROKHIN, V.V. y LUXEMBURG, W.M.J., 2007. Temperatures and Precipitation Totals over the {Russian Far East} and {Eastern Siberia}: Long-Term Variability and Its Links to Teleconnection Indices. \emph{Hydrology and Earth System Sciences}, vol. 11, no. 6, ISSN 1027-5606. DOI \href{https://doi.org/10.5194/hess-11-1831-2007}{10.5194/hess-11-1831-2007}.

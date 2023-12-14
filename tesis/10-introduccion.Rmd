@@ -9,6 +9,7 @@ Estas asimetrías zonales no han sido ampliamente estudiadas, pero trabajos prev
 
 La circulación zonalmente asimétrica suele describirse en base a la amplitud y la fase de las ondas zonales obtenidas por descomposición de Fourier de la altura geopotencial o la presión a nivel del mar en cada latitud [ej., @vanloon1972; @trenberth1980a; @turner2017].
 Bajo este enfoque, las ondas zonales 1 y 3 explican casi el 99% de la varianza total del campo medio anual de las anomalías zonales de altura geopotencial de 500 hPa en 50ºS [@vanloon1972].
+La fase media de la onda 3 además tiene ciclo anual de aproximadamente 30º según describió @mo1985 y luego @campitelli2018b utilizando una serie más larga.
 @trenberth1985 concluyó que la onda 3 tiene un rol importante en el desarrollo de los fenómenos de bloqueo.
 Además, trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos, como en las anomalías en la concentración de hielo marino antártico [@raphael2007].
 
@@ -35,7 +36,7 @@ Aunque estos patrones suelen derivarse aplicando EOF a anomalías temporales, @r
 Por otra parte,@irving2016 propuso una metodología novedosa para identificar el patrón PSA utilizando la descomposición de Fourier.
 Más recientemente @goyal2022 creó un índice de amplitud y fase de la variabilidad zonal tipo onda 3 combinando los dos EOF principales de las anomalías del viento meridional.
 
-Los patrones resultantes del análisis EOF son más \"flexibles\" que los modos derivados de la descomposición de Fourier, ya que pueden captar patrones de oscilación que no pueden caracterizarse por ondas puramente sinusoidales con amplitud constante.
+Los patrones resultantes del análisis EOF son más "flexibles" que los modos derivados de la descomposición de Fourier, ya que pueden captar patrones de oscilación que no pueden caracterizarse por ondas puramente sinusoidales con amplitud constante.
 No obstante, los EOFs se limitan a describir modos de variabilidad estacionarios y no pueden representar correctamente modos de variabilidad que cambian de posición, como ondas que se propagan.
 Por otra parte, un único EOF también puede representar una mezcla de dos o más modos físicos.
 

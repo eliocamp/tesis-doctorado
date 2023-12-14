@@ -49,7 +49,7 @@ La variabilidad del SAM está asociada a la variabilidad tropical [@fan2007; @fo
 El Niño-Oscilación del Sur (ENSO, por sus siglas en inglés) o la variabilidad de la temperatura de la superficie del mar (TSM) similar afecta a los extratrópicos del hemisferio sur a través de trenes de ondas de Rossby [@mo1987; @kidson1988; @karoly1989] que se proyectan fuertemente sobre las anomalías zonales asociadas al SAM en el sector del Pacífico.
 @fan2007 calculó los índices de SAM de los hemisferios occidental y oriental por separado y encontró que la correlación entre ellos aumentaba si se eliminaba la señal (lineal) del ENSO, sugiriendo que la influencia del ENSO en el SAM no es zonalmente homogéneo.
 
-Investigaciones previas han documentado tendencias positivas en el SAM utilizando diferentes índices, sobre todo en verano y otoño austral [p.e., @fogt2020 y sus referencias].
+Investigaciones previas han documentado tendencias positivas en el SAM utilizando diferentes índices, sobre todo en verano y otoño austral [ej., @fogt2020 y sus referencias].
 Se cree que estas tendencias están impulsadas principalmente por la reducción del ozono estratosférico y el aumento de los gases de efecto invernadero, y son analizadas en el contexto de las variables medias zonales [@marshall2004; @gillett2005; @arblaster2006; @gillett2013].
 Sin embargo, aún no está claro si la componente asimétrica del SAM responde a estos forzantes de la misma forma o cómo su variabilidad altera las tendencias observadas.
 

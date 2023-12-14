@@ -45,7 +45,7 @@ Este patrón tiene su amplitud máxima en 250 hPa, sugiriendo que los índices d
 La correlación significativa entre el índice SAM y el ENSO es capturada en su totalidad por el A-SAM, lo que sugiere que el ENSO y el SAM están conectados únicamente por la variabilidad zonalmente asimétrica.
 El A-SAM es, por lo tanto, una medida muy útil para estudiar la relación entre estos dos modos de variabilidad.
 
-Las tendencias positivas del SAM de verano y otoño en la troposfera documentadas por estudios previos [p.e. . @fogt2020 y sus referencias] son únicamente explicadas por el S-SAM.
+Las tendencias positivas del SAM de verano y otoño en la troposfera documentadas por estudios previos [ej. . @fogt2020 y sus referencias] son únicamente explicadas por el S-SAM.
 También detectamos una tendencia positiva estadísticamente significativa en el S-SAM en la estratósfera en otoño que no es evidente en el índice SAM.
 Hay evidencia de que el SAM está evolucionando hacia ser más asimétrico en verano, contrario a lo observado por @fogt2012, aunque la discrepancia puede deberse a las diferencias metodológicas o al período analizado.
 

@@ -548,8 +548,8 @@ La relación entre el cEOF2 y el ENSO se explica por una preferencia de fase cua
 Para evaluar esto en los modelos del CMIP6, las Figuras \@ref(fig:enso-phase-cmip) muestra la relación entre el ENSO y la fase del cEOF2 para los modelos del CMIP6 y la Figura \@ref(fig:arg-enso-density) la distribución de fases del cEOF2 para primaveras con ONI menor a -0.5, mayor a 0.5 y valores intermedios. 
 Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal fuerte, mientras que en los modelos con baja correlación la relación es más chata. 
 La distribución de las fases según categorías de índice ONI (Fig. \@ref(fig:arg-enso-density)) se ven bien separadas en las observaciones y en los modelos con alta correlación entre el cEOF2 y el ONI.
-En estos modelos (p.e. MIROC6, CESM2), cuando el ENSO está activo (definido como ONI > 0.5 o ONI < -0.5), la fase del cEOF2 se concentra cerca de $\pm$ 90º (dependiendo del signo del ONI) mientras que cuando el ENSO no está tan activo (definido como ONI entre -0.5 y 0.5), la distribución de la fase es más uniforme. 
-En los modelos con baja correlación entre cEOF2 y ONI (p.e. IPSL-CM6A-LR, INM-CM5-0) la distribución de fase es uniforme independientemente de la actividad del ENSO. 
+En estos modelos (ej. MIROC6, CESM2), cuando el ENSO está activo (definido como ONI > 0.5 o ONI < -0.5), la fase del cEOF2 se concentra cerca de $\pm$ 90º (dependiendo del signo del ONI) mientras que cuando el ENSO no está tan activo (definido como ONI entre -0.5 y 0.5), la distribución de la fase es más uniforme. 
+En los modelos con baja correlación entre cEOF2 y ONI (ej. IPSL-CM6A-LR, INM-CM5-0) la distribución de fase es uniforme independientemente de la actividad del ENSO. 
 
 ```{r fft}
 fft <- ceofs %>% 

@@ -9,7 +9,7 @@ Estas asimetrías zonales no han sido ampliamente estudiadas, pero trabajos prev
 
 La circulación zonalmente asimétrica suele describirse en base a la amplitud y la fase de las ondas zonales obtenidas por descomposición de Fourier de la altura geopotencial o la presión a nivel del mar en cada latitud [ej., @vanloon1972; @trenberth1980a; @turner2017].
 Bajo este enfoque, las ondas zonales 1 y 3 explican casi el 99% de la varianza total del campo medio anual de las anomalías zonales de altura geopotencial de 500 hPa en 50ºS [@vanloon1972].
-La fase media de la onda 3 además tiene ciclo anual de aproximadamente 30º según describió @mo1985 y luego @campitelli2018b utilizando una serie más larga.
+La onda 3 alcanza su máxima amplitud cerca de 200 hPa y su fase media de la onda 3 además tiene ciclo anual de aproximadamente 30º según describió @mo1985 y luego @campitelli2018b utilizando una serie más larga.
 @trenberth1985 concluyó que la onda 3 tiene un rol importante en el desarrollo de los fenómenos de bloqueo.
 Además, trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos, como en las anomalías en la concentración de hielo marino antártico [@raphael2007].
 

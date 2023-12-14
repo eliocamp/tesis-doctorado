@@ -1,7 +1,7 @@
 # Introducción {#intro}
 
-La circulación general del hemisferio sur es más zonalmente simétrica que la del hemisferio norte, pero las anomalías zonales de la circulación tienen impactos regionales importantes [p.e. @hoskins2005].
-Modulan fuertemente los sistemas meteorológicos y el clima regional al influenciar el transporte meridional de calor, humedad y momento [@trenberth1980a; @raphael2007] e incluso podrían estar relacionados con la ocurrencia de extremos climáticos de alto impacto [@pezza2012].
+La circulación general del hemisferio sur (HS) es más zonalmente simétrica que la del hemisferio norte, pero las anomalías zonales de la circulación tienen impactos regionales importantes [p.e. @hoskins2005].
+Las anomalías zonales modulan fuertemente los sistemas meteorológicos y el clima regional al influenciar el transporte meridional de calor, humedad y momento [@trenberth1980a; @raphael2007] e incluso podrían estar relacionados con la ocurrencia de extremos climáticos de alto impacto [@pezza2012].
 
 A pesar de estos impactos, las anomalías zonales de circulación están poco estudiadas en el hemisferio sur.
 Por ejemplo, el principal patrón de circulación en latitudes medias -- el Modo Anular del Sur (SAM, por sus siglas en inglés) -- es entendido como un patrón zonalmente simétrico [@fogt2020] a pesar de estar asoaciado a significativas anomalías zonales de altura geopotencial.

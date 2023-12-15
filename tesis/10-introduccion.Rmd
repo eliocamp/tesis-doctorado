@@ -29,7 +29,7 @@ La envolvente de onda puede representar entonces ondas planetarias con diferente
 Utilizando este método, @irving2015 demostraron que la amplitud de las ondas planetarias en el HS en general tienen un impacto en las anomalías de concentración de hielo marino antártico y temperatura, así como en las anomalías de precipitación en regiones de topografía significativa en latitudes medias del hemisferio sur y en la Antártida.
 
 Un enfoque ampliamente utilizado para caracterizar las anomalías de la circulación troposférica del hemisferio sur es el cálculo de las Funciones Ortogonales Empíricas (EOF, también conocidas como Análisis de Componentes Principales).
-El SAM aparece como el EOF que explica la mayor parte de la varianza la circulación del hemisferio sur [@fogt2020], seguido por los EOF 2 y 3, normalmente conocidos como Patrón del Pacífico-Sudamérica 1  y 2 (PSA1 y PSA2), respectivamente.
+El SAM aparece como el EOF que explica la mayor parte de la varianza la circulación del hemisferio sur [@fogt2020], seguido por los EOF 2 y 3, normalmente conocidos como Patrón del Pacífico-Sudamérica 1 y 2 (PSA1 y PSA2), respectivamente.
 Éstos describen trenes de ondas con propagación meridional que se originan en el Pacífico ecuatorial oriental y en el sector australiano-océano Índico, y viajan hacia Sudamérica y el Atlántico Sur siguiendo un arco de gran círculo a lo largo de la costa Antártida [@mo2001].
 Estos patrones influyen en anomalías climáticas en Sudamérica incluyendo la precipitación [@mo2001].
 Aunque estos patrones suelen derivarse aplicando EOF a anomalías temporales, @raphael2003 también aplicó métodos EOF específicamente a anomalías zonales.

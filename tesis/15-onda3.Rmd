@@ -22,7 +22,7 @@ blue <- "#0d52bf"
 gray <- "#d4d4d4"
 ```
 
-# Exploración de las formas de descripción de la onda 3
+# Exploración de las formas de descripción de la onda 3 {#onda3}
 
 La [Introducción](#intro) introdujo conceptualmente algunos aspectos problemáticos de las metodologías e índices normalmente utilizados en la literatura para estudiar la circulación zonalmente asimétrica en el hemisferio sur.
 Este capítulo realiza una primera evaluación de la descripción de la onda zonal 3 a través del del índice propuesto por @raphael2004 y de la descomposición de Fourier.
@@ -494,7 +494,7 @@ Se observa que la amplitud de la onda 1 se asocia a mayor actividad de onda en u
 Las ondas 2 y 3, en cambio, contribuyen a las anomalías mensuales de altura geopotencial principalmente en el Pacífico sur.
 Esto es consistente con lo observado en los casos particulares en la Figura \@ref(fig:zw3-top8) y sugiere que la onda 3 puede presentar variaciones longitudinales que no son capturadas por un modelo sinusoidal puro.
 
-## Conclusiones
+## Conclusiones del capítulo \@ref(onda3)
 
 De este análisis concluimos que ni el modelo de @raphael2004 ni el modelo de Fourier son adecuados para describir las variaciones espacio-temporales de la onda 3 en el hemisferio sur.
 Es necesario entonces una metodología que permita describir cambios en la fase, modulación zonal de la amplitud y propagación meridional.

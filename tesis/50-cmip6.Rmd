@@ -1206,8 +1206,6 @@ ceofs_standard %>%
 
 ```
 
-<<<<<<< HEAD
-
 
 ```{r}
 hgt_regression_mmm %>% 

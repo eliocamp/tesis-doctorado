@@ -26,6 +26,8 @@ Sys.setenv(HDF5_USE_FILE_LOCKING = FALSE)
 alpha_from_n <- function(n, max_alpha = 0.99) {
   1 - (1 - max_alpha)^(1/n)
 }
+
+sf::sf_use_s2(FALSE)
 ```
 
 ```{r scales}
@@ -375,15 +377,16 @@ Lo siguiente es explorar si los modelos logran capturar características de segu
 
 
 ```{r ceof_largo_p}
-campos <- ceofs[, denormalise(eof[[1]], "right"), by = .(experiment, model)] %>% 
-  sep_ReIm()
 
-setorder(campos, experiment, model, part, cEOF, -lev, lat, lon)
 ceof_largo_file <- data_path("derived", "ceof_largo.Rds")
 
 if (file.exists(ceof_largo_file)) {
   ceof_largo_p <- readRDS(ceof_largo_file)
 } else {
+  campos <- ceofs[, denormalise(eof[[1]], "right"), by = .(experiment, model)] %>% 
+    sep_ReIm()
+  setorder(campos, experiment, model, part, cEOF, -lev, lat, lon)
+  
   ceof_largo_p <- simulaciones %>%
     .[variable == "zg"] %>%
     .[, ceof_proyectado(file, member, model, experiment, fields = campos,
@@ -943,12 +946,13 @@ Sin embargo, la fase de 90º del cEOF1 tiene una tendencia negativa mucho mayor,
 
 
 ```{r trends}
+trend_base <- 1950
 trends <- ceof_largo_p %>% 
   sep_ReIm() %>% 
   .[experiment %in% c("historical", "reanalysis")] %>%
   .[, hgt := Anomaly(hgt, time >= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
   .[, hgt := hgt/sd(hgt[time >= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>%
-  .[time >= 1950] %>% 
+  .[time >= trend_base] %>% 
   # .[, .(hgt = mean(hgt)), by = .(model, experiment, ensemble, time, part, cEOF)] %>% 
   .[, FitLm(hgt, time = time/10, se = TRUE), 
     by = .(model, cEOF, ensemble, part, experiment)] %>% 
@@ -1018,7 +1022,6 @@ Finalmente, dado que el cEOF1 captura el campo medio de las anomalías zonales d
 ```{r ceof-damip, fig.width=6, fig.height=4}
 ceof_largo_p %>% 
   sep_ReIm() %>% 
-  
   .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
   .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
   # .[, eof := scale_eof(eof, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>%
@@ -1083,91 +1086,159 @@ Sorpendentemente ambas series presentan una variabilidad a largo plazo virtualme
 Esta compensación parcial entre forzantes es otra posible explicación para las diferencias entre las tendencias observadas y las modeladas, ya que pequeñas diferencias en la respuesta de los modelos a los forzantes pueden hacer que la tendencia resultante cambie de signo o no se anule completamente. 
 
 
-```{r trends_cmip, eval = FALSE}
 
-no_poolling <- ceof_largo_p %>% 
+
+```{r regression_hgt}
+
+ceofs_standard <- ceof_largo_p %>% 
   sep_ReIm() %>% 
-  # .[experiment == "historical"] %>% 
   .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
   .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
-  .[time >= 1960] %>% 
-  .[, FitLm(hgt, time, se = TRUE), by = .(experiment, model, ensemble, part)] %>% 
-  rm_intercept()
+  .[, r2 := NULL] %>% 
+  .[, .(hgt = mean(hgt)), by = .(experiment, model, time, cEOF, part)] %>% 
+  tidyfast::dt_pivot_wider(names_from = part, values_from = hgt)
 
 
-trends_cmip <-ceof_largo_p %>% 
-  sep_ReIm() %>% 
-  # .[experiment == "historical"] %>% 
-  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
-  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
-  .[time >= 1960] %>% 
-  .[, model := as.factor(model)] %>% 
-  .[, .(model = list(lme4::lmer(hgt ~ time  + (time | model/ensemble), data = .SD))), by = .(part, cEOF, experiment)]
-```
-
-```{r lmer-funs, eval = FALSE}
-
-
-lmer_fixed <- function(model) {
-  summary <- summary(model)
+regression_hgt_ <- function(this_model, this_experiment) {
+  files <- simulaciones %>% 
+    .[variable == "zg"] %>% 
+    .[model == this_model & experiment == this_experiment] 
   
-  data.table::data.table(
-    term = rownames(summary$coefficients),
-    estimate = summary$coefficients[, 1],
-    std.error = summary$coefficients[, 2],
-    t.value = summary$coefficients[, 3]
-  )
+  message("Procesando: ", files$file[1])
+  data <- lapply(seq_len(nrow(files)), function(i) {
+    ReadNetCDF(files[i, ]$file, vars = c(hgt = "zg"), 
+               subset = list(lat  = c(-90, 10))) %>% 
+      .[, time := year(time)] %>% 
+      .[, ensemble := files[i, ]$member] 
+  }) %>% 
+    rbindlist() %>% 
+    .[, hgt := hgt - mean(hgt), by = .(lon, lat, plev, ensemble)] %>% 
+    .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, time)] 
+  
+  ceofs_standard %>%
+    .[model == this_model & experiment == this_experiment] %>%
+    .[data, on =  .(time), allow.cartesian = TRUE] %>%
+    .[, FitLm(hgt, Real, Imaginario), by = .(cEOF, plev, lon, lat)]
 }
 
-lmer_rand <- function(model, level) {
+regression_hgt <- memoise::memoise(regression_hgt_, cache = cachem::cache_disk(here::here("cache", "memoise", "regression_hgt")))
+
+```
+
+```{r}
+regresion_tiempo <- function(this_model, this_experiment) {
+  files <- simulaciones %>% 
+    .[variable == "zg"] %>% 
+    .[model == this_model & experiment == this_experiment] 
   
-  coef(model)[[level]] %>% 
-    data.table::as.data.table(keep.rownames = "level") %>% 
-    tidyfast::dt_pivot_longer(cols = -level, names_to = "term", values_to = "estimate") %>% 
-    tidyfast::dt_separate(level, sep = ":", into = strsplit(level, split = ":", fixed = TRUE)[[1]])
-  
+  message("Procesando: ", files$file[1])
+  data <- lapply(seq_len(nrow(files)), function(i) {
+    ReadNetCDF(files[i, ]$file, vars = c(hgt = "zg"), 
+               subset = list(lat  = c(-90, 10))) %>% 
+      .[, time := year(time)] %>% 
+      .[, ensemble := files[i, ]$member] 
+  }) %>% 
+    rbindlist() %>% 
+    .[, hgt := hgt - mean(hgt), by = .(lon, lat, plev, ensemble)] %>% 
+    .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, time)] %>% 
+    .[, FitLm(hgt, time), by = .(lon, lat, plev)]
 }
+```
+
+
+```{r}
+tiempo_regresion <- simulaciones %>%
+  .[variable == "zg"] %>% 
+  # .[, .SD[model %in% unique(model)[1:2]], by = .(experiment)] %>%
+  .[, regresion_tiempo(model, experiment), by = .(model, experiment)] 
 
 ```
 
-```{r trends-cmip, eval=FALSE, include=FALSE}
-trends_cmip %>% 
-  # [experiment == "historical"] %>% 
-  .[cEOF == "cEOF1"] %>%
-  ggplot() +
-  geom_point(data = \(x) x[, lmer_rand(model[[1]], "ensemble:model"), by = .(part, experiment, cEOF)] %>%
-               rm_intercept(),
-             aes(estimate, model)) +
-  geom_point(data = \(x) x[, lmer_rand(model[[1]], "model"), by = .(part, experiment, cEOF)] %>% rm_intercept(),
-             aes(estimate, model), size  = 3) +
-  geom_vline(data = \(x) x[, lmer_fixed(model[[1]]), by = .(part, experiment, cEOF)] %>% rm_intercept(),
-             aes(xintercept = estimate)) +
-  # geom_vline(data = \(x) x[, lmer_fixed(model[[1]]), by = .(part, cEOF)] %>% rm_intercept(),
-  #            aes(xintercept = estimate + 2*std.error)) +
-  #   geom_vline(data = \(x) x[, lmer_fixed(model[[1]]), by = .(part, cEOF)] %>% rm_intercept(),
-  #            aes(xintercept = estimate - 2*std.error)) +
-  
-  facet_grid(experiment + cEOF ~ part, scales = "free") +
-  panel_background()
-```
+```{r hgt_regression_mmm}
 
-```{r trends_cmip2,  eval=FALSE}
-trends_cmip %>% 
-  # .[cEOF == "cEOF1"] %>% 
-  .[, broom.mixed::tidy(model[[1]]), by = .(part, cEOF, experiment)] %>% 
-  .[effect == "fixed"] %>% 
+hgt_regression <- simulaciones %>%
+  .[variable == "zg"] %>% 
+  # .[, .SD[model %in% unique(model)[1:2]], by = .(experiment)] %>%
+  .[, regression_hgt(model, experiment), by = .(model, experiment)] 
+
+
+hgt_regression_mmm <- hgt_regression %>% 
   rm_intercept() %>% 
-  ggplot(aes(part, estimate)) +
-  geom_col(aes(fill = experiment), position = position_dodge()) +
-  # geom_errorbar(aes(ymin = estimate - 2*std.error, ymax = estimate  + 2*std.error, 
-  #                   group = experiment), 
-  #               width = 0.3,
-  #               position = position_dodge(width = 0.9)) +
-  # scale_fill_experiments() +
-  facet_wrap(~cEOF) +
-  coord_flip() 
+  setnames("estimate", "hgt") %>% 
+  .[, interpolate_to_era(.SD), by = .(plev, cEOF, term, experiment, model)] %>% 
+  na.omit() %>% 
+  .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, cEOF, term, experiment)] 
+```
+
+
+```{r}
+ceofs_standard %>% 
+  dt_pivot_longer(cols = c(Real, Imaginario), 
+                  names_to = "part", values_to = "hgt") %>% 
+  .[time >= trend_base] %>% 
+  .[, .(hgt = mean(hgt)), by = .(time, cEOF, part, experiment)] %>% 
+  .[, FitLm(hgt, time), by= .(cEOF, part, experiment)] %>% 
+  rm_intercept() %>% 
+  .[, term := NULL] %>% 
+  setnames("part", "term") %>% 
+  .[] %>% 
+  .[hgt_regression_mmm, on = .(cEOF, term, experiment)] %>% 
+  .[, dif := hgt*estimate, by = .(lon, lat, plev, cEOF, term, experiment)] %>% 
+  .[plev == 5000] %>%
+  # .[experiment == "historical"] %>% 
+    .[!(experiment %in% c("hist-nat", "hist-aer"))] %>%
+  .[cEOF == "cEOF1"] %>% 
+  .[, term := factor_ReIm(term)] %>% 
+  .[, dif := dif/sd(dif), by = .(term, experiment)] %>% 
+  periodic(lon = c(0, 360)) %>%
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = dif), breaks = AnchorBreaks(exclude = 0)) +
+  # geom_contour2(aes(z = Re(base), 
+  #                   linetype = factor(-sign(..level..))),
+  #               data = base %>%
+  #                 .[lev == which_lev & cEOF == which_cEOF] %>% 
+  #                 periodic(lon = c(0, 360)),
+  #               breaks = AnchorBreaks(exclude = 0)) +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent(guide = "none") +
+  geom_qmap(crop = c(ymax = -20)) +
+  scale_x_longitude() +
+  scale_y_latitude(limits = c(-90, NA)) +
+  coord_polar2() +
+  facet_grid(experiment ~ term, labeller = labeller(term = lab_cplx)) +
+  tag_facets()
 
 ```
+
+
+
+```{r}
+hgt_regression_mmm %>% 
+  .[plev == 5000] %>%
+  # .[experiment == "historical"] %>% 
+  .[cEOF == "cEOF1"] %>% 
+  rm_intercept() %>% 
+  na.omit() %>% 
+  periodic(lon = c(0, 360)) %>%
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = hgt), breaks = AnchorBreaks(exclude = 0)) +
+  # geom_contour2(aes(z = Re(base), 
+  #                   linetype = factor(-sign(..level..))),
+  #               data = base %>%
+  #                 .[lev == which_lev & cEOF == which_cEOF] %>% 
+  #                 periodic(lon = c(0, 360)),
+  #               breaks = AnchorBreaks(exclude = 0)) +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent(guide = "none") +
+  geom_qmap(crop = c(ymax = -20)) +
+  scale_x_longitude() +
+  scale_y_latitude(limits = c(-90, NA)) +
+  coord_polar2() +
+  facet_grid(experiment ~ term) +
+  tag_facets()
+
+```
+
 
 ## Conclusiones
 

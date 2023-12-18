@@ -29,7 +29,7 @@ Dadas las deficiencias de los índices analizados previamente, es necesaria una 
 Proponemos el uso de Funciones Ortogonales Empíricas Complejas (cEOF) [@horel1984], ya que éstas permiten caracterizar modos de variabilidad con amplitud y fase variable en el tiempo y con una estructura espacial más compleja que la que presentan ondas sinusoidales constantes por cada círculo de latitud.
 
 En este capítulo el estudio se restringe al trimestre septiembre-octubre-noviembre (SON) ya durante esta estación las teleconexiones sobre Sudamérica son más intensas [@cazes-boezio2003] y es de interés de esta tesis estudiar las características de la circulación del hemisferio sur de influencia en esa región.
-Cabe mencionar, que muchas de las características de los cEOF son similares en los otros trimestres a excepción del trimestre diciembre-enero-febrero, el cual tiene características distintas.
+Cabe mencionar, que muchas de las características de los cEOF son similares en los otros trimestres a excepción del trimestre diciembre-enero-febrero, en el cual las ondas zonales están menos organizadas. 
 
 Analizamos el nivel de 200 hPa dado que, como se mencionó en la Introducción, es alrededor de este nivel donde se encuentra el máximo de la amplitud de la onda 3 [@campitelli2018b].
 Asimismo, dada la importancia de la variabilidad estratosférica en modular la propagación de las ondas, también incluimos el nivel de 50 hPa.
@@ -67,6 +67,7 @@ Z(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{X} + \beta(\lambda, \p
 (\#eq:multiple-regression-sam)
 \end{equation}
 ```
+
 donde $\lambda$ y $\phi$ son la longitud y la latitud, $t$ es el tiempo, $\alpha$ y $\beta$ son los coeficientes de regresión lineal, $X_0$ y $\epsilon$ son la constante y los términos de error.
 A partir de esta ecuación, $\alpha$ representa la asociación (lineal) de $Z$ con la variabilidad de $X$ que no se explica por la variabilidad de $Y$; es decir, es proporcional a la correlación parcial de $Z$ y $X$, controlando el efecto de $Y$, y viceversa para $\beta$.
 
@@ -218,15 +219,71 @@ eof_naive[, eof[[1]]$right, by = lev] %>%
 
 Una alternativa para representar ondas que varían en su fase es utilizando el análisis de Funciones Ortogonales Empíricas Complejas (cEOF, por sus siglas en inglés) [@horel1984].
 Cada cEOF es un conjunto de estructuras espaciales y series temporales con valores en el plano complejo (es decir, con una parte real y una imaginaria).
+
+```{=tex}
+\begin{equation}
+E_{(\lambda, \phi, p)} &= (E_{r(\lambda, \phi, p)} +  iE_{i(\lambda, \phi, p)}) \\
+T_{(t)} &= (T_{r(t)} +  iT_{i(t)})
+(\#eq:ceof-equation)
+\end{equation}
+```
+
+Donde $E_{(\lambda, \phi)}$ es la componente espacial del cEOF, que depende de la longitud ($\lambda$), la latitud ($\phi$) y el nivel de presión ($p$) y que tiene una parte real $E_r$ y una imaginaria $E_i$. 
+La parte temporal del cEOF $T_{(t)}$. 
+La contribución cada cEOF al campo original es la parte real del producto de la componente espacial y temporal. 
+
 Las componentes real e imaginaria del patrón espacial complejo son la representación de dos patrones espaciales que están desplazados 1/4 de longitud de onda, similar a EOF1 y EOF2 en la Figura \@ref(fig:eof-naive).
 En este trabajo nos referiremos a parte real e imaginaria de cada cEOF como la fase de 0º y la fase de 90º respectivamente.
 El campo real reconstruido por cada cEOF es la combinación lineal de los dos campos espaciales ponderados por sus respectivas series temporales.
 Esto es análogo a cómo cualquier onda sinusoidal de fase y amplitud arbitraria puede construirse mediante la suma de un seno y un coseno de diferente amplitud pero fase fija.
 Esto permite que los cEOF representen patrones ondulatorios que cambian tanto su fase como su amplitud.
 
-Por ejemplo, cuando las anomalías zonales de altura geopotencial se parecen mucho a la fase 0º del cEOF, entonces la serie temporal de esta fase es positiva y la serie temporal de la fase 90º es cercana a cero.
-Del mismo modo, cuando las anomalías zonales de altura geopotencial se parecen a la fase 90º, la serie temporal de ésta es positiva y la serie temporal de la fase de 0º es cercana a cero.
-Cuando las anomalías zonales de altura geopotencial tiene los máximos en una localización intermedia, entonces ambas series temporales tienen valores distintos a cero.
+
+```{r ejemplo-reconstruccion}
+N <- 60
+x <- seq(0, 2*pi, length.out = N)
+z <- complex(real = cos(x*3), imaginary = sin(x*3))
+
+
+ondas <- data.table(x = x, 
+                    z = z) 
+
+
+angles <- seq(0, 180 - 45, by = 45)
+
+
+g <- lapply(angles, function(a) {
+  ondas %>% 
+    copy() %>% 
+    .[, z := Re(rotate(z, a*pi/180))] %>% 
+    .[, angle := a]
+}) %>% 
+  rbindlist() %>% 
+  ggplot(aes(x*180/pi, z)) +
+  # geom_line(data = sep_ReIm(ondas), aes(color = part)) +
+  geom_line() +
+  facet_wrap(~angle, labeller = labeller(angle = AddSuffix("º"))) +
+  tag_facets("panel")
+
+ondas %>% 
+  sep_ReIm() %>% 
+  ggplot(aes(x*180/pi, z))  +
+  geom_line(aes(color = part)) +
+  scale_color_fase() +
+  
+  g +
+  
+  plot_layout(ncol = 1)  &
+  scale_x_longitude(ticks = 60) &
+  scale_y_continuous(NULL) 
+
+
+```
+
+Un ejemplo idealizado se presenta en la Figura \@ref(fig:ejemplo-reconstruccion) la cual representa la parte espacial de las fases de 0º y 90º de un cEOF hipotético en el panel superior y cuatro reconstrucciones de la variable original en el panel inferior. 
+Cuando la serie temporal de la fase de 0º es positiva y la serie temporal de la fase 90º es cercana a cero, entonces las anomalías zonales de altura geopotencial son similares al patrón espacial de la fase de 0º (panel a).
+Del mismo modo, cuando la serie temporal de de la fase 0º es cercana a cero y la serie la serie temporal de la fase de 90º es positiva, entonces las anomalías zonales de altura geopotencial se parecen a la fase de 90 (panel c).
+Cuando ambas fases de la serie temporal son distintas a cero, entonces las anomalías zonales de altura geopotencial tiene los máximos en una localización intermedia (paneles b y d).
 
 El signo de los EOF tradicionales no está determinado unívocamente, por lo que se puede multiplicar cada EOF por -1 (tanto su serie temporal como su patrón espacial) y obtener una descripción igualmente válida.
 Este cambio de signo en los números reales corresponde a una rotación en el plano complejo de 0 o $\pi$.
@@ -431,7 +488,7 @@ Si bien los cEOFs se calcularon para el período `r periodo`, se extendieron las
 
 ## Resultados
 
-### **Caracterización espacio-temporal de los cEOFs principales**
+### Caracterización espacio-temporal de los cEOFs principales
 
 (ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período `r periodo`. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
 
@@ -540,7 +597,7 @@ era_more %>%
   # geom_line(data = era_less) +
   scale_alpha_manual(values = c(1, 0.2)) +
   geom_smooth(
-              show.legend = FALSE, linewidth = 0.8) +
+    show.legend = FALSE, linewidth = 0.8) +
   scale_x_date(NULL, 
                breaks = seq(as.Date("1950-01-01"),
                             as.Date("2020-01-01"), by = "10 years"),
@@ -591,7 +648,7 @@ era_more %>%
   # geom_line(data = era_less) +
   scale_alpha_manual(values = c(1, 0.2)) +
   geom_smooth(
-              show.legend = FALSE, linewidth = 0.8) +
+    show.legend = FALSE, linewidth = 0.8) +
   scale_x_date(NULL, 
                breaks = seq(as.Date("1950-01-01"),
                             as.Date("2020-01-01"), by = "10 years"),
@@ -659,7 +716,7 @@ La tendencia positiva de la fase de 0º del cEOF1 se traduce en una tendencia po
 Este cambio a largo plazo indica un aumento de la magnitud de la onda zonal 1 de latitudes altas.
 Por otra parte, no se encuentran tendencias significativas en ninguna de las fases de cEOF2.
 
-### **Mapas de regresión a partir de los cEOF**
+### Mapas de regresión a partir de los cEOF
 
 #### Altura geopotencial
 

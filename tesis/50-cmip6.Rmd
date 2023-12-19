@@ -54,7 +54,7 @@ Sin embargo, el estudio de tendencias y variabilidad de estos modelos se ve limi
 Además, es imposible abordar la atribución de las tendencias observadas utilizando únicamente observaciones.
 
 Estas limitaciones motivan completar el trabajo de tesis a partir de la utilización de salidas de modelos climáticos.
-En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparación de Modelos Acoplados (CMIP6) [@eyring2016] y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) [@gillet2016] de capturar estos modos y sus principales características.
+En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparación de Modelos Acoplados (CMIP6) [@eyring2016] y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) [@gillett2016] de capturar estos modos y sus principales características.
 Al contar con corridas mucho más largas y múltiples miembros por modelo, es posible evaluar las tendencias a largo plazo con mayor robustez.
 Utilizando los modelos incluidos en DAMPI, además podemos avanzar en la atribución de las tendencias observadas.
 
@@ -911,10 +911,147 @@ Esto implícitamente sugiere que los modelos CMIP6 no capturan correctamente la 
 
 ## Tendencias
 
+```{r trend_base}
+trend_base <- 1940
+```
+
 De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y que algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
 
 En esta sección, aprovechamos las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes.
 Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, proyectamos los campos espaciales de los dos cEOFs del período 1979\--2014 en los campos desde 1850 hasta 2014.
+
+```{r regression_hgt}
+
+ceofs_standard <- ceof_largo_p %>% 
+  sep_ReIm() %>% 
+  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
+  .[, r2 := NULL] %>% 
+  .[time >= trend_base] %>% 
+  .[, .(hgt = mean(hgt)), by = .(experiment, model, time, cEOF, part)] %>% 
+  tidyfast::dt_pivot_wider(names_from = part, values_from = hgt)
+
+first_time <- paste0(trend_base, "-09-15")
+
+regression_hgt_ <- function(this_model, this_experiment, 
+                            serie = ceofs_standard) {
+  files <- simulaciones %>% 
+    .[variable == "zg"] %>% 
+    .[model == this_model & experiment == this_experiment] 
+  
+  message("Procesando: ", files$file[1])
+  data <- lapply(seq_len(nrow(files)), function(i) {
+    ReadNetCDF(files[i, ]$file, vars = c(hgt = "zg"), 
+               subset = list(lat  = c(-90, 10),
+                             time = c(first_time, NA))) %>% 
+      .[, time := year(time)] %>% 
+      .[, ensemble := files[i, ]$member] 
+  }) %>% 
+    rbindlist() %>% 
+    .[, hgt := hgt - mean(hgt), by = .(lon, lat, plev, ensemble)] %>% 
+    .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, time)] 
+  
+  serie %>%
+    .[model == this_model & experiment == this_experiment] %>%
+    .[data, on =  .(time), allow.cartesian = TRUE] %>%
+    .[, FitLm(hgt, Real, Imaginario), by = .(cEOF, plev, lon, lat)]
+}
+
+regression_hgt <- memoise::memoise(regression_hgt_, cache = cachem::cache_disk(here::here("cache", "memoise", "regression_hgt")))
+
+```
+
+
+```{r hgt_regression_mmm}
+hgt_regression <- simulaciones %>%
+  .[variable == "zg"] %>% 
+  # .[, .SD[model %in% unique(model)[1:2]], by = .(experiment)] %>%
+  .[, regression_hgt(model, experiment), by = .(model, experiment)] 
+
+
+hgt_regression_mmm <- hgt_regression %>% 
+  rm_intercept() %>% 
+  setnames("estimate", "hgt") %>% 
+  .[, interpolate_to_era(.SD), by = .(plev, cEOF, term, experiment, model)] %>% 
+  na.omit() %>% 
+  .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, cEOF, term, experiment)] 
+```
+
+
+
+```{r era_regr}
+era5 <- ERA5_geopotential() %>% 
+  ReadNetCDF(vars = c(hgt = "z"),
+             subset = list(level = list(50),
+                           latitude = -90:-10,
+                           time = main_period)) %>% 
+  normalise_coords() %>% 
+  na.omit() %>%   # Tengo que omitirlo por la forrada del expver
+  .[season(time) == "SON"] %>% 
+  # .[is.full_season(time)] %>% 
+  .[, w := season_weights(time)] %>% 
+  .[, .(hgt = mean(hgt*w)), by = .(lev, lon, lat, time = data.table::year(time))]
+
+
+era_regr <- ceofs[model == "ERA5", eof[[1]]$left] %>%
+  .[cEOF == "cEOF1"] %>% 
+  sep_ReIm(format = "wide") %>%
+  .[, hgt := NULL] %>%
+  .[, `:=`(Real = as.numeric(scale(Real)), Imaginario = as.numeric(scale(Imaginario))),
+    by = .(cEOF)] %>%
+  .[era5, on = "time", allow.cartesian = TRUE] %>%
+  .[, FitLm(hgt, Imaginario, Real),
+    by = .(lev, lon, lat, cEOF)] %>%
+  rm_intercept() %>%
+  .[, term := factor_ReIm(term)]
+```
+
+
+```{r regresion-hgt-damip, fig.width=6, fig.height=9}
+hgt_regression_mmm %>% 
+  # .[!(experiment %in% c("hist-nat"))] %>%
+  .[cEOF == "cEOF1"] %>%
+  .[, plev := as.integer(plev/100)] %>% 
+  .[plev == 50] %>%
+  .[, term := factor_ReIm(term)] %>% 
+  .[, experiment := factor(experiment, levels = experiments)] %>%
+  data.table::setnames("plev", "lev") %>% 
+  .[, hgt := hgt + rnorm(.N)*0.01] %>% 
+  periodic(lon = c(0, 360)) %>%
+  ggplot(aes(lon, lat)) +
+  geom_contour_fill(aes(z = hgt, fill = after_stat(level)),
+                    breaks = AnchorBreaks(exclude = 0)) +
+  geom_contour_tanaka(aes(z = hgt),
+                      breaks = AnchorBreaks(exclude = 0)) +
+  # geom_contour2(aes(z = estimate, linetype = factor(-sign(..level..))),
+  #             data = era_regr %>% 
+  #               periodic(lon = c(0, 360)),
+  #             breaks = AnchorBreaks(exclude = 0)) +
+  scale_linetype(guide = "none") +
+  scale_fill_divergent_discretised(name = NULL,
+                                   labels = label_one_less,
+                                   guide = guide_colorsteps_bottom(width = 15,
+                                                                   show.limits = FALSE,
+                                                                   ticks = TRUE,
+                                                                   order = 1)) +
+  
+  geom_qmap(crop = c(ymax = -20)) +
+  scale_x_longitude() +
+  scale_y_latitude(limits = c(-90, NA)) +
+  coord_polar2() +
+  facet_grid(experiment ~ term, 
+             labeller = labeller(term = lab_cplx)) +
+  tag_facets(tag = "rc")
+
+```
+
+(ref:regresion-hgt-damip-cap) Regresión de anomalías de altura geopotencial con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período `r trend_base`--2014 para los experimentos de CMIP6 y DAMIP. 
+
+Los patrones espaciales de ambos cEOFs son muy similares en todos los experimentos; comparable con lo observado en la Figura \@ref(fig:mmm). 
+La regresión con la altura geopotencial, en cambio, tiene diferencias importantes que dificultan la interpretación en el caso del cEOF1. 
+Estas regresiones se muestran en la Figura \@ref(fig:regresion-hgt-damip) para el nivel de 50 hPa. 
+Si bien la localización general de los máximos es similar en todos los experimentos, en el experimento historical, la fase de 0º está asociada a una onda 1 mientras que la fase de 90º está asociada un monopolo con el centro sobre la Antártida oriental (Fig. \@ref(fig:regresion-hgt-damip) fila a). 
+Esto es lo contrario de lo observado en ERA5, donde la fase de 0º era la asociada a una estructura más zonalmente simétrica (Fig. \@ref(fig:eof1-regr-gh)), más similar a las regresiones observadas para el experimento hist-aer (Fig. \@ref(fig:regresion-hgt-damip) fila e). 
 
 ```{r series-largas, fig.width=6, fig.height=4}
 ceof_largo_p %>% 
@@ -937,11 +1074,10 @@ ceof_largo_p %>%
 (ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 -- 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran as series de cada de cada modelo.
 
 La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período.
-La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando alrededor de 1950, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
+La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando alrededor de `r trend_base`, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
 Sin embargo, la fase de 90º del cEOF1 tiene una tendencia negativa mucho mayor, la cual no está presente en ERA5.
 
 ```{r trends}
-trend_base <- 1950
 trends <- ceof_largo_p %>% 
   sep_ReIm() %>% 
   .[experiment %in% c("historical", "reanalysis")] %>%
@@ -998,9 +1134,9 @@ trends %>%
   plot_trend()  
 ```
 
-(ref:trends-ceof1-cap) Tendencias lineales de cada fase del cEOF1 desde 1950. Cada punto representa un miembro, donde los miembros con tendencias significativas (p-valor \< 0.01) se marcan con una cruz. La línea vertical punteada representa la tendencia media de todos los modelos.
+(ref:trends-ceof1-cap) Tendencias lineales de cada fase del cEOF1 desde `r trend_base`. Cada punto representa un miembro, donde los miembros con tendencias significativas (p-valor \< 0.01) se marcan con una cruz. La línea vertical punteada representa la tendencia media de todos los modelos.
 
-Las tendencias de cada fase del cEOF1 para cada modelo desde 1950 se muestra en la Figura \@ref(fig:trends-ceof1) junto con la tendencia promedio de todos los modelos.
+Las tendencias de cada fase del cEOF1 para cada modelo desde `r trend_base` se muestra en la Figura \@ref(fig:trends-ceof1) junto con la tendencia promedio de todos los modelos.
 La tendencia media de la fase de 0º es positiva pero muy pequeña.
 Además, los modelos no son consistentes en sus tendencias y sólo algunos modelos tienen una tendencia promedio positiva.
 Por otro lado, las tendencias de la fase de 90º son más consistentes.
@@ -1009,9 +1145,15 @@ Estas tendencias son incompatibles con la variabilidad del cEOF1 observado, el c
 Es posible los modelos tengan algún problema fundamental al capturar la variabilidad a largo plazo de este modo, ya sea por falencias en la dinámica interna o por algún problema con el forzante involucrado.
 
 También es posible que la tendencia observada se deba a variabilidad interna de baja frecuencia.
-En este caso, no sería esperable que los modelos capturen correctamente la fase de esta variabilidad, por lo que no sería observable ni en la media multimodelo ni en en las tendencias de cada miembro particularmente en el período 1950--2014.
+En este caso, no sería esperable que los modelos capturen correctamente la fase de esta variabilidad, por lo que no sería observable ni en la media multimodelo ni en en las tendencias de cada miembro particularmente en el período `r trend_base`--2014.
+ERA5 puede considerarse como una realización particular del ensamble climático y es posible que la tendencia particular observada no sea representativa del forzante externo. 
 
-Finalmente, dado que el cEOF1 captura el campo medio de las anomalías zonales de altura geopotencial y que los distintos modelos de CMIP6 tienen potencialmente un campo medio distinto a ERA5, es posible que la rotación elegida del cEOF1 no sea la ideal para capturar la variabilidad de largo plazo compatible con lo observado en ERA5.
+Alternativamente, dado que el cEOF1 captura el campo medio de las anomalías zonales de altura geopotencial y que los distintos modelos de CMIP6 tienen potencialmente un campo medio distinto a ERA5, es posible que la rotación elegida del cEOF1 no sea la ideal para capturar la variabilidad de largo plazo compatible con lo observado en ERA5.
+
+Aún considerando estas limitaciones, para tratar de atribuir esta tendencia, computamos los mismos cEOFs para experimentos de DAMIP.
+La Figura \@ref(fig:ceof-damip) muestra las series temporales para los experimentos hist-GHG, hist-nat, hist-stratO3 e hist-aer junto al experimento histórico y la Figura \@ref(fig:mapa-trend) muestra los campos de tendencias de la altura geopotencial en 50 hPa que es explicada por cada fase del cEOF1 y la suma de ambas. 
+Esto se calculó como el valor de la regresión lineal entre cada fase del cEOF1 y la altura geopotencial multiplicado por la tendencia lineal de cada fase del cEOF1.
+En estas figuras se excluyen los experimentos hist-nat e hist-aer ya que sus tendencais son poco significativas. 
 
 ```{r ceof-damip, fig.width=6, fig.height=4}
 ceof_largo_p %>% 
@@ -1040,18 +1182,89 @@ ceof_largo_p %>%
   facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx))
 ```
 
-(ref:ceof-damip-cap) Igual que la Figura \@ref(fig::series-largas) pero para cada experimento de DAMIP y el experimento historical en negro.
+(ref:ceof-damip-cap) Igual que la Figura \@ref(fig:series-largas) pero para cada experimento de DAMIP y el experimento histórico en negro.
 
-Aún considerando estas limitaciones, para tratar de atribuir esta tendencia, computamos los mismos cEOFs para experimentos de DAMIP.
-La Figura \@ref(fig:ceof-damip) muestra las series temporales para los experimentos hist-GHG, hist-nat, hist-stratO3 e hist-aer junto a las corridas históricas.
+
+```{r ceofs_standard}
+
+regression <- ceofs_standard %>% 
+  dt_pivot_longer(cols = c(Real, Imaginario), 
+                  names_to = "part", values_to = "hgt") %>% 
+  .[time >= trend_base] %>% 
+  .[, .(hgt = mean(hgt)), by = .(time, cEOF, part, experiment)] %>% 
+  .[, FitLm(hgt, time), by= .(cEOF, part, experiment)] %>% 
+  rm_intercept() %>% 
+  .[, term := NULL] %>% 
+  data.table::setnames("part", "term") %>% 
+  .[hgt_regression_mmm, on = .(cEOF, term, experiment)] %>% 
+  .[, hgt := hgt*estimate, by = .(lon, lat, plev, cEOF, term, experiment)] %>% 
+  .[, estimate := NULL] %>% 
+  dt_pivot_wider(names_from = term, values_from = hgt) %>% 
+  .[, Total := Real + Imaginario] %>% 
+  # .[]
+  dt_pivot_longer(cols = Imaginario:Total, names_to = "term", values_to = "hgt")
+
+plot_regresion_time <- function(data) {
+  data %>% 
+    .[, term := factor(term,
+                       levels = c("Real", "Imaginario", "Total"), 
+                       ordered = TRUE)] %>%
+    # .[, dif := dif/sd(dif), by = .(term, experiment)] %>% 
+    periodic(lon = c(0, 360)) %>%
+    ggplot(aes(lon, lat)) +
+    geom_contour_fill(aes(z = hgt, fill = after_stat(level)),
+                      breaks = AnchorBreaks(exclude = 0)) +
+    geom_contour_tanaka(aes(z = hgt),
+                        breaks = AnchorBreaks(exclude = 0)) +
+    scale_linetype(guide = "none") +
+    scale_fill_divergent_discretised(name = "Tendencia concordante con cEOF1",,
+                                     labels = label_one_less,
+                                     guide = guide_colorsteps_bottom(width = 15,
+                                                                     show.limits = FALSE,
+                                                                     ticks = TRUE,
+                                                                     order = 1)) +
+    geom_qmap(crop = c(ymax = -20)) +
+    scale_x_longitude() +
+    scale_y_latitude(limits = c(-90, NA)) +
+    coord_polar2() +
+    facet_grid(experiment ~ term,
+               labeller = labeller(term = c(lab_cplx, Total = "Total"))) +
+    tag_facets(tag = "rc")
+  
+}
+```
+
+```{r mapa-trend, fig.width=6, fig.height=6.3, fig.ncol = 1}
+#| fig.subcap = c("Para 50 hPa.", "Para 200 hPa.")
+datos <- regression %>% 
+  .[!(experiment %in% c("hist-nat", "hist-aer"))] %>%
+  .[cEOF == "cEOF1"] %>% 
+  .[, experiment := factor(experiment, 
+                           levels = experiments)] 
+
+datos %>% 
+  .[plev == 5000] %>% 
+  plot_regresion_time()
+
+# datos %>% 
+#   .[plev == 20000] %>% 
+#   plot_regresion_time()
+```
+
+(ref:mapa-trend-cap) Tendencias de altura geopotencial en 50 hPa concordante con las fases del cEOF1 y su suma. 
+
+La fase de 90º del cEOF1, presenta una tendencia positiva en hist-aer y negativa en hist-GHG y, también negativa pero más débil, en hist-stratO3.
+La disminución del ozono estratosférico y el aumento de las concentraciones de GHG contribuyen a la tendencia negativa.
+Ambos efectos tienden a reducir la altura geopotencial en 50 hPa sobre la Antártida oriental (Fig. \@ref(fig:mapa-trend) columna 2).
+Este efecto combinado de ambos forzantes ha sido ya identificada por trabajos previos como aquella que mayormente explica la intensificación y progresión hacia el polo de los vientos del oeste (ej. REFERENCIA).
 
 Para la fase de 0º del cEOF1, ni hist-nat ni hist-aer muestran tendencias significativas, sugiriendo que la tendencia observada no se debe a variabilidad ni al forzante de los aerosoles antropogénicos.
 Por otro lado, hist-stratO3 muestra una tendencia mucho mayor a la observada e hist-GHG muestra una tendencia negativa de similar magnitud la de hist-stratO3.
 Esto sugiere que el ozono estratosférico y los gases de efecto invernadero tienen efectos contrarios sobre esta fase del cEOF1.
 
-La fase de 90º del cEOF1, presenta una tendencia positiva en hist-aer y negativa en hist-GHG y, también negativa pero más débil, en hist-stratO3.
-En este caso la disminución del ozono estratosférico y el aumento de las concentraciones de GHG contribuyen a la tendencia negativa.
-Este efecto combinado de ambos forzantes ha sido ya identificada por trabajos previos como aquella que mayormente explica la intensificación y progresión hacia el polo de los vientos del oeste (ej. REFERENCIA).
+El efecto de la tendencia de la fase de 0º del cEOF1 en el experimento hist-GHG en la altura geopotencial de 50 hPa es una leve anomalía negativa sobre el Mar de Ross. 
+Este patrón indicaría un aumento del jet al Sur de Nueva Zelanda. 
+Este efecto es opuesto al efecto en el experimento hist-stratO3
 
 (ref:suma-cap) Media multimodelo de las dos fases del cEOF1 para las corridas históricas y para la suma de las corridas hist-GHG, hist-stratO3 e hist-aer.
 
@@ -1073,7 +1286,9 @@ ceof_largo_p %>%
   ggplot(aes(time, value)) +
   geom_line(aes(color = name), alpha = 0.4) +
   geom_smooth(aes(color = name)) +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_brewer(name = "Forzantes", palette = "Set1") +
+  scale_y_continuous(name = NULL) +
+  scale_x_continuous(name = NULL) +
   facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx))
 ```
 
@@ -1081,158 +1296,6 @@ Como una primera aproximación al efecto combinado de todos estos forzantes, la 
 Ambas series presentan una tendencia a largo plazo virtualmente idéntica, sugiriendo que el efecto de los forzantes es aproximadamente lineal.
 
 Esta compensación parcial entre forzantes es otra posible explicación para las diferencias entre las tendencias observadas y las modeladas, ya que pequeñas diferencias en la respuesta de los modelos a los forzantes pueden hacer que la tendencia resultante cambie de signo o no se anule completamente.
-
-
-
-```{r regression_hgt}
-
-ceofs_standard <- ceof_largo_p %>% 
-  sep_ReIm() %>% 
-  .[, hgt := Anomaly(hgt, time <= 1900), by = .(model, experiment, part, ensemble, cEOF)] %>% 
-  .[, hgt := hgt/sd(hgt[time <= 1900]), by = .(model, experiment, part, ensemble, cEOF)] %>% 
-  .[, r2 := NULL] %>% 
-  .[, .(hgt = mean(hgt)), by = .(experiment, model, time, cEOF, part)] %>% 
-  tidyfast::dt_pivot_wider(names_from = part, values_from = hgt)
-
-
-regression_hgt_ <- function(this_model, this_experiment) {
-  files <- simulaciones %>% 
-    .[variable == "zg"] %>% 
-    .[model == this_model & experiment == this_experiment] 
-  
-  message("Procesando: ", files$file[1])
-  data <- lapply(seq_len(nrow(files)), function(i) {
-    ReadNetCDF(files[i, ]$file, vars = c(hgt = "zg"), 
-               subset = list(lat  = c(-90, 10))) %>% 
-      .[, time := year(time)] %>% 
-      .[, ensemble := files[i, ]$member] 
-  }) %>% 
-    rbindlist() %>% 
-    .[, hgt := hgt - mean(hgt), by = .(lon, lat, plev, ensemble)] %>% 
-    .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, time)] 
-  
-  ceofs_standard %>%
-    .[model == this_model & experiment == this_experiment] %>%
-    .[data, on =  .(time), allow.cartesian = TRUE] %>%
-    .[, FitLm(hgt, Real, Imaginario), by = .(cEOF, plev, lon, lat)]
-}
-
-regression_hgt <- memoise::memoise(regression_hgt_, cache = cachem::cache_disk(here::here("cache", "memoise", "regression_hgt")))
-
-```
-
-```{r}
-regresion_tiempo <- function(this_model, this_experiment) {
-  files <- simulaciones %>% 
-    .[variable == "zg"] %>% 
-    .[model == this_model & experiment == this_experiment] 
-  
-  message("Procesando: ", files$file[1])
-  data <- lapply(seq_len(nrow(files)), function(i) {
-    ReadNetCDF(files[i, ]$file, vars = c(hgt = "zg"), 
-               subset = list(lat  = c(-90, 10))) %>% 
-      .[, time := year(time)] %>% 
-      .[, ensemble := files[i, ]$member] 
-  }) %>% 
-    rbindlist() %>% 
-    .[, hgt := hgt - mean(hgt), by = .(lon, lat, plev, ensemble)] %>% 
-    .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, time)] %>% 
-    .[, FitLm(hgt, time), by = .(lon, lat, plev)]
-}
-```
-
-
-```{r}
-tiempo_regresion <- simulaciones %>%
-  .[variable == "zg"] %>% 
-  # .[, .SD[model %in% unique(model)[1:2]], by = .(experiment)] %>%
-  .[, regresion_tiempo(model, experiment), by = .(model, experiment)] 
-
-```
-
-```{r hgt_regression_mmm}
-
-hgt_regression <- simulaciones %>%
-  .[variable == "zg"] %>% 
-  # .[, .SD[model %in% unique(model)[1:2]], by = .(experiment)] %>%
-  .[, regression_hgt(model, experiment), by = .(model, experiment)] 
-
-
-hgt_regression_mmm <- hgt_regression %>% 
-  rm_intercept() %>% 
-  setnames("estimate", "hgt") %>% 
-  .[, interpolate_to_era(.SD), by = .(plev, cEOF, term, experiment, model)] %>% 
-  na.omit() %>% 
-  .[, .(hgt = mean(hgt)), by = .(lon, lat, plev, cEOF, term, experiment)] 
-```
-
-
-```{r}
-ceofs_standard %>% 
-  dt_pivot_longer(cols = c(Real, Imaginario), 
-                  names_to = "part", values_to = "hgt") %>% 
-  .[time >= trend_base] %>% 
-  .[, .(hgt = mean(hgt)), by = .(time, cEOF, part, experiment)] %>% 
-  .[, FitLm(hgt, time), by= .(cEOF, part, experiment)] %>% 
-  rm_intercept() %>% 
-  .[, term := NULL] %>% 
-  setnames("part", "term") %>% 
-  .[] %>% 
-  .[hgt_regression_mmm, on = .(cEOF, term, experiment)] %>% 
-  .[, dif := hgt*estimate, by = .(lon, lat, plev, cEOF, term, experiment)] %>% 
-  .[plev == 5000] %>%
-  # .[experiment == "historical"] %>% 
-    .[!(experiment %in% c("hist-nat", "hist-aer"))] %>%
-  .[cEOF == "cEOF1"] %>% 
-  .[, term := factor_ReIm(term)] %>% 
-  .[, dif := dif/sd(dif), by = .(term, experiment)] %>% 
-  periodic(lon = c(0, 360)) %>%
-  ggplot(aes(lon, lat)) +
-  geom_contour_fill(aes(z = dif), breaks = AnchorBreaks(exclude = 0)) +
-  # geom_contour2(aes(z = Re(base), 
-  #                   linetype = factor(-sign(..level..))),
-  #               data = base %>%
-  #                 .[lev == which_lev & cEOF == which_cEOF] %>% 
-  #                 periodic(lon = c(0, 360)),
-  #               breaks = AnchorBreaks(exclude = 0)) +
-  scale_linetype(guide = "none") +
-  scale_fill_divergent(guide = "none") +
-  geom_qmap(crop = c(ymax = -20)) +
-  scale_x_longitude() +
-  scale_y_latitude(limits = c(-90, NA)) +
-  coord_polar2() +
-  facet_grid(experiment ~ term, labeller = labeller(term = lab_cplx)) +
-  tag_facets()
-
-```
-
-
-```{r}
-hgt_regression_mmm %>% 
-  .[plev == 5000] %>%
-  # .[experiment == "historical"] %>% 
-  .[cEOF == "cEOF1"] %>% 
-  rm_intercept() %>% 
-  na.omit() %>% 
-  periodic(lon = c(0, 360)) %>%
-  ggplot(aes(lon, lat)) +
-  geom_contour_fill(aes(z = hgt), breaks = AnchorBreaks(exclude = 0)) +
-  # geom_contour2(aes(z = Re(base), 
-  #                   linetype = factor(-sign(..level..))),
-  #               data = base %>%
-  #                 .[lev == which_lev & cEOF == which_cEOF] %>% 
-  #                 periodic(lon = c(0, 360)),
-  #               breaks = AnchorBreaks(exclude = 0)) +
-  scale_linetype(guide = "none") +
-  scale_fill_divergent(guide = "none") +
-  geom_qmap(crop = c(ymax = -20)) +
-  scale_x_longitude() +
-  scale_y_latitude(limits = c(-90, NA)) +
-  coord_polar2() +
-  facet_grid(experiment ~ term) +
-  tag_facets()
-
-```
 
 ## Conclusiones del capítulo \@ref(cmip6)
 

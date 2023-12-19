@@ -1,7 +1,7 @@
 # Introducción {#intro}
 
-La circulación general del hemisferio sur es más zonalmente simétrica que la del hemisferio norte, pero las anomalías zonales de la circulación tienen impactos regionales importantes [p.e. @hoskins2005].
-Modulan fuertemente los sistemas meteorológicos y el clima regional al influenciar el transporte meridional de calor, humedad y momento [@trenberth1980a; @raphael2007] e incluso podrían estar relacionados con la ocurrencia de extremos climáticos de alto impacto [@pezza2012].
+La circulación general del hemisferio sur (HS) es más zonalmente simétrica que la del hemisferio norte, pero las anomalías zonales de la circulación tienen impactos regionales importantes [p.e. @hoskins2005].
+Las anomalías zonales modulan fuertemente los sistemas meteorológicos y el clima regional al influenciar el transporte meridional de calor, humedad y momento [@trenberth1980a; @raphael2007] e incluso podrían estar relacionados con la ocurrencia de extremos climáticos de alto impacto [@pezza2012].
 
 A pesar de estos impactos, las anomalías zonales de circulación están poco estudiadas en el hemisferio sur.
 Por ejemplo, el principal patrón de circulación en latitudes medias -- el Modo Anular del Sur (SAM, por sus siglas en inglés) -- es entendido como un patrón zonalmente simétrico [@fogt2020] a pesar de estar asoaciado a significativas anomalías zonales de altura geopotencial.
@@ -10,13 +10,20 @@ Estas asimetrías zonales no han sido ampliamente estudiadas, pero trabajos prev
 La circulación zonalmente asimétrica suele describirse en base a la amplitud y la fase de las ondas zonales obtenidas por descomposición de Fourier de la altura geopotencial o la presión a nivel del mar en cada latitud [p.e., @vanloon1972; @trenberth1980a; @turner2017].
 Bajo este enfoque, las ondas zonales 1 y 3 explican casi el 99% de la varianza total del campo medio anual de las anomalías zonales de altura geopotencial de 500 hPa en 50ºS [@vanloon1972].
 @trenberth1985 concluyó que la onda 3 tiene un rol importante en el desarrollo de los fenómenos de bloqueo.
-Además, trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos, como en las anomalías en la concentración de hielo matino antártico [@raphael2007].
+Además, trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos, como en las anomalías en la concentración de hielo marino antártico [@raphael2007].
 
 @quintanar1995a realizaron experimentos de sensibilidad tratando de identificar los factores importantes en el mantenimiento de la onda zonal 1 climatológica.
 Encontraron que ni la temperatura ni la orografía de la Antártida eran suficientes para explicar la amplitud de esta onda en latitudes subpolares, por lo que concluyeron que los forzantes remotos debían jugar un papel importante.
-Por otro lado @wang2013 encontraron que la destrucción y recuperación de la capa de ozono está asociada a un aumento y disminución de la actividad de las ondas planetarias, respectivamente, pero su análisis no distingue en la actividad de distintos números de onda.
+Sin embargo, @watterson1992, más recientemente @goyal2021a sugieren que la orografía Antártida sí genera una onda 1 significativa. 
+Por otro lado @wang2013 encontraron que la destrucción y recuperación de la capa de ozono por forzantes antropogénicos está asociada a un aumento y disminución de la actividad de las ondas planetarias, respectivamente, pero su análisis no distingue en la actividad de distintos números de onda.
 
-En cuanto a la onda 3, experimentos de sensibilidad sugieren que los forzantes tropicales no son importanets para determinar la amplitud de la onda 3, sino que ayudan a fijarla en una fase preferencial y así se vea reflejada en el campo medio.
+En cuanto a la onda zonal 3, @campitelli2018b realizó un estudio de sus propiedades y climatología.
+Encontró que tanto la onda zonal 3 mensual alcanza su máximo de amplitud entre 200 y 300 hPa y en 50ºS. 
+Su fase es tiene un ciclo anual de aproximadamente 30ºS entre enero y junio (ya observada por @mo1985). 
+Excepto en noviembre y diciembre, la fase varía poco año a año con respecto a la fase media mensual, lo cual explica su relevancia en el campo medio. 
+En estos dos meses, en cambio, su fase es tan variable que no es posible hablar de una onda zonal 3 climatológica. 
+
+Experimentos de sensibilidad sugieren que los forzantes tropicales no son importantes para determinar la amplitud de la onda 3, sino que ayudan a fijarla en una fase preferencial y así se vea reflejada en el campo medio.
 @campitelli2018b realizó simulaciones con el modelo SPEEDY eliminando la variabilidad de la temperatura de la superficie del mar (TSM) tropical, encontrando que la amplitud de la onda 3 era similar a la simulación control, pero que su fase era mucho más variable.
 Estas conclusiones son consistentes con @goyal2021a quien realizó simulaciones con *aquaplanet* al que le agregó los continentes individualmente, sugiriendo que la distribución de los tres continentes del hemisferio sur no tiene un rol relevante en el establecimiento de la onda 3 ni su importancia en el campo medio.
 Este trabajo además propone que la onda 3 representa un tren de onda con propagación meridional y amplitud relativamente localizada en vez de una onda planetaria con amplitud constante en todo el hemisferio.
@@ -47,8 +54,8 @@ En conclusión, las metodologías usadas en la literatura para estudiar la circu
 
 Una metodología alternativa que se ha propuesto para estudiar las ondas propagantes y estacionarias son las funciones ortogonales empíricas complejas (cEOF) [@horel1984].
 Este método amplía el análisis EOF para capturar oscilaciones con amplitud y fase variables y se ha aplicado al dominio temporal.
-Por ejemplo, @krokhin2007 aplicó cEOF a las anomalías mensuales de precipitación basadas en estaciones y a las anomalías mensuales de temperatura en la región de Siberia Oriental y Extremo Oriente para caracterizar los principales modos de variabilidad y su relación con los índices de teleconexión.
-Del mismo modo, @gelbrecht2018 aplicó cEOF a la precipitación diaria a partir de reanálisis para estudiar las características de propagación del Monzón Sudamericano.
+Por ejemplo, @krokhin2007 aplicó cEOF a las anomalías mensuales de precipitación basadas en estaciones y a las anomalías mensuales de temperatura en la región de Siberia Oriental y Extremo Oriente, lo cual permitió evaluar las características de propagación del principal patrón de cada variable. 
+Del mismo modo, @gelbrecht2018 aplicó cEOF a la precipitación diaria en Sudamérica, lo cual permitió caracterizar las características de propagación del dipolo de anomalías de precipitación observado entre el Sur de Sudamérica (SESA) y la Zona de Convergencia del Atlántico Sur. 
 Hasta donde sabemos, el análisis cEOF no se ha aplicado en el dominio espacial para capturar la naturaleza variable en fase de las ondas planetarias en la atmósfera.
 
 El objetivo de esta tesis es mejorar la descripción y comprensión de la circulación extratropical hemisferio sur zonalmente asimétrica utilizando cEOF, que puede describir ondas planetarias de fase variable con amplitud variable a lo largo de un círculo de latitud.

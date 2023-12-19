@@ -23,7 +23,7 @@ header-includes:
     - \usepackage{setspace}\onehalfspacing
     - \usepackage[spanish,es-tabla]{babel}
     - \usepackage[colorinlistoftodos]{todonotes}
-    # - \usepackage[inline]{showlabels}
+    - \usepackage[inline]{showlabels}
     - \usepackage{subfig}
 
 language:

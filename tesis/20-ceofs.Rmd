@@ -221,11 +221,11 @@ Una alternativa para representar ondas que varían en su fase es utilizando el a
 Cada cEOF es un conjunto de estructuras espaciales y series temporales con valores en el plano complejo (es decir, con una parte real y una imaginaria).
 
 ```{=tex}
-\begin{equation}
+\begin{align}
 E_{(\lambda, \phi, p)} &= (E_{r(\lambda, \phi, p)} +  iE_{i(\lambda, \phi, p)}) \\
 T_{(t)} &= (T_{r(t)} +  iT_{i(t)})
 (\#eq:ceof-equation)
-\end{equation}
+\end{align}
 ```
 
 Donde $E_{(\lambda, \phi)}$ es la componente espacial del cEOF, que depende de la longitud ($\lambda$), la latitud ($\phi$) y el nivel de presión ($p$) y que tiene una parte real $E_r$ y una imaginaria $E_i$. 
@@ -279,6 +279,8 @@ ondas %>%
 
 
 ```
+
+(ref:ejemplo-reconstruccion-cap) Un ejemplo idealizado de las dos fases del patrón espacial de un cEOF (fila superior) y cuatro reconstrucciones para distintos valores de sus series temporales.
 
 Un ejemplo idealizado se presenta en la Figura \@ref(fig:ejemplo-reconstruccion) la cual representa la parte espacial de las fases de 0º y 90º de un cEOF hipotético en el panel superior y cuatro reconstrucciones de la variable original en el panel inferior. 
 Cuando la serie temporal de la fase de 0º es positiva y la serie temporal de la fase 90º es cercana a cero, entonces las anomalías zonales de altura geopotencial son similares al patrón espacial de la fase de 0º (panel a).
@@ -803,7 +805,7 @@ plot_regr <- function(data, which_cEOF, which_levs, which_var) {
 mpg <- expression('Altura geopotencial ('*m^{2}*s^{phantom() - 1}*')')
 ```
 
-(ref:eof1-regr-gh-cap) Regresión de anomalías de temperatura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período `r periodo`. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. `r pval_contours()`.
+(ref:eof1-regr-gh-cap) Regresión de anomalías de altura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período `r periodo`. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. `r pval_contours()`.
 
 ```{r eof1-regr-gh, fig.height=1.2*6, fig.width=6, dependson="plot_regr"}
 plot_regr(regr , "cEOF1", c(200, 50), "hgt") +
@@ -848,7 +850,7 @@ La localización de las anomalías no varía en la vertical, lo cual vuelvea con
 El cEOF2 representa entonces un tren de ondas de estructura barotrópica equivalente muy similar al de los Patrones PSA [@mo2001].
 Comparando la localización de la anomalía positiva cerca de 90ºO en la columna 2 de la Figura \@ref(fig:eof2-regr-gh) con las Figuras 1.a y b de @mo2001, el mapa de regresión de la fase de 0º podría identificarse con el PSA2, mientras que la fase 90º se asemeja al PSA1.
 Por otro lado, ambos modos muestran relación con patrones anulares semejantes al SAM.
-Estudiaremos la relación entre los cEOF y el PSA con más detalle en la sección \@ref(sam).
+Estudiaremos la relación entre los cEOF y el PSA con más detalle en la sección \@ref(psa).
 
 #### Temperatura y Ozono
 
@@ -1549,7 +1551,7 @@ Este patrón es muy similar al patrón del ENSO positivo canónico [@bamston1997
 De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (`r enso_cor[cEOF == "cEOF2" & part == "Imaginario"]$text`).
 Además del patrón similar al ENSO del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja al patrón DMI en su fase positiva [@saji1999].
 Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es `r dmi_cor[cEOF == "cEOF2" & part == "Imaginario"]$text`.
-Sin embargo, la correlación parcial es de `r oni_dmi_parciales[cEOF == "cEOF2" & part == "Imaginario" & term == "dmi"]$text,` indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo.
+Sin embargo, la correlación parcial es de `r oni_dmi_parciales[cEOF == "cEOF2" & part == "Imaginario" & term == "dmi"]$text`, indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo.
 Esto puede observarse en la Figura \@ref(fig:euler),, donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI.
 El DMI explica, independientemente, sólo un 4.3% de la varianza mientras que el ONI explica un 23.9% por sí mismo.
 

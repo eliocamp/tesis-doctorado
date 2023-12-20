@@ -57,7 +57,7 @@ Por último, se investigaron las relaciones del SAM a 700 hPa con las anomalías
 ### Datos
 
 Se utilizan las mismas fuentes de datos que en capítulos anteriores.
-En este capítulo usamos en particular datos de altura geopotencial, temperatura a 2 metros del conjunto de datos ERA5 y precipitación del conjunto de datos CMAP para el período 1979--2020.
+En este capítulo usamos en particular datos de altura geopotencial, temperatura del aire a 2 metros del conjunto de datos ERA5 y precipitación del conjunto de datos CMAP para el período 1979--2020.
 
 ### Regresión segmentada
 

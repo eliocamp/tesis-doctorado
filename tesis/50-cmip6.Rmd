@@ -56,7 +56,11 @@ Además, es imposible abordar la atribución de las tendencias observadas utiliz
 Estas limitaciones motivan completar el trabajo de tesis a partir de la utilización de salidas de modelos climáticos.
 En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparación de Modelos Acoplados (CMIP6) [@eyring2016] y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) [@gillett2016] de capturar estos modos y sus principales características.
 Al contar con corridas mucho más largas y múltiples miembros por modelo, es posible evaluar las tendencias a largo plazo con mayor robustez.
-Utilizando los modelos incluidos en DAMPI, además podemos avanzar en la atribución de las tendencias observadas.
+Utilizando los modelos incluidos en DAMIP, además es posible avanzar en la atribución de las tendencias observadas.
+
+Estudios previos estudiaron las tendencias de los principales modos de circulación del hemisferio sur. 
+Encontraron que la tendencia positiva del SAM es simulada correctamente por los modelos de CMIP5 y CMIP6 y que puede atribuirse tanto al efecto de los gases de efecto invernadero como a la destrucción del ozono estratosférico [@gillett2013; @ipcc5ch3]. 
+
 
 ## Métodos
 
@@ -1256,7 +1260,7 @@ datos %>%
 La fase de 90º del cEOF1, presenta una tendencia positiva en hist-aer y negativa en hist-GHG y, también negativa pero más débil, en hist-stratO3.
 La disminución del ozono estratosférico y el aumento de las concentraciones de GHG contribuyen a la tendencia negativa.
 Ambos efectos tienden a reducir la altura geopotencial en 50 hPa sobre la Antártida oriental (Fig. \@ref(fig:mapa-trend) columna 2).
-Este efecto combinado de ambos forzantes ha sido ya identificada por trabajos previos como aquella que mayormente explica la intensificación y progresión hacia el polo de los vientos del oeste (ej. REFERENCIA).
+Este efecto combinado de ambos forzantes ha sido ya identificada por trabajos previos como aquella que mayormente explica la intensificación y progresión hacia el polo de los vientos del oeste [@ipcc5ch3]. 
 
 Para la fase de 0º del cEOF1, ni hist-nat ni hist-aer muestran tendencias significativas, sugiriendo que la tendencia observada no se debe a variabilidad ni al forzante de los aerosoles antropogénicos.
 Por otro lado, hist-stratO3 muestra una tendencia mucho mayor a la observada e hist-GHG muestra una tendencia negativa de similar magnitud la de hist-stratO3.

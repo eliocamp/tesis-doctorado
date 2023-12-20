@@ -123,7 +123,7 @@ if (sign(cor_aao) != 1) {
 ### Datos
 
 Se utilizan las mismas fuentes de datos que en capítulos anteriores.
-En este capítulo usamos en particular datos de altura geopotencial, temperatura a 2 metros del conjunto de datos ERA5 y precipitación del conjunto de datos CMAP para el período `r periodo`.
+En este capítulo usamos en particular datos de altura geopotencial, temperatura del aire a 2 metros del conjunto de datos ERA5 y precipitación del conjunto de datos CMAP para el período `r periodo`.
 
 ### Regresión segmentada
 

@@ -36,7 +36,7 @@ impactos
 conclusiones-del-capítulo-refceofs
 asymsam
 introducción-1
-datos-y-métodos-métodos
+datos-y-métodos
 datos-2
 regresión-segmentada
 definition-of-indices

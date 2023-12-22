@@ -39,7 +39,7 @@ Primero se calcula la transformada de Fourier de las anomalías de geopotencial 
 
 
 
-(ref:envolvente-ejemplo-cap) Anomalías zonales de altura geopotencial en 500 hPa en septiembre de 1989 (contornos, líneas sólidas indican valores positivos y líneas punteadas indican valores negativos) y envolvente de ondas zonales (sombreado).
+(ref:envolvente-ejemplo-cap) Anomalías zonales de altura geopotencial (m) en 500 hPa en septiembre de 1989 (contornos, líneas sólidas indican valores positivos y líneas punteadas indican valores negativos) y envolvente de ondas zonales (sombreado).
 
 La Figura \@ref(fig:envolvente-ejemplo) muestra un ejemplo de la envolvente de la ondas zonales para la altura geopotencial en 500 hPa en septiembre de 1989 junto con las anomalías zonales correspondientes.
 Estas anomalías son intensas al sur de Australia y Nueva Zelanda y la envolvente captura esa región.
@@ -60,7 +60,7 @@ La tesis se compiló utilizando knitr y rmarkdown [@xie2015; @allaire2020].
 
 
 
-(ref:raphael-regr-cap) Regresión lineal entre R04 y la anomalía zonal de altura geopotencial en 500 hPa (sombreado). La onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa se muestra en contornos; (valores positivos en línea llena y negativos en línea punteada). En azul se indican la ubicación de los puntos usado para calcular R04.
+(ref:raphael-regr-cap) Regresión lineal entre R04 y la anomalía zonal de altura geopotencial (m) en 500 hPa (sombreado). La onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa se muestra en contornos; (valores positivos en línea llena y negativos en línea punteada). En azul se indican la ubicación de los puntos usado para calcular R04.
 
 La Figura \@ref(fig:raphael-regr) presenta la regresión lineal entre R04 y la anomalía zonal de altura geopotencial en 500 hPa junto con la onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa para el período 1979--2020.
 La figura incluye además las ubicaciones definidas por @raphael2004 para calcular el índice.
@@ -121,7 +121,7 @@ Esto indica que los puntos no son covariantes, lo que implica que no serían par
 
 
 
-(ref:cor-puntos-cap) Regresión entre las anomalías zonales de altura geopotencial en 500 hPa e índices R04 usando combinaciones de 1 y 2 puntos. En cada panel, los puntos azules son los puntos usados para calcular el índice y los negros, los excluidos.
+(ref:cor-puntos-cap) Regresión entre las anomalías zonales de altura geopotencial en 500 hPa e índices R04 usando combinaciones de 1 y 2 puntos (m). En cada panel, los puntos azules son los puntos usados para calcular el índice y los negros, los excluidos.
 
 La Figura \@ref(fig:cor-puntos) muestra los campos de regresión entre la anomalía zonal de altura geopotencial e índices similares a R04 pero computados considerado o bien solo un punto (Fig. \@ref(fig:cor-puntos), fila a) o promedios de combinaciones de dos puntos (Fig.\@ref(fig:cor-puntos), fila b) de los tres utilizados para computar R04.
 La figura muestra que no se encuentra un patrón coherente de onda 3 asociado a los puntos individuales.
@@ -129,7 +129,7 @@ Por otra parte, los campos obtenidos a partir de las combinaciones de dos puntos
 
 ![(\#fig:raphael-top8)(ref:raphael-top8-cap)](figures/15-onda3/raphael-top8-1.png)![(\#fig:raphael-top8)(ref:raphael-top8-cap)](figures/15-onda3/raphael-top8-2.png)
 
-(ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04. Los puntos azules indican las ubicaciones usadas en el índice R04.
+(ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (m, sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04. Los puntos azules indican las ubicaciones usadas en el índice R04.
 
 Finalmente, las Figuras \@ref(fig:raphael-top8-1) y \@ref(fig:raphael-top8-2) muestran  las anomalías mensuales  zonales de la altura geopotencial para los 8 meses con mayor y menor valor del índice R04, respectivamente.
 En pocos casos se observa un patrón de onda 3 bien marcado; por ejemplo, en abril de 2003 y noviembre de 1985 (paneles f y g) se observan tres zonas de anomalías positivas cercanas a las ubicaciones utilizadas para calcular R04 y tres zonas de anomalías negativas entre las mismas.
@@ -160,7 +160,7 @@ Por lo que dado que la variable relevante para estudiar la variabilidad, los imp
 
 
 
-(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
+(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (m, ombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
 
 La Figura \@ref(fig:zw3-top8) presenta, para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial, las anomalía zonales de altura geopotencial en 500 hPa y las correspondientes anomalías mensuales.
 Algunos meses, como septiembre de 1997, abril de 1995 y octubre de 2009 (Fig. \@ref(fig:zw3-top8), paneles c, d y h) tienen máximos y mínimos de intensidad relativamente constante.
@@ -170,7 +170,7 @@ En cambio, en junio de 1986 (Fig. \@ref(fig:zw3-top8), panel f) las anomalías t
 
 
 
-(ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial.
+(ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial (sin unidades).
 
 Esta diferencia longitudinal en la amplitud de las ondas puede capturarse a partir de la envolvente de las ondas.
 La Figura \@ref(fig:envelope-regr) muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial.

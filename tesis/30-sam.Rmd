@@ -654,7 +654,7 @@ El S-SAM estratosférico tiene una conexión con el S-SAM troposférico algo má
 indices %>% 
   .[, lapply(.SD, mean), by = .(lev, PC, term, time = seasonally(time))] %>% 
   .[, season := season(time, "es")] %>% 
-  rbind(., copy(indices)[, season := "Annual"]) %>% 
+  rbind(., copy(indices)[, season := "Anual"]) %>% 
   .[year(time) >= c(1979)] %>% 
   .[, estimate_norm := estimate_norm/sd(estimate_norm), by = .(lev, term)] %>%
   .[, FitLm(estimate_norm, time = time, se = TRUE), by = .(type = term, lev, season)] %>% 
@@ -664,7 +664,7 @@ indices %>%
   .[, std.error := std.error*365*10] %>% 
   .[, pval := Pvaluate(estimate, std.error, df, "fdr")] %>% 
   setnames("type", "term") %>% 
-  .[, season := forcats::fct_relevel(season, "Annual")] %>% 
+  .[, season := forcats::fct_relevel(season, "Anual")] %>% 
   .[, t := qt(.975, df)] %>% 
   .[, term := factor_sam(term)] %>% 
   ggplot(aes(lev, estimate)) +
@@ -823,7 +823,7 @@ indices_2d_yearly <- hgt[lev %in% c(main_levs)] %>%
   .[, p.val := Pvaluate(estimate, std.error, df, "fdr"), by = .(term, lev)] %>% 
   periodic(lon = c(0, 360)) %>% 
   .[, term := factor_sam(term)] %>% 
-  .[, season := "Annual"]
+  .[, season := "Anual"]
 ```
 
 (ref:2d-regr-cap) Regresión de altura geopotencial (metros) en 50 hPa (fila a) y 700 hPa (fila b) con el SAM (columna 1), A-SAM (columna 2) y S-SAM (columna 3) para el período `r periodo`. Los puntos en panel b.2 indican la posición de los puntos de referencia usados por @raphael2004 para calcular su índice de la onda zonal 3.
@@ -1097,7 +1097,6 @@ if (is_word()) {
     add_header_above(c(" " = 1, "Correlación" = 1, 
                        "Correlación parcial" = 2)) 
 }
-
 ```
 
 El patrón de la onda 3 de la Figura \@ref(fig:2d-regr)b.2 es muy similar al PSA [@mo1987; @kidson1988], que es un patrón de teleconexión asociado al ENSO [@karoly1989].
@@ -1237,7 +1236,7 @@ indices_2d_seasonal <- hgt[lev %in% 700] %>%
   .[, term := factor_sam(term)]
 
 indices_2d <- rbind(indices_2d_yearly[lev == 700] %>% .[, lev := NULL], indices_2d_seasonal) %>% 
-  .[, season := forcats::fct_relevel(season, "Annual")] 
+  .[, season := forcats::fct_relevel(season, "Anual")] 
 ```
 
 ```{r compute-pp-regr}
@@ -1305,11 +1304,11 @@ pp_regr_annual <- cmap %>%
     by = .(lon, lat)] %>% 
   rm_intercept() %>% 
   .[, term := factor_sam(term)] %>% 
-  .[, season := "Annual"]
+  .[, season := "Anual"]
 
 
 pp_regr <- rbind(pp_regr_season, pp_regr_annual) %>% 
-  .[, season := forcats::fct_relevel(season, "Annual")] 
+  .[, season := forcats::fct_relevel(season, "Anual")] 
 ```
 
 ```{r pp-enso-patterns, eval=FALSE, include=FALSE}
@@ -1371,7 +1370,7 @@ breaks_pp <- breaks_pp[breaks_pp != 0]
 
 lons <- c(0, unique(pp_regr$lon), 360)
 pp_regr %>%
-  .[season == "Annual"] %>%
+  .[season == "Anual"] %>%
   .[, p.value := Pvaluate(estimate, std.error, df, "fdr"), by = .(season, term)] %>% 
   periodic(lon = c(1.25, 360 + 1.25)) %>%
   wrap() %>%

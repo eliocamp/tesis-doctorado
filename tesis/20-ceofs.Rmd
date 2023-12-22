@@ -67,7 +67,7 @@ Z(\lambda, \phi, t) = \alpha(\lambda, \phi) \operatorname{X} + \beta(\lambda, \p
 donde $\lambda$ y $\phi$ son la longitud y la latitud, $t$ es el tiempo, $\alpha$ y $\beta$ son los coeficientes de regresión lineal, $X_0$ y $\epsilon$ son la constante y los términos de error.
 A partir de esta ecuación, $\alpha$ representa la asociación (lineal) de $Z$ con la variabilidad de $X$ que no se explica por la variabilidad de $Y$; es decir, es proporcional a la correlación parcial de $Z$ y $X$, controlando el efecto de $Y$, y viceversa para $\beta$.
 
-Para las regresiones estacionales, promediamos la variables para cada año y trimestre (DJF, MAM, JJA, SON) antes de calcular la regresión.
+Para las regresiones estacionales, promediamos la variables para cada año y trimestre (DEF, MAM, JJA, SON) antes de calcular la regresión.
 
 La significancia estadística de los campos de regresión se evaluó ajustando los p-valores mediante el control de la Tasa de Falso Descubrimiento [@benjamini1995; @wilks2016] para evitar resultados engañosos derivados del elevado número de regresiones [@walker1914; @katz1991].
 
@@ -122,6 +122,7 @@ era5 <- ERA5_geopotential() %>%
              subset = list(level = list(200, 50),
                            latitude = -90:10,
                            time = main_period)) %>% 
+  .[, hgt := hgt/9.8] %>% 
   normalise_coords() %>% 
   na.omit() %>%   # Tengo que omitirlo por la forrada del expver
   .[season(time) == "SON"] %>% 
@@ -345,6 +346,7 @@ invisible(
                subset = list(latitude = -90:10,
                              level = list(200, 50),
                              time = main_period)) %>%
+    .[, hgt := hgt/9.8] %>% 
     normalise_coords() %>%
     na.omit() %>% 
     .[season(time) == "SON"] %>% 
@@ -536,6 +538,7 @@ era_more <- ERA5_geopotential() %>%
              subset = list(latitude = range(pattern$lat),
                            level = list(200, 50),
                            time = c(NA_character_, main_period[2]))) %>% 
+  .[, hgt := hgt/9.8] %>% 
   normalise_coords() %>%
   na.omit() %>% 
   .[is.full_season(time)] %>% 
@@ -1909,7 +1912,7 @@ Sin embargo, esta es la fase más fuertemente correlacionada con la precipitaci�
 La fase de 135º (una intermedia 90º y 180º) está correlacionada más intensa y extensamente con la precipitación sobre Australia y Nueva Zelanda.
 La influencia del cEOF2 en la precipitación australiana podría estar relacionada más con los impactos directos de las anomalías de la TSM en los océanos circundantes que en el patrón de teleconexión representado por el cEOF2.
 
-Sobre Sudamérica, la fase de 90º del cEOF2 está correlacionada positivamente con la precipitación en el sudeste de Sudamérica (SESA) y el centro de Chile, y negativamente en el este de Brasil.
+Sobre Sudamérica, la fase de 90º del cEOF2 está correlacionada positivamente con la precipitación en el SESA y el centro de Chile, y negativamente en el este de Brasil.
 Este campo de correlación es coherente con la señal de ENSO en la precipitación regional de primavera [p.ej. @cai2020a].
 
 Los coeficientes de correlación entre las anomalías de precipitación y la fase de 0º del cEOF2 (Fig. \@ref(fig:pp-temp-2)d.2) son más débiles que para la fase de 90º.

@@ -77,6 +77,11 @@ factor_sam <- function(term) {
 }
 
 
+lab_season <- c(DJF = "DEF",
+                MAM = "MAM",
+                JJA = "JJA",
+                SON = "SON")
+
 
 axis_labs_smol <- function() ggplot2::theme(axis.text = ggplot2::element_text(size = 6))
 

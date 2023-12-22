@@ -989,6 +989,7 @@ era5 <- ERA5_geopotential() %>%
              subset = list(level = list(50),
                            latitude = -90:-10,
                            time = main_period)) %>% 
+  .[, hgt := hgt/9.8] %>% 
   normalise_coords() %>% 
   na.omit() %>%   # Tengo que omitirlo por la forrada del expver
   .[season(time) == "SON"] %>% 

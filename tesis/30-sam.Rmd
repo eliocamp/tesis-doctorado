@@ -31,7 +31,8 @@ main_levs <- c(700, 300, 30, 50)
 
 ## Introducción
 
-Como se explicó en la introducción, el patrón espacial del Modo Anular del Sur (SAM) suele describirse a través del EOF principal de las anomalías de altura geopotencial en la troposfera del hemisferio sur pero también en muchos casos utilizando índices como se discute a continuación que están construidos asumiendo que el patrón describe eminentemente variaciones de la circulación zonalmente simétrica.
+Como se explicó en la introducción, el patrón espacial del SAM suele describirse a través del primer EOF de las anomalías de altura geopotencial en la troposfera del hemisferio sur.
+En otros casos se utilizan índices construidos asumiendo que el patrón describe eminentemente variaciones de la circulación zonalmente simétrica.
 Sin embargo, este patrón tiene asimetrías zonales significativas.
 
 Muchos índices presentados en la literatura para describir el SAM se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial [@ho2012].
@@ -39,26 +40,26 @@ Tanto @gong1999 como @marshall2003 definen el índice SAM como la diferencia de 
 Asimismo,@baldwin2009 propuso definir modos anulares del norte y el sur como el primer EOF de la altura geopotencial promediada zonalmente en cada nivel en cada hemisferio.
 Sin embargo, como veremos a continuación, las asimetrías zonales del SAM pueden ser significativas y han sido poco estudiadas.
 
-En la literatura se asocia generalmente a la fase positiva del SAM a aquella asociada con anomalías positivas de altura geopotencial sobre la Antártida y negativas en latitudes medias.
+En la literatura se asocia generalmente a la fase positiva del SAM a aquella asociada con anomalías positivas de altura geopotencial sobre la Antártida y negativas en latitudes medias [@jones2019].
 En esta fase las temperaturas son más frías de lo normal sobre la Antártida y más cálidas de lo normal en latitudes más bajas.
-Lo opuesto se encuentra para la fase negativa [@jones2019].
+Lo opuesto se encuentra para la fase negativa.
 Pero hay desviaciones significativas de esta respuesta media zonal, especialmente en la Península Antártica y el Atlántico sur [@fogt2012].
-La señal relacionada con el SAM en las anomalías de precipitación también es positiva en latitudes altas y negativos en latitudes medias, aunque con aún mayores desviaciones respecto de la simetría zonal [@lim2016].
-En particular, la relación entre el SAM y la precipitación en el Sudeste de Sudamérica (SESA) en escalas interanuales depende fuertemente de las anomalías de circulación zonalmente asimétrica asociadas al SAM y presenta importantes variaciones decadales [@silvestri2009; @rosso2018].
+La señal relacionada con el SAM en las anomalías de precipitación también es positiva en latitudes altas y negativa en latitudes medias, aunque con aún mayores desviaciones respecto de la simetría zonal [@lim2016].
+En particular, la relación entre el SAM y la precipitación en el SESA en escalas interanuales depende fuertemente de las anomalías de circulación zonalmente asimétrica asociadas al SAM y presenta importantes variaciones decadales [@silvestri2009; @rosso2018].
 
 Si bien la variabilidad del SAM se debe principalmente a la variabilidad interna, en escalas intraestacionales e interanuales, puede estar asociada con la variabilidad tropical [@fan2007; @fogt2011a; @clem2013].
 Como discutimos en las secciones anteriores el ENSO o la variabilidad tropical en general afecta a los extratrópicos del hemisferio sur a través de trenes de ondas de Rossby [@mo1987; @kidson1988; @karoly1989] que pueden proyectarse fuertemente sobre las anomalías zonales asociadas al SAM en el sector del Pacífico [p.ej. @silvestri2009; @vera2018].
 @fan2007 calculó los índices de SAM de los hemisferios occidental y oriental por separado y encontró que la correlación entre ellos aumentaba si se elimina la señal (lineal) del ENSO, sugiriendo que la influencia del ENSO en el SAM no es zonalmente homogénea.
 
-En escalas más largas, investigaciones previas han documentado a lo largo del siglo 20 y lo que va del 21, tendencias positivas en el SAM utilizando diferentes índices, sobre todo en verano y otoño austral [p.ej., @fogt2020 y sus referencias].
+En escalas más largas, investigaciones previas han documentado a lo largo del siglo 20 y lo que va del 21, tendencias positivas en el SAM utilizando diferentes índices, sobre todo para el verano y otoño australes [p.ej., @fogt2020 y sus referencias].
 Se encontró que estas tendencias están impulsadas principalmente por la reducción del ozono estratosférico y el aumento de los gases de efecto invernadero, aunque han sido analizadas en el contexto de las variables medias zonales [@marshall2004; @gillett2005; @arblaster2006; @gillett2013].
-Sin embargo, no está claro si la componente asimétrica del SAM responde a estos forzantes de la misma forma o si su variabilidad, por el contrario, altera las tendencias observadas.
+Por lo tanto no está claro si la componente asimétrica del SAM responde a estos forzantes de la misma forma o si su variabilidad, por el contrario, altera las tendencias observadas.
 
 Uno de los pocos trabajos que estudiaron la variabilidad temporal de la componente asimétrica del SAM es @fogt2012.
 Este trabajo definió los patrones de SAM asimétrico positivo y negativo como las anomalías zonales de composiciones de presión al nivel del mar para eventos SAM positivos y negativos.
 Sin embargo, estas composiciones se basan en un número reducido de casos y distribuidos inhomogéneamente entre años con y sin información satelital.
 Esto es especialmente relevante debido a las inhomogeneidades en los productos de reanálisis anteriores a la era satelital y al posible cambio en la estructura asimétrica del SAM [@silvestri2009].
-Además, @fogt2012 estudió la componente asimétrica zonal del SAM sólo en la presión a nivel del mar.
+Además, @fogt2012 estudió la componente asimétrica zonal del SAM solamente en la presión a nivel del mar.
 Si bien las asimetrías zonales en el patrón espacial del SAM son barotrópicas equivalentes en toda la troposfera, su estructura cambia drásticamente en la estratosfera [@baldwin2009].
 
 Es decir, las investigaciones previas sugieren fuertemente que la componente zonalmente asimétrica del SAM puede tener un comportamiento potencialmente muy distinto al de la componente zonalmente simétrica, por lo que su estudio merece particular atención.
@@ -75,6 +76,7 @@ hgt <- ERA5_geopotential() %>%
                            latitude = c(-90, 10),
                            level = as.list(main_levs)),
              vars = c(hgt = "z")) %>% 
+  .[, hgt := hgt/9.8] %>% 
   normalise_coords() %>% 
   na.omit() %>% 
   .[, hgt := hgt/9.8] %>% 
@@ -118,7 +120,7 @@ if (sign(cor_aao) != 1) {
 }
 ```
 
-## Datos y métodos Métodos
+## Datos y métodos
 
 ### Datos
 
@@ -129,6 +131,7 @@ En este capítulo usamos en particular datos de altura geopotencial, temperatura
 
 Se utilizó la metodología de regresión lineal segmentada para calcular los campos asociados a las fases positivas y negativas del SAM.
 Ésta consiste en ajustar un modelo lineal a tramos con continuidad en cada segmento como se ilustra en la Figura \@ref(fig:segmentada-ejemplo) con datos sintéticos.
+
 
 ```{r segmentada-ejemplo, fig.width=4, fig.height=3}
 withr::with_seed(42, 
@@ -160,15 +163,15 @@ $$
 donde $Y$ e $X$ son las variables dependiente e independiente respectivamente, $\alpha$ es la pendiente asociada a los valores positivos de $X$, $\beta$ es la diferencia entre la pendiente asociada a valores positivos y negativos de $X$, $I_{X\le 0}$ es la función indicador que es 1 cuando $X\le0$ y 0 cuando $X>0$, y $X_0$ y $\epsilon_i$ son la constante y los términos de error.
 El coeficiente asociado a valores negativos de X es $\beta - \alpha$.
 
-Esta metodología utiliza todos los datos disponibles.
+Comparado con el uso de composiciones para eventos que superan umbrales positivos y negativos, este método tiene la ventaja de utilizar todos los datos eficientemente (en vez de descartar los eventos "neutrales") y de que la magnitud de los patrones obtenidos no depende de la intensidad media de los eventos positivos y negativos. 
 Además, dado que $\beta$ es la diferencia en la pendiente entre valores positivos y negativos, es posible calcular la significancia estadística de la misma.
 
-### D**escomposición de las componentes del SAM** {#definition-of-indices}
+### Descomposición de las componentes del SAM {#definition-of-indices}
 
 El SAM suele en muchos casos definirse como el EOF de las anomalías de la presión al nivel del mar o de la altura geopotencial en un determinado nivel vertical, generalmente bajo de la troposfera [ej @silvestri2009; @ho2012].
 Siguiendo a @baldwin2001, ampliamos esa definición verticalmente y utilizamos el término SAM para referirnos al primer EOF de las anomalías mensuales de altura geopotencial al sur de 20º S en cada nivel vertical considerado y que de ahora en adelante si bien llamaremos SAM, se refiere al SAM "completo" que incluye tanto la componente simétrica como la asimétrica.
 
-Para separar la componente zonalmente simétrica y asimétrica del SAM, calculamos la media zonal y las anomalías del patrón espacial del SAM completo, como muestra en la Figura \@ref(fig:method) en 700 hPa.
+Para separar la componente zonalmente simétrica y la asimétrica del SAM, calculamos la media zonal y las anomalías del patrón espacial del SAM completo, como se muestra en la Figura \@ref(fig:method) en 700 hPa.
 La señal espacial completa ($\mathrm{EOF_1}(\lambda, \phi)$) es la suma de la componente zonalmente asimétrica ($\mathrm{EOF_1^*}(\lambda, \phi)$) y la simétrica ($[\mathrm{EOF_1}](\lambda, \phi)$).
 A continuación, calculamos el índice SAM, el índice SAM asimétrico (A-SAM) y el índice SAM simétrico (S-SAM) como los coeficientes de la regresión de cada campo de altura geopotencial mensual sobre los respectivos patrones (ponderando por el coseno de la latitud).
 Finalmente, normalizamos los tres índices dividiéndolos por la desviación estándar del índice SAM en cada nivel.
@@ -250,7 +253,7 @@ sign_regression <- hgt[lev %in% c(50, 700)] %>%
   #   by = .(lev, month(time))] %>% 
   .[, hgt_a := Anomaly(hgt_a), by = .(lat, lev, time)] %>%
   .[, FitLm(hgt_a, samplus = full, difference = full*(sign(full) <= 0), intercept = FALSE, se = TRUE), 
-    by = .(lon, lat, lev, season(time))] %>% 
+    by = .(lon, lat, lev, season(time, lang = "es"))] %>% 
   .[, pval := Pvaluate(estimate, std.error, df, adjustment = "fdr")]
 
 plot_sign_regression <- function(sign_regression) {
@@ -332,15 +335,15 @@ La Figura \@ref(fig:season-regression) muestra la regresión de las anomalías d
 En 50 hPa (Fig. \@ref(fig:season-regression) fila a), los patrones del SAM para MAM y JJA son muy similares a SON, con correlación espacial cuadrada mayor a 0.75.
 En estas tres estaciones, el SAM en 50 hPa se asocia a una onda planetaria 1 con su centro negativo en 60ºO.
 El patrón de JJA tiene algunas diferencias significativas con respecto a SON, principalmente un corrimiento e intensificación de la anomalía negativa de la onda.
-El patrón de DJF, en cambio, es muy distinto; la onda 1 tiene su mínimo cerca de 180ºO y está más retraída a latitudes altas.
+El patrón de DEF, en cambio, es muy distinto; la onda 1 tiene su mínimo cerca de 180ºO y está más retraída a latitudes altas.
 Además, su correlación espacial es esencialmente nula.
 
 En 700 hPa (Fig. \@ref(fig:season-regression) fila b), las cuatro estaciones tienen patrones bastante similares, prácticamente sin diferencias estadísticamente significativas con respecto a SON y con correlaciones cuadradas mayores a 0.6.
-El patrón de DJF es el más distinto, siendo similar a SON pero menos intenso.
+El patrón de DEF es el más distinto, siendo similar a SON pero menos intenso.
 Esto es consistente con los resultados de @fogt2020.
 
-Estos resultados sugieren entonces que la suposición de estabilidad estacional se cumple excepto para DJF en la estratósfera.
-Esto indica que hay que tener cuidado en la interpretación del SAM asimétrico en DJF en la estratosfera ya que el patrón de SAM asimétrico impuesto por la metodología no coincide con el patrón de SAM asimétrico que se obtendría considerando únicamente este trimestre.
+Estos resultados sugieren entonces que la suposición de estabilidad estacional se cumple excepto para DEF en la estratósfera.
+Esto indica que hay que tener cuidado en la interpretación del SAM asimétrico en DEF en la estratosfera ya que el patrón de SAM asimétrico impuesto por la metodología no coincide con el patrón de SAM asimétrico que se obtendría considerando únicamente este trimestre.
 
 (ref:season-regression-cap) Regresión múltiple de las anomalías zonales de altura geopotencial de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada estación. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. `r pval_contours()`, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON.
 
@@ -348,12 +351,12 @@ Esto indica que hay que tener cuidado en la interpretación del SAM asimétrico 
 season_regression <- hgt[lev %in% c(50, 700)] %>%
   indices_wide[., on = .NATURAL] %>% 
   .[, hgt_a := Anomaly(hgt_a), by = .(lat, lev, time)] %>%
-  .[, ":="(DJF = as.numeric(season(time) == "DJF"), 
-           MAM = as.numeric(season(time) == "MAM"), 
-           JJA = as.numeric(season(time) == "JJA"))] %>%    # Feo, pero bueno. 
+  .[, ":="(DEF = as.numeric(season(time, "es") == "DEF"), 
+           MAM = as.numeric(season(time, "es") == "MAM"), 
+           JJA = as.numeric(season(time, "es") == "JJA"))] %>%    # Feo, pero bueno. 
   .[, FitLm(hgt_a, 
             SON = full, 
-            DJF = full*DJF, 
+            DEF = full*DEF, 
             MAM = full*MAM, 
             JJA = full*JJA, se = TRUE), 
     by = .(lon, lat, lev)] %>% 
@@ -363,7 +366,7 @@ season_regression <- hgt[lev %in% c(50, 700)] %>%
   .[, baseline := estimate[term == "SON"], by = .(lon, lat, lev)] %>%
   .[term != "SON", dif := estimate] %>% 
   .[term != "SON", estimate := estimate + baseline] %>%
-  .[, term := factor(term, levels = c("SON", "DJF", "MAM", "JJA"))]
+  .[, term := factor(term, levels = c("SON", "DEF", "MAM", "JJA"))]
 
 
 season_cors <- season_regression %>% 
@@ -410,10 +413,6 @@ ggplot(season_regression[lev == 50], aes(lon, lat)) +
   plot_layout(ncol = 1) 
 ```
 
-El método también asume que el patrón zonalmente asimétrico del SAM permanece estacionario a lo largo del periodo considerado.
-@silvestri2009 sugiere que este podría no ser el caso entre 1958 y 2004.
-Para probar esta suposición, calculamos el SAM para las dos mitades del periodo (1979 a 1998 y 1999 a 2020), que se muestran en la Figura \@ref(fig:sam-period).
-Las diferencias entre los dos períodos parecen ser relativamente pequeñas, tanto en la troposfera como en la estratosfera.
 
 (ref:sam-period-cap) Patrón espacial del primer EOF computado para el período 1979 -- 1998 (columna 1) y 1999 -- 2020 (columna 2) para 50 hPa (fila a) y 700 hPa (fila b). Unidades arbitrarias con valores negativos en azul y negativos en azul.
 
@@ -458,6 +457,13 @@ SAM_period %>%
                                                           old = "1979 -- 1998"))) +
   tag_facets("rc")
 ```
+
+El método también asume que el patrón zonalmente asimétrico del SAM permanece estacionario a lo largo del periodo considerado.
+@silvestri2009 sugiere que este podría no ser el caso entre 1958 y 2004.
+Para probar esta suposición, calculamos el SAM para las dos mitades del periodo (1979 a 1998 y 1999 a 2020), que se muestran en la Figura \@ref(fig:sam-period).
+Las diferencias entre los dos períodos parecen ser relativamente pequeñas, tanto en la troposfera como en la estratosfera.
+La correlación espacial entre los campos es de `r sam_period_cor[lev == 50]$text` en 50 hPa y  `r sam_period_cor[lev == 700]$text` en 700 hPa. 
+
 
 ## Resultados
 
@@ -542,7 +548,7 @@ spec %>%
 Los espectros de estas series temporales se muestran en la Figura \@ref(fig:spectrum).
 El S-SAM estratosférico varía fuertemente con un periodo entre 10 y 30 meses (Fig. \@ref(fig:spectrum) a.3).
 En el periodograma del S-SAM troposférico (Fig.\@ref(fig:spectrum) b.3) se aprecia un pico local en un rango de frecuencias similar, aunque no es estadísticamente significativo.
-Esta banda de periodicidad que exhibe la estratosfera está alrededor del rango de periodicidad de la Oscilación Cuasi-Bienal (QBO, por su siglas en inglés, @baldwin2001b) y es consistente con @vasconcellos2022, quien encontró que el SAM y la QBO comparten una alta potencia común significativa alrededor de la banda de 2 años.
+Esta banda de periodicidad que exhibe la estratosfera está alrededor del rango de periodicidad de la Oscilación Cuasi-Bienal (QBO, por su siglas en inglés, @baldwin2001b) y es consistente con  los resultados de @vasconcellos2022, el cuál encontró que el SAM y la QBO comparten una alta potencia común significativa alrededor de la banda de 2 años.
 El hecho de que esta periodicidad no sea evidente en el índice A-SAM, también es consistente con los resultados de estos autores que muestran en sus composiciones de anomalías de altura geopotencial durante la QBO oriental y occidental, un monopolo bastante simétrico sobre la Antártida.
 En la troposfera, el pico de variabilidad más significativo se encuentra en A-SAM en torno a 36 meses.
 
@@ -558,10 +564,10 @@ cors <- indices_wide %>%
   .[, ccf_dt(asym, sym, lag.max = 5), by = .(lev)]
 ```
 
-La Figura \@ref(fig:cor-lev) muestra la correlación entre A-SAM y S-SAM en cada nivel para los desfasajes cero y -1.
+La Figura \@ref(fig:cor-lev) muestra la correlación entre A-SAM y S-SAM en cada nivel para los desfasajes cero (simultáneo) y -1 (A-SAM adelantada a S-SAM en 1 mes).
 Los valores de las correlaciones instantáneas entre A-SAM y S-SAM son relativamente constantes en toda la troposfera, fluctuando entre `r signif(cors[lag == 0 & lev >= 100, min(acf)], 2)` y `r signif(cors[lag == 0 & lev >= 100, max(acf)], 2)`.
-Las correlaciones con desfase de un mes son igualmente constantes pero muy reducidas.
-En la estratosfera, las correlaciones instantáneas caen a un mínimo de `r signif(cors[lag == 0 & lev < 100][which.min(acf)]$acf, 2)` en `r cors[lag == 0 & lev < 100][which.min(acf)]$lev` hPa y luego aumentan nuevamente monotónicamente con la altura hasta el nivel más alto considerado  (aunque los resultados cerca del tope superior representado en los modelos deben interpretarse con cuidado).
+Las correlaciones con defasaje de un mes son igualmente constantes pero muy reducidas.
+En la estratosfera, las correlaciones instantáneas caen a un mínimo de `r signif(cors[lag == 0 & lev < 100][which.min(acf)]$acf, 2)` en `r cors[lag == 0 & lev < 100][which.min(acf)]$lev` hPa y luego aumentan nuevamente monótonamente con la altura hasta el nivel más alto considerado  (aunque los resultados cerca del tope superior representado en los modelos deben interpretarse con cuidado).
 Al mismo tiempo, las correlaciones con un mes de defasaje aumentan con la altura.
 Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SAM.
 
@@ -577,10 +583,10 @@ cors %>%
   scale_y_continuous("Correlación", limits = c(0, 1)) + 
   scale_linetype_manual(name = NULL, values = c(1, 5), 
                         labels = c("0" = "Instantánea", 
-                                   "-1" = "A-SAM adelanda a\nS-SAM en 1 month")) +
+                                   "-1" = "A-SAM adelanda a\nS-SAM en 1 mes")) +
   scale_color_brewer(NULL, palette = "Dark2", 
                      labels = c("0" = "Instantánea",
-                                "-1" = "A-SAM adelanda a\nS-SAM en 1 month")) +
+                                "-1" = "A-SAM adelanda a\nS-SAM en 1 mes")) +
   coord_flip() +
   panel_background()
 ```
@@ -634,7 +640,7 @@ crosscor %>%
   tag_facets(position = "br")
 ```
 
-La Figura \@ref(fig:cross-correlation) muestra la correlación cruzada (lag cero) entre niveles para los índices SAM, A-SAM y S-SAM.
+La Figura \@ref(fig:cross-correlation) muestra la correlación cruzada simultánea (sin desfasaje) entre niveles para los índices SAM, A-SAM y S-SAM.
 Para el SAM (Fig. \@ref(fig:cross-correlation)a), los valores altos por debajo de 100 hPa reflejan coherencia vertical en toda la troposfera.
 Por encima de 100 hPa, la correlación entre niveles disminuye más rápidamente, lo que indica una variabilidad menos coherente.
 Sin embargo, las correlaciones entre los niveles troposféricos y los niveles estratosféricos bajos y medios siguen siendo relativamente altas (por ejemplo, más de 0,4 entre los niveles troposféricos y los niveles por debajo de 30 hPa).
@@ -647,7 +653,7 @@ El S-SAM estratosférico tiene una conexión con el S-SAM troposférico algo má
 ```{r trends, fig.width = 6, fig.height=4}
 indices %>% 
   .[, lapply(.SD, mean), by = .(lev, PC, term, time = seasonally(time))] %>% 
-  .[, season := season(time)] %>% 
+  .[, season := season(time, "es")] %>% 
   rbind(., copy(indices)[, season := "Annual"]) %>% 
   .[year(time) >= c(1979)] %>% 
   .[, estimate_norm := estimate_norm/sd(estimate_norm), by = .(lev, term)] %>%
@@ -677,23 +683,20 @@ indices %>%
   panel_background()
 ```
 
-Evaluamos las tendencias lineales para cada uno de los índices para el periodo `r periodo` en cada nivel para el año completo y separado por trimestres (Fig. \@ref(fig:trends)).
+A continuación, evaluamos las tendencias lineales para cada uno de los índices para el periodo `r periodo` en cada nivel para el año completo y separado por trimestres (Fig. \@ref(fig:trends)).
 El índice SAM presenta una tendencia positiva estadísticamente significativa (Fig. \@ref(fig:trends)a.1) en todos los niveles entre 1000 hPa y aproximadamente 50 hPa, con un máximo en 100 hPa.
 Las tendencias estacionales (Fig. \@ref(fig:trends) columna a) indican que las tendencias son significativas sólo en verano y marginalmente en otoño.
-Esto es consistente con los resultados de estudios previos, los cuales documentaron tendencias positivas en verano, menores en otoño y ninguna tendencia en las demás estaciones (por ejemplo, @fogt2020 y sus referencias) utilizando índices del SAM basados en la circulación en o cerca de superficie.
+Esto es consistente con los resultados de estudios previos, los cuales documentaron tendencias positivas en verano, menores en otoño y ninguna tendencia en las demás estaciones (por ejemplo, @fogt2020 y sus referencias) utilizando índices del SAM basados en la circulación cerca de la superficie.
 
 Al separar el SAM en sus partes asimétrica y simétrica, no sólo podemos ver que estas tendencias se deben casi por completo a la componente simétrica (comparar columnas b y c Figura \@ref(fig:trends)), sino que en algunos casos las tendencias se vuelven más claras.
-En verano, A-SAM tiene una tendencia negativa estadísticamente no significativa en la troposfera media que oculta la tendencia en el índice SAM; como resultado, las tendencias calculadas utilizando sólo la componente simétrica son más intensas (comparar la región sombreada en la Figura \@ref(fig:trends)a.2 y c.2).
+En verano, el índice A-SAM tiene una tendencia negativa estadísticamente no significativa en la troposfera media que oculta la tendencia en el índice SAM; como resultado, las tendencias calculadas utilizando sólo la componente simétrica son más intensas (comparar la región sombreada en la Figura \@ref(fig:trends)a.2 y c.2).
 En otoño, el índice S-SAM revela una tendencia positiva estadísticamente significativa en la estratosfera que no es significativa utilizando el índice SAM.
-
-Una tendencia positiva en el índice S-SAM y ninguna tendencia en el índice A-SAM podría sugerir en un primer momento una tendencia hacia un SAM más simétrico.
-Sin embargo, un S-SAM muy negativo con tendencia a un S-SAM menos negativo se traduciría en una tendencia positiva del S-SAM pero en una SAM más asimétrica.
 
 ```{r all-trends, eval=FALSE, warning=FALSE, include=FALSE}
 data <- indices %>% 
   .[, lapply(.SD, mean), by = .(lev, PC, term, time = seasonally(time))] %>% 
   .[, estimate_norm := estimate_norm/sd(estimate_norm), by = .(lev, term)] %>%
-  .[, season := season(time)] %>% 
+  .[, season := season(time, "es")] %>% 
   .[, year := year(time)] %>% 
   .[lev %in% c(1000, 700, 300, 50, 10)]
 
@@ -753,7 +756,7 @@ lapply(years, function(y) {
 indices %>% 
   .[term != "full"] %>% 
   .[year(time) >= 1979] %>% 
-  .[, FitLm(r.squared, time, se = TRUE), by = .(lev, type = term, season(time))] %>%
+  .[, FitLm(r.squared, time, se = TRUE), by = .(lev, type = term, season(time, "es"))] %>%
   rm_intercept() %>%
   .[, estimate := estimate*365*10] %>% 
   .[, std.error := std.error*365*10] %>% 
@@ -772,9 +775,10 @@ indices %>%
   panel_background()
 ```
 
-Para estudiar la cuestión de si el SAM se está volviendo más o menos asimétrico, mostramos las tendencias de la varianza explicada de cada índice para cada trimestre en la Figura \@ref(fig:r-squared-trend).
-En la troposfera, la única tendencia significativa es la de DJF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2% por década, lo que sugiere que el DJF SAM se ha vuelto más asimétrico en el período de `r min(year(main_period))` a `r max(year(main_period))` @fogt2012 observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (`r periodo`) nos impide detectar ese cambio.
-Sin embargo, debido a la naturaleza atípica de la componente asimétrica del SAM durante la DJF (Sección \@ref(definition-of-indices)), esto debe tomarse sólo como una evidencia preliminar.
+Para estudiar la cuestión de si el SAM se está volviendo más o menos asimétrico, se muestran las tendencias de la varianza explicada de cada índice para cada trimestre en la Figura \@ref(fig:r-squared-trend).
+En la troposfera, la única tendencia significativa es la de DEF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2% por década, lo que sugiere que el SAM en DEF se ha vuelto más asimétrico en el período de `r min(year(main_period))` a `r max(year(main_period))`.
+@fogt2012 observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (`r periodo`) nos impide detectar ese cambio.
+Sin embargo, debido a la naturaleza atípica de la componente asimétrica del SAM durante la DEF (Sección \@ref(definition-of-indices)), esto debe tomarse sólo como una evidencia preliminar.
 La otra tendencia significativa se da en la estratosfera durante SON, donde hay una tendencia positiva en la varianza explicada por la S-SAM de aproximadamente un 4% por década.
 Este cambio podría ser el resultado del forzamiento provocado por el agotamiento del ozono.
 
@@ -790,14 +794,14 @@ indices %>%
   # .[year(time) >= 1979] %>%
   .[, .(r.squared = mean(r.squared)), by = .(time = seasonally(time), lev, term)] %>%
   .[year(time) >= 1979, pred := predict(betareg::betareg(r.squared ~ time)), 
-    by = .(lev, term, season(time))] %>% 
+    by = .(lev, term, season(time, "es"))] %>% 
   ggplot(aes(time, r.squared)) +
   geom_line(aes(color = term)) +
   geom_line(aes(y = pred, color = term)) +
   geom_smooth(aes(color = term), span = 30/n_years) +  # 30 años
   # geom_smooth(aes(color = term), data = ~.x[year(time) > 1979],
   #             method = "lm") +
-  facet_grid(lev~season(time), scales = "free") +
+  facet_grid(lev~season(time, "es"), scales = "free") +
   scale_y_continuous(trans = scales::logit_trans()) +
   coord_trans(y = logistic_trans) +
   scale_color_brewer(NULL, palette = "Dark2",
@@ -883,6 +887,7 @@ raphael <- ReadNetCDF(ERA5_geopotential(),
                                     latitude = -49,
                                     level = 500),
                       vars = c(hgt = "z")) %>% 
+  .[, hgt := hgt/9.8] %>% 
   normalise_coords() %>% 
   na.omit() %>% 
   .[, hgt := hgt/9.8] %>% 
@@ -899,7 +904,7 @@ cor_raphael <- raphael[indices_wide[lev == 500], on = "time"] %>%
   .[, correlate(asym, raphael)]
 ```
 
-En la troposfera, el patrón espacial descrito por la regresión asociada al SAM muestra la ya conocida combinación de una estructura anular zonalmente simétrica en la zona polar con asimetrías zonales en forma de onda-3 en las latitudes medias (Fig. \@ref(fig:2d-regr)b.1, [@fogt2012]).
+En la troposfera, el patrón espacial descrito por la regresión asociada al SAM (Fig. \@ref(fig:2d-regr)b.1) muestra la ya conocida combinación de una estructura anular zonalmente simétrica en la zona polar con asimetrías zonales en forma de onda-3 en las latitudes medias [@fogt2012].
 Los patrones asociados a los índices A-SAM y S-SAM separan ambas estructuras claramente.
 El A-SAM se ve asociado a un patrón de onda zonal 3 y de amplitud modulada por la longitud; con mayor amplitud en hemisferio occidental y casi nula amplitud en el oriental.
 El S-SAM, por su parte, se asocia a una estructura anular mucho más zonalmente simétrica que el SAM.
@@ -941,6 +946,7 @@ vertical_regr <- ReadNetCDF(ERA5_geopotential(),
                             subset = list(time = range(indices_wide[year(time) >= 1979]$time),
                                           latitude = c(-65, -40)),
                             vars = c(hgt = "z")) %>% 
+  .[, hgt := hgt/9.8] %>% 
   normalise_coords() %>% 
   .[, time := as.Date(time)] %>% 
   na.omit() %>% 
@@ -982,7 +988,7 @@ vertical_regr %>%
   theme(panel.spacing = grid::unit(1, "lines"))
 ```
 
-La estructura vertical de las anomalías de altura geopotencial asociadas al índice A-SAM se analizaron con mayo profundidad a través de una sección transversal vertical de regresiones de anomalías de altura geopotencial promediadas entre 65ºS y 40ºS con el índice A-SAM de 50 hPa (Fig. \@ref(fig:vertical-regression)a) y con el índice A-SAM de 700 hPa (Fig. \@ref(fig:vertical-regression)b).
+La estructura vertical de las anomalías de altura geopotencial asociadas al índice A-SAM se analizaron con mayor profundidad a través de una sección transversal vertical de regresiones de anomalías de altura geopotencial promediadas entre 65ºS y 40ºS con el índice A-SAM de 50 hPa (Fig. \@ref(fig:vertical-regression)a) y con el índice A-SAM de 700 hPa (Fig. \@ref(fig:vertical-regression)b).
 Las anomalías de altura geopotencial asociadas al A-SAM estratosférico (Fig. \@ref(fig:vertical-regression)a) están claramente limitadas a la estratosfera, lo que subraya el desacoplamiento entre el A-SAM estratosférico y el troposférico.
 La estructura vertical de esta señal se inclina unos 60 grados hacia el oeste entre 100 hPa y 1 hPa, lo que sugiere procesos baroclínicos.
 La señal en la estratosfera maximiza cerca de 10 hPa a pesar de utilizar el índice de 50 hPa para la regresión.
@@ -1009,7 +1015,7 @@ enso_sam_cor <- enso %>%
            list(cor = estimate, 
                 p.value = p.value)), by = .(lev, term)] %>% 
   .[, type := "Correlation"] %>% 
-  .[, season := "Year"] %>% 
+  .[, season := "Año"] %>% 
   .[, lev := NULL]
 
 enso_sam_cor_season <- enso %>% 
@@ -1017,7 +1023,7 @@ enso_sam_cor_season <- enso %>%
   .[lev == 700] %>% 
   .[, with(cor.test(estimate, oni), 
            list(cor = estimate, 
-                p.value = p.value)), by = .(lev, term, season(time))] %>% 
+                p.value = p.value)), by = .(lev, term, season(time, "es"))] %>% 
   .[, type := "Correlation"] %>% 
   .[, lev := NULL]
 
@@ -1027,12 +1033,12 @@ enso_sam_partial <- enso %>%
   .[, partial_cor(oni, asym, sym)] %>% 
   setnames("partial_correlation", "cor") %>% 
   .[, type := "Partial Correlation"] %>% 
-  .[, season := "Year"] 
+  .[, season := "Año"] 
 
 
 enso_sam_partial_season <- enso %>% 
   .[indices_wide[lev == 700], on = "time"] %>% 
-  .[, partial_cor(oni, asym, sym), by = .(season(time))] %>% 
+  .[, partial_cor(oni, asym, sym), by = .(season(time, "es"))] %>% 
   setnames("partial_correlation", "cor") %>% 
   .[, type := "Partial Correlation"] 
 
@@ -1050,7 +1056,7 @@ cor_texts <- enso_cors %>%
   .[, p.value := report_p(p.value)] 
 ```
 
-(ref:enso-cor-table-cap) Correlación entre los índices del SAM y el ONI. En negrita, las correlaciones con p-valor ajustado por FDR menores a 0.01.
+(ref:enso-cor-table-cap) Correlación entre los índices del SAM y el ONI considerando todos los meses y para cada estación por separado. Entre parentéresis se indican los p-valores ajustado por FDR).  En negrita, se indican las correlaciones con p-valores menores a 0,01.
 
 ```{r enso-cor-table}
 table <- enso_cors %>% 
@@ -1097,9 +1103,9 @@ if (is_word()) {
 El patrón de la onda 3 de la Figura \@ref(fig:2d-regr)b.2 es muy similar al PSA [@mo1987; @kidson1988], que es un patrón de teleconexión asociado al ENSO [@karoly1989].
 Como se mencionó en la introducción de este capítulo, existen evidencias previas de que la actividad del ENSO y el SAM pueden estar relacionadas [@silvestri2009; @fogt2011a].
 Se analizó entonces la relación entre el SAM y sus componentes y el ENSO (medido por el Índice del Niño Oceánico [ONI, @bamston1997]) y se muestra en la Tabla \@ref(tab:enso-cor-table) para cada índice SAM y para cada trimestre y para todo el año.
-Mientras que la la correlación es significativa entre el SAM completo y ENSO considerando todo el año, soo es significativa trimestralmente en DJF y SON.
+Mientras que la la correlación es significativa entre el SAM completo y ENSO considerando todo el año, solamente es significativa para los trimestres  DEF y SON.
 Se encontró que esta relación es captada principalmente por el A-SAM, ya que este índice presenta correlaciones parciales significativas con el ENSO, mientras que las correlaciones con el S-SAM son todas menores y no significativas.
-Incluso en los trimestres donde la correlación entre SAM y ENSO es esencialmente nula (MAM y JJA), la correlación parcial entre el A-SAM y el ONI es mucho más alta; en MAM incluso es significativa al nivel del 95%.
+Incluso en los trimestres donde la correlación entre SAM y ENSO es esencialmente nula (MAM y JJA), la correlación parcial entre el A-SAM y el ONI es mucho más alta; en efecto, en MAM  es significativa al nivel del 95%.
 El mismo análisis se realizó utilizando el Índice ENSO Multivariado [@wolter2011] y el Índice de Oscilación del Sur [@ropelewski1987], obteniendo resultados similares.
 Esto último indica que estos resultados no dependen del índice ENSO utilizado.
 
@@ -1123,7 +1129,7 @@ air_regr <- air %>%
   .[, lapply(.SD, mean, na.rm = TRUE), by = .(lon, lat, time = seasonally(time))] %>%
   .[, rbind(as.data.table(FitLm(air, asym, sym, se = TRUE)),
             as.data.table(FitLm(air, full, se = TRUE))),
-    by = .(lon, lat, season(time))] %>% 
+    by = .(lon, lat, season(time, "es"))] %>% 
   rm_intercept() %>% 
   .[, term := factor_sam(term)]
 ```
@@ -1198,7 +1204,7 @@ Las regresiones se realizaron sin quitarle la tendencia ni a las variables ni a 
 
 La Figura \@ref(fig:regr-air-season) muestra las regresiones con la temperatura del aire a 2 metros.
 En verano, los valores positivos del índice SAM (Fig. \@ref(fig:regr-air-season)a.1) se asocian con anomalías negativas de temperatura cerca de la Antártida rodeadas por un anillo de anomalías positivas en las latitudes medias.
-El anillo no es zonalmente simétrico, ya que hay cuatro máximos locales distintivos en torno a 30ºW, 120ºW, 150ºE y 90ºE respectivamente.
+El anillo no es zonalmente simétrico, ya que hay cuatro máximos locales distintivos en torno a 30ºO, 120ºO, 150ºE y 90ºE respectivamente.
 En los trópicos, las anomalías son negativas en el Pacífico ecuatorial, lo que concuerda con la correlación negativa entre SAM y ENSO observada en la Tabla \@ref(tab:enso-cor-table).
 Los paneles a.2 y a.3 de la Figura \@ref(fig:regr-air-season) muestran que tanto las anomalías negativas en los trópicos como las anomalías entre 45ºS y 60ºS están asociadas principalmente con el A-SAM y que el S-SAM está asociado a anomalías de temperatura extendidas más zonalmente simétricas en latitudes altas.
 Sobre la Antártida, los valores positivos del índice SAM están asociados a anomalías negativas de temperatura, en particular sobre la costa oriental.
@@ -1224,7 +1230,7 @@ indices_2d_seasonal <- hgt[lev %in% 700] %>%
   .[, lapply(.SD, mean, na.rm = TRUE), by = .(lon, lat, time = seasonally(time))] %>% 
   .[, rbind(as.data.table(FitLm(hgt_a, sym, asym, se = TRUE)),
             as.data.table(FitLm(hgt_a, full, se = TRUE))),
-    by = .(lon, lat, season(time))] %>% 
+    by = .(lon, lat, season(time, "es"))] %>% 
   rm_intercept() %>% 
   .[, p.val := Pvaluate(estimate, std.error, df, "fdr"), by = .(term, season)] %>% 
   periodic(lon = c(0, 360)) %>% 
@@ -1275,13 +1281,13 @@ pp_regr_season <- cmap %>%
   nas_cmap[., on = c("lon", "lat")] %>% 
   .[n_na == 0] %>% 
   .[, lapply(.SD, mean, na.rm = TRUE), by = .(lon, lat, time = seasonally(time))] %>%
-  .[, pp_a := Anomaly(pp), by = .(lon, lat, season(time))] %>%
-  # .[, nas := mean(is.na(pp_a)), by = .(lon, lat, season(time))] %>% 
+  .[, pp_a := Anomaly(pp), by = .(lon, lat, season(time, "es"))] %>%
+  # .[, nas := mean(is.na(pp_a)), by = .(lon, lat, season(time, "es"))] %>% 
   # .[nas >= 0.15, precip := NA] %>% 
   # .[is.finite(precip_a)] %>%
   .[, rbind(as.data.table(FitLm(pp_a, asym, sym, se = TRUE)),
             as.data.table(FitLm(pp_a, full, se = TRUE))),
-    by = .(lon, lat, season(time))] %>% 
+    by = .(lon, lat, season(time, "es"))] %>% 
   rm_intercept() %>% 
   .[, term := factor_sam(term)]
 
@@ -1312,7 +1318,7 @@ pp_patterns <- enso  %>%
   .[cmap, on = "time"] %>% 
   .[, lapply(.SD, mean, na.rm = TRUE), by = .(lon, lat, time = seasonally(time))] %>% 
   na.omit() %>% 
-  .[, FitLm(pp_a, oni), by = .(lon, lat, season(time))] %>% 
+  .[, FitLm(pp_a, oni), by = .(lon, lat, season(time, "es"))] %>% 
   rm_intercept() %>% 
   add_continent() %>% 
   .[continent %in% names(continents)[-1]] 
@@ -1331,19 +1337,19 @@ pp_enso_index <- cmap %>%
   .[continent %in% names(continents)[-1]] %>% 
   na.omit() %>% 
   .[, continent := NULL] %>% 
-  .[, season := season(time)] %>% 
+  .[, season := season(time, "es")] %>% 
   .[pp_patterns, on = c("lon", "lat", "season")] %>% 
   .[, mean(estimate*pp_a), by = .(time, continent)]
 
 
 cors_enso_pp <- pp_enso_index %>%
   dcast(time ~ continent, value.var = "V1") %>%
-  .[, cor(oceania, america), by = season(time)] %>% 
+  .[, cor(oceania, america), by = season(time, "es")] %>% 
   .[, label := paste0(season, " (cor=", signif(V1, 2), ")")]
 
 pp_enso_index %>%
   dcast(time ~ continent) %>%
-  .[, season := season(time)] %>%
+  .[, season := season(time, "es")] %>%
   ggplot(aes(oceania, america)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -1408,9 +1414,9 @@ La Figura \@ref(fig:global-pp) muestra la regresión de los índices SAM con la 
 La señal de precipitación asociada al SAM completo (Fig. \@ref(fig:global-pp)a) muestra en general una disminución de la precipitación en torno a los 45ºS, un ligero aumento de la precipitación en torno a los 30ºS y un aumento de la precipitación sobre la Antártida, un patrón que concuerda con los obtenidos en otros estudios [p.ej. @hendon2014].
 Este patrón se mantiene prácticamente sin cambios entre estaciones, aunque varía en intensidad (no se muestra).
 Los paneles b y c de la Figura \@ref(fig:global-pp) muestran que la influencia del A-SAM sólo se da en los trópicos y latitudes medias, mientras que la señal S-SAM es fuerte en las latitudes altas.
-En particular, los valores positivos de S-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.
+En particular, los valores positivos del S-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.
 
-Para estudiar con más detalle los impactos locales, las Figuras \@ref(fig:pp-regr-oceania) y \@ref(fig:pp-regr-america) muestran la regresión de los índices SAM con la precipitación media estacional y la altura geopotencial de 700 hPa para la región de Oceanía, y Sudamérica respectivamente.
+Para estudiar con más detalle los impactos locales en distintas regiones continentales del hemisferio sur, las Figuras \@ref(fig:pp-regr-oceania) y \@ref(fig:pp-regr-america) muestran la regresión de los índices SAM con la precipitación media estacional y la altura geopotencial de 700 hPa para la región de Oceanía, y Sudamérica respectivamente.
 No se muestran los resultados para la región de Sudáfrica porque allí no se detectó ninguna señal significativa.
 
 ```{r plot_pp}
@@ -1498,15 +1504,15 @@ plot_pp("america")
 
 ```
 
-En Sudamérica (Fig. \@ref(fig:pp-regr-america)), la regresión anual muestra que la fase positiva del SAM está asociada con anomalías de precipitación negativas en el Sudeste de Sudamérica (SESA) y el sur de Chile, y anomalías positivas en el sudeste de Brasil, alrededor de la posición climatológica de la Zona de Convergencia del Atlántico Sur (SACZ) (Fig. \@ref(fig:pp-regr-america)a.1).
+En Sudamérica (Fig. \@ref(fig:pp-regr-america)), la regresión anual muestra que la fase positiva del SAM está asociada con anomalías de precipitación negativas en el SESA y el sur de Chile, y anomalías positivas en el sudeste de Brasil, alrededor de la posición climatológica de la Zona de Convergencia del Atlántico Sur (SACZ) (Fig. \@ref(fig:pp-regr-america)a.1).
 Las figuras \@ref(fig:pp-regr-america)b.1 y c.1 muestran que mientras las señales sobre SESA y el sudeste de Brasil están asociadas significativamente con A-SAM, la del sur de Chile está relacionada con S-SAM.
 
 Las regresiones estacionales reflejan un patrón similar al annual, excepto en invierno.
 Aunque no sean estadísticamente significativas, todas las estaciones muestran valores negativos en SESA y el sur de Chile junto con valores positivos en el sur de Brasil en relación con el SAM.
-La separación de estas características entre los mapas de regresión A-SAM y S-SAM es también bastante consistente.
+La separación de estas características entre los mapas de regresión del A-SAM y S-SAM es también bastante consistente.
 En invierno la señal del SAM es levemente positiva en el SESA y al sur de Chile y levemente negativa en el centro de Chile.
 
-La circulación anómala a 700 hPa asociada a S-SAM (Fig. \@ref(fig:pp-regr-america)c.1) indica un flujo anómalo del este sobre el sur de Chile.
+La circulación anómala a 700 hPa asociada al S-SAM (Fig. \@ref(fig:pp-regr-america)c.1) indica un flujo anómalo del este sobre el sur de Chile.
 Esto conduce a una menor advección de aire húmedo desde el Océano Pacífico, que es la principal fuente de agua precipitable en esa región [@garreaud2007].
 Por otro lado, la circulación anómala asociada a valores positivos del A-SAM (Fig. \@ref(fig:pp-regr-america)b.1) en el Atlántico es anticiclónica al este y ciclónica al oeste de Sudamérica.
 Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo del chorro de baja altura desde Sudamérica hacia la región [p.ej. @silvestri2009; @zamboni2010].
@@ -1529,7 +1535,7 @@ sam_r2 <- indices %>%
   .[, .(estimate = mean(estimate)), by = .(lev, term, time = seasonally(time))] %>% 
   .[time, on = .NATURAL, allow.cartesian = TRUE] %>%
   na.omit() %>% 
-  .[, correlate(hgt, estimate), by = .(lev, term, part, cEOF, season(time))]
+  .[, correlate(hgt, estimate), by = .(lev, term, part, cEOF, season(time, "es"))]
 
 max_r2 <- sam_r2[part == "Imaginario"] %>% 
   .[, .SD[which.max(estimate^2)], by = .(cEOF, term, season)]
@@ -1559,13 +1565,15 @@ sam_r2 %>%
   panel_background() 
 ```
 
-Calculamos el coeficiente de determinación entre las series temporales de los cEOFs presetados en el Capítulo \@ref(ceofs) y los tres índices SAM (SAM, A-SAM y S-SAM) definidos en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
+Se evaluó también la relación de los cEOFs presentados en el Capítulo \@ref(ceofs) con los índices del SAM. 
+Para ello, calculamos el coeficiente de determinación entre las series temporales de los cEOFs con cada uno de los índices SAM  definidos en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
+Dado que los cEOFs fueron definidos únicamente para el trimestre SON, esto se calculó sólo para estre trimestre. 
 El índice SAM está correlacionado de forma estadísticamente significativa con la fase de 0º del cEOF1 en todos los niveles, y con la fase de 90º del cEOF1 y la fase de 90º del cEOF2 en la tropósfera.
-Por otro lado, las correlaciones entre SAM y la fase de 0º del cEOF2 son prácticamente nulas.
+Por otro lado, las correlaciones entre el SAM y la fase de 0º del cEOF2 son prácticamente nulas.
 
 En la tropósfera la correlación de ambas fases del cEOF1 y el SAM es igual a su correlación con el S-SAM, y su correlación con el A-SAM es mucho más baja y no significativa.
 Esto indica que la relación entre el SAM y el cEOF1 en la tropósfera se explica en su totalidad por la componente zonalmente simétrica del SAM.
-En la estratosfera, la fase de 0º del cEOF1 está correlacionada tanto con la A-SAM como con la S-SAM, mientras que la fase de 90º está altamente correlacionada sólo con la A-SAM.
+En la estratosfera, la fase de 0º del cEOF1 está correlacionada tanto con el A-SAM como con la S-SAM, mientras que la fase de 90º está altamente correlacionada sólo con el A-SAM.
 Estas correlaciones son consistentes con los mapas de regresión de la altura geopotencial en la Figura \@ref(fig:eof1-regr-gh) y su comparación con los obtenidos para SAM, A-SAM y S-SAM (Fig. \@ref(fig:2d-regr)).
 
 La Figura \@ref(fig:sam-eof-vertical) muestra que el cEOF2 sólo tiene relación con el SAM en su fase de 90º, asociada a la parte asimétrica y únicamente en la tropósfera.

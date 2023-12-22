@@ -60,6 +60,7 @@ hgt <- ERA5_geopotential() %>%
              subset = list(level = 500,
                            latitude = -90:10,
                            time = main_period)) %>% 
+  .[, hgt := hgt/9.8] %>% 
   na.omit() %>% 
   normalise_coords() %>% 
   .[, hgt_z := Anomaly(hgt), by = .(time, lat)] 
@@ -104,6 +105,7 @@ ejemplo_datos <- ERA5_geopotential() %>%
              subset = list(level = 500,
                            latitude = c(-90, 0),
                            time = fecha_ejemplo)) %>% 
+  .[, hgt := hgt/9.8] %>% 
   na.omit() %>% 
   normalise_coords() %>% 
   .[, hgt_z := Anomaly(hgt), by = .(time, lat)] %>% 
@@ -125,7 +127,7 @@ ejemplo_datos %>%
   coord_polar2() 
 ```
 
-(ref:envolvente-ejemplo-cap) Anomalías zonales de altura geopotencial en 500 hPa en septiembre de 1989 (contornos, líneas sólidas indican valores positivos y líneas punteadas indican valores negativos) y envolvente de ondas zonales (sombreado).
+(ref:envolvente-ejemplo-cap) Anomalías zonales de altura geopotencial (m) en 500 hPa en septiembre de 1989 (contornos, líneas sólidas indican valores positivos y líneas punteadas indican valores negativos) y envolvente de ondas zonales (sombreado).
 
 La Figura \@ref(fig:envolvente-ejemplo) muestra un ejemplo de la envolvente de la ondas zonales para la altura geopotencial en 500 hPa en septiembre de 1989 junto con las anomalías zonales correspondientes.
 Estas anomalías son intensas al sur de Australia y Nueva Zelanda y la envolvente captura esa región.
@@ -171,7 +173,7 @@ hgt %>%
   coord_polar2() 
 ```
 
-(ref:raphael-regr-cap) Regresión lineal entre R04 y la anomalía zonal de altura geopotencial en 500 hPa (sombreado). La onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa se muestra en contornos; (valores positivos en línea llena y negativos en línea punteada). En azul se indican la ubicación de los puntos usado para calcular R04.
+(ref:raphael-regr-cap) Regresión lineal entre R04 y la anomalía zonal de altura geopotencial (m) en 500 hPa (sombreado). La onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa se muestra en contornos; (valores positivos en línea llena y negativos en línea punteada). En azul se indican la ubicación de los puntos usado para calcular R04.
 
 La Figura \@ref(fig:raphael-regr) presenta la regresión lineal entre R04 y la anomalía zonal de altura geopotencial en 500 hPa junto con la onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa para el período `r periodo`.
 La figura incluye además las ubicaciones definidas por @raphael2004 para calcular el índice.
@@ -181,11 +183,12 @@ Sin embargo, se puede notar que los máximos al sur de Nueva Zelanda y sobre el 
 La onda 3 descrita por R04 coincide bien con la onda 3 climatológica, lo cual es esperable por construcción.
 Al usar puntos fijos cercanos a estos máximos climatológicos, el índice R04 busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
 
-```{r pseudo-raphael, fig.height=3, fig.width=4}
+```{r pseudo-raphael, fig.height=4, fig.width=4}
 qs3 <- hgt %>% 
   .[lat == -50] %>% 
   .[, .(qs3 = mean(hgt_z)), by = .(lon)] %>% 
-  .[, qs3 := FilterWave(qs3, 3)]
+  .[, qs3 := FilterWave(qs3, 3)] %>% 
+  .[, qs3 := qs3/max(qs3)]
 
 raphael2 <- puntos %>% 
   .[, .(zw3 = mean(hgt_z)), by = .(time, lev)]
@@ -193,7 +196,11 @@ raphael2 <- puntos %>%
 pseudo_raphael <- hgt %>% 
   .[lat == -50] %>% 
   .[qs3, on = "lon"] %>% 
-  .[, .(value = sum(qs3*hgt)), by = time]
+  .[, .(value = mean(qs3*hgt)*2), by = time]
+
+
+lims <- range(c(pseudo_raphael$value,
+                raphael2$zw3))
 
 pseudo_raphael %>% 
   .[raphael2, on = "time"] %>% 
@@ -201,10 +208,11 @@ pseudo_raphael %>%
     cor_pseudo_raphael <<- .[, correlate(zw3, value)]
     .
   } %>% 
-  ggplot(aes(zw3, value/1e6)) +
+  ggplot(aes(zw3, value)) +
   geom_point() +
-  scale_x_continuous("Anomalía de altura geopotencial promedio") +
-  scale_y_continuous("Proyección") 
+  scale_x_continuous("Anomalía de altura geopotencial promedio [m]", limits = lims) +
+  scale_y_continuous("Proyección [m]", limits = lims) +
+  coord_equal()
 ```
 
 (ref:pseudo-raphael-cap) Relación entre la anomalía zonal de altura geopotencial en los tres puntos utilizados para construir R04 y la amplitud de la proyección de la geopotencial en 50ºS, 500 hPa con la onda 3 climatológica.
@@ -295,8 +303,9 @@ gdata %>%
   periodic(lon = c(0, 360)) %>% 
   ggplot(aes(lon, lat)) +
   geom_contour_fill(aes(z = estimate, fill = after_stat(level)), 
-                    breaks = AnchorBreaks(0, exclude = 0, binwidth = 50)) +
-  geom_contour_tanaka(aes(z = estimate), breaks = AnchorBreaks(0, exclude = 0, binwidth = 50)) +
+                    breaks = AnchorBreaks(0, exclude = 0, binwidth = 5)) +
+  geom_contour_tanaka(aes(z = estimate),
+                      breaks = AnchorBreaks(0, exclude = 0, binwidth = 5)) +
   inject(geom_point(data = unique(puntos[, .(lat, lon)]),
                     !!!raphael_aes_unused)) +
   
@@ -318,7 +327,7 @@ gdata %>%
   tag_facets(tag = "rc")
 ```
 
-(ref:cor-puntos-cap) Regresión entre las anomalías zonales de altura geopotencial en 500 hPa e índices R04 usando combinaciones de 1 y 2 puntos. En cada panel, los puntos azules son los puntos usados para calcular el índice y los negros, los excluidos.
+(ref:cor-puntos-cap) Regresión entre las anomalías zonales de altura geopotencial en 500 hPa e índices R04 usando combinaciones de 1 y 2 puntos (m). En cada panel, los puntos azules son los puntos usados para calcular el índice y los negros, los excluidos.
 
 La Figura \@ref(fig:cor-puntos) muestra los campos de regresión entre la anomalía zonal de altura geopotencial e índices similares a R04 pero computados considerado o bien solo un punto (Fig. \@ref(fig:cor-puntos), fila a) o promedios de combinaciones de dos puntos (Fig.\@ref(fig:cor-puntos), fila b) de los tres utilizados para computar R04.
 La figura muestra que no se encuentra un patrón coherente de onda 3 asociado a los puntos individuales.
@@ -326,7 +335,7 @@ Por otra parte, los campos obtenidos a partir de las combinaciones de dos puntos
 
 ```{r raphael-top8, fig.height=4, fig.width=6, fig.ncol = 1}
 #| fig.subcap = c("Meses con mayor valor de R04", "Meses con menor valor de R04")
-gplot <- function(data, breaks =  AnchorBreaks(0, binwidth = 400, exclude = 0)(c(-3200, 3200))) {
+gplot <- function(data, breaks =  AnchorBreaks(0, binwidth = 40, exclude = 0)(c(-320, 320))) {
   
   data %>% 
     ggplot(aes(lon, lat)) +
@@ -370,7 +379,7 @@ hgt %>%
   tag_facets(tag_pool = letters[-c(1:8)])
 ```
 
-(ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04. Los puntos azules indican las ubicaciones usadas en el índice R04.
+(ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (m, sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04. Los puntos azules indican las ubicaciones usadas en el índice R04.
 
 Finalmente, las Figuras \@ref(fig:raphael-top8-1) y \@ref(fig:raphael-top8-2) muestran  las anomalías mensuales  zonales de la altura geopotencial para los 8 meses con mayor y menor valor del índice R04, respectivamente.
 En pocos casos se observa un patrón de onda 3 bien marcado; por ejemplo, en abril de 2003 y noviembre de 1985 (paneles f y g) se observan tres zonas de anomalías positivas cercanas a las ubicaciones utilizadas para calcular R04 y tres zonas de anomalías negativas entre las mismas.
@@ -453,7 +462,7 @@ hgt %>%
   tag_facets()
 ```
 
-(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
+(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (m, ombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
 
 La Figura \@ref(fig:zw3-top8) presenta, para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial, las anomalía zonales de altura geopotencial en 500 hPa y las correspondientes anomalías mensuales.
 Algunos meses, como septiembre de 1997, abril de 1995 y octubre de 2009 (Fig. \@ref(fig:zw3-top8), paneles c, d y h) tienen máximos y mínimos de intensidad relativamente constante.
@@ -489,7 +498,7 @@ hgt %>%
   facet_wrap(~k, ncol = 2)
 ```
 
-(ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial.
+(ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial (sin unidades).
 
 Esta diferencia longitudinal en la amplitud de las ondas puede capturarse a partir de la envolvente de las ondas.
 La Figura \@ref(fig:envelope-regr) muestra la regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial.

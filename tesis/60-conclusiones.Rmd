@@ -26,7 +26,7 @@ En especial se encontró que presenta una asociación significativa con las anom
 Por otra parte, no presenta asociación significativa con fuentes de variabilidad tropical.
 En superficie, no presenta influencia significativa en la precipitación.
 Si, en cambio, influye significativamente en las anomalías de la temperatura del aire en superficie en Antártida Occidental y en especial en la Península Antártica, así como en algunas regiones oceánicas en la vecindad de Australia, Sudamérica y África.
-Esto es coherente con trabajos previos que confirman la influencia del SAM sobre las anomalías de temperatura regionales en el HS.
+Esto es coherente con trabajos previos que confirman la influencia del SAM sobre las anomalías de temperatura regionales en el hemisferio sur.
 .
 
 El segundo modo obtenido a partir del análisis cEOF (cEOF2) representa una estructura espacial de onda 3 que está localizado principalmente en el sector del océano Pacífico.
@@ -47,10 +47,10 @@ Aunque este método tiene similitudes con el cEOF2, depende de la inspección vi
 En cambio, el cEOF2 tiene la ventaja de construirse como un patrón de ondas con amplitud y fase por construcción.
 Futuros trabajos deberán explorar las ventajas y limitaciones de cada uno.
 
-Los resultados obtenidos tanto con el cEOF1 como con el cEOF2 muestran en suma que ambos modos a través de sus fases y amplitudes variables proporcionan una descripción más profunda y compleja de las principales estructuras asociadas con la variabilidad de la circulación del HS como son la estructura anular polar, la onda 3 extratropical y los trenes de onda extendidos desde el Indico-Pacífico tropical hacia Sudamérica, que aquella proporcionada por el método de EOF tradicional.
-Esto abre nuevas oportunidades para estudiar desde un abordaje diferente la influencia , tanto de la variabilidad tropical como de la variabilidad estratosférica, en la circulación del HS y en sus porciones continentales.
+Los resultados obtenidos tanto con el cEOF1 como con el cEOF2 muestran en suma que ambos modos a través de sus fases y amplitudes variables proporcionan una descripción más profunda y compleja de las principales estructuras asociadas con la variabilidad de la circulación del hemisferio sur como son la estructura anular polar, la onda 3 extratropical y los trenes de onda extendidos desde el Indico-Pacífico tropical hacia Sudamérica, que aquella proporcionada por el método de EOF tradicional.
+Esto abre nuevas oportunidades para estudiar desde un abordaje diferente la influencia , tanto de la variabilidad tropical como de la variabilidad estratosférica, en la circulación del hemisferio sur y en sus porciones continentales.
 
-El análisis del comportamiento asimétrico de la circulación del HS se completó con el estudio de las características simétricas y asimétricas del SAM, por ser el patrón principal que explica su variabilidad temporal.
+El análisis del comportamiento asimétrico de la circulación del hemisferio sur se completó con el estudio de las características simétricas y asimétricas del SAM, por ser el patrón principal que explica su variabilidad temporal.
 Para lo cual desarrollamos índices para describir la componente simétrica del SAM (S-SAM) y la componente asimétrica del SAM (A-SAM), a partir de la media zonal y de las anomalías espaciales del SAM completo .
 
 Tanto en la estratosfera como en la tropósfera, la estructura de las anomalías temporales de la altura geopotencial asociados al S-SAM es mucho más anular que aquella asociada con el SAM completo.
@@ -62,7 +62,7 @@ Por otro lado, este resultado abre la pregunta sobre si la componente asimétric
 Evidencias de esta posibilidad se encuentran en el antiguo trabajo de @kidson1988 donde aplicando rotación a las EOFs obtiene modos rotados que separan una estructura anular similar a la obtenida con el S-SAM del patrón de onda 3 similar al obtenido con el A-SAM.
 Estudios futuros deberían abordar esta cuestión con mayor profundidad.
 
-El análisis de las tendencias positivas del SAM de verano y otoño en la troposfera entre 1940 y 2020, que fueron identificadas como significativas por estudios previos [ej. @fogt2020 y sus referencias] son únicamente explicadas por la tendencia del S-SAM.
+El análisis de las tendencias positivas del SAM de verano y otoño en la troposfera entre 1940 y 2020, que fueron identificadas como significativas por estudios previos [p.ej. @fogt2020 y sus referencias] son únicamente explicadas por la tendencia del S-SAM.
 También detectamos una tendencia positiva estadísticamente significativa en el S-SAM en la estratósfera en otoño que no es evidente en el índice SAM.
 Hay evidencia de que el SAM está evolucionando hacia ser más asimétrico en verano, aunque el período es corto y la señal no es muy robusta.
 Esto es contrario a lo observado por @fogt2012, aunque la discrepancia puede deberse a las diferencias metodológicas o al período analizado.

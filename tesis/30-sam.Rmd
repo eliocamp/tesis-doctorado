@@ -31,7 +31,7 @@ main_levs <- c(700, 300, 30, 50)
 
 ## Introducción
 
-Como se explicó en la introducción, el patrón espacial del Modo Anular del Sur (SAM) suele describirse a través del EOF principal de las anomalías de altura geopotencial en la troposfera del HS pero también en muchos casos utilizando índices como se discute a continuación que están construidos asumiendo que el patrón describe eminentemente variaciones de la circulación zonalmente simétrica.
+Como se explicó en la introducción, el patrón espacial del Modo Anular del Sur (SAM) suele describirse a través del EOF principal de las anomalías de altura geopotencial en la troposfera del hemisferio sur pero también en muchos casos utilizando índices como se discute a continuación que están construidos asumiendo que el patrón describe eminentemente variaciones de la circulación zonalmente simétrica.
 Sin embargo, este patrón tiene asimetrías zonales significativas.
 
 Muchos índices presentados en la literatura para describir el SAM se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial [@ho2012].
@@ -47,10 +47,10 @@ La señal relacionada con el SAM en las anomalías de precipitación también es
 En particular, la relación entre el SAM y la precipitación en el Sudeste de Sudamérica (SESA) en escalas interanuales depende fuertemente de las anomalías de circulación zonalmente asimétrica asociadas al SAM y presenta importantes variaciones decadales [@silvestri2009; @rosso2018].
 
 Si bien la variabilidad del SAM se debe principalmente a la variabilidad interna, en escalas intraestacionales e interanuales, puede estar asociada con la variabilidad tropical [@fan2007; @fogt2011a; @clem2013].
-Como discutimos en las secciones anteriores el ENSO o la variabilidad tropical en general afecta a los extratrópicos del HS a través de trenes de ondas de Rossby [@mo1987; @kidson1988; @karoly1989] que pueden proyectarse fuertemente sobre las anomalías zonales asociadas al SAM en el sector del Pacífico [ej. @silvestri2009; @vera2018].
+Como discutimos en las secciones anteriores el ENSO o la variabilidad tropical en general afecta a los extratrópicos del hemisferio sur a través de trenes de ondas de Rossby [@mo1987; @kidson1988; @karoly1989] que pueden proyectarse fuertemente sobre las anomalías zonales asociadas al SAM en el sector del Pacífico [p.ej. @silvestri2009; @vera2018].
 @fan2007 calculó los índices de SAM de los hemisferios occidental y oriental por separado y encontró que la correlación entre ellos aumentaba si se elimina la señal (lineal) del ENSO, sugiriendo que la influencia del ENSO en el SAM no es zonalmente homogénea.
 
-En escalas más largas, investigaciones previas han documentado a lo largo del siglo 20 y lo que va del 21, tendencias positivas en el SAM utilizando diferentes índices, sobre todo en verano y otoño austral [ej., @fogt2020 y sus referencias].
+En escalas más largas, investigaciones previas han documentado a lo largo del siglo 20 y lo que va del 21, tendencias positivas en el SAM utilizando diferentes índices, sobre todo en verano y otoño austral [p.ej., @fogt2020 y sus referencias].
 Se encontró que estas tendencias están impulsadas principalmente por la reducción del ozono estratosférico y el aumento de los gases de efecto invernadero, aunque han sido analizadas en el contexto de las variables medias zonales [@marshall2004; @gillett2005; @arblaster2006; @gillett2013].
 Sin embargo, no está claro si la componente asimétrica del SAM responde a estos forzantes de la misma forma o si su variabilidad, por el contrario, altera las tendencias observadas.
 
@@ -868,7 +868,7 @@ ggplot(gdata[lev == 50], aes(lon, lat)) +
   plot_layout(ncol = 1)
 ```
 
-Para describir y entender la influencia de las diferentes componentes del SAM en las anomalías temporales de la circulación del HS, calculamos la regresión lineal de las anomalías de altura geopotencial sobre los índices SAM, A-SAM y S-SAM en los niveles de 50 hPa y 700 hPa (Fig. \@ref(fig:2d-regr)).
+Para describir y entender la influencia de las diferentes componentes del SAM en las anomalías temporales de la circulación del hemisferio sur, calculamos la regresión lineal de las anomalías de altura geopotencial sobre los índices SAM, A-SAM y S-SAM en los niveles de 50 hPa y 700 hPa (Fig. \@ref(fig:2d-regr)).
 Los coeficientes de regresión de la columna 1 de la Figura \@ref(fig:2d-regr) se calcularon utilizando el índice del SAM.
 Los coeficientes de regresión de las columnas 2 y 3 se calcularon mediante regresión múltiple utilizando los índices A-SAM y S-SAM al mismo tiempo, de manera que deben interpretarse como los patrones asociados a cada índice, eliminando la variabilidad (linealmente) explicada por el otro.
 
@@ -1405,7 +1405,7 @@ pp_regr %>%
 ```
 
 La Figura \@ref(fig:global-pp) muestra la regresión de los índices SAM con la precipitación para el hemisferio sur considerando todos los meses del año.
-La señal de precipitación asociada al SAM completo (Fig. \@ref(fig:global-pp)a) muestra en general una disminución de la precipitación en torno a los 45ºS, un ligero aumento de la precipitación en torno a los 30ºS y un aumento de la precipitación sobre la Antártida, un patrón que concuerda con los obtenidos en otros estudios [p. ej. @hendon2014].
+La señal de precipitación asociada al SAM completo (Fig. \@ref(fig:global-pp)a) muestra en general una disminución de la precipitación en torno a los 45ºS, un ligero aumento de la precipitación en torno a los 30ºS y un aumento de la precipitación sobre la Antártida, un patrón que concuerda con los obtenidos en otros estudios [p.ej. @hendon2014].
 Este patrón se mantiene prácticamente sin cambios entre estaciones, aunque varía en intensidad (no se muestra).
 Los paneles b y c de la Figura \@ref(fig:global-pp) muestran que la influencia del A-SAM sólo se da en los trópicos y latitudes medias, mientras que la señal S-SAM es fuerte en las latitudes altas.
 En particular, los valores positivos de S-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.
@@ -1509,7 +1509,7 @@ En invierno la señal del SAM es levemente positiva en el SESA y al sur de Chile
 La circulación anómala a 700 hPa asociada a S-SAM (Fig. \@ref(fig:pp-regr-america)c.1) indica un flujo anómalo del este sobre el sur de Chile.
 Esto conduce a una menor advección de aire húmedo desde el Océano Pacífico, que es la principal fuente de agua precipitable en esa región [@garreaud2007].
 Por otro lado, la circulación anómala asociada a valores positivos del A-SAM (Fig. \@ref(fig:pp-regr-america)b.1) en el Atlántico es anticiclónica al este y ciclónica al oeste de Sudamérica.
-Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo del chorro de baja altura desde Sudamérica hacia la región [ej. @silvestri2009; @zamboni2010].
+Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo del chorro de baja altura desde Sudamérica hacia la región [p.ej. @silvestri2009; @zamboni2010].
 Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ [@rosso2018].
 
 ## Relación con los cEOFs {#sam-ceof}

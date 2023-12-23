@@ -1546,8 +1546,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "metR",
       "RemoteUsername": "eliocamp",
+      "RemotePkgRef": "eliocamp/metR",
       "RemoteRef": "HEAD",
-      "RemoteSha": "68972e71a8a28a4d5fd23dccfd6ae4b7249a6a4f",
+      "RemoteSha": "1dd5d391d5da6a80fde03301671aea5582643914",
       "Requirements": [
         "Formula",
         "R",
@@ -1567,7 +1568,7 @@
         "sf",
         "stringr"
       ],
-      "Hash": "91a1045477fd8b9c74dedfe290b30844"
+      "Hash": "2ea1049c97d14390cc3352faa140d24d"
     },
     "mgcv": {
       "Package": "mgcv",

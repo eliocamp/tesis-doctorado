@@ -24,7 +24,7 @@ gray <- "#d4d4d4"
 
 # Exploración de las formas de descripción de la onda 3 {#onda3}
 
-En el [capítulo anterior]((#intro) se introdujeron conceptualmente algunos aspectos problemáticos de las metodologías e índices normalmente utilizados en la literatura para estudiar la circulación zonalmente asimétrica en el hemisferio sur.
+En el [capítulo anterior](#intro) se introdujeron conceptualmente algunos aspectos problemáticos de las metodologías e índices normalmente utilizados en la literatura para estudiar la circulación zonalmente asimétrica en el hemisferio sur.
 Este capítulo realiza una primera evaluación de la descripción de la onda zonal 3 a través del del índice propuesto por @raphael2004 y de la descomposición de Fourier.
 
 ## Métodos
@@ -32,7 +32,7 @@ Este capítulo realiza una primera evaluación de la descripción de la onda zon
 ### Datos
 
 Se utilizaron datos mensuales de altura geopotencial, del European Centre for Medium-Range Weather Forecasts Reanalysis versión 5 (ERA5) [@hersbach2020] a una resolución espacial de 2,5° de longitud por 2,5° de latitud.
-Utilizamos datos del período post-satelital (`r periodo`) para garantizar la mayor cobertura posible de datos en el hemisferio sur que hayan alimentado al sistema de reanálisis.
+Se utilizaron datos del período post-satelital (`r periodo`) para garantizar la mayor cobertura posible de datos en el hemisferio sur que hayan alimentado al sistema de reanálisis.
 
 ### Índice R04
 
@@ -95,7 +95,7 @@ Dado que se utilizaron datos de reanálisis con una resolución de 2,5º, se cal
 
 ### Envolvente
 
-Para cuantificar la actividad de las ondas zonales, calculamos la envolvente de las ondas siguiendo a @irving2015.
+Para cuantificar la actividad de las ondas zonales, se calculó la envolvente de las ondas siguiendo a @irving2015.
 Primero se calcula la transformada de Fourier de las anomalías de geopotencial en un círculo de latitud determinado, luego se le aplica la transformada inversa sólo al espectro positivo y finalmente se toma el doble de la amplitud de este resultado complejo.
 
 ```{r envolvente-ejemplo, fig.height=3, fig.width=3}
@@ -145,6 +145,10 @@ La tesis se compiló utilizando knitr y rmarkdown [@xie2015; @allaire2020].
 
 ### Índice R04
 
+La Figura \@ref(fig:raphael-regr) presenta la regresión lineal entre R04 y la anomalía zonal de altura geopotencial en 500 hPa junto con la onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa para el período `r periodo`.
+La figura incluye además las ubicaciones definidas por @raphael2004 para calcular el índice.
+Se observa que R04 representa una onda 3 relativamente pura con una amplitud ligeramente más alta en la región del Pacífico Sur.
+Sin embargo, se puede notar que los máximos al sur de Nueva Zelanda y sobre el pasaje de Drake se encuentran más al sur que los puntos usados de referencia.
 
 ```{r raphael-regr, fig.height=3, fig.width=3}
 hgt %>% 
@@ -174,11 +178,6 @@ hgt %>%
 ```
 
 (ref:raphael-regr-cap) Regresión lineal entre R04 y la anomalía zonal de altura geopotencial (m) en 500 hPa (sombreado). La onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa se muestra en contornos; (valores positivos en línea llena y negativos en línea punteada). En azul se indican la ubicación de los puntos usado para calcular R04.
-
-La Figura \@ref(fig:raphael-regr) presenta la regresión lineal entre R04 y la anomalía zonal de altura geopotencial en 500 hPa junto con la onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa para el período `r periodo`.
-La figura incluye además las ubicaciones definidas por @raphael2004 para calcular el índice.
-Se observa que R04 representa una onda 3 relativamente pura con una amplitud ligeramente más alta en la región del Pacífico Sur.
-Sin embargo, se puede notar que los máximos al sur de Nueva Zelanda y sobre el pasaje de Drake se encuentran más al sur que los puntos usados de referencia.
 
 La onda 3 descrita por R04 coincide bien con la onda 3 climatológica, lo cual es esperable por construcción.
 Al usar puntos fijos cercanos a estos máximos climatológicos, el índice R04 busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
@@ -426,7 +425,7 @@ zw %>%
 (ref:fase-histogram-cap) Histograma de la fase de la onda 3 de altura geopotencial en 500 hPa para cada trimestre.
 
 Por otro lado, cabe mencionar que la onda 3 que se obtiene de la descomposición de Fourier aplicada directamente a las medias mensuales de la altura geopotencial no es idéntica a la onda 3 que surge de la descomposición de Fourier aplicada a las anomalías mensuales de altura geopotencial mensual.
-Por lo que dado que la variable relevante para estudiar la variabilidad, los impactos, los forzantes y las tendencias son las anomalías con respecto a la media, desde ahora vamos a analizar las anomalías mensuales.
+Por lo que dado que la variable relevante para estudiar la variabilidad, los impactos, los forzantes y las tendencias son las anomalías con respecto a la media, desde ahora se analizarán las anomalías mensuales.
 
 ```{r time}
 zw <- zw[type == "time"][, type := NULL]
@@ -508,6 +507,6 @@ Esto es consistente con lo observado en los casos particulares en la Figura \@re
 
 ## Conclusiones del capítulo \@ref(onda3)
 
-De este análisis concluimos que ni el modelo de @raphael2004 ni el modelo de Fourier son adecuados para describir las variaciones espacio-temporales de la onda 3 en el hemisferio sur.
+De este análisis se concluye que ni el modelo de @raphael2004 ni el modelo de Fourier son adecuados para describir las variaciones espacio-temporales de la onda 3 en el hemisferio sur.
 Es necesario entonces una metodología que permita describir cambios en la fase, modulación zonal de la amplitud y propagación meridional.
-En el próximo capítulo presentamos un índice basado en cEOF que apunta a resolver estos problemas.
+En el próximo capítulo se presenta un índice basado en cEOF que apunta a resolver estos problemas.

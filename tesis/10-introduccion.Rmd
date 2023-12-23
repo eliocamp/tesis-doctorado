@@ -56,7 +56,7 @@ Una metodología alternativa que se ha propuesto para estudiar las ondas propaga
 Este método amplía el análisis EOF para capturar oscilaciones con amplitud y fase variables y se ha aplicado al dominio temporal.
 Por ejemplo, @krokhin2007 aplicó cEOF a las anomalías mensuales de precipitación basadas en estaciones y a las anomalías mensuales de temperatura en la región de Siberia Oriental y Extremo Oriente, lo cual permitió evaluar las características de propagación del principal patrón de cada variable.
 Del mismo modo, @gelbrecht2018 aplicó cEOF a la precipitación diaria en Sudamérica, lo cual permitió caracterizar las características de propagación del dipolo de anomalías de precipitación observado entre el Sur de Sudamérica (SESA) y la Zona de Convergencia del Atlántico Sur.
-Hasta donde sabemos, el análisis cEOF no se ha aplicado en el dominio espacial para capturar la naturaleza variable en fase de las ondas planetarias en la atmósfera.
+Hasta donde se sabe, el análisis cEOF no se ha aplicado en el dominio espacial para capturar la naturaleza variable en fase de las ondas planetarias en la atmósfera.
 
 El objetivo de esta tesis es entonces mejorar la descripción y comprensión de las asimetrías zonales de la circulación extratropical del hemisferio sur a través de:
 

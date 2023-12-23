@@ -42,6 +42,7 @@ output:
       pandoc_args:
         - "--lua-filter=resumen-to-meta.lua"
         - "--lua-filter=abstract-to-meta.lua"
+        - "--lua-filter=agradecimientos-to-meta.lua"
         - "--top-level-division=chapter"
   bookdown::gitbook:
       split_by: "rmd"
@@ -56,10 +57,8 @@ output:
 
 always_allow_html: true
 
-acknowledgements: |
-  I want to thank a few people.
-dedication: |
-  You can have a dedication here if you wish. 
+# dedication: |
+#   You can have a dedication here if you wish. 
 
 
 # Specify the location of the bibliography below
@@ -70,15 +69,19 @@ bibliography:
 #   - bib/era.bib
 #   - bib/packages.bib
 # Download your specific csl file and refer to it in the line below.
-csl: "csl/iso690-author-date-es.csl"
+csl: "csl/apa.csl"
 link-citations: yes
 lot: true
 lof: true
 ---
 
 <!-- Required to number equations in HTML files -->
+
+```{=html}
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
+```
+

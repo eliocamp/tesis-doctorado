@@ -4,7 +4,15 @@
 \alias{geom_contour_pval}
 \title{Contorno al rededor de p-valores 'significativos'}
 \usage{
-geom_contour_pval(mapping, p.value = 0.01, size = 0.1, hatch = 0, ...)
+geom_contour_pval(
+  mapping,
+  p.value = 0.01,
+  size = 0.1,
+  hatch = 0,
+  pattern_density = 0.1,
+  pattern_spacing = 0.05,
+  ...
+)
 }
 \description{
 Contorno al rededor de p-valores 'significativos'

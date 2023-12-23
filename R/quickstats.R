@@ -25,7 +25,7 @@ Pvaluate <- function(estimate, std.error, df, adjustment = "none") {
 #'
 #'
 #' @return
-#' A character vector of the same length as `p` with `" < 0.001"` for values
+#' A character vector of the same length as `p` with `" < 0,001"` for values
 #' lower than 0.001 and `" = signif(p, 2)"` otherwise.
 #'
 #' @export

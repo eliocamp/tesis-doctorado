@@ -10,7 +10,7 @@ report_p(p)
 \item{p}{numeric vector of p-values}
 }
 \value{
-A character vector of the same length as \code{p} with \code{" < 0.001"} for values
+A character vector of the same length as \code{p} with \code{" < 0,001"} for values
 lower than 0.001 and \code{" = signif(p, 2)"} otherwise.
 }
 \description{

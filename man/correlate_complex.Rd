@@ -4,7 +4,7 @@
 \alias{correlate_complex}
 \title{Correlaciona una variable compleja con una real}
 \usage{
-correlate_complex(z, x, angles = seq(-pi, pi, by = 0.5 * pi/180), ...)
+correlate_complex(z, x, angles = seq(0, 2 * pi, by = 0.5 * pi/180), ...)
 }
 \arguments{
 \item{z}{vector complejo}

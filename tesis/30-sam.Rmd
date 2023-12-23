@@ -135,24 +135,24 @@ Se utilizó la metodología de regresión lineal segmentada para calcular los ca
 
 ```{r segmentada-ejemplo, fig.width=4, fig.height=3}
 withr::with_seed(42, 
- {
-   N <- 100
-   x <- runif(N, -3, 3)
-   y <- ifelse(x < 0, 2*x, .5*x) + rnorm(N, sd = 0.5)
-   
-   data.frame(x = x,
-              y = y) %>% 
-     ggplot(aes(x, y)) +
-     geom_point() +
-     geom_smooth(method = "lm", formula = y ~ x + x:sign(x), se = FALSE) +
-     scale_x_continuous("X") +
-     scale_y_continuous("Y")   
-   
- })
+                 {
+                   N <- 100
+                   x <- runif(N, -3, 3)
+                   y <- ifelse(x < 0, 2*x, .5*x) + rnorm(N, sd = 0.5)
+                   
+                   data.frame(x = x,
+                              y = y) %>% 
+                     ggplot(aes(x, y)) +
+                     geom_point() +
+                     geom_smooth(method = "lm", formula = y ~ x + x:sign(x), se = FALSE) +
+                     scale_x_continuous("X") +
+                     scale_y_continuous("Y")   
+                   
+                 })
 
 ```
 
-(ref:segmentada-ejemplo-cap) Ejemplo de regresión segmentada. La relación entre X e Y es lineal pero con distinta pendiente para valores de X positivos y negativos.
+(ref:segmentada-ejemplo-cap) Ejemplo de regresión segmentada. X es una variable aleatoria con distribución uniforme e Y es $2X$ cuando $X<0$ y $1/2X$ cuando $X\ge0$ más errores aleatorios. La línea azul es la regresión segmentada de X e Y.
 
 Para obtener las pendientes asociadas a la relación lineal para cada signo, ajustamos la ecuación
 
@@ -317,7 +317,7 @@ Se puede observar que en casi todas las estaciones y en ambos niveles, los campo
 Este análisis cualitativo se confirma por el análisis cuantitativo al observar que el $r^2$ (representando la correlación espacial al cuadrado) tienen valores entre 0.7 y 0.9, indicando alta similaridad.
 A su vez, también es similar la intensidad de los coeficientes de correlación, indicando un buen cumplimiento de la hipótesis de linealidad.
 
-(ref:sign-regression-50-cap) Regresión segmentada de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada signo para el período `r periodo`. La correlación espacial al cuadrado entre cada campo en cada estación se detalla debajo de la estación. `r pval_contours(de = " de la diferencia entre el signo positivo y el negativo ")` (no hay áreas).
+(ref:sign-regression-50-cap) Regresión segmentada de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada signo para el período `r periodo` (m). La correlación espacial al cuadrado entre cada campo en cada estación se detalla debajo de la estación. `r pval_contours(de = " de la diferencia entre el signo positivo y el negativo ")` (no hay áreas).
 
 ```{r sign-regression-50, fig.width=6, fig.height=3.7}
 plot_sign_regression(sign_regression[lev == 50])
@@ -345,7 +345,7 @@ Esto es consistente con los resultados de @fogt2020.
 Estos resultados sugieren entonces que la suposición de estabilidad estacional se cumple excepto para DEF en la estratósfera.
 Esto indica que hay que tener cuidado en la interpretación del SAM asimétrico en DEF en la estratosfera ya que el patrón de SAM asimétrico impuesto por la metodología no coincide con el patrón de SAM asimétrico que se obtendría considerando únicamente este trimestre.
 
-(ref:season-regression-cap) Regresión múltiple de las anomalías zonales de altura geopotencial de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada estación. El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. `r pval_contours()`, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON.
+(ref:season-regression-cap) Regresión múltiple de las anomalías zonales de altura geopotencial de la anomalía zonal de altura geopotencial en 50 hPa con el índice SAM para cada estación (m). El sombreado muestra la regresión de cada estación y los contornos grises, la diferencia de cada estación con respecto a SON (valores negativos en línea punteada y positivos en línea sólida). La correlación espacial al cuadrado entre cada campo y el campo de SON se detalla debajo de la estación. `r pval_contours()`, donde para estaciones distintas a SON, marca el p-valor de la diferencia respecto a SON.
 
 ```{r season-regression, fig.height=5.5, fig.width=6, warning=FALSE}
 season_regression <- hgt[lev %in% c(50, 700)] %>%
@@ -469,7 +469,12 @@ La correlación espacial entre los campos es de `r sam_period_cor[lev == 50]$tex
 
 ### Evolución temporal {#temporal}
 
-(ref:asymsam-timeseries-cap) Serie temporal de A-SAM y S-SAM en 50 hPa (panel a) y 700 hPa (panel b). A la derecha, la densidad de probabilidad de cada índice. Las series están estandarizadas por el desvío estándar del SAM en cada nivel.
+Primero se evalúa la evolución temporal del A-SAM y S-SAM.
+La Figura \@ref(fig:asymsam-timeseries) muestra las series temporales en 700 hPa y 50 hPa y sus correspondientes estimaciones de densidad.
+Se seleccionaron estos dos niveles como representativos de la variabilidad troposférica y estratosférica respectivamente.
+Como se muestra a continuación, las variabilidades de ambos índices son muy coherentes dentro de cada región de la atmósfera, por lo que es razonable tomar un nivel como representativo de cada capa.
+
+(ref:asymsam-timeseries-cap) Serie temporal de A-SAM y S-SAM en 50 hPa (panel a) y 700 hPa (panel b). A la derecha, la densidad de probabilidad de cada índice. Las series están estandarizadas por el desvío estándar del SAM en cada nivel. Sin unidades.
 
 ```{r asymsam-timeseries, fig.width=6, fig.height=3}
 indices %>% 
@@ -519,11 +524,6 @@ max_period <- spec[lev == 50 & term == "sym"] %>%
   .[which.max(spec - `95%`)] %>% 
   .[, 1/freq]
 ```
-
-Primero evaluamos la evolución temporal del A-SAM y S-SAM.
-La Figura \@ref(fig:asymsam-timeseries) muestra las series temporales en 700 hPa y 50 hPa y sus correspondientes estimaciones de densidad.
-Seleccionamos estos dos niveles como representativos de la variabilidad troposférica y estratosférica respectivamente.
-Como se muestra a continuación, las variabilidades de ambos índices son muy coherentes dentro de cada región de la atmósfera, por lo que es razonable tomar un nivel como representativo de cada capa.
 
 (ref:spectrum-cap) Espectro de cada serie temporal suavizada. El sombreado indica el intervalo de confianza del 95% del espectro nulo calculado usando bootstrap tomando 5000 simulaciones de un modelo autoregresivo ajustado a los datos. La línea gris indica la amplitud promedio teórica del modelo autoregresivo. Para el período `r periodo`.
 
@@ -624,10 +624,10 @@ crosscor %>%
   geom_contour_tanaka(aes(z = correlation), size = 0.1, na.fill = .99, 
                       breaks = MakeBreaks(binwidth = 0.1)) +
   geom_text_contour(aes(z = correlation), breaks = MakeBreaks(binwidth = 0.1),
-                    color = "white", 
+                    color = "black", 
                     rotate = FALSE, 
-                    stroke.color = "black", stroke = 0.2, 
-                    skip = 1, size = 2, 
+                    stroke.color = "white", stroke = 0.25, 
+                    skip = 1, size = 2.2, 
                     data = ~.x[item2 > item1]) +
   geom_polygon(data = tri, fill = "#fbfbfb") +
   scale_fill_divergent_discretised("Correlación cruzada",
@@ -767,7 +767,7 @@ indices %>%
               size = 0.2, alpha = 0.2) +
   geom_line(aes(color = type)) +
   scale_x_level() +
-  scale_y_continuous("Change in explained variance per decade", 
+  scale_y_continuous("Vambio en varianza explicada por década", 
                      label = scales::percent_format(1)) +
   scale_fill_brewer(NULL, palette = "Dark2", aesthetics = c("color", "fill"), labels = lab_sam) +
   coord_flip() +
@@ -970,9 +970,9 @@ vertical_regr %>%
   .[, index_level := as.integer(index_level)] %>% 
   # wrap() %>% 
   ggplot(aes(lon, lev)) +
-  geom_contour_fill(aes(z = estimate, fill = ..level..), breaks = AnchorBreaks(0, 10, 0)) +
+  geom_contour_fill(aes(z = estimate, fill = ..level..), breaks = AnchorBreaks(0, 1, 0)) +
   geom_contour_tanaka(aes(z = estimate),
-                      breaks = AnchorBreaks(0, 10, 0),
+                      breaks = AnchorBreaks(0, 1, 0),
                       size = 0.3) +
   geom_hline(data = data.frame(lev = c(50, 700),
                                index_level = c(50, 700)), 
@@ -1110,6 +1110,21 @@ Esto último indica que estos resultados no dependen del índice ENSO utilizado.
 
 ## Impactos {#impacts}
 
+Para evaluar las diferencias en los impactos asociados a los índices SAM, A-SAM y S-SAM, realizamos una regresión de la temperatura del aire a 2 metros y la precipitación a 2 metros sobre cada uno de los tres índices del SAM de 700 hPa.
+Como se mostró en secciones anteriores, los tres índices son muy coherentes en la troposfera, por lo que seleccionamos este nivel para representar la circulación troposférica por compatibilidad con la literatura previa.
+Las regresiones se realizaron sin quitarle la tendencia ni a las variables ni a los índices, pero el cálculo de las regresiones con valores sin tendencias no muestran diferencias importantes (no se muestra).
+
+### Temperatura del aire a 2 metros
+
+La Figura \@ref(fig:regr-air-season) muestra las regresiones con la temperatura del aire a 2 metros.
+En verano, los valores positivos del índice SAM (Fig. \@ref(fig:regr-air-season)a.1) se asocian con anomalías negativas de temperatura cerca de la Antártida rodeadas por un anillo de anomalías positivas en las latitudes medias.
+El anillo no es zonalmente simétrico, ya que hay cuatro máximos locales distintivos en torno a 30ºO, 120ºO, 150ºE y 90ºE respectivamente.
+En los trópicos, las anomalías son negativas en el Pacífico ecuatorial, lo que concuerda con la correlación negativa entre SAM y ENSO observada en la Tabla \@ref(tab:enso-cor-table).
+Los paneles a.2 y a.3 de la Figura \@ref(fig:regr-air-season) muestran que tanto las anomalías negativas en los trópicos como las anomalías entre 45ºS y 60ºS están asociadas principalmente con el A-SAM y que el S-SAM está asociado a anomalías de temperatura extendidas más zonalmente simétricas en latitudes altas.
+Sobre la Antártida, los valores positivos del índice SAM están asociados a anomalías negativas de temperatura, en particular sobre la costa oriental.
+Estas anomalías están explicadas únicamente con el S-SAM.
+Por otro lado, las anomalías de temperatura en el océano Índico, el sur de África y Australia están fuertemente relacionadas con A-SAM y no están presentes en el patrón asociado con el SAM.
+
 ```{r compute-air-regr}
 time_subset <- list(time = range(indices[year(time) >= 1979]$time))
 
@@ -1133,7 +1148,7 @@ air_regr <- air %>%
   .[, term := factor_sam(term)]
 ```
 
-(ref:regr-air-season-cap) Regresión de las anomalías de temperatura a dos metros (Kelvin) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período `r periodo`. `r pval_contours()`. La escala de colores se corta en $\pm0.6 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
+(ref:regr-air-season-cap) Regresión de las anomalías de temperatura a dos metros (K) con el índice SAM (columna a), A-SAM (columna b) y S-SAM (columna c) en cada trimestre para el período `r periodo`. `r pval_contours()`. La escala de colores se corta en $\pm0.6 \mathrm{K}$ para resaltar valores de regresión en los trópicos y latitudes medias a expensas de los valores en las regiones polares.
 
 ```{r regr-air-season, fig.width = 6, fig.height = 8}
 anchor_limits <- function(anchor = 0, binwidth = NULL, exclude = NULL,  bins = 10,
@@ -1195,21 +1210,6 @@ air_regr %>%
 
 ```
 
-Para evaluar las diferencias en los impactos asociados a los índices SAM, A-SAM y S-SAM, realizamos una regresión de la temperatura del aire a 2 metros y la precipitación a 2 metros sobre cada uno de los tres índices del SAM de 700 hPa.
-Como se mostró en secciones anteriores, los tres índices son muy coherentes en la troposfera, por lo que seleccionamos este nivel para representar la circulación troposférica por compatibilidad con la literatura previa.
-Las regresiones se realizaron sin quitarle la tendencia ni a las variables ni a los índices, pero el cálculo de las regresiones con valores sin tendencias no muestran diferencias importantes (no se muestra).
-
-### Temperatura del aire a 2 metros
-
-La Figura \@ref(fig:regr-air-season) muestra las regresiones con la temperatura del aire a 2 metros.
-En verano, los valores positivos del índice SAM (Fig. \@ref(fig:regr-air-season)a.1) se asocian con anomalías negativas de temperatura cerca de la Antártida rodeadas por un anillo de anomalías positivas en las latitudes medias.
-El anillo no es zonalmente simétrico, ya que hay cuatro máximos locales distintivos en torno a 30ºO, 120ºO, 150ºE y 90ºE respectivamente.
-En los trópicos, las anomalías son negativas en el Pacífico ecuatorial, lo que concuerda con la correlación negativa entre SAM y ENSO observada en la Tabla \@ref(tab:enso-cor-table).
-Los paneles a.2 y a.3 de la Figura \@ref(fig:regr-air-season) muestran que tanto las anomalías negativas en los trópicos como las anomalías entre 45ºS y 60ºS están asociadas principalmente con el A-SAM y que el S-SAM está asociado a anomalías de temperatura extendidas más zonalmente simétricas en latitudes altas.
-Sobre la Antártida, los valores positivos del índice SAM están asociados a anomalías negativas de temperatura, en particular sobre la costa oriental.
-Estas anomalías están explicadas únicamente con el S-SAM.
-Por otro lado, las anomalías de temperatura en el océano Índico, el sur de África y Australia están fuertemente relacionadas con A-SAM y no están presentes en el patrón asociado con el SAM.
-
 En otoño, invierno y primavera (filas b, c y d en la Figura \@ref(fig:regr-air-season)) el SAM está asociado a anomalías de temperatura con estructura zonalmente asimétrica en latitudes altas, con valores negativos sobre la Antártida y el Mar de Amundsen y positivas al sur de Nueva Zelanda y centradas en el pasaje de Drake que se extienden hasta la Patagonia.
 Esto refleja la naturaleza más asimétrica del SAM durante estas estaciones en comparación al verano.
 En acuerdo, @jones2019 observó características similares en las mediciones de estaciones, aunque utilizando datos de 1957 a 2016.
@@ -1222,6 +1222,12 @@ Asimismo, las temperaturas sobre la Antártida Oriental se ven más afectadas po
 Dado que el índice S-SAM está negativamente correlacionado con la temperatura sobre la Antártida Oriental (Figura \@ref(fig:regr-air-season) columna 3), es posible que la tendencia positiva en el índice S-SAM pueda ayudar a explicar la falta de tendencia positiva de la temperatura en la Antártida Oriental en comparación con la Antártida Occidental en el contexto del calentamiento global [@nicolas2014].
 
 ### Precipitación
+
+La Figura \@ref(fig:global-pp) muestra la regresión de los índices SAM con la precipitación para el hemisferio sur considerando todos los meses del año.
+La señal de precipitación asociada al SAM completo (Fig. \@ref(fig:global-pp)a) muestra en general una disminución de la precipitación en torno a los 45ºS, un ligero aumento de la precipitación en torno a los 30ºS y un aumento de la precipitación sobre la Antártida, un patrón que concuerda con los obtenidos en otros estudios [p.ej. @hendon2014].
+Este patrón se mantiene prácticamente sin cambios entre estaciones, aunque varía en intensidad (no se muestra).
+Los paneles b y c de la Figura \@ref(fig:global-pp) muestran que la influencia del A-SAM sólo se da en los trópicos y latitudes medias, mientras que la señal S-SAM es fuerte en las latitudes altas.
+En particular, los valores positivos del S-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.
 
 ```{r calc-indices2d-seasonal}
 indices_2d_seasonal <- hgt[lev %in% 700] %>% 
@@ -1409,12 +1415,6 @@ pp_regr %>%
   theme(panel.grid = element_blank()) 
 ```
 
-La Figura \@ref(fig:global-pp) muestra la regresión de los índices SAM con la precipitación para el hemisferio sur considerando todos los meses del año.
-La señal de precipitación asociada al SAM completo (Fig. \@ref(fig:global-pp)a) muestra en general una disminución de la precipitación en torno a los 45ºS, un ligero aumento de la precipitación en torno a los 30ºS y un aumento de la precipitación sobre la Antártida, un patrón que concuerda con los obtenidos en otros estudios [p.ej. @hendon2014].
-Este patrón se mantiene prácticamente sin cambios entre estaciones, aunque varía en intensidad (no se muestra).
-Los paneles b y c de la Figura \@ref(fig:global-pp) muestran que la influencia del A-SAM sólo se da en los trópicos y latitudes medias, mientras que la señal S-SAM es fuerte en las latitudes altas.
-En particular, los valores positivos del S-SAM se asocian con el aumento de las precipitaciones sobre la Antártida y la disminución de las precipitaciones alrededor del Océano Austral.
-
 Para estudiar con más detalle los impactos locales en distintas regiones continentales del hemisferio sur, las Figuras \@ref(fig:pp-regr-oceania) y \@ref(fig:pp-regr-america) muestran la regresión de los índices SAM con la precipitación media estacional y la altura geopotencial de 700 hPa para la región de Oceanía, y Sudamérica respectivamente.
 No se muestran los resultados para la región de Sudáfrica porque allí no se detectó ninguna señal significativa.
 
@@ -1448,7 +1448,7 @@ plot_pp <- function(this_continent, data = pp_regr) {
                   aes(z = estimate, linetype = factor(-sign(..level..)))) +
     geom_text_contour(data = gh, breaks = MakeBreaks(bins = 15, exclude = 0),
                       global.breaks = FALSE,
-                      size = 2.5,
+                      size = 2.5, 
                       stroke = 0.15, stroke.color = "white",
                       aes(z = estimate), rotate = FALSE, skip = 1) +
     geom_qmap(~.x[lat <= 10]) +
@@ -1486,7 +1486,8 @@ La separación entre A-SAM y S-SAM sugiere que esta anomalía positiva se explic
 Las anomalías de altura geopotencial asociadas a este índice (contornos negros) son indicativas de un flujo hacia el este procedente del mar de Tasmania, lo que podría explicar las anomalías positivas en las precipitaciones, en acuerdo con @hendon2007.
 El A-SAM parece estar relacionado con anomalías positivas de precipitación en la costa sureste de Australia (Fig. \@ref(fig:pp-regr-oceania)b.2), que podrían explicarse de forma similar por la circulación anómala del oeste que transporta aire húmedo al continente desde el océano Índico.
 
-Las regresiones estacionales muestran anomalías estadísticamente significativas sólo en primavera, cuando valores positivos del SAM positivo se asocian con anomalías positivas de precipitación en el este y centro de Australia (Fig. \@ref(fig:pp-regr-oceania)a.5).
+Las regresiones estacionales muestran valores altos pero no estadísticamente significativos.
+En SON, valores positivos del SAM se asocian con anomalías positivas de precipitación en el este y centro de Australia (Fig. \@ref(fig:pp-regr-oceania)a.5).
 En este trimestre, el S-SAM parece estar asociado con anomalías positivas de precipitación en un área relativamente reducida de la costa oriental (Fig. \@ref(fig:pp-regr-oceania)c.5) mientras que las anomalías positivas de precipitación relacionadas con A-SAM positivo afectan a todo el este de Australia (Fig. \@ref(fig:pp-regr-oceania)b.5).
 
 En verano, un índice SAM positivo se asocia con anomalías de precipitación positivas en Australia occidental y oriental, sobre todo en la región noreste (Fig. \@ref(fig:pp-regr-oceania)a.2).
@@ -1519,11 +1520,17 @@ Se encontró que este mismo patrón está asociado con el aumento de las precipi
 
 ## Relación con los cEOFs {#sam-ceof}
 
+Se evaluó también la relación de los cEOFs presentados en el Capítulo \@ref(ceofs) con los índices del SAM. 
+Para ello, calculamos el coeficiente de determinación entre las series temporales de los cEOFs con cada uno de los índices SAM  definidos en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
+Dado que los cEOFs fueron definidos únicamente para el trimestre SON, esto se calculó sólo para estre trimestre. 
+El índice SAM está correlacionado de forma estadísticamente significativa con la fase de 0º del cEOF1 en todos los niveles, y con la fase de 90º del cEOF1 y la fase de 90º del cEOF2 en la tropósfera.
+Por otro lado, las correlaciones entre el SAM y la fase de 0º del cEOF2 son prácticamente nulas.
+
 ```{r ceof}
 ceof <- readRDS(data_path("derived", "ceof.Rds"))
 ```
 
-(ref:sam-eof-vertical-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período `r periodo`. Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.
+(ref:sam-eof-vertical-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período `r periodo` para SON. Las líneas gruesas representan valores con p-valor menor a 0.01 ajustado por FDR.
 
 ```{r sam-eof-vertical, fig.height=4, fig.width=4}
 time <- ceof$left %>%
@@ -1564,12 +1571,6 @@ sam_r2 %>%
   panel_background() 
 ```
 
-Se evaluó también la relación de los cEOFs presentados en el Capítulo \@ref(ceofs) con los índices del SAM. 
-Para ello, calculamos el coeficiente de determinación entre las series temporales de los cEOFs con cada uno de los índices SAM  definidos en cada nivel vertical (Fig. \@ref(fig:sam-eof-vertical)).
-Dado que los cEOFs fueron definidos únicamente para el trimestre SON, esto se calculó sólo para estre trimestre. 
-El índice SAM está correlacionado de forma estadísticamente significativa con la fase de 0º del cEOF1 en todos los niveles, y con la fase de 90º del cEOF1 y la fase de 90º del cEOF2 en la tropósfera.
-Por otro lado, las correlaciones entre el SAM y la fase de 0º del cEOF2 son prácticamente nulas.
-
 En la tropósfera la correlación de ambas fases del cEOF1 y el SAM es igual a su correlación con el S-SAM, y su correlación con el A-SAM es mucho más baja y no significativa.
 Esto indica que la relación entre el SAM y el cEOF1 en la tropósfera se explica en su totalidad por la componente zonalmente simétrica del SAM.
 En la estratosfera, la fase de 0º del cEOF1 está correlacionada tanto con el A-SAM como con la S-SAM, mientras que la fase de 90º está altamente correlacionada sólo con el A-SAM.
@@ -1584,7 +1585,9 @@ Esto sugiere que la fase de 90º del cEOF2 es capaz de caracterizar la actividad
 
 La división del SAM entre su parte zonalmente asimétrica y simétrica muestra que estos dos aspectos del SAM tienen variabilidad, tendencias e impactos distintivos que merecen ser abordados por separado.
 
-(Agregar acá algunas frases breves sobre las características del A-SAM y las del S-SAM, haciendo foco en la región vertical de influencia, troposfera, estratosfera, su vinculación con las ondas 1 y 3 y su relación con el ENSO y el ozono)
+Los patrones asociados al S-SAM son mucho más anulares que los asociados al SAM en toda la atmósfera. 
+En la tropósfera, el A-SAM describe un patrón de onda zonal 3 similar al cEOF2 que se extiende verticalmente en toda esta capa y alcanza su máximo en 250 hPa y explica la relación entre el SAM y el ENSO.
+En la estratósfera describe un patrón de onda 1 similar al cEOF1. 
 
 La relación entre el SAM y el cEOF1 en la tropósfera se explica en su totalidad por la componente zonalmente simétrica del SAM, mientras que la relación entre el cEOF2 y el SAM se explica por la relación entre la fase de 90º del cEOF2 y la parte asimétrica del SAM.
 

@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
   warning = verbose,
   cache = TRUE,
   fig.show = ifelse(is_word(), "hide", "asis"),
-  cache.extra = 346347,
+  cache.extra = 3453,
   out.extra = "",
   fig.width = 6,
   fig.height = 6/1.6,   # Golden ratio?

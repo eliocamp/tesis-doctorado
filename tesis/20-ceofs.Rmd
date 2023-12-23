@@ -187,7 +187,24 @@ explained <- eof_naive[, eof[[1]]$sdev, by = lev] %>%
 
 ```
 
-(ref:eof-naive-cap) Patrones espaciales de los primeros EOFs de las anomalías zonales de altura geopotencial en 50 hPa al sur de 20ºS. Para el período `r periodo` (unidades arbitrarias).
+
+Una alternativa para representar ondas que varían en su fase es utilizando el análisis de cEOF [@horel1984].
+Cada cEOF es un conjunto de estructuras espaciales y series temporales con valores en el plano complejo (es decir, con una parte real y una imaginaria) de la forma
+
+```{=tex}
+\begin{align}
+E_{(\lambda, \phi, p)} &= (E_{r(\lambda, \phi, p)} +  iE_{i(\lambda, \phi, p)}) \\
+T_{(t)} &= (T_{r(t)} +  iT_{i(t)})
+(\#eq:ceof-equation)
+\end{align}
+```
+
+donde $E_{(\lambda, \phi)}$ es la componente espacial del cEOF, que depende de la longitud ($\lambda$), la latitud ($\phi$) y el nivel de presión ($p$) y que tiene una parte real $E_r$ y una imaginaria $E_i$. 
+$T_{(t)}$ es la parte temporal del cEOF, al cual también tiene una parte real `T_{r(t)}` y una imaginaria `T_{i(t)}`
+La contribución de cada cEOF al campo original se obtiene como la parte real del producto entre las componentes espacial y temporal.
+
+
+(ref:eof-naive-cap) Patrones espaciales de los primeros EOFs de las anomalías zonales de altura geopotencial en 50 hPa al sur de 20ºS. Para el período `r periodo`. Unidades arbitrarias.
 
 ```{r eof-naive, fig.width=6, fig.height=6*1.2}
 eof_naive[, eof[[1]]$right, by = lev] %>%
@@ -213,21 +230,6 @@ eof_naive[, eof[[1]]$right, by = lev] %>%
   facet_wrap(.~EOF, ncol = 2)  +
   tagger::tag_facets("rc")
 ```
-
-Una alternativa para representar ondas que varían en su fase es utilizando el análisis de cEOF [@horel1984].
-Cada cEOF es un conjunto de estructuras espaciales y series temporales con valores en el plano complejo (es decir, con una parte real y una imaginaria) de la forma
-
-```{=tex}
-\begin{align}
-E_{(\lambda, \phi, p)} &= (E_{r(\lambda, \phi, p)} +  iE_{i(\lambda, \phi, p)}) \\
-T_{(t)} &= (T_{r(t)} +  iT_{i(t)})
-(\#eq:ceof-equation)
-\end{align}
-```
-
-donde $E_{(\lambda, \phi)}$ es la componente espacial del cEOF, que depende de la longitud ($\lambda$), la latitud ($\phi$) y el nivel de presión ($p$) y que tiene una parte real $E_r$ y una imaginaria $E_i$. 
-$T_{(t)}$ es la parte temporal del cEOF, al cual también tiene una parte real `T_{r(t)}` y una imaginaria `T_{i(t)}`
-La contribución de cada cEOF al campo original se obtiene como la parte real del producto entre las componentes espacial y temporal.
 
 Las componentes real e imaginaria del patrón espacial complejo son la representación de dos patrones espaciales que están desplazados 1/4 de longitud de onda, similar a EOF1 y EOF2 en la Figura \@ref(fig:eof-naive).
 En este trabajo nos referiremos a la parte real e imaginaria de cada cEOF como la fase de 0º y la fase de 90º respectivamente.
@@ -295,7 +297,7 @@ La transformada de Hilbert suele entenderse en términos de una señal variable 
 Por esto calculamos la transformada de Hilbert de las anomalías zonales de altura geopotencial variable en cada longitud; es decir, calculada para cada nivel, tiempo y latitud.
 Dado que cada círculo de latitud es un dominio periódico, este procedimiento no sufre efectos de borde.
 
-(ref:hilbert-ejemplo-cap) Ejemplo de cálculo de la función analítica de la señal de anomalías zonales de altura geopotencial en 50ºS en SON de 1982. Las anomalías zonales (línea verde en panel e) se pueden descomponer en un número de ondas zonales (paneles a, b, c y d muestran las primeras 4 en verde). La transformada de Hilbert de las anomalías zonales de altura geopotencial (línea naranja en panel e) es la suma de las ondas zonales desplazadas en 1/4 de longitud de onda (líneas naranjas en paneles a, b, c, y d).
+(ref:hilbert-ejemplo-cap) Ejemplo de cálculo de la función analítica de la señal de anomalías zonales de altura geopotencial (m) en 50ºS en SON de 1982. Las anomalías zonales (línea verde en panel e) se pueden descomponer en un número de ondas zonales (paneles a, b, c y d muestran las primeras 4 en verde). La transformada de Hilbert de las anomalías zonales de altura geopotencial (línea naranja en panel e) es la suma de las ondas zonales desplazadas en 1/4 de longitud de onda (líneas naranjas en paneles a, b, c, y d).
 
 ```{r hilbert-ejemplo, fig.width=6, fig.height=6/1.6}
 gdata <- era5[lev == 50] %>% 
@@ -491,7 +493,11 @@ Si bien los cEOFs se calcularon para el período `r periodo`, se extendieron las
 
 ### Caracterización espacio-temporal de los cEOFs principales
 
-(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período `r periodo`. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
+Las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) muestran las partes espacial y temporal de los dos primeros cEOFs de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
+El primer modo (cEOF1) explica el `r scales::percent(ceof$sdev[cEOF == "cEOF1"]$r2, 0.1)` de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (`r scales::percent(ceof$sdev[cEOF == "cEOF2"]$r2, 0.1)`).
+En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y fase está controlada por la magnitud y fase de su serie temporal.
+
+(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período `r periodo`. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Unidades arbitrarias.
 
 ```{r ceofs-1, fig.width=6, fig.height=6}
 gdata <- ceof$right %>% 
@@ -553,7 +559,7 @@ era_more <- ERA5_geopotential() %>%
 
 ```
 
-(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período `r paste0(range(year(era_more$time)), collapse = "--")`. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal mediante un suavizado de regresión local. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Las unidades son arbitrarias.
+(ref:extended-series-cap) Series temporales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período `r paste0(range(year(era_more$time)), collapse = "--")`. El cEOF1 (fila a) y cEOF2 (fila b) separados en la fase 0º (columna 1) y la fase 90º (columna 2). Las líneas oscuras muestran la tendencia lineal mediante un suavizado de regresión local. Las líneas negras horizontales y verticales muestran el valor medio y el rango de cada serie, respectivamente. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Unidades arbitrarias.
 
 ```{r extended-series, fig.height=3, fig.width = 6}
 # Check that the extended index coincides with the
@@ -619,10 +625,6 @@ era_more %>%
 ```{r save-era-more}
 saveRDS(era_more, data_path("derived", "era_more.Rds"))
 ```
-
-Las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) muestran las partes espacial y temporal de los dos primeros cEOFs de las anomalías zonales de la altura geopotencial en 50 hPa y 200 hPa, calculados conjuntamente en ambos niveles.
-El primer modo (cEOF1) explica el `r scales::percent(ceof$sdev[cEOF == "cEOF1"]$r2, 0.1)` de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (`r scales::percent(ceof$sdev[cEOF == "cEOF2"]$r2, 0.1)`).
-En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y fase está controlada por la magnitud y fase de su serie temporal.
 
 ```{r era-more-magnitud, eval=FALSE, include=FALSE}
 era_more %>% 
@@ -805,11 +807,11 @@ plot_regr <- function(data, which_cEOF, which_levs, which_var) {
 mpg <- expression('Altura geopotencial ('*m^{2}*s^{phantom() - 1}*')')
 ```
 
-(ref:eof1-regr-gh-cap) Regresión de anomalías de altura geopotencial en SON ($m^2s^{-1}$) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período `r periodo`. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. `r pval_contours()`.
+(ref:eof1-regr-gh-cap) Regresión de anomalías de altura geopotencial en SON (m) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa (fila a) y 200 hPa (fila b) para el período `r periodo`. Estos coeficientes fueron obtenidos a partir de una regresión múltiple incluyendo ambas fases. `r pval_contours()`.
 
 ```{r eof1-regr-gh, fig.height=1.2*6, fig.width=6, dependson="plot_regr"}
 plot_regr(regr , "cEOF1", c(200, 50), "hgt") +
-  scale_fill_divergent(mpg,
+  scale_fill_divergent("Altura geopotencial",
                        breaks = AnchorBreaksSym(0, exclude = 0),
                        guide = guide_colorsteps_bottom(15, even.steps = TRUE), 
                        limits = c(-2000, 2000)) 
@@ -829,7 +831,7 @@ Por lo tanto, la magnitud y la fase del cEOF1 están asociadas a la magnitud y l
 
 ```{r eof2-regr-gh, fig.height=1.2*6, fig.width=6, dependson="plot_regr"}
 plot_regr(regr, "cEOF2", c(200, 50), "hgt") +
-  scale_fill_divergent(mpg, 
+  scale_fill_divergent("Altura geopotencial", 
                        breaks = AnchorBreaksSym(0, 200, exclude = 0),
                        guide = guide_colorsteps_bottom(15, even.steps = TRUE), 
                        limits = c(-1000, 1000))
@@ -858,7 +860,7 @@ Estudiaremos la relación entre los cEOF y el PSA con más detalle en la secció
 
 ```{r eof1-regr-t, dependson="plot_regr", fig.height=1.2*6, fig.width=6}
 plot_regr(regr, "cEOF1", c(200, 50), "t") +
-  scale_fill_divergent("Temperatura del aire (K)", breaks = AnchorBreaksSym(0, exclude = 0),
+  scale_fill_divergent("Temperatura del aire", breaks = AnchorBreaksSym(0, exclude = 0),
                        guide = guide_colorsteps_bottom(15, even.steps = TRUE), 
                        limits = c(-4.5, 4.5))
 ```
@@ -923,7 +925,7 @@ t %>%
                     skip = 1, stroke = 0.15, stroke.colour = "white",
                     breaks = AnchorBreaksSym(0, exclude = 0)) +
   
-  scale_fill_divergent_discretised("Temperatura del aire (K)",
+  scale_fill_divergent_discretised("Temperatura del aire",
                                    # limits = c(-2.25, 2.25),
                                    labels = label_one_less,
                                    guide = guide_colorsteps_bottom(15, show.limits = TRUE)) +
@@ -996,7 +998,7 @@ o3_regr %>%
            size = 0.3, alpha = 0.8
   ) +
   geom_qmap() +
-  scale_fill_divergent_discretised("Columna Total de Ozono (DU)", 
+  scale_fill_divergent_discretised("Columna Total de Ozono", 
                                    limits = c(-30, 30), 
                                    breaks = AnchorBreaksSym(exclude = 0, binwidth = 5)(c(-30, 30)),
                                    guide = guide_colorsteps_bottom(15)) + 
@@ -1399,7 +1401,7 @@ oni_dmi_parciales <- gdata %>%
                      report_p(p.value), ")")]
 ```
 
-(ref:psi-sst-explained-variance-cap) Varianza de las anomalías de TSM (fila a) y de las anomalías zonales de función corriente (fila b) explicada por el cEOF1 (columna 1) el cEOF2 (columna 2).
+(ref:psi-sst-explained-variance-cap) Porcentaje de varianza de las anomalías de TSM (fila a) y de las anomalías zonales de función corriente (fila b) explicada por el cEOF1 (columna 1) el cEOF2 (columna 2).
 
 ```{r psi-sst-explained-variance, fig.width = 6, fig.height = 3}
 breaks <- seq(.1, 1, by = .1)
@@ -1494,7 +1496,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
                       breaks = breaks_sst) +
     geom_contour_pval(data = sst_gdata, aes(z = p_val), pattern_spacing = pattern_spacing) +
     
-    scale_fill_divergent_discretised("TSM (K)",
+    scale_fill_divergent_discretised("TSM",
                                      labels = label_one_less,
                                      guide = guide_colorsteps_bottom(width = 15,
                                                                      show.limits = FALSE, ticks = TRUE,
@@ -1510,7 +1512,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
                 size = 0.1) +
     scale_mag(max_size = .5, guide = "none") +
     geom_qmap() +
-    scale_fill_divergent_discretised(psi_expr, 
+    scale_fill_divergent_discretised("Función corriente", 
                                      labels = label_one_less,
                                      low = scales::muted("red"),
                                      high = scales::muted("blue"),

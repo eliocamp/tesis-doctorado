@@ -180,7 +180,7 @@ Sin embargo, sólo el índice SAM tiene desviación estándar unitaria por defin
 La varianza explicada por cada patrón se utiliza como indicador del grado de simetría o asimetría zonal de cada campo mensual.
 Para cuantificar la coherencia entre las series temporales correspondientes a distintos índices o al mismo índice en distintos niveles, se calculó la correlación temporal entre ellas.
 
-(ref:method-cap) Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período `r periodo`. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y negativos en azul.
+(ref:method-cap) Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período `r periodo`. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y positivos en rojo.
 
 ```{r method, fig.width=6, fig.height=2.5}
 sam_sep <- SAM[, eof[[1]]$right, by = .(lev)] %>% 
@@ -573,7 +573,7 @@ En la estratosfera, las correlaciones instantáneas caen a un mínimo de `r sign
 Al mismo tiempo, las correlaciones con un mes de defasaje aumentan con la altura.
 Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SAM.
 
-(ref:cor-lev-cap) Correlación instantánea y con un defasaje de 1 mes entre S-SAM y A-SAM para el período `r periodo`.
+(ref:cor-lev-cap) Correlación instantánea (línea verde) y con un defasaje de 1 mes (línea naranja) entre S-SAM y A-SAM para el período `r periodo`.
 
 ```{r cor-lev, fig.width=3, fig.height=3}
 cors %>% 
@@ -1534,7 +1534,7 @@ Por otro lado, las correlaciones entre el SAM y la fase de 0º del cEOF2 son pr�
 ceof <- readRDS(data_path("derived", "ceof.Rds"))
 ```
 
-(ref:sam-eof-vertical-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período `r periodo` para SON. Las líneas gruesas representan valores con p-valor menor a 0,01 ajustado por FDR.
+(ref:sam-eof-vertical-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM (línea naranja), A-SAM (línea verde) y S-SAM (línea azul) para cada nivel durante el período `r periodo` para SON. Las líneas gruesas representan valores con p-valor menor a 0,01 ajustado por FDR.
 
 ```{r sam-eof-vertical, fig.height=4, fig.width=4}
 time <- ceof$left %>%

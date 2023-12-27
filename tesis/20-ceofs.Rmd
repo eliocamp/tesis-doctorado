@@ -280,7 +280,7 @@ ondas %>%
 
 ```
 
-(ref:ejemplo-reconstruccion-cap) Un ejemplo idealizado de las dos fases del patrón espacial de un cEOF (fila superior) y cuatro reconstrucciones para distintos valores de sus series temporales.
+(ref:ejemplo-reconstruccion-cap) Ejemplo idealizado de las dos fases del patrón espacial de un cEOF (fila superior) y cuatro reconstrucciones para distintos valores de sus series temporales.
 
 Un ejemplo idealizado se presenta en la Figura \@ref(fig:ejemplo-reconstruccion) la cual representa la parte espacial de las fases de 0º y 90º de un cEOF hipotético en el panel superior y cuatro reconstrucciones de la variable original en el panel inferior. 
 Cuando la serie temporal de la fase de 0º es positiva y la serie temporal de la fase 90º es cercana a cero, entonces las anomalías zonales de altura geopotencial son similares al patrón espacial de la fase de 0º (panel b).
@@ -897,7 +897,8 @@ t <- t %>%
         o3  = mean(o3*w)), by = .(lev, lon, time = seasonally(time))]
 ```
 
-(ref:t-vertical-cap) Regresión de anomalías zonales de temperatura (sombrado, Kelvin) y razón de mezcla de ozono (contornos, valores negativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre `r combine_words(LatLabel(o3wave_lats))` en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período `r periodo`.
+(ref:t-vertical-cap) Regresión de anomalías zonales de temperatura (sombrado, K) y razón de mezcla de ozono (contornos, valores negativos en línea punteada, etiquetas en partes por mil millón en masa) promediados entre `r combine_words(LatLabel(o3wave_lats))` en SON con la fase de 0º (a) y de 90º (b) del cEOF1 para el período `r periodo`.
+ 
 
 ```{r t-vertical, fig.height=3, fig.width=6}
 t %>% 
@@ -1599,7 +1600,7 @@ cor_enso_mag_quantile <- gdata[mag >= quantile(mag, 0.5)] %>%
 cos_model <- gdata %>% 
   .[, .(model = list(lm(oni ~ I(sin(arg)) - 1, weights = mag)))]
 
-equation <- bquote(ONI  * {phantom() == phantom()} * .(signif(cos_model[, coef(model[[1]])[1]], 2)) * sin(Phase) )
+equation <- bquote(ONI  * {phantom() == phantom()} * .(signif(cos_model[, coef(model[[1]])[1]], 2)) * sin(fase) )
 
 
 gdata %>% 
@@ -1678,7 +1679,7 @@ fft %>%
   panel_background() 
 ```
 
-(ref:fft-ceof-era5-cap) Espectro de Fourier para cada fase del cEOF2 y del ONI.
+(ref:fft-ceof-era5-cap) Espectro de Fourier para cada fase de 0º del cEOF2 (línea azul), fase de 90º del cEOF2 (línea naranja) y el ONI (línea gris).
 
 Otra evidencia de la relación entre el ENSO y la fase del cEOF2 es que tanto el ONI como la fase de 90º del cEOF2 tienen un pico de periodicidad alrededor de 3 años (Fig. \@ref(fig:fft-ceof-era5).
 Esto muestra que la principal escala de variabilidad de esta fase está íntimamente relacionada con el ENSO.

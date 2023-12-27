@@ -236,7 +236,7 @@ cors <- ceofs %>%
 Previo a otros análisis, se decidió evaluar en los modelos la capacidad  de capturar las propiedades de los cEOFs observados.
 Para esto se consideraron los experimentos históricos.
 
-(ref:comparacion-r2-cap) Coeficiente de determinación ($r^2$) de los patrones espaciales de cada modelo con ERA5 para cada cEOF.
+(ref:comparacion-r2-cap) Coeficiente de determinación ($r^2$) de los patrones espaciales de cada modelo con ERA5 para el cEOF1 (rojo) y cEOF2 (azul).
 
 ```{r comparacion-r2, fig.width=5, fig.height=6}
 cors %>% 
@@ -462,7 +462,8 @@ Sin embargo, existe una gran variabilidad en la capacidad de los modelos de capt
 Algunos, como MIROC6 y CESM2 tienen una correlación cercana a la observada, pero en la mayoría es mucho menor.
 IPSL-CM6A-LR y INM-CM5-0 virtualmente no muestran relación entre el cEOF2 y el ONI.
 
-(ref:cor-enso-plot-cap) Coeficiente de determinación ($r^2$) entre el índice ONI y las fases de 0º y 90º del cEOF2 para cada modelo del CMIP6 y para ERA5.
+(ref:cor-enso-plot-cap) Coeficiente de determinación ($r^2$) entre el índice ONI y las fases de 0º (azul)
+y 90º (rojo) del cEOF2 para cada modelo del CMIP6 y para ERA5.
 
 ```{r cor-enso-plot, fig.width=4, fig.height=6}
 cors_enso_all %>% 
@@ -508,7 +509,7 @@ ceofs[, eof[[1]]$left, by = .(model, experiment)] %>%
   scale_shape_manual(NULL, values = c(20, 18)) +
   scale_y_continuous("ONI") +
   scale_x_continuous("Fase de cEOF2",
-                     breaks = seq(-pi, pi, by = 45*pi/180),
+                     breaks = seq(-pi, pi, by = 90*pi/180)[-1],
                      labels = function(x) paste0(round(x*180/pi, 5), "º")) +
   coord_cartesian(xlim = c(-pi, pi)) +
   # labs(subtitle = equation) +
@@ -517,7 +518,7 @@ ceofs[, eof[[1]]$left, by = .(model, experiment)] %>%
 
 ```
 
-(ref:enso-phase-cmip-cap) Valores del ONI en SON y la fase del cEOF2 para los modelos del CMIP6 en el período 1979--2014 y para ERA5 en el período `r periodo`. La línea negra representa el ajuste ONI \~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2. Igual a la Figura \@ref(fig:enso-phase).
+(ref:enso-phase-cmip-cap) Valores del ONI en SON y la fase del cEOF2 para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período `r periodo`. La línea negra representa el ajuste ONI \~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2 de forma equivalente a la Figura \@ref(fig:enso-phase).
 
 ```{r arg-enso-density, fig.width=6, fig.height=5}
 ceofs[, eof[[1]]$left, by = .(model, experiment)] %>% 
@@ -542,14 +543,14 @@ ceofs[, eof[[1]]$left, by = .(model, experiment)] %>%
   scale_color_brewer(NULL, palette = "Dark2", aesthetics = c("color", "fill")) +
   scale_y_continuous(NULL) +
   scale_x_continuous("Fase de cEOF2",
-                     breaks = seq(-pi, pi, by = 90*pi/180),
+                     breaks =  seq(-pi, pi, by = 90*pi/180)[-1],
                      labels = function(x) paste0(round(x*180/pi, 5), "º")) +
   facet_wrap(~model, labeller = labeller(model = labs_cor_enso)) +
   coord_cartesian(xlim = c(-pi, pi)) 
 
 ```
 
-(ref:arg-enso-density-cap) Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0,5, entre -0,5 y 0,5, y mayor a 0,5 para los modelos del CMIP6 en el período 1979--2014 y para ERA5 en el período `r periodo`.
+(ref:arg-enso-density-cap) Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0,5 (verde), entre -0,5 y 0,5 (naranja), y mayor a 0,5 (azul) para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período `r periodo`.
 
 La relación entre el cEOF2 y el ENSO se explica por una preferencia de fase cuando el forzante tropical está activo.
 Para evaluar esto en los modelos del CMIP6, la Figura \@ref(fig:enso-phase-cmip) muestra la relación entre el ENSO y la fase del cEOF2 para los modelos del CMIP6 y la Figura \@ref(fig:arg-enso-density) la distribución de fases del cEOF2 para primaveras con ONI menor a -0,5, mayor a 0,5 y valores intermedios.
@@ -616,7 +617,7 @@ fft %>%
   rect
 ```
 
-(ref:fft-ceof2-cap) Espectros de Fourier para las fases del cEOF2 y del ONI de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el $r^2$ entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.
+(ref:fft-ceof2-cap) Espectros de Fourier en cada modelo para la fase de 90º del cEOF2 (naranja), para la fase de 0º del cEOF2 (violeta) y para el ONI (negro). En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el $r^2$ entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.
 
 La relación entre el cEOF2 y el ENSO también se evidencia en la similitud del periodograma de las series.
 La Figura \@ref(fig:fft-ceof2) muestra el periodograma para el cEOF2 con una línea por miembro y una línea gruesa marcando el periodograma promedio, así como el periodograma promedio del ONI de cada modelo.
@@ -752,7 +753,7 @@ Los modelos del CMIP6 reproducen los patrones de regresión de la fase de 90º d
 Se observa un exceso de señal en el Pacífico ecuatorial en la fase de 0º del cEOF2 que probablemente se deba a que estos modos no están alineados para minimizar esta relación.
 Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valores excesivamente altos no observados en ERA5.
 
-(ref:cor-sst-regr-cap) Coeficiente de determinación ($r^2$) entre los patrones de regresión de las fases de 0º y 90º de cada cEOF y la TSM cada modelo y el patrón de regresión respectivo de ERA5.
+(ref:cor-sst-regr-cap) Coeficiente de determinación ($r^2$) entre los patrones de regresión de las fases de 0º (violeta) y 90º (naranja) de cada cEOF y la TSM cada modelo y el patrón de regresión respectivo de ERA5.
 
 ```{r cor-sst-regr, fig.width=6, fig.height=4}
 sst_cors <- sst_regression %>% 
@@ -1046,7 +1047,7 @@ hgt_regression_mmm %>%
 
 ```
 
-(ref:regresion-hgt-damip-cap) Regresión de anomalías de altura geopotencial con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período `r trend_base`--2014 para los experimentos de CMIP6 y DAMIP (m).
+(ref:regresion-hgt-damip-cap) Regresión de anomalías de altura geopotencial (m) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período `r trend_base`--2014 para los experimentos de CMIP6 y DAMIP.
 
 Los patrones espaciales de ambos cEOFs son muy similares en todos los experimentos y comparables con lo observado en la Figura \@ref(fig:mmm) (no se muestra).
 La regresión con la altura geopotencial, en cambio, tiene diferencias en el caso del cEOF1.
@@ -1074,7 +1075,8 @@ ceof_largo_p %>%
   facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx))
 ```
 
-(ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 -- 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran as series de cada de cada modelo.
+(ref:series-largas-cap) 
+Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran las series de cada de cada modelo.
 
 La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período.
 La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando alrededor de `r trend_base`, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
@@ -1267,7 +1269,7 @@ El efecto de la tendencia de la fase de 0º del cEOF1 en el experimento hist-GHG
 Este patrón indicaría un aumento del jet al Sur de Nueva Zelanda.
 Este efecto es opuesto al efecto en el experimento hist-stratO3
 
-(ref:suma-cap) Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer.
+(ref:suma-cap) Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical (azul) y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer, es decir, los que consideran cambios antropogénicos (rojo).
 
 ```{r suma, fig.width=6, fig.height=3}
 ceof_largo_p %>%

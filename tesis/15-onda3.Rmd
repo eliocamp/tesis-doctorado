@@ -214,7 +214,7 @@ pseudo_raphael %>%
   coord_equal()
 ```
 
-(ref:pseudo-raphael-cap) Relación entre la anomalía zonal de altura geopotencial en los tres puntos utilizados para construir R04 y la amplitud de la proyección de la geopotencial en 50ºS, 500 hPa con la onda 3 climatológica.
+(ref:pseudo-raphael-cap) Relación entre la anomalía zonal de altura geopotencial (m) en los tres puntos utilizados para construir R04 y la amplitud de la proyección de la altura geopotencial (m) en 50ºS y 500 hPa con la onda 3 climatológica
 
 La Figura \@ref(fig:pseudo-raphael) muestra la relación entre la proyección de la altura geopotencial en 50ºS con la onda 3 climatológica en esa latitud y la anomalía zonal de altura geopotencial promediada en las tres ubicaciones de R04 (que no es exactamente el índice R04 ya que éste se calcula a partir de un promedio móvil de 3 meses y una estandarización previa al promediado).
 Ambas series son casi idénticas, con una correlación de `r cor_pseudo_raphael$text`.
@@ -380,6 +380,8 @@ hgt %>%
 
 (ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (m, sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04. Los puntos azules indican las ubicaciones usadas en el índice R04.
 
+
+
 Finalmente, las Figuras \@ref(fig:raphael-top8-1) y \@ref(fig:raphael-top8-2) muestran  las anomalías mensuales  zonales de la altura geopotencial para los 8 meses con mayor y menor valor del índice R04, respectivamente.
 En pocos casos se observa un patrón de onda 3 bien marcado; por ejemplo, en abril de 2003 y noviembre de 1985 (paneles f y g) se observan tres zonas de anomalías positivas cercanas a las ubicaciones utilizadas para calcular R04 y tres zonas de anomalías negativas entre las mismas.
 En octubre de 2009 (panel m) se observa lo contrario.
@@ -461,7 +463,7 @@ hgt %>%
   tag_facets()
 ```
 
-(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (m, ombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
+(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (m, sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa
 
 La Figura \@ref(fig:zw3-top8) presenta, para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial, las anomalía zonales de altura geopotencial en 500 hPa y las correspondientes anomalías mensuales.
 Algunos meses, como septiembre de 1997, abril de 1995 y octubre de 2009 (Fig. \@ref(fig:zw3-top8), paneles c, d y h) tienen máximos y mínimos de intensidad relativamente constante.

@@ -1205,7 +1205,7 @@ air_regr %>%
   annotate_grid() +
   scale_x_longitude(labels = NULL) +
   scale_y_latitude(labels = NULL, limits = c(NA, 0)) +
-  scale_fill_divergent_discretised("2-meter air temperature", 
+  scale_fill_divergent_discretised("Temperatura del aire a 2 metros", 
                                    guide = guide_colorsteps_bottom(even.steps = FALSE)) +
   coord_polar2(ymax = 0) +
   facet_grid(season ~ term, labeller = labeller(term = lab_sam, lev = lab_lev)) +
@@ -1403,10 +1403,10 @@ pp_regr %>%
   geom_qmap(~.x[lat <= 0], keep = 0.015, weighting = 0.9) +
   scale_x_longitude(breaks = NULL) +
   scale_y_latitude(breaks = NULL, limits = c(-90, NA)) +
-  # discrete_scale("fill", "name", name = "Precipitation",
+  # discrete_scale("fill", "name", name = "Precipitación",
   #                palette = discrete_div_pp,
   #                guide = guide_colorsteps_bottom(show.limits = TRUE, even.steps = FALSE)) +
-  scale_fill_divergent_discretised("Precipitation",
+  scale_fill_divergent_discretised("Precipitación",
                                    low = "#8E521C", high = "#00665E",
                                    guide = guide_colorsteps_bottom(even.steps = FALSE)) +
   scale_linetype(guide = "none") +
@@ -1458,10 +1458,10 @@ plot_pp <- function(this_continent, data = pp_regr) {
     geom_qmap(~.x[lat <= 10]) +
     scale_x_longitude(ticks = 15, minor_breaks = NULL) +
     scale_y_latitude(ticks = 10,  minor_breaks = NULL) +
-    # discrete_scale("fill", "name", name = "Precipitation",
+    # discrete_scale("fill", "name", name = "Precipitación",
     #             palette = discrete_div_pp,
     #             guide = guide_colorsteps_bottom(show.limits = TRUE, even.steps = FALSE)) +
-    scale_fill_divergent_discretised("Precipitation",
+    scale_fill_divergent_discretised("Precipitación",
                                      # limits = c(-.8, .8),
                                      # oob = scales::squish,
                                      low = "#8E521C",

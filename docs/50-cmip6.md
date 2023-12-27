@@ -16,9 +16,9 @@ Estas limitaciones motivan completar el trabajo de tesis a partir de la utilizac
 En este capítulo se analiza la habilidad de los modelos del sexto Proyecto de Intercomparación de Modelos Acoplados (CMIP6) [@eyring2016] y del Proyecto de Intercomparación de Modelos de Detección y Atribución (DAMIP) [@gillett2016] de capturar estos modos y sus principales características.
 Al contar con corridas mucho más largas y múltiples miembros por modelo, es posible evaluar las tendencias a largo plazo con mayor robustez.
 Utilizando los modelos incluidos en DAMIP, además es posible avanzar en la atribución de las tendencias observadas.
-Por lo que también se utilizó las simulaciones de DAMIP para explicar los forzantes asociados con las tendencias observadas en los modos de variabilidad de la circulación zonalmente asimétrica del hemisferio sur.
+Por lo que también se utilizaron las simulaciones de DAMIP para explicar los forzantes asociados con las tendencias observadas en los modos de variabilidad de la circulación zonalmente asimétrica del hemisferio sur.
 
-Estudios previos estudiaron las tendencias de los principales modos de circulación del hemisferio sur.
+Estudios previos evaluaron las tendencias de los principales modos de circulación del hemisferio sur.
 Encontraron que la tendencia positiva del SAM observada en el clima presente es simulada correctamente por los modelos de CMIP5 y CMIP6 y que puede atribuirse tanto al efecto del incremento de los gases de efecto invernadero como a la destrucción del ozono estratosférico [@gillett2013; @ipcc6ch3].
 
 ## Métodos
@@ -123,7 +123,7 @@ Esto busca que la localización del patrón sea parecida a la observada.
 
 ## Comparación con los modos observados
 
-Previo a otros análisis, se decidió evaluar la capacidad de los modelos de capturar las propiedades de los cEOFs observados.
+Previo a otros análisis, se decidió evaluar en los modelos la capacidad  de capturar las propiedades de los cEOFs observados.
 Para esto se consideraron los experimentos históricos.
 
 (ref:comparacion-r2-cap) Coeficiente de determinación ($r^2$) de los patrones espaciales de cada modelo con ERA5 para cada cEOF.
@@ -149,7 +149,7 @@ Aunque se pueden identificar modelos con menor correlación con los modos observ
 
 Para entender mejor los patrones espaciales representados por cada uno de los modelos, las Figuras \@ref(fig:todos-ceof1) y \@ref(fig:todos-ceof2) muestran la fase de 0º del cEOF1 y cEOF2, respectivamente, con los modelos ordenados de acuerdo al $r^2$ del respectivo cEOF y los representados por ERA5.
 Para el cEOF1 (Fig. \@ref(fig:todos-ceof1)) todo los modelos excepto FGOALS-g3 (panel t) capturan correctamente el patrón de onda 1 observado.
-Las diferencias con ERA5 son mínimas, como es de esperarse por la alta correlación espacial de estos patrones.
+Las diferencias con ERA5 son mínimas visualmente, como es de esperarse por la alta correlación espacial de estos patrones.
 Para el cEOF2 (Fig. \@ref(fig:todos-ceof2)), todos los modelos capturan el patrón de onda 3 localizado en el sector Pacífico-Atlántico.
 En particular, el centro positivo al sur de Sudamérica y los centros negativos a los lados del mismo coinciden en todos los modelos con los centros de ERA5.
 La principal característica de los modelos con baja correlación es la menor intensidad y mala localización del máximo localizado al sur de Nueva Zelanda.
@@ -191,9 +191,9 @@ IPSL-CM6A-LR y INM-CM5-0 virtualmente no muestran relación entre el cEOF2 y el 
 (ref:arg-enso-density-cap) Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0,5, entre -0,5 y 0,5, y mayor a 0,5 para los modelos del CMIP6 en el período 1979--2014 y para ERA5 en el período 1979--2020.
 
 La relación entre el cEOF2 y el ENSO se explica por una preferencia de fase cuando el forzante tropical está activo.
-Para evaluar esto en los modelos del CMIP6, las Figuras \@ref(fig:enso-phase-cmip) muestra la relación entre el ENSO y la fase del cEOF2 para los modelos del CMIP6 y la Figura \@ref(fig:arg-enso-density) la distribución de fases del cEOF2 para primaveras con ONI menor a -0,5, mayor a 0,5 y valores intermedios.
+Para evaluar esto en los modelos del CMIP6, la Figura \@ref(fig:enso-phase-cmip) muestra la relación entre el ENSO y la fase del cEOF2 para los modelos del CMIP6 y la Figura \@ref(fig:arg-enso-density) la distribución de fases del cEOF2 para primaveras con ONI menor a -0,5, mayor a 0,5 y valores intermedios.
 Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal fuerte, mientras que en los modelos con baja correlación la relación es más chata.
-La distribución de las fases según categorías de índice ONI (Fig. \@ref(fig:arg-enso-density)) se ven bien separadas en las observaciones y en los modelos con alta correlación entre el cEOF2 y el ONI.
+Las distribuciones de las fases según categorías del índice ONI (Fig. \@ref(fig:arg-enso-density)) se ven bien separadas en las observaciones y en los modelos con alta correlación entre el cEOF2 y el ONI.
 En estos modelos (ej. MIROC6, CESM2), cuando el ENSO está activo (definido como ONI \> 0,5 o ONI \< -0,5), la fase del cEOF2 se concentra cerca de $\pm$ 90º (dependiendo del signo del ONI) mientras que cuando el ENSO no está tan activo (definido como ONI entre -0,5 y 0,5), la distribución de la fase es más uniforme.
 En los modelos con baja correlación entre cEOF2 y ONI (ej. IPSL-CM6A-LR, INM-CM5-0) la distribución de fase es uniforme independientemente de la actividad del ENSO.
 
@@ -282,7 +282,7 @@ Para extender las series temporales para todo el período disponible en CMIP6 y 
 
 (ref:regresion-hgt-damip-cap) Regresión de anomalías de altura geopotencial con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período 1940--2014 para los experimentos de CMIP6 y DAMIP (m).
 
-Los patrones espaciales de ambos cEOFs son muy similares en todos los experimentos y comparables con lo observado en la Figura \@ref(fig:mmm).
+Los patrones espaciales de ambos cEOFs son muy similares en todos los experimentos y comparables con lo observado en la Figura \@ref(fig:mmm) (no se muestra).
 La regresión con la altura geopotencial, en cambio, tiene diferencias en el caso del cEOF1.
 Estas regresiones se muestran en la Figura \@ref(fig:regresion-hgt-damip) para el nivel de 50 hPa.
 Si bien la localización general de los máximos es similar en todos los experimentos, en el experimento historical, la fase de 0º está asociada a una onda 1 mientras que la fase de 90º está asociada un monopolo con el centro sobre la Antártida oriental (Fig. \@ref(fig:regresion-hgt-damip) fila a).
@@ -304,7 +304,7 @@ Sin embargo, la fase de 90º del cEOF1 tiene una tendencia negativa mucho mayor,
 
 (ref:trends-ceof1-cap) Tendencias lineales de cada fase del cEOF1 desde 1940. Cada punto representa un miembro, donde los miembros con tendencias significativas (p-valor < 0,01) se marcan con una cruz. La línea vertical punteada representa la tendencia media de todos los modelos.
 
-Las tendencias de cada fase del cEOF1 para cada modelo desde 1940 se muestra en la Figura \@ref(fig:trends-ceof1) junto con la tendencia promedio de todos los modelos.
+Las tendencias de cada fase del cEOF1 para cada modelo desde 1940 se muestran en la Figura \@ref(fig:trends-ceof1) junto con la tendencia promedio de todos los modelos.
 La tendencia media de la fase de 0º es positiva pero muy pequeña.
 Además, los modelos no son consistentes en sus tendencias y sólo algunos modelos tienen una tendencia promedio positiva.
 Por otro lado, las tendencias de la fase de 90º son más consistentes.

@@ -14,7 +14,7 @@ Sin embargo se encontró que estos métodos no son capaces de caracterizar propi
 Considerando estas limitaciones, esta tesis propuso una forma alternativa para la caracterización de la circulación zonalmente asimétrica del hemisferio sur a partir del uso de Funciones Empíricas Ortogonales Complejas (cEOF), metodología que permite capturar oscilaciones con amplitud y fase variables.
 Dada la alta correlación temporal entre los modos observados en la tropósfera y estratósfera y la similitud de sus patrones espaciales al aplicar la metodología cEOF en distintos niveles atmosféricos, se consideró que pueden tratarse como modos de variabilidad conjunta.
 Por lo tanto, los cEOF se calcularon utilizando la altura geopotencial de los niveles de 200 hPa y 50 hPa en conjunto.
-Se hizo foco en la estación de primavera, ya que durante esta se maximizan las teleconexiones entre los trópicos y extratrópicos.
+Se hizo foco en la estación de primavera, ya que durante ésta se maximizan las teleconexiones entre los trópicos y extratrópicos.
 
 El primer modo obtenido a partir del análisis cEOF (cEOF1) representa un patrón de onda 1 y es principalmente un modo estratosférico con fuerte asociación con la dinámica del vórtice polar.
 La regresión de las anomalías temporales de altura geopotencial con este modo tanto en su fase 0 como en su fase 90 muestran su influencia significativa en modular la ubicación e intensidad del centro de anomalía sobre la región antártica en asociación con un centro y banda de anomalías de signo opuesto en latitudes medias.
@@ -92,7 +92,7 @@ El cEOF principal es un patrón de onda 1 vinculado al vórtice polar, al SAM y 
 Por otro lado, el segundo cEOF está asociado a la onda zonal 3 y describe el patrón de teleconexiones entre los trópicos y los extratrópicos.
 Los modelos de CMIP6 se mostraron adecuados para representar estos modos pero no todos consiguen simular su relación con el ENSO o el SAM ni sus tendencias correctamente.
 
-Tomados en su conjunto, esto permite representar las características principales de la variabilidad del hemisferio sur.
+Tomados en su conjunto, estos patrones permiten representar las características principales de la variabilidad del hemisferio sur.
 La variabilidad anular con el S-SAM, el vórtice polar con el cEOF1 y los trenes de onda de Rossby con el cEOF2.
 
 Estos resultados abren la puerta a muchas investigaciones futuras.

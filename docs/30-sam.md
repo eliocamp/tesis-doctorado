@@ -449,3 +449,5 @@ En la estratósfera describe un patrón de onda 1 similar al cEOF1.
 La relación entre el SAM y el cEOF1 en la tropósfera se explica en su totalidad por la componente zonalmente simétrica del SAM, mientras que la relación entre el cEOF2 y el SAM se explica por la relación entre la fase de 90º del cEOF2 y la parte asimétrica del SAM.
 
 Esto último sugiere que el A-SAM no es una componente intrínseca del SAM, sino que es la respuesta de la circulación atmosférica a la influencia tropical que aparece reflejado en el primer EOF de las anomalías de altura geopotencial por construcción.
+
+Los principales resultados de este capítulo han sido publicados en @campitelli2022.

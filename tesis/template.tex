@@ -40,7 +40,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{lmodern}
 \usepackage{float}
-\floatplacement{figure}{H}
+\floatplacement{figure}{tbp}
 % Thanks, @Xyv
 \usepackage{calc}
 % End of CII addition
@@ -206,6 +206,19 @@ $endfor$
 
 \usepackage{newpxtext,newpxmath}
 \usepackage[T1]{fontenc}
+
+\usepackage[-]{pagesel}% http://ctan.org/pkg/pagesel
+\makeatletter
+\let\ORIincludegraphics\includegraphics
+\renewcommand{\includegraphics}{%
+  \write\listofgraphics{\theps@count}%
+  \ORIincludegraphics
+}
+\newwrite\listofgraphics
+\AtBeginDocument{\immediate\openout\listofgraphics=\jobname.lis }
+\AtEndDocument{\closeout\listofgraphics}
+\makeatother
+
 \begin{document}
 
 % Everything below added by CII

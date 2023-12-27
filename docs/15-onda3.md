@@ -37,7 +37,10 @@ Dado que se utilizaron datos de reanálisis con una resolución de 2,5º, se cal
 Para cuantificar la actividad de las ondas zonales, se calculó la envolvente de las ondas siguiendo a @irving2015.
 Primero se calcula la transformada de Fourier de las anomalías de geopotencial en un círculo de latitud determinado, luego se le aplica la transformada inversa sólo al espectro positivo y finalmente se toma el doble de la amplitud de este resultado complejo.
 
-
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/envolvente-ejemplo-1.png" alt="(ref:envolvente-ejemplo-cap)" width="450"  />
+<p class="caption">(\#fig:envolvente-ejemplo)(ref:envolvente-ejemplo-cap)</p>
+</div>
 
 (ref:envolvente-ejemplo-cap) Anomalías zonales de altura geopotencial (m) en 500 hPa en septiembre de 1989 (contornos, líneas sólidas indican valores positivos y líneas punteadas indican valores negativos) y envolvente de ondas zonales (sombreado).
 
@@ -62,16 +65,22 @@ La figura incluye además las ubicaciones definidas por @raphael2004 para calcul
 Se observa que R04 representa una onda 3 relativamente pura con una amplitud ligeramente más alta en la región del Pacífico Sur.
 Sin embargo, se puede notar que los máximos al sur de Nueva Zelanda y sobre el pasaje de Drake se encuentran más al sur que los puntos usados de referencia.
 
-
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/raphael-regr-1.png" alt="(ref:raphael-regr-cap)" width="450"  />
+<p class="caption">(\#fig:raphael-regr)(ref:raphael-regr-cap)</p>
+</div>
 
 (ref:raphael-regr-cap) Regresión lineal entre R04 y la anomalía zonal de altura geopotencial (m) en 500 hPa (sombreado). La onda 3 obtenida de la descomposición de Fourier del campo medio climatológico de la altura geopotencial en 500 hPa se muestra en contornos; (valores positivos en línea llena y negativos en línea punteada). En azul se indican la ubicación de los puntos usado para calcular R04.
 
 La onda 3 descrita por R04 coincide bien con la onda 3 climatológica, lo cual es esperable por construcción.
 Al usar puntos fijos cercanos a estos máximos climatológicos, el índice R04 busca medir la similitud del campo de anomalías zonales de altura geopotencial con la onda 3 climatológica.
 
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/pseudo-raphael-1.png" alt="(ref:pseudo-raphael-cap)" width="600"  />
+<p class="caption">(\#fig:pseudo-raphael)(ref:pseudo-raphael-cap)</p>
+</div>
 
-
-(ref:pseudo-raphael-cap) Relación entre la anomalía zonal de altura geopotencial en los tres puntos utilizados para construir R04 y la amplitud de la proyección de la geopotencial en 50ºS, 500 hPa con la onda 3 climatológica.
+(ref:pseudo-raphael-cap) Relación entre la anomalía zonal de altura geopotencial (m) en los tres puntos utilizados para construir R04 y la amplitud de la proyección de la altura geopotencial (m) en 50ºS y 500 hPa con la onda 3 climatológica
 
 La Figura \@ref(fig:pseudo-raphael) muestra la relación entre la proyección de la altura geopotencial en 50ºS con la onda 3 climatológica en esa latitud y la anomalía zonal de altura geopotencial promediada en las tres ubicaciones de R04 (que no es exactamente el índice R04 ya que éste se calcula a partir de un promedio móvil de 3 meses y una estandarización previa al promediado).
 Ambas series son casi idénticas, con una correlación de 0,97 (CI: 0,96 -- 0,97).
@@ -118,7 +127,10 @@ Esto indica que los puntos no son covariantes, lo que implica que no serían par
 
 
 
-
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/cor-puntos-1.png" alt="(ref:cor-puntos-cap)" width="900"  />
+<p class="caption">(\#fig:cor-puntos)(ref:cor-puntos-cap)</p>
+</div>
 
 (ref:cor-puntos-cap) Regresión entre las anomalías zonales de altura geopotencial en 500 hPa e índices R04 usando combinaciones de 1 y 2 puntos (m). En cada panel, los puntos azules son los puntos usados para calcular el índice y los negros, los excluidos.
 
@@ -126,9 +138,14 @@ La Figura \@ref(fig:cor-puntos) muestra los campos de regresión entre la anomal
 La figura muestra que no se encuentra un patrón coherente de onda 3 asociado a los puntos individuales.
 Por otra parte, los campos obtenidos a partir de las combinaciones de dos puntos se asocian a anomalías positivas en los dos puntos relevantes y negativas entre los mismos --esperable ya que se trata de anomalías zonales-- pero, crucialmente, no hay una asociación positiva con el tercer punto no incluido en el índice.
 
-![(\#fig:raphael-top8)(ref:raphael-top8-cap)](figures/15-onda3/raphael-top8-1.png)![(\#fig:raphael-top8)(ref:raphael-top8-cap)](figures/15-onda3/raphael-top8-2.png)
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/raphael-top8-1.png" alt="(ref:raphael-top8-cap)" width="900"  /><img src="figures/15-onda3/raphael-top8-2.png" alt="(ref:raphael-top8-cap)" width="900"  />
+<p class="caption">(\#fig:raphael-top8)(ref:raphael-top8-cap)</p>
+</div>
 
 (ref:raphael-top8-cap) Anomalía zonal de altura geopotencial (m, sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor del índice R04. Los puntos azules indican las ubicaciones usadas en el índice R04.
+
+
 
 Finalmente, las Figuras \@ref(fig:raphael-top8-1) y \@ref(fig:raphael-top8-2) muestran  las anomalías mensuales  zonales de la altura geopotencial para los 8 meses con mayor y menor valor del índice R04, respectivamente.
 En pocos casos se observa un patrón de onda 3 bien marcado; por ejemplo, en abril de 2003 y noviembre de 1985 (paneles f y g) se observan tres zonas de anomalías positivas cercanas a las ubicaciones utilizadas para calcular R04 y tres zonas de anomalías negativas entre las mismas.
@@ -148,7 +165,10 @@ También se puede observar el ciclo anual de la fase.
 
 
 
-
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/fase-histogram-1.png" alt="(ref:fase-histogram-cap)" width="900"  />
+<p class="caption">(\#fig:fase-histogram)(ref:fase-histogram-cap)</p>
+</div>
 
 (ref:fase-histogram-cap) Histograma de la fase de la onda 3 de altura geopotencial en 500 hPa para cada trimestre.
 
@@ -157,9 +177,12 @@ Por lo que dado que la variable relevante para estudiar la variabilidad, los imp
 
 
 
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/zw3-top8-1.png" alt="(ref:zw3-top8-cap)" width="900"  />
+<p class="caption">(\#fig:zw3-top8)(ref:zw3-top8-cap)</p>
+</div>
 
-
-(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (m, ombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa.
+(ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (m, sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa
 
 La Figura \@ref(fig:zw3-top8) presenta, para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial, las anomalía zonales de altura geopotencial en 500 hPa y las correspondientes anomalías mensuales.
 Algunos meses, como septiembre de 1997, abril de 1995 y octubre de 2009 (Fig. \@ref(fig:zw3-top8), paneles c, d y h) tienen máximos y mínimos de intensidad relativamente constante.
@@ -167,7 +190,10 @@ En la mayoría aún cuando se puede observar una onda 3 relativamente clara, su 
 Por ejemplo, en septiembre de 2008 (Fig. \@ref(fig:zw3-top8), panel a), las anomalías zonales tienen mayor intensidad y se encuentran más al sur en la zona del Pacífico y al este de Sudamérica que en el Índico y al sur de Australia.
 En cambio, en junio de 1986 (Fig. \@ref(fig:zw3-top8), panel f) las anomalías tienen mayor intensidad en la zona del Pacífico y al sur de Australia y son casi nulas en el Atlántico.
 
-
+<div class="figure" style="text-align: center">
+<img src="figures/15-onda3/envelope-regr-1.png" alt="(ref:envelope-regr-cap)" width="900"  />
+<p class="caption">(\#fig:envelope-regr)(ref:envelope-regr-cap)</p>
+</div>
 
 (ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial (sin unidades).
 

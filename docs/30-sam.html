@@ -231,9 +231,9 @@ Y_i = \alpha X_i + \beta X_iI_{X\le 0} + X_0 + \epsilon_i
 <p>Para separar la componente zonalmente simétrica y la asimétrica del SAM, se calculó la media zonal y las anomalías del patrón espacial del SAM completo, como se muestra en la Figura <a href="30-sam.html#fig:method">4.2</a> en 700 hPa. La señal espacial completa (<span class="math inline">\(\mathrm{EOF_1}(\lambda, \phi)\)</span>) es la suma de la componente zonalmente asimétrica (<span class="math inline">\(\mathrm{EOF_1^*}(\lambda, \phi)\)</span>) y la simétrica (<span class="math inline">\([\mathrm{EOF_1}](\lambda, \phi)\)</span>). A continuación, se calculó el índice SAM, el índice SAM asimétrico (A-SAM) y el índice SAM simétrico (S-SAM) como los coeficientes de la regresión de cada campo de altura geopotencial mensual sobre los respectivos patrones (ponderando por el coseno de la latitud). Finalmente, se normalizaron los tres índices dividiéndolos por la desviación estándar del índice SAM en cada nivel. Como resultado, las magnitudes entre los índices son comparables. Sin embargo, sólo el índice SAM tiene desviación estándar unitaria por definición. La varianza explicada por cada patrón se utiliza como indicador del grado de simetría o asimetría zonal de cada campo mensual. Para cuantificar la coherencia entre las series temporales correspondientes a distintos índices o al mismo índice en distintos niveles, se calculó la correlación temporal entre ellas.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:method"></span>
-<img src="figures/30-sam/method-1.png" alt="Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período 1979–2020. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y negativos en azul." width="900"  />
+<img src="figures/30-sam/method-1.png" alt="Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período 1979–2020. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y positivos en rojo." width="900"  />
 <p class="caption">
-Figura 4.2: Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período 1979–2020. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y negativos en azul.
+Figura 4.2: Patrones espaciales del primer EOF de la altura geopotencial en 700 hPa para el período 1979–2020. (a) Campo completo, (b) componente zonalmente asimétrica y (c) componente zonalmente simétrica. Unidades arbitrarias con valores negativos en azul y positivos en rojo.
 </p>
 </div>
 <p>Cabe mencionar que una limitación de este método es que supone linealidad en entre las componentes del SAM. Es decir, supone que los patrones de anomalías asociadas a valores positivos de cada componente del SAM son similares pero de signo opuesto a las asociadas a la fase valores negativos y de magnitud proporcional a la magnitud del índice. Las composiciones de <span class="citation">Fogt et al. (<a href="#ref-fogt2012" role="doc-biblioref">2012</a>)</span> (su Figura 4) sugieren que esto podría no ser del todo válido, aunque gran parte de esa aparente no linealidad podría deberse a la naturaleza heterogénea de los años seleccionados para construir las composiciones y a la incertidumbre muestral.</p>
@@ -296,9 +296,9 @@ Figura 4.8: Espectro de cada serie temporal suavizada. El sombreado indica el in
 <p>La Figura <a href="30-sam.html#fig:cor-lev">4.9</a> muestra la correlación entre A-SAM y S-SAM en cada nivel para los desfasajes cero (simultáneo) y -1 (A-SAM adelantada a S-SAM en 1 mes). Los valores de las correlaciones instantáneas entre A-SAM y S-SAM son relativamente constantes en toda la troposfera, fluctuando entre 0,38 y 0,44. Las correlaciones con defasaje de un mes son igualmente constantes pero muy reducidas. En la estratosfera, las correlaciones instantáneas caen a un mínimo de 0,28 en 20 hPa y luego aumentan nuevamente monótonamente con la altura hasta el nivel más alto considerado  (aunque los resultados cerca del tope superior representado en los modelos deben interpretarse con cuidado). Al mismo tiempo, las correlaciones con un mes de defasaje aumentan con la altura. Por lo tanto, el índice A-SAM estratosférico tiende a preceder al índice S-SAM.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cor-lev"></span>
-<img src="figures/30-sam/cor-lev-1.png" alt="Correlación instantánea y con un defasaje de 1 mes entre S-SAM y A-SAM para el período 1979–2020." width="450"  />
+<img src="figures/30-sam/cor-lev-1.png" alt="Correlación instantánea (línea verde) y con un defasaje de 1 mes (línea naranja) entre S-SAM y A-SAM para el período 1979–2020." width="450"  />
 <p class="caption">
-Figura 4.9: Correlación instantánea y con un defasaje de 1 mes entre S-SAM y A-SAM para el período 1979–2020.
+Figura 4.9: Correlación instantánea (línea verde) y con un defasaje de 1 mes (línea naranja) entre S-SAM y A-SAM para el período 1979–2020.
 </p>
 </div>
 
@@ -590,9 +590,9 @@ Figura 4.19: Igual que la Figura <a href="30-sam.html#fig:pp-regr-oceania">4.18<
 <p>Se evaluó también la relación de los cEOFs presentados en el Capítulo <a href="20-ceofs.html#ceofs">3</a> con los índices del SAM. Para ello, se calculó el coeficiente de determinación entre las series temporales de los cEOFs con cada uno de los índices SAM definidos en cada nivel vertical (Fig. <a href="30-sam.html#fig:sam-eof-vertical">4.20</a>). Dado que los cEOFs fueron definidos únicamente para el trimestre SON, esto se calculó sólo para estre trimestre. El índice SAM está correlacionado de forma estadísticamente significativa con la fase de 0º del cEOF1 en todos los niveles, y con la fase de 90º del cEOF1 y la fase de 90º del cEOF2 en la tropósfera. Por otro lado, las correlaciones entre el SAM y la fase de 0º del cEOF2 son prácticamente nulas.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:sam-eof-vertical"></span>
-<img src="figures/30-sam/sam-eof-vertical-1.png" alt="Coeficiente de determinación (\(r^2\)) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979–2020 para SON. Las líneas gruesas representan valores con p-valor menor a 0,01 ajustado por FDR." width="600"  />
+<img src="figures/30-sam/sam-eof-vertical-1.png" alt="Coeficiente de determinación (\(r^2\)) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM (línea naranja), A-SAM (línea verde) y S-SAM (línea azul) para cada nivel durante el período 1979–2020 para SON. Las líneas gruesas representan valores con p-valor menor a 0,01 ajustado por FDR." width="600"  />
 <p class="caption">
-Figura 4.20: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM, A-SAM y S-SAM para cada nivel durante el período 1979–2020 para SON. Las líneas gruesas representan valores con p-valor menor a 0,01 ajustado por FDR.
+Figura 4.20: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) entre la fase de 0º (fila a) y 90º (fila b) de los cEOFs con el SAM (línea naranja), A-SAM (línea verde) y S-SAM (línea azul) para cada nivel durante el período 1979–2020 para SON. Las líneas gruesas representan valores con p-valor menor a 0,01 ajustado por FDR.
 </p>
 </div>
 <p>En la tropósfera la correlación de ambas fases del cEOF1 y el SAM es igual a su correlación con el S-SAM, y su correlación con el A-SAM es mucho más baja y no significativa. Esto indica que la relación entre el SAM y el cEOF1 en la tropósfera se explica en su totalidad por la componente zonalmente simétrica del SAM. En la estratosfera, la fase de 0º del cEOF1 está correlacionada tanto con el A-SAM como con la S-SAM, mientras que la fase de 90º está altamente correlacionada sólo con el A-SAM. Estas correlaciones son consistentes con los mapas de regresión de la altura geopotencial en la Figura <a href="20-ceofs.html#fig:eof1-regr-gh">3.6</a> y su comparación con los obtenidos para SAM, A-SAM y S-SAM (Fig. <a href="30-sam.html#fig:2d-regr">4.13</a>).</p>
@@ -764,7 +764,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": [["thesis.pdf", "PDF"], ["thesis.docx", "Word"]],
+"download": [["tesis.pdf", "PDF"]],
 "search": {
 "engine": "fuse",
 "options": null

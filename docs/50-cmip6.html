@@ -617,14 +617,14 @@ div.csl-indent {
 <div id="comparación-con-los-modos-observados" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Comparación con los modos observados<a href="50-cmip6.html#comparación-con-los-modos-observados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Previo a otros análisis, se decidió evaluar en los modelos la capacidad de capturar las propiedades de los cEOFs observados. Para esto se consideraron los experimentos históricos.</p>
+<p>La Figura <a href="50-cmip6.html#fig:comparacion-r2">5.1</a> muestra el <span class="math inline">\(r^2\)</span> de los patrones espaciales de cada modelo para los dos cEOFs. En general estos valores se extienden entre 57% y 92%. En todos los casos, la correlación entre el cEOF1 simulado con el observado es mayor que la obtenida para el cEOF2. Aunque se pueden identificar modelos con menor correlación con los modos observados, como CNRM-ESM2-1 y MIROC-ES2L, aún éstos se asocian con valores mayores al 50%.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:comparacion-r2"></span>
-<img src="figures/50-cmip6/comparacion-r2-1.png" alt="Coeficiente de determinación (\(r^2\)) de los patrones espaciales de cada modelo con ERA5 para cada cEOF." width="750"  />
+<img src="figures/50-cmip6/comparacion-r2-1.png" alt="Coeficiente de determinación (\(r^2\)) de los patrones espaciales de cada modelo con ERA5 para el cEOF1 (rojo) y cEOF2 (azul)." width="750"  />
 <p class="caption">
-Figura 5.1: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) de los patrones espaciales de cada modelo con ERA5 para cada cEOF.
+Figura 5.1: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) de los patrones espaciales de cada modelo con ERA5 para el cEOF1 (rojo) y cEOF2 (azul).
 </p>
 </div>
-<p>La Figura <a href="50-cmip6.html#fig:comparacion-r2">5.1</a> muestra el <span class="math inline">\(r^2\)</span> de los patrones espaciales de cada modelo para los dos cEOFs. En general estos valores se extienden entre 57% y 92%. En todos los casos, la correlación entre el cEOF1 simulado con el observado es mayor que la obtenida para el cEOF2. Aunque se pueden identificar modelos con menor correlación con los modos observados, como CNRM-ESM2-1 y MIROC-ES2L, aún éstos se asocian con valores mayores al 50%.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:todos-ceof1"></span>
 <img src="figures/50-cmip6/todos-ceof1-1.png" alt="Fase de 0º del cEOF1 en 50 hPa (sombreado, valores positivos en rojo, negativos en azul) de las corridas históricas de los modelos de CMIP6 analizados. Los contornos marcan el patrón de ERA5 (valores positivos en líneas llenas, valores negativos en línea punteada). Unidades arbitrarias." width="900"  />
 <p class="caption">
@@ -654,30 +654,30 @@ Figura 5.4: Media multimodelo (sombreado, valores positivos en rojo, negativos e
 <p>Como se mostró en la Sección <a href="20-ceofs.html#fuentes-ceof">3.3.4</a>, el cEOF2 está fuertemente relacionado con la variabilidad tropical. Una primera aproximación para explorar esta relación en los modelos del CMIP6 fue calcular la correlación entre el cEOF2 y el ONI de cada modelo (Figura <a href="50-cmip6.html#fig:cor-enso-plot">5.5</a>). Se encontró que casi todos los modelos tienen una correlación alta entre el ONI y la fase de 90º del cEOF2 y casi nula correlación entre el ONI y la fase de 0º del cEOF2, lo cual es consistente con las observaciones. Sin embargo, existe una gran variabilidad en la capacidad de los modelos de capturar esta relación. Algunos, como MIROC6 y CESM2 tienen una correlación cercana a la observada, pero en la mayoría es mucho menor. IPSL-CM6A-LR y INM-CM5-0 virtualmente no muestran relación entre el cEOF2 y el ONI.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cor-enso-plot"></span>
-<img src="figures/50-cmip6/cor-enso-plot-1.png" alt="Coeficiente de determinación (\(r^2\)) entre el índice ONI y las fases de 0º y 90º del cEOF2 para cada modelo del CMIP6 y para ERA5." width="600"  />
+<img src="figures/50-cmip6/cor-enso-plot-1.png" alt="Coeficiente de determinación (\(r^2\)) entre el índice ONI y las fases de 0º (azul) y 90º (rojo) del cEOF2 para cada modelo del CMIP6 y para ERA5." width="600"  />
 <p class="caption">
-Figura 5.5: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) entre el índice ONI y las fases de 0º y 90º del cEOF2 para cada modelo del CMIP6 y para ERA5.
+Figura 5.5: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) entre el índice ONI y las fases de 0º (azul) y 90º (rojo) del cEOF2 para cada modelo del CMIP6 y para ERA5.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:enso-phase-cmip"></span>
-<img src="figures/50-cmip6/enso-phase-cmip-1.png" alt="Valores del ONI en SON y la fase del cEOF2 para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020. La línea negra representa el ajuste ONI ~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2. Igual a la Figura 3.15." width="900"  />
+<img src="figures/50-cmip6/enso-phase-cmip-1.png" alt="Valores del ONI en SON y la fase del cEOF2 para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020. La línea negra representa el ajuste ONI ~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2 de forma equivalente a la Figura 3.15." width="900"  />
 <p class="caption">
-Figura 5.6: Valores del ONI en SON y la fase del cEOF2 para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020. La línea negra representa el ajuste ONI ~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2. Igual a la Figura <a href="20-ceofs.html#fig:enso-phase">3.15</a>.
+Figura 5.6: Valores del ONI en SON y la fase del cEOF2 para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020. La línea negra representa el ajuste ONI ~ sen(fase) computado por cuadrados mínimos pesados por la magnitud del cEOF2 de forma equivalente a la Figura <a href="20-ceofs.html#fig:enso-phase">3.15</a>.
 </p>
 </div>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:arg-enso-density"></span>
-<img src="figures/50-cmip6/arg-enso-density-1.png" alt="Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0,5, entre -0,5 y 0,5, y mayor a 0,5 para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020." width="900"  />
+<img src="figures/50-cmip6/arg-enso-density-1.png" alt="Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0,5 (verde), entre -0,5 y 0,5 (naranja), y mayor a 0,5 (azul) para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020." width="900"  />
 <p class="caption">
-Figura 5.7: Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0,5, entre -0,5 y 0,5, y mayor a 0,5 para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020.
+Figura 5.7: Estimación de densidad por núcleos de la fase del cEOF2 para primaveras con ONI menor a -0,5 (verde), entre -0,5 y 0,5 (naranja), y mayor a 0,5 (azul) para los modelos del CMIP6 en el período 1979–2014 y para ERA5 en el período 1979–2020.
 </p>
 </div>
 
 <p>La relación entre el cEOF2 y el ENSO se explica por una preferencia de fase cuando el forzante tropical está activo. Para evaluar esto en los modelos del CMIP6, la Figura <a href="50-cmip6.html#fig:enso-phase-cmip">5.6</a> muestra la relación entre el ENSO y la fase del cEOF2 para los modelos del CMIP6 y la Figura <a href="50-cmip6.html#fig:arg-enso-density">5.7</a> la distribución de fases del cEOF2 para primaveras con ONI menor a -0,5, mayor a 0,5 y valores intermedios. Los modelos con una correlación alta entre el cEOF2 y el ENSO muestran una relación sinusoidal fuerte, mientras que en los modelos con baja correlación la relación es más chata. Las distribuciones de las fases según categorías del índice ONI (Fig. <a href="50-cmip6.html#fig:arg-enso-density">5.7</a>) se ven bien separadas en las observaciones y en los modelos con alta correlación entre el cEOF2 y el ONI. En estos modelos (ej. MIROC6, CESM2), cuando el ENSO está activo (definido como ONI &gt; 0,5 o ONI &lt; -0,5), la fase del cEOF2 se concentra cerca de <span class="math inline">\(\pm\)</span> 90º (dependiendo del signo del ONI) mientras que cuando el ENSO no está tan activo (definido como ONI entre -0,5 y 0,5), la distribución de la fase es más uniforme. En los modelos con baja correlación entre cEOF2 y ONI (ej. IPSL-CM6A-LR, INM-CM5-0) la distribución de fase es uniforme independientemente de la actividad del ENSO.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fft-ceof2"></span>
-<img src="figures/50-cmip6/fft-ceof2-1.png" alt="Espectros de Fourier para las fases del cEOF2 y del ONI de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el \(r^2\) entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel." width="900"  />
+<img src="figures/50-cmip6/fft-ceof2-1.png" alt="Espectros de Fourier en cada modelo para la fase de 90º del cEOF2 (naranja), para la fase de 0º del cEOF2 (violeta) y para el ONI (negro). En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el \(r^2\) entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel." width="900"  />
 <p class="caption">
-Figura 5.8: Espectros de Fourier para las fases del cEOF2 y del ONI de cada modelo. En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el <span class="math inline">\(r^2\)</span> entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.
+Figura 5.8: Espectros de Fourier en cada modelo para la fase de 90º del cEOF2 (naranja), para la fase de 0º del cEOF2 (violeta) y para el ONI (negro). En línea obscura es el espectro promedio de todos los miembros, que se muestran en líneas translúcidas. El espectro del ONI es el espectro promedio de todos los miembros de cada modelo. Los paneles están ordenados de mayor a menor según el <span class="math inline">\(r^2\)</span> entre la fase de 90º del cEOF2 y el ONI, el cual se muestra entre paréntesis en el título de cada panel.
 </p>
 </div>
 
@@ -695,9 +695,9 @@ Figura 5.9: Media multimodelo de regresión de la TSM con las fases de 0º y 90�
 <p>Para estudiar más en detalle esa relación, se evaluó la relación entre los cEOF y las anomalías de TSM. La Figura <a href="50-cmip6.html#fig:sst-mmm">5.9</a> muestra la media multimodelo de la regresión entre TSM y las dos fases de cada cEOF, marcando las zonas donde más de la mitad de los modelos tienen p-valores menores a 0,01. Los modelos del CMIP6 reproducen los patrones de regresión de la fase de 90º del cEOF2 relativamente bien. Se observa un exceso de señal en el Pacífico ecuatorial en la fase de 0º del cEOF2 que probablemente se deba a que estos modos no están alineados para minimizar esta relación. Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valores excesivamente altos no observados en ERA5.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cor-sst-regr"></span>
-<img src="figures/50-cmip6/cor-sst-regr-1.png" alt="Coeficiente de determinación (\(r^2\)) entre los patrones de regresión de las fases de 0º y 90º de cada cEOF y la TSM cada modelo y el patrón de regresión respectivo de ERA5." width="900"  />
+<img src="figures/50-cmip6/cor-sst-regr-1.png" alt="Coeficiente de determinación (\(r^2\)) entre los patrones de regresión de las fases de 0º (violeta) y 90º (naranja) de cada cEOF y la TSM cada modelo y el patrón de regresión respectivo de ERA5." width="900"  />
 <p class="caption">
-Figura 5.10: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) entre los patrones de regresión de las fases de 0º y 90º de cada cEOF y la TSM cada modelo y el patrón de regresión respectivo de ERA5.
+Figura 5.10: Coeficiente de determinación (<span class="math inline">\(r^2\)</span>) entre los patrones de regresión de las fases de 0º (violeta) y 90º (naranja) de cada cEOF y la TSM cada modelo y el patrón de regresión respectivo de ERA5.
 </p>
 </div>
 <p>Para tener una visión global y quantitativa de esta comparación, la Figura <a href="50-cmip6.html#fig:cor-sst-regr">5.10</a> muestra el <span class="math inline">\(r^2\)</span> entre las regresiones de TSM asociada con la fase de 90º del cEOF2 para cada modelo y la correspondiente regresión para ERA5.. En la mayoría de los modelos el patrón es similar al observado, excepto por INM-CM5-0. Las regresiones asociadas con la fase de 0º del cEOF2, en cambio, tiene baja similitud con el observado en casi todos los modelos. Posiblemente esto se deba al exceso de señal presente en la región del ENSO.</p>
@@ -721,17 +721,17 @@ Figura 5.11: Coeficiente de determinación (<span class="math inline">\(r^2\)</s
 <p>De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y que algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.</p>
 <p>En esta sección, se utilizaron las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes. Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, se proyectaron los campos espaciales de los dos cEOFs del período 1979--2014 en los campos desde 1850 hasta 2014.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:regresion-hgt-damip"></span>
-<img src="figures/50-cmip6/regresion-hgt-damip-1.png" alt="Regresión de anomalías de altura geopotencial con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período 1940–2014 para los experimentos de CMIP6 y DAMIP (m)." width="900"  />
+<img src="figures/50-cmip6/regresion-hgt-damip-1.png" alt="Regresión de anomalías de altura geopotencial (m) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período 1940–2014 para los experimentos de CMIP6 y DAMIP." width="900"  />
 <p class="caption">
-Figura 5.12: Regresión de anomalías de altura geopotencial con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período 1940–2014 para los experimentos de CMIP6 y DAMIP (m).
+Figura 5.12: Regresión de anomalías de altura geopotencial (m) con la fase de 0º (columna 1) y de 90º (columna 2) del cEOF1 en 50 hPa para el período 1940–2014 para los experimentos de CMIP6 y DAMIP.
 </p>
 </div>
 
 <p>Los patrones espaciales de ambos cEOFs son muy similares en todos los experimentos y comparables con lo observado en la Figura <a href="50-cmip6.html#fig:mmm">5.4</a> (no se muestra). La regresión con la altura geopotencial, en cambio, tiene diferencias en el caso del cEOF1. Estas regresiones se muestran en la Figura <a href="50-cmip6.html#fig:regresion-hgt-damip">5.12</a> para el nivel de 50 hPa. Si bien la localización general de los máximos es similar en todos los experimentos, en el experimento historical, la fase de 0º está asociada a una onda 1 mientras que la fase de 90º está asociada un monopolo con el centro sobre la Antártida oriental (Fig. <a href="50-cmip6.html#fig:regresion-hgt-damip">5.12</a> fila a). Esto es lo contrario de lo observado en ERA5, donde la fase de 0º era la asociada a una estructura más zonalmente simétrica (Fig. <a href="20-ceofs.html#fig:eof1-regr-gh">3.6</a>). Esto ocurre también para el experimento hist-stratO3, aunque en la fase 90 se observa mas bien una onda 1 que un monopolo (Fig <a href="50-cmip6.html#fig:regresion-hgt-damip">5.12</a>, fila c). Por otra parte, las regresiones para el experimento hist-aer (Fig. <a href="50-cmip6.html#fig:regresion-hgt-damip">5.12</a> fila e) son mas similares a las observadas así como aquellas para el experimento hist-GHG (Fig. <a href="50-cmip6.html#fig:regresion-hgt-damip">5.12</a> fila b) y en menor medida para el experimento hist-nat (Fig. <a href="50-cmip6.html#fig:regresion-hgt-damip">5.12</a>, fila d).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:series-largas"></span>
-<img src="figures/50-cmip6/series-largas-1.png" alt="Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran as series de cada de cada modelo." width="900"  />
+<img src="figures/50-cmip6/series-largas-1.png" alt="Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran las series de cada de cada modelo." width="900"  />
 <p class="caption">
-Figura 5.13: Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran as series de cada de cada modelo.
+Figura 5.13: Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran las series de cada de cada modelo.
 </p>
 </div>
 
@@ -767,9 +767,9 @@ Figura 5.16: Tendencias de altura geopotencial (m por decada) en 50 hPa concorda
 <p>El efecto de la tendencia de la fase de 0º del cEOF1 en el experimento hist-GHG en la altura geopotencial de 50 hPa es una leve anomalía negativa sobre el Mar de Ross. Este patrón indicaría un aumento del jet al Sur de Nueva Zelanda. Este efecto es opuesto al efecto en el experimento hist-stratO3</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:suma"></span>
-<img src="figures/50-cmip6/suma-1.png" alt="Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer." width="900"  />
+<img src="figures/50-cmip6/suma-1.png" alt="Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical (azul) y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer, es decir, los que consideran cambios antropogénicos (rojo)." width="900"  />
 <p class="caption">
-Figura 5.17: Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer.
+Figura 5.17: Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical (azul) y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer, es decir, los que consideran cambios antropogénicos (rojo).
 </p>
 </div>
 <p>Como una primera aproximación al efecto combinado de todos estos forzantes, la Figura <a href="50-cmip6.html#fig:suma">5.17</a> muestra la media multimodelo de la corrida histórica junto con la suma de las medias multimodelo de las corridas hist-GHG, hist-stratO3 e hist-aer. Ambas series presentan una tendencia a largo plazo virtualmente idéntica, sugiriendo que el efecto de los forzantes es aproximadamente lineal.</p>
@@ -784,34 +784,34 @@ Figura 5.17: Media multimodelo de las series temporales estandarizadas de las fa
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
 <div id="ref-CMIP6.CMIP.E3SM-Project.E3SM-1-0" class="csl-entry">
-Bader, D. C., Leung, R., Taylor, M. and McCoy, R. B. (2019). <em>E3SM-project E3SM1.0 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2294">https://doi.org/10.22033/ESGF/CMIP6.2294</a>
+Bader, D. C., Leung, R., Taylor, M. and McCoy, R. B. (2019). <em>E3SM-project E3SM1.0 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2294">https://doi.org/10.22033/ESGF/CMIP6.2294</a>
 </div>
 <div id="ref-CMIP6.CMIP.NCC.NorCPM1" class="csl-entry">
-Bethke, I., Wang, Y., Counillon, F., Kimmritz, M., Fransner, F., Samuelsen, A., Langehaug, H. R., Chiu, P.-G., Bentsen, M., Guo, C., Tjiputra, J., Kirkevåg, A., Oliviè, D. J. L., Seland, ?yvind., Fan, Y., Lawrence, P., Eldevik, T. and Keenlyside, N. (2019). <em>NCC NorCPM1 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.10843">https://doi.org/10.22033/ESGF/CMIP6.10843</a>
+Bethke, I., Wang, Y., Counillon, F., Kimmritz, M., Fransner, F., Samuelsen, A., Langehaug, H. R., Chiu, P.-G., Bentsen, M., Guo, C., Tjiputra, J., Kirkevåg, A., Oliviè, D. J. L., Seland, ?yvind., Fan, Y., Lawrence, P., Eldevik, T. and Keenlyside, N. (2019). <em>NCC NorCPM1 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.10843">https://doi.org/10.22033/ESGF/CMIP6.10843</a>
 </div>
 <div id="ref-CMIP6.CMIP.IPSL.IPSL-CM6A-LR" class="csl-entry">
-Boucher, O., Denvil, S., Levavasseur, G., Cozic, A., Caubel, A., Foujols, M.-A., Meurdesoif, Y., Cadule, P., Devilliers, M., Ghattas, J., Lebas, N., Lurton, T., Mellul, L., Musat, I., Mignot, J. and Cheruy, F. (2018). <em>IPSL IPSL-CM6A-LR model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1534">https://doi.org/10.22033/ESGF/CMIP6.1534</a>
+Boucher, O., Denvil, S., Levavasseur, G., Cozic, A., Caubel, A., Foujols, M.-A., Meurdesoif, Y., Cadule, P., Devilliers, M., Ghattas, J., Lebas, N., Lurton, T., Mellul, L., Musat, I., Mignot, J. and Cheruy, F. (2018). <em>IPSL IPSL-CM6A-LR model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1534">https://doi.org/10.22033/ESGF/CMIP6.1534</a>
 </div>
 <div id="ref-CMIP6.DAMIP.IPSL.IPSL-CM6A-LR" class="csl-entry">
-Boucher, O., Denvil, S., Levavasseur, G., Cozic, A., Caubel, A., Foujols, M.-A., Meurdesoif, Y. and Gastineau, G. (2018). <em>IPSL IPSL-CM6A-LR model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.13801">https://doi.org/10.22033/ESGF/CMIP6.13801</a>
+Boucher, O., Denvil, S., Levavasseur, G., Cozic, A., Caubel, A., Foujols, M.-A., Meurdesoif, Y. and Gastineau, G. (2018). <em>IPSL IPSL-CM6A-LR model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.13801">https://doi.org/10.22033/ESGF/CMIP6.13801</a>
 </div>
 <div id="ref-CMIP6.CMIP.NUIST.NESM3" class="csl-entry">
-Cao, J. and Wang, B. (2019). <em>NUIST NESMv3 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2021">https://doi.org/10.22033/ESGF/CMIP6.2021</a>
+Cao, J. and Wang, B. (2019). <em>NUIST NESMv3 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2021">https://doi.org/10.22033/ESGF/CMIP6.2021</a>
 </div>
 <div id="ref-CMIP6.CMIP.NCAR.CESM2" class="csl-entry">
-Danabasoglu, G. (2019a). <em>NCAR CESM2 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2185">https://doi.org/10.22033/ESGF/CMIP6.2185</a>
+Danabasoglu, G. (2019a). <em>NCAR CESM2 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2185">https://doi.org/10.22033/ESGF/CMIP6.2185</a>
 </div>
 <div id="ref-CMIP6.DAMIP.NCAR.CESM2" class="csl-entry">
-Danabasoglu, G. (2019b). <em>NCAR CESM2 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2187">https://doi.org/10.22033/ESGF/CMIP6.2187</a>
+Danabasoglu, G. (2019b). <em>NCAR CESM2 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2187">https://doi.org/10.22033/ESGF/CMIP6.2187</a>
 </div>
 <div id="ref-CMIP6.CMIP.CSIRO-ARCCSS.ACCESS-CM2" class="csl-entry">
-Dix, M., Bi, D., Dobrohotoff, P., Fiedler, R., Harman, I., Law, R., Mackallah, C., Marsland, S., O’Farrell, S., Rashid, H., Srbinovsky, J., Sullivan, A., Trenham, C., Vohralik, P., Watterson, I., Williams, G., Woodhouse, M., Bodman, R., Dias, F. B. … Yang, R. (2019). <em>CSIRO-ARCCSS ACCESS-CM2 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2281">https://doi.org/10.22033/ESGF/CMIP6.2281</a>
+Dix, M., Bi, D., Dobrohotoff, P., Fiedler, R., Harman, I., Law, R., Mackallah, C., Marsland, S., O’Farrell, S., Rashid, H., Srbinovsky, J., Sullivan, A., Trenham, C., Vohralik, P., Watterson, I., Williams, G., Woodhouse, M., Bodman, R., Dias, F. B. … Yang, R. (2019). <em>CSIRO-ARCCSS ACCESS-CM2 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2281">https://doi.org/10.22033/ESGF/CMIP6.2281</a>
 </div>
 <div id="ref-CMIP6.DAMIP.CSIRO-ARCCSS.ACCESS-CM2" class="csl-entry">
-Dix, M., Mackallah, C., Bi, D., Bodman, R., Marsland, S., Rashid, H., Woodhouse, M. and Druken, K. (2020). <em>CSIRO-ARCCSS ACCESS-CM2 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.14361">https://doi.org/10.22033/ESGF/CMIP6.14361</a>
+Dix, M., Mackallah, C., Bi, D., Bodman, R., Marsland, S., Rashid, H., Woodhouse, M. and Druken, K. (2020). <em>CSIRO-ARCCSS ACCESS-CM2 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.14361">https://doi.org/10.22033/ESGF/CMIP6.14361</a>
 </div>
 <div id="ref-CMIP6.DAMIP.E3SM-Project.E3SM-1-0" class="csl-entry">
-<em>E3SM-project E3SM1.0 model output prepared for CMIP6 DAMIP</em>. (2022). Earth System Grid Federation. <a href="http://cera-www.dkrz.de/WDCC/meta/CMIP6/CMIP6.DAMIP.E3SM-Project.E3SM-1-0">http://cera-www.dkrz.de/WDCC/meta/CMIP6/CMIP6.DAMIP.E3SM-Project.E3SM-1-0</a>
+<em>E3SM-project E3SM1.0 model output prepared for CMIP6 DAMIP</em>. (2022). <a href="http://cera-www.dkrz.de/WDCC/meta/CMIP6/CMIP6.DAMIP.E3SM-Project.E3SM-1-0">http://cera-www.dkrz.de/WDCC/meta/CMIP6/CMIP6.DAMIP.E3SM-Project.E3SM-1-0</a>
 </div>
 <div id="ref-eyring2016" class="csl-entry">
 Eyring, V., Bony, S., Meehl, G. A., Senior, C. A., Stevens, B., Stouffer, R. J. and Taylor, K. E. (2016). Overview of the <span>Coupled Model Intercomparison Project Phase</span> 6 (<span>CMIP6</span>) experimental design and organization. <em>Geoscientific Model Development</em>, <em>9</em>(5), 1937–1958. <a href="https://doi.org/10.5194/gmd-9-1937-2016">https://doi.org/10.5194/gmd-9-1937-2016</a>
@@ -823,85 +823,85 @@ Gillett, N. P., Fyfe, J. C. and Parker, D. E. (2013). Attribution of observed se
 Gillett, N. P., Shiogama, H., Funke, B., Hegerl, G., Knutti, R., Matthes, K., Santer, B. D., Stone, D. and Tebaldi, C. (2016). The <span>Detection</span> and <span>Attribution Model Intercomparison Project</span> (<span>DAMIP</span> v1.0) contribution to <span>CMIP6</span>. <em>Geoscientific Model Development</em>, <em>9</em>(10), 3685–3697. <a href="https://doi.org/10.5194/gmd-9-3685-2016">https://doi.org/10.5194/gmd-9-3685-2016</a>
 </div>
 <div id="ref-CMIP6.DAMIP.NOAA-GFDL.GFDL-ESM4" class="csl-entry">
-Horowitz, L. W., John, J. G., Blanton, C., McHugh, C., Radhakrishnan, A., Rand, K., Vahlenkamp, H., Zadeh, N. T., Wilson, C., Dunne, J. P., Ploshay, J., Winton, M. and Zeng, Y. (2018). <em>NOAA-GFDL GFDL-ESM4 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1408">https://doi.org/10.22033/ESGF/CMIP6.1408</a>
+Horowitz, L. W., John, J. G., Blanton, C., McHugh, C., Radhakrishnan, A., Rand, K., Vahlenkamp, H., Zadeh, N. T., Wilson, C., Dunne, J. P., Ploshay, J., Winton, M. and Zeng, Y. (2018). <em>NOAA-GFDL GFDL-ESM4 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1408">https://doi.org/10.22033/ESGF/CMIP6.1408</a>
 </div>
 <div id="ref-ipcc6ch3" class="csl-entry">
 Intergovernmental Panel on Climate Change (IPCC) (Ed.). (2023). Human <span>Influence</span> on the <span>Climate System</span>. In <em>Climate <span>Change</span> 2021 <span></span> <span>The Physical Science Basis</span>: <span>Working Group I Contribution</span> to the <span>Sixth Assessment Report</span> of the <span>Intergovernmental Panel</span> on <span>Climate Change</span></em> (pp. 423–552). <span>Cambridge University Press</span>. <a href="https://doi.org/10.1017/9781009157896.005">https://doi.org/10.1017/9781009157896.005</a>
 </div>
 <div id="ref-CMIP6.DAMIP.MOHC.HadGEM3-GC31-LL" class="csl-entry">
-Jones, G. (2019). <em>MOHC HadGEM3-GC31-LL model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.471">https://doi.org/10.22033/ESGF/CMIP6.471</a>
+Jones, G. (2019). <em>MOHC HadGEM3-GC31-LL model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.471">https://doi.org/10.22033/ESGF/CMIP6.471</a>
 </div>
 <div id="ref-CMIP6.CMIP.MPI-M.MPI-ESM1-2-HR" class="csl-entry">
-Jungclaus, J., Bittner, M., Wieners, K.-H., Wachsmann, F., Schupfner, M., Legutke, S., Giorgetta, M., Reick, C., Gayler, V., Haak, H., Vrese, P. de, Raddatz, T., Esch, M., Mauritsen, T., Storch, J.-S. von, Behrens, J., Brovkin, V., Claussen, M., Crueger, T. … Roeckner, E. (2019). <em>MPI-m MPIESM1.2-HR model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.741">https://doi.org/10.22033/ESGF/CMIP6.741</a>
+Jungclaus, J., Bittner, M., Wieners, K.-H., Wachsmann, F., Schupfner, M., Legutke, S., Giorgetta, M., Reick, C., Gayler, V., Haak, H., Vrese, P. de, Raddatz, T., Esch, M., Mauritsen, T., Storch, J.-S. von, Behrens, J., Brovkin, V., Claussen, M., Crueger, T. … Roeckner, E. (2019). <em>MPI-m MPIESM1.2-HR model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.741">https://doi.org/10.22033/ESGF/CMIP6.741</a>
 </div>
 <div id="ref-CMIP6.CMIP.CAS.FGOALS-g3" class="csl-entry">
-Li, L. (2019). <em>CAS FGOALS-g3 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1783">https://doi.org/10.22033/ESGF/CMIP6.1783</a>
+Li, L. (2019). <em>CAS FGOALS-g3 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1783">https://doi.org/10.22033/ESGF/CMIP6.1783</a>
 </div>
 <div id="ref-CMIP6.DAMIP.CAS.FGOALS-g3" class="csl-entry">
-Li, L. (2020). <em>CAS FGOALS-g3 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2048">https://doi.org/10.22033/ESGF/CMIP6.2048</a>
+Li, L. (2020). <em>CAS FGOALS-g3 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2048">https://doi.org/10.22033/ESGF/CMIP6.2048</a>
 </div>
 <div id="ref-CMIP6.DAMIP.NOAA-GFDL.GFDL-CM4" class="csl-entry">
-Ploshay, J., Hurlin, W., John, J. G., Blanton, C., McHugh, C., Radhakrishnan, A., Rand, K., Vahlenkamp, H., Zadeh, N. T., Wilson, C., Paynter, D. J., Winton, M., Zeng, Y. and Knutson, T. (2018). <em>NOAA-GFDL GFDL-CM4 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.11383">https://doi.org/10.22033/ESGF/CMIP6.11383</a>
+Ploshay, J., Hurlin, W., John, J. G., Blanton, C., McHugh, C., Radhakrishnan, A., Rand, K., Vahlenkamp, H., Zadeh, N. T., Wilson, C., Paynter, D. J., Winton, M., Zeng, Y. and Knutson, T. (2018). <em>NOAA-GFDL GFDL-CM4 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.11383">https://doi.org/10.22033/ESGF/CMIP6.11383</a>
 </div>
 <div id="ref-CMIP6.CMIP.MOHC.HadGEM3-GC31-LL" class="csl-entry">
-Ridley, J., Menary, M., Kuhlbrodt, T., Andrews, M. and Andrews, T. (2018). <em>MOHC HadGEM3-GC31-LL model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.419">https://doi.org/10.22033/ESGF/CMIP6.419</a>
+Ridley, J., Menary, M., Kuhlbrodt, T., Andrews, M. and Andrews, T. (2018). <em>MOHC HadGEM3-GC31-LL model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.419">https://doi.org/10.22033/ESGF/CMIP6.419</a>
 </div>
 <div id="ref-CMIP6.CMIP.CNRM-CERFACS.CNRM-ESM2-1" class="csl-entry">
-Seferian, R. (2018). <em>CNRM-CERFACS CNRM-ESM2-1 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1391">https://doi.org/10.22033/ESGF/CMIP6.1391</a>
+Seferian, R. (2018). <em>CNRM-CERFACS CNRM-ESM2-1 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1391">https://doi.org/10.22033/ESGF/CMIP6.1391</a>
 </div>
 <div id="ref-CMIP6.DAMIP.NCC.NorESM2-LM" class="csl-entry">
-Seland, ?yvind., Bentsen, M., Oliviè, D. J. L., Toniazzo, T., Gjermundsen, A., Graff, L. S., Debernard, J. B., Gupta, A. K., He, Y., Kirkevåg, A., Schwinger, J., Tjiputra, J., Aas, K. S., Bethke, I., Fan, Y., Griesfeller, J., Grini, A., Guo, C., Ilicak, M. … Schulz, M. (2019). <em>NCC NorESM2-LM model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.580">https://doi.org/10.22033/ESGF/CMIP6.580</a>
+Seland, ?yvind., Bentsen, M., Oliviè, D. J. L., Toniazzo, T., Gjermundsen, A., Graff, L. S., Debernard, J. B., Gupta, A. K., He, Y., Kirkevåg, A., Schwinger, J., Tjiputra, J., Aas, K. S., Bethke, I., Fan, Y., Griesfeller, J., Grini, A., Guo, C., Ilicak, M. … Schulz, M. (2019). <em>NCC NorESM2-LM model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.580">https://doi.org/10.22033/ESGF/CMIP6.580</a>
 </div>
 <div id="ref-CMIP6.CMIP.AWI.AWI-CM-1-1-MR" class="csl-entry">
-Semmler, T., Danilov, S., Rackow, T., Sidorenko, D., Barbi, D., Hegewald, J., Sein, D., Wang, Q. and Jung, T. (2018). <em>AWI AWI-CM1.1MR model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.359">https://doi.org/10.22033/ESGF/CMIP6.359</a>
+Semmler, T., Danilov, S., Rackow, T., Sidorenko, D., Barbi, D., Hegewald, J., Sein, D., Wang, Q. and Jung, T. (2018). <em>AWI AWI-CM1.1MR model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.359">https://doi.org/10.22033/ESGF/CMIP6.359</a>
 </div>
 <div id="ref-CMIP6.CMIP.NIMS-KMA.UKESM1-0-LL" class="csl-entry">
-Shim, S., Lim, Y.-J., Byun, Y.-H., Seo, J., Kwon, S. and Kim, B.-H. (2020). <em>NIMS-KMA UKESM1.0-LL model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2245">https://doi.org/10.22033/ESGF/CMIP6.2245</a>
+Shim, S., Lim, Y.-J., Byun, Y.-H., Seo, J., Kwon, S. and Kim, B.-H. (2020). <em>NIMS-KMA UKESM1.0-LL model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2245">https://doi.org/10.22033/ESGF/CMIP6.2245</a>
 </div>
 <div id="ref-CMIP6.DAMIP.MIROC.MIROC6" class="csl-entry">
-Shiogama, H. (2019). <em>MIROC MIROC6 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.894">https://doi.org/10.22033/ESGF/CMIP6.894</a>
+Shiogama, H. (2019). <em>MIROC MIROC6 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.894">https://doi.org/10.22033/ESGF/CMIP6.894</a>
 </div>
 <div id="ref-CMIP6.CMIP.NASA-GISS.GISS-E2-1-G" class="csl-entry">
-Space Studies (NASA/GISS), N. G. I. for. (2018a). <em>NASA-GISS GISS-E2.1G model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1400">https://doi.org/10.22033/ESGF/CMIP6.1400</a>
+Space Studies (NASA/GISS), N. G. I. for. (2018a). <em>NASA-GISS GISS-E2.1G model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1400">https://doi.org/10.22033/ESGF/CMIP6.1400</a>
 </div>
 <div id="ref-CMIP6.DAMIP.NASA-GISS.GISS-E2-1-G" class="csl-entry">
-Space Studies (NASA/GISS), N. G. I. for. (2018b). <em>NASA-GISS GISS-E2.1G model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2062">https://doi.org/10.22033/ESGF/CMIP6.2062</a>
+Space Studies (NASA/GISS), N. G. I. for. (2018b). <em>NASA-GISS GISS-E2.1G model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2062">https://doi.org/10.22033/ESGF/CMIP6.2062</a>
 </div>
 <div id="ref-CMIP6.CMIP.CCCma.CanESM5" class="csl-entry">
-Swart, N. C., Cole, J. N. S., Kharin, V. V., Lazare, M., Scinocca, J. F., Gillett, N. P., Anstey, J., Arora, V., Christian, J. R., Jiao, Y., Lee, W. G., Majaess, F., Saenko, O. A., Seiler, C., Seinen, C., Shao, A., Solheim, L., Salzen, K. von, Yang, D. … Sigmond, M. (2019a). <em>CCCma CanESM5 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1303">https://doi.org/10.22033/ESGF/CMIP6.1303</a>
+Swart, N. C., Cole, J. N. S., Kharin, V. V., Lazare, M., Scinocca, J. F., Gillett, N. P., Anstey, J., Arora, V., Christian, J. R., Jiao, Y., Lee, W. G., Majaess, F., Saenko, O. A., Seiler, C., Seinen, C., Shao, A., Solheim, L., Salzen, K. von, Yang, D. … Sigmond, M. (2019a). <em>CCCma CanESM5 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1303">https://doi.org/10.22033/ESGF/CMIP6.1303</a>
 </div>
 <div id="ref-CMIP6.DAMIP.CCCma.CanESM5" class="csl-entry">
-Swart, N. C., Cole, J. N. S., Kharin, V. V., Lazare, M., Scinocca, J. F., Gillett, N. P., Anstey, J., Arora, V., Christian, J. R., Jiao, Y., Lee, W. G., Majaess, F., Saenko, O. A., Seiler, C., Seinen, C., Shao, A., Solheim, L., Salzen, K. von, Yang, D. … Sigmond, M. (2019b). <em>CCCma CanESM5 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1305">https://doi.org/10.22033/ESGF/CMIP6.1305</a>
+Swart, N. C., Cole, J. N. S., Kharin, V. V., Lazare, M., Scinocca, J. F., Gillett, N. P., Anstey, J., Arora, V., Christian, J. R., Jiao, Y., Lee, W. G., Majaess, F., Saenko, O. A., Seiler, C., Seinen, C., Shao, A., Solheim, L., Salzen, K. von, Yang, D. … Sigmond, M. (2019b). <em>CCCma CanESM5 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1305">https://doi.org/10.22033/ESGF/CMIP6.1305</a>
 </div>
 <div id="ref-CMIP6.CMIP.MOHC.UKESM1-0-LL" class="csl-entry">
-Tang, Y., Rumbold, S., Ellis, R., Kelley, D., Mulcahy, J., Sellar, A., Walton, J. and Jones, C. (2019). <em>MOHC UKESM1.0-LL model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1569">https://doi.org/10.22033/ESGF/CMIP6.1569</a>
+Tang, Y., Rumbold, S., Ellis, R., Kelley, D., Mulcahy, J., Sellar, A., Walton, J. and Jones, C. (2019). <em>MOHC UKESM1.0-LL model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1569">https://doi.org/10.22033/ESGF/CMIP6.1569</a>
 </div>
 <div id="ref-CMIP6.CMIP.MIROC.MIROC6" class="csl-entry">
-Tatebe, H. and Watanabe, M. (2018). <em>MIROC MIROC6 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.881">https://doi.org/10.22033/ESGF/CMIP6.881</a>
+Tatebe, H. and Watanabe, M. (2018). <em>MIROC MIROC6 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.881">https://doi.org/10.22033/ESGF/CMIP6.881</a>
 </div>
 <div id="ref-CMIP6.CMIP.CNRM-CERFACS.CNRM-CM6-1" class="csl-entry">
-Voldoire, A. (2018). <em>CNRM-CERFACS CNRM-CM6-1 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1375">https://doi.org/10.22033/ESGF/CMIP6.1375</a>
+Voldoire, A. (2018). <em>CNRM-CERFACS CNRM-CM6-1 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1375">https://doi.org/10.22033/ESGF/CMIP6.1375</a>
 </div>
 <div id="ref-CMIP6.DAMIP.CNRM-CERFACS.CNRM-CM6-1" class="csl-entry">
-Voldoire, A. (2019). <em>CNRM-CERFACS CNRM-CM6-1 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1376">https://doi.org/10.22033/ESGF/CMIP6.1376</a>
+Voldoire, A. (2019). <em>CNRM-CERFACS CNRM-CM6-1 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1376">https://doi.org/10.22033/ESGF/CMIP6.1376</a>
 </div>
 <div id="ref-CMIP6.CMIP.INM.INM-CM5-0" class="csl-entry">
-Volodin, E., Mortikov, E., Gritsun, A., Lykossov, V., Galin, V., Diansky, N., Gusev, A., Kostrykin, S., Iakovlev, N., Shestakova, A. and Emelina, S. (2019). <em>INM INM-CM5-0 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1423">https://doi.org/10.22033/ESGF/CMIP6.1423</a>
+Volodin, E., Mortikov, E., Gritsun, A., Lykossov, V., Galin, V., Diansky, N., Gusev, A., Kostrykin, S., Iakovlev, N., Shestakova, A. and Emelina, S. (2019). <em>INM INM-CM5-0 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1423">https://doi.org/10.22033/ESGF/CMIP6.1423</a>
 </div>
 <div id="ref-CMIP6.CMIP.MPI-M.MPI-ESM1-2-LR" class="csl-entry">
-Wieners, K.-H., Giorgetta, M., Jungclaus, J., Reick, C., Esch, M., Bittner, M., Legutke, S., Schupfner, M., Wachsmann, F., Gayler, V., Haak, H., Vrese, P. de, Raddatz, T., Mauritsen, T., Storch, J.-S. von, Behrens, J., Brovkin, V., Claussen, M., Crueger, T. … Roeckner, E. (2019). <em>MPI-m MPIESM1.2-LR model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.742">https://doi.org/10.22033/ESGF/CMIP6.742</a>
+Wieners, K.-H., Giorgetta, M., Jungclaus, J., Reick, C., Esch, M., Bittner, M., Legutke, S., Schupfner, M., Wachsmann, F., Gayler, V., Haak, H., Vrese, P. de, Raddatz, T., Mauritsen, T., Storch, J.-S. von, Behrens, J., Brovkin, V., Claussen, M., Crueger, T. … Roeckner, E. (2019). <em>MPI-m MPIESM1.2-LR model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.742">https://doi.org/10.22033/ESGF/CMIP6.742</a>
 </div>
 <div id="ref-CMIP6.DAMIP.BCC.BCC-CSM2-MR" class="csl-entry">
-Xin, X., Wu, T., Shi, X., Zhang, F., Li, J., Chu, M., Liu, Q., Yan, J., Ma, Q. and Wei, M. (2019). <em>BCC BCC-CSM2MR model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.1726">https://doi.org/10.22033/ESGF/CMIP6.1726</a>
+Xin, X., Wu, T., Shi, X., Zhang, F., Li, J., Chu, M., Liu, Q., Yan, J., Ma, Q. and Wei, M. (2019). <em>BCC BCC-CSM2MR model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.1726">https://doi.org/10.22033/ESGF/CMIP6.1726</a>
 </div>
 <div id="ref-CMIP6.DAMIP.MRI.MRI-ESM2-0" class="csl-entry">
-Yukimoto, S., Koshiro, T., Kawai, H., Oshima, N., Yoshida, K., Urakawa, S., Tsujino, H., Deushi, M., Tanaka, T., Hosaka, M., Yoshimura, H., Shindo, E., Mizuta, R., Ishii, M., Obata, A. and Adachi, Y. (2019). <em>MRI MRI-ESM2.0 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.634">https://doi.org/10.22033/ESGF/CMIP6.634</a>
+Yukimoto, S., Koshiro, T., Kawai, H., Oshima, N., Yoshida, K., Urakawa, S., Tsujino, H., Deushi, M., Tanaka, T., Hosaka, M., Yoshimura, H., Shindo, E., Mizuta, R., Ishii, M., Obata, A. and Adachi, Y. (2019). <em>MRI MRI-ESM2.0 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.634">https://doi.org/10.22033/ESGF/CMIP6.634</a>
 </div>
 <div id="ref-CMIP6.CMIP.CSIRO.ACCESS-ESM1-5" class="csl-entry">
-Ziehn, T., Chamberlain, M., Lenton, A., Law, R., Bodman, R., Dix, M., Wang, Y., Dobrohotoff, P., Srbinovsky, J., Stevens, L., Vohralik, P., Mackallah, C., Sullivan, A., O’Farrell, S. and Druken, K. (2019). <em>CSIRO ACCESS-ESM1.5 model output prepared for CMIP6 CMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.2288">https://doi.org/10.22033/ESGF/CMIP6.2288</a>
+Ziehn, T., Chamberlain, M., Lenton, A., Law, R., Bodman, R., Dix, M., Wang, Y., Dobrohotoff, P., Srbinovsky, J., Stevens, L., Vohralik, P., Mackallah, C., Sullivan, A., O’Farrell, S. and Druken, K. (2019). <em>CSIRO ACCESS-ESM1.5 model output prepared for CMIP6 CMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.2288">https://doi.org/10.22033/ESGF/CMIP6.2288</a>
 </div>
 <div id="ref-CMIP6.DAMIP.CSIRO.ACCESS-ESM1-5" class="csl-entry">
-Ziehn, T., Dix, M., Mackallah, C., Chamberlain, M., Lenton, A., Law, R., Druken, K. and Ridzwan, S. M. (2020). <em>CSIRO ACCESS-ESM1.5 model output prepared for CMIP6 DAMIP</em>. Earth System Grid Federation. <a href="https://doi.org/10.22033/ESGF/CMIP6.14362">https://doi.org/10.22033/ESGF/CMIP6.14362</a>
+Ziehn, T., Dix, M., Mackallah, C., Chamberlain, M., Lenton, A., Law, R., Druken, K. and Ridzwan, S. M. (2020). <em>CSIRO ACCESS-ESM1.5 model output prepared for CMIP6 DAMIP</em>. <a href="https://doi.org/10.22033/ESGF/CMIP6.14362">https://doi.org/10.22033/ESGF/CMIP6.14362</a>
 </div>
 </div>
             </section>
@@ -952,7 +952,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": [["thesis.pdf", "PDF"], ["thesis.docx", "Word"]],
+"download": [["tesis.pdf", "PDF"]],
 "search": {
 "engine": "fuse",
 "options": null

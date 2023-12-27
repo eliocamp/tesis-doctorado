@@ -8,11 +8,11 @@ Al CONICET por darme de comer durante el doctorado, a la FCEN y el DCAO por ofre
 A la comunidad de R, en cuyos amplios y cómodos hombros me paro para escribir esta tesis de forma abierta y reproducible. 
 
 A mi familia.
-Clementina y David, cuyas contribuciones al sentarse sobre el teclado fueron imprescindibles. 
-Mis suegres, que me cebaron mate y trajeron bananas mientras escribía esta tésis. 
+Clementina y David, cuyas contribuciones sentados sobre el teclado fueron imprescindibles. 
+Mis suegres, que me cebaron mate y compartieron bananas mientras escribía esta tésis. 
 Mi papá, que un día me sentó en una plaza de San Juan para hablarme de la gravitación.
 Enrique, que me mostró la maleabilidad del plomo.
 Goyo, que me ayudó a aprender a leer con la "J" de "joder".
-Y mi mamá, con quién compartimos largas discusiones sobre cómo hacer ciencia y escribir papers; extraño no poder brindar con ella para celebrar cada acontecimiento importante. 
+Y mi mamá, con quién compartimos largas discusiones sobre cómo hacer ciencia y escribir papers; extraño no poder celebrar con ella con un brindis.
 
-A Pao. 
+A Pao, la mejor compañera de trabajo y de vida.  

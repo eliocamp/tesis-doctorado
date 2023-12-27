@@ -93,7 +93,7 @@ cmip_files <- function() {
   all_lines <- vector("character")
   for (i in seq_along(files)) {
     lines <- readLines(files[i])
-    lines[1] <- paste0("@misc{", unique(sims$id)[i], ",")
+    lines[1] <- paste0("@article{", unique(sims$id)[i], ",")
     all_lines <- c(all_lines, lines, "\n")
   }
 

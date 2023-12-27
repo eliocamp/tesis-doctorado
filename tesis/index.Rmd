@@ -50,10 +50,6 @@ output:
       citation_package: "default"
       pandoc_args:
         - --wrap=none
-  bookdown::word_document2:
-      toc_depth: 3
-      pandoc_args:
-        - --wrap=none
 
 always_allow_html: true
 

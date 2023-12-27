@@ -236,6 +236,11 @@ cors <- ceofs %>%
 Previo a otros análisis, se decidió evaluar en los modelos la capacidad  de capturar las propiedades de los cEOFs observados.
 Para esto se consideraron los experimentos históricos.
 
+La Figura \@ref(fig:comparacion-r2) muestra el $r^2$ de los patrones espaciales de cada modelo para los dos cEOFs.
+En general estos valores se extienden entre `r combine_words(scales::percent(range(cors[experiment == "historical"]$r2), decimal.mark = ","))`.
+En todos los casos, la correlación entre el cEOF1 simulado con el observado es mayor que la obtenida para el cEOF2.
+Aunque se pueden identificar modelos con menor correlación con los modos observados, como `r cors[experiment == "historical"][, model := reorder(model, r2, fun = mean)][, levels(model)[1:2]] %>% combine_words()`, aún éstos se asocian con valores mayores al 50%.
+
 (ref:comparacion-r2-cap) Coeficiente de determinación ($r^2$) de los patrones espaciales de cada modelo con ERA5 para el cEOF1 (rojo) y cEOF2 (azul).
 
 ```{r comparacion-r2, fig.width=5, fig.height=6}
@@ -251,10 +256,7 @@ cors %>%
   scale_y_discrete(NULL)
 ```
 
-La Figura \@ref(fig:comparacion-r2) muestra el $r^2$ de los patrones espaciales de cada modelo para los dos cEOFs.
-En general estos valores se extienden entre `r combine_words(scales::percent(range(cors[experiment == "historical"]$r2), decimal.mark = ","))`.
-En todos los casos, la correlación entre el cEOF1 simulado con el observado es mayor que la obtenida para el cEOF2.
-Aunque se pueden identificar modelos con menor correlación con los modos observados, como `r cors[experiment == "historical"][, model := reorder(model, r2, fun = mean)][, levels(model)[1:2]] %>% combine_words()`, aún éstos se asocian con valores mayores al 50%.
+
 
 ```{r interpolated}
 interpolated <- ceofs[, eof[[1]]$right, by = .(experiment, model)] %>% 

@@ -122,7 +122,7 @@ datasets_download <- function(force_download = FALSE, from_source = FALSE) {
 #' `zenodo_url` sea `NULL` o se llame a la función con el argumento `from_source` `TRUE`.
 #' En cuyo caso, descarga los datos de la fuente original con la función `source`.
 #' La función advierte si el checksum no es igual al registrado.
-#'
+#' @export
 new_dataset <- function(name,
                         file,
                         source,

@@ -84,10 +84,10 @@ Al usar puntos fijos cercanos a estos máximos climatológicos, el índice R04 b
 
 La Figura \@ref(fig:pseudo-raphael) muestra la relación entre la proyección de la altura geopotencial en 50ºS con la onda 3 climatológica en esa latitud y la anomalía zonal de altura geopotencial promediada en las tres ubicaciones de R04 (que no es exactamente el índice R04 ya que éste se calcula a partir de un promedio móvil de 3 meses y una estandarización previa al promediado).
 Ambas series son casi idénticas, con una correlación de 0,97 (CI: 0,96 -- 0,97).
-Esto ilustra que el R04 no es un índice de la amplitud de la onda 3, sino un índice de cuánto se parecen la altura geopotencial en 50ºS a la onda 3 media en 50ºS.
+Esto ilustra que el R04 no es un índice de la amplitud de la onda 3, sino un índice de cuánto se parece la altura geopotencial en 50ºS a la onda 3 media en 50ºS.
 
 Si bien la Figura \@ref(fig:raphael-regr) muestra que R04 está asociado con una onda 3 relativamente pura, no es sorprendente que un índice basado en el promedio de 3 puntos esté altamente correlacionado con regiones cercanas a esos puntos.
-Por lo que esto no garantiza que esta estructura así como está definida sea un patrón físicamente coherente.
+Esto no garantiza que esta estructura así definida represente un patrón físicamente coherente.
 
 <table class=" lightable-classic-2" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
 <caption>(\#tab:raphael-correlation)Correlación temporal entre la anomalía zonal de geopotential para cada posible par de ubicaciones (indicadas por su longitud) de los tres puntos utilizados para construir R04.</caption>
@@ -150,7 +150,7 @@ Por otra parte, los campos obtenidos a partir de las combinaciones de dos puntos
 Finalmente, las Figuras \@ref(fig:raphael-top8-1) y \@ref(fig:raphael-top8-2) muestran  las anomalías mensuales  zonales de la altura geopotencial para los 8 meses con mayor y menor valor del índice R04, respectivamente.
 En pocos casos se observa un patrón de onda 3 bien marcado; por ejemplo, en abril de 2003 y noviembre de 1985 (paneles f y g) se observan tres zonas de anomalías positivas cercanas a las ubicaciones utilizadas para calcular R04 y tres zonas de anomalías negativas entre las mismas.
 En octubre de 2009 (panel m) se observa lo contrario.
-En casos para los cuales el índice es grande y positivo no hay siquiera anomalías positivas en los tres puntos, como en noviembre de 2018 (panel b) diciembre de 1998 (panel e).
+En casos para los cuales el índice es grande y positivo no hay siquiera anomalías positivas en los tres puntos, como en noviembre de 2018 (panel b) y diciembre de 1998 (panel e).
 En los meses con menores valores del índice R04, parece haber un patrón de onda tipo PSA algo más definido, sin embargo, tampoco en estos casos hay buena consistencia entre los puntos.
 
 De este análisis se desprende que el índice propuesto por @raphael2004 no sería capaz de representar las características espacio-temporales de la onda 3.
@@ -173,7 +173,7 @@ También se puede observar el ciclo anual de la fase.
 (ref:fase-histogram-cap) Histograma de la fase de la onda 3 de altura geopotencial en 500 hPa para cada trimestre.
 
 Por otro lado, cabe mencionar que la onda 3 que se obtiene de la descomposición de Fourier aplicada directamente a las medias mensuales de la altura geopotencial no es idéntica a la onda 3 que surge de la descomposición de Fourier aplicada a las anomalías mensuales de altura geopotencial mensual.
-Por lo que dado que la variable relevante para estudiar la variabilidad, los impactos, los forzantes y las tendencias son las anomalías con respecto a la media, desde ahora se analizarán las anomalías mensuales.
+Dado que la variable relevante para estudiar la variabilidad, los impactos, los forzantes y las tendencias son las anomalías con respecto a la media, desde ahora se analizarán las anomalías mensuales.
 
 
 
@@ -184,9 +184,9 @@ Por lo que dado que la variable relevante para estudiar la variabilidad, los imp
 
 (ref:zw3-top8-cap) Anomalía zonal de altura geopotencial (m, sombreado) y anomalía mensual de la anomalía zonal de altura geopotencial (m, contornos, valores positivos en línea sólida y valores negativos en línea punteada) en 500 hPa para los 8 meses con mayor y menor valor de la amplitud de la onda 3 de la anomalía mensual de altura geopotencial en 500 hPa
 
-La Figura \@ref(fig:zw3-top8) presenta, para los 8 meses con mayor amplitud de la onda 3 de la anomalía mensual de altura geopotencial, las anomalía zonales de altura geopotencial en 500 hPa y las correspondientes anomalías mensuales.
+La Figura \@ref(fig:zw3-top8) presenta las anomalías zonales y mensuales de altura geopotencial en 500 hPa, para los 8 meses con mayor amplitud de la onda 3 de las anomalías mensuales de altura geopotencial en 50ºS.
 Algunos meses, como septiembre de 1997, abril de 1995 y octubre de 2009 (Fig. \@ref(fig:zw3-top8), paneles c, d y h) tienen máximos y mínimos de intensidad relativamente constante.
-En la mayoría aún cuando se puede observar una onda 3 relativamente clara, su amplitud no es constante a lo largo de todo el hemisferio.
+En la mayoría, aún cuando se puede observar una onda 3 relativamente clara, su amplitud no es constante a lo largo de todo el hemisferio.
 Por ejemplo, en septiembre de 2008 (Fig. \@ref(fig:zw3-top8), panel a), las anomalías zonales tienen mayor intensidad y se encuentran más al sur en la zona del Pacífico y al este de Sudamérica que en el Índico y al sur de Australia.
 En cambio, en junio de 1986 (Fig. \@ref(fig:zw3-top8), panel f) las anomalías tienen mayor intensidad en la zona del Pacífico y al sur de Australia y son casi nulas en el Atlántico.
 

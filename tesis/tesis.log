@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.27)  27 DEC 2023 14:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.16)  7 MAR 2024 18:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **tesis.tex
 (./tesis.tex
 LaTeX2e <2023-11-01>
-L3 programming layer <2023-12-11>
+L3 programming layer <2024-01-04>
 (./reedthesis.cls
 Document Class: reedthesis 2004/01/27 The Reed College Thesis Class
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/base/book.cls
@@ -449,7 +449,7 @@ Package caption Info: rotating package is loaded.
 \csllabelwidth=\skip77
 \cslhangindent=\skip78
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2023/12/10 v3.99 The Babel package
+Package: babel 2024/01/07 v24.1 The Babel package
 \babel@savecnt=\count307
 \U@D=\dimen185
 \l@unhyphenated=\language6
@@ -468,8 +468,8 @@ Package babel Info: Making > an active character on input line 722.
 Package babel Info: Importing font and identification data for spanish
 (babel)             from babel-es.ini. Reported on input line 11.
 ) (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/todonotes/todonotes.sty
-Package: todonotes 2023/01/31 v1.1.6 Todonotes source and documentation.
-Package: todonotes 2023/01/31
+Package: todonotes 2024/01/05 v1.1.7 Todonotes source and documentation.
+Package: todonotes 2024/01/05
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex
@@ -785,16 +785,16 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \c@nlinenum=\count351
 \TeXr@lab=\toks58
 ) (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/newpx/newpxtext.sty
-Package: newpxtext 2023/11/13 v1.534(Michael Sharpe) latex and unicode latex support for TeXGyrePagellaX
-`newpxtext' v1.534, 2023/11/13 Text macros taking advantage of TeXGyre Pagella and its extensions (msharpe) (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: newpxtext 2024/01/10 v1.535(Michael Sharpe) latex and unicode latex support for TeXGyrePagellaX
+`newpxtext' v1.535, 2024/01/10 Text macros taking advantage of TeXGyre Pagella and its extensions (msharpe) (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 112.
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )) (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-12-11 L3 programming layer (loader) 
+Package: expl3 2024-01-04 L3 programming layer (loader) 
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-11-09 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count352
 \l__pdf_internal_box=\box86
 ))
@@ -811,8 +811,6 @@ LaTeX Font Info:    Setting zplLF sub-encoding to TS1/0 on input line 26.
 LaTeX Font Info:    Setting zplTLF sub-encoding to TS1/0 on input line 26.
 LaTeX Font Info:    Setting zplOsF sub-encoding to TS1/0 on input line 26.
 LaTeX Font Info:    Setting zplTOsF sub-encoding to TS1/0 on input line 26.
-\zplsups@scale=\dimen313
-\zplsups@raise=\dimen314
 \zpl@cnt=\count355
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/fontaxes/fontaxes.sty
 Package: fontaxes 2020/07/21 v1.0e Font selection axes
@@ -827,34 +825,34 @@ LaTeX Info: Redefining \textsw on input line 47.
 LaTeX Info: Redefining \textssc on input line 48.
 LaTeX Info: Redefining \textulc on input line 49.
 )
-\zpl@sixem=\dimen315
-\zpl@y=\dimen316
-\zpl@x=\dimen317
-\zpl@tmpdima=\dimen318
-\zpl@tmpdimb=\dimen319
-\zpl@tmpdimc=\dimen320
-\zpl@tmpdimd=\dimen321
-\zpl@tmpdime=\dimen322
-\zpl@tmpdimf=\dimen323
-\zpl@dimA=\dimen324
-\zpl@dimAA=\dimen325
-\zpl@dimB=\dimen326
-\zpl@dimBB=\dimen327
-\zpl@dimC=\dimen328
-LaTeX Info: Redefining \oldstylenums on input line 776.
-LaTeX Font Info:    Trying to load font information for T1+zplLF on input line 785.
+\zpl@sixem=\dimen313
+\zpl@y=\dimen314
+\zpl@x=\dimen315
+\zpl@tmpdima=\dimen316
+\zpl@tmpdimb=\dimen317
+\zpl@tmpdimc=\dimen318
+\zpl@tmpdimd=\dimen319
+\zpl@tmpdime=\dimen320
+\zpl@tmpdimf=\dimen321
+\zpl@dimA=\dimen322
+\zpl@dimAA=\dimen323
+\zpl@dimB=\dimen324
+\zpl@dimBB=\dimen325
+\zpl@dimC=\dimen326
+LaTeX Info: Redefining \oldstylenums on input line 778.
+LaTeX Font Info:    Trying to load font information for T1+zplLF on input line 787.
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/newpx/t1zpllf.fd
-File: t1zpl.fd 2021/05/25 v1.0 font definition file for T1/zpl/lf
+File: t1zpllf.fd 2021/05/25 v1.0 font definition file for T1/zpl/lf
 )
-LaTeX Font Info:    Trying to load font information for T1+zplTLF on input line 786.
+LaTeX Font Info:    Trying to load font information for T1+zplTLF on input line 788.
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/newpx/t1zpltlf.fd
 File: t1zpltlf.fd 2021/05/25 v1.0 font definition file for T1/zpl/tlf
 )
-LaTeX Font Info:    Trying to load font information for T1+zplOsF on input line 787.
+LaTeX Font Info:    Trying to load font information for T1+zplOsF on input line 789.
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/newpx/t1zplosf.fd
 File: t1zplosf.fd 2021/05/25 v1.0 font definition file for T1/zpl/osf
 )
-LaTeX Font Info:    Trying to load font information for T1+zplTOsF on input line 788.
+LaTeX Font Info:    Trying to load font information for T1+zplTOsF on input line 790.
 (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/newpx/t1zpltosf.fd
 File: t1zpltosf.fd 2021/05/25 v1.0 font definition file for T1/zpl/tosf
 )) (/home/elio.campitelli/.TinyTeX/texmf-dist/tex/latex/newpx/newpxmath.sty
@@ -1085,7 +1083,7 @@ Package todonotes Warning: The length marginparwidth is less than 2cm and will m
 \c@mv@boldtabular=\count360
 \openout5 = `tesis.lis'.
 
-<logo_exactas.png, id=203, 178.07803pt x 179.11682pt>
+<logo_exactas.png, id=195, 178.07803pt x 179.11682pt>
 File: logo_exactas.png Graphic file (type png)
 <use logo_exactas.png>
 Package pdftex.def Info: logo_exactas.png  used on input line 299.
@@ -1226,7 +1224,7 @@ LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
 [6
 
 ]
-<figures/15-onda3/envolvente-ejemplo-1.png, id=824, 216.81pt x 216.81pt>
+<figures/15-onda3/envolvente-ejemplo-1.png, id=819, 216.81pt x 216.81pt>
 File: figures/15-onda3/envolvente-ejemplo-1.png Graphic file (type png)
 <use figures/15-onda3/envolvente-ejemplo-1.png>
 Package pdftex.def Info: figures/15-onda3/envolvente-ejemplo-1.png  used on input line 514.
@@ -1234,12 +1232,12 @@ Package pdftex.def Info: figures/15-onda3/envolvente-ejemplo-1.png  used on inpu
 LaTeX Info: Redefining \. on input line 527.
 LaTeX Info: Redefining \% on input line 527.
 [7{/home/elio.campitelli/.TinyTeX/texmf-dist/fonts/enc/dvips/newtx/ntx-ecth-tlf.enc} <./figures/15-onda3/envolvente-ejemplo-1.png (PNG copy)>]
-<figures/15-onda3/raphael-regr-1.png, id=844, 216.81pt x 216.81pt>
+<figures/15-onda3/raphael-regr-1.png, id=839, 216.81pt x 216.81pt>
 File: figures/15-onda3/raphael-regr-1.png Graphic file (type png)
 <use figures/15-onda3/raphael-regr-1.png>
 Package pdftex.def Info: figures/15-onda3/raphael-regr-1.png  used on input line 549.
 (pdftex.def)             Requested size: 216.80946pt x 216.80946pt.
-<figures/15-onda3/pseudo-raphael-1.png, id=845, 289.08pt x 289.08pt>
+<figures/15-onda3/pseudo-raphael-1.png, id=840, 289.08pt x 289.08pt>
 File: figures/15-onda3/pseudo-raphael-1.png Graphic file (type png)
 <use figures/15-onda3/pseudo-raphael-1.png>
 Package pdftex.def Info: figures/15-onda3/pseudo-raphael-1.png  used on input line 563.
@@ -1253,22 +1251,19 @@ LaTeX Info: Redefining \% on input line 597.
 LaTeX Info: Redefining \. on input line 597.
 LaTeX Info: Redefining \% on input line 597.
 [10 <./figures/15-onda3/pseudo-raphael-1.png>]
-<figures/15-onda3/cor-puntos-1.png, id=879, 433.62pt x 361.35pt>
+<figures/15-onda3/cor-puntos-1.png, id=874, 433.62pt x 361.35pt>
 File: figures/15-onda3/cor-puntos-1.png Graphic file (type png)
 <use figures/15-onda3/cor-puntos-1.png>
 Package pdftex.def Info: figures/15-onda3/cor-puntos-1.png  used on input line 600.
 (pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
-LaTeX Info: Redefining \. on input line 612.
-LaTeX Info: Redefining \% on input line 612.
-[11 <./figures/15-onda3/cor-puntos-1.png (PNG copy)>]
-<figures/15-onda3/raphael-top8-1.png, id=887, 433.62pt x 289.08pt>
+<figures/15-onda3/raphael-top8-1.png, id=878, 433.62pt x 289.08pt>
 File: figures/15-onda3/raphael-top8-1.png Graphic file (type png)
 <use figures/15-onda3/raphael-top8-1.png>
 Package pdftex.def Info: figures/15-onda3/raphael-top8-1.png  used on input line 615.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
 (Font)              scaled to size 10.0pt on input line 615.
-<figures/15-onda3/raphael-top8-2.png, id=888, 433.62pt x 289.08pt>
+<figures/15-onda3/raphael-top8-2.png, id=879, 433.62pt x 289.08pt>
 File: figures/15-onda3/raphael-top8-2.png Graphic file (type png)
 <use figures/15-onda3/raphael-top8-2.png>
 Package pdftex.def Info: figures/15-onda3/raphael-top8-2.png  used on input line 615.
@@ -1286,12 +1281,15 @@ Overfull \hbox (2.99895pt too wide) in paragraph at lines 615--616
 
 LaTeX Warning: Float too large for page by 67.72856pt on input line 620.
 
-<figures/15-onda3/fase-histogram-1.png, id=893, 433.62pt x 289.08pt>
+LaTeX Info: Redefining \. on input line 620.
+LaTeX Info: Redefining \% on input line 620.
+[11 <./figures/15-onda3/cor-puntos-1.png (PNG copy)>]
+<figures/15-onda3/fase-histogram-1.png, id=888, 433.62pt x 289.08pt>
 File: figures/15-onda3/fase-histogram-1.png Graphic file (type png)
 <use figures/15-onda3/fase-histogram-1.png>
 Package pdftex.def Info: figures/15-onda3/fase-histogram-1.png  used on input line 643.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-<figures/15-onda3/zw3-top8-1.png, id=894, 433.62pt x 289.08pt>
+<figures/15-onda3/zw3-top8-1.png, id=889, 433.62pt x 289.08pt>
 File: figures/15-onda3/zw3-top8-1.png Graphic file (type png)
 <use figures/15-onda3/zw3-top8-1.png>
 Package pdftex.def Info: figures/15-onda3/zw3-top8-1.png  used on input line 657.
@@ -1308,7 +1306,7 @@ LaTeX Info: Redefining \% on input line 671.
 LaTeX Info: Redefining \. on input line 671.
 LaTeX Info: Redefining \% on input line 671.
 [15 <./figures/15-onda3/zw3-top8-1.png (PNG copy)>]
-<figures/15-onda3/envelope-regr-1.png, id=920, 433.62pt x 505.89pt>
+<figures/15-onda3/envelope-regr-1.png, id=915, 433.62pt x 505.89pt>
 File: figures/15-onda3/envelope-regr-1.png Graphic file (type png)
 <use figures/15-onda3/envelope-regr-1.png>
 Package pdftex.def Info: figures/15-onda3/envelope-regr-1.png  used on input line 674.
@@ -1335,12 +1333,12 @@ File: t1npxtt.fd 2000/12/14 v1.0
 )
 LaTeX Font Info:    Font shape `T1/npxtt/m/n' will be
 (Font)              scaled to size 12.0pt on input line 782.
-<figures/20-ceofs/eof-naive-1.png, id=994, 433.62pt x 520.344pt>
+<figures/20-ceofs/eof-naive-1.png, id=989, 433.62pt x 520.344pt>
 File: figures/20-ceofs/eof-naive-1.png Graphic file (type png)
 <use figures/20-ceofs/eof-naive-1.png>
 Package pdftex.def Info: figures/20-ceofs/eof-naive-1.png  used on input line 789.
 (pdftex.def)             Requested size: 433.61894pt x 520.34271pt.
-<figures/20-ceofs/ejemplo-reconstruccion-1.png, id=996, 433.62pt x 270.7716pt>
+<figures/20-ceofs/ejemplo-reconstruccion-1.png, id=991, 433.62pt x 270.7716pt>
 File: figures/20-ceofs/ejemplo-reconstruccion-1.png Graphic file (type png)
 <use figures/20-ceofs/ejemplo-reconstruccion-1.png>
 Package pdftex.def Info: figures/20-ceofs/ejemplo-reconstruccion-1.png  used on input line 804.
@@ -1354,7 +1352,7 @@ LaTeX Info: Redefining \% on input line 817.
 LaTeX Info: Redefining \. on input line 827.
 LaTeX Info: Redefining \% on input line 827.
 [23 <./figures/20-ceofs/ejemplo-reconstruccion-1.png (PNG copy)>]
-<figures/20-ceofs/hilbert-ejemplo-1.png, id=1015, 433.62pt x 270.7716pt>
+<figures/20-ceofs/hilbert-ejemplo-1.png, id=1010, 433.62pt x 270.7716pt>
 File: figures/20-ceofs/hilbert-ejemplo-1.png Graphic file (type png)
 <use figures/20-ceofs/hilbert-ejemplo-1.png>
 Package pdftex.def Info: figures/20-ceofs/hilbert-ejemplo-1.png  used on input line 832.
@@ -1365,12 +1363,12 @@ LaTeX Info: Redefining \% on input line 841.
 LaTeX Info: Redefining \. on input line 878.
 LaTeX Info: Redefining \% on input line 878.
 [25]
-<figures/20-ceofs/ceofs-1-1.png, id=1030, 433.62pt x 433.62pt>
+<figures/20-ceofs/ceofs-1-1.png, id=1025, 433.62pt x 433.62pt>
 File: figures/20-ceofs/ceofs-1-1.png Graphic file (type png)
 <use figures/20-ceofs/ceofs-1-1.png>
 Package pdftex.def Info: figures/20-ceofs/ceofs-1-1.png  used on input line 895.
 (pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
-<figures/20-ceofs/extended-series-1.png, id=1031, 433.62pt x 216.81pt>
+<figures/20-ceofs/extended-series-1.png, id=1026, 433.62pt x 216.81pt>
 File: figures/20-ceofs/extended-series-1.png Graphic file (type png)
 <use figures/20-ceofs/extended-series-1.png>
 Package pdftex.def Info: figures/20-ceofs/extended-series-1.png  used on input line 906.
@@ -1384,576 +1382,573 @@ LaTeX Info: Redefining \% on input line 925.
 LaTeX Info: Redefining \. on input line 925.
 LaTeX Info: Redefining \% on input line 925.
 [28 <./figures/20-ceofs/extended-series-1.png (PNG copy)>]
-<figures/20-ceofs/eof1-regr-gh-1.png, id=1050, 433.62pt x 520.344pt>
+<figures/20-ceofs/eof1-regr-gh-1.png, id=1045, 433.62pt x 520.344pt>
 File: figures/20-ceofs/eof1-regr-gh-1.png Graphic file (type png)
 <use figures/20-ceofs/eof1-regr-gh-1.png>
-Package pdftex.def Info: figures/20-ceofs/eof1-regr-gh-1.png  used on input line 945.
+Package pdftex.def Info: figures/20-ceofs/eof1-regr-gh-1.png  used on input line 943.
 (pdftex.def)             Requested size: 433.61894pt x 520.34271pt.
-LaTeX Info: Redefining \. on input line 960.
-LaTeX Info: Redefining \% on input line 960.
-[29]
-LaTeX Info: Redefining \. on input line 960.
-LaTeX Info: Redefining \% on input line 960.
-[30 <./figures/20-ceofs/eof1-regr-gh-1.png (PNG copy)>]
-<figures/20-ceofs/eof2-regr-gh-1.png, id=1066, 433.62pt x 520.344pt>
+<figures/20-ceofs/eof2-regr-gh-1.png, id=1050, 433.62pt x 520.344pt>
 File: figures/20-ceofs/eof2-regr-gh-1.png Graphic file (type png)
 <use figures/20-ceofs/eof2-regr-gh-1.png>
-Package pdftex.def Info: figures/20-ceofs/eof2-regr-gh-1.png  used on input line 966.
+Package pdftex.def Info: figures/20-ceofs/eof2-regr-gh-1.png  used on input line 964.
 (pdftex.def)             Requested size: 433.61894pt x 520.34271pt.
-<figures/20-ceofs/eof1-regr-t-1.png, id=1077, 433.62pt x 520.344pt>
+LaTeX Info: Redefining \. on input line 969.
+LaTeX Info: Redefining \% on input line 969.
+[29]
+LaTeX Info: Redefining \. on input line 969.
+LaTeX Info: Redefining \% on input line 969.
+[30 <./figures/20-ceofs/eof1-regr-gh-1.png (PNG copy)>]
+<figures/20-ceofs/eof1-regr-t-1.png, id=1072, 433.62pt x 520.344pt>
 File: figures/20-ceofs/eof1-regr-t-1.png Graphic file (type png)
 <use figures/20-ceofs/eof1-regr-t-1.png>
-Package pdftex.def Info: figures/20-ceofs/eof1-regr-t-1.png  used on input line 997.
+Package pdftex.def Info: figures/20-ceofs/eof1-regr-t-1.png  used on input line 995.
 (pdftex.def)             Requested size: 433.61894pt x 520.34271pt.
-<figures/20-ceofs/t-vertical-1.png, id=1080, 433.62pt x 216.81pt>
+<figures/20-ceofs/t-vertical-1.png, id=1075, 433.62pt x 216.81pt>
 File: figures/20-ceofs/t-vertical-1.png Graphic file (type png)
 <use figures/20-ceofs/t-vertical-1.png>
-Package pdftex.def Info: figures/20-ceofs/t-vertical-1.png  used on input line 1008.
+Package pdftex.def Info: figures/20-ceofs/t-vertical-1.png  used on input line 1006.
 (pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
-LaTeX Info: Redefining \. on input line 1021.
-LaTeX Info: Redefining \% on input line 1021.
+LaTeX Info: Redefining \. on input line 1019.
+LaTeX Info: Redefining \% on input line 1019.
 [31]
-LaTeX Info: Redefining \. on input line 1021.
-LaTeX Info: Redefining \% on input line 1021.
+LaTeX Info: Redefining \. on input line 1019.
+LaTeX Info: Redefining \% on input line 1019.
 [32 <./figures/20-ceofs/eof2-regr-gh-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1021.
-LaTeX Info: Redefining \% on input line 1021.
+LaTeX Info: Redefining \. on input line 1019.
+LaTeX Info: Redefining \% on input line 1019.
 [33 <./figures/20-ceofs/eof1-regr-t-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1031.
-LaTeX Info: Redefining \% on input line 1031.
+LaTeX Info: Redefining \. on input line 1029.
+LaTeX Info: Redefining \% on input line 1029.
 [34 <./figures/20-ceofs/t-vertical-1.png (PNG copy)>]
-<figures/20-ceofs/o3-regr-1.png, id=1112, 433.62pt x 289.08pt>
+<figures/20-ceofs/o3-regr-1.png, id=1107, 433.62pt x 289.08pt>
 File: figures/20-ceofs/o3-regr-1.png Graphic file (type png)
 <use figures/20-ceofs/o3-regr-1.png>
-Package pdftex.def Info: figures/20-ceofs/o3-regr-1.png  used on input line 1036.
+Package pdftex.def Info: figures/20-ceofs/o3-regr-1.png  used on input line 1034.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 1051.
-LaTeX Info: Redefining \% on input line 1051.
+LaTeX Info: Redefining \. on input line 1049.
+LaTeX Info: Redefining \% on input line 1049.
 [35 <./figures/20-ceofs/o3-regr-1.png (PNG copy)>]
-<figures/20-ceofs/phase-histogram-1.png, id=1127, 289.08pt x 180.675pt>
+<figures/20-ceofs/phase-histogram-1.png, id=1123, 289.08pt x 180.675pt>
 File: figures/20-ceofs/phase-histogram-1.png Graphic file (type png)
 <use figures/20-ceofs/phase-histogram-1.png>
-Package pdftex.def Info: figures/20-ceofs/phase-histogram-1.png  used on input line 1083.
+Package pdftex.def Info: figures/20-ceofs/phase-histogram-1.png  used on input line 1081.
 (pdftex.def)             Requested size: 289.07928pt x 180.67455pt.
-LaTeX Info: Redefining \. on input line 1093.
-LaTeX Info: Redefining \% on input line 1093.
+LaTeX Info: Redefining \. on input line 1091.
+LaTeX Info: Redefining \% on input line 1091.
 [36]
-<figures/20-ceofs/psi-sst-explained-variance-1.png, id=1139, 433.62pt x 216.81pt>
+<figures/20-ceofs/psi-sst-explained-variance-1.png, id=1134, 433.62pt x 216.81pt>
 File: figures/20-ceofs/psi-sst-explained-variance-1.png Graphic file (type png)
 <use figures/20-ceofs/psi-sst-explained-variance-1.png>
-Package pdftex.def Info: figures/20-ceofs/psi-sst-explained-variance-1.png  used on input line 1104.
+Package pdftex.def Info: figures/20-ceofs/psi-sst-explained-variance-1.png  used on input line 1102.
 (pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
-LaTeX Info: Redefining \. on input line 1120.
-LaTeX Info: Redefining \% on input line 1120.
-[37 <./figures/20-ceofs/phase-histogram-1.png>]
-<figures/20-ceofs/sst-psi-2-1.png, id=1150, 433.62pt x 433.62pt>
+<figures/20-ceofs/sst-psi-2-1.png, id=1137, 433.62pt x 433.62pt>
 File: figures/20-ceofs/sst-psi-2-1.png Graphic file (type png)
 <use figures/20-ceofs/sst-psi-2-1.png>
-Package pdftex.def Info: figures/20-ceofs/sst-psi-2-1.png  used on input line 1125.
+Package pdftex.def Info: figures/20-ceofs/sst-psi-2-1.png  used on input line 1121.
 (pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
-LaTeX Info: Redefining \. on input line 1144.
-LaTeX Info: Redefining \% on input line 1144.
+LaTeX Info: Redefining \. on input line 1126.
+LaTeX Info: Redefining \% on input line 1126.
+[37 <./figures/20-ceofs/phase-histogram-1.png>]
+LaTeX Info: Redefining \. on input line 1140.
+LaTeX Info: Redefining \% on input line 1140.
 [38 <./figures/20-ceofs/psi-sst-explained-variance-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1144.
-LaTeX Info: Redefining \% on input line 1144.
+LaTeX Info: Redefining \. on input line 1140.
+LaTeX Info: Redefining \% on input line 1140.
 [39 <./figures/20-ceofs/sst-psi-2-1.png (PNG copy)>]
-<figures/20-ceofs/euler-1.png, id=1165, 289.08pt x 289.08pt>
+<figures/20-ceofs/euler-1.png, id=1160, 289.08pt x 289.08pt>
 File: figures/20-ceofs/euler-1.png Graphic file (type png)
 <use figures/20-ceofs/euler-1.png>
-Package pdftex.def Info: figures/20-ceofs/euler-1.png  used on input line 1147.
+Package pdftex.def Info: figures/20-ceofs/euler-1.png  used on input line 1143.
 (pdftex.def)             Requested size: 289.07928pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 1159.
-LaTeX Info: Redefining \% on input line 1159.
+LaTeX Info: Redefining \. on input line 1161.
+LaTeX Info: Redefining \% on input line 1161.
 [40 <./figures/20-ceofs/euler-1.png (PNG copy)>]
-<figures/20-ceofs/enso-phase-1.png, id=1182, 289.08pt x 216.81pt>
+<figures/20-ceofs/enso-phase-1.png, id=1178, 289.08pt x 216.81pt>
 File: figures/20-ceofs/enso-phase-1.png Graphic file (type png)
 <use figures/20-ceofs/enso-phase-1.png>
-Package pdftex.def Info: figures/20-ceofs/enso-phase-1.png  used on input line 1170.
+Package pdftex.def Info: figures/20-ceofs/enso-phase-1.png  used on input line 1166.
 (pdftex.def)             Requested size: 289.07928pt x 216.80946pt.
-LaTeX Info: Redefining \. on input line 1182.
-LaTeX Info: Redefining \% on input line 1182.
+LaTeX Info: Redefining \. on input line 1178.
+LaTeX Info: Redefining \% on input line 1178.
 [41 <./figures/20-ceofs/enso-phase-1.png (PNG copy)>]
-<figures/20-ceofs/fft-ceof-era5-1.png, id=1195, 289.08pt x 180.675pt>
+<figures/20-ceofs/fft-ceof-era5-1.png, id=1186, 289.08pt x 180.675pt>
 File: figures/20-ceofs/fft-ceof-era5-1.png Graphic file (type png)
 <use figures/20-ceofs/fft-ceof-era5-1.png>
-Package pdftex.def Info: figures/20-ceofs/fft-ceof-era5-1.png  used on input line 1185.
+Package pdftex.def Info: figures/20-ceofs/fft-ceof-era5-1.png  used on input line 1181.
 (pdftex.def)             Requested size: 289.07928pt x 180.67455pt.
-LaTeX Info: Redefining \. on input line 1206.
-LaTeX Info: Redefining \% on input line 1206.
-[42 <./figures/20-ceofs/fft-ceof-era5-1.png (PNG copy)>]
-<figures/20-ceofs/sst-psi-1-1.png, id=1201, 433.62pt x 433.62pt>
+<figures/20-ceofs/sst-psi-1-1.png, id=1188, 433.62pt x 433.62pt>
 File: figures/20-ceofs/sst-psi-1-1.png Graphic file (type png)
 <use figures/20-ceofs/sst-psi-1-1.png>
-Package pdftex.def Info: figures/20-ceofs/sst-psi-1-1.png  used on input line 1211.
+Package pdftex.def Info: figures/20-ceofs/sst-psi-1-1.png  used on input line 1207.
 (pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
-<figures/20-ceofs/pp-t2m-r2-1.png, id=1207, 433.62pt x 216.81pt>
+LaTeX Info: Redefining \. on input line 1218.
+LaTeX Info: Redefining \% on input line 1218.
+[42 <./figures/20-ceofs/fft-ceof-era5-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1218.
+LaTeX Info: Redefining \% on input line 1218.
+[43 <./figures/20-ceofs/sst-psi-1-1.png (PNG copy)>]
+<figures/20-ceofs/pp-t2m-r2-1.png, id=1203, 433.62pt x 216.81pt>
 File: figures/20-ceofs/pp-t2m-r2-1.png Graphic file (type png)
 <use figures/20-ceofs/pp-t2m-r2-1.png>
-Package pdftex.def Info: figures/20-ceofs/pp-t2m-r2-1.png  used on input line 1228.
+Package pdftex.def Info: figures/20-ceofs/pp-t2m-r2-1.png  used on input line 1224.
 (pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
-<figures/20-ceofs/pp-temp-2-1.png, id=1214, 433.62pt x 433.62pt>
+LaTeX Info: Redefining \. on input line 1242.
+LaTeX Info: Redefining \% on input line 1242.
+[44 <./figures/20-ceofs/pp-t2m-r2-1.png (PNG copy)>]
+<figures/20-ceofs/pp-temp-2-1.png, id=1216, 433.62pt x 433.62pt>
 File: figures/20-ceofs/pp-temp-2-1.png Graphic file (type png)
 <use figures/20-ceofs/pp-temp-2-1.png>
-Package pdftex.def Info: figures/20-ceofs/pp-temp-2-1.png  used on input line 1254.
+Package pdftex.def Info: figures/20-ceofs/pp-temp-2-1.png  used on input line 1250.
 (pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
-LaTeX Info: Redefining \. on input line 1259.
-LaTeX Info: Redefining \% on input line 1259.
-[43]
-LaTeX Info: Redefining \. on input line 1259.
-LaTeX Info: Redefining \% on input line 1259.
-[44 <./figures/20-ceofs/sst-psi-1-1.png (PNG copy)>]
 LaTeX Info: Redefining \. on input line 1272.
 LaTeX Info: Redefining \% on input line 1272.
-[45 <./figures/20-ceofs/pp-t2m-r2-1.png (PNG copy)>]
+[45]
 LaTeX Info: Redefining \. on input line 1272.
 LaTeX Info: Redefining \% on input line 1272.
 [46 <./figures/20-ceofs/pp-temp-2-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1296.
-LaTeX Info: Redefining \% on input line 1296.
+LaTeX Info: Redefining \. on input line 1292.
+LaTeX Info: Redefining \% on input line 1292.
 [47]
-LaTeX Info: Redefining \. on input line 1296.
-LaTeX Info: Redefining \% on input line 1296.
-[48]
 Capítulo 4.
-[49
+[48
 
 ]
-LaTeX Info: Redefining \. on input line 1331.
-LaTeX Info: Redefining \% on input line 1331.
-[50]
-<figures/30-sam/segmentada-ejemplo-1.png, id=1318, 289.08pt x 216.81pt>
+LaTeX Info: Redefining \. on input line 1327.
+LaTeX Info: Redefining \% on input line 1327.
+[49]
+<figures/30-sam/segmentada-ejemplo-1.png, id=1304, 289.08pt x 216.81pt>
 File: figures/30-sam/segmentada-ejemplo-1.png Graphic file (type png)
 <use figures/30-sam/segmentada-ejemplo-1.png>
-Package pdftex.def Info: figures/30-sam/segmentada-ejemplo-1.png  used on input line 1357.
+Package pdftex.def Info: figures/30-sam/segmentada-ejemplo-1.png  used on input line 1353.
 (pdftex.def)             Requested size: 289.07928pt x 216.80946pt.
-LaTeX Info: Redefining \. on input line 1370.
-LaTeX Info: Redefining \% on input line 1370.
-[51]
-LaTeX Info: Redefining \. on input line 1383.
-LaTeX Info: Redefining \% on input line 1383.
-[52 <./figures/30-sam/segmentada-ejemplo-1.png (PNG copy)>]
-<figures/30-sam/method-1.png, id=1336, 433.62pt x 180.675pt>
+LaTeX Info: Redefining \. on input line 1366.
+LaTeX Info: Redefining \% on input line 1366.
+[50]
+LaTeX Info: Redefining \. on input line 1379.
+LaTeX Info: Redefining \% on input line 1379.
+[51 <./figures/30-sam/segmentada-ejemplo-1.png (PNG copy)>]
+<figures/30-sam/method-1.png, id=1321, 433.62pt x 180.675pt>
 File: figures/30-sam/method-1.png Graphic file (type png)
 <use figures/30-sam/method-1.png>
-Package pdftex.def Info: figures/30-sam/method-1.png  used on input line 1397.
+Package pdftex.def Info: figures/30-sam/method-1.png  used on input line 1393.
 (pdftex.def)             Requested size: 433.61894pt x 180.67455pt.
-LaTeX Info: Redefining \. on input line 1407.
-LaTeX Info: Redefining \% on input line 1407.
-[53 <./figures/30-sam/method-1.png (PNG copy)>]
-<figures/30-sam/sign-regression-50-1.png, id=1345, 433.62pt x 267.399pt>
+LaTeX Info: Redefining \. on input line 1403.
+LaTeX Info: Redefining \% on input line 1403.
+[52 <./figures/30-sam/method-1.png (PNG copy)>]
+<figures/30-sam/sign-regression-50-1.png, id=1331, 433.62pt x 267.399pt>
 File: figures/30-sam/sign-regression-50-1.png Graphic file (type png)
 <use figures/30-sam/sign-regression-50-1.png>
-Package pdftex.def Info: figures/30-sam/sign-regression-50-1.png  used on input line 1418.
+Package pdftex.def Info: figures/30-sam/sign-regression-50-1.png  used on input line 1414.
 (pdftex.def)             Requested size: 433.61894pt x 267.39835pt.
-<figures/30-sam/sign-regression-700-1.png, id=1346, 433.62pt x 267.399pt>
+<figures/30-sam/sign-regression-700-1.png, id=1332, 433.62pt x 267.399pt>
 File: figures/30-sam/sign-regression-700-1.png Graphic file (type png)
 <use figures/30-sam/sign-regression-700-1.png>
-Package pdftex.def Info: figures/30-sam/sign-regression-700-1.png  used on input line 1429.
+Package pdftex.def Info: figures/30-sam/sign-regression-700-1.png  used on input line 1425.
 (pdftex.def)             Requested size: 433.61894pt x 267.39835pt.
-LaTeX Info: Redefining \. on input line 1451.
-LaTeX Info: Redefining \% on input line 1451.
-[54]
-LaTeX Info: Redefining \. on input line 1451.
-LaTeX Info: Redefining \% on input line 1451.
-[55 <./figures/30-sam/sign-regression-50-1.png (PNG copy)>]
-<figures/30-sam/season-regression-1.png, id=1362, 433.62pt x 397.485pt>
+LaTeX Info: Redefining \. on input line 1447.
+LaTeX Info: Redefining \% on input line 1447.
+[53]
+LaTeX Info: Redefining \. on input line 1447.
+LaTeX Info: Redefining \% on input line 1447.
+[54 <./figures/30-sam/sign-regression-50-1.png (PNG copy)>]
+<figures/30-sam/season-regression-1.png, id=1347, 433.62pt x 397.485pt>
 File: figures/30-sam/season-regression-1.png Graphic file (type png)
 <use figures/30-sam/season-regression-1.png>
-Package pdftex.def Info: figures/30-sam/season-regression-1.png  used on input line 1456.
+Package pdftex.def Info: figures/30-sam/season-regression-1.png  used on input line 1452.
 (pdftex.def)             Requested size: 433.61894pt x 397.48402pt.
-<figures/30-sam/sam-period-1.png, id=1363, 289.08pt x 289.08pt>
+<figures/30-sam/sam-period-1.png, id=1348, 289.08pt x 289.08pt>
 File: figures/30-sam/sam-period-1.png Graphic file (type png)
 <use figures/30-sam/sam-period-1.png>
-Package pdftex.def Info: figures/30-sam/sam-period-1.png  used on input line 1467.
+Package pdftex.def Info: figures/30-sam/sam-period-1.png  used on input line 1463.
 (pdftex.def)             Requested size: 289.07928pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 1490.
-LaTeX Info: Redefining \% on input line 1490.
-[56 <./figures/30-sam/sign-regression-700-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1490.
-LaTeX Info: Redefining \% on input line 1490.
-[57 <./figures/30-sam/season-regression-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1490.
-LaTeX Info: Redefining \% on input line 1490.
-[58 <./figures/30-sam/sam-period-1.png (PNG copy)>]
-<figures/30-sam/asymsam-timeseries-1.png, id=1380, 433.62pt x 216.81pt>
+LaTeX Info: Redefining \. on input line 1486.
+LaTeX Info: Redefining \% on input line 1486.
+[55 <./figures/30-sam/sign-regression-700-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1486.
+LaTeX Info: Redefining \% on input line 1486.
+[56 <./figures/30-sam/season-regression-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1486.
+LaTeX Info: Redefining \% on input line 1486.
+[57 <./figures/30-sam/sam-period-1.png (PNG copy)>]
+<figures/30-sam/asymsam-timeseries-1.png, id=1366, 433.62pt x 216.81pt>
 File: figures/30-sam/asymsam-timeseries-1.png Graphic file (type png)
 <use figures/30-sam/asymsam-timeseries-1.png>
-Package pdftex.def Info: figures/30-sam/asymsam-timeseries-1.png  used on input line 1495.
+Package pdftex.def Info: figures/30-sam/asymsam-timeseries-1.png  used on input line 1491.
 (pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
-<figures/30-sam/spectrum-1.png, id=1381, 433.62pt x 289.08pt>
+<figures/30-sam/spectrum-1.png, id=1367, 433.62pt x 289.08pt>
 File: figures/30-sam/spectrum-1.png Graphic file (type png)
 <use figures/30-sam/spectrum-1.png>
-Package pdftex.def Info: figures/30-sam/spectrum-1.png  used on input line 1506.
+Package pdftex.def Info: figures/30-sam/spectrum-1.png  used on input line 1502.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 1519.
-LaTeX Info: Redefining \% on input line 1519.
-[59 <./figures/30-sam/asymsam-timeseries-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1519.
-LaTeX Info: Redefining \% on input line 1519.
-[60 <./figures/30-sam/spectrum-1.png>]
-<figures/30-sam/cor-lev-1.png, id=1400, 216.81pt x 216.81pt>
+LaTeX Info: Redefining \. on input line 1515.
+LaTeX Info: Redefining \% on input line 1515.
+[58 <./figures/30-sam/asymsam-timeseries-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1515.
+LaTeX Info: Redefining \% on input line 1515.
+[59 <./figures/30-sam/spectrum-1.png>]
+<figures/30-sam/cor-lev-1.png, id=1386, 216.81pt x 216.81pt>
 File: figures/30-sam/cor-lev-1.png Graphic file (type png)
 <use figures/30-sam/cor-lev-1.png>
-Package pdftex.def Info: figures/30-sam/cor-lev-1.png  used on input line 1531.
+Package pdftex.def Info: figures/30-sam/cor-lev-1.png  used on input line 1527.
 (pdftex.def)             Requested size: 216.80946pt x 216.80946pt.
-<figures/30-sam/cross-correlation-1.png, id=1401, 433.62pt x 216.81pt>
+<figures/30-sam/cross-correlation-1.png, id=1387, 433.62pt x 216.81pt>
 File: figures/30-sam/cross-correlation-1.png Graphic file (type png)
 <use figures/30-sam/cross-correlation-1.png>
-Package pdftex.def Info: figures/30-sam/cross-correlation-1.png  used on input line 1542.
+Package pdftex.def Info: figures/30-sam/cross-correlation-1.png  used on input line 1538.
 (pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
-LaTeX Info: Redefining \. on input line 1556.
-LaTeX Info: Redefining \% on input line 1556.
-[61 <./figures/30-sam/cor-lev-1.png (PNG copy)>]
-<figures/30-sam/trends-1.png, id=1410, 433.62pt x 289.08pt>
+LaTeX Info: Redefining \. on input line 1552.
+LaTeX Info: Redefining \% on input line 1552.
+[60 <./figures/30-sam/cor-lev-1.png (PNG copy)>]
+<figures/30-sam/trends-1.png, id=1395, 433.62pt x 289.08pt>
 File: figures/30-sam/trends-1.png Graphic file (type png)
 <use figures/30-sam/trends-1.png>
-Package pdftex.def Info: figures/30-sam/trends-1.png  used on input line 1561.
+Package pdftex.def Info: figures/30-sam/trends-1.png  used on input line 1557.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 1576.
-LaTeX Info: Redefining \% on input line 1576.
-[62 <./figures/30-sam/cross-correlation-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1576.
-LaTeX Info: Redefining \% on input line 1576.
-[63 <./figures/30-sam/trends-1.png (PNG copy)>]
-<figures/30-sam/r-squared-trend-1.png, id=1425, 289.08pt x 289.08pt>
+LaTeX Info: Redefining \. on input line 1572.
+LaTeX Info: Redefining \% on input line 1572.
+[61 <./figures/30-sam/cross-correlation-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1572.
+LaTeX Info: Redefining \% on input line 1572.
+[62 <./figures/30-sam/trends-1.png (PNG copy)>]
+<figures/30-sam/r-squared-trend-1.png, id=1411, 289.08pt x 289.08pt>
 File: figures/30-sam/r-squared-trend-1.png Graphic file (type png)
 <use figures/30-sam/r-squared-trend-1.png>
-Package pdftex.def Info: figures/30-sam/r-squared-trend-1.png  used on input line 1581.
+Package pdftex.def Info: figures/30-sam/r-squared-trend-1.png  used on input line 1577.
 (pdftex.def)             Requested size: 289.07928pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 1594.
-LaTeX Info: Redefining \% on input line 1594.
-[64 <./figures/30-sam/r-squared-trend-1.png (PNG copy)>]
-<figures/30-sam/2d-regr-1.png, id=1435, 433.62pt x 433.62pt>
+LaTeX Info: Redefining \. on input line 1590.
+LaTeX Info: Redefining \% on input line 1590.
+[63 <./figures/30-sam/r-squared-trend-1.png (PNG copy)>]
+<figures/30-sam/2d-regr-1.png, id=1421, 433.62pt x 433.62pt>
 File: figures/30-sam/2d-regr-1.png Graphic file (type png)
 <use figures/30-sam/2d-regr-1.png>
-Package pdftex.def Info: figures/30-sam/2d-regr-1.png  used on input line 1606.
+Package pdftex.def Info: figures/30-sam/2d-regr-1.png  used on input line 1602.
 (pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
-LaTeX Info: Redefining \. on input line 1625.
-LaTeX Info: Redefining \% on input line 1625.
-[65]
-LaTeX Info: Redefining \. on input line 1625.
-LaTeX Info: Redefining \% on input line 1625.
-[66 <./figures/30-sam/2d-regr-1.png (PNG copy)>]
-<figures/30-sam/wave-amplitude-1.png, id=1455, 289.08pt x 216.81pt>
+LaTeX Info: Redefining \. on input line 1621.
+LaTeX Info: Redefining \% on input line 1621.
+[64]
+LaTeX Info: Redefining \. on input line 1621.
+LaTeX Info: Redefining \% on input line 1621.
+[65 <./figures/30-sam/2d-regr-1.png (PNG copy)>]
+<figures/30-sam/wave-amplitude-1.png, id=1440, 289.08pt x 216.81pt>
 File: figures/30-sam/wave-amplitude-1.png Graphic file (type png)
 <use figures/30-sam/wave-amplitude-1.png>
-Package pdftex.def Info: figures/30-sam/wave-amplitude-1.png  used on input line 1630.
+Package pdftex.def Info: figures/30-sam/wave-amplitude-1.png  used on input line 1626.
 (pdftex.def)             Requested size: 289.07928pt x 216.80946pt.
-<figures/30-sam/vertical-regression-1.png, id=1466, 289.08pt x 216.81pt>
+<figures/30-sam/vertical-regression-1.png, id=1451, 289.08pt x 216.81pt>
 File: figures/30-sam/vertical-regression-1.png Graphic file (type png)
 <use figures/30-sam/vertical-regression-1.png>
-Package pdftex.def Info: figures/30-sam/vertical-regression-1.png  used on input line 1647.
+Package pdftex.def Info: figures/30-sam/vertical-regression-1.png  used on input line 1643.
 (pdftex.def)             Requested size: 289.07928pt x 216.80946pt.
-LaTeX Info: Redefining \. on input line 1658.
-LaTeX Info: Redefining \% on input line 1658.
-[67 <./figures/30-sam/wave-amplitude-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1668.
-LaTeX Info: Redefining \% on input line 1668.
-[68 <./figures/30-sam/vertical-regression-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1712.
-LaTeX Info: Redefining \% on input line 1712.
-[69]
-<figures/30-sam/regr-air-season-1.png, id=1504, 433.62pt x 578.16pt>
+LaTeX Info: Redefining \. on input line 1654.
+LaTeX Info: Redefining \% on input line 1654.
+[66 <./figures/30-sam/wave-amplitude-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1664.
+LaTeX Info: Redefining \% on input line 1664.
+[67 <./figures/30-sam/vertical-regression-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1708.
+LaTeX Info: Redefining \% on input line 1708.
+[68]
+<figures/30-sam/regr-air-season-1.png, id=1490, 433.62pt x 578.16pt>
 File: figures/30-sam/regr-air-season-1.png Graphic file (type png)
 <use figures/30-sam/regr-air-season-1.png>
-Package pdftex.def Info: figures/30-sam/regr-air-season-1.png  used on input line 1736.
+Package pdftex.def Info: figures/30-sam/regr-air-season-1.png  used on input line 1732.
 (pdftex.def)             Requested size: 433.61894pt x 578.15858pt.
 
-LaTeX Warning: Float too large for page by 39.22858pt on input line 1741.
+LaTeX Warning: Float too large for page by 39.22858pt on input line 1737.
 
-LaTeX Info: Redefining \. on input line 1748.
-LaTeX Info: Redefining \% on input line 1748.
-[70]
-LaTeX Info: Redefining \. on input line 1748.
-LaTeX Info: Redefining \% on input line 1748.
-[71 <./figures/30-sam/regr-air-season-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1762.
-LaTeX Info: Redefining \% on input line 1762.
-[72]
-<figures/30-sam/global-pp-1.png, id=1533, 433.62pt x 238.491pt>
+LaTeX Info: Redefining \. on input line 1744.
+LaTeX Info: Redefining \% on input line 1744.
+[69]
+LaTeX Info: Redefining \. on input line 1744.
+LaTeX Info: Redefining \% on input line 1744.
+[70 <./figures/30-sam/regr-air-season-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1758.
+LaTeX Info: Redefining \% on input line 1758.
+[71]
+<figures/30-sam/global-pp-1.png, id=1521, 433.62pt x 238.491pt>
 File: figures/30-sam/global-pp-1.png Graphic file (type png)
 <use figures/30-sam/global-pp-1.png>
-Package pdftex.def Info: figures/30-sam/global-pp-1.png  used on input line 1767.
+Package pdftex.def Info: figures/30-sam/global-pp-1.png  used on input line 1763.
 (pdftex.def)             Requested size: 433.61894pt x 238.4904pt.
-<figures/30-sam/pp-regr-oceania-1.png, id=1536, 433.62pt x 469.755pt>
+<figures/30-sam/pp-regr-oceania-1.png, id=1524, 433.62pt x 469.755pt>
 File: figures/30-sam/pp-regr-oceania-1.png Graphic file (type png)
 <use figures/30-sam/pp-regr-oceania-1.png>
-Package pdftex.def Info: figures/30-sam/pp-regr-oceania-1.png  used on input line 1781.
+Package pdftex.def Info: figures/30-sam/pp-regr-oceania-1.png  used on input line 1777.
 (pdftex.def)             Requested size: 433.61894pt x 469.75386pt.
-LaTeX Info: Redefining \. on input line 1792.
-LaTeX Info: Redefining \% on input line 1792.
-[73 <./figures/30-sam/global-pp-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1792.
-LaTeX Info: Redefining \% on input line 1792.
-[74 <./figures/30-sam/pp-regr-oceania-1.png (PNG copy)>]
-<figures/30-sam/pp-regr-america-1.png, id=1558, 433.62pt x 614.295pt>
+LaTeX Info: Redefining \. on input line 1788.
+LaTeX Info: Redefining \% on input line 1788.
+[72 <./figures/30-sam/global-pp-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1788.
+LaTeX Info: Redefining \% on input line 1788.
+[73 <./figures/30-sam/pp-regr-oceania-1.png (PNG copy)>]
+<figures/30-sam/pp-regr-america-1.png, id=1547, 433.62pt x 614.295pt>
 File: figures/30-sam/pp-regr-america-1.png Graphic file (type png)
 <use figures/30-sam/pp-regr-america-1.png>
-Package pdftex.def Info: figures/30-sam/pp-regr-america-1.png  used on input line 1808.
+Package pdftex.def Info: figures/30-sam/pp-regr-america-1.png  used on input line 1804.
 (pdftex.def)             Requested size: 433.61894pt x 614.29349pt.
-LaTeX Info: Redefining \. on input line 1823.
-LaTeX Info: Redefining \% on input line 1823.
-[75]
-LaTeX Info: Redefining \. on input line 1823.
-LaTeX Info: Redefining \% on input line 1823.
-[76 <./figures/30-sam/pp-regr-america-1.png (PNG copy)>]
-<figures/30-sam/sam-eof-vertical-1.png, id=1582, 289.08pt x 289.08pt>
+LaTeX Info: Redefining \. on input line 1824.
+LaTeX Info: Redefining \% on input line 1824.
+[74]
+LaTeX Info: Redefining \. on input line 1824.
+LaTeX Info: Redefining \% on input line 1824.
+[75 <./figures/30-sam/pp-regr-america-1.png (PNG copy)>]
+<figures/30-sam/sam-eof-vertical-1.png, id=1569, 289.08pt x 289.08pt>
 File: figures/30-sam/sam-eof-vertical-1.png Graphic file (type png)
 <use figures/30-sam/sam-eof-vertical-1.png>
-Package pdftex.def Info: figures/30-sam/sam-eof-vertical-1.png  used on input line 1842.
+Package pdftex.def Info: figures/30-sam/sam-eof-vertical-1.png  used on input line 1838.
 (pdftex.def)             Requested size: 289.07928pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 1858.
-LaTeX Info: Redefining \% on input line 1858.
-[77]
-LaTeX Info: Redefining \. on input line 1858.
-LaTeX Info: Redefining \% on input line 1858.
-[78 <./figures/30-sam/sam-eof-vertical-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 1875.
-LaTeX Info: Redefining \% on input line 1875.
-[79]
+LaTeX Info: Redefining \. on input line 1856.
+LaTeX Info: Redefining \% on input line 1856.
+[76]
+LaTeX Info: Redefining \. on input line 1856.
+LaTeX Info: Redefining \% on input line 1856.
+[77 <./figures/30-sam/sam-eof-vertical-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 1871.
+LaTeX Info: Redefining \% on input line 1871.
+[78]
 Capítulo 5.
-[80
+[79
 
 ]
-Overfull \hbox (17.79407pt too wide) in paragraph at lines 1912--1913
+Overfull \hbox (17.79407pt too wide) in paragraph at lines 1908--1909
  []\T1/zpltlf/m/n/12 (-20) historical
  []
 
 
-Overfull \hbox (3.18161pt too wide) in paragraph at lines 1914--1915
+Overfull \hbox (3.18161pt too wide) in paragraph at lines 1910--1911
  \T1/zpltlf/m/n/12 (-20) GHG
  []
 
 
-Overfull \hbox (2.48785pt too wide) in paragraph at lines 1920--1921
+Overfull \hbox (2.48785pt too wide) in paragraph at lines 1916--1917
  \T1/zpltlf/m/n/12 (-20) stratO3
  []
 
 
-Overfull \hbox (17.79407pt too wide) in paragraph at lines 1928--1929
+Overfull \hbox (17.79407pt too wide) in paragraph at lines 1924--1925
  []\T1/zpltlf/m/n/12 (-20) historical
  []
 
 
-Overfull \hbox (3.18161pt too wide) in paragraph at lines 1930--1931
+Overfull \hbox (3.18161pt too wide) in paragraph at lines 1926--1927
  \T1/zpltlf/m/n/12 (-20) GHG
  []
 
 
-Overfull \hbox (2.48785pt too wide) in paragraph at lines 1936--1937
+Overfull \hbox (2.48785pt too wide) in paragraph at lines 1932--1933
  \T1/zpltlf/m/n/12 (-20) stratO3
  []
 
-LaTeX Info: Redefining \. on input line 1989.
-LaTeX Info: Redefining \% on input line 1989.
+LaTeX Info: Redefining \. on input line 1985.
+LaTeX Info: Redefining \% on input line 1985.
+[80]
+LaTeX Info: Redefining \. on input line 1985.
+LaTeX Info: Redefining \% on input line 1985.
 [81]
-LaTeX Info: Redefining \. on input line 1989.
-LaTeX Info: Redefining \% on input line 1989.
+LaTeX Info: Redefining \. on input line 2008.
+LaTeX Info: Redefining \% on input line 2008.
 [82]
-LaTeX Info: Redefining \. on input line 2012.
-LaTeX Info: Redefining \% on input line 2012.
-[83]
-<figures/50-cmip6/comparacion-r2-1.png, id=1717, 361.35pt x 433.62pt>
+<figures/50-cmip6/comparacion-r2-1.png, id=1704, 361.35pt x 433.62pt>
 File: figures/50-cmip6/comparacion-r2-1.png Graphic file (type png)
 <use figures/50-cmip6/comparacion-r2-1.png>
-Package pdftex.def Info: figures/50-cmip6/comparacion-r2-1.png  used on input line 2028.
+Package pdftex.def Info: figures/50-cmip6/comparacion-r2-1.png  used on input line 2024.
 (pdftex.def)             Requested size: 361.34912pt x 433.61894pt.
-<figures/50-cmip6/todos-ceof1-1.png, id=1718, 433.62pt x 578.16pt>
+<figures/50-cmip6/todos-ceof1-1.png, id=1705, 433.62pt x 578.16pt>
 File: figures/50-cmip6/todos-ceof1-1.png Graphic file (type png)
 <use figures/50-cmip6/todos-ceof1-1.png>
-Package pdftex.def Info: figures/50-cmip6/todos-ceof1-1.png  used on input line 2037.
+Package pdftex.def Info: figures/50-cmip6/todos-ceof1-1.png  used on input line 2033.
 (pdftex.def)             Requested size: 433.61894pt x 578.15858pt.
 
-LaTeX Warning: Float too large for page by 10.22858pt on input line 2042.
+LaTeX Warning: Float too large for page by 10.22858pt on input line 2038.
 
-<figures/50-cmip6/todos-ceof2-1.png, id=1719, 433.62pt x 578.16pt>
+<figures/50-cmip6/todos-ceof2-1.png, id=1706, 433.62pt x 578.16pt>
 File: figures/50-cmip6/todos-ceof2-1.png Graphic file (type png)
 <use figures/50-cmip6/todos-ceof2-1.png>
-Package pdftex.def Info: figures/50-cmip6/todos-ceof2-1.png  used on input line 2048.
+Package pdftex.def Info: figures/50-cmip6/todos-ceof2-1.png  used on input line 2044.
 (pdftex.def)             Requested size: 433.61894pt x 578.15858pt.
-LaTeX Info: Redefining \. on input line 2067.
-LaTeX Info: Redefining \% on input line 2067.
-[84]
-LaTeX Info: Redefining \. on input line 2067.
-LaTeX Info: Redefining \% on input line 2067.
-[85 <./figures/50-cmip6/comparacion-r2-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 2067.
-LaTeX Info: Redefining \% on input line 2067.
-[86 <./figures/50-cmip6/todos-ceof1-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 2067.
-LaTeX Info: Redefining \% on input line 2067.
-[87 <./figures/50-cmip6/todos-ceof2-1.png (PNG copy)>]
-<figures/50-cmip6/mmm-1.png, id=1745, 433.62pt x 289.08pt>
+LaTeX Info: Redefining \. on input line 2063.
+LaTeX Info: Redefining \% on input line 2063.
+[83]
+LaTeX Info: Redefining \. on input line 2063.
+LaTeX Info: Redefining \% on input line 2063.
+[84 <./figures/50-cmip6/comparacion-r2-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 2063.
+LaTeX Info: Redefining \% on input line 2063.
+[85 <./figures/50-cmip6/todos-ceof1-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 2063.
+LaTeX Info: Redefining \% on input line 2063.
+[86 <./figures/50-cmip6/todos-ceof2-1.png (PNG copy)>]
+<figures/50-cmip6/mmm-1.png, id=1733, 433.62pt x 289.08pt>
 File: figures/50-cmip6/mmm-1.png Graphic file (type png)
 <use figures/50-cmip6/mmm-1.png>
-Package pdftex.def Info: figures/50-cmip6/mmm-1.png  used on input line 2070.
+Package pdftex.def Info: figures/50-cmip6/mmm-1.png  used on input line 2066.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 2091.
-LaTeX Info: Redefining \% on input line 2091.
-[88 <./figures/50-cmip6/mmm-1.png (PNG copy)>]
-<figures/50-cmip6/cor-enso-plot-1.png, id=1753, 289.08pt x 433.62pt>
+LaTeX Info: Redefining \. on input line 2087.
+LaTeX Info: Redefining \% on input line 2087.
+[87 <./figures/50-cmip6/mmm-1.png (PNG copy)>]
+<figures/50-cmip6/cor-enso-plot-1.png, id=1741, 289.08pt x 433.62pt>
 File: figures/50-cmip6/cor-enso-plot-1.png Graphic file (type png)
 <use figures/50-cmip6/cor-enso-plot-1.png>
-Package pdftex.def Info: figures/50-cmip6/cor-enso-plot-1.png  used on input line 2097.
+Package pdftex.def Info: figures/50-cmip6/cor-enso-plot-1.png  used on input line 2093.
 (pdftex.def)             Requested size: 289.07928pt x 433.61894pt.
-<figures/50-cmip6/enso-phase-cmip-1.png, id=1754, 433.62pt x 361.35pt>
+<figures/50-cmip6/enso-phase-cmip-1.png, id=1742, 433.62pt x 361.35pt>
 File: figures/50-cmip6/enso-phase-cmip-1.png Graphic file (type png)
 <use figures/50-cmip6/enso-phase-cmip-1.png>
-Package pdftex.def Info: figures/50-cmip6/enso-phase-cmip-1.png  used on input line 2107.
+Package pdftex.def Info: figures/50-cmip6/enso-phase-cmip-1.png  used on input line 2103.
 (pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
-<figures/50-cmip6/arg-enso-density-1.png, id=1757, 433.62pt x 361.35pt>
+<figures/50-cmip6/arg-enso-density-1.png, id=1745, 433.62pt x 361.35pt>
 File: figures/50-cmip6/arg-enso-density-1.png Graphic file (type png)
 <use figures/50-cmip6/arg-enso-density-1.png>
-Package pdftex.def Info: figures/50-cmip6/arg-enso-density-1.png  used on input line 2118.
+Package pdftex.def Info: figures/50-cmip6/arg-enso-density-1.png  used on input line 2114.
 (pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
-<figures/50-cmip6/fft-ceof2-1.png, id=1761, 433.62pt x 433.62pt>
+<figures/50-cmip6/fft-ceof2-1.png, id=1749, 433.62pt x 433.62pt>
 File: figures/50-cmip6/fft-ceof2-1.png Graphic file (type png)
 <use figures/50-cmip6/fft-ceof2-1.png>
-Package pdftex.def Info: figures/50-cmip6/fft-ceof2-1.png  used on input line 2136.
+Package pdftex.def Info: figures/50-cmip6/fft-ceof2-1.png  used on input line 2132.
 (pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
-LaTeX Info: Redefining \. on input line 2156.
-LaTeX Info: Redefining \% on input line 2156.
-[89]
-LaTeX Info: Redefining \. on input line 2156.
-LaTeX Info: Redefining \% on input line 2156.
-[90 <./figures/50-cmip6/cor-enso-plot-1.png>]
-LaTeX Info: Redefining \. on input line 2156.
-LaTeX Info: Redefining \% on input line 2156.
-[91 <./figures/50-cmip6/enso-phase-cmip-1.png>]
-LaTeX Info: Redefining \. on input line 2156.
-LaTeX Info: Redefining \% on input line 2156.
-[92 <./figures/50-cmip6/arg-enso-density-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 2156.
-LaTeX Info: Redefining \% on input line 2156.
-[93 <./figures/50-cmip6/fft-ceof2-1.png (PNG copy)>]
-<figures/50-cmip6/sst-mmm-1.png, id=1786, 433.62pt x 238.491pt>
+LaTeX Info: Redefining \. on input line 2152.
+LaTeX Info: Redefining \% on input line 2152.
+[88]
+LaTeX Info: Redefining \. on input line 2152.
+LaTeX Info: Redefining \% on input line 2152.
+[89 <./figures/50-cmip6/cor-enso-plot-1.png>]
+LaTeX Info: Redefining \. on input line 2152.
+LaTeX Info: Redefining \% on input line 2152.
+[90 <./figures/50-cmip6/enso-phase-cmip-1.png>]
+LaTeX Info: Redefining \. on input line 2152.
+LaTeX Info: Redefining \% on input line 2152.
+[91 <./figures/50-cmip6/arg-enso-density-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 2152.
+LaTeX Info: Redefining \% on input line 2152.
+[92 <./figures/50-cmip6/fft-ceof2-1.png (PNG copy)>]
+<figures/50-cmip6/sst-mmm-1.png, id=1774, 433.62pt x 238.491pt>
 File: figures/50-cmip6/sst-mmm-1.png Graphic file (type png)
 <use figures/50-cmip6/sst-mmm-1.png>
-Package pdftex.def Info: figures/50-cmip6/sst-mmm-1.png  used on input line 2161.
+Package pdftex.def Info: figures/50-cmip6/sst-mmm-1.png  used on input line 2157.
 (pdftex.def)             Requested size: 433.61894pt x 238.4904pt.
-<figures/50-cmip6/cor-sst-regr-1.png, id=1788, 433.62pt x 289.08pt>
+<figures/50-cmip6/cor-sst-regr-1.png, id=1776, 433.62pt x 289.08pt>
 File: figures/50-cmip6/cor-sst-regr-1.png Graphic file (type png)
 <use figures/50-cmip6/cor-sst-regr-1.png>
-Package pdftex.def Info: figures/50-cmip6/cor-sst-regr-1.png  used on input line 2178.
+Package pdftex.def Info: figures/50-cmip6/cor-sst-regr-1.png  used on input line 2174.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 2191.
-LaTeX Info: Redefining \% on input line 2191.
-[94 <./figures/50-cmip6/sst-mmm-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 2191.
-LaTeX Info: Redefining \% on input line 2191.
-[95 <./figures/50-cmip6/cor-sst-regr-1.png (PNG copy)>]
-<figures/50-cmip6/cor-sam-cmip6-1.png, id=1800, 433.62pt x 361.35pt>
+LaTeX Info: Redefining \. on input line 2187.
+LaTeX Info: Redefining \% on input line 2187.
+[93 <./figures/50-cmip6/sst-mmm-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 2187.
+LaTeX Info: Redefining \% on input line 2187.
+[94 <./figures/50-cmip6/cor-sst-regr-1.png (PNG copy)>]
+<figures/50-cmip6/cor-sam-cmip6-1.png, id=1788, 433.62pt x 361.35pt>
 File: figures/50-cmip6/cor-sam-cmip6-1.png Graphic file (type png)
 <use figures/50-cmip6/cor-sam-cmip6-1.png>
-Package pdftex.def Info: figures/50-cmip6/cor-sam-cmip6-1.png  used on input line 2199.
+Package pdftex.def Info: figures/50-cmip6/cor-sam-cmip6-1.png  used on input line 2195.
 (pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
-<figures/50-cmip6/regresion-hgt-damip-1.png, id=1803, 433.62pt x 650.43pt>
+<figures/50-cmip6/regresion-hgt-damip-1.png, id=1791, 433.62pt x 650.43pt>
 File: figures/50-cmip6/regresion-hgt-damip-1.png Graphic file (type png)
 <use figures/50-cmip6/regresion-hgt-damip-1.png>
-Package pdftex.def Info: figures/50-cmip6/regresion-hgt-damip-1.png  used on input line 2225.
+Package pdftex.def Info: figures/50-cmip6/regresion-hgt-damip-1.png  used on input line 2221.
 (pdftex.def)             Requested size: 433.61894pt x 650.4284pt.
 
-LaTeX Warning: Float too large for page by 53.4984pt on input line 2230.
+LaTeX Warning: Float too large for page by 53.4984pt on input line 2226.
 
-LaTeX Info: Redefining \. on input line 2241.
-LaTeX Info: Redefining \% on input line 2241.
-[96]
-LaTeX Info: Redefining \. on input line 2241.
-LaTeX Info: Redefining \% on input line 2241.
-[97 <./figures/50-cmip6/cor-sam-cmip6-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 2241.
-LaTeX Info: Redefining \% on input line 2241.
-[98 <./figures/50-cmip6/regresion-hgt-damip-1.png (PNG copy)>]
-<figures/50-cmip6/series-largas-1.png, id=1827, 433.62pt x 289.08pt>
+LaTeX Info: Redefining \. on input line 2237.
+LaTeX Info: Redefining \% on input line 2237.
+[95]
+LaTeX Info: Redefining \. on input line 2237.
+LaTeX Info: Redefining \% on input line 2237.
+[96 <./figures/50-cmip6/cor-sam-cmip6-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 2237.
+LaTeX Info: Redefining \% on input line 2237.
+[97 <./figures/50-cmip6/regresion-hgt-damip-1.png (PNG copy)>]
+<figures/50-cmip6/series-largas-1.png, id=1815, 433.62pt x 289.08pt>
 File: figures/50-cmip6/series-largas-1.png Graphic file (type png)
 <use figures/50-cmip6/series-largas-1.png>
-Package pdftex.def Info: figures/50-cmip6/series-largas-1.png  used on input line 2244.
+Package pdftex.def Info: figures/50-cmip6/series-largas-1.png  used on input line 2240.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-LaTeX Info: Redefining \. on input line 2257.
-LaTeX Info: Redefining \% on input line 2257.
-[99 <./figures/50-cmip6/series-largas-1.png>]
-<figures/50-cmip6/trends-ceof1-1.png, id=1836, 433.62pt x 433.62pt>
+<figures/50-cmip6/trends-ceof1-1.png, id=1818, 433.62pt x 433.62pt>
 File: figures/50-cmip6/trends-ceof1-1.png Graphic file (type png)
 <use figures/50-cmip6/trends-ceof1-1.png>
-Package pdftex.def Info: figures/50-cmip6/trends-ceof1-1.png  used on input line 2260.
+Package pdftex.def Info: figures/50-cmip6/trends-ceof1-1.png  used on input line 2255.
 (pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
-<figures/50-cmip6/ceof-damip-1.png, id=1840, 433.62pt x 289.08pt>
+LaTeX Info: Redefining \. on input line 2260.
+LaTeX Info: Redefining \% on input line 2260.
+[98 <./figures/50-cmip6/series-largas-1.png>]
+<figures/50-cmip6/ceof-damip-1.png, id=1827, 433.62pt x 289.08pt>
 File: figures/50-cmip6/ceof-damip-1.png Graphic file (type png)
 <use figures/50-cmip6/ceof-damip-1.png>
-Package pdftex.def Info: figures/50-cmip6/ceof-damip-1.png  used on input line 2289.
+Package pdftex.def Info: figures/50-cmip6/ceof-damip-1.png  used on input line 2284.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
-<figures/50-cmip6/mapa-trend-1.png, id=1843, 433.62pt x 455.301pt>
+<figures/50-cmip6/mapa-trend-1.png, id=1830, 433.62pt x 455.301pt>
 File: figures/50-cmip6/mapa-trend-1.png Graphic file (type png)
 <use figures/50-cmip6/mapa-trend-1.png>
-Package pdftex.def Info: figures/50-cmip6/mapa-trend-1.png  used on input line 2300.
+Package pdftex.def Info: figures/50-cmip6/mapa-trend-1.png  used on input line 2295.
 (pdftex.def)             Requested size: 433.61894pt x 455.29988pt.
-LaTeX Info: Redefining \. on input line 2313.
-LaTeX Info: Redefining \% on input line 2313.
-[100]
-LaTeX Info: Redefining \. on input line 2313.
-LaTeX Info: Redefining \% on input line 2313.
-[101 <./figures/50-cmip6/trends-ceof1-1.png>]
-LaTeX Info: Redefining \. on input line 2313.
-LaTeX Info: Redefining \% on input line 2313.
-[102 <./figures/50-cmip6/ceof-damip-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 2313.
-LaTeX Info: Redefining \% on input line 2313.
-[103 <./figures/50-cmip6/mapa-trend-1.png (PNG copy)>]
-<figures/50-cmip6/suma-1.png, id=1864, 433.62pt x 216.81pt>
+LaTeX Info: Redefining \. on input line 2308.
+LaTeX Info: Redefining \% on input line 2308.
+[99]
+LaTeX Info: Redefining \. on input line 2308.
+LaTeX Info: Redefining \% on input line 2308.
+[100 <./figures/50-cmip6/trends-ceof1-1.png>]
+LaTeX Info: Redefining \. on input line 2308.
+LaTeX Info: Redefining \% on input line 2308.
+[101 <./figures/50-cmip6/ceof-damip-1.png (PNG copy)>]
+LaTeX Info: Redefining \. on input line 2308.
+LaTeX Info: Redefining \% on input line 2308.
+[102 <./figures/50-cmip6/mapa-trend-1.png (PNG copy)>]
+<figures/50-cmip6/suma-1.png, id=1852, 433.62pt x 216.81pt>
 File: figures/50-cmip6/suma-1.png Graphic file (type png)
 <use figures/50-cmip6/suma-1.png>
-Package pdftex.def Info: figures/50-cmip6/suma-1.png  used on input line 2326.
+Package pdftex.def Info: figures/50-cmip6/suma-1.png  used on input line 2321.
 (pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+LaTeX Info: Redefining \. on input line 2337.
+LaTeX Info: Redefining \% on input line 2337.
+[103 <./figures/50-cmip6/suma-1.png (PNG copy)>]
 LaTeX Info: Redefining \. on input line 2342.
 LaTeX Info: Redefining \% on input line 2342.
-[104 <./figures/50-cmip6/suma-1.png (PNG copy)>]
-LaTeX Info: Redefining \. on input line 2347.
-LaTeX Info: Redefining \% on input line 2347.
-[105]
+[104]
 Capítulo 6.
-[106
+[105
 
-] [107] [108] [109] [110] [111] [112
+] [106] [107] [108] [109] [110] [111
 
 
 ]
-Underfull \hbox (badness 1661) in paragraph at lines 2509--2511
+Underfull \hbox (badness 1661) in paragraph at lines 2503--2505
 []\T1/zpltlf/m/n/12 (+20) Campitelli, E. (2023). \T1/zpltlf/m/it/12 (+20) Rc-mip6\T1/zpltlf/m/n/12 (+20) . Ze-no-do. []$\T1/npxtt/m/n/12 https : / / doi . org / 10 . 5281 / zenodo .
  []
 
-LaTeX Info: Redefining \. on input line 2517.
-LaTeX Info: Redefining \% on input line 2517.
+LaTeX Info: Redefining \. on input line 2511.
+LaTeX Info: Redefining \% on input line 2511.
+[112]
+LaTeX Info: Redefining \. on input line 2547.
+LaTeX Info: Redefining \% on input line 2547.
 [113]
-LaTeX Info: Redefining \. on input line 2553.
-LaTeX Info: Redefining \% on input line 2553.
+LaTeX Info: Redefining \. on input line 2584.
+LaTeX Info: Redefining \% on input line 2584.
 [114]
-LaTeX Info: Redefining \. on input line 2590.
-LaTeX Info: Redefining \% on input line 2590.
+LaTeX Info: Redefining \. on input line 2613.
+LaTeX Info: Redefining \% on input line 2613.
 [115]
-LaTeX Info: Redefining \. on input line 2619.
-LaTeX Info: Redefining \% on input line 2619.
+LaTeX Info: Redefining \. on input line 2643.
+LaTeX Info: Redefining \% on input line 2643.
 [116]
-LaTeX Info: Redefining \. on input line 2649.
-LaTeX Info: Redefining \% on input line 2649.
+LaTeX Info: Redefining \. on input line 2676.
+LaTeX Info: Redefining \% on input line 2676.
 [117]
-LaTeX Info: Redefining \. on input line 2682.
-LaTeX Info: Redefining \% on input line 2682.
+LaTeX Info: Redefining \. on input line 2710.
+LaTeX Info: Redefining \% on input line 2710.
 [118]
-LaTeX Info: Redefining \. on input line 2716.
-LaTeX Info: Redefining \% on input line 2716.
+LaTeX Info: Redefining \. on input line 2746.
+LaTeX Info: Redefining \% on input line 2746.
 [119]
-LaTeX Info: Redefining \. on input line 2752.
-LaTeX Info: Redefining \% on input line 2752.
+LaTeX Info: Redefining \. on input line 2778.
+LaTeX Info: Redefining \% on input line 2778.
 [120]
-LaTeX Info: Redefining \. on input line 2784.
-LaTeX Info: Redefining \% on input line 2784.
+LaTeX Info: Redefining \. on input line 2814.
+LaTeX Info: Redefining \% on input line 2814.
 [121]
-LaTeX Info: Redefining \. on input line 2820.
-LaTeX Info: Redefining \% on input line 2820.
-[122]
-LaTeX Info: Redefining \. on input line 2853.
-LaTeX Info: Redefining \% on input line 2853.
-[123] (./tesis.aux
+LaTeX Info: Redefining \. on input line 2847.
+LaTeX Info: Redefining \% on input line 2847.
+[122] (./tesis.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -1962,21 +1957,21 @@ LaTeX2e <2023-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `tesis.out' has not changed.
-(rerunfilecheck)             Checksum: BC4CCDB6FCB8831043AD915D4440CF60;8939.
+(rerunfilecheck)             Checksum: C0EBAC4D2DBDA15125EE38EA7A1D15AB;8591.
  ) 
 Here is how much of TeX's memory you used:
- 33153 strings out of 476100
- 613788 string characters out of 5792385
- 2007457 words of memory out of 5000000
- 53841 multiletter control sequences out of 15000+600000
- 630334 words of font info for 237 fonts, out of 8000000 for 9000
+ 33133 strings out of 476091
+ 613482 string characters out of 5792206
+ 2008525 words of memory out of 5000000
+ 53833 multiletter control sequences out of 15000+600000
+ 630288 words of font info for 236 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,12n,101p,1002b,811s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/NewPXMI.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/NewPXMI_gnu.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/pxmiaX.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/pxsys.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newtx/txexs.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/zplb.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/zplr.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/zplri.pfb>
-Output written on tesis.pdf (141 pages, 14528794 bytes).
+Output written on tesis.pdf (140 pages, 16891268 bytes).
 PDF statistics:
- 2294 PDF objects out of 2487 (max. 8388607)
- 2022 compressed objects within 21 object streams
- 458 named destinations out of 1000 (max. 500000)
- 35551 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 2283 PDF objects out of 2487 (max. 8388607)
+ 2012 compressed objects within 21 object streams
+ 457 named destinations out of 1000 (max. 500000)
+ 35535 words of extra memory for PDF output out of 35830 (max. 10000000)
 

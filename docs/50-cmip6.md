@@ -272,9 +272,9 @@ Por otro lado, la señal asociada a la fase de 90º del cEOF1 sí muestra valore
 <p class="caption">(\#fig:cor-sst-regr)(ref:cor-sst-regr-cap)</p>
 </div>
 
-Para tener una visión global y quantitativa de esta comparación, la Figura \@ref(fig:cor-sst-regr) muestra el $r^2$ entre las regresiones de TSM asociada con la fase de 90º del cEOF2 para cada modelo y la correspondiente regresión para ERA5..
+Para tener una visión global y cuantitativa de esta comparación, la Figura \@ref(fig:cor-sst-regr) muestra el $r^2$ entre las regresiones de TSM asociada con la fase de 90º del cEOF2 para cada modelo y la correspondiente regresión para ERA5.
 En la mayoría de los modelos el patrón es similar al observado, excepto por INM-CM5-0.
-Las regresiones asociadas con la fase de 0º del cEOF2, en cambio, tiene baja similitud con el observado en casi todos los modelos.
+Las regresiones asociadas con la fase de 0º del cEOF2, en cambio, tienen baja similitud con el observado en casi todos los modelos.
 Posiblemente esto se deba al exceso de señal presente en la región del ENSO.
 
 ### Relación con el SAM
@@ -297,7 +297,7 @@ Se encuentra que la relación entre el cEOF1 y el SAM en los modelos del CMIP6 e
 En cuanto al cEOF2, los modelos del CMIP6 capturan correctamente la falta de correlación entre fase de 0º del cEOF2 y el SAM y el S-SAM (paneles c.1 y c.3), pero tienen un nivel de correlación más alto de lo esperado con el A-SAM en la tropósfera (panel c.2).
 La fase de 90º, en cambio, no muestra la relación observada con el SAM en la tropósfera (panel d.1).
 A pesar de esto, sí tiene una relación alta con el A-SAM (panel d.2).
-Esto implícitamente sugiere que los modelos CMIP6 no capturan correctamente la relación entre el PSA2 el SAM, pero esta relación sí aparece si se filtra sólo la variabilidad de la parte asimétrica del SAM.
+Esto implícitamente sugiere que los modelos CMIP6 no capturan correctamente la relación entre el PSA2 y el SAM, pero esta relación sí aparece si se filtra sólo la variabilidad de la parte asimétrica del SAM.
 
 ## Tendencias
 
@@ -306,7 +306,7 @@ Esto implícitamente sugiere que los modelos CMIP6 no capturan correctamente la 
 De la sección anterior surge que los modelos del CMIP6 logran capturar la estructura espacial de los cEOFs correctamente y que algunos modelos capturan también su variabilidad y relación con otras componentes del sistema climático.
 
 En esta sección, se utilizaron las corridas largas de estos modelos y los experimentos de DAMIP para estudiar las tendencias a largo plazo y sus posibles forzantes.
-Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, se proyectaron los campos espaciales de los dos cEOFs del período 1979\--2014 en los campos desde 1850 hasta 2014.
+Para extender las series temporales para todo el período disponible en CMIP6 y DAMIP, se proyectaron los campos espaciales de los dos cEOFs del período 1979--2014 en los campos desde 1850 hasta 2014.
 
 
 
@@ -327,15 +327,14 @@ Estas regresiones se muestran en la Figura \@ref(fig:regresion-hgt-damip) para e
 Si bien la localización general de los máximos es similar en todos los experimentos, en el experimento historical, la fase de 0º está asociada a una onda 1 mientras que la fase de 90º está asociada un monopolo con el centro sobre la Antártida oriental (Fig. \@ref(fig:regresion-hgt-damip) fila a).
 Esto es lo contrario de lo observado en ERA5, donde la fase de 0º era la asociada a una estructura más zonalmente simétrica (Fig. \@ref(fig:eof1-regr-gh)).
 Esto ocurre también para el experimento hist-stratO3, aunque en la fase 90 se observa mas bien una onda 1 que un monopolo (Fig \@ref(fig:regresion-hgt-damip), fila c).
-Por otra parte, las regresiones para el experimento hist-aer (Fig. \@ref(fig:regresion-hgt-damip) fila e) son mas similares a las observadas así como aquellas para el experimento hist-GHG (Fig. \@ref(fig:regresion-hgt-damip) fila b) y en menor medida para el experimento hist-nat (Fig. \@ref(fig:regresion-hgt-damip), fila d).
+Por otra parte, las regresiones para el experimento hist-aer (Fig. \@ref(fig:regresion-hgt-damip) fila e) son mas similares a las observadas, así como aquellas para el experimento hist-GHG (Fig. \@ref(fig:regresion-hgt-damip) fila b) y en menor medida para el experimento hist-nat (Fig. \@ref(fig:regresion-hgt-damip), fila d).
 
 <div class="figure" style="text-align: center">
 <img src="figures/50-cmip6/series-largas-1.png" alt="(ref:series-largas-cap)" width="900"  />
 <p class="caption">(\#fig:series-largas)(ref:series-largas-cap)</p>
 </div>
 
-(ref:series-largas-cap) 
-Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran las series de cada de cada modelo.
+(ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran las series de cada de cada modelo.
 
 La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período.
 La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando alrededor de 1940, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
@@ -393,11 +392,11 @@ Para la fase de 0º del cEOF1, ni hist-nat ni hist-aer muestran tendencias signi
 Por otro lado, hist-stratO3 muestra una tendencia mucho mayor a la observada e hist-GHG muestra una tendencia negativa de similar magnitud la de hist-stratO3.
 Esto sugiere que el ozono estratosférico y los gases de efecto invernadero tienen efectos contrarios sobre esta fase del cEOF1.
 
-El efecto de la tendencia de la fase de 0º del cEOF1 en el experimento hist-GHG en la altura geopotencial de 50 hPa es una leve anomalía negativa sobre el Mar de Ross.
+El efecto de la tendencia de la fase de 0º del cEOF1 en el experimento hist-GHG en la altura geopotencial de 50 hPa es una leve anomalía negativa sobre el Mar de Ross (Fig. \@ref(fig:mapa-trend) b.1).
 Este patrón indicaría un aumento del jet al Sur de Nueva Zelanda.
 Este efecto es opuesto al efecto en el experimento hist-stratO3
 
-(ref:suma-cap) Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical (azul) y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer, es decir, los que consideran cambios antropogénicos (rojo).
+(ref:suma-cap) Media multimodelo de las series temporales estandarizadas de las fases de 0º y 90º del cEOF1 para el experimento historical (azul) y para la suma de los experimentos hist-GHG, hist-stratO3 e hist-aer, es decir, los que consideran cambios antropogénicos (rojo). La líneas gruesas indican un suavizado usado regresión local. 
 
 <div class="figure" style="text-align: center">
 <img src="figures/50-cmip6/suma-1.png" alt="(ref:suma-cap)" width="900"  />
@@ -413,5 +412,5 @@ Los modelos del CMIP6 consiguen caracterizar la estructura espacial de los cEOFs
 La habilidad de los modelos de capturar sus características de segundo orden, como la relación con el ENSO y el SAM no es tan buena ni homogénea entre modelos.
 Sólo algunos modelos, como MIROC6 y CESM2 consiguen capturar con todas sus características la influencia del ENSO en la fase del cEOF2 y la relación de la mayoría de los modelos con el SAM es menor a la observada.
 
-La tendencia levement positiva de la fase de 0º del cEOF1 es capturada por la media multimodelo y el análisis de las corridas de DAMIP indican que está principalmente asociada por el forzarte del ozono estratosférico parcialmente compensado por el forzante de los gases de efecto invernadero.
+La tendencia levemente positiva de la fase de 0º del cEOF1 es capturada por la media multimodelo y el análisis de las corridas de DAMIP indican que está principalmente asociada por el forzarte del ozono estratosférico parcialmente compensado por el forzante de los gases de efecto invernadero.
 Los modelos del CMIP6 también presentan una tendencia negativa importante en la fase de 90º del cEOF1 no presente en las observaciones que la asocian con el forzante de gases de efecto invernadero principalmente y en menor medida con el forzante del ozono y compensados con el forzante de los aerosoles.

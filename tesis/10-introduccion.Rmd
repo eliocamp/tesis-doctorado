@@ -9,17 +9,17 @@ Estas asimetrías zonales no han sido estudiadas extensivamente, pero en trabajo
 
 La circulación zonalmente asimétrica suele describirse en base a la amplitud y la fase de las ondas zonales obtenidas por la descomposición de Fourier de la altura geopotencial o de la presión a nivel del mar en cada latitud [p.ej., @vanloon1972; @trenberth1980a; @turner2017].
 Bajo este enfoque, las ondas zonales 1 y 3 explican casi el 99% de la varianza total del campo medio anual de las anomalías zonales de altura geopotencial de 500 hPa en 50ºS [@vanloon1972].
-@trenberth1985 concluyó que la onda 3 tiene un rol importante en el desarrollo de los fenómenos de bloqueo.
+@trenberth1985 concluyeron que la onda 3 tiene un rol importante en el desarrollo de los fenómenos de bloqueo.
 Además, otros trabajos previos identificaron patrones de onda con números de onda dominantes 3-4 en latitudes extratropicales y subpolares con impactos regionales distintivos, como en las anomalías en la concentración de hielo marino antártico [@raphael2007].
 
-Con el propósito de identificar los factores importantes en el mantenimiento de la onda zonal 1 climatológica, @quintanar1995a realizó un conjunto de experimentos de sensibilidad.
+Con el propósito de identificar los factores importantes en el mantenimiento de la onda zonal 1 climatológica, @quintanar1995a realizaron un conjunto de experimentos de sensibilidad.
 Encontró que ni la temperatura ni la orografía de la Antártida eran suficientes para explicar la amplitud de esta onda en latitudes subpolares, por lo que concluyó que los forzantes remotos debían jugar un papel importante.
 Sin embargo, @watterson1992 y más recientemente @goyal2021a sugieren que la orografía antártica sí genera una onda 1 significativa.
 Por otro lado @wang2013 encontraron que la destrucción y recuperación de la capa de ozono por forzantes antropogénicos está asociada a un aumento y disminución de la actividad de las ondas planetarias, respectivamente, pero su análisis no distingue cómo se modifican los distintos números de onda.
 
 En cuanto a la onda zonal 3, @campitelli2018b realizó un estudio de sus propiedades y climatología.
 Encontró que la onda zonal 3 mensual alcanza su máximo de amplitud entre 200 y 300 hPa y en 50ºS.
-Además, la fase de esta onda zonal tiene un ciclo anual de aproximadamente 30ºS entre enero y junio, en coincidencia con lo observado por @mo1985.
+Además, la fase de esta onda zonal tiene un ciclo anual de aproximadamente 30º entre enero y junio, en coincidencia con lo observado por @mo1985.
 Excepto en noviembre y diciembre, la fase varía poco año a año con respecto a la fase media mensual, lo cual explica su relevancia en el campo medio.
 En estos dos meses, en cambio, su fase es tan variable que no es posible hablar de una onda zonal 3 climatológica.
 
@@ -46,11 +46,11 @@ No obstante, se limitan a los modos de oscilación estacionarios y no pueden rep
 Un único EOF también puede representar una mezcla de dos o más modos físicos.
 
 Una tercera metodología comúnmente utilizada para describir anomalías de circulación consiste en identificar características particulares de interés y crear índices utilizando métodos simples como promedios y diferencias.
-Ejemplos de esta metodología son el índice SAM de @gong1999, el índice de actividad de la onda 3 hemisferio sur definido por @raphael2004 y el índice de circulación zonalmente asimétrica hemisferio sur de @hobbs2010.
-Estos métodos derivados se fundamentan en otros métodos, como la descomposición de Fourier o las EOF, para identificar los centros de acción de los fenómenos descritos y pueden ser útiles para caracterizar rasgos que no se aprecian fácilmente con estos métodos.
+Ejemplos de esta metodología son el índice SAM de @gong1999, el índice de actividad de la onda 3 hemisferio sur definido por @raphael2004 y el índice de circulación zonalmente asimétrica del hemisferio sur de @hobbs2010.
+Estos métodos derivados se fundamentan en otras técnicas, como la descomposición de Fourier o las EOF, para identificar los centros de acción de los fenómenos descritos y pueden ser útiles para caracterizar rasgos que no se aprecian fácilmente mediante las mismas. 
 Este tipo de índices suelen ser fáciles de calcular, pero no suelen captar patrones no estacionarios.
 
-En conclusión, las metodologías usadas en la literatura para estudiar la circulación atmosférica de gran escala no son apropiadas para el estudio de la onda3, la cual es un patrón ondulatorio no estacionario con propagación meridional y amplitud no constante a lo largo de un círculo de latitud.
+En conclusión, las metodologías usadas en la literatura para estudiar la circulación atmosférica de gran escala no son apropiadas para el estudio de la onda 3, la cual es un patrón ondulatorio no estacionario con propagación meridional y amplitud no constante a lo largo de un círculo de latitud.
 
 Una metodología alternativa que se ha propuesto para estudiar las ondas propagantes y estacionarias son las funciones ortogonales empíricas complejas [cEOF, @horel1984].
 Este método amplía el análisis EOF para capturar oscilaciones con amplitud y fase variables y se ha aplicado al dominio temporal.
@@ -63,7 +63,7 @@ El objetivo de esta tesis es entonces mejorar la descripción y comprensión de 
 1.  La identificación de los patrones principales de variabilidad de las asimetrías zonales identificándolas con el método de cEOF, porque permite considerar ondas planetarias de fase variable con amplitud variable.
     Se pone especial atención en el patrón de onda 1 y onda 3 por el conocimiento previo de su importante influencia tanto en la circulación extratropical del hemisferio sur como en el clima de sus continentes.
 
-2.  La exploración de las condiciones dinámicas estratosféricas, troposféricas y de superficie que explican la actividad de los patrones principales identificados en 1).
+2.  La exploración de las condiciones dinámicas estratosféricas, troposféricas y de superficie que explican la actividad de los patrones principales identificados en 1.
 
 3.  La exploración de las características simétricas y asimétricas del SAM a través de metodologías innovadoras, teniendo en cuenta que es el primer patrón de variabilidad temporal de la circulación extratropical del hemisferio sur.
 

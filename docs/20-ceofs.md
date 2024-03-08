@@ -567,7 +567,7 @@ En latitudes más altas, se observan valores moderados sobre el este de Australi
 Dado que el cEOF1 tiene una señal relativamente débil en las variables de superficie exploradas, se analizó con mayor profundidad la influencia del cEOF2 sobre estas dos variables.
 En la Figura \@ref(fig:pp-temp-2) se muestran los mapas de regresión de las anomalías de precipitación (columna 1) y de temperatura del aire a 2 metros (columna 2) para diferentes fases del cEOF2 normalizado.
 
-(ref:pp-temp-2-cap) Regresión de la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos) (columna 1), y la precipitación (correlación, columna 2) sobre diferentes fases de cEOF2 para el trimestre SON del periodo 1979--2020. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.
+(ref:pp-temp-2-cap) Regresión de la precipitación (correlación, columna 1) y la temperatura de 2 metros (K, sombreado) y la altura geopotencial de 850 hPa (m, contornos, columna 2) sobre diferentes fases de cEOF2 para el trimestre SON del periodo 1979--2020. Áreas con puntos marcan regiones donde el p-valor es menor que 0,01 ajustado por FDR.
 
 <div class="figure" style="text-align: center">
 <img src="figures/20-ceofs/pp-temp-2-1.png" alt="(ref:pp-temp-2-cap)" width="900"  />
@@ -582,8 +582,8 @@ Sobre los continentes, las fase de 90º (Fig.\@ref(fig:pp-temp-2)b.2) está asoc
 Las anomalías de temperatura asociadas a la fase de 0º (Fig.\@ref(fig:pp-temp-2)d.2) son menos extensas y se limitan a latitudes medias y altas.
 Sobre los continentes, las regresiones de las anomalías de temperatura no son significativas, excepto las anomalías positivas cerca de la Península Antártica.
 
-Las anomalías de precipitación tropicales asociadas a la fase de 90º del cEOF2 son importantes, con anomalías positivas en el Pacífico central y el Índico occidental, y anomalías negativas en el Pacífico oriental (Fig.\@ref(fig:pp-temp-2)b.2).
-Este campo es consistente con el mapa de regresión de la TSM (Fig.\@ref(fig:pp-temp-2)b.1), ya que las anomalías positivas de la TSM potencian la convección tropical y las anomalías negativas de la TSM la inhiben.
+Las anomalías de precipitación tropicales asociadas a la fase de 90º del cEOF2 son importantes, con anomalías positivas en el Pacífico central y el Índico occidental, y anomalías negativas en el Pacífico oriental (Fig.\@ref(fig:pp-temp-2)b.1).
+Este campo es consistente con el mapa de regresión de la TSM (Fig.\@ref(fig:sst-psi-2)b.1), ya que las anomalías positivas de la TSM potencian la convección tropical y las anomalías negativas de la TSM la inhiben.
 
 En los extratrópicos, la fase de 90º del cEOF2 se asocia a condiciones más secas sobre el este de Australia y el océano circundante, que es una señal similar a la asociada al ENSO [@cai2011].
 Sin embargo, esta es la fase más fuertemente correlacionada con la precipitación en esa zona.

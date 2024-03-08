@@ -1077,7 +1077,7 @@ ceof_largo_p %>%
   facet_grid(cEOF ~ part, labeller = labeller(part = lab_cplx))
 ```
 
-(ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran las series de cada de cada modelo.
+(ref:series-largas-cap) Series temporales de anomalías estandarizadas de los cEOFs computados usando el período 1850 – 2014 promediadas para cada modelo (líneas translúcidas) y su media multimodelo (línea oscura). Las anomalías están computadas con respecto a la media entre 1850 y 1900. En líneas translúcidas se muestran las series de cada modelo.
 
 La Figura \@ref(fig:series-largas) muestra las series temporales durante todo el período.
 La fase de 0º del cEOF1 tiene una pequeña tendencia positiva comenzando alrededor de `r trend_base`, consistente con la tendencia observada en ERA5 (Fig. \@ref(fig:extended-series)).
@@ -1148,10 +1148,10 @@ Además, los modelos no son consistentes en sus tendencias y sólo algunos model
 Por otro lado, las tendencias de la fase de 90º son más consistentes.
 
 Estas tendencias son incompatibles con la variabilidad del cEOF1 observado, el cual tiene una tendencia positiva de su fase de 0º y ninguna tendencia en su fase de 90º.
-Es posible los modelos tengan algún problema fundamental al capturar la variabilidad a largo plazo de este modo, ya sea por falencias en la dinámica interna o por algún problema con el forzante involucrado.
+Es posible que los modelos tengan algún problema fundamental al capturar la variabilidad a largo plazo de este modo, ya sea por falencias en la dinámica interna o por algún problema con el forzante involucrado.
 
 También es posible que la tendencia observada se deba a variabilidad interna de baja frecuencia.
-En este caso, no sería esperable que los modelos capturen correctamente la fase de esta variabilidad, por lo que no sería observable ni en la media multimodelo ni en en las tendencias de cada miembro particularmente en el período `r trend_base`--2014.
+En este caso, no sería esperable que los modelos capturen correctamente la fase de esta variabilidad, por lo que no sería observable ni en la media multimodelo ni en las tendencias de cada miembro particularmente en el período `r trend_base`--2014.
 ERA5 puede considerarse como una realización particular del ensamble climático y es posible que la tendencia particular observada no sea necesariamente representativa del forzante externo.
 
 Alternativamente, dado que el cEOF1 captura el campo medio de las anomalías zonales de altura geopotencial y que los distintos modelos de CMIP6 tienen potencialmente un campo medio distinto a ERA5, es posible que la rotación elegida del cEOF1 no sea la ideal para capturar la variabilidad de largo plazo compatible con lo observado en ERA5.

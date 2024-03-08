@@ -32,7 +32,7 @@ El segundo modo obtenido a partir del análisis cEOF (cEOF2) representa una estr
 Se encontró que está fuertemente asociado con trenes de onda del tipo PSA.
 Además, es una forma alternativa de representar a los modos PSA1 y PSA2 (que surgen del tradicional análisis de EOF) como un único modo conjunto con una amplitud y una fase continua.
 Al igual que el cEOF1, este segundo modo presenta vinculación con el SAM, pero a diferencia del primer modo, la variabilidad del cEOF2 está fuertemente influenciada por la variabilidad tropical.
-Además se mostró que que el cEOF2 surge como un modo de variabilidad interna de la atmósfera extratropical, aunque en ausencia del forzante tropical carece de una fase preferencial.
+Además se mostró que el cEOF2 surge como un modo de variabilidad interna de la atmósfera extratropical, aunque en ausencia del forzante tropical carece de una fase preferencial.
 El forzante tropical no influye significativamente en su intensidad, pero sí tiende a determinar una fase estacionaria.
 Esto es consistente con @cai2002, quienes encontraron a partir de simulaciones con un modelo de circulación general acoplado que se puede desarrollar actividad tipo PSA aún con condiciones medias climatológicas en el océano superficial, removiendo la variabilidad de tipo ENSO, pero que la actividad de uno de los modos PSA se incrementa al incluirla.
 
@@ -99,6 +99,6 @@ La variabilidad anular con el S-SAM, el vórtice polar con el cEOF1 y los trenes
 
 Estos resultados abren la puerta a muchas investigaciones futuras.
 Es necesario extender el estudio a otros trimestres además de SON, así como adentrar en el impacto de estos modos en otras variables del sistema climático.
-Queda pendiente estudiar en más detalle cómo se comporta el el cEOF2 en ausencia de variabilidad tropical y cuál es su relación con la variabilidad del vórtice polar.
+Queda pendiente estudiar en más detalle cómo se comporta el cEOF2 en ausencia de variabilidad tropical y cuál es su relación con la variabilidad del vórtice polar.
 A su vez, quedan sin dilucidar los mecanismos que establecen la relación entre el S-SAM y el A-SAM/cEOF2, los cuales pueden ser estudiados mediante simulaciones de sensibilidad.
 En cuanto a los modelos de CMIP6, un estudio más detallado de las propiedades de cada modelo podría permitir entender qué procesos son importantes para una correcta caracterización de la circulación asimétrica y sus tendencias.

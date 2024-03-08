@@ -769,7 +769,7 @@ indices %>%
               size = 0.2, alpha = 0.2) +
   geom_line(aes(color = type)) +
   scale_x_level() +
-  scale_y_continuous("Vambio en varianza explicada por década", 
+  scale_y_continuous("Cambio en varianza explicada por década", 
                      label = scales::percent_format(1)) +
   scale_fill_brewer(NULL, palette = "Dark2", aesthetics = c("color", "fill"), labels = lab_sam) +
   coord_flip() +
@@ -880,7 +880,7 @@ ggplot(gdata[lev == 50], aes(lon, lat)) +
 ```
 
 En la estratosfera, el patrón espacial descrito por la regresión asociada al SAM está claramente dominado por un monopolo que no está centrado en el Polo Sur (Fig. \@ref(fig:2d-regr)a.1).
-En cambio, el patrón asociado a la parte simétrica del SAM se caracteriza por una estructura de onda-1 con centros sobre el Pasaje de Drake en el Hemisferio Occidental y el Mar de Davis en el Hemisferio Oriental.
+En cambio, el patrón asociado a la parte asimétrica del SAM se caracteriza por una estructura de onda-1 con centros sobre el Pasaje de Drake en el Hemisferio Occidental y el Mar de Davis en el Hemisferio Oriental.
 Este eje se alinea con el defasaje del monopolo encontrado para el SAM (Fig. \@ref(fig:2d-regr).a.1).
 Por otra parte, el patrón asociado al S-SAM, es un monopolo más simétrico que el encontrado para el SAM aunque tampoco perfectamente centrado en el Polo Sur.
 
@@ -1106,7 +1106,7 @@ if (is_word()) {
 El patrón de la onda 3 de la Figura \@ref(fig:2d-regr)b.2 es muy similar al PSA [@mo1987; @kidson1988], que es un patrón de teleconexión asociado al ENSO [@karoly1989].
 Como se mencionó en la introducción de este capítulo, existen evidencias previas de que la actividad del ENSO y el SAM pueden estar relacionadas [@silvestri2009; @fogt2011a].
 Se analizó entonces la relación entre el SAM y sus componentes y el ENSO (medido por el Índice del Niño Oceánico [ONI, @bamston1997]) y se muestra en la Tabla \@ref(tab:enso-cor-table) para cada índice SAM y para cada trimestre y para todo el año.
-Mientras que la la correlación es significativa entre el SAM completo y ENSO considerando todo el año, solamente es significativa para los trimestres  DEF y SON.
+Mientras que la correlación es significativa entre el SAM completo y ENSO considerando todo el año, solamente es significativa para los trimestres  DEF y SON.
 Se encontró que esta relación es captada principalmente por el A-SAM, ya que este índice presenta correlaciones parciales significativas con el ENSO, mientras que las correlaciones con el S-SAM son todas menores y no significativas.
 Incluso en los trimestres donde la correlación entre SAM y ENSO es esencialmente nula (MAM y JJA), la correlación parcial entre el A-SAM y el ONI es mucho más alta; en efecto, en MAM  es significativa al nivel del 95%.
 El mismo análisis se realizó utilizando el Índice ENSO Multivariado [@wolter2011] y el Índice de Oscilación del Sur [@ropelewski1987], obteniendo resultados similares.
@@ -1114,7 +1114,7 @@ Esto último indica que estos resultados no dependen del índice ENSO utilizado.
 
 ### Impactos {#impacts}
 
-Para evaluar las diferencias en los impactos asociados a los índices SAM, A-SAM y S-SAM, se realió una regresión de la temperatura del aire a 2 metros y la precipitación a 2 metros sobre cada uno de los tres índices del SAM de 700 hPa.
+Para evaluar las diferencias en los impactos asociados a los índices SAM, A-SAM y S-SAM, se realió una regresión de la temperatura del aire a 2 metros y la precipitación sobre cada uno de los tres índices del SAM de 700 hPa.
 Como se mostró en secciones anteriores, los tres índices son muy coherentes en la troposfera, por lo que se seleccionó este nivel para representar la circulación troposférica por compatibilidad con la literatura previa.
 Las regresiones se realizaron sin quitarle la tendencia ni a las variables ni a los índices, pero el cálculo de las regresiones con valores sin tendencias no muestran diferencias importantes (no se muestra).
 
@@ -1509,16 +1509,16 @@ plot_pp("america")
 ```
 
 En Sudamérica (Fig. \@ref(fig:pp-regr-america)), la regresión anual muestra que la fase positiva del SAM está asociada con anomalías de precipitación negativas en el SESA y el sur de Chile, y anomalías positivas en el sudeste de Brasil, alrededor de la posición climatológica de la Zona de Convergencia del Atlántico Sur (SACZ) (Fig. \@ref(fig:pp-regr-america)a.1).
-Las figuras \@ref(fig:pp-regr-america)b.1 y c.1 muestran que mientras las señales sobre SESA y el sudeste de Brasil están asociadas significativamente con A-SAM, la del sur de Chile está relacionada con S-SAM.
+Las figuras \@ref(fig:pp-regr-america)a.2 y a.3 muestran que mientras las señales sobre SESA y el sudeste de Brasil están asociadas significativamente con A-SAM, la del sur de Chile está relacionada con S-SAM.
 
 Las regresiones estacionales reflejan un patrón similar al annual, excepto en invierno.
 Aunque no sean estadísticamente significativas, todas las estaciones muestran valores negativos en SESA y el sur de Chile junto con valores positivos en el sur de Brasil en relación con el SAM.
 La separación de estas características entre los mapas de regresión del A-SAM y S-SAM es también bastante consistente.
 En invierno la señal del SAM es levemente positiva en el SESA y al sur de Chile y levemente negativa en el centro de Chile.
 
-La circulación anómala a 700 hPa asociada al S-SAM (Fig. \@ref(fig:pp-regr-america)c.1) indica un flujo anómalo del este sobre el sur de Chile.
+La circulación anómala a 700 hPa asociada al S-SAM (Fig. \@ref(fig:pp-regr-america)a.3) indica un flujo anómalo del este sobre el sur de Chile.
 Esto conduce a una menor advección de aire húmedo desde el Océano Pacífico, que es la principal fuente de agua precipitable en esa región [@garreaud2007].
-Por otro lado, la circulación anómala asociada a valores positivos del A-SAM (Fig. \@ref(fig:pp-regr-america)b.1) en el Atlántico es anticiclónica al este y ciclónica al oeste de Sudamérica.
+Por otro lado, la circulación anómala asociada a valores positivos del A-SAM (Fig. \@ref(fig:pp-regr-america)a.2) en el Atlántico es anticiclónica al este y ciclónica al oeste de Sudamérica.
 Esto promueve un flujo anómalo del sudeste sobre el SESA que inhibe el flujo del chorro de baja altura desde Sudamérica hacia la región [p.ej. @silvestri2009; @zamboni2010].
 Se encontró que este mismo patrón está asociado con el aumento de las precipitaciones en el sur de Brasil durante los eventos de SACZ [@rosso2018].
 

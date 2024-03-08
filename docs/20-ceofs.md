@@ -224,7 +224,7 @@ Las Figuras \@ref(fig:ceofs-1) y \@ref(fig:extended-series) muestran las partes 
 El primer modo (cEOF1) explica el 82,2% de la varianza de las anomalías zonales, mientras que el segundo modo (cEOF2) explica una fracción menor (6,9%).
 En los patrones espaciales (Fig. \@ref(fig:ceofs-1)), las fases de 0º y 90º están en cuadratura por construcción, de modo que cada cEOF describe un único patrón ondulatorio cuya amplitud y fase está controlada por la magnitud y fase de su serie temporal.
 
-(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 y 200 hPa para el período 1979--2020. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Unidades arbitrarias.
+(ref:ceofs-1-cap) Patrones espaciales de los dos primeros cEOF de las anomalías zonales de altura geopotencial de SON en 50 (columna a) y 200 (columna b) hPa para el período 1979--2020. El sombreado corresponde a la fase 0º y los contornos, a la fase 90º. La proporción de varianza explicada por cada modo con respecto a la media zonal está indicada entre paréntesis. Unidades arbitrarias.
 
 <div class="figure" style="text-align: center">
 <img src="figures/20-ceofs/ceofs-1-1.png" alt="(ref:ceofs-1-cap)" width="900"  />
@@ -405,7 +405,7 @@ La Tabla \@ref(tab:psa-eof2) muestra las correlaciones entre las series temporal
 Como se anticipaba visualmente en la Figura \@ref(fig:eof2-regr-gh), existen   correlaciones positivas altas entre el PSA1 y la fase de 90º, y entre el PSA2 y la fase de 0º cEOF2.
 Por otro lado, no existe una relación significativa entre el PSA1 y la fase de 0º ni entre el PSA2 y la fase de 90º cEOF2.
 En consecuencia, el cEOF2 representa bien tanto la estructura espacial como la evolución temporal de los modos PSA, por lo que es posible establecer una asociación entre sus dos fases y los dos modos PSA.
-Es decir, la elección de fase para cEOF2 que maximiza la relación entre ENSO y la fase de 90º del cEOF2, también maximiza la asociación entre los componentes de cEOF2 y los modos PSA (no se muestra).
+Es decir, la fase del cEOF2 que tiene máxima correlación con el ENSO es la que tiene máxima correlación con el PSA1 y la fase del cEOF2 que tiene mínima correlación con el ENSO es la que tiene máxima correlación con el PSA2 (no se muestra).
 
 (ref:phase-histogram-cap) Histograma de la distribución de fases del cEOF2 para el periodo 1979--2020. Los intervalos están centrados en 90º, 0º, -90º, -180º con un ancho del intervalo de 90º. Las pequeñas líneas verticales cerca del eje horizontal marcan los valores de cada trimestre SON.
 
@@ -446,8 +446,7 @@ De esta forma, con la metodología de cEOF se puede caracterizar al PSA como un 
 </div>
 
 Para evaluar si la variabilidad de los cEOF analizados está relacionada con fuentes de variabilidad en la banda tropical se calculó la regresión de distintas fases de los cEOFs con las anomalías de TSM y con las anomalías zonales de función corriente en 200 hPa.
-La Figura \@ref(fig:psi-sst-explained-variance) muestra la varianza de cada variable explicada por cada cEOF.
-
+La Figura \@ref(fig:psi-sst-explained-variance) muestra la varianza de cada variable explicada por cada cEOF a partir de la regresión lineal múltiple de ambas fases. 
 
 El cEOF2, en cambio, se asocia con una gran proporción de la variabilidad tropical tanto de las anomalías de TSM como de las de función corriente (Fig. \@ref(fig:psi-sst-explained-variance) columna 2).
 Este modo comparte más de un 50% de la varianza con las TSM en el Pacífico central , sugiriendo la influencia del ENSO.
@@ -472,9 +471,9 @@ Este patrón es muy similar al patrón del ENSO positivo canónico [@bamston1997
 De hecho, existe una correlación significativa y muy alta entre el ONI y la serie temporal de la fase de 90º del cEOF2 (0,76 (CI: 0,6 -- 0,87)).
 Además del patrón similar al ENSO del Pacífico, también hay anomalías positivas en el océano Índico occidental y valores negativos en el océano Índico oriental, lo que se asemeja al patrón DMI en su fase positiva [@saji1999].
 Consistentemente, la correlación entre la fase de 90º del cEOF2 y el DMI es 0,62 (CI: 0,38 -- 0,77).
-Sin embargo, la correlación parcial es de 0,33 (p-valor = 0,036), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo.
+Sin embargo, la correlación semiparcial es de 0,21 (p-valor = 0,18), indicando que el DMI explica poca varianza de la fase de 90º del cEOF2 por sí mismo.
 Esto puede observarse en la Figura \@ref(fig:euler), donde se ilustra la partición de la varianza de la fase de 90º del cEOF2, el DMI y el ONI.
-El DMI explica, independientemente, sólo un 4,3% de la varianza, mientras que el ONI explica un 23,9% por sí mismo.
+El DMI explica, independientemente, sólo un 4.5% de la varianza, mientras que el ONI explica un 24.8% por sí mismo.
 
 <div class="figure" style="text-align: center">
 <img src="figures/20-ceofs/euler-1.png" alt="(ref:euler-cap)" width="600"  />

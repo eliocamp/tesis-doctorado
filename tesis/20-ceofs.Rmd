@@ -200,7 +200,7 @@ T_{(t)} &= (T_{r(t)} +  iT_{i(t)})
 ```
 
 donde $E_{(\lambda, \phi)}$ es la componente espacial del cEOF, que depende de la longitud ($\lambda$), la latitud ($\phi$) y el nivel de presión ($p$) y que tiene una parte real $E_r$ y una imaginaria $E_i$. 
-$T_{(t)}$ es la parte temporal del cEOF, al cual también tiene una parte real `T_{r(t)}` y una imaginaria `T_{i(t)}`
+$T_{(t)}$ es la parte temporal del cEOF, al cual también tiene una parte real $T_{r(t)}$ y una imaginaria $T_{i(t)}$
 La contribución de cada cEOF al campo original se obtiene como la parte real del producto entre las componentes espacial y temporal.
 
 
@@ -1158,11 +1158,11 @@ plot <- cut(ceof, 2)$left %>%
   #          color = "black", size = 3,
   #          y = 0.5, x = c(-pi, -pi/2, 0, pi/2), angle = 90, hjust = 0) +
   geom_rug() +
-  scale_y_continuous("Number of years",
+  scale_y_continuous("Número de años",
                      sec.axis = sec_axis(~.x/N,
-                                         name = "Proportion of years",
+                                         name = "Proporción de años",
                                          labels = scales::percent)) +
-  scale_x_continuous("Phase", trans = scales::reverse_trans(),
+  scale_x_continuous("Fase", trans = scales::reverse_trans(),
                      breaks = seq(-pi - 1/4*pi, pi - 1/4*pi, by = 45*pi/180),
                      labels = function(x) paste0(round(x*180/pi, 5), "º")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
@@ -1451,7 +1451,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
     unique() %>% 
     setNames(paste0(abs(.), "º"), .)
   
-  variables <- c("TSM", "Streamfunction")
+  variables <- c("TSM", "Función corriente")
   
   sst_gdata <- sst_regr %>%
     # .[cEOF == "cEOF2"] %>% 
@@ -1459,7 +1459,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
     .[, p_val := Pvaluate(estimate, std.error, df, "fdr"), 
       by = .(cEOF, term, angle)] %>%
     .[, angle := as.numeric(angle)] %>% 
-    .[, var := factor("TSM", levels = variables)] %>% 
+    .[, var := factor(variables[1], levels = variables)] %>% 
     periodic(lon = c(0, 360))
   
   # browser()
@@ -1473,7 +1473,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
     .[lat %between% c(-90, 10)] %>%
     .[, p_val := Pvaluate(estimate, std.error, df, "fdr"), by = .(cEOF, angle, term)] %>%
     .[, angle := as.numeric(angle)] %>% 
-    .[, var := factor("Streamfunction", levels = variables)] %>% 
+    .[, var := factor(variables[2], levels = variables)] %>% 
     periodic(lon = c(0, 360)) 
   
   rstream <- max(range(abs(psi_regr$estimate), 
@@ -1481,7 +1481,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
   breaks_stream <- AnchorBreaksSym(0, bins = 20, exclude = 0)(c(-rstream, rstream))
   
   #from latex2exp::TeX("Streamfunction ($m^2s^{-1}\\times 1e^{-7}$)")
-  psi_expr <- expression('Streamfunction ('*m^{2}*s^{phantom() - 1} %*% 1*e^{phantom() - 7}*')')
+  
   # browser()
   stream_gdata %>% 
     ggplot(aes(lon, lat)) +
@@ -1491,7 +1491,7 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
                       breaks = breaks_sst) +
     geom_contour_pval(data = sst_gdata, aes(z = p_val), pattern_spacing = pattern_spacing) +
     
-    scale_fill_divergent_discretised("TSM",
+    scale_fill_divergent_discretised(variables[1],
                                      labels = label_one_less,
                                      guide = guide_colorsteps_bottom(width = 15,
                                                                      show.limits = FALSE, ticks = TRUE,
@@ -1507,13 +1507,15 @@ plot_sst_psi <- function(sst_regr, psi_regr, min.mag = 0.002) {
                 size = 0.1) +
     scale_mag(max_size = .5, guide = "none") +
     geom_qmap() +
-    scale_fill_divergent_discretised("Función corriente", 
+    scale_fill_divergent_discretised(variables[2],
                                      labels = label_one_less,
                                      low = scales::muted("red"),
                                      high = scales::muted("blue"),
                                      guide = guide_colorsteps_bottom(15, show.limits = FALSE,
                                                                      order = 99)) +
-    grid_panel(grob_spoke, aes(angle = -angle, var = "TSM"), inherit.aes = FALSE) +
+    grid_panel(grob_spoke, aes(angle = -angle, 
+                               var = factor(variables[2], levels = variables)), 
+               inherit.aes = FALSE) +
     scale_x_continuous(NULL, expand = c(0, 0), 
                        breaks = seq(0, 360, by = 60),
                        labels = LonLabel) +
@@ -1659,7 +1661,7 @@ fft %>%
   geom_line(data = enso_fft, aes(y = spec*3, color = "ONI"), linewidth = 1) +
   geom_line(aes(color = part), linewidth = 1) +
   # annotation_logticks(sides = "b") +
-  scale_x_log10("Period (years)") +
+  scale_x_log10("Período (years)") +
   scale_y_continuous("Espectro")  +
   scale_color_manual(name= NULL, 
                      values = c(Real = color_real, 

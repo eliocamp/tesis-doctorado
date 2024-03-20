@@ -421,7 +421,7 @@ zw %>%
   geom_rug() +
   scale_x_continuous("Fase", labels = LonLabel) +
   scale_y_continuous(NULL) +
-  facet_wrap(~ season(time))
+  facet_wrap(~ season(time)) 
 ```
 
 (ref:fase-histogram-cap) Histograma de la fase de la onda 3 de altura geopotencial en 500 hPa para cada trimestre.
@@ -496,7 +496,7 @@ hgt %>%
                                    labels = label_one_less) +
   annotate_grid() +
   coord_polar2() +
-  facet_wrap(~k, ncol = 2)
+  facet_wrap(~k, ncol = 2, labeller = labeller(k = AddPreffix("Onda ")))
 ```
 
 (ref:envelope-regr-cap) Regresión entre la amplitud de las ondas 1 a 4 y la envolvente de todas las ondas zonales de las anomalías de altura geopotencial (sin unidades).

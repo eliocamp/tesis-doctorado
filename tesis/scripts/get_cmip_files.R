@@ -15,7 +15,8 @@ cmip_files <- function() {
                          experiment_id = "historical",
                          # source_id = unique(simulaciones$model),
                          table_id = c("Amon", "Omon"),
-                         variable_id = c("zg", "tos")) %>%
+                         variable_id = c("zg", "tos"),
+                         root = cmip_root) %>%
     as.data.table() %>%
     .[, version := as.numeric(version)] %>%
     .[, c("ensemble", "init", "physics", "forcing") := as.list(unglue::unglue_data(member_id, "r{ensemble}i{init}p{physics}f{forcing}", convert = TRUE))] %>%
@@ -94,6 +95,7 @@ cmip_files <- function() {
   for (i in seq_along(files)) {
     lines <- readLines(files[i])
     lines[1] <- paste0("@article{", unique(sims$id)[i], ",")
+    # lines <- gsub("\\\\'{e}", "e", lines, perl = TRUE)
     all_lines <- c(all_lines, lines, "\n")
   }
 

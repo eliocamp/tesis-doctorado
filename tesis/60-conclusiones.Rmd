@@ -58,6 +58,7 @@ La correlación significativa entre el índice SAM y el ENSO es capturada en su 
 El A-SAM es, por lo tanto, una medida muy útil para estudiar la relación entre estos dos modos de variabilidad.
 Por otro lado, este resultado abre la pregunta sobre si la componente asimétrica del SAM forma parte intrínsicamente de este modo interno de variabilidad, o es en cambio un reflejo de la influencia del ENSO en la circulación extratropical que por construcción queda embebido en el primer EOF aplicado a las anomalías temporales.
 Evidencias de esta posibilidad se encuentran en el antiguo trabajo de @kidson1988 donde, aplicando rotación a las EOFs, obtiene modos rotados que separan una estructura anular similar a la obtenida con el S-SAM de un patrón de onda 3 similar al obtenido con el A-SAM.
+Otro trabajo relevante es @ding2012a, quienes computaron el primer EOF a la altura geopotencial en 700 hPa filtrar la variabilidad asociada al modo PSA. 
 Estudios futuros deberían abordar esta cuestión con mayor profundidad.
 
 El análisis de las tendencias positivas del SAM de verano y otoño en la troposfera entre 1940 y 2020, que fueron identificadas como significativas por estudios previos [p.ej. @fogt2020 y sus referencias] son únicamente explicadas por la tendencia del S-SAM.

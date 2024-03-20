@@ -139,7 +139,7 @@ Los gráficos se hicieron con ggplot2 [@wickham2009].
 
 Los datos de reanálisis fueron descargados con el paquete ecmwfr [@hufkens2020], los datos de CMIP y DAMIP se descargaron con el paquete rcmip6 [@rcmip6] y los índices de El Niño-Oscilación del Sur (ENSO, por sus siglas en inglés) y el dipolo del Índico, con el paquete rsoi [@albers2020].
 
-La tesis se compiló utilizando knitr y rmarkdown [@xie2015; @allaire2020].
+La tesis se compiló utilizando knitr y rmarkdown [@xie2015; @R-rmarkdown].
 
 ## Resultados
 

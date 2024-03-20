@@ -716,7 +716,7 @@ plot_sst_regression <- function(sst_regression, which_ceof) {
 sst_regression_ERA5 <- readRDS(data_path("derived", "sst_regr_ERA5.Rds")) %>% 
   .[angle %in% c(0, -90) & lat <= max(sst_regression$lat)] %>% 
   .[, term := ifelse(angle == 0, "Real", "Imaginario")] %>% 
-  .[, .(lon, lat, cEOF, term, era5 = estimate)]
+  .[, .(lon, lat, cEOF, term = factor_ReIm(term), era5 = estimate)]
 ```
 
 (ref:sst-mmm-cap) Media multimodelo de regresión de la TSM con las fases de 0º y 90º de cada cEOF (K). El área sombreada muestra las zonas donde más de la mitad de los modelos tienen p-valor menor a 0,01. Los contornos negros muestran la regresión de TSM observada en ERA5.

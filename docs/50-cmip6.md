@@ -290,13 +290,13 @@ Las líneas translúcidas son los valores para cada modelo y las áreas llenas r
 <p class="caption">(\#fig:cor-sam-cmip6)(ref:cor-sam-cmip6-cap)</p>
 </div>
 
-(ref:cor-sam-cmip6-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (columna a y c) y 90º (columna b y d) de los cEOFs con el SAM (fila 1), A-SAM (fila 2) y S-SAM (fila 3) para cada nivel. Las líneas translúcidas son los valores promedio de cada modelo y las áreas llenas representan el promedio multimodelo y su intervalo de confianza del 95%. La línea gruesa es el valor de ERA5. Equivalente a la Figura \@ref(fig:sam-eof-vertical).
+(ref:cor-sam-cmip6-cap) Coeficiente de determinación ($r^2$) entre la fase de 0º (columna 1 y 3) y 90º (columna 2 y 4) de los cEOFs con el SAM (fila a), A-SAM (fila b) y S-SAM (fila c) para cada nivel. Las líneas translúcidas son los valores promedio de cada modelo y las áreas llenas representan el promedio multimodelo y su intervalo de confianza del 95%. La línea gruesa es el valor de ERA5. Equivalente a la Figura \@ref(fig:sam-eof-vertical).
 
 Se encuentra que la relación entre el cEOF1 y el SAM en los modelos del CMIP6 es similar a la observada, aunque con diferencias en la magnitud.
 
-En cuanto al cEOF2, los modelos del CMIP6 capturan correctamente la falta de correlación entre fase de 0º del cEOF2 y el SAM y el S-SAM (paneles c.1 y c.3), pero tienen un nivel de correlación más alto de lo esperado con el A-SAM en la tropósfera (panel c.2).
-La fase de 90º, en cambio, no muestra la relación observada con el SAM en la tropósfera (panel d.1).
-A pesar de esto, sí tiene una relación alta con el A-SAM (panel d.2).
+En cuanto al cEOF2, los modelos del CMIP6 capturan correctamente la falta de correlación entre fase de 0º del cEOF2 y el SAM y el S-SAM (paneles a.3 y c.3), pero tienen un nivel de correlación más alto de lo esperado con el A-SAM en la tropósfera (panel c.2).
+La fase de 90º, en cambio, no muestra la relación observada con el SAM en la tropósfera (panel a.4).
+A pesar de esto, sí tiene una relación alta con el A-SAM (panel b.4).
 Esto implícitamente sugiere que los modelos CMIP6 no capturan correctamente la relación entre el PSA2 y el SAM, pero esta relación sí aparece si se filtra sólo la variabilidad de la parte asimétrica del SAM.
 
 ## Tendencias

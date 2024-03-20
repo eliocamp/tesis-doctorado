@@ -14,7 +14,7 @@ Sin embargo, este patrón tiene asimetrías zonales significativas.
 
 Muchos índices presentados en la literatura para describir el SAM se basan en medias zonales de la presión a nivel del mar o de la altura geopotencial [@ho2012].
 Tanto @gong1999 como @marshall2003 definen el índice SAM como la diferencia de la media zonal de la presión a nivel del mar entre 40ºS y 65ºS.
-Asimismo,@baldwin2009 propuso definir modos anulares del norte y el sur como el primer EOF de la altura geopotencial promediada zonalmente en cada nivel en cada hemisferio.
+Asimismo, @baldwin2009 propusieron definir modos anulares del norte y el sur como el primer EOF de la altura geopotencial promediada zonalmente en cada nivel en cada hemisferio.
 Sin embargo, como se verá a continuación, las asimetrías zonales del SAM pueden ser significativas y han sido poco estudiadas.
 
 En la literatura se asocia generalmente a la fase positiva del SAM a aquella asociada con anomalías negativas de altura geopotencial sobre la Antártida y positivas en latitudes medias [@jones2019].
@@ -248,11 +248,11 @@ El S-SAM estratosférico tiene una conexión con el S-SAM troposférico algo má
 
 A continuación, se evalúan las tendencias lineales para cada uno de los índices para el periodo 1979--2020 en cada nivel para el año completo y separado por trimestres (Fig. \@ref(fig:trends)).
 El índice SAM presenta una tendencia positiva estadísticamente significativa (Fig. \@ref(fig:trends)a.1) en todos los niveles entre 1000 hPa y aproximadamente 50 hPa, con un máximo en 100 hPa.
-Las tendencias estacionales (Fig. \@ref(fig:trends) columna a) indican que las tendencias son significativas sólo en verano y marginalmente en otoño.
+Las tendencias estacionales (Fig. \@ref(fig:trends) columna 1) indican que las tendencias son significativas sólo en verano y marginalmente en otoño.
 Esto es consistente con los resultados de estudios previos, los cuales documentaron tendencias positivas en verano, menores en otoño y ninguna tendencia en las demás estaciones (por ejemplo, @fogt2020 y sus referencias) utilizando índices del SAM basados en la circulación cerca de la superficie.
 
-Al separar el SAM en sus partes asimétrica y simétrica, no sólo se puede ver que estas tendencias se deben casi por completo a la componente simétrica (comparar columnas b y c Figura \@ref(fig:trends)), sino que en algunos casos las tendencias se vuelven más claras.
-En verano, el índice A-SAM tiene una tendencia negativa estadísticamente no significativa en la troposfera media que oculta la tendencia en el índice SAM; como resultado, las tendencias calculadas utilizando sólo la componente simétrica son más intensas (comparar la región sombreada en la Figura \@ref(fig:trends)a.2 y c.2).
+Al separar el SAM en sus partes asimétrica y simétrica, no sólo se puede ver que estas tendencias se deben casi por completo a la componente simétrica (comparar columnas 2 y 3 en Figura \@ref(fig:trends)), sino que en algunos casos las tendencias se vuelven más claras.
+En verano, el índice A-SAM tiene una tendencia negativa estadísticamente no significativa en la troposfera media que oculta la tendencia en el índice SAM; como resultado, las tendencias calculadas utilizando sólo la componente simétrica son más intensas (comparar la región sombreada en la Figura \@ref(fig:trends)b.1 y b.3).
 En otoño, el índice S-SAM revela una tendencia positiva estadísticamente significativa en la estratosfera que no es significativa utilizando el índice SAM.
 
 
@@ -265,10 +265,10 @@ En otoño, el índice S-SAM revela una tendencia positiva estadísticamente sign
 </div>
 
 Para estudiar la cuestión de si el SAM se está volviendo más o menos asimétrico, se muestran las tendencias de la varianza explicada de cada índice para cada trimestre en la Figura \@ref(fig:r-squared-trend).
-En la troposfera, la única tendencia significativa es la de DEF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2% por década, lo que sugiere que el SAM en DEF se ha vuelto más asimétrico en el período de 1979 a 2020.
+En la troposfera, la única tendencia significativa es la de DEF, en la que el A-SAM tiene una tendencia positiva de alrededor del 2% por década (Fig. \@ref(fig:r-squared-trend) a), lo que sugiere que el SAM en DEF se ha vuelto más asimétrico en el período de 1979 a 2020.
 @fogt2012 observó un cambio de una SAM más asimétrica antes de 1980 a una SAM más simétrica después de 1980, pero nuestro periodo de estudio (1979--2020) nos impide detectar ese cambio.
 Sin embargo, debido a la naturaleza atípica de la componente asimétrica del SAM durante la DEF (Sección \@ref(definition-of-indices)), esto debe tomarse sólo como una evidencia preliminar.
-La otra tendencia significativa se da en la estratosfera durante SON, donde hay una tendencia positiva en la varianza explicada por la S-SAM de aproximadamente un 4% por década.
+La otra tendencia significativa se da en la estratosfera durante SON (Fig. \@ref(fig:r-squared-trend) d), donde hay una tendencia positiva en la varianza explicada por la S-SAM de aproximadamente un 4% por década.
 Este cambio podría ser el resultado del forzamiento provocado por el agotamiento del ozono.
 
 
@@ -312,10 +312,10 @@ Así, el índice A-SAM troposférico representa un desplazamiento zonal en la po
 </div>
 
 La amplitud de las ondas zonales con números de onda 0 a 3 en cada latitud a 50 hPa y 700 hPa se muestran en la Figura \@ref(fig:wave-amplitude), donde el número de onda cero representa la amplitud de la media zonal.
-Las amplitudes de las ondas zonales del patrón espacial asociado al SAM (Fig. \@ref(fig:wave-amplitude) columna a) están dominadas por la media zonal (número de onda 0) en ambos niveles.
-Sin embargo, las ondas zonales son importantes, sobre todo al sur de 50ºS, con un número de onda 1 claramente dominante en 50 hPa (Fig. \@ref(fig:wave-amplitude)a.1) y una mezcla de ondas de amplitud similar en 700 hPa (Fig. \@ref(fig:wave-amplitude)a.2).
-La Figura \@ref(fig:wave-amplitude) columna b muestra que el A-SAM está dominado principalmente por la onda 1 en la estratosfera (Fig. \@ref(fig:wave-amplitude)b.1), mientras que en la troposfera se explica por una combinación de ondas zonales 3 a 1 en nivel decreciente de importancia (Fig. \@ref(fig:wave-amplitude)b.2) con una amplitud despreciable de la media zonal.
-Por otra parte, el S-SAM se explica casi en su totalidad por la media zonal en ambos niveles (Fig. \@ref(fig:wave-amplitude) columna c), con poca o ninguna contribución de las ondas zonales con números de onda de 1 a 3.
+Las amplitudes de las ondas zonales del patrón espacial asociado al SAM (Fig. \@ref(fig:wave-amplitude) columna 1) están dominadas por la media zonal (número de onda 0) en ambos niveles.
+Sin embargo, las ondas zonales son importantes, sobre todo al sur de 50ºS, con un número de onda 1 claramente dominante en 50 hPa (Fig. \@ref(fig:wave-amplitude)a.1) y una mezcla de ondas de amplitud similar en 700 hPa (Fig. \@ref(fig:wave-amplitude)b.1).
+La Figura \@ref(fig:wave-amplitude) columna 2 muestra que el A-SAM está dominado principalmente por la onda 1 en la estratosfera (Fig. \@ref(fig:wave-amplitude)a.2), mientras que en la troposfera se explica por una combinación de ondas zonales 3 a 1 en nivel decreciente de importancia (Fig. \@ref(fig:wave-amplitude)b.2) con una amplitud despreciable de la media zonal.
+Por otra parte, el S-SAM se explica casi en su totalidad por la media zonal en ambos niveles (Fig. \@ref(fig:wave-amplitude) columna 3), con poca o ninguna contribución de las ondas zonales con números de onda de 1 a 3.
 
 
 
@@ -504,20 +504,20 @@ No se muestran los resultados para la región de Sudáfrica porque allí no se d
 </div>
 
 En Oceanía, la regresión anual muestra que el índice SAM está asociado con anomalías positivas de precipitación en la región sudeste de Australia (Fig. \@ref(fig:pp-regr-oceania)a.1), en acuerdo con @gillett2006.
-La separación entre A-SAM y S-SAM sugiere que esta anomalía positiva se explica por el S-SAM sólo en la costa este (Fig. \@ref(fig:pp-regr-oceania)c.1).
+La separación entre A-SAM y S-SAM sugiere que esta anomalía positiva se explica por el S-SAM sólo en la costa este (Fig. \@ref(fig:pp-regr-oceania)a.3).
 Las anomalías de altura geopotencial asociadas a este índice (contornos negros) son indicativas de un flujo hacia el oeste procedente del mar de Tasmania, lo que podría explicar las anomalías positivas en las precipitaciones, en acuerdo con @hendon2007.
-El A-SAM parece estar relacionado con anomalías positivas de precipitación en la costa sureste de Australia (Fig. \@ref(fig:pp-regr-oceania)b.2), que podrían explicarse de forma similar por la circulación anómala del oeste que transporta aire húmedo al continente desde el océano Índico.
+El A-SAM parece estar relacionado con anomalías positivas de precipitación en la costa sureste de Australia (Fig. \@ref(fig:pp-regr-oceania)a.2), que podrían explicarse de forma similar por la circulación anómala del oeste que transporta aire húmedo al continente desde el océano Índico.
 
 Las regresiones estacionales muestran valores altos pero no estadísticamente significativos.
-En SON, valores positivos del SAM se asocian con anomalías positivas de precipitación en el este y centro de Australia (Fig. \@ref(fig:pp-regr-oceania)a.5).
-En este trimestre, el S-SAM parece estar asociado con anomalías positivas de precipitación en un área relativamente reducida de la costa oriental (Fig. \@ref(fig:pp-regr-oceania)c.5) mientras que las anomalías positivas de precipitación relacionadas con A-SAM positivo afectan a todo el este de Australia (Fig. \@ref(fig:pp-regr-oceania)b.5).
+En SON, valores positivos del SAM se asocian con anomalías positivas de precipitación en el este y centro de Australia (Fig. \@ref(fig:pp-regr-oceania)e.1).
+En este trimestre, el S-SAM parece estar asociado con anomalías positivas de precipitación en un área relativamente reducida de la costa oriental (Fig. \@ref(fig:pp-regr-oceania)e.3) mientras que las anomalías positivas de precipitación relacionadas con A-SAM positivo afectan a todo el este de Australia (Fig. \@ref(fig:pp-regr-oceania)e.2).
 
-En verano, un índice SAM positivo se asocia con anomalías de precipitación positivas en Australia occidental y oriental, sobre todo en la región noreste (Fig. \@ref(fig:pp-regr-oceania)a.2).
+En verano, un índice SAM positivo se asocia con anomalías de precipitación positivas en Australia occidental y oriental, sobre todo en la región noreste (Fig. \@ref(fig:pp-regr-oceania)b.1).
 La parte oriental está dominada por la relación con el S-SAM y la occidental, por el A-SAM.
 En otoño, la regresión con el SAM muestra anomalías positivas en el norte, similares a las de verano, que se asocian con el A-SAM.
 En invierno los coeficientes de regresión son mucho más débiles que durante el resto del año.
 Ninguno de estos coeficientes de regresión es estadísticamente significativo al nivel del 95%.
-La señal de la primavera coincide en líneas generales con @hendon2007, pero mientras que ellos también detectaron una fuerte señal en verano, la Figura \@ref(fig:pp-regr-oceania)a.2 no muestra ninguna asociación estadísticamente significativa (aunque los coeficientes tienen un signo coherente).
+La señal de la primavera coincide en líneas generales con @hendon2007, pero mientras que ellos también detectaron una fuerte señal en verano, la Figura \@ref(fig:pp-regr-oceania)b.1 no muestra ninguna asociación estadísticamente significativa (aunque los coeficientes tienen un signo coherente).
 
 (ref:pp-regr-america-cap) Igual que la Figura \@ref(fig:pp-regr-oceania) pero para Sudamérica.
 
@@ -529,7 +529,7 @@ La señal de la primavera coincide en líneas generales con @hendon2007, pero mi
 En Sudamérica (Fig. \@ref(fig:pp-regr-america)), la regresión anual muestra que la fase positiva del SAM está asociada con anomalías de precipitación negativas en el SESA y el sur de Chile, y anomalías positivas en el sudeste de Brasil, alrededor de la posición climatológica de la Zona de Convergencia del Atlántico Sur (SACZ) (Fig. \@ref(fig:pp-regr-america)a.1).
 Las figuras \@ref(fig:pp-regr-america)a.2 y a.3 muestran que mientras las señales sobre SESA y el sudeste de Brasil están asociadas significativamente con A-SAM, la del sur de Chile está relacionada con S-SAM.
 
-Las regresiones estacionales reflejan un patrón similar al annual, excepto en invierno.
+Las regresiones estacionales reflejan un patrón similar al anual, excepto en invierno.
 Aunque no sean estadísticamente significativas, todas las estaciones muestran valores negativos en SESA y el sur de Chile junto con valores positivos en el sur de Brasil en relación con el SAM.
 La separación de estas características entre los mapas de regresión del A-SAM y S-SAM es también bastante consistente.
 En invierno la señal del SAM es levemente positiva en el SESA y al sur de Chile y levemente negativa en el centro de Chile.

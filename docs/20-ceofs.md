@@ -100,7 +100,7 @@ T_{(t)} &= (T_{r(t)} +  iT_{i(t)})
 ```
 
 donde $E_{(\lambda, \phi)}$ es la componente espacial del cEOF, que depende de la longitud ($\lambda$), la latitud ($\phi$) y el nivel de presión ($p$) y que tiene una parte real $E_r$ y una imaginaria $E_i$. 
-$T_{(t)}$ es la parte temporal del cEOF, al cual también tiene una parte real `T_{r(t)}` y una imaginaria `T_{i(t)}`
+$T_{(t)}$ es la parte temporal del cEOF, al cual también tiene una parte real $T_{r(t)}$ y una imaginaria $T_{i(t)}$
 La contribución de cada cEOF al campo original se obtiene como la parte real del producto entre las componentes espacial y temporal.
 
 

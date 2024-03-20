@@ -254,7 +254,7 @@ angles <- seq(0, 180 - 45, by = 45)
 g <- lapply(angles, function(a) {
   ondas %>% 
     copy() %>% 
-    .[, z := Re(rotate(z, a*pi/180))] %>% 
+    .[, z := Re(rotate(z, -a*pi/180))] %>% 
     .[, angle := a]
 }) %>% 
   rbindlist() %>% 
@@ -276,15 +276,13 @@ ondas %>%
   plot_layout(ncol = 1)  &
   scale_x_longitude(ticks = 60) &
   scale_y_continuous(NULL) 
-
-
 ```
 
 (ref:ejemplo-reconstruccion-cap) Ejemplo idealizado de las dos fases del patrón espacial de un cEOF (fila superior) y cuatro reconstrucciones para distintos valores de sus series temporales.
 
 Un ejemplo idealizado se presenta en la Figura \@ref(fig:ejemplo-reconstruccion), la cual representa la parte espacial de las fases de 0º y 90º de un cEOF hipotético en el panel superior y cuatro reconstrucciones de la variable original en el panel inferior. 
 Cuando la serie temporal de la fase de 0º es positiva y la serie temporal de la fase 90º es cercana a cero, entonces las anomalías zonales de altura geopotencial son similares al patrón espacial de la fase de 0º (panel b).
-Del mismo modo, cuando la serie temporal de la fase 0º es cercana a cero y la serie la serie temporal de la fase de 90º es positiva, entonces las anomalías zonales de altura geopotencial se parecen a la fase de 90 (panel d).
+Del mismo modo, cuando la serie temporal de la fase 0º es cercana a cero y la serie la serie temporal de la fase de 90º es positiva, entonces las anomalías zonales de altura geopotencial se parecen a la fase de 90º (panel d).
 Cuando ambas fases de la serie temporal son distintas a cero, entonces las anomalías zonales de altura geopotencial tiene los máximos en una localización intermedia (paneles c y e).
 
 El signo de los EOF tradicionales no está determinado unívocamente, por lo que se puede multiplicar cada EOF por -1 (tanto su serie temporal como su patrón espacial) y obtener una descripción igualmente válida.

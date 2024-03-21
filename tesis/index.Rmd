@@ -1,9 +1,9 @@
 ---
 title: Dinámica de la circulación zonalmente asimétrica del hemisferio sur
 title_en: Dynamics of the Southern Hemisphere zonally asymmetric circulation
-author: 'Lic. Elio Campitelli'
+author: 'Lic. Elio Cumelen Campitelli'
 # date: 'BUENOS AIRES, 2023'
-date: "BUENOS AIRES, 2023"
+date: "BUENOS AIRES, 11 de marzo de 2024"
 institution: 'Universidad de Buenos Aires'
 division: 'Facultad de Ciencias Exactas y Naturales'
 

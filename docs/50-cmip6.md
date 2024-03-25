@@ -36,56 +36,56 @@ DAMIP es una componente del CMIP6 que cuenta con experimentos particularmente di
 
 Table: (\#tab:modelos)Modelos analizados y la cantidad de miembros para cada experimento.
 
-|Modelo                                                                                | historical| hist-GHG| hist-nat| hist-aer| hist-stratO3|
-|:-------------------------------------------------------------------------------------|----------:|--------:|--------:|--------:|------------:|
-|AWI-CM-1-1-MR
-[@CMIP6.CMIP.AWI.AWI-CM-1-1-MR]                                          |         10|        -|        -|        -|            -|
-|FGOALS-g3
-[@CMIP6.CMIP.CAS.FGOALS-g3; @CMIP6.DAMIP.CAS.FGOALS-g3]                      |         12|        3|        3|        -|            -|
-|CanESM5
-[@CMIP6.CMIP.CCCma.CanESM5; @CMIP6.DAMIP.CCCma.CanESM5]                        |         50|       50|       50|       10|           10|
-|CNRM-CM6-1
-[@CMIP6.CMIP.CNRM-CERFACS.CNRM-CM6-1; @CMIP6.DAMIP.CNRM-CERFACS.CNRM-CM6-1] |         60|       10|       10|       10|            -|
-|CNRM-ESM2-1
-[@CMIP6.CMIP.CNRM-CERFACS.CNRM-ESM2-1]                                     |         21|        -|        -|        -|            -|
-|ACCESS-ESM1-5
-[@CMIP6.CMIP.CSIRO.ACCESS-ESM1-5; @CMIP6.DAMIP.CSIRO.ACCESS-ESM1-5]      |         80|        3|        3|        -|            -|
-|ACCESS-CM2
-[@CMIP6.CMIP.CSIRO-ARCCSS.ACCESS-CM2; @CMIP6.DAMIP.CSIRO-ARCCSS.ACCESS-CM2] |         10|        3|        3|        -|            -|
-|IPSL-CM6A-LR
-[@CMIP6.CMIP.IPSL.IPSL-CM6A-LR; @CMIP6.DAMIP.IPSL.IPSL-CM6A-LR]           |         66|       10|       10|       10|           10|
+|Modelo                                                                                | historical| hist-GHG| hist-nat| hist-stratO3| hist-aer|
+|:-------------------------------------------------------------------------------------|----------:|--------:|--------:|------------:|--------:|
 |MIROC6
-[@CMIP6.CMIP.MIROC.MIROC6; @CMIP6.DAMIP.MIROC.MIROC6]                           |        100|       50|       50|        3|           10|
-|HadGEM3-GC31-LL
-[@CMIP6.CMIP.MOHC.HadGEM3-GC31-LL; @CMIP6.DAMIP.MOHC.HadGEM3-GC31-LL]  |         10|        5|       10|        4|            -|
-|UKESM1-0-LL
-[@CMIP6.CMIP.MOHC.UKESM1-0-LL; @CMIP6.CMIP.NIMS-KMA.UKESM1-0-LL]           |         30|        -|        -|        -|            -|
-|MPI-ESM1-2-HR
-[@CMIP6.CMIP.MPI-M.MPI-ESM1-2-HR]                                        |         20|        -|        -|        -|            -|
+[@CMIP6.CMIP.MIROC.MIROC6; @CMIP6.DAMIP.MIROC.MIROC6]                           |         50|       50|       50|           10|        3|
+|ACCESS-ESM1-5
+[@CMIP6.CMIP.CSIRO.ACCESS-ESM1-5; @CMIP6.DAMIP.CSIRO.ACCESS-ESM1-5]      |         40|        3|        3|            -|        -|
+|IPSL-CM6A-LR
+[@CMIP6.CMIP.IPSL.IPSL-CM6A-LR; @CMIP6.DAMIP.IPSL.IPSL-CM6A-LR]           |         33|       10|       10|           10|       10|
+|CNRM-CM6-1
+[@CMIP6.CMIP.CNRM-CERFACS.CNRM-CM6-1; @CMIP6.DAMIP.CNRM-CERFACS.CNRM-CM6-1] |         30|       10|       10|            -|       10|
 |MPI-ESM1-2-LR
-[@CMIP6.CMIP.MPI-M.MPI-ESM1-2-LR]                                        |         60|        -|        -|        -|            -|
-|GISS-E2-1-G
-[@CMIP6.CMIP.NASA-GISS.GISS-E2-1-G; @CMIP6.DAMIP.NASA-GISS.GISS-E2-1-G]    |         24|       10|       20|        -|            5|
-|CESM2
-[@CMIP6.CMIP.NCAR.CESM2; @CMIP6.DAMIP.NCAR.CESM2]                                |         22|        3|        3|        -|            -|
+[@CMIP6.CMIP.MPI-M.MPI-ESM1-2-LR]                                        |         30|        -|        -|            -|        -|
 |NorCPM1
-[@CMIP6.CMIP.NCC.NorCPM1]                                                      |         60|        -|        -|        -|            -|
-|NESM3
-[@CMIP6.CMIP.NUIST.NESM3]                                                        |         10|        -|        -|        -|            -|
-|E3SM-1-0
-[@CMIP6.CMIP.E3SM-Project.E3SM-1-0; @CMIP6.DAMIP.E3SM-Project.E3SM-1-0]       |         10|        3|        -|        -|            -|
-|INM-CM5-0
-[@CMIP6.CMIP.INM.INM-CM5-0]                                                  |         20|        -|        -|        -|            -|
-|BCC-CSM2-MR
-[@CMIP6.DAMIP.BCC.BCC-CSM2-MR]                                             |          -|        3|        3|        3|            -|
+[@CMIP6.CMIP.NCC.NorCPM1]                                                      |         30|        -|        -|            -|        -|
+|CanESM5
+[@CMIP6.CMIP.CCCma.CanESM5; @CMIP6.DAMIP.CCCma.CanESM5]                        |         25|       50|       50|           10|       10|
+|UKESM1-0-LL
+[@CMIP6.CMIP.MOHC.UKESM1-0-LL; @CMIP6.CMIP.NIMS-KMA.UKESM1-0-LL]           |         16|        -|        -|            -|        -|
+|GISS-E2-1-G
+[@CMIP6.CMIP.NASA-GISS.GISS-E2-1-G; @CMIP6.DAMIP.NASA-GISS.GISS-E2-1-G]    |         12|       10|       20|            5|        -|
+|CESM2
+[@CMIP6.CMIP.NCAR.CESM2; @CMIP6.DAMIP.NCAR.CESM2]                                |         11|        3|        3|            -|        -|
 |MRI-ESM2-0
-[@CMIP6.DAMIP.MRI.MRI-ESM2-0]                                               |         20|        5|        5|        2|            3|
+[@CMIP6.DAMIP.MRI.MRI-ESM2-0]                                               |         10|        5|        5|            3|        2|
+|CNRM-ESM2-1
+[@CMIP6.CMIP.CNRM-CERFACS.CNRM-ESM2-1]                                     |         10|        -|        -|            -|        -|
+|MPI-ESM1-2-HR
+[@CMIP6.CMIP.MPI-M.MPI-ESM1-2-HR]                                        |         10|        -|        -|            -|        -|
+|INM-CM5-0
+[@CMIP6.CMIP.INM.INM-CM5-0]                                                  |         10|        -|        -|            -|        -|
+|FGOALS-g3
+[@CMIP6.CMIP.CAS.FGOALS-g3; @CMIP6.DAMIP.CAS.FGOALS-g3]                      |          6|        3|        3|            -|        -|
+|HadGEM3-GC31-LL
+[@CMIP6.CMIP.MOHC.HadGEM3-GC31-LL; @CMIP6.DAMIP.MOHC.HadGEM3-GC31-LL]  |          5|        5|       10|            -|        4|
+|ACCESS-CM2
+[@CMIP6.CMIP.CSIRO-ARCCSS.ACCESS-CM2; @CMIP6.DAMIP.CSIRO-ARCCSS.ACCESS-CM2] |          5|        3|        3|            -|        -|
+|E3SM-1-0
+[@CMIP6.CMIP.E3SM-Project.E3SM-1-0; @CMIP6.DAMIP.E3SM-Project.E3SM-1-0]       |          5|        3|        -|            -|        -|
+|AWI-CM-1-1-MR
+[@CMIP6.CMIP.AWI.AWI-CM-1-1-MR]                                          |          5|        -|        -|            -|        -|
+|NESM3
+[@CMIP6.CMIP.NUIST.NESM3]                                                        |          5|        -|        -|            -|        -|
+|BCC-CSM2-MR
+[@CMIP6.DAMIP.BCC.BCC-CSM2-MR]                                             |          -|        3|        3|            -|        3|
 |NorESM2-LM
-[@CMIP6.DAMIP.NCC.NorESM2-LM]                                               |          -|        3|        3|        -|            -|
-|GFDL-CM4
-[@CMIP6.DAMIP.NOAA-GFDL.GFDL-CM4]                                             |          -|        -|        3|        -|            -|
+[@CMIP6.DAMIP.NCC.NorESM2-LM]                                               |          -|        3|        3|            -|        -|
 |GFDL-ESM4
-[@CMIP6.DAMIP.NOAA-GFDL.GFDL-ESM4]                                           |          -|        1|        3|        -|            -|
+[@CMIP6.DAMIP.NOAA-GFDL.GFDL-ESM4]                                           |          -|        1|        3|            -|        -|
+|GFDL-CM4
+[@CMIP6.DAMIP.NOAA-GFDL.GFDL-CM4]                                             |          -|        -|        3|            -|        -|
 
 Los modelos usados se listan en la Tabla \@ref(tab:modelos) que incluye además la cantidad de miembros de cada uno de los experimentos considerados.
 Se utilizaron todos los modelos del CMIP6 con 5 o más miembros en el experimento histórico ("historical") y todos los modelos en los experimentos que contienen únicamente el efecto de los gases de efecto invernadero ("hist-GHG"), variabilidad natural sin forzantes antropogénicos ("hist-nat"), forzantes de aerosoles antropogénicos ("hist-aer") o sólo el efecto de el ozono estratosférico ("hist-stratO3").

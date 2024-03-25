@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.16)  21 MAR 2024 12:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.16)  25 MAR 2024 10:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1714,7 +1714,7 @@ Overfull \hbox (3.18161pt too wide) in paragraph at lines 1910--1911
  []
 
 
-Overfull \hbox (2.48785pt too wide) in paragraph at lines 1916--1917
+Overfull \hbox (2.48785pt too wide) in paragraph at lines 1914--1915
  \T1/zpltlf/m/n/12 (-20) stratO3
  []
 
@@ -1729,7 +1729,7 @@ Overfull \hbox (3.18161pt too wide) in paragraph at lines 1926--1927
  []
 
 
-Overfull \hbox (2.48785pt too wide) in paragraph at lines 1932--1933
+Overfull \hbox (2.48785pt too wide) in paragraph at lines 1930--1931
  \T1/zpltlf/m/n/12 (-20) stratO3
  []
 
@@ -2007,7 +2007,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  99i,12n,101p,1002b,811s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/NewPXMI.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/NewPXMI_gnu.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/pxmiaX.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/pxsys.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newtx/txexs.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/zplb.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/zplr.pfb></home/elio.campitelli/.TinyTeX/texmf-dist/fonts/type1/public/newpx/zplri.pfb>
-Output written on tesis.pdf (142 pages, 20060654 bytes).
+Output written on tesis.pdf (142 pages, 20060711 bytes).
 PDF statistics:
  2308 PDF objects out of 2487 (max. 8388607)
  2035 compressed objects within 21 object streams

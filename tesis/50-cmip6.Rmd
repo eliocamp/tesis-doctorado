@@ -98,13 +98,15 @@ simulaciones <- son_cmip_files %>%
 
 ```{r modelos}
 simulaciones %>% 
+  .[variable == "zg"] %>%
   .[, .(miembros = .N), by = .(model, experiment)] %>% 
   tidyr::pivot_wider(names_from = experiment, values_from = miembros, values_fill = 0) %>% 
   as.data.table() %>% 
-  .[order(-historical, -(`hist-GHG` + `hist-nat` + `hist-stratO3` + `hist-aer`))] %>% 
   .[sims, on = "model"] %>% 
   .[, model := paste(model, ref, sep = "\n")] %>% 
+  .[order(-historical, -(`hist-GHG` + `hist-nat` + `hist-stratO3` + `hist-aer`))] %>% 
   .[, ref := NULL] %>% 
+  .[, .(model, historical, `hist-GHG`, `hist-nat`, `hist-stratO3`, `hist-aer`)] %>% 
   setnames("model", "Modelo") %>% 
   knitr::kable(caption = "Modelos analizados y la cantidad de miembros para cada experimento.",
                format = "markdown", format.args = list(zero.print = "-"))

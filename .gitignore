@@ -75,4 +75,6 @@ tesis/thesis.lot
 tesis/thesis.out
 tesis/thesis.toc
 tesis/thesis.tex
-presentacion/
+presentacion/*.png
+presentacion/*.gif
+presentacion/*/

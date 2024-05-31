@@ -72,15 +72,15 @@ globalVariables(c(":=", ".", ".NATURAL"))
 # zzz.R
 .onLoad <- function(libname, pkgname) {
   cache_root <- here::here("cache", "memoise")
-  compute_sam_cmip_one <<- memoise::memoise(compute_sam_cmip_one,
-                                            cache = cachem::cache_disk(file.path(cache_root, "compute_sam_cmip_one"),
-                                                                       max_size = Inf))
-  ceof_proyectado <<- memoise::memoise(ceof_proyectado,
-                                       cache = cachem::cache_disk(file.path(cache_root, "ceof_proyectado"),
-                                                                  max_size = Inf))
+  # compute_sam_cmip_one <<- memoise::memoise(compute_sam_cmip_one,
+  #                                           cache = cachem::cache_disk(file.path(cache_root, "compute_sam_cmip_one"),
+  #                                                                      max_size = Inf))
+  # ceof_proyectado <<- memoise::memoise(ceof_proyectado,
+  #                                      cache = cachem::cache_disk(file.path(cache_root, "ceof_proyectado"),
+  #                                                                 max_size = Inf))
 
-  compute_ceof_cmip <<- memoise::memoise(compute_ceof_cmip,
-                                         cache = cachem::cache_disk(file.path(cache_root, "compute_ceof_cmip"),
-                                                                    max_size = Inf))
+  # compute_ceof_cmip <<- memoise::memoise(compute_ceof_cmip,
+  #                                        cache = cachem::cache_disk(file.path(cache_root, "compute_ceof_cmip"),
+  #                                                                   max_size = Inf))
 
 }

@@ -31,4 +31,6 @@ Imports:
     tidyr,
     boot,
     memoise,
-    shadowtext
+    shadowtext,
+    irlba,
+    abind
